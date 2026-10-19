@@ -1,0 +1,667 @@
+{
+  "schema": "unison-final-validation-finding-policy/1",
+  "actual_tool": {
+    "session": 8018,
+    "terminal_chunk": "480d0d",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "result_path": "/private/tmp/u-validation-policy-c3ef49a206/RESULT.json",
+  "result_sha256": "ea113aa3c5cb4b90af03a978e31864f2249cc8fe9522420973fa2c189777b422",
+  "source_pins": {
+    "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+    "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+    "src/dngValidation.ml": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b",
+    "src/dngValidation.mli": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68",
+    "src/helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+    "src/helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+    "src/helperSupervisor_stubs.c": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239",
+    "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+    "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+    "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+    "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+    "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+    "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+    "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+    "tests/final_validation_policy/finding_helper.ml": "149a4ec100465f79e772c653e3b0f64c4a6c5d683708fc6a4841f3be196bec7e",
+    "tests/final_validation_policy/findings.ml": "78ced7577ab0b50b267948b661507159891dade6e96051a2770b4568a20510b9"
+  },
+  "programs": [
+    {
+      "compiler": "stock",
+      "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "helper": "/private/tmp/u-validation-policy-c3ef49a206/stock/finding_helper",
+      "helper_sha256": "e86d2761eee7f97b3ea2ee05b688b972dbab23fb69dc40e03a14cff8efd4cbce",
+      "program": "/private/tmp/u-validation-policy-c3ef49a206/stock/findings",
+      "program_sha256": "bf0c4b85ffbe7e0630a6723831305576d82946787984dfa18cdd68bbb5789b33",
+      "stdout": "PASS policy=require mode=valid finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=missing finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=warnings finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-mismatch finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-not-checked finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=structure-invalid finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=structure-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-failure finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-not-checked finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=error-zero finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-hash finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-size finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-build finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=malformed finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=trailing finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=truncated finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=nonzero finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=warn mode=valid finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=missing finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=warnings finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-mismatch finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-not-checked finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=structure-invalid finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=structure-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-failure finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-not-checked finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=error-zero finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-hash finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-size finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-build finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=malformed finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=trailing finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=truncated finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=nonzero finding=warning helper-reaped=true group-before-reap=0\nPASS off no-inspection no-execution; 38 finding/policy cases\n"
+    },
+    {
+      "compiler": "ox",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "helper": "/private/tmp/u-validation-policy-c3ef49a206/ox/finding_helper",
+      "helper_sha256": "997ca604abf28c49da641f2ccbb4ad34a8667293d261ad24a84141792e58a948",
+      "program": "/private/tmp/u-validation-policy-c3ef49a206/ox/findings",
+      "program_sha256": "a3064467aea489ad214a5ffcb388ced3916fa5e124bf86b00e189efcb1613eba",
+      "stdout": "PASS policy=require mode=valid finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=missing finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=warnings finding=passed helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-mismatch finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=raw-not-checked finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=structure-invalid finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=structure-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-failure finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-unsupported finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=decode-not-checked finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=error-zero finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-hash finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-size finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=wrong-build finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=malformed finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=trailing finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=truncated finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=require mode=nonzero finding=rejected helper-reaped=true group-before-reap=0\nPASS policy=warn mode=valid finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=missing finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=warnings finding=passed helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-mismatch finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=raw-not-checked finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=structure-invalid finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=structure-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-failure finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-unsupported finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=decode-not-checked finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=error-zero finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-hash finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-size finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=wrong-build finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=malformed finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=trailing finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=truncated finding=warning helper-reaped=true group-before-reap=0\nPASS policy=warn mode=nonzero finding=warning helper-reaped=true group-before-reap=0\nPASS off no-inspection no-execution; 38 finding/policy cases\n"
+    }
+  ],
+  "calls": [
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-00.json",
+      "sha256": "14ca4081f4ee4d8864f606213340d2b090184b68d75fd3cf0ce0beb061ddedfd",
+      "pid": 90460,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-01.json",
+      "sha256": "9f34ed259855a3fed1c91121cb810a9e19136ad0c189b18023f83a267fe55bef",
+      "pid": 90462,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-02.json",
+      "sha256": "a92b79834ea4352dc84ca6f48a8159366e49e70d00bfdeb1916809e7aa380c76",
+      "pid": 90467,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "pqueue.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-03.json",
+      "sha256": "908ca2955aadbd7077c5fb7e82b5d446d9fddd0feb957d312fe9926f79b11d36",
+      "pid": 90469,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "pqueue.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-04.json",
+      "sha256": "b1e01201d6242d0aaccf017d29a4358c24ac6843ab553ab2220c30d05a25a5fd",
+      "pid": 90474,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix_impl.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-05.json",
+      "sha256": "a70bdc3c23234acb89e24a115493518077ddf2937a4c338803b6c62b9b0f6755",
+      "pid": 90479,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-06.json",
+      "sha256": "8b3645e648b23ef10a4cfea54f93c282ef2b842288495694f601b78bf178ed7f",
+      "pid": 90483,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-07.json",
+      "sha256": "009c70062c01bd1ddd828318517656065471fea4666d84b007c3c9ab0f641bab",
+      "pid": 90493,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "borrowedWork.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-08.json",
+      "sha256": "b1bad9d62799cb705de1b9f957efe12bb2c6abc9a714adb4a579334ce3ee2e26",
+      "pid": 90495,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "borrowedWork.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-09.json",
+      "sha256": "aa163df25e4ae83712276e773016682cb100a7a79ab5d70ecdead22be51b39cd",
+      "pid": 90500,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-10.json",
+      "sha256": "f29ba5289abc4f9c4d761857fa5a7826dc8c62e0a9fc8b61d2a9e45f966c1716",
+      "pid": 90502,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-11.json",
+      "sha256": "3c755dccf934d8495aa9ebbc2df89a971e6acff923ed9b86e3ebb34bcfaf717f",
+      "pid": 90507,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "dngValidation.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-12.json",
+      "sha256": "86196a67a2e30678a77648ddaa5bfcdbb2aff1e2a60505b7f16ecb4bbdc84669",
+      "pid": 90509,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "dngValidation.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-13.json",
+      "sha256": "d71379907ff7a041dffdab074a03badbc9477119d90b9375ecaffae4cfb476b3",
+      "pid": 90514,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor_stubs.c"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-14.json",
+      "sha256": "3282b7c594c480abfb8ab2f9d4f184a55f90b41907311eb0e40b10b06c94d046",
+      "pid": 90518,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "unix.cmxa",
+        "finding_helper.ml",
+        "-o",
+        "finding_helper"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-15.json",
+      "sha256": "bc77012192bb86b2240f0b2da3fa29dd1bac914b5a7d1af5b9bcd24ac4536330",
+      "pid": 90528,
+      "command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "unix.cmxa",
+        "lwt.cmx",
+        "pqueue.cmx",
+        "lwt_unix_impl.cmx",
+        "lwt_unix.cmx",
+        "helperSupervisor_stubs.o",
+        "borrowedWork.cmx",
+        "helperSupervisor.cmx",
+        "dngValidation.cmx",
+        "findings.ml",
+        "-o",
+        "findings"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-16.json",
+      "sha256": "b52ad86f282959dcdad2dcc8ea766b7c8a5ee183fc0ee604e46da2529f17fed9",
+      "pid": 90538,
+      "command": [
+        "/private/tmp/u-validation-policy-c3ef49a206/stock/findings",
+        "/private/tmp/u-validation-policy-c3ef49a206/stock/finding_helper"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-17.json",
+      "sha256": "59e55e9de4243ec1aba94e12963db80b4bce6163e4e639abaa30eb6dbf64e5de",
+      "pid": 90580,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-18.json",
+      "sha256": "6fc6f4b04386ca94feab59aed8652090464ae195d6a85c052c5314aebd2b4467",
+      "pid": 90582,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-19.json",
+      "sha256": "0befe2e9f22b536743bc9f60c7c710d5dd39dd26eed838a56a409ea1f084b976",
+      "pid": 90587,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "pqueue.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-20.json",
+      "sha256": "62e7ea3fdb8a99b8415d068934a84ae41f2c1062673448eca1cb13a37cedc7f9",
+      "pid": 90591,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "pqueue.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-21.json",
+      "sha256": "9e19381487fbf45281888d2b27ccf762977cbf5e1e253fd7cc9e77e37096ecd6",
+      "pid": 90601,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix_impl.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-22.json",
+      "sha256": "348f5b1184967a5c9c6be35437d3d6a977521ca4034f6e9182f2d45662ee4fbb",
+      "pid": 90606,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-23.json",
+      "sha256": "cae4436fd9d1cb03119d5cc2eed9c7a274ff30836eb38409043c5f5e38dc28ac",
+      "pid": 90608,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "lwt_unix.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-24.json",
+      "sha256": "ceeae94dd8c9e063bf0b34cfe35c77e5216cb8d44c6f648cafff459efd8c8f13",
+      "pid": 90613,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "borrowedWork.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-25.json",
+      "sha256": "7079df8482b4a485809decefd3f09e472fbf7233257181e9c7c7339d7488c8ac",
+      "pid": 90615,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "borrowedWork.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-26.json",
+      "sha256": "db4d662fccd8ba6f8fe153c0e2a718060a003d97816cec2bec0ac98a9c6972bf",
+      "pid": 90620,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-27.json",
+      "sha256": "87e2b8836a0d420230c59ad7e27e97ebb9be71e98bf7686d19dca340e92faf1b",
+      "pid": 90622,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-28.json",
+      "sha256": "e7f9150b01fb6c773ef00d62014374cd7465c521686493e608673493a1c5c7fe",
+      "pid": 90627,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "dngValidation.mli"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-29.json",
+      "sha256": "361a19c556071ce610d603b67132219f9a0b3b580c8ab61ee9f0fea6a209bc8a",
+      "pid": 90629,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "dngValidation.ml"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-30.json",
+      "sha256": "60c23fe1a07d23310439f1a3244a397f86ea4d91005a52718e78ef78a737acc5",
+      "pid": 90634,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "-c",
+        "helperSupervisor_stubs.c"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-31.json",
+      "sha256": "c5fc4efb0cf7010b137384b247cde94475119c1f23762f259620a0cb2629b451",
+      "pid": 90638,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "unix.cmxa",
+        "finding_helper.ml",
+        "-o",
+        "finding_helper"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-32.json",
+      "sha256": "5814e7a149ee41f7acc93ef9bdfbbf098729c8f4f84708027f74c89b42cd2d83",
+      "pid": 90648,
+      "command": [
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "-I",
+        "+unix",
+        "unix.cmxa",
+        "lwt.cmx",
+        "pqueue.cmx",
+        "lwt_unix_impl.cmx",
+        "lwt_unix.cmx",
+        "helperSupervisor_stubs.o",
+        "borrowedWork.cmx",
+        "helperSupervisor.cmx",
+        "dngValidation.cmx",
+        "findings.ml",
+        "-o",
+        "findings"
+      ]
+    },
+    {
+      "path": "/private/tmp/u-validation-policy-c3ef49a206/call-33.json",
+      "sha256": "7475b1e381aaf59470d95f15eb6879ca8d7538684750c22393e0f296c883941c",
+      "pid": 90665,
+      "command": [
+        "/private/tmp/u-validation-policy-c3ef49a206/ox/findings",
+        "/private/tmp/u-validation-policy-c3ef49a206/ox/finding_helper"
+      ]
+    }
+  ],
+  "warning_companions": [
+    {
+      "compiler": "stock",
+      "production_sources": 329,
+      "linked_sources": 212,
+      "test_sources": 5,
+      "cases": [
+        {
+          "case": "warn-error",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-error/test.log",
+          "sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+        },
+        {
+          "case": "warn-pass",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-pass/test.log",
+          "sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+        },
+        {
+          "case": "require-error",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/require-error/test.log",
+          "sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+        },
+        {
+          "case": "off",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/off/test.log",
+          "sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+        },
+        {
+          "case": "warn-inspection-error",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-inspection-error/test.log",
+          "sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+        },
+        {
+          "case": "warn-mutation",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-mutation/test.log",
+          "sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+        },
+        {
+          "case": "warn-active-cancel",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-active-cancel/test.log",
+          "sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+        },
+        {
+          "case": "warn-before-delivery-cancel",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-before-delivery-cancel/test.log",
+          "sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+        },
+        {
+          "case": "warn-delivery-cancel",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-delivery-cancel/test.log",
+          "sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+        },
+        {
+          "case": "warn-delivery-abort",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-delivery-abort/test.log",
+          "sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+        },
+        {
+          "case": "warn-printer-error",
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-printer-error/test.log",
+          "sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+        }
+      ],
+      "actual_parent": {
+        "session": 59806,
+        "initial_chunk": "1cf31b",
+        "terminal_chunk": "68e562",
+        "exit": 0,
+        "no_session": true
+      },
+      "scope": "rebound historical current-source warning companion; not a new execution/native UI/SDK proof"
+    },
+    {
+      "compiler": "ox",
+      "production_sources": 329,
+      "linked_sources": 212,
+      "test_sources": 5,
+      "cases": [
+        {
+          "case": "warn-error",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-error/test.log",
+          "sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+        },
+        {
+          "case": "warn-pass",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-pass/test.log",
+          "sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+        },
+        {
+          "case": "require-error",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/require-error/test.log",
+          "sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+        },
+        {
+          "case": "off",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/off/test.log",
+          "sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+        },
+        {
+          "case": "warn-inspection-error",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-inspection-error/test.log",
+          "sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+        },
+        {
+          "case": "warn-mutation",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-mutation/test.log",
+          "sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+        },
+        {
+          "case": "warn-active-cancel",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-active-cancel/test.log",
+          "sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+        },
+        {
+          "case": "warn-before-delivery-cancel",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-before-delivery-cancel/test.log",
+          "sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+        },
+        {
+          "case": "warn-delivery-cancel",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-delivery-cancel/test.log",
+          "sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+        },
+        {
+          "case": "warn-delivery-abort",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-delivery-abort/test.log",
+          "sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+        },
+        {
+          "case": "warn-printer-error",
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-printer-error/test.log",
+          "sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+        }
+      ],
+      "actual_parent": {
+        "session": 59806,
+        "initial_chunk": "1cf31b",
+        "terminal_chunk": "68e562",
+        "exit": 0,
+        "no_session": true
+      },
+      "scope": "rebound historical current-source warning companion; not a new execution/native UI/SDK proof"
+    }
+  ],
+  "modes": [
+    "valid",
+    "missing",
+    "warnings",
+    "raw-mismatch",
+    "raw-unsupported",
+    "raw-not-checked",
+    "structure-invalid",
+    "structure-unsupported",
+    "decode-failure",
+    "decode-unsupported",
+    "decode-not-checked",
+    "error-zero",
+    "wrong-hash",
+    "wrong-size",
+    "wrong-build",
+    "malformed",
+    "trailing",
+    "truncated",
+    "nonzero"
+  ],
+  "policies": [
+    "require",
+    "warn"
+  ],
+  "finding_cases_per_compiler": 38,
+  "off_cases_per_compiler": 1,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "scope": "production DngValidation/HelperSupervisor with original synthetic receipts and synthetic inspection snapshots; no receiving-path publication/real executable hash or SDK proof",
+  "CPU00_07_fresh_reacquired_closed": true,
+  "independent_audit_tool": {
+    "terminal_chunk": "37387c",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit_source_sha256": "784defc440f2a5599707770c1be0712a42d8e0f6a21b3aba9dd73f9dd559505a",
+  "prior_core_only_audit": {
+    "terminal_chunk": "8079df",
+    "exit_code": 0
+  },
+  "prior_combined_audit_failure": {
+    "terminal_chunk": "08cd04",
+    "exit_code": 1,
+    "cause": "empty historical stderr log was sent to nonempty artifact reader; CPU finally closed, no SDK/child execution; successor uses qualified empty-log reader"
+  }
+}

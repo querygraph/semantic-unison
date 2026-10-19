@@ -62,6 +62,25 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Core validation findings — ACTUAL current stock/Ox controls closed
+
+New fixed synthetic production DngValidation/HelperSupervisor matrix ACTUAL
+8018/480d0d/exit0/no session,34compiler/test children reaped0/groups absent,
+CPU8closed/noEX/noSDK. Each compiler19finding×2policy+off=39 controls; strict
+missing vs mismatch/unchecked, structure/decode/errors0-vs1/receipt bindings,
+malformed/trailing/nonzero and warning counts. No receiving/publication claim.
+Independent37387c/0 rechecks34rawcalls/all78PASSlines/16sources/programs and
+freshCPU8closed; additionally rebinds existing11warning-companion cases per
+compiler to unchanged329production/212linked/5fixture pins and actual logs.
+Core-only8079df/0 passed; combined08cd04/1 empty-stderr-reader refusal preserved,
+CPUfinallyclosed; corrected qualified empty-log reader, no test/SDK rerun.
+`doc/final-adobe-finding-policy-case-map-20261019.md` and
+`tests/qualification/final-validation-finding-policy-actual-20261019.json`
+keep real SDK/genuine negative receiving and finalthreecodecmerge separate.
+Photo replied SDK048d0ae7 question remains unanswered/UNALLOCATED; no Photo
+resources held or direct Capitola channel falsely claimed. Independent work
+continues; do not acquire EX or execute SDK merely from this checkpoint.
+
 ## Original + selected upstream comparison artifacts — ACTUAL binding complete
 
 Original375 stock5.2 build/selftests ACTUAL12764/8177fa/0/no session, five
