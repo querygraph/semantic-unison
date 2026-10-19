@@ -62,6 +62,22 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Minimal upstream Ox baseline — ACTUAL build/selftests passed
+
+V2 patch `doc/upstream-8772-minimal-oxcaml-v2.patch` SHA7951aaede099632e392ba950f9381e52a1a46ac07e5dcf222b21996b3f401f3e
+adds the Features.mem eta expansion found by actual V1 compile refusal: ten
+expansions/four files, no semantic/APFS/workers/protocol changes. Actual owner
+97618/60b3b0/exit0/no session; seven direct children all reaped0/groups absent,
+native Make serial1 build and built-in selftests PASS. Workspace
+/private/tmp/u-upstream-ox-67ff102c3b; binary SHA481c640cba954d9267d00e202a3323d5a2dca411b43d0c82e32fe9d231bb76c5.
+Independent metadata audit3b9653/0 reparsed seven calls, binary/patched hashes,
+and freshly reacquired/closed CPU00..07. No EX/Photo/SDK; ZERO resources held.
+`tests/qualification/minimal-upstream-ox-baseline-actual-20261019.json` preserves
+both earlier failures: pre-child capture refusal recovered idle owner137, then
+known-settled Features.mem compiler failure. Neither was a baseline pass.
+Next rebuild original375 and bind matched stock baseline; performance matrix
+and pending finite SDK fixture generation remain separate, goal incomplete.
+
 ## Baseline comparison successor — source prepared, builds pending
 
 The minimal upstream8772 OxCaml patch is now isolated in
