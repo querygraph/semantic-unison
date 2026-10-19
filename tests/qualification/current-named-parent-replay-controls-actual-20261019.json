@@ -1,0 +1,36 @@
+{
+  "schema": "unison-current-named-parent-replay-controls/1",
+  "actual_tool": {
+    "runner": "in-process unittest under standing CPU00 lease (scratchpad runner, not committed)",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 135,
+  "new_parent_replay_methods": 11,
+  "source_sha256": {
+    "tests/current_validation_paths/parent.py": "a8e740898ab98edbefcc31c41d7a569c3e1cd72a3a0dafce359ce6035f79d4c4",
+    "tests/current_validation_paths/parent_counters.py": "bde812a9d594fad3a30ea9418513944d7428604cf50c1ca8fc5753c665bff772",
+    "tests/current_validation_paths/parent_test.py": "fdf91e331ceea009b7a9f5a52b6986a0e487ec39cf234896a1a3d84a28080a69",
+    "tests/current_validation_paths/recipes.py": "6105a4be873246dcea2f52dc9a3bf8e5f70309d107dd6ec8673f34843114e22d",
+    "tests/current_validation_paths/session.py": "b675de22b74df91daad52f158826e915e2898ea8403019669f09b67c3ec60cc4",
+    "tests/current_validation_paths/invoke.py": "7c6fef11be398448823c77db418d82afdb7c04e94ea86e5cd10118362e309ff4",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "payload_opened": false,
+  "refactor": {
+    "summary": "generated helper/launcher scripts, exact endpoint flags/options and proxy source moved into pure recipes.py so worker and parent derive identical bytes; proxy config now embedded as canonical JSON; intent saves profile text and prepared script inventory",
+    "behavior_checked_by": "all 124 pre-existing named-path methods re-passed in the same run"
+  },
+  "scope": "Pure parent replay over fabricated pins/captures: one failed-prefix producer interruption plus ten refusal ablations (raw pin bytes, client command, inherited inode, unknown group, missing counter, endpoint budget, script freshness, inherited record, noncontiguous calls, missing START). No complete-21-case replay fixture, no real IO adapters, no process/lifecycle qualification.",
+  "remaining": [
+    "actual parent IO adapters for read_case/read_root/case_state with bounded NOFOLLOW reads and fresh script/profile/counter binding",
+    "complete 21-case fabricated replay control including case_summary joins",
+    "owned worker/owner/metadata plan/freezer/admission entry",
+    "actual complete 21-case stock/Ox runs under fresh coordination"
+  ]
+}

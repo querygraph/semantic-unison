@@ -17,6 +17,7 @@ from current_validation_paths.cancel_observation import wait as observe_cancel,v
 from current_validation_paths.cancel_evidence import audit as audit_cancel
 from current_validation_paths.producer_evidence import audit as audit_producer
 from current_validation_paths.files import epoch
+from current_validation_paths.recipes import proxy_source
 
 
 def artifacts(packet):
@@ -70,6 +71,7 @@ class Actor:
             self.active['intent_pin']=store.write(stem+'-INTENT.json',dict(intent=deepcopy(intent),global_call=number,resource_release_authorized=False))
             self.artifact_check(self.packet)
             expected_scripts={str(path) for path in (*session.drivers.values(),session.copy,session.merger,session.launcher,session.abort_launcher)}
+            if not exact(intent['prepared_scripts'],session.prepared_scripts):raise ValueError('saved generated script inventory differs')
             if set(session.prepared_scripts)!=expected_scripts:raise ValueError('exact generated script inventory required')
             for path,digest in session.prepared_scripts.items():
                 if hashlib.sha256(session.root.__class__(path).read_bytes()).hexdigest()!=digest:raise ValueError('generated helper/launcher script changed')
@@ -79,15 +81,13 @@ class Actor:
                 if not exact(json.loads(session.drivers[endpoint].with_suffix('.control.json').read_text()),control):raise ValueError('fake helper control changed after intent')
             native=session.root.lstat();config=dict(directory=root,identity=dict(device=native.st_dev,inode=native.st_ino),stage=stem,
                 binary=self.packet['binary']['path'],flags=intent['server_command'][3:],deadline=phase,worker_pid=os.getpid(),resource_fds=self.resources)
-            imports=[self.packet['repository']+'/tests',self.packet['repository']+'/tests/sdk_host_matrix',self.packet['repository']+'/bench/sync']
-            module='sdk_merge_receiving.child_entry'
             if 'producer_interruption' in intent:
                 observer=intent['producer_interruption'];row=self.rows[root]
                 if (row['family']!='resumed' or observer['kind']!=row['arguments'][0] or intent['expected_client_exit']!='connection-failure'
                     or 'cancellation' in intent or observer['root']!=root or observer['identity']!=[native.st_dev,native.st_ino]):
                     raise ValueError('exact admitted original resumed-case interruption required')
-                module='current_validation_paths.producer_proxy';config['producer_observer']=deepcopy(observer)
-            source='#!'+PYTHON+'\nimport sys\nsys.path[:0]='+repr(imports)+'\nfrom '+module+' import proxy_main\nraise SystemExit(proxy_main('+repr(config)+'))\n'
+                config['producer_observer']=deepcopy(observer)
+            source=proxy_source(self.packet['repository'],config)
             compile(source,root+'/'+stem+'-proxy.py','exec')
             script=session.root/(stem+'-proxy.py');script.write_text(source);script.chmod(0o700)
             proxy=[PYTHON,'-B',str(script)]

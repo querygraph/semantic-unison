@@ -97,3 +97,26 @@ truncated/aliased/incorrect-status and trace/frame/counter refusals. CPU00 close
 no child, payload, SDK or EX. [Evidence](../qualification/current-named-evidence-controls-actual-20261019.json).
 The actual retained invocation and signal actors, whole-run parent audit and
 fresh runnable request are still pending. No IO scheduling hold exists.
+
+## Independent parent replay
+
+`recipes.py` is now the single pure source for generated helper/launcher
+scripts, exact endpoint flags/options, per-phase intents and proxy scripts, so
+the worker Session and the parent derive identical bytes. `parent.py` replays
+every attempted call from its own pinned INTENT/CONFIG/PAIR/AUDIT (and
+CANCELLATION) records: contiguous global numbering in original case order,
+intent equal to the recipe phase, proxy configuration bound to the actual worker
+PID and nine inherited resource identities, reproducible proxy script, and
+re-running the normal/cancellation/producer auditor against raw frames. Final
+fake-helper/copy/merge counter streams are sliced between consecutive intents
+by `parent_counters.py`, so no counter can appear or vanish. Case START/RESULT/
+FAILED and root ACCEPTED histories must match. A complete run must reach
+exactly 69CLI/54fake/9copy/7merge/4producer/2cancellation; a failed prefix
+must stop at the named case. The replay never proves worker settlement, parent
+terminal or release.
+
+Eleven parent methods passed with all 135 named-path methods in one in-process
+run under CPU00, then closed. Only fabricated captures were used.
+[Evidence](../qualification/current-named-parent-replay-controls-actual-20261019.json).
+Real bounded parent IO adapters, a complete 21-case replay fixture, and the
+owned entry/plan/admission remain before any runtime request.
