@@ -1,0 +1,230 @@
+{
+  "schema": "unison-auto-cohort-four-shared8-closed/1",
+  "state": "ALL_FOUR_PASS_CLOSED",
+  "cohorts": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "workspace": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6",
+      "actual_owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 22685,
+        "initial_chunk": "f83404",
+        "terminal_chunk": "a005f2",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 66497,
+        "worker_pid": 66520,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792386602.812802
+      },
+      "return_receipt": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/OWNER-RETURN.json",
+        "sha256": "ebc9c0106842b136ac12156d0ad9ff8e44b15b7b59ed024b8cea977a27fc7668"
+      },
+      "closure": {
+        "child": {
+          "pid": 66520,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 66520,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": true,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "nested_audit": {
+        "attempted_cli_invocations": 54,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": true,
+        "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+        "rows": 18,
+        "cli_invocations": 54,
+        "parent_terminal_proved": false,
+        "token_release_authorized": false,
+        "functional_status": "PASSED"
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "workspace": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595",
+      "actual_owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 29564,
+        "initial_chunk": "ed00c9",
+        "terminal_chunk": "058ffe",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 69144,
+        "worker_pid": 69160,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387003.0603719
+      },
+      "return_receipt": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/OWNER-RETURN.json",
+        "sha256": "15ee828d57c2f08763bad00329608a2521db491aad0f5130a406910998a6cebb"
+      },
+      "closure": {
+        "child": {
+          "pid": 69160,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 69160,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": true,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "nested_audit": {
+        "attempted_cli_invocations": 54,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": true,
+        "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+        "rows": 18,
+        "cli_invocations": 54,
+        "parent_terminal_proved": false,
+        "token_release_authorized": false,
+        "functional_status": "PASSED"
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "workspace": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa",
+      "actual_owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 26570,
+        "initial_chunk": "5a6b6b",
+        "terminal_chunk": "c6f903",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 71776,
+        "worker_pid": 71792,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387390.3465831
+      },
+      "return_receipt": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/OWNER-RETURN.json",
+        "sha256": "170e70df01254de9cfc0faf1adf37be1639dc398570139e984ebceb7311bd34f"
+      },
+      "closure": {
+        "child": {
+          "pid": 71792,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 71792,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": true,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "nested_audit": {
+        "attempted_cli_invocations": 54,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": true,
+        "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+        "rows": 18,
+        "cli_invocations": 54,
+        "parent_terminal_proved": false,
+        "token_release_authorized": false,
+        "functional_status": "PASSED"
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "workspace": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68",
+      "actual_owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 43971,
+        "initial_chunk": "661920",
+        "terminal_chunk": "70c1b8",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 73527,
+        "worker_pid": 73544,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387750.498842
+      },
+      "return_receipt": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/OWNER-RETURN.json",
+        "sha256": "9f6c592448e30f7b38e28ebe457067d143c3b8ec1b485f389be22db518ffc488"
+      },
+      "closure": {
+        "child": {
+          "pid": 73544,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 73544,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": true,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "nested_audit": {
+        "attempted_cli_invocations": 54,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": true,
+        "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+        "rows": 18,
+        "cli_invocations": 54,
+        "parent_terminal_proved": false,
+        "token_release_authorized": false,
+        "functional_status": "PASSED"
+      }
+    }
+  ],
+  "actual_rows": 72,
+  "actual_cli_invocations": 216,
+  "no_active_owned_job_or_resource": true,
+  "scope": "Allfour personally collected owning-tool terminals plus pinned nested/group/FD evidence, not ps inference. No temporary18 acquired, SDK invoked, Main access or replay."
+}

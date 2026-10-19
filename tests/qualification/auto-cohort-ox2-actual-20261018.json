@@ -1,0 +1,112 @@
+{
+  "schema": "unison-auto-cohort-actual/1",
+  "state": "PASS_CLOSED",
+  "label": "ox",
+  "selection": 2,
+  "actual_owner": {
+    "schema": "unison-actual-owning-tool-terminal/1",
+    "state": "ACTUAL_TERMINAL",
+    "session_id": 43971,
+    "initial_chunk": "661920",
+    "terminal_chunk": "70c1b8",
+    "exit_code": 0,
+    "no_running_session": true,
+    "owner_pid": 73527,
+    "worker_pid": 73544,
+    "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+    "unix": 1792387750.498842
+  },
+  "workspace": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68",
+  "plan": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-2-plan.json",
+    "sha256": "083edf8a7ca544aaec69eaad13de5b042ed05434fb7da70af5bc6fae667a4589"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-auto-cohort-ox2-admission-aab1b1f6f1d14757aeed76e5f16243e2.json",
+    "sha256": "2decf4b1abdf59abdea7b831eeb88c4c3b07ddd3eba50f677b1b6000479cf068"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/SHARED-START.json",
+      "bytes": 7329,
+      "sha256": "4124e022b86a939edc1452e1e380fe9d82da5009fa2fce58767164d7e182c90a"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "1f2321831ef028308162c94325e42a2450274d70f40d84cc0e861a367d75e428"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/SHARED-SERVER-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/COHORT-BINDING.json",
+      "bytes": 797,
+      "sha256": "4f3ca50d327140f90f5982be59f28c8bdf78e26f6e2ec5c544318b57af56dea9"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/WORKER-COHORT-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+      "bytes": 1989230,
+      "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/SHARED-STDOUT.txt",
+      "bytes": 1236,
+      "sha256": "0a9ea9afc05fa90b2dc0a01e9de79259d953960d76ee3900b7ee3dca821495cb"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/OWNER-TERMINAL.json",
+      "bytes": 398,
+      "sha256": "7666b8303776aad1dc0d571282c38bcfd0ce06eac30a190c98aa3e0396bc6288"
+    }
+  ],
+  "closed": {
+    "child": {
+      "pid": 73544,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 73544,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "saved_metadata_reaudit": {
+    "attempted_cli_invocations": 54,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": true,
+    "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+    "rows": 18,
+    "cli_invocations": 54,
+    "parent_terminal_proved": false,
+    "token_release_authorized": false,
+    "functional_status": "PASSED"
+  },
+  "timing_disclosure": [
+    "Shared host with routine metadata/coordination and uncontrolled OS activity; no absolute quiet timing claim."
+  ],
+  "scope": "Generated32MiB\u00d78files Ox2 cohort,3warmups15measured/18rows54CLI; actual parent terminal distinct from nested group/FD audit. No SDK/Photo/Main/18borrow or replay."
+}

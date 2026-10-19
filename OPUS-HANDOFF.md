@@ -6410,3 +6410,27 @@ reviewedexact6plans/requests andasksall4shared8closuresforadoptionbeforefirst18.
 No18START/leaseyet. Finishstock2/Ox2 next undernewoneuseshared8admissions;
 thenpublishall4actualproofs. Photo holdsALLnewjobs exceptinertedits/metadata;
 MainremainsPhoto-exclusive. Nootherownjobs/resourcesactive.
+
+
+### Stock2 and Ox2 actual PASS/CLOSED — all4shared8 complete
+Stock2 actual26570/5a6b6b→c6f903/0/no session parent71776/worker71792;
+Ox2 actual43971/661920→70c1b8/0/no session parent73527/worker73544. Both
+18rows54CLI exact, workerreaped0/othersabsent/CPU8EXclosed/53sourcepinsunchanged.
+Freshadmissions238a31f3 and2decf4b1 eachCONSUMED_ONCE; no retry/replay.
+PromptRootclosurenotices01a1529c-e200+01a152a2-31ea BEFOREseals. Returns
+stock2170e70df01254de9cfc0faf1adf37be1639dc398570139e984ebceb7311bd34f;
+Ox29f6c592448e30f7b38e28ebe457067d143c3b8ec1b485f389be22db518ffc488.
+Actualevidenceauto-cohort-stock2/ox2-actual-20261018.json.
+All4shared8proofindex doc/auto-cohort-four-shared8-actual-closure-20261018.json
+SHA44895383308d9775858fb8568c9aabe4863b404b9098470a7a9b93986a867afa;
+72rows216CLI/12warm+60measured; everydirectartifacthashrechecked.
+RootALL4metadataadoptionreceived (savedterminals+aggregate+216nestedcalls, NOT
+independentfullrawreaudit). ACTIVE84ced306 conditionmet; maypublishfresh
+individual18admissions forONLYsixfrozenstock/Ox4/8/auto, serial/nooverlap.
+PhotoALLnewjobshold, MainstillPhoto-exclusive. No18STARTyet/noownresources.
+Saved-onlyff0f61/0 report12groups/6missing preserved all72rowrefs, nooutliers
+removed. doc/auto-cohort-four-shared8-report-20261018.json/.md. Descriptive
+semantic1→2wallratios1.481stock/1.464Ox only; no causal/quiet/physicalclaim.
+Next first18stock4 freshadmission mustpinACTIVE84ced306, exact00..17/policy
+1dbe12eb/restorestandingtrue andcurrentunusedrequest. DirectSDKrequestf9c93745
+stillUNADMITTED, noSDK/Main/nativePhotocall. Goalactive.

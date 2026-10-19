@@ -64,11 +64,11 @@ interpretation as completion gates. Exact opaque preservation remains mandatory.
    deployment authorization.
 
 [Prepared cohort index](auto-cohort-qualification-v1-20261018/INDEX.json) is
-partially executed: stock1 and Ox1 have each passed18rows/54CLI and closed;
-the other eight workspaces are unused. Photo actual69656/bc04d0/137 independent
+partially executed: stock/Ox1/2 have each passed18rows/54CLI and closed
+(72rows/216calls). The other six workspaces are unused. Photo actual69656/bc04d0/137 independent
 recovery closed (not bulk success); first8 publications remain/248 incomplete.
 Photo holds new jobs for direct Unison qualification. The six larger cohorts
-have explicit active CPU coordination84ced306, but no dispatch admissions or
-18-core acquisition yet. Finish stock2/Ox2 and send all four shared8 closures
-for Root adoption before starting temporary18. No own IO/Adobe owner is active.
+have explicit active CPU coordination84ced306 and allfour shared8 closures
+have been adopted. No per-cohort18 admissions or acquisition yet; publish a
+fresh exact individual admission before each named serial temporary18 run. No own IO/Adobe owner is active.
 The Main catalog remains Photo-exclusive.
