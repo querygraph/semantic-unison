@@ -54,7 +54,8 @@ membership and current blob hashes; it is navigation, not acceptance evidence.
   [positional writes](final-positional-write-result-20261019.md) and
   [scratch rollback](final-clone-scratch-result-20261019.md) bind native faults
   and designated guard-removal controls to current sources.
-- [Generic clone receiving](final-clone-sync-result-20261019.md),
+- [Whole-file Copy/native callers](final-whole-file-clone-result-20261019.md),
+  [generic clone receiving](final-clone-sync-result-20261019.md),
   [interruption/recovery](final-clone-interruption-result-20261019.md) and
   [archive round trip](final-archive-roundtrip-result-20261019.md) retain actual
   parent/client/server/group/resource closure rather than process-absence guesses.

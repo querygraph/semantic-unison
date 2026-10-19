@@ -62,6 +62,23 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Current whole-file native/Copy caller suite — ACTUAL passed/closed
+
+Original suite on current compiler-matched builds: stock55677/daab31/0 and
+Ox99536/6c48f3/0/no sessions; each34children, combined68settled(58zero+10exact
+expected2), CPU8closed/noEX/SDK/Photo. Percompiler60fixedgroups/536assertions:
+typed15/native17/namedsettlement9/currentCopychannel12/namedCopy7; fiveindependent
+negatives retained incl exact330dparentthreefailures/currentdecoder/oldclose.
+Independente5cf6f/0 binds329production/248linkedobjects/404generatedentries,
+all68rawcalls, per-command savedsource/object/CMI versions, exactnegative
+assertions/current+historicalCopy/C+Fs transformations/freshCPU8closed.
+Audit9d53f8/1 ambiguouscaller/path-caller suffixjoin closedCPU; exactjoin5d97c3/0
+thenfullvariante5cf6f/0; NO compiler/native rerun or recovery. Reports
+`doc/final-whole-file-clone-result-20261019.md` and
+`tests/qualification/final-whole-clone-actual-20261019.json`. FDsharing success
+is simulated where stated; actualsmallAPFSnamedcases separate. No physical,
+fullCLI/pixel/corpus/speedup claim. ResourcesZERO; SDK048d0ae7windowseparate.
+
 ## Draft PR13 current publication — ACTUAL refreshed, not merged
 
 PR13 https://github.com/querygraph/semantic-unison/pull/13 is OPEN DRAFT,
