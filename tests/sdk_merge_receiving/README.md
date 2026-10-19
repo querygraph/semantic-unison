@@ -167,3 +167,29 @@ native functionality qualification. Receipt `../qualification/current-sdk-merge-
 bound-evidence-controls-20261019.json`. Remaining: exact owned writer/freezer and
 launcher/proxy entry scripts, authenticated generated input recovery, actual
 paired transport qualification, immutable request/admission, then native matrix.
+
+## Owned metadata store and independent journal wiring
+
+`store.py` opens an existing0700 private directory by pinned device/inode and
+keeps its descriptor owned. Relative one-use0600 records are size-bounded,
+fsynced and fenced against name/inode substitution both before and after file
+close; the directory is fsynced too. Independent reads enforce regular/owned/
+single-link/mode/size/full epochs and optional exact hash. Unknown close retains
+all uncertain pre-close identities and the known directory FD without retry.
+There is no destructor/context-manager release or process-settlement claim.
+
+`journal.py` wires the worker's persist, pair-evidence and audit callbacks. Every
+call's raw pair/hex frame is written once; the audit callback independently opens
+and hashes that saved record and rebinds the outcome. The bounded19 snapshots
+carry the nine pair pins, so a parent can repeat the checks from disk. It cannot
+substitute a no-op transport audit or authorize CPU/IO release.
+
+Actual0d5774/exit0/no session passed nine original controls, child30248 reaped0/
+group-empty thenCPU00..03 closed. One full nine-call worker sequence uses fabricated
+transport/SDK records and actual tiny private JSON files. Close injections occur
+BEFORE any OS close syscall; fixture cleanup therefore has known untouched FDs
+and does not model retrying a real uncertain close. Earlierfd8fe0/0 eight-case
+receipt preserved; final successor adds a name-substitution race control.
+No SDK/DNG/native/Unison/compiler/canonicalIO ran. Still required: exact owned
+entry/freezer and launcher scripts, authenticated generated fixture recovery,
+real paired transport qualification, immutable admission and final native matrix.

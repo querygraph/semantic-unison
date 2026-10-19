@@ -6830,3 +6830,26 @@ This advances the retained executor, not runtime qualification. Next exact
 owned writer/freezer/entry wiring, generated input recovery and actual paired
 transport qualification before immutable native admission. Goal remains active;
 no resources held or new Photo/native/payload starts from source qualification.
+
+## Owned evidence store + complete fabricated worker wiring — 2026-10-19
+
+Final Adobe source branch now has `tests/sdk_merge_receiving/store.py` and
+`journal.py`: pinned0700 directory FD, one-use0600 bounded records, file+directory
+fsync, before/after-close publication inode fences, strict independent reads,
+combined uncertainty carrier and no numeric retry. Worker callbacks now write
+pair evidence and independently re-read/rebind its hash before accepting each
+outcome.19 immutable events record allnine pair pins for independent parent
+reparse; neither store nor journal authorizes resource release.
+
+Actual0d5774/exit0/no session passed nine original controls, child30248 reaped0/
+group-empty thenCPU00..03 closed. This includes an allnine-call FABRICATED worker
+sequence with real tiny private JSON evidence, substituted-output refusal,
+write+close and directory-close uncertainty injections, directory/name swaps,
+links/modes/nonregular input refusal. No real SDK/native/Unison/media/compiler/
+canonicalIO; originalfd8fe0/0 eight-case receipt retained, finalv2 adds name-race
+fence. Receipts `tests/qualification/current-sdk-merge-durable-evidence-controls
+[-v2]-20261019.json`. No actual uncertain OS close occurred in injected controls.
+Remaining before native qualification: exact owned entry/freezer/launcher wiring,
+authenticated generated input recovery and real paired transport qualification.
+This advances validation harness/source only, not new production functionality.
+Goal remains active/incomplete; no resources held and no new payload dispatch.
