@@ -17,8 +17,8 @@ by the new current329pin composition receipt; the older originals are preserved.
 | SOL requirement | Inspected evidence and proved scope | Remaining closure / limit |
 | --- | --- | --- |
 | 1 Exactness | Current independent SDE/golden/apply controls; current ranges and clone-backed reconciliation; all ten32MiB cohorts plus first128MiB cohort verify exact outputs, unchanged bases and no-op inode behavior. | Trace the named first/last/zero/multiple packet and fork/property cases to exact current or justified unchanged-source evidence; benchmark byte equality alone does not cover every edge. |
-| 2 Coverage | Current component/worker source bindings, XMP kernel/observation, opaque exact-layout predecessor receiving and conservative refusal contracts. | Complete explicit byte-order/IFD/tag/preview/embedded-original/opcode case mapping. Unknown private meanings remain opaque and are NOT a deployment blocker. No universal camera/pixel claim. |
-| 3 Malformed input | Fixed current SDE malformed/binding vectors, constrained range cases and bounded parser ownership controls are retained. | Match cycles/alias/count/offset/truncation/XML limits to actual cases and dependencies. User excludes new fuzz/sanitizer campaigns; do not invent a missing campaign or universal malformed-input proof. |
+| 2 Coverage | Current component/worker source bindings, XMP kernel/observation, opaque exact-layout predecessor receiving and conservative refusal contracts. | Named parser mapping is now in final-parser-case-map-20261019.md: both byte orders/classic+BigTIFF,33wire cases,936protected edits and247refusals/compiler. Complete later component/private-field mapping separately. Unknown private meanings remain opaque and are NOT a deployment blocker. No universal camera/pixel claim. |
+| 3 Malformed input | Fixed current SDE malformed/binding vectors, constrained range cases and bounded parser ownership controls are retained. | Named parser inventory binds cycles/aliases/count/offset/overflow to actual command/PASS logs. Match remaining truncation/XML observation limits to their separate actual sources. User excludes new fuzz/sanitizer campaigns; do not invent a missing campaign or universal malformed-input proof. |
 | 4 Integrity | Current SDE/base/hash/opaque guards; current realSDK structure/decode/raw-digestvalid full receiving and no-op scan results. | Current-candidate negative raw-digest/corrupt-output receiving proof and exact opaque/different-encoding counterexample mapping; SDK digest equality is not pixel/semantic equality. |
 | 5 Concurrent modification | Current source/worker apply-cancel controls and source/native ownership scopes; frozen V6 property/transport originals retained. | Map receiver/source/symlink/inode/cache/late-completion/mtime-restoration cases. Uncooperative check-to-rename race remains documented, not “eliminated” by a test. |
 | 6 Failure/recovery | Current warning/cancel/cache/input-pipeline composition; independent native range errors; preserved actual failed-prefix/recovery receipts. | Explicit clone/pwrite/property/flush/rename/archive/ENOSPC/drop/abort case-to-current-source map. Known recovery is not original-owner normal wait or crash durability. |
@@ -213,3 +213,16 @@ current owner controls passed actual0f1e3d/0, CPU00 closed; native execution is
 UNSTARTED. No additional worker/parity/race success is claimed from preparation,
 and no Photo/Capitola hold exists. Existing broad benchmark and final Adobe
 receiving gaps remain open independently.
+
+### Existing parser case inventory now source-bound
+
+[Named map](final-parser-case-map-20261019.md) and
+[inventory](final-parser-case-inventory-20261019.json) join all1253cases/compiler
+(33inspect+33golden+936opaque+247reject+4sparse) to existing actual88003/d7e7af/0,
+6288assertions/compiler, both exact CASE/PASS logs and20nested child settlements.
+Metadata-only audit e9c8f2/0, child71201 reaped0/groupabsent/CPU00closed. Initial
+fd400b/1 pin refusal preserved; exact historical40809783→currentb4491baf helper
+difference is only four timestamp/wait4-usage observations, reverse-hash checked
+against both saved snapshots. Parser/fixture/kernel source matches current;
+current helper was NOT retroactively used. No new native/SDK/payload/EXIO or
+Photo hold; remaining XML/merge/receiving cases stay independently open.

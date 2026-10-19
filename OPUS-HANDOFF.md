@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:19:24.320630+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:23:55.778105+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -87,6 +87,17 @@ investigation, announced as a distinct active finite EX/Photo8/UI operation.
 Unison has ZERO resources and NO Photo/Capitola scheduling hold. Do not infer
 that operation's terminal from this handoff; coordinate only when Unison is
 ready for immediate shared IO execution, otherwise continue independent source.
+
+New named parser inventory: `doc/final-parser-case-map-20261019.md` and JSON
+bind1253cases/compiler to existing actual88003/d7e7af/0:33inspect+33golden+
+936opaque+247reject+4sparse/6288assertions each. Metadata-only audit e9c8f2/0,
+child71201 reaped0/groupabsent/CPU00closed, noEXIO/payload/native rerun. Initial
+fd400b/1 correctly found one historical support pin; preserved. Exact four
+observation-only additions inverse-hash40809783→currentb4491baf checked against
+both original shared_child snapshots. Parser/fixture/kernel source stillcurrent;
+no current-helper rerun claim. XML/merge/receiving gaps separate. Worker plan
+cc71c911 remains UNSTARTED; Photo's Capitola investigation has priority and no
+Unison resources or scheduling holds exist.
 
 ## Actual current evidence
 
