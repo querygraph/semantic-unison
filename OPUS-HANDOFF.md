@@ -7073,3 +7073,21 @@ framing/output allowance with final current remote fragment and transfer/copy
 source, not final inherited-rsync publication/transport/corpus proof. Photo
 goesfirst IOhold unchanged, no liveUnisonjobs/resources. Next inherited-rsync
 source/binding closure; actualnative clones defer until PhotoIOreleased.
+
+
+## 2026-10-19 — DNG parser fixed-case inventory and SDE evidence mapping
+
+Photo reported bulk resume actual49291/030390; newEXIO/native/SDK/benchmark
+remain held; own8sourcecontrols permitted. No Photo release inferred.
+Current DNG map doc/sol-dng-final-case-map-20261019.md traces TIFF/BigTIFF/order,
+graph/pixels/previews/original/opcode/ICC, cycles/aliases/counts/sparse/highoffset
+and SDE bindings. Fresh saved audit:82current SDE sourcepins+4savedartifacts
+match (127commands2224asserts/compiler original actual3582/9768d4/0).
+In-memory existingfixtures:33valid/247invalid/27525120generatedlogicalbytes,
+NOTparserexecution/refusalproof; nofiles/native/SDK/photo/sparse. Initialhelper
+fe0909/1 usedmissingclose_unstarted method/nochildren; preservedfailure. Fresh
+successor96ce3f/0 reacquiredCPU00..03andqualifiedclose_descriptors succeeded.
+JSON inventories under doc/sol-dng-{fixed-case-inventory,final-case-bindings}-
+20261019.json. Extendedprofile/latercomponent parser actualbindings stillneed
+renewal/scopedmapping, not universallyqualified by SDE evidence. Allownjobs/
+resourcesclosed. GoalACTIVE, continue source work while Photo goesfirst.

@@ -244,3 +244,10 @@ stock/Ox167checks each plus9designated negatives each, all120 childgroups settle
 current329production bindings match, actualownertool10579/6aaca5/0/no session;
 CPU4closed/noEXIO/nativeSDK. Token/output component gap closed; inherited-rsync
 publication and final transport scope remain separate.
+
+### DNG parser fixed-case mapping — 2026-10-19
+
+[Named map](sol-dng-final-case-map-20261019.md): current SDE82sourcepins/4saved
+artifacts verified; existing33valid/247invalid fixtureinventory enumerated in
+memory. Inventory is not parser qualification; extended/later component-source
+scopes remain open. Photo first/bulkIO hold respected; no newnative operation.

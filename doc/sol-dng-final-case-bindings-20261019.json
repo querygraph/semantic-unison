@@ -1,0 +1,141 @@
+{
+  "schema": "unison-final-dng-case-binding-audit/1",
+  "scope": "Current explicit SDE source and saved artifacts only; no test rerun or full transitive-runtime proof",
+  "receipt": {
+    "path": "tests/qualification/current-sde-conformance-actual-20261018.json",
+    "sha256": "00a274ab3554ecd2013799e791b894a3b30d182738126384349c63cf9006bf78"
+  },
+  "actual_controller": {
+    "session": 3582,
+    "initial_chunk": "596b01",
+    "terminal_chunk": "9768d4",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "rows": [
+    {
+      "compiler": "stock",
+      "commands": 127,
+      "assertions": 2224,
+      "source_pins_matched": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+        "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+        "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+        "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+        "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+        "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+        "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+        "doc/semantic-delta-v0.md": "aafd875341ca418a29c8ffe06a2c08e218977120c314918d673a111e75d95513",
+        "doc/dng-profile-v0.md": "8257154e0c8ee7d3e3ac2701f829315ad45b4d95c7894a2560ced11390188201",
+        "tests/semantic/conformance/README.md": "e6073d470017292df26e020736a793b02b586597c45f3235df96df86bb6a29cd",
+        "tests/semantic/conformance/golden/boundary-manifest.json": "1c60e4473f4e5b97eca446f13ebf2dbf7cb1db0a8c9933c2e58f6c688681f5de",
+        "tests/semantic/conformance/golden/dng-be.base": "a309884b55c4c0f3db9b7766ce4a9b9d2acc2492b2fc70c959e0dfde367b6916",
+        "tests/semantic/conformance/golden/dng-be.sde": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe",
+        "tests/semantic/conformance/golden/dng-be.sdr": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e",
+        "tests/semantic/conformance/golden/dng-be.target": "d42103c1a18d0ad994d6590985650b85780652eb810d5073301b0dcb8d19e9ed",
+        "tests/semantic/conformance/golden/dng-le.base": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+        "tests/semantic/conformance/golden/dng-le.sde": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22",
+        "tests/semantic/conformance/golden/dng-le.sdr": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8",
+        "tests/semantic/conformance/golden/dng-le.target": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+        "tests/semantic/conformance/golden/manifest.json": "ce0884c7bddafb7a4e975b56d89616f8c96ac528f1c479faef43d720c640ce10",
+        "tests/semantic/conformance/golden/multi.base": "64fec337382cbac4b0fd58fd08987975ea69cdb8e8ea8be2d0f2335e74a27c9e",
+        "tests/semantic/conformance/golden/multi.sde": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+        "tests/semantic/conformance/golden/multi.sdr": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd",
+        "tests/semantic/conformance/golden/multi.target": "1f9dc1d6c9d1de7eb30a09cb6382cf00702a98d88f2b4b41e8cae0caf129cf29",
+        "tests/semantic/conformance/reference.py": "0cd110501807de0a299209ec1b0210c13ad9623d8dc14611cfcd95a2fb1800c1",
+        "tests/semantic/conformance/run.py": "e6ffe456312f2d30f2917e10715587962975b4e00c5d23413ac2834e039a36c8",
+        "tests/semantic/conformance/sanitizer-build-handoff.json": "51cd92b2600b0a10c2fa06aaed40a15abcfe95795fabb45cd9edb4a09337a117",
+        "tests/semantic/conformance/shared.py": "aaa9cf9a5c7d9b96c660a67c107881d02ccc440557b7e2bd5109e0bb37c7112d",
+        "tests/semantic/conformance/shared_owner_test.py": "97ba017cccfdae53504a8b9ca5968b28ffbd1ff96e746cf9b124fc0b0aeb35fe",
+        "tests/semantic/conformance/test.ml": "9fd454222297fee5f9a0b71d7c29c01284daf6713ce356da79885b85c7594521",
+        "tests/semantic/conformance/vectors.py": "aa949d3bc797e9786a71d3f1fa7d1bcd2ad53a204c3e121db0a6a552d7dfdf57"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-sde-conformance-stock-20261018-001/RESULT.json",
+          "bytes": 24452,
+          "sha256": "1cfd5bcf6d11f88dcc08598fe81328b4ca08a51a0596433f07fb019b99c7fe3c",
+          "verified": true
+        },
+        {
+          "path": "/private/tmp/unison-current-sde-conformance-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cde7d08dd69a3e442dfc396beecafc7cc2153cc0830b1a7674c44c0fb3a08b0b",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "commands": 127,
+      "assertions": 2224,
+      "source_pins_matched": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+        "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+        "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+        "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+        "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+        "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+        "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+        "doc/semantic-delta-v0.md": "aafd875341ca418a29c8ffe06a2c08e218977120c314918d673a111e75d95513",
+        "doc/dng-profile-v0.md": "8257154e0c8ee7d3e3ac2701f829315ad45b4d95c7894a2560ced11390188201",
+        "tests/semantic/conformance/README.md": "e6073d470017292df26e020736a793b02b586597c45f3235df96df86bb6a29cd",
+        "tests/semantic/conformance/golden/boundary-manifest.json": "1c60e4473f4e5b97eca446f13ebf2dbf7cb1db0a8c9933c2e58f6c688681f5de",
+        "tests/semantic/conformance/golden/dng-be.base": "a309884b55c4c0f3db9b7766ce4a9b9d2acc2492b2fc70c959e0dfde367b6916",
+        "tests/semantic/conformance/golden/dng-be.sde": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe",
+        "tests/semantic/conformance/golden/dng-be.sdr": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e",
+        "tests/semantic/conformance/golden/dng-be.target": "d42103c1a18d0ad994d6590985650b85780652eb810d5073301b0dcb8d19e9ed",
+        "tests/semantic/conformance/golden/dng-le.base": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+        "tests/semantic/conformance/golden/dng-le.sde": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22",
+        "tests/semantic/conformance/golden/dng-le.sdr": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8",
+        "tests/semantic/conformance/golden/dng-le.target": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+        "tests/semantic/conformance/golden/manifest.json": "ce0884c7bddafb7a4e975b56d89616f8c96ac528f1c479faef43d720c640ce10",
+        "tests/semantic/conformance/golden/multi.base": "64fec337382cbac4b0fd58fd08987975ea69cdb8e8ea8be2d0f2335e74a27c9e",
+        "tests/semantic/conformance/golden/multi.sde": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+        "tests/semantic/conformance/golden/multi.sdr": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd",
+        "tests/semantic/conformance/golden/multi.target": "1f9dc1d6c9d1de7eb30a09cb6382cf00702a98d88f2b4b41e8cae0caf129cf29",
+        "tests/semantic/conformance/reference.py": "0cd110501807de0a299209ec1b0210c13ad9623d8dc14611cfcd95a2fb1800c1",
+        "tests/semantic/conformance/run.py": "e6ffe456312f2d30f2917e10715587962975b4e00c5d23413ac2834e039a36c8",
+        "tests/semantic/conformance/sanitizer-build-handoff.json": "51cd92b2600b0a10c2fa06aaed40a15abcfe95795fabb45cd9edb4a09337a117",
+        "tests/semantic/conformance/shared.py": "aaa9cf9a5c7d9b96c660a67c107881d02ccc440557b7e2bd5109e0bb37c7112d",
+        "tests/semantic/conformance/shared_owner_test.py": "97ba017cccfdae53504a8b9ca5968b28ffbd1ff96e746cf9b124fc0b0aeb35fe",
+        "tests/semantic/conformance/test.ml": "9fd454222297fee5f9a0b71d7c29c01284daf6713ce356da79885b85c7594521",
+        "tests/semantic/conformance/vectors.py": "aa949d3bc797e9786a71d3f1fa7d1bcd2ad53a204c3e121db0a6a552d7dfdf57"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-sde-conformance-ox-20261018-001/RESULT.json",
+          "bytes": 24456,
+          "sha256": "a971a1afa275c430e6e9dd6d85f45baef0c3ee9f41a3f8b6cef93fc9400a4451",
+          "verified": true
+        },
+        {
+          "path": "/private/tmp/unison-current-sde-conformance-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "96e8804cb6eb419f0eca294459a714439e3a439e49c193252c6486e0eb0fb2f3",
+          "verified": true
+        }
+      ]
+    }
+  ]
+}
