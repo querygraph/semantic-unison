@@ -8,9 +8,9 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest fixture
-  preservation owner `961bfc/0/NOsession`; independent metadata audit `4b1b2f/0`
-  freshly acquired/closed Unison8+EX. No SDK calls or sealing hold.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest saved
+  profile pair28308/7b837c/0/NOsession, independent455c91/0 reacquired/closed
+  Unison8+EX. Sixnativepairsclosed. No SDK/Photo operation or sealinghold.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -99,6 +99,15 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   meet SOLv0ordinaryfallback: requirement remains visibly unresolved, no new
   unsupported transport silently restored. `doc/final-rpc-version-result-20261019.md`.
   Threecontrols b2606d/0; allresourcesZERO. Continue otherindependent work.
+
+- **Actual saved-profile properties:**28308/7b837c/0 bothcompilers6pairs,
+  generatedDNG+binary: ignore/symlink/versionedbackups/mode640→400/xattr+fork
+  removal/exacttimestamp/oldreader preservation/noop8fields allpass. Independent
+  455c91/0 reaudited538source329production/canonical9+786432Bcurrent/backupbytes;
+  full8EXclosed. V1preentrymissingplanfield1 and V2backupfixturefailure then
+  exactidleRoot137recovery preserved; V3freshnamespacepass, originalproxywait4
+  notclaimed. `doc/final-sync-properties-result-20261019.md`. OtherACL/compressed/
+  races/crash/platform scopes remain separate. AllresourcesZERO.
 
 ## Remaining work — do not mark goal complete
 

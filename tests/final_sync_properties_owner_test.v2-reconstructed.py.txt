@@ -1,0 +1,25 @@
+import unittest
+from pathlib import Path
+from final_sync_properties_owner import command,content,profile_text
+
+class PropertyCommands(unittest.TestCase):
+    def test_saved_profile_owns_roots_ignore_backup_and_selected_metadata(self):
+        text=profile_text(Path('/private/tmp/u-sync-props-original/0'))
+        for line in ('root = /private/tmp/u-sync-props-original/0/left','root = ssh://localhost//private/tmp/u-sync-props-original/0/right','ignore = Name ignored.tmp','backupsuffix = .previous','rsrc = true','xattrs = true','perms = 0o777','times = true'):
+            self.assertIn(line+'\n',text)
+        with self.assertRaises(ValueError):profile_text(Path('relative'))
+    def test_both_compilers_load_named_profile_and_explicit_shared_budget(self):
+        artifacts={x:dict(path='/private/tmp/'+x) for x in ('stock','ox')}
+        for i in range(2):
+            row=command(artifacts,Path('/private/tmp/u-sync-props-original'),i);a=row['command']
+            self.assertEqual(a[1],'compat');self.assertEqual(a[a.index('-adobevalidate')+1],'off')
+            self.assertEqual(a[a.index('-semanticcpubudget')+1],'2')
+            self.assertEqual(row['server_command'][:3],[row['server'],'-server','__new-rpc-mode'])
+    def test_both_original_payloads_change_exact_fixed_length(self):
+        for name in ('item.dng','item.bin'):
+            self.assertEqual(len(content(name)),65536);self.assertEqual(len(content(name,True)),65536);self.assertNotEqual(content(name),content(name,True))
+        with self.assertRaises(ValueError):content('other')
+    def test_invalid_command_case_preentry(self):
+        for value in (True,-1,2):
+            with self.assertRaises(ValueError):command({},Path('/private/tmp/u-sync-props-original'),value)
+if __name__=='__main__':unittest.main()

@@ -1,0 +1,29 @@
+{
+  "schema": "unison-final-sync-properties-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 28308,
+    "initial_chunk": "998e73",
+    "terminal_chunk": "7b837c",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 41850
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-sync-properties-plan-v3-20261019.json",
+    "sha256": "2c6336864c0bafe76bab3edf01707cd89e63416a8a288d242854c95ecf5a406b"
+  },
+  "workspace": "/private/tmp/u-sync-props-866e7151e8bb46b1",
+  "calls": 6,
+  "primary_roles": 18,
+  "source_pins": 538,
+  "production_pins": 329,
+  "fresh_final_replica_and_backup_bytes": 786432,
+  "profiles_ignore_symlink_backup": true,
+  "selected_xattr_resourcefork_mode_removal": true,
+  "timestamps_exact_integer_ns": true,
+  "held_readers_preserved_recorded": 4,
+  "noop_target_identities_unchanged": true,
+  "all_peer_raw_proofs_reaudited": true,
+  "canonical9_reacquired_closed": true,
+  "scope": "Generated saved-profile current stock/Ox sync properties only; noACL/compressed/crash/platform/SDK/Photo/physicalsharing proof."
+}
