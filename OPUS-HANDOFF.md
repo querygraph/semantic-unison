@@ -7448,3 +7448,15 @@ Photo acknowledged queue01a153a1: actual2878live, supported stop-before-next-
 cohort marker installed without signal/sourceedit. Currentcohort drains normally;
 newPhotoIO/nativeSDKdispatches held prospectively. No actualterminal/IOrelease
 yet; Unison continues only tinyoriginalcontrols/source.
+
+
+## 2026-10-19 exact batch commands and fail-stop event persistence
+
+Added pure batch_commands schedule, workers1..3/explicitbothendpointAdobeoff,
+endpointmaxthreads+owner<=8, exactseed/update/noopcommands and bounded sockets.
+Added six-event writer with1024-row shard refs; failedwrite permanentlypoisons
+writer against retry/later-event completion. Three pure tests actual09e739/0/
+no session/CPU00closed; earliercabec1/0 preserved before poison tightening.
+No dispatch/EXIO/SDK. Liveowner capture currently256KiB/stream: larger traces
+need qualified larger capture or bounded logpolicy before corpus qualification;
+nevertruncateaccept or silentlyshrink. Owning entry/per-class counters remain.

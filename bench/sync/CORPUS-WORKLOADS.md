@@ -143,3 +143,17 @@ uncertainty. No signal, cancellation, retry or cleanup is introduced.
 Four original fake-evidence/handle controls passed actuale97204/0/no session
 under Unison00, including seven malformed frame variants. No socket/native/EXIO
 run. The owning entrypoint, source policy and actual pair/corpus run remain open.
+
+`batch_commands.schedule` now binds exact seed/update/no-op commands for ordinary,
+receiver-clone and semantic modes. Both endpoints explicitly disable Adobe,
+workers1..3 and maxthreads at least2 yield a conservative configured endpoint+
+owner sum <=8. This is a declaration, not an OSthread hardcap. No local-source
+clone mode is silently substituted for the loopback workload. Paths/socketlength
+are bounded and no command is executed by this pure contract.
+`batch_events.Events` accepts exactly six ordered sample events, sharding large
+row sets in1024-entry bounded raw artifacts. A failed attempted publication
+poisons the writer: no retry or later event can make that prefix look complete.
+Three original pure controls passed actual09e739/0/no session/Unison00closed.
+No IO/resource/server grant is supplied. Runtime owning entry and per-class
+observed counters remain open;256KiB live capture limit is an explicit scaling
+constraint, not silently accepted truncation or a reason to shrink the corpus.
