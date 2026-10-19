@@ -6987,3 +6987,32 @@ compiler/canonicalIO/newgrant. Receipts `tests/qualification/current-sdk-merge-
 parent-controls[-v2]-20261019.json`. Next top-level entry/freezer and authenticated
 generated fixture recovery, then actual native qualification. Goal active and
 incomplete; these controls own no remaining resources.
+
+## Native merge entry and immutable metadata freezer now runnable — 2026-10-19
+
+New final-Adobebranch files: `entry.py`(owner/worker/check-plan), `inventory.py`,
+`artifacts.py`, `freeze.py` under `tests/sdk_merge_receiving`. They connect current
+metadata/source inventories and exact admission to existing canonical pools,
+retained owner/worker/runtime and independent parent audit. Worker final closes
+retain nine inheritedFDs on metadata-directory uncertainty and never resurrect
+already-closed numeric slots on partial resource close. Metadata-only freezer
+creates immutable plan/request/index from authenticated JSON and lstat/source
+pins; it never opens DNG/executable payload or mints an admission. Artifact byte
+hashes stay inside ownedIO. No currently valid real generated-input packet was
+frozen: tests use fabricated source/SDK/build data and remove their private JSON.
+
+Actual7e0b63/0/no session:12 focused controlsPASS, child50107 reaped0/group-empty/
+CPU4closed. ActualCLI7e5dfa/0: entry+freezer help49060/49062 exit0; native missing-
+admission refusal49064 exit1 BEFOREplanmetadata, allchildwaits/group/captures/
+CPU4closed. Sourcebootstrap fix verified via actual file launches. Earlier
+dde5d3/e1da74/f0fc20 controls preserved. Receipts `tests/qualification/current-
+sdk-merge-{entry,freeze,freeze-v2,cli,entry-freeze}-controls-20261019.json` (exact
+filenames in qualification directory). No SDK/Unison/media/compiler/IO pool or
+newgrant; native-source composition is implemented but NOT actually qualified.
+
+Next actionable dependency: authenticated input recovery/regeneration (oldJXL
+and12scalarstates missing; two recent generated originals/validator previously
+observed surviving; fixture-writer absent). Preserve allhistorical receipts and
+oldnamespaces; no fabricated fixture substitution. Then real freeze+fresh exact
+IO coordination/admission, native matrix, independent evidence adoption. Other
+SOL benchmark/workload/case-mapping requirements remain; goalactive/incomplete.

@@ -1,5 +1,15 @@
 # Current SDK merge receiving successor — source work in progress
 
+## Current status — 2026-10-19
+
+The complete native entry and metadata freezer now exist (`entry.py`, `freeze.py`).
+Source/metadata/resource-close controls and actual CLI help/refusal checks pass;
+actual native Unison+Adobe merge qualification has NOT run. The older temporary
+three-codec/twelve-state set is missing and must be authentically recovered or
+regenerated. No real request/admission was frozen by the fabricated-input tests.
+Earlier entries below retain the implementation chronology and narrower scopes.
+
+
 `plan.py` defines the exact nine-call matrix: three retained generated encodings,
 each seed/off → scalar merge/require → unchanged no-op/require. The stock client
 uses an explicit OxCaml server. Both receive explicit two-worker/two-credit
@@ -350,3 +360,33 @@ clone/Unison/media/compiler/canonicalIO grant/run. Receipts `../qualification/
 current-sdk-merge-parent-controls[-v2]-20261019.json`. This checks decoder/join
 logic, not actual native qualification. Remaining top-level entry/freezer and
 authenticated generated fixtures must precede the actual Unison–Adobe matrix.
+
+## Top-level entry, source inventory and metadata freezer
+
+`entry.py` now connects current metadata checks, exact request/admission, existing
+canonical IO/CPU pools, retained owner, actual worker descriptor/parent guard,
+artifact hashes, runtime, independent parent audit and qualified final closes.
+Worker metadata-directory uncertainty retains all nine inherited FDs; a partial
+resource close preserves only remaining known and uncertain identities, never
+resurrecting already-closed numeric slots. Unknown remains a live owner with
+saved diagnostics. `--check-plan` is source/JSON/lstat only; it neither consumes
+a workspace nor acquires IO or invokes a native helper.
+
+`inventory.py` enumerates current first-party support/execution/production names
+from the reviewed repository. `artifacts.py` hashes six declared executables ONLY
+inside caller-owned IO; it does not claim independent lock authority. `freeze.py`
+reads input/SDK/build/ancestry JSON, pins current source and input metadata, then
+writes immutable PLAN/REQUEST/INDEX and a launch template. It never opens DNG
+or executable payload, acquires IO or publishes an admission. SDK/build hashes
+remain authenticated receipt declarations until the IO-owned phase.
+
+Actual7e0b63/exit0/no session:12 focused entry/freezer/artifact controls PASS, child
+50107 reaped0/group-empty thenCPU00..03closed. Actual CLI7e5dfa/0 spawned help
+children49060/49062 exit0 and missing-admission refusal49064 exit1, all reaped/
+group-empty/CPU4closed; no plan opened by refusal. Earlierdde5d3/0,e1da74/0 and
+f0fc20/0 controls preserved; final focused freezer covers retained-directory
+no-retry using an inert close failure BEFORE any OS close. SDK/worker/pools and
+artifact readers mocked in unit controls; no native DNG/SDK/Unison/compiler/
+canonicalIO/grant. No claim of final native functionality or goal completion.
+Next authenticated three-codec input recovery/regeneration, real metadata freeze,
+exact new IO scheduling/admission, native run and independent acceptance.
