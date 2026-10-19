@@ -56,6 +56,12 @@ scheduling statements below; preserve original receipts and their scopes.
   67541/5343fe/0, allscanned45243/e035b2/0, all CLOSED. TenSDKcalls with rawdigest
   valid/decodeSUCCESS/errors0 and4edgepaddingwarnings each retained. Historical
   threecodec merge43830/699a51/0 remains predecessor scope, not current execution.
+- **Additional workload source:** eight recipes now wired through explicit
+  `--workload` (growth, metadata+preview/raw/opaque, full replacement, malformed/
+  unsupported), legacy default and frozen plans unchanged. Sixteen tiny directed
+  controls pass; unchanged mutation cannot be counted as change. No actual new
+  workload sync/measurement yet. Saved no-change report separately retains
+  180noops/150measured/30warmups and20authenticated inputs without a rerun.
 - **Benchmarks:** ten32MiBcohorts180rows540CLI actualclosed. First128stock1
   52223/3c264e/0 closed18rows54CLI;29largercohorts unstarted. Full30plan estimate
   18–30h/central23h remains a scheduling projection. No further payload starts
@@ -7317,3 +7323,16 @@ actual-20261019.json. Finitewarmnochange scopecovered; thousandssmall/new/editor
 mixed/fullnewrecipe executions+larger/topology/upstreamperformance remainopen.
 LatestPhoto91034recoveryclosed, immediatelegacyretentionfix/retrypriority still
 holdsnewIO/native/SDK/benchmark. Noownresources. GoalACTIVE.
+
+
+## 2026-10-19 — Guard against measuring a broken change recipe as a no-op
+
+Reviewfound newconsumer lackedexplicit afterSHA!=beforeSHA assertion. Fixedboth
+consumer and benchmarkrunner beforeupdateinvoke. All8recipe kinds declarechange;
+noopbenchmark isseparateexisting saved-call report, notsilentempty mutation.
+OriginalinjectedemptyRecipe test refuses/noafter-size success fields/source
+bytespreserved. Actual0dc2fc/0/no session:16tinyrecipe/file controlsPASS, child
+73483reaped0/groupempty/CPU4closed. AST/sourcecheck verifiesrunnerguard precedes
+measured update. Receiptgenerated-workload-nonnoop-actual-20261019.json. NoUnison
+benchmark/nativeSDK/Photo/EXIO; allactualnewworkloads stillawaitendtoendIOwindow.
+Photo-firstpriority unchanged; goalACTIVE.

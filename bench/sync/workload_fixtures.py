@@ -111,6 +111,8 @@ def edit(path, metadata, kind):
         os.fsync(fd)
         after = epoch(os.fstat(fd))
         expected = digest(fd, changes.target_size)
+        if expected == metadata['before_sha256']:
+            raise ValueError('generated change workload produced unchanged bytes')
         fence(fd, path, after)
         metadata.update(workload=kind, after_size_bytes=changes.target_size,
                         expected_transfer=changes.expected_transfer)

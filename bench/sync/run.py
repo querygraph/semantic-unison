@@ -547,6 +547,8 @@ def main():
                             item["expected_after_sha256"] = (edit(directory / "left" / name, item)
                                 if args.workload == "fixed-xmp" else
                                 edit_workload(directory / "left" / name, item, args.workload))
+                            if item["expected_after_sha256"] == item["before_sha256"]:
+                                raise AssertionError("declared change workload unexpectedly produced a no-op")
                             if args.property_removal_controls:
                                 property_controls.remove_source(directory / "left" / name)
                         sample = {"label": label, "mode": mode, "workers": worker,

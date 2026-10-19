@@ -61,6 +61,17 @@ class Fixtures(unittest.TestCase):
         with self.assertRaises(ValueError):edit(self.path,info,'metadata-raw')
         self.assertEqual(self.path.read_bytes(),b'new file')
 
+    def test_broken_empty_mutation_cannot_be_reported_as_change(self):
+        from workloads import Recipe
+        info=create(self.path,32768,512,0)
+        before=self.path.read_bytes()
+        broken=Recipe('metadata-raw',32768,32768,(),'exact-fallback-fixture')
+        with patch('workload_fixtures.recipe',return_value=broken):
+            with self.assertRaisesRegex(ValueError,'unchanged bytes'):
+                edit(self.path,info,'metadata-raw')
+        self.assertEqual(self.path.read_bytes(),before)
+        self.assertNotIn('after_size_bytes',info)
+
     def test_alias_refuses_before_mutation(self):
         import os
         info=create(self.path,32768,512,0)

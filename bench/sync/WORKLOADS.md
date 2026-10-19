@@ -70,3 +70,10 @@ source suite passed, as did legacy fixture and actualCLIhelp checks; see
 `tests/qualification/generated-workload-extended-actual-20261019.json`.
 All eight recipes still await their actual Unison receiving/benchmark execution;
 a passing generator does not prove expected fallback or transfer correctness.
+
+Every current recipe declares a change. The consumer and runner now both reject
+an unchanged before/after SHA before update measurement. A deliberately empty
+recipe is an injected negative control: it must fail and cannot become a fast
+"full-change" no-op sample. Sixteen tiny source controls passed; actual receiving
+still remains unstarted. No-change measurements use their separately reported
+saved no-op calls, not this change-only recipe interface.
