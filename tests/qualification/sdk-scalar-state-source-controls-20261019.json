@@ -1,0 +1,78 @@
+{
+  "schema": "unison-sdk-scalar-state-source-controls/1",
+  "state": "PURE_ORIGINAL_TINY_CONTROLS_PASS_NATIVE_GENERATION_UNSTARTED",
+  "actual_tool": {
+    "terminal_chunk": "e440a9",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "result": {
+    "path": "/private/tmp/unison-sdk-fixture-state-controls-20261019-002/RESULT.json",
+    "bytes": 437,
+    "sha256": "cc4b5305d7be3ac736de5fd596f06a10ccea0d4b42e225f22e081064a6449fbd"
+  },
+  "child": {
+    "path": "/private/tmp/unison-sdk-fixture-state-controls-20261019-002/CHILD.json",
+    "bytes": 592,
+    "sha256": "6e34b5b6a80f87a83ceed2df4070b56e1d64041fd4d57d5a7888d85a1507de5f"
+  },
+  "control_result": {
+    "child": {
+      "group_cleanup_before_leader_reap": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "pid": 72768,
+      "reaped": true,
+      "returncode": 0
+    },
+    "methods": 8,
+    "no_sync_SDK_or_payload": true,
+    "passed": true,
+    "source_pins": {
+      "tests/sdk_fixture_states.py": "ec6e8d03d7466f72557d078cefa19dcb8d8cae1f1a1a58e81a757a14dc8a6d47",
+      "tests/sdk_fixture_states_test.py": "e00d9a4f1cc8822da2aaa8ccec333a4e4e2889f67dbfa066b13b70ee13dafffb"
+    }
+  },
+  "source_pins": {
+    "tests/sdk_fixture_states.py": "ec6e8d03d7466f72557d078cefa19dcb8d8cae1f1a1a58e81a757a14dc8a6d47",
+    "tests/sdk_fixture_states_test.py": "e00d9a4f1cc8822da2aaa8ccec333a4e4e2889f67dbfa066b13b70ee13dafffb"
+  },
+  "official_constant_source": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1/dng_sdk/source/dng_tag_values.h",
+    "bytes": 12945,
+    "sha256": "e6b5e7157c7e7e2a3867c3dd1b51d7d0ed7ae3a762734e26d9e0455fc3d07bdb"
+  },
+  "constants": {
+    "uncompressed": 1,
+    "jpeg": 7,
+    "jxl": 52546
+  },
+  "scope": "Pure synthetic 4096B TIFF/XMP variants only; no retained fixture/source payload/SDK/writer/receiving or decoded pixel qualification",
+  "resources": {
+    "CPU00_closed": true,
+    "EXglobal_acquired": false,
+    "Photo_or_Capitola_hold": false
+  },
+  "predecessor": {
+    "actual_tool": {
+      "terminal_chunk": "ff9283",
+      "exit_code": 0,
+      "running_session": null
+    },
+    "result": {
+      "path": "/private/tmp/unison-sdk-fixture-state-controls-20261019-001/RESULT.json",
+      "bytes": 437,
+      "sha256": "fe096f30367a1a744ad1eb643516eb3a9f81058efc79e050a78daebbc6c39fad"
+    },
+    "child": {
+      "path": "/private/tmp/unison-sdk-fixture-state-controls-20261019-001/CHILD.json",
+      "bytes": 592,
+      "sha256": "a6d731996b681bdf205bbb419d1f30d6e71ab6756a697f1ba0fabbad6faa400a"
+    },
+    "source_pins": {
+      "tests/sdk_fixture_states.py": "69654d3664ec614197af7516604513efe5ad8fd340658ac0b946f25a034a8171",
+      "tests/sdk_fixture_states_test.py": "7b862c0be7fc055ec44ea44b2ae37b2cfff58c9545f2eba6dfec81afc21a3132"
+    },
+    "scope": "Initial eight controls before expanded-name child-property duplicate refusal was added"
+  }
+}

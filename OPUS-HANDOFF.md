@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:23:55.778105+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:27:56.763923+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -98,6 +98,23 @@ both original shared_child snapshots. Parser/fixture/kernel source stillcurrent;
 no current-helper rerun claim. XML/merge/receiving gaps separate. Worker plan
 cc71c911 remains UNSTARTED; Photo's Capitola investigation has priority and no
 Unison resources or scheduling holds exist.
+
+Final fixture source progressed: `tests/sdk_fixture_states.py` now implements
+pure four-state fixed-size scalar construction for known6000x4000 generated
+classic TIFF inputs. Eight original tiny controls actuale440a9/0/NOsession,
+child72768 reaped0/groupabsent/CPU00closed. All3codec declarations/both endians,
+exact outside-XMP preservation, proper XML namespaces and malformed/ambiguous
+refusals tested. No retained DNG opened, SDK invoked or EXIO acquired. See
+`doc/sdk-scalar-state-generation-20261019.md`. Actual generatedJXL/12states still
+DO NOT exist; writer2768 still BUILD ONLY. Next implement exact generation owner
+(one JXL transcode+12qualified2724 checks), freeze it, then coordinate active
+IO/SDK only. Do not substitute pure bytes for authentic native fixture evidence.
+
+Worker plancc71c911 remains UNSTARTED. Just-in-time readiness notice queued
+01a154c5-7669; Photo has zero resources but Capitola current-conflict state is
+not yet known, so there is NO active allocation or pause. Source/ownCPU work
+continues independently. Do not dispatch shared IO until that current priority
+is reconciled; do not reserve a blanket future window or stall all source work.
 
 ## Actual current evidence
 

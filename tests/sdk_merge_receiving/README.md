@@ -2,6 +2,18 @@
 
 ## Current status — 2026-10-19
 
+The current receiving entry/freezer/independent audit are implemented; native
+qualification still awaits actual generated inputs. Two base fixtures are now
+preserved as readonly private clones, and a separately reviewed2768 fixture
+writer has built successfully without being executed. New pure
+`tests/sdk_fixture_states.py` controls passed e440a9/0 for all three declared
+encodings/both byte orders and four fixed-size scalar states. This does not
+create real JXL/twelve-state files. See
+`doc/sdk-scalar-state-generation-20261019.md`; the retained native generator owner
+and exact active IO/SDK window are next. Old chronology below is historical,
+including earlier statements that the freezer/transport did not yet exist.
+
+
 The complete native entry and metadata freezer now exist (`entry.py`, `freeze.py`).
 Source/metadata/resource-close controls and actual CLI help/refusal checks pass;
 actual native Unison+Adobe merge qualification has NOT run. The older temporary
