@@ -20,6 +20,7 @@ class Retained(BaseException):
 
 class Dispatcher(unittest.TestCase):
     credits=8
+    observation_seconds=900
     def setUp(self):
         self.temporary=tempfile.TemporaryDirectory(prefix='cohort-dispatch-controls-')
         self.output=Path(self.temporary.name).resolve();self.events=[]
@@ -55,7 +56,7 @@ class Dispatcher(unittest.TestCase):
                 outer.assertEqual(kw['pass_fds'],outer.cpu.fds+outer.io.fds)
                 outer.events.append('spawn:inert')
             def await_terminal(self,seconds):
-                outer.assertEqual(seconds,898);outer.events.append('await:inert');return not outer.live
+                outer.assertEqual(seconds,outer.observation_seconds-2);outer.events.append('await:inert');return not outer.live
         def audit(*args,**kw):
             outer.events.append('audit')
             outer.assertFalse(outer.cpu.closed or outer.io.closed)
@@ -75,6 +76,8 @@ class Dispatcher(unittest.TestCase):
             stack.enter_context(patch.object(D,'settle',side_effect=settle))
             stack.enter_context(patch.object(D,'retain_after_record',side_effect=retain))
             stack.enter_context(patch.object(E,'parent_audit',side_effect=audit))
+            stack.enter_context(patch.object(E,'checked_plan',return_value={
+                'limits':dict(owner_observation_seconds=self.observation_seconds)}))
             stack.enter_context(patch.object(E,'authorize_temporary_borrow',return_value=tuple(range(self.credits))))
             return D.run(E.TARGET,[sys.executable,str(E.ROOT/'tests/cohort_entry.py'),'--worker',
                          '--plan','/inert','--plan-sha256','a'*64,'--workspace',str(self.output)],
@@ -108,6 +111,11 @@ class Dispatcher(unittest.TestCase):
 
 class BorrowedDispatcher(Dispatcher):
     credits=18
+
+
+class LargerDispatcher(Dispatcher):
+    credits=18
+    observation_seconds=7200
 
 
 if __name__=='__main__':unittest.main()

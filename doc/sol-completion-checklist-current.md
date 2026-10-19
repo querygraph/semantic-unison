@@ -161,3 +161,23 @@ V1requesttargettypo supersededUNSTARTED;47e4fc metadata-relativepathguard refuse
 71ce11 createdcorrectabsoluteV2, no originalrequest/admissionreused/runtimefailure.
 Allownjobs/FDsclosed;PhotoIO-at-endstillheldperuser,CPU8sourceindependent.
 Nextpolicy/pathmatrixsourceaudit/largerworkloads, no automaticSDKgrant.
+
+
+### Larger workload SOURCE successor prepared; no payload dispatch yet
+No production change:971271a8 binaries/current329 source pins remain. New nested
+cohort/2 dimensions128×4,512×4,2048×2, preserving exactoldcohort/1 and plan/2.
+Limits derive7200owner/180CLI, unknownretains, declared4TiBlogicalnotphysicalcap.
+Shared1/2need8;4/8/auto neednew18coordination(notconsumedACTIVE84).
+Actual52559a/0 original46controls passed; realonePythonchildreaped0/groupempty,
+outerCPU4closed. Ownerinline reusedclose_unstarted after actualsettlement;
+childproofwasreal, notno-childclaim; futureownersuseexplicitproof-bearingclose.
+Three frozenindexes/30cohorts540rows1620CLI SOURCEONLY under doc/auto-cohort-qualification-larger-*-v1-20261019/.
+Series82ee83dc:doc/auto-cohort-larger-series-prepared-20261019.json; no admissions.
+Legacyreportactual4e051e/0 re-auditsall180savedrows/no rerun, originalrawunchanged.
+Receipt tests/qualification/auto-cohort-larger-legacy-report-actual-20261019.json.
+Newtests/source/lifecycle scope documented doc/auto-cohort-larger-plan-20261019.md.
+Photoqueue01a152d4-baed receivesfinitechecklist/new18request; no extraACKforclosedruns.
+Allownjobs/resourcesclosed. UserPhotoIO-at-endhold remains;CPU8sourceindependent.
+Nextfirst128stock1 freshshared8guard/admission; no18untilfreshPhoto coordination.
+CurrentSDKfull67541/5343fe/0 +allscanned45243/e035b2/0 source/harness scope preserved
+asactualpriorruns, not relabeled to this subsequent Python-only harness commit.

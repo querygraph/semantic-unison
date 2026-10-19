@@ -63,12 +63,12 @@ def checked_io_request(request, target, argv, output, credits):
                     ROOT / 'bench/sync/ownership.py', Path(argv[1])}
     if target == COHORT_TARGET:
         from cohort_entry import checked_plan, worker_argv, require_grant
-        from cohort_plan import execution_sources, LIMITS
+        from cohort_plan import execution_sources, limits
         from auto_cohort import exact
         require(type(credits) is int and credits in (8,18) and len(argv)==9,'exact cohort worker required')
         packet=checked_plan(argv[4],argv[6]);require_grant(packet,credits)
         require(argv==worker_argv(packet,argv[4],argv[6]) and packet['workspace']==str(output)
-                and exact(value['limits'],LIMITS),'exact cohort admission/namespace differs')
+                and exact(value['limits'],limits(packet['cohort'])),'exact cohort admission/namespace differs')
         source_paths.update(ROOT/name for name in execution_sources(ROOT))
     if target == CACHED_TARGET:
         from cached_benchmark.contract import checked_plan,worker_argv,sources,LIMITS
@@ -337,6 +337,11 @@ def run(target, argv, output, credits, *, io_admission=None, temporary_borrow=No
                       for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (COHORT_TARGET,CACHED_TARGET,*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else [],
                   'sources': pins})
             seconds = 900 if target == COHORT_TARGET else 600 if target == 'sync-timed' else 300 if target in (CACHED_TARGET,'sync-functional') or target.startswith('inspect-') else 600 if target.endswith(('-build', '-check')) else 60
+            if target == COHORT_TARGET:
+                # Re-authenticate the exact plan; an admission cannot choose an
+                # arbitrary observation interval or turn expiry into a kill.
+                from cohort_entry import checked_plan
+                seconds = checked_plan(argv[4], argv[6])['limits']['owner_observation_seconds']
             if target in (COHORT_TARGET,CACHED_TARGET,'sync-functional', 'sync-timed',*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
                 # Separate server sessions retain their own coordinator. Do
                 # not kill it on an outer deadline and discard live handles.

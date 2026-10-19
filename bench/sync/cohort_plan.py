@@ -1,12 +1,22 @@
 """Immutable auto-cohort metadata contract; validation is not admission."""
 from pathlib import PurePosixPath
 import re
-from auto_cohort import contract, exact, launch_argv
+from auto_cohort import reconstruct, exact, launch_argv
 
 SCHEMA = 'unison-auto-cohort-plan/2'
 LIMITS = dict(owner_observation_seconds=900, cli_observation_seconds=30,
               declared_logical_io_bytes=32*1024**3, physical_io_limit_enforced=False,
               retry_allowed=False, sdk_calls=0, camera_inputs=0)
+
+
+def limits(cohort):
+    canonical = reconstruct(cohort)
+    if not exact(canonical, cohort):
+        raise ValueError('cohort declaration differs')
+    if canonical['schema'] == 'unison-auto-cohort/1':
+        return dict(LIMITS)
+    return dict(LIMITS, owner_observation_seconds=7200,
+                cli_observation_seconds=180, declared_logical_io_bytes=4*1024**4)
 
 
 def path(value):
@@ -38,12 +48,12 @@ def validate(plan, *, execution_sources):
     if workspace.parent != PurePosixPath('/private/tmp') or re.fullmatch('unison-auto-cohort-[0-9a-f]{32}',workspace.name) is None:
         raise ValueError('fresh private cohort namespace required')
     cohort = plan['cohort']
-    if not exact(cohort,contract(cohort['label'],cohort['selection'])):
+    if not exact(cohort,reconstruct(cohort)):
         raise ValueError('cohort accounting differs')
     credits=cohort['reserved_credits']
     if (not exact(plan['cpu_token_indexes'],list(range(credits)))
             or plan['requires_temporary_borrow'] is not (credits==18)
-            or not exact(plan['limits'],LIMITS)):
+            or not exact(plan['limits'],limits(cohort))):
         raise ValueError('exact resource request required')
     for key in ('interpreter','script'):
         path(plan[key])

@@ -1,0 +1,55 @@
+{
+  "schema": "unison-larger-cohort-series/1",
+  "state": "PREPARED_UNADMITTED",
+  "indexes": [
+    {
+      "file_mib": 128,
+      "files": 4,
+      "index": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/INDEX.json",
+        "sha256": "709ce914c915b99f40dce13838b578cad78bde443736fc784a3fb02ed64af3aa"
+      },
+      "cohorts": 10,
+      "rows": 180,
+      "cli_calls": 540,
+      "shared8_cohorts": 4,
+      "temporary18_cohorts": 6
+    },
+    {
+      "file_mib": 512,
+      "files": 4,
+      "index": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-512-v1-20261019/INDEX.json",
+        "sha256": "798ae4af6d7a3f80e42b18e140eb25273bbacf8f694aef8284627cedaaffb6e3"
+      },
+      "cohorts": 10,
+      "rows": 180,
+      "cli_calls": 540,
+      "shared8_cohorts": 4,
+      "temporary18_cohorts": 6
+    },
+    {
+      "file_mib": 2048,
+      "files": 2,
+      "index": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-2048-v1-20261019/INDEX.json",
+        "sha256": "7751537055f2e7d40eb87839a3fe81cf333812f5c67ee61cf640552481383fe2"
+      },
+      "cohorts": 10,
+      "rows": 180,
+      "cli_calls": 540,
+      "shared8_cohorts": 4,
+      "temporary18_cohorts": 6
+    }
+  ],
+  "total_cohorts": 30,
+  "total_rows": 540,
+  "total_cli_calls": 1620,
+  "source_controls": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-larger-controls-actual-20261019.json",
+    "sha256": "4a902a645afb421397c5c8e8fd27efa67f38e8a2c1e64734ce9aea46dfe69761"
+  },
+  "sdk_calls": 0,
+  "live_dispatches": 0,
+  "scope": "SeparateexactstockOx1/2/4/8/auto perlargersize,warmgeneratedfixedXMPloopbackonly. 7200sownerobservation/180sCLI percohort,unknownretainsnotkill. Declared4TiBlogicalbudgetpercohort notinstrumented/physicalcap; max4GiBcorpus/onefixtureatonce underactualcleanup. 18borrowrequiresnewPhotoquietcoordination, prior6grantconsumed. Nototherworkloads/topologies/baselinecomparisoncompletion."
+}

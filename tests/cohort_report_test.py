@@ -46,6 +46,12 @@ def record(label,selection):
 
 
 class Report(unittest.TestCase):
+    def test_mixed_sizes_cannot_become_one_completed_matrix(self):
+        first=record('stock',1);second=record('ox',1)
+        second['plan']['cohort']=A.contract('ox',1,file_mib=128,files=4)
+        with self.assertRaisesRegex(ValueError,'one workload'):
+            R.summarize([first,second])
+
     def test_full_typed_matrix_all_samples_and_unknowns(self):
         records=[record(label,s) for s in A.SELECTORS for label in ('stock','ox')]
         before=copy.deepcopy(records);report=R.summarize(records)

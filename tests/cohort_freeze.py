@@ -46,8 +46,9 @@ def artifact(build,label):
                 compiler_sha256=C.digest(build['compiler_sha256']))
 
 
-def prepare(output,build_paths,prerequisites):
+def prepare(output,build_paths,prerequisites,*,file_mib=32,files=8):
     require(not os.path.lexists(output),'freeze output already exists')
+    A.contract('stock',1,file_mib=file_mib,files=files)
     names=C.execution_sources(ROOT)
     source_sha={name:pin(ROOT/name) for name in names}
     prerequisites={str(Path(p).resolve()):pin(Path(p).resolve()) for p in prerequisites}
@@ -61,7 +62,7 @@ def prepare(output,build_paths,prerequisites):
     rows=[]
     for selection in A.SELECTORS:
         for label in ('stock','ox'):
-            cohort=A.contract(label,selection)
+            cohort=A.contract(label,selection,file_mib=file_mib,files=files)
             workspace=Path('/private/tmp')/('unison-auto-cohort-'+uuid.uuid4().hex)
             require(not os.path.lexists(workspace),'generated workspace already exists')
             build_path,tool=builds[label]
@@ -69,7 +70,7 @@ def prepare(output,build_paths,prerequisites):
                 interpreter_sha256=PYTHON_SHA,script=str(ROOT/'bench/sync/run.py'),
                 cohort=cohort,artifact=tool,build_receipt=build_path,
                 execution_sha256=source_sha,prerequisite_sha256=prerequisites,
-                limits=C.LIMITS,cpu_token_indexes=list(range(cohort['reserved_credits'])),
+                limits=C.limits(cohort),cpu_token_indexes=list(range(cohort['reserved_credits'])),
                 requires_temporary_borrow=cohort['reserved_credits']==18)
             plan['launch_argv']=A.launch_argv(cohort,interpreter=PYTHON,script=plan['script'],
                                             output=str(workspace/'RESULT.json'),artifact=tool)
@@ -90,6 +91,7 @@ def prepare(output,build_paths,prerequisites):
                 request=dict(path=str(request_path),sha256=request_sha),plan=request['plan'],
                 workspace=str(workspace),runtime_admitted=False))
     index=dict(schema='unison-auto-cohort-index/1',state='PREPARED_UNADMITTED',cohorts=rows,
+        workload=dict(file_mib=file_mib,files=files),
         total_rows=180,total_cli_invocations=540,warmup_rows=30,measured_rows=150,
         source_sha256=source_sha,preparer_sha256=pin(Path(__file__)),
         scope='metadata only; binary/compiler hashes copied from qualified receipts, not freshly read; no admission or execution')
@@ -102,11 +104,14 @@ def main():
     for name in ('stock-build','ox-build','output'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--prerequisite',type=Path,action='append',default=[])
+    parser.add_argument('--file-mib',type=int,default=32)
+    parser.add_argument('--files',type=int,default=8)
     args=parser.parse_args()
     output=args.output.resolve()
     require(output.parent==ROOT/'doc' and output.name.startswith('auto-cohort-qualification-'),
             'repository doc freeze directory required')
-    index=prepare(output,dict(stock=args.stock_build,ox=args.ox_build),args.prerequisite)
+    index=prepare(output,dict(stock=args.stock_build,ox=args.ox_build),args.prerequisite,
+                  file_mib=args.file_mib,files=args.files)
     print(json.dumps(dict(index=str(output/'INDEX.json'),cohorts=len(index['cohorts']),
                          runtime_admitted=False),indent=2))
 

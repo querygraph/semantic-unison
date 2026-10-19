@@ -13,19 +13,38 @@ def exact(left, right):
     return json.dumps(left, sort_keys=True, allow_nan=False) == json.dumps(right, sort_keys=True, allow_nan=False)
 
 
-def contract(label, selection):
+LARGER_WORKLOADS = ((128, 4), (512, 4), (2048, 2))
+
+
+def contract(label, selection, *, file_mib=32, files=8):
     if label not in ('stock', 'ox') or not any(exact(selection, x) for x in SELECTORS):
         raise ValueError('exact compiler and worker selection required')
+    if (type(file_mib) is not int or type(files) is not int
+            or (file_mib, files) not in ((32, 8), *LARGER_WORKLOADS)):
+        raise ValueError('exact qualified workload dimensions required')
     bound = endpoint_bound(selection, 8)
     declared = 2 * bound + 2
-    return dict(schema='unison-auto-cohort/1', label=label, selection=selection,
+    value = dict(schema='unison-auto-cohort/1', label=label, selection=selection,
                 endpoint_cpu_ceiling=8, endpoint_permit_upper_bound=bound,
                 declared_peak_credits=declared, reserved_credits=8 if declared <= 8 else 18,
                 modes=list(MODES), warmups=1, repetitions=5, rows=18, cli_invocations=54)
+    if (file_mib, files) != (32, 8):
+        value.update(schema='unison-auto-cohort/2', file_mib=file_mib, files=files)
+    return value
+
+
+def reconstruct(cohort):
+    """Keep completed v1 declarations exact; larger workloads have explicit v2 dimensions."""
+    if cohort.get('schema') == 'unison-auto-cohort/1':
+        return contract(cohort['label'], cohort['selection'])
+    if cohort.get('schema') == 'unison-auto-cohort/2':
+        return contract(cohort['label'], cohort['selection'],
+                        file_mib=cohort['file_mib'], files=cohort['files'])
+    raise ValueError('unknown cohort schema')
 
 
 def audit_attempted(result, cohort):
-    expected = contract(cohort['label'], cohort['selection'])
+    expected = reconstruct(cohort)
     if not exact(cohort, expected):
         raise ValueError('cohort contract differs')
     for entry in result.get('invocations', []):
@@ -88,11 +107,12 @@ BACKGROUND = 'generated auto cohort; concurrent host activity disclosed; no quie
 
 def parameters(cohort):
     # Reconstruct instead of trusting caller-supplied accounting fields.
-    c = contract(cohort['label'], cohort['selection'])
+    c = reconstruct(cohort)
     if not exact(c, cohort):
         raise ValueError('cohort contract differs')
-    return dict(modes=list(MODES), workers=[c['selection']], file_mib=32, files=8,
-                packet_bytes=8192, warmups=1, repetitions=5, timeout_seconds=30.0,
+    larger = c['schema'] == 'unison-auto-cohort/2'
+    return dict(modes=list(MODES), workers=[c['selection']], file_mib=c.get('file_mib',32), files=c.get('files',8),
+                packet_bytes=8192, warmups=1, repetitions=5, timeout_seconds=180.0 if larger else 30.0,
                 background_note=BACKGROUND, measure_primary_reads=True,
                 measure_semantic_phases=True, property_removal_controls=False,
                 layout_only_controls=False, loopback_cpu_credit_bound=c['reserved_credits'],
@@ -127,9 +147,9 @@ def launch_argv(cohort, *, interpreter, script, output, artifact):
     for option, value in (
             ('modes', ','.join(MODES)), ('workers', str(cohort['selection'])),
             ('endpoint-cpu-budget', '8'), ('loopback-cpu-credits', str(p['loopback_cpu_credit_bound'])),
-            ('orchestration-cpu-credits', '2'), ('file-mib', '32'), ('files', '8'),
+            ('orchestration-cpu-credits', '2'), ('file-mib', str(p['file_mib'])), ('files', str(p['files'])),
             ('packet-bytes', '8192'), ('warmups', '1'), ('repetitions', '5'),
-            ('timeout', '30'), ('background-note', BACKGROUND), ('output', output)):
+            ('timeout', str(int(p['timeout_seconds']))), ('background-note', BACKGROUND), ('output', output)):
         argv += ['--'+option, value]
     return argv + ['--measure-primary-reads', '--measure-semantic-phases']
 

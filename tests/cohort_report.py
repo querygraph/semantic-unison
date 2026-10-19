@@ -19,10 +19,13 @@ from shared_cpu_pool import unique_object, require
 
 def summarize(records):
     require(type(records) is list and len(records)<=10,'at most ten cohort records required')
-    seen=set();cohorts=[];groups=[]
+    seen=set();cohorts=[];groups=[];workload=None
     for record in records:
         plan=record['plan'];result=record['result'];c=plan['cohort']
-        require(A.exact(c,A.contract(c['label'],c['selection'])),'exact cohort declaration required')
+        require(A.exact(c,A.reconstruct(c)),'exact cohort declaration required')
+        dimensions=dict(file_mib=c.get('file_mib',32),files=c.get('files',8))
+        if workload is None:workload=dimensions
+        require(dimensions==workload,'one workload per comparison report required')
         key=c['label'],c['selection']
         require(key not in seen,'duplicate compiler/selection cohort');seen.add(key)
         proof=audit_result(result,plan)
@@ -70,6 +73,7 @@ def summarize(records):
         v=group['update_wall_seconds']['median']
         group['descriptive_one_worker_wall_ratio']=None if b is None or v is None or v==0 else b/v
     return dict(schema='unison-auto-cohort-report/1',state='FULL_GENERATED_MATRIX' if complete else 'INCOMPLETE_MATRIX',
+        workload=workload,
         matrix_complete=complete,missing_cohorts=missing,cohorts=cohorts,groups=groups,
         raw_samples_retained=sum(len(c['raw_sample_indexes']) for c in cohorts),
         actual_parent_terminal_proved=False,resource_release_authorized=False,current_production_proved=False,

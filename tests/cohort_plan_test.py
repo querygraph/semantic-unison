@@ -27,6 +27,20 @@ def fixture(selection):
 
 
 class Plan(unittest.TestCase):
+    def test_larger_limits_must_match_exact_dimensions(self):
+        for mib,files in cohort.LARGER_WORKLOADS:
+            p=fixture('auto');p['cohort']=cohort.contract('stock','auto',file_mib=mib,files=files)
+            p['limits']=cohort_plan.limits(p['cohort'])
+            p['launch_argv']=cohort.launch_argv(p['cohort'],interpreter=p['interpreter'],script=p['script'],
+                output=p['workspace']+'/RESULT.json',artifact=p['artifact'])
+            cohort_plan.validate(p,execution_sources=['bench/sync/run.py'])
+            self.assertEqual(p['limits']['owner_observation_seconds'],7200)
+            self.assertEqual(p['limits']['cli_observation_seconds'],180)
+            for field,value in (('owner_observation_seconds',900),('cli_observation_seconds',30),
+                                ('retry_allowed',True)):
+                bad=copy.deepcopy(p);bad['limits'][field]=value
+                with self.assertRaises(ValueError):cohort_plan.validate(bad,execution_sources=['bench/sync/run.py'])
+
     def test_all_source_cohorts(self):
         for selection in cohort.SELECTORS:
             p=fixture(selection); before=copy.deepcopy(p)

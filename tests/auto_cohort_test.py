@@ -23,6 +23,26 @@ def receipt(selection):
 
 
 class Cohort(unittest.TestCase):
+    def test_larger_dimensions_are_typed_and_bound_to_launch(self):
+        artifact=dict(binary='/fabricated/unison',compiler='/fabricated/ocamlopt',
+                      binary_sha256='a'*64,compiler_sha256='b'*64)
+        bindings=dict(interpreter='/qualified/python',script='/repo/bench/sync/run.py',
+                      output='/private/tmp/RESULT.json',artifact=artifact)
+        for mib,files in auto_cohort.LARGER_WORKLOADS:
+            for selection in auto_cohort.SELECTORS:
+                c=auto_cohort.contract('stock',selection,file_mib=mib,files=files)
+                self.assertEqual(c['schema'],'unison-auto-cohort/2')
+                self.assertEqual(auto_cohort.reconstruct(c),c)
+                p=auto_cohort.parameters(c)
+                self.assertEqual((p['file_mib'],p['files'],p['timeout_seconds']),(mib,files,180.0))
+                argv=auto_cohort.launch_argv(c,**bindings)
+                self.assertEqual(argv[argv.index('--file-mib')+1],str(mib))
+                self.assertEqual(argv[argv.index('--files')+1],str(files))
+                self.assertEqual(argv[argv.index('--timeout')+1],'180')
+        for mib,files in ((True,4),(128,True),(128.0,4),(128,8),(512,2),(2048,4)):
+            with self.assertRaises(ValueError):
+                auto_cohort.contract('stock',1,file_mib=mib,files=files)
+
     def test_all_selectors_and_reservations(self):
         for selection, peak, reserved in ((1,4,8),(2,6,8),(4,10,18),(8,18,18),('auto',18,18)):
             cohort = auto_cohort.contract('stock', selection)
