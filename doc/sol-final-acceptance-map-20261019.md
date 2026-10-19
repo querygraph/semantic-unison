@@ -182,3 +182,14 @@ The user explicitly chose upstream’s supported-peer range and dropped the obso
 ### Current native publication, lease and restored-mtime guards renewed
 
 [Result](final-native-publication-result-20261019.md) and [actual case inventory](final-native-publication-case-inventory-20261019.json): owner74637/dd4390/0/no session, 78 children (74zero+4specific negative2), each compiler177 publication/producer cases in ordinary and timed modes plus21 native CloneLease cases. Independent748b45/0 bound556 source pins/329 production,184 generated artifacts, exact private guard ablations and canonical9/full8EX closure. New exact native-mtime regression53737/fd27be/0: candidate and target same-size mutations with restored mtime/changed ctime refused on both compilers; two private guard-disabled controls fail as expected,12 children all settled. Independentb3f93e/0 bound559 sources/object lineage/native-time tuples and whole8EX closure. No SDK/photos; native primitive scope, not an uncooperative check-to-rename race cure or physical crash durability.
+
+### Photo availability correction — current scheduling policy
+
+The user explicitly requires Photo to remain available for its own work and
+Capitola. The earlier blanket Unison drain/handover hold is released, queue
+`01a154b6-1a28-7e10-80d3-6913b972dc5d`. Source preparation, CPU-only tests,
+audits and report sealing must not hold Photo. Coordinate shared IO/Adobe access
+only for a concrete operation ready for immediate dispatch; release after actual
+terminal and resource settlement, without an automatic successor. Standing8/8
+remains. This changes scheduling, not functional qualification or permissions to
+open Photo originals/Main/catalog/cache.

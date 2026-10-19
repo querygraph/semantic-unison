@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:04:41.786983+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:10:39.099428+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -18,12 +18,19 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   also closed. No18borrow or report-sealing hold. Standalone2768 fixture-writer
   is still BUILD ONLY; no writer/newfixture runtime execution. Historical SDK
   qualifications remain distinct from pending final generated merge evidence.
-- **Scheduling:** user directed independent Unison work first, direct Adobe
-  qualification later, Photo workflow verification last. Photo normal drain
-  `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
-  IO/native/SDK for handover.40published/storageverified,40recognitionpending,
-  216pending retained; Main not reopened/final startup required. No permission
-  to open new Photo originals or mutate Main/catalog/cache is implied.
+- **Scheduling — USER CORRECTION, authoritative:** Photo must remain available
+  for its own work and Capitola. NEVER retain a blanket Photo pause while Unison
+  prepares source/plans/fixtures, runs CPU-only work, audits or seals reports.
+  Coordinate Photo/EXIO/Adobe access ONLY when a concrete operation is fully
+  ready for immediate dispatch; acquire for that active finite operation and
+  release promptly after actual terminal/group/FD settlement. No speculative
+  future-window reservation, automatic successor, or wait through unrelated work.
+  Current Unison coordination hold explicitly RELEASED to Photo in queue
+  `01a154b6-1a28-7e10-80d3-6913b972dc5d` (actual queue tool9777b7/0).
+  The earlier blanket drain/handover scheduling plan is superseded; Photo owns
+  its own workflow/startup/publications. This grants no Unison access to Main,
+  catalog/cache or new originals. Future direct SDK qualification must be ready
+  first, then separately coordinate the shortest active window with Photo.
 - **Standing policy:** Unison00..07, Photo08..15, system16..17; no active18
   borrow. Existing single EX_GLOBAL barrier only, no device independence.
   IO→CPU whole-set nonblocking acquisition/partial rollback; inherited copies
@@ -58,8 +65,16 @@ Do not equate these native primitive tests with whole-sync/archive crash recover
 or an eliminated uncooperative check-to-rename race. Then complete final DIRECT
 Unison generated Adobe fixture/merge qualification, prescribed remaining
 benchmark/review scope, and Photo workflow handback. No new Photo allowance is
-blocking independent work. Standalone2768 fixture writer still has NEVER RUN;
+blocking independent work. Photo is released for its own work and Capitola;
+only immediately ready finite operations may coordinate shared IO/Adobe access.
+Standalone2768 fixture writer still has NEVER RUN;
 JXL/12scalarstates and current3codec native merge matrix remain pending.
+
+Current uncommitted source-only follow-up: `tests/workers/restored_mutation.ml`
+is a new deterministic tiny-file recognizer-barrier regression (same-size source
+mutation with exact native mtime restored). It has NOT been compiled or run and
+has no admission, live owner, CPU/IO reservation or Photo hold. Finish source/
+object planning on Unison's own share; only acquire shared IO for actual work.
 
 ## Actual current evidence
 
@@ -258,8 +273,10 @@ JXL/12scalarstates and current3codec native merge matrix remain pending.
    fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
    last verified OPEN DRAFT atf6bfd653; local final qualification successor not
    published. No upstream submission/merge/production activation inferred.
-6. Return Photo IO handover explicitly for final workflow verification; its
-   Main/catalog/cache and pending publications remain Photo-owned.
+6. Photo coordination hold is ALREADY RELEASED (queue01a154b6-1a28). Do not
+   re-establish a blanket pause. Photo independently owns workflow/startup and
+   pending publication verification; Main/catalog/cache remain Photo-exclusive.
+   Coordinate only ready-to-dispatch active IO/Adobe operations when needed.
 
 User excludes new fuzz/sanitizer campaigns and exhaustive MakerNote meaning as
 completion gates; exact opaque preservation remains mandatory. Positive hard-RSS
