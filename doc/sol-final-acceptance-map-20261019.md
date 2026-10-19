@@ -138,3 +138,7 @@ full logical model are retained as negative optimization evidence.
 ### Current default-startup genuine-upstream interoperability
 
 [Actual result](final-default-upstream-result-20261019.md) and [receipt](../tests/qualification/final-default-upstream-peer-actual-20261019.json): current stock/Ox both client/server orientations versus unmodified8772;12calls/36primaryroles normalclosed, exact replicas/source fences/no-op8fields. Owning9111/c2e1e7/0/no session; independent07dc8d/0 raw/pin/shim/FD audit+65536Bfreshpayloadhashes/whole8EXclosed. This renews current default-startup interop, not forcedRPC0/installedoldrelease/archive-roundtrip/actualSSH/performance/semantic or SDK qualification.
+
+### Current installed-old-peer archive round trip
+
+[Actual result](final-archive-roundtrip-result-20261019.md): stock/Ox each ten stages through byte-pinned installed2.53.5, owning29608/8c45ae/0,18zero+2normal designated missing-base exit2,20pairs/60primaryroles closed. Same state/archive roots, old load/update, exact edited variants preserved, explicit known-common restoration and later disjoint merge/noop pass. Independent9841ff/0 re-audited allrawpairs/534source+329production pins/FDidentities/archive records+262144Bfreshfinalreplicas; entire8EX reacquiredclosed. Plan descriptive-field discrepancy and first metadata-audit137 recovery preserved in report, no native replay. ForcedRPCv0/realSSH/otherplatform/SDK remain separate.

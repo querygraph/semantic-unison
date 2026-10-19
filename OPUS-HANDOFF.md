@@ -81,16 +81,20 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   whole8EXclosed. `doc/final-default-upstream-result-20261019.md`. Default
   new-RPC startup/customloopback only, not forcedRPC0/archive/realSSH/SDK.
 
-- **Archive successor source:** six original contract controls passed actual
-  `2251ca/0/NOsession`, child37544 reaped0/groupabsent/token00closed. Ten-stage
-  scenario/variant-preserving missing-base refusal/archive reset/noop guards
-  implemented in `tests/archive_roundtrip_contract.py`; retained current/old
-  owning driver and actual execution still pending. Existing zero-only pair
-  audits unchanged. `doc/final-archive-roundtrip-preparation-20261019.md`.
+- **Current installed-old-peer archive round trip:** owner29608/8c45ae/0,
+  stock/Ox each10stages/20pairs total;18normalzero+2specific missing-base exit2,
+  exacteditedreplicas preserved; old2.53.5 loaded/updated samearchives, explicit
+  known-common restore and subsequentcurrentmerge/noop passed. Independent
+  9841ff/0 re-audited534source+329productionpins/raw60primaryroles/canonical9,
+  archive records+262144Bfreshfinalreplicas; entire8EXreacquiredclosed. Fourteen
+  controls50316/e62cbf/0. First metadata-audit137 recovery and copied stale plan
+  descriptivefields preserved; no sync replay. AllresourcesZERO. See
+  `doc/final-archive-roundtrip-result-20261019.md`. ForcedRPCv0/actualSSH and
+  otherfullsync/archivecases stillopen; this is generatedprivatearchive evidence.
 
 ## Remaining work — do not mark goal complete
 
-1. Reconcile current full-sync properties, archive round-trip/installedoldpeers/forcedRPC0
+1. Reconcile current full-sync properties, remaining archive cases/forcedRPC0
    and remaining named edge cases to source-bound evidence or renew only the
    missing cases. Native stage qualification is not every sync property or
    compressed-input/crash/platform proof. See `doc/sol-final-acceptance-map-20261019.md`.
