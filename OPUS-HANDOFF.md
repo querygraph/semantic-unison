@@ -6434,3 +6434,21 @@ semantic1→2wallratios1.481stock/1.464Ox only; no causal/quiet/physicalclaim.
 Next first18stock4 freshadmission mustpinACTIVE84ced306, exact00..17/policy
 1dbe12eb/restorestandingtrue andcurrentunusedrequest. DirectSDKrequestf9c93745
 stillUNADMITTED, noSDK/Main/nativePhotocall. Goalactive.
+
+
+### First temporary18 cohort stock4 ACTUAL PASS/CLOSED
+Freshadmission3e586f24 (5956e4d18f9c4f3a9cf53fa99c52aed5) boundexactACTIVE
+84ced306 andall4adoptiona226261e +current53pins/unusedworkspace. Actualtool
+37134 initial3045ce terminal0e82ac/exit0/NOsession, parent76082/worker76100.
+Workspace85e328936afa4f16b400115248b99c88 actualSTART18tokens+19inheritedFDs.
+18rows54CLIexact/nested54auditPASS, workerreaped0/groupsabsent/CPU18EXclosed.
+Rootpromptactualnotice01a152a9-a6ad BEFOREseal; no pernextcohortACK needed.
+Freshpostclose2359a6/0 EX→all18 bundle reacquired+close_unstarted(no children),
+proof0b2a90e22cc669411d24c35fca6f0c3cba647383600777d8e071f894e22a5701.
+OWNERRETURN13b8a5f00312ca2b4629514418c9de2626c3fd06627252f639c3482e0d213a5d;
+evidenceauto-cohort-stock4-actual-20261018.json. Sourcepinsunchanged, noSDK/
+Photo/Main/compiler work/policyrewrite. Allcurrentownleasesclosed, butPhoto
+coordinatedserieshold persists throughsix; fullstanding8/8+2 restorationreport
+onlyafterseries. Firstof6closed/5of10total (90rows270CLI), remaininghigher
+Ox4,stock8,Ox8,stockauto,Oxauto UNSTARTED. NextOx4fresh exactadmission directly
+underACTIVE84ced306; Rootexplicitlysaidno further percohortACK wait/replay.
