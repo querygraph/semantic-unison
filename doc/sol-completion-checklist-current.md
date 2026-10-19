@@ -130,3 +130,17 @@ Evidence tests/qualification/current-mixed-adobe-actual-20261018.json; OWNERRETU
 PromptPhotoactualrelease01a152c7-2e87; no reportsealinghold. ALLownjobs/resourcesclosed,
 standing8/8+2. UserPhoto-at-end steering continues: noPhotoMain/original/SDKgrantreuse.
 This closes currentmixedcomposition only; finalreceivingoff/warn/require+largerworkloads/edges/reviewremain.
+
+
+### Current actual SDK full receiving PASS/CLOSED
+Freshrequestbad8a4e3/plan4440adcf, admission56968be1 consumedonce;
+actual67541/5a4c41→5343fe/0/NOsession,parent91837/worker91853.
+Workspace/private/tmp/u-smr-current-9e2e489b:2fullreceivingCLI/4realSDKsinglehelpers,
+2generatedencodings/twocompilers; receivedbytesexact, rawdigestvalid/decodeSUCCESS/errors0
+(4edgepaddingwarnings each preserved). Raw2proxyframes independentlyreboundtoaudit.
+Workerreaped0/groupsabsent/Unison8EXclosed,169harnesspostpinsunchanged;
+329productionpins/currentbuildbindingscheckedpreexec, SDK/binarieshashedinsideheldIO.
+Evidencecurrent-sdk-multifile-actual-20261018.json, OWNERRETURN419ad9d2b60206a99d0c84d7a245cf8b9db65ca4ce88655608cdc08fcfec244b.
+PromptPhotoactualrelease01a152ca-82d7; no sealgate, userPhotoIO-at-end stillcurrent.
+NoMain/original/pixels/corpus/computeoverlap/production inference.
+Next finalreceivingpath/policy matrix andlargerworkloadsourceprep, noautoSDKdispatch.

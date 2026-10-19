@@ -1,0 +1,279 @@
+{
+  "schema": "unison-current-sdk-multifile-actual/1",
+  "state": "PASS_CLOSED",
+  "production_source": "971271a8",
+  "actual_owner": {
+    "schema": "unison-actual-owning-tool-terminal/1",
+    "state": "ACTUAL_TERMINAL",
+    "session_id": 67541,
+    "initial_chunk": "5a4c41",
+    "terminal_chunk": "5343fe",
+    "exit_code": 0,
+    "no_running_session": true,
+    "owner_pid": 91837,
+    "worker_pid": 91853,
+    "source": "Personally observed direct write_stdin result; not ps/marker inference",
+    "unix": 1792390390.6834629
+  },
+  "workspace": "/private/tmp/u-smr-current-9e2e489b",
+  "plan": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sdk-multifile-current-cpu-ceiling-plan-v1.json",
+    "sha256": "4440adcffc18b4345d69d397d65eeee538c29710c5c4a4cc5cf848809145f96c"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sdk-multifile-current-cpu-ceiling-request-v1.json",
+    "sha256": "bad8a4e3b767abae9bdc7e8900f4e09d5d7d6893e49b3bc650235d86dc6c7786"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-sdk-multifile-current-admission-1d57f90460ed40bf93e4114e6f6905cf.json",
+    "sha256": "56968be188bf5ed0953416eb5f5642000a4b0524cf01bb85c3e523c6b89d4a36"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/SHARED-START.json",
+      "bytes": 20786,
+      "sha256": "b62452c8507122f1d96f06ebc822278684597f5fc5dd55cc1076fa1a8ff49827"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "f08c52358e5b891d431dc5ba07725a3d73400dda57d70424281027161d14145d"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/SHARED-SERVER-AUDIT.json",
+      "bytes": 959,
+      "sha256": "f66b6c652db5ee17b2ee6cd0a99894f429cdc54801d17df9171adcfa8c5f77aa"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/RESULT.json",
+      "bytes": 66085,
+      "sha256": "e076344c22c9c8af1758aee32c3f71b7a60a85fbd7f4569a56ae1d110d87681e"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/OWNER-TERMINAL.json",
+      "bytes": 376,
+      "sha256": "0e40e74276493568894ba1d546b90006a0a6512a51ed534e9c89c6cc8629c961"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/stock/seed-proxy.json",
+      "bytes": 1785,
+      "sha256": "c2c357384ed08ccbbf6c9e503967721319761feff391a840712072a32bb59232"
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/ox/seed-proxy.json",
+      "bytes": 1798,
+      "sha256": "db418332a45c8c807e83dd7bf2c3171c7c3d70c5c18e2709308d245456bf4c71"
+    }
+  ],
+  "closed": {
+    "child": {
+      "pid": 91853,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 91853,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "saved_raw_proxy_reaudit": {
+    "attempted_cli_invocations": 2,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": false,
+    "scope": "journal-prefix lifecycle only; not aggregate or parent terminal",
+    "functional_status": "PASSED",
+    "sdk_helpers_settled": 4,
+    "case_audits": [
+      {
+        "functional_status": "PASSED",
+        "sdk_helpers_settled": 2,
+        "no_call_preparation": false,
+        "cli_worker_fd_closure_proved": false,
+        "receiving_bytes_reverified": false,
+        "resource_release_authorized": false
+      },
+      {
+        "functional_status": "PASSED",
+        "sdk_helpers_settled": 2,
+        "no_call_preparation": false,
+        "cli_worker_fd_closure_proved": false,
+        "receiving_bytes_reverified": false,
+        "resource_release_authorized": false
+      }
+    ],
+    "aggregate_parent_fd_closure_proved": false,
+    "receiving_bytes_reverified": false,
+    "resource_release_authorized": false
+  },
+  "validation": [
+    {
+      "cli_worker_fd_closure_proved": false,
+      "helper_settlements": [
+        {
+          "candidate_id": "uncompressed.dng",
+          "helper_pid": 91877,
+          "other_group_members_before_reap": 0,
+          "settlement_only": true,
+          "wait_status": [
+            "exit",
+            0
+          ]
+        },
+        {
+          "candidate_id": "jpeg.dng",
+          "helper_pid": 91876,
+          "other_group_members_before_reap": 0,
+          "settlement_only": true,
+          "wait_status": [
+            "exit",
+            0
+          ]
+        }
+      ],
+      "known_live_overlap_ns": 386150998,
+      "known_live_overlap_observed": true,
+      "pixel_equivalence_proved": false,
+      "process_record_producer_authenticated": false,
+      "raw_digests_verified": true,
+      "reports": [
+        {
+          "candidate_id": "uncompressed.dng",
+          "helper_pid": 91877,
+          "report": {
+            "candidate-sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "candidate-size": "48005534",
+            "decode": "success",
+            "driver-build": "unison-sdk171-2724-v1-single",
+            "errors": "0",
+            "raw-digest": "valid",
+            "raw_digest_verified": true,
+            "structure": "valid",
+            "warnings": "4"
+          }
+        },
+        {
+          "candidate_id": "jpeg.dng",
+          "helper_pid": 91876,
+          "report": {
+            "candidate-sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "candidate-size": "39016722",
+            "decode": "success",
+            "driver-build": "unison-sdk171-2724-v1-single",
+            "errors": "0",
+            "raw-digest": "valid",
+            "raw_digest_verified": true,
+            "structure": "valid",
+            "warnings": "4"
+          }
+        }
+      ],
+      "sdk_compute_overlap_proved": false,
+      "semantic_eligibility_proved": false,
+      "throughput_qualified": false,
+      "timing_coverage_complete": true
+    },
+    {
+      "cli_worker_fd_closure_proved": false,
+      "helper_settlements": [
+        {
+          "candidate_id": "uncompressed.dng",
+          "helper_pid": 91946,
+          "other_group_members_before_reap": 0,
+          "settlement_only": true,
+          "wait_status": [
+            "exit",
+            0
+          ]
+        },
+        {
+          "candidate_id": "jpeg.dng",
+          "helper_pid": 91945,
+          "other_group_members_before_reap": 0,
+          "settlement_only": true,
+          "wait_status": [
+            "exit",
+            0
+          ]
+        }
+      ],
+      "known_live_overlap_ns": 393918998,
+      "known_live_overlap_observed": true,
+      "pixel_equivalence_proved": false,
+      "process_record_producer_authenticated": false,
+      "raw_digests_verified": true,
+      "reports": [
+        {
+          "candidate_id": "uncompressed.dng",
+          "helper_pid": 91946,
+          "report": {
+            "candidate-sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "candidate-size": "48005534",
+            "decode": "success",
+            "driver-build": "unison-sdk171-2724-v1-single",
+            "errors": "0",
+            "raw-digest": "valid",
+            "raw_digest_verified": true,
+            "structure": "valid",
+            "warnings": "4"
+          }
+        },
+        {
+          "candidate_id": "jpeg.dng",
+          "helper_pid": 91945,
+          "report": {
+            "candidate-sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "candidate-size": "39016722",
+            "decode": "success",
+            "driver-build": "unison-sdk171-2724-v1-single",
+            "errors": "0",
+            "raw-digest": "valid",
+            "raw_digest_verified": true,
+            "structure": "valid",
+            "warnings": "4"
+          }
+        }
+      ],
+      "sdk_compute_overlap_proved": false,
+      "semantic_eligibility_proved": false,
+      "throughput_qualified": false,
+      "timing_coverage_complete": true
+    }
+  ],
+  "source_binding": {
+    "harness169_reverified_parent": true,
+    "production329_current_at_preexec": true,
+    "current_build_receipts": {
+      "stock": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+        "sha256": "71e12a87fded7739949df93aceb3f006d115514742f751ac189e388cdd9a53e8"
+      },
+      "ox": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json",
+        "sha256": "4b00fc9ad5da85d94c545c3d6b59f9ff1d3fe35e31994d255d95bc264a21fd64"
+      }
+    },
+    "scope": "Current source/build binding checked before admission, SDK/binaries rehashed under ownedIO. Not a new build or independent SDK source reproduction."
+  },
+  "scope": "Currentstock/Ox fullreceiving2calls/4qualifiedSDKv1singlehelpers, two retainedgeneratedencodings nativecloneonly. Exactreceivedbytes, structure/decode/rawdigestvalid/errors0/fourwarnings each. Knownlivehelperoverlap is not compute overlap/throughput/OSthread/pixels/semanticeligibility/corpus/production/fullSOL proof. NoPhotooriginal/Main/cache access."
+}
