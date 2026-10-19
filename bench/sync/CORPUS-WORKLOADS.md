@@ -75,3 +75,15 @@ A4096-entry roundtrip and two refusal/control groups passed in-memory under
 Unison token00, actual owning terminal6b8bbf/0/no session. These are expectation
 records, not fresh filesystem observations or evidence of actual receiving.
 The batch runner must still collect and compare those observations independently.
+
+`batch_verify.verify` independently walks the exact generated group/file set via
+held no-follow directory descriptors. It hashes every expected regular0600,
+single-link file, refuses extra/missing/aliased/symlinked entries, and fences
+file/group/root epochs. Before-phase verification omits additions entirely;
+target phase requires them. It consumes expectations, not self-reported sync
+success. Qualified descriptor cleanup preserves close uncertainty. The separate
+`create_corpus` seed range is0..16383; legacy `create` remains0..255.
+Four original tiny32768B fixture controls passed, actual terminal900e6d/0/no
+session under Unison00. No sync/corpus benchmark, Photo payload or EXIO used.
+The full corpus phase controller and raw capture/transport integration remain
+unimplemented; this does not change dispatcher_ready=false.

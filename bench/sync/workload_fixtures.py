@@ -51,8 +51,19 @@ def fence(fd, path, expected):
 
 
 def create(path, size, packet_bytes, index):
+    return _create(path, size, packet_bytes, index, 255)
+
+
+def create_corpus(path, size, packet_bytes, index):
+    """Separate generated-corpus seed range; legacy create stays <=255."""
+    if type(size) is not int or not 32768 <= size <= 262144:
+        raise ValueError('bounded corpus file extent required')
+    return _create(path, size, packet_bytes, index, 16383)
+
+
+def _create(path, size, packet_bytes, index, maximum_index):
     shape = layout(size, packet_bytes)
-    if type(index) is not int or not 0 <= index <= 255:
+    if type(index) is not int or not 0 <= index <= maximum_index:
         raise ValueError('bounded generated fixture seed required')
     path = Path(path)
     fd = os.open(path, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600)

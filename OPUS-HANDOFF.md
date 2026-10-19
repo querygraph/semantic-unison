@@ -7377,3 +7377,18 @@ Actual terminal6b8bbf/exit0/no session: three original in-memory test groups
 including4096-entry roundtrip, canonical CPU00 qualified-closed, no child/EXIO.
 This is expectation serialization only: filesystem observation, raw capture and
 actual corpus runner/receiving integration remain open. Goal remains active.
+
+
+## 2026-10-19 recursive generated-corpus replica verification
+
+Added batch_verify.py: exact group/file sets, full hashes,0600/single-link files,
+unique inodes and file/group/root epoch fences through held no-follow FDs.
+Before phase excludes additions; target requires them. Qualified close carrier
+propagates, no process-release authority. Separate create_corpus permits seeds
+0..16383 while legacy create remains0..255. Four original tiny32768B fixture
+controls passed actual900e6d/0/no session under Unison00, then qualified close.
+No sync/SDK/Photo/corpusbulk execution. Batch controller/rawcapture still open.
+Photo reported new live continuation2878 after startup recovery5890 closed.
+Requested normal completion then HOLD NEW Photo IO/native/SDK dispatches via
+queue01a153a1-ad7c, aligning user end-of-work Adobe handover proposal. No active
+Photo process interrupted; no handover/resource release yet claimed.
