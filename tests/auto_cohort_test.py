@@ -55,6 +55,38 @@ class Cohort(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises(ValueError):
                 auto_cohort.audit(value,auto_cohort.contract('stock','auto'))
 
+    def test_exact_launch_and_bound_result(self):
+        artifact=dict(binary='/fabricated/unison',compiler='/fabricated/ocamlopt',
+                      binary_sha256='a'*64,compiler_sha256='b'*64)
+        bindings=dict(interpreter='/fake/python',script='/fake/run.py',output='/fake/RESULT.json',artifact=artifact)
+        cohort=auto_cohort.contract('stock','auto')
+        argv=auto_cohort.launch_argv(cohort,**bindings)
+        auto_cohort.check_launch(argv,cohort,**bindings)
+        for extra in (['--workers','8'],['--prepare-only'],['--timeout','300']):
+            with self.assertRaises(ValueError):auto_cohort.check_launch(argv+extra,cohort,**bindings)
+        value=receipt('auto');value['parameters']=auto_cohort.parameters(cohort)
+        value['binaries']={'stock':{}};value['compilers']={'stock':{'path':artifact['compiler']}}
+        value['admitted_binary_sha256']={'stock':artifact['binary_sha256']}
+        value['admitted_compiler_sha256']={'stock':artifact['compiler_sha256']}
+        for index,entry in enumerate(value['invocations']):
+            mode=entry['identity']['mode']
+            flags=['-debug','copy','-debug','semantic','-debug','semantic-reads',
+                   '-debug','semantic-timings','-clone','off' if mode=='ordinary' else 'auto',
+                   '-semanticworkers','0','-semanticcpubudget','8','-maxthreads','8']
+            if mode=='semantic':flags+=['-semanticdng']
+            command=['/fabricated/unison',entry['identity']['directory'],*flags]
+            entry['command']=command;entry['outcome']['command']=command
+            row=value['samples'][index//3]
+            row[auto_cohort.STAGES[index%3][1]]=copy.deepcopy(entry['outcome'])
+        auto_cohort.audit_bound(value,cohort,artifact)
+        for mutation in ('budget','hash','flags'):
+            broken=copy.deepcopy(value)
+            if mutation=='budget':broken['parameters']['loopback_cpu_credit_bound']=8
+            if mutation=='hash':broken['admitted_binary_sha256']['stock']='c'*64
+            if mutation=='flags':broken['invocations'][0]['command'][-1]='2'
+            with self.subTest(mutation=mutation),self.assertRaises(ValueError):
+                auto_cohort.audit_bound(broken,cohort,artifact)
+
     def test_failed_prefix_separate_and_legacy_unchanged(self):
         value=receipt(8); value['complete']=False; value['invocations']=value['invocations'][:1]
         self.assertEqual(auto_cohort.audit_attempted(value,auto_cohort.contract('stock',8))['attempted_cli_invocations'],1)

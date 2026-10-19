@@ -1,7 +1,7 @@
 """Versioned pure cohort accounting. No admission, lock access or FD release."""
 import json
 from invocation_journal import _audit_attempted
-from worker_config import endpoint_bound
+from worker_config import endpoint_bound, worker_options
 
 SELECTORS = (1, 2, 4, 8, 'auto')
 MODES = ('ordinary', 'receiver-clone', 'semantic')
@@ -75,3 +75,89 @@ def audit(result, cohort):
     return dict(lifecycle, rows=18, cli_invocations=54, functional_success_inferred=True,
                 parent_terminal_proved=False, token_release_authorized=False,
                 scope='nested cohort journal and functional rows; not artifact authentication or measurements')
+
+
+BACKGROUND = 'generated auto cohort; concurrent host activity disclosed; no quiet-window claim'
+
+
+def parameters(cohort):
+    # Reconstruct instead of trusting caller-supplied accounting fields.
+    c = contract(cohort['label'], cohort['selection'])
+    if not exact(c, cohort):
+        raise ValueError('cohort contract differs')
+    return dict(modes=list(MODES), workers=[c['selection']], file_mib=32, files=8,
+                packet_bytes=8192, warmups=1, repetitions=5, timeout_seconds=30.0,
+                background_note=BACKGROUND, measure_primary_reads=True,
+                measure_semantic_phases=True, property_removal_controls=False,
+                layout_only_controls=False, loopback_cpu_credit_bound=c['reserved_credits'],
+                maximum_configured_endpoint_credit_sum=2*c['endpoint_permit_upper_bound'],
+                orchestration_cpu_credits=2, maximum_declared_cpu_credit_sum=c['declared_peak_credits'],
+                endpoint_cpu_budget_ceiling=8,
+                endpoint_cpu_permit_upper_bounds=[dict(selection=c['selection'],
+                                                      upper_bound=c['endpoint_permit_upper_bound'])])
+
+
+def launch_argv(cohort, *, interpreter, script, output, artifact):
+    """Exact generated command; metadata only, no subprocess or artifact reads.
+
+    Artifact hashes are declarations here. A future owner must authenticate the
+    plan and hash the actual files under its acquired IO reservation.
+    """
+    p = parameters(cohort)
+    if set(artifact) != {'binary', 'compiler', 'binary_sha256', 'compiler_sha256'}:
+        raise ValueError('exact artifact declaration required')
+    for path in (interpreter, script, output, artifact['binary'], artifact['compiler']):
+        if type(path) is not str or not path.startswith('/') or '\x00' in path:
+            raise ValueError('absolute path required')
+    for name in ('binary_sha256', 'compiler_sha256'):
+        digest = artifact[name]
+        if type(digest) is not str or len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest):
+            raise ValueError('SHA256 declaration required')
+    label = cohort['label']
+    argv = [interpreter, script, '--binary', label+'='+artifact['binary'],
+            '--compiler', label+'='+artifact['compiler'],
+            '--expected-binary-sha256', label+'='+artifact['binary_sha256'],
+            '--expected-compiler-sha256', label+'='+artifact['compiler_sha256']]
+    for option, value in (
+            ('modes', ','.join(MODES)), ('workers', str(cohort['selection'])),
+            ('endpoint-cpu-budget', '8'), ('loopback-cpu-credits', str(p['loopback_cpu_credit_bound'])),
+            ('orchestration-cpu-credits', '2'), ('file-mib', '32'), ('files', '8'),
+            ('packet-bytes', '8192'), ('warmups', '1'), ('repetitions', '5'),
+            ('timeout', '30'), ('background-note', BACKGROUND), ('output', output)):
+        argv += ['--'+option, value]
+    return argv + ['--measure-primary-reads', '--measure-semantic-phases']
+
+
+def check_launch(argv, cohort, **bindings):
+    if not exact(argv, launch_argv(cohort, **bindings)):
+        raise ValueError('exact cohort launch differs')
+
+
+def audit_bound(result, cohort, artifact):
+    """Full nested matrix plus declared parameters/artifacts; no file hashing."""
+    expected = parameters(cohort)
+    for key, value in expected.items():
+        if not exact(result['parameters'].get(key), value):
+            raise ValueError('cohort parameter differs: '+key)
+    label = cohort['label']
+    if (result.get('purpose') != 'warm-cache performance' or 'partition' in result
+            or set(result['binaries']) != {label} or set(result['compilers']) != {label}
+            or result['compilers'][label]['path'] != artifact['compiler']
+            or not exact(result['admitted_binary_sha256'], {label:artifact['binary_sha256']})
+            or not exact(result['admitted_compiler_sha256'], {label:artifact['compiler_sha256']})):
+        raise ValueError('cohort artifact/purpose declaration differs')
+    # Command equality in audit() binds nested row outcomes to their journal;
+    # this additional check binds every attempted client/server to its artifact.
+    for entry in result['invocations']:
+        if entry['command'][0] != artifact['binary'] or entry['outcome']['proxy']['server_command'][0] != artifact['binary']:
+            raise ValueError('cohort call artifact differs')
+        identity = entry['identity']
+        flags = ['-debug', 'copy', '-debug', 'semantic', '-debug', 'semantic-reads',
+                 '-debug', 'semantic-timings', '-clone',
+                 'off' if identity['mode'] == 'ordinary' else 'auto',
+                 *worker_options(cohort['selection'], 8)]
+        if identity['mode'] == 'semantic':
+            flags += ['-semanticdng']
+        if entry['command'][-len(flags):] != flags:
+            raise ValueError('cohort endpoint flags differ')
+    return audit(result, cohort)

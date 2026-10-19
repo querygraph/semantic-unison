@@ -6191,3 +6191,15 @@ regression; both children reaped0/groups absent/CPU4 closed, no EXIO/payload.
 Evidence tests/qualification/auto-cohort-source-actual-20261018.json.
 Next: exact argv/parameter/artifact binding and dispatcher owner integration,
 then fresh coordinated IO qualification. Photo catalog-wide5K priority untouched.
+
+
+### 2026-10-18 — auto cohort exact launch/declaration binding
+Added exact launch builder/checker and audit_bound to auto_cohort: one pinned
+compiler/binary declaration, explicit endpoint ceiling8, 32MiB×8 generatedfiles,
+1warm+5measured per3modes, 30s CLI observation, client flag tail checks.
+Actual66a082/0 original directed controls passed; child54049 reaped0/groupabsent,
+CPU4closed/no EXIO. Evidence auto-cohort-bindings-actual-20261018.json.
+No admission or actual benchmark. Remaining: server flag/whole client command
+namespace binding, authenticated immutable plan/artifact checks under IO, and
+dispatcher owner integration before fresh coordinated matrix. Auto upperbound
+is not observed domain count; reserved18 requires fresh Photo coordination.
