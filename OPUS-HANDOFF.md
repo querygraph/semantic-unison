@@ -7109,3 +7109,17 @@ tests/qualification/extended-profile-owned-controls-actual-20261019.json.
 Full actual extended-parser run stillpending PhotoIOrelease; no new admission
 or payload/SDKstart. Earlier inventory runnerpin is historical afterthis edit;
 fixture data/test bodies unchanged. GoalACTIVE; no liveownedresources.
+
+
+## 2026-10-19 — Full extended-parser pair prepared, not dispatched
+
+Source review of owned runner found no additional process/log boundary gap.
+New doc/final-extended-profile-pair-plan-v1-20261019.json freezes33sourcepins,
+qualifiedPython and both ocamlopt.opt SHAs, exactfullcommands+absentworkspace.
+Percompiler1253fixed cases (source-derivedcount), all3negative mutations, all4
+sparseoffsetcases retained; serial1compiler insideUnison8+EXglobal. Nofixed-only
+substitution/newfuzz. Exactpins rechecked by preparation7a82d3/0. No executable,
+sparsefixture, IO/CPUreservation or admission created. CompanionMD explains
+actualouterterminal/group/FDclosure and retainunknown/no signals. Photo49291
+bulk goesfirst; no newIO/native/SDK/benchmark before actual release. Goalactive;
+other source/case/workload closure can continue.
