@@ -74,3 +74,11 @@ JXL and the twelve scalar states still need authenticated recovery/regeneration.
 The pure binder currently accepts temporary roots only; the future boundary
 must explicitly authenticate any persistent store, rather than letting a packet
 choose arbitrary source roots.
+
+## Ordered call accounting
+
+`ledger.py` now records intent/outcome order and prevents retry, successor after
+failure, and unknown-intent classification as settled failure. Raw helper hashes
+are references only: all reports explicitly deny release authorization. Ten
+combined inert tests pass; independent raw audits and the retained executor are
+still required. See `../qualification/current-sdk-merge-ledger-controls-20261019.json`.

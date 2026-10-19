@@ -1,0 +1,36 @@
+{
+  "schema": "unison-sdk-merge-ledger-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path.insert(0,'tests');s=unittest.defaultTestLoader.loadTestsFromNames(['sdk_merge_receiving.plan_test','sdk_merge_receiving.inputs_test','sdk_merge_receiving.ledger_test']);r=unittest.TextTestRunner(verbosity=2).run(s);sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_budgets_include_both_endpoints_and_source_headroom (sdk_merge_receiving.plan_test.Plan.test_budgets_include_both_endpoints_and_source_headroom) ... ok\ntest_exact_stages_peers_and_helper_count (sdk_merge_receiving.plan_test.Plan.test_exact_stages_peers_and_helper_count) ... ok\ntest_refuses_unqualified_or_ambiguous_input (sdk_merge_receiving.plan_test.Plan.test_refuses_unqualified_or_ambiguous_input) ... ok\ntest_exact_twelve_states_without_mutation (sdk_merge_receiving.inputs_test.Inputs.test_exact_twelve_states_without_mutation) ... ok\ntest_refuses_every_unbound_or_ambiguous_metadata_form (sdk_merge_receiving.inputs_test.Inputs.test_refuses_every_unbound_or_ambiguous_metadata_form) ... ok\ntest_bad_terminal_evidence_leaves_intent_pending (sdk_merge_receiving.ledger_test.Lifecycle.test_bad_terminal_evidence_leaves_intent_pending) ... ok\ntest_every_failed_helper_prefix_stops_without_noncreation_claim (sdk_merge_receiving.ledger_test.Lifecycle.test_every_failed_helper_prefix_stops_without_noncreation_claim) ... ok\ntest_full_matrix_still_requires_independent_audit (sdk_merge_receiving.ledger_test.Lifecycle.test_full_matrix_still_requires_independent_audit) ... ok\ntest_order_and_outcome_replacement_refused (sdk_merge_receiving.ledger_test.Lifecycle.test_order_and_outcome_replacement_refused) ... ok\ntest_pending_intent_never_becomes_known_failed_prefix (sdk_merge_receiving.ledger_test.Lifecycle.test_pending_intent_never_becomes_known_failed_prefix) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.005s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 24686,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "source_pins": {
+    "tests/sdk_merge_receiving/inputs.py": "c5af07c6ab9ebf5cb7fd8b6bf3088fca607984231e660ead8308983b4d6bde29",
+    "tests/sdk_merge_receiving/inputs_test.py": "9d48e0be058b095f489f9485daa37be39bb7647bbf0dc505561bfdf13eb9a53e",
+    "tests/sdk_merge_receiving/ledger.py": "d0ca4fc1112f8286a4d0dcc5660a32126f1544832e94b49d0727f8752eeafa7a",
+    "tests/sdk_merge_receiving/ledger_test.py": "626f2b71b3984f95a21f4dbbf724ca7a83b67f7d810069e2ff99c50b733b6757",
+    "tests/sdk_merge_receiving/plan.py": "0f3976ec6a5f7c3b03297c84b47d1223c1ff9377fec0de5ce9c12bf15b1f9322",
+    "tests/sdk_merge_receiving/plan_test.py": "de74fc28c8549ebe95000f79b5e97ebd647b3c0986a9c601b0822f4a6f053038"
+  },
+  "scope": "10 inert original tests; CPU4 only, no IO pool/media/SDK/transport/compiler. Ledger never authorizes release."
+}

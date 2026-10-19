@@ -6722,3 +6722,20 @@ exactexecutor+controls/schedulingexception beforeexecution. Rootqueue01a1530d-c1
 No competingpool/oldnamespace recreation, no restoredmanifestguessing; JXL/state
 recovery orregeneration remainsneeded. Continue sourceworker/auditsindependently;
 noactiveowner/resources, no goalpause/blockedclaim. Old30benchplansstillfrozen.
+
+## SDK merge successor: ordered failure accounting — 2026-10-19
+
+New source `tests/sdk_merge_receiving/ledger.py` preserves intent before terminal
+references, refuses reordered/repeated calls or successors after failure, and
+keeps unfinished intents unresolved. Successful updates require two distinct
+endpoint helper references; seed/no-op require zero. Failed calls may reference
+0/1/2 helpers but never infer noncreation or authorize resource release. Every
+report still requires independent raw process/helper and worker/FD audits.
+
+Ten original inert tests passed under canonical Unison CPU00..03; child24686
+actually reaped0/group-empty and all four tokens closed. Actual owner tool chunk
+106069/exit0/no session. No IO pool, media, transport, SDK or compiler invocation.
+Receipt: `tests/qualification/current-sdk-merge-ledger-controls-20261019.json`.
+This completes source failure-accounting controls, not the executor or runtime
+qualification. Missing older generated fixture states remain a separate input
+recovery task; no historical fixture or admission was recreated.
