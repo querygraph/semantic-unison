@@ -7209,3 +7209,24 @@ Native8KiB-family fixtures afterPhotoIOrelease only; modelexpectedretainedfault
 cases are not normalnativeownershipqualification. No pendingrun/reservation/
 admission/replay. Photo49291recoveryclosed reported but immediatefix/retrypriority
 remains; holdnewEXIO/native/SDK/benchmark. Goalactive/sourceworkcontinues.
+
+
+## 2026-10-19 — Actual current incremental component refinement renewed
+
+Actualtool99658/c2287c→eae204/exit0/NOsession, controller63597/child63613
+reaped0/groupempty. Existing full current component_controls runs BOTH compilers
+serially:56component+1005checkpoint+13borrowedreadfault+27recordpublicationfault
+checks/compiler;5Oxexpectednonportable/contended compile refusals.41actual
+compiler/probe groups settled; quota-contender fork children explicitlywaited0
+insidebothcheckpoint probes (savedstdout). CPU00..03closed/noEXglobal/SDK/Photo/
+originalmedia/benchmark. Source20pinsfreshmatched; no sourceeditedduringrun.
+Receipt tests/qualification/current-component-refinement-actual-20261019.json,
+savedroot/private/tmp/unison-component-controls-vs6veh9d; outer/private/tmp/
+unison-final-component-owner-tfxbj537. Same8KiB-family originalgeneratedbytes
+plus bounded131079Bchunk-reader fixture. Sourcepreviouscomment8KiB shorthand
+notstrictallinputsizecap; fixturealltiny/noncamera.
+Actualupgradecontrol proves decoderimplementation/schema replacement rehashes
+privateparentonly and reuses unchanged encodedpixelnode; full checkpointrestore
+stillrevalidatesinputfirst. Projectionnotdecodedpixels/rendering/cameraeligibility.
+This renews component kernel, notDNGcontainerparser/productionnativeSDK. Photo
+priorityfix/retryhold unchanged; goalACTIVE/allownresourcesclosed.

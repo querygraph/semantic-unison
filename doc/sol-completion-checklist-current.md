@@ -258,3 +258,11 @@ scopes remain open. Photo first/bulkIO hold respected; no newnative operation.
 cancellation controls percompiler; all329production/212linked/5testpins and
 22case logs rechecked. This closes handler-policy mapping, not realSDK negative
 findings, receiving reuse/resume/merge paths, corpus or pixels.
+
+### Current incremental component kernel renewed — 2026-10-19
+
+[Actual stock/Ox receipt](../tests/qualification/current-component-refinement-actual-20261019.json):
+56refinement/1005checkpoint/13readerfault/27publicationfault checks percompiler,
+5expectedOxcompile refusals;41actualchildgroupssettled andCPU4closed. Decoder
+replacement preserves unaffected encodedpixelnode; private rereads stay localized.
+Checkpointrestore still revalidates current input. No newcamera/SDK/pixel proof.
