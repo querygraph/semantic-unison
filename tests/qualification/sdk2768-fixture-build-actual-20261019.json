@@ -1,0 +1,78 @@
+{
+  "schema": "unison-sdk2768-fixture-build-actual/1",
+  "actual_owner_terminal": {
+    "session_id": 53680,
+    "initial_chunk": "c1df62",
+    "terminal_chunk": "1939df",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 48782
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk2768-fixture-build-plan-v1-20261019.json",
+    "sha256": "ea91c6cc9176cb505d5d33ae8f37094877a151da75638419513e008d6e192936"
+  },
+  "workspace": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/fixture-build-owner-4d127a2179a04612b9898609bcb6e23b",
+  "builder": {
+    "group_cleanup_before_leader_reap": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "pid": 48807,
+    "reaped": true,
+    "returncode": 0
+  },
+  "build_manifest": {
+    "bytes": 79156,
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/fixture-build-owner-4d127a2179a04612b9898609bcb6e23b/build/fixture-writer-build-manifest.json",
+    "sha256": "55c2f1d77a4dc3b20e1c51266071c025a51220cce06c65950713190da157ac7d"
+  },
+  "fixture_writer": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/fixture-build-owner-4d127a2179a04612b9898609bcb6e23b/build/fixture-writer",
+    "sha256": "3a5c9f986c0b8dd10c0ab06cbb675902e89e9ec77c985b9a8a65da2f9de76218"
+  },
+  "linked_artifacts": 233,
+  "compile_cache_records": 226,
+  "unique_transitive_dependencies": 1732,
+  "unique_dependency_hash_bytes": 21441310,
+  "full_official_source_hash_bytes": 133855079,
+  "official_source_files": 3769,
+  "source_pins": 18,
+  "metadata_calls": [
+    {
+      "command": [
+        "/usr/bin/plutil",
+        "-convert",
+        "json",
+        "-o",
+        "-",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1/dng_sdk/projects/mac/dng_validate.xcodeproj/project.pbxproj"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "6d2d84fe0a2ea2ec5036ecb1b397fa3d3c7052f7cb6cd886245da9424d0244f8"
+    },
+    {
+      "command": [
+        "/usr/bin/plutil",
+        "-convert",
+        "json",
+        "-o",
+        "-",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1/xmp/toolkit/XMPCore/build/CMake64_libcpp_Static/XMPCore64.xcodeproj/project.pbxproj"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "6e58807e17be77321cddab731aff84f5f52851f215afd52122c5cac7b1a1e919"
+    }
+  ],
+  "qualified2724validator_unchanged": true,
+  "canonical9_reacquired_closed": true,
+  "fixture_or_validator_executions": 0,
+  "planning_budget_addendum": {
+    "declared_logical_bytes": 8589934592,
+    "modeled_compiler_digest_read_lower_bound_bytes": 122959389696,
+    "model": "226 successful fresh compile-cache records, each compiler digest before/after,272034048B actualcompiler; excludes source/dependency/CMake/audit reads",
+    "original_estimate_understated": true,
+    "physical_IO_measurement": null,
+    "enforced_cap": false
+  },
+  "scope": "Build-only new2768fixturewriter; exact225SDK-XMP+onewriter compiled-cache/link/source bindings and normal buildergroupclosure; CMakeinternalcommands not individually PID-ledgered. No fixture/SDK-runtime/decode/merge/pixels/throughput/production qualification."
+}

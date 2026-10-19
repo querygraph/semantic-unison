@@ -162,3 +162,7 @@ full logical model are retained as negative optimization evidence.
 ### SDK2768 complete private source extracted
 
 [Source extraction](sdk2768-private-source-unpack-20261019.md): actual7403/0feceb/0, pinned OSunzip46216reaped0/groupabsent,3769files/133855079B and exact bounded ZIPcensus. Independentd725da/0 rereadallsourcehashes/nativeproof/supportpins/canonical9; requiredSDK/XMP/JXLbuildinputs exist, old2724validatorunchanged, full8EXclosed. Sixcontrols a22bdd/0; first fabricatedCRCfixturefailure/recovery137 retained separately. ZERO SDK/compiler/fixture executions. Separate2768fixture-writer-only build and final12states/SDKmatrix remain.
+
+### Separate SDK2768 fixture writer actually built
+
+[Build-only result](sdk2768-fixture-writer-build-20261019.md): owner53680/1939df/0, builder48807 normallyreaped/groupabsent. Newfixture-only path excludesvalidator, binary3a5c9f98/manifest55c2f1d7;233linkedartifacts/226cacheunits/225officialSDK-XMP+onewriter. Independent52950/40a018/0 rechecked1732uniqueheaders+full3769SDKsources/toolpins/artifacts and old2724validator; whole8EXclosed. Tenoriginalcontrolspass0bb271/0, initialfixture-onlytesterrors preserved/normalclosed. Original8GiB estimate understated: modeledcompilerhash lowerbound122959389696B, not physicalIO/measurement/cap. ZERO writer/validator executions; actualJXL/12states/native finalmatrix stillpending.

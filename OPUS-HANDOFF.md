@@ -1,17 +1,17 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T12:59:30.983638+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T14:20:15.847526+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest SDK
-  sourceunpack7403/0feceb/0/NOsession, nativeunzip46216reaped0/groupabsent;
-  independentd725da/0 rereadall133855079B and reacquired/closedwhole8EX.
-  ZERO SDK/compiler executions. FirstCRCcontrolfixture137recovery closed.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Standalone2768
+  fixture-writer BUILD ONLY actual53680/1939df/0/NOsession, builder48807reaped0/
+  groupabsent; independent52950/40a018/0 whole8EXreacquiredclosed. ZERO writer/
+  validator/Photo executions. No replay/successor/18borrow/sealinghold.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -117,7 +117,7 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   controls a1f0de/0 passed incl actualbuilder synthetic2768refusal beforemkdir,
   officialsavedREADME9b2536/0 checked. Newmanifest includes release/readme/license/
   selectorhashes. Qualified2724binary untouched. SDK2768source NOW extracted/audited (below);
-  separatefixture-writer-only2768build remains nextpreparation.
+  separatefixture-writer-only2768build NOWPASS (below), runtime stillunqualified.
   `doc/sdk-current-release-identity-fix-20261019.md`. No SDK execution yet.
 
 - **SDK2768source ACTUALLY extracted:**7403/0feceb/0, root/data SDK_root in
@@ -127,16 +127,30 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   SDKsource at retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/
   source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1.
   Original `tools/adobe-validator/fixture_writer.cpp` exists; onlyoldwriterbinary
-  waslost. Existingvalidatorbuilder correctlyrefuses2768. NEXT sourcebuild
-  successor must fixture-writer-only2768/freshbuilddir/separateprovenance, NOT
-  rebuild/relabel2724validator. SDKruntime/fixturegeneration stillzero. First
+  waslost. Existingvalidatorbuilder correctlyrefuses2768; the standalone2768
+  fixture-writer successor NOWbuiltseparately (below), no2724relabel.
+  SDKruntime/fixturegeneration stillzero. First
   CRCcontrolfixturefailure then idlecontroller137recovery retained; corrected
   6controls a22bdd/0 pass, no nativeextractorretry. AllresourcesZERO.
 
+- **Standalone2768 fixture writer BUILD PASS:**53680/1939df/0, builder48807
+  reaped0/groupabsent. BinarySHA3a5c9f986c0b8dd10c0ab06cbb675902e89e9ec77c985b9a8a65da2f9de76218,
+  manifest55c2f1d7 path in `tests/qualification/sdk2768-fixture-build-actual-20261019.json`;
+  new--fixture-writer-build-only/freshdir/2jobs excludesdriver+validator. Independent
+  52950/40a018/0 all233linkedartifacts/226cacheunits/1732uniquedependencies/
+  full3769SDKsourcefiles/currenttoolpins+old2724validator checked; whole8EXclosed.
+  Tenoriginalcontrols0bb271/0 (firstmockAST/pathfailures normalclosed/preserved).
+  SDKwriter/validator NEVEREXECUTED; runtimefalse. Original8GiB logicalestimate
+  UNDERSTATED:2*226*272034048compilerhash reads model122959389696B, NOTphysical
+  measurement/hardcap; record preservedaddendum. Next fresh finite preparation
+  can regenerateJXL/12states whenfinalSDKphase reached; no blindwriterdispatch.
+  `doc/sdk2768-fixture-writer-build-20261019.md`. AllresourcesZERO.
+
 ## Remaining work — do not mark goal complete
 
-1. Reconcile current full-sync properties, remaining archive cases/forcedRPC0
-   and remaining named edge cases to source-bound evidence or renew only the
+1. Reconcile remaining full-sync/archive/profile/platform cases and the
+   inherited RPCv0 requirement mismatch (safe refusal is NOT ordinaryfallback),
+   plus remaining named edge cases to source-bound evidence or renew only the
    missing cases. Native stage qualification is not every sync property or
    compressed-input/crash/platform proof. See `doc/sol-final-acceptance-map-20261019.md`.
 2. Complete prescribed benchmark/baseline/topology evidence: pinned local
@@ -150,27 +164,21 @@ checkpoint; historical snapshots below do not create resource holds or grants.
    retained fixtures after independent work. Current merge source under
    `tests/sdk_merge_receiving` is implemented:9CLI/6helpers/3codecs/12states,
    independent parent audit. Native current merge matrix remains unrun.
-4. Two generated fixtures are NOW preserved as persistent readonly native clones:
-   `sdk-generated-fixture-preservation-actual-20261019.json`, owner961bfc/0,
-   independent metadata audit4b1b2f/0; manifestSHA3f690df1 in Unison-owned
-   `~/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19`.
-   Uncompressed+JPEG clone hashes total87022256B match historicalSHA; source
-   epochs unchanged/no source hash/chmod. V2plan736594b0 consumed; V1unexecuted.
-   JXL/12scalarstates still missing. SharedSDKhostV1/V2 metadata references only
-   deleted originals, no recovered clone. Current inputs.bind only/private/tmp;
-   exact trustedpersistent codec-state path integration NOW controlsqualified
-   7cdd5e/0; actual12states/ancestry/nativeclones still required before execution.
-   Validator2724 survives; old2724SDKtree is skeleton/writerbinary absent.
-   Separate2768source is extracted below. Manifest sourceSHA
-   is driver.cpp, notSDKarchive. Official2768 source NOW persistently fetched:
-   97807/a2bf20/0,80509918B SHA c1d3a545ed45b150e59af2e6aa0695c1551f0e2bed34ad87436898a05194d2b1,
-   `~/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001`.
-   Index4215entries/133855079declaredbytes, license/readme inspected; NOW
-   private extraction7403/0feceb/0 completed3769files/fullhashmanifest98672df1,
-   independentd725da/0 full133855079B rechecked/whole8EXclosed. ZERO SDK/build execution. Independent1eb9cb/0 archiveepoch+unchanged2724toolSHA/full8EXclosed.
-   New2768 is distinct ancestry, NOTrestored2724 or validatorreplacement.
-   `doc/sdk-generated-fixture-readiness-successor-20261019.md`. FirstJXLsearch
-   capped50000; narrowed91roots1554entriesfound no namedpayload, notglobalabsence.
+4. Final fixture readiness: two readonly persistent generated bases
+   (uncompressed/JPEG) remain preserved under manifest3f690df1; no sourcehash/
+   chmod/recopy. Exact persistent codec/state binding controls7cdd5e/0 pass.
+   Official SDK2768 archive c1d3a545 was privately extracted7403/0feceb/0,
+   3769files/fullhashmanifest98672df1; independentd725da/0 passed. Standalone
+   fixture-writer2768 BUILD ONLY NOWPASS53680/1939df/0, binary3a5c9f98,
+   manifest55c2f1d7, independent52950/40a018/0 (receipt above). Qualified2724
+   validator unchanged; old2724source was NOT restored/relabelled. Freshwriter
+   source mode is separate from the2724 validator builder. JXL/12scalarstates
+   still need generation and finalnativequalification; writer has NEVERrun.
+   Prior own-temp filename searches did not recover a knownJXL payload, but
+   capped/filteredscope is NOT globalabsence. SDKBuild8GiB readestimate was
+   understated; compilerhash model lowerbound122959389696B, no physicalcap/
+   measurement. Future nativeowner must bind actualbinary/currentstates/pins,
+   not replay an old plan/admission. See SDKfixture build result above.
 5. Reconcile final candidate/review and report all requirement scopes. PR13
    fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
    last verified OPEN DRAFT atf6bfd653; local final qualification successor not

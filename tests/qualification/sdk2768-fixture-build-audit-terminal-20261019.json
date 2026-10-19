@@ -1,0 +1,57 @@
+{
+  "schema": "unison-sdk2768-fixture-build-audit-terminal/1",
+  "actual_terminal": {
+    "session_id": 52950,
+    "initial_chunk": "8b508a",
+    "terminal_chunk": "40a018",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_source": {
+    "path": "/private/tmp/unison-sdk-fixture-build-audit-20261019.py",
+    "bytes": 8141,
+    "sha256": "5028990240727fb162445ab9105fdc8d650f7be07b4f7237ac8d29be348f7a59"
+  },
+  "actual": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/sdk2768-fixture-build-actual-20261019.json",
+    "bytes": 3782,
+    "sha256": "603c92bf5ac846adf93fb475197f2578557b91cf557b08cf7c8b6b7643821068"
+  },
+  "original_controls": {
+    "actual_terminal": "0bb271/0/NOsession",
+    "methods": 10,
+    "result": {
+      "path": "/private/tmp/unison-sdk-fixture-builder-controls-20261019-002/RESULT.json",
+      "bytes": 659,
+      "sha256": "59de200f34d6e869bef992b9b1551d20ac6448c75392d515793a88b5a549dcd9"
+    },
+    "source_pins": {
+      "tools/adobe-validator/build.py": "421a93120013b6fe91b697ef8bc18f7e124c000bcd31609dc9accefdffbab78c",
+      "tests/sdk_fixture_builder_test.py": "36eff9b536a675ee0f90722dca12d4b1f907639eb0bc35151dcaba8a6f1e09d7",
+      "tests/sdk_source_identity_test.py": "edc829befd516a4c59297712bee7bbd9d5531435c7f251013df3b9761f307b11"
+    }
+  },
+  "preserved_initial_control_failure": {
+    "actual_terminal": "5786e8/1/NOsession",
+    "raw": {
+      "path": "/private/tmp/unison-sdk-fixture-builder-controls-20261019-001/CHILD.json",
+      "bytes": 2580,
+      "sha256": "189809f9d2d82cd7f0892b170162211214bfcc22a6c96c56cafe589980e8b294"
+    },
+    "source_snapshots": [
+      {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_fixture_builder_test.first.py.txt",
+        "bytes": 6283,
+        "sha256": "5c071d100be92dafe9a4b2bc987efd420cc7d5e0e2d8f8796c609296319cf541"
+      },
+      {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_source_identity_test.fixture-builder-first.py.txt",
+        "bytes": 4234,
+        "sha256": "b02997fb171f5a3fca564f1e8060aa1e0cd8fed5324bf8cd9250bc13e22dc113"
+      }
+    ],
+    "reason": "Original AST test assumed mkdir still top-level; fake-build path assertion missed /var\u2192/private/var alias. Testchild47753 normalreaped1/groupabsent/tokenclosed; no SDK/compiler, no recovery signal or native retry."
+  },
+  "all8_EX_reacquired_closed": true,
+  "SDK_fixture_or_validator_calls": 0
+}

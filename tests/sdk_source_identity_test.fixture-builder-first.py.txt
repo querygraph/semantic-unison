@@ -1,0 +1,57 @@
+import ast,sys,unittest
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'tools/adobe-validator'))
+from sdk_source_identity import require_release
+
+
+def text(build=2724,history=True):
+    return 'Original synthetic SDK package notes\nRelease Notes / Changelog:\n\n1.7.1 '+str(build)+' September 8, 2026\n\n - original note.\n'+ ('\n1.7.1 2724 September 8, 2026\n' if history else '')
+
+class Release(unittest.TestCase):
+    def test_original_substring_counterexample_and_current_first_entry(self):
+        value=text(2768)
+        self.assertIn('1.7.1 2724',value) # Old builder accepted the wrong package.
+        with self.assertRaisesRegex(ValueError,'observed 1.7.1 2768'):require_release(value)
+        self.assertEqual(require_release(value,2768)['build'],2768)
+        self.assertEqual(require_release(text(2724,False))['build'],2724)
+    def test_missing_malformed_or_duplicate_heading_refuses(self):
+        for value in ('','1.7.1 2724 September 8, 2026',text()+'\nRelease Notes / Changelog:',text().replace('1.7.1 2724','unreviewed entry',1),text().replace('1.7.1 2724','1.8.0 2724',1)):
+            with self.assertRaises(ValueError):require_release(value)
+    def test_first_nonempty_entry_not_later_compatible_history(self):
+        for first in ('1.7.2 3000 May 1, 2027','1.7.1 9999 May 1, 2027','not a release','1.7.1 02724 May 1, 2027'):
+            with self.assertRaises(ValueError):require_release('Release Notes / Changelog:\n\n'+first+'\n1.7.1 2724 September 8, 2026\n')
+    def test_bad_types_or_unreviewed_selector_refuse(self):
+        for expected in (True,'2724',0,9999):
+            with self.assertRaises(ValueError):require_release(text(),expected)
+        with self.assertRaises(ValueError):require_release(b'notes')
+    @unittest.skipUnless(sys.platform == "darwin", "actual SDK builder supports Darwin only")
+    def test_actual_builder_refuses_new_source_before_creating_build(self):
+        import tempfile,runpy,contextlib,io
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory(prefix='unison-original-sdk-version-') as name:
+            root=Path(name);sdk=root/'sdk';sdk.mkdir();(sdk/'DNG_ReadMe.txt').write_text(text(2768));output=root/'never-built'
+            argv=[str(R/'tools/adobe-validator/build.py'),'--sdk-root',str(sdk),'--build-dir',str(output),'--jobs','1']
+            stream=io.StringIO()
+            with patch.object(sys,'argv',argv),contextlib.redirect_stderr(stream):
+                with self.assertRaises(SystemExit) as got:runpy.run_path(argv[0],run_name='__main__')
+            self.assertEqual(got.exception.code,2);self.assertIn('observed 1.7.1 2768',stream.getvalue());self.assertFalse(output.exists())
+
+    def test_actual_builder_preflight_runs_before_directory_or_commands(self):
+        # Execute the original actual builder prefix through its new guard,
+        # replacing only argument parsing/filesystem source with original fakes.
+        tree=ast.parse((R/'tools/adobe-validator/build.py').read_text())
+        guard=next(n for n in tree.body if isinstance(n,ast.Try) and any(isinstance(c,ast.Call) and isinstance(c.func,ast.Name) and c.func.id=='require_release' for c in ast.walk(n)))
+        calls=[]
+        class Parser:
+            def error(self,message):calls.append(message);raise ValueError(message)
+        class Readme:
+            def read_text(self):return text(2768)
+        class SDK:
+            def __truediv__(self,name):self.name=name;return Readme()
+        with self.assertRaises(ValueError):exec(compile(ast.Module(body=[guard],type_ignores=[]),'<actual builder release guard>','exec'),dict(sdk=SDK(),parser=Parser(),require_release=require_release,args=type('OriginalArgs',(),{'fixture_writer_build_only':False})()))
+        self.assertEqual(len(calls),1)
+        mkdir=next(i for i,n in enumerate(tree.body) if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Attribute) and n.value.func.attr=='mkdir')
+        self.assertLess(tree.body.index(guard),mkdir)
+        self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='run' for n in ast.walk(guard)))
+
+if __name__=='__main__':unittest.main()

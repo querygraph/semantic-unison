@@ -48,10 +48,10 @@ class Release(unittest.TestCase):
             def read_text(self):return text(2768)
         class SDK:
             def __truediv__(self,name):self.name=name;return Readme()
-        with self.assertRaises(ValueError):exec(compile(ast.Module(body=[guard],type_ignores=[]),'<actual builder release guard>','exec'),dict(sdk=SDK(),parser=Parser(),require_release=require_release))
+        with self.assertRaises(ValueError):exec(compile(ast.Module(body=[guard],type_ignores=[]),'<actual builder release guard>','exec'),dict(sdk=SDK(),parser=Parser(),require_release=require_release,args=type('OriginalArgs',(),{'fixture_writer_build_only':False})()))
         self.assertEqual(len(calls),1)
-        mkdir=next(i for i,n in enumerate(tree.body) if isinstance(n,ast.Expr) and isinstance(n.value,ast.Call) and isinstance(n.value.func,ast.Attribute) and n.value.func.attr=='mkdir')
-        self.assertLess(tree.body.index(guard),mkdir)
+        mkdir=min(n.lineno for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='mkdir')
+        self.assertLess(guard.lineno,mkdir)
         self.assertFalse(any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='run' for n in ast.walk(guard)))
 
 if __name__=='__main__':unittest.main()

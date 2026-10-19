@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build against a separately obtained Adobe DNG SDK 1.7.1/2724 on macOS.
+"""Build the 2724 validator or an isolated 2768 fixture writer on macOS.
 
 No Adobe source is copied into this repository. SDK notices remain in place.
 The official Xcode source manifests are consumed without requiring Xcode.app.
@@ -19,6 +19,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--sdk-root", type=Path, required=True)
 parser.add_argument("--build-dir", type=Path, required=True)
 parser.add_argument("--jobs", type=int, default=min(2, os.cpu_count() or 1))
+parser.add_argument("--fixture-writer-build-only", action="store_true",
+                    help="fresh SDK2768 fixture writer only; never builds or replaces a validator")
 parser.add_argument("--fixture-only", action="store_true",
                     help="rebuild test fixture writer using existing SDK libraries; preserve validator and manifest")
 parser.add_argument("--experimental-area-task-host", action="store_true",
@@ -33,15 +35,24 @@ if sys.platform != "darwin":
     parser.error("this qualified build currently supports macOS only")
 if args.jobs < 1:
     parser.error("--jobs must be positive")
+if args.fixture_writer_build_only and (args.fixture_only or args.experimental_area_task_host or args.experimental_memory_budget):
+    parser.error("standalone fixture writer cannot select a validator or existing-driver mode")
+if args.fixture_writer_build_only and args.jobs > 2:
+    parser.error("standalone fixture writer permits at most two compiler jobs")
 if args.fixture_only and (args.experimental_area_task_host or args.experimental_memory_budget):
     parser.error("--fixture-only cannot select an experimental validator build")
 try:
-    reviewed_sdk_release = require_release((sdk / "DNG_ReadMe.txt").read_text(), 2724)
+    reviewed_sdk_release = require_release((sdk / "DNG_ReadMe.txt").read_text(), 2768 if args.fixture_writer_build_only else 2724)
 except ValueError as error:
     parser.error(str(error))
 if not (sdk / "LICENSE.txt").is_file():
     parser.error("SDK license missing")
-build.mkdir(parents=True, exist_ok=True)
+if args.fixture_writer_build_only:
+    if build.exists() or build.is_relative_to(sdk) or sdk.is_relative_to(build):
+        parser.error("standalone fixture writer requires a fresh build directory disjoint from SDK source")
+    build.mkdir(parents=True, exist_ok=False)
+else:
+    build.mkdir(parents=True, exist_ok=True)
 preserved_manifest = None
 if args.fixture_only:
     preserved_manifest = (build / "build-manifest.json").read_bytes()
@@ -107,7 +118,7 @@ dng_sources = [p for p in dng_sources if p.name != "dng_validate.cpp"]
 xmp_sources = sources(xmp / "XMPCore/build/CMake64_libcpp_Static/XMPCore64.xcodeproj/project.pbxproj",
                       "XMPCoreStaticRelease")
 jobs = [(p, dng_flags) for p in dng_sources] + [(p, xmp_flags) for p in xmp_sources]
-if not args.fixture_only:
+if not args.fixture_only and not args.fixture_writer_build_only:
     driver_flags = dng_flags + (["-DUNISON_EXPERIMENTAL_AREA_TASK_HOST=1"]
                                if args.experimental_area_task_host else [])
     if args.experimental_memory_budget: driver_flags += ["-DUNISON_EXPERIMENTAL_MEMORY_BUDGET=1"]
@@ -138,12 +149,38 @@ mode = ("area-memory" if args.experimental_area_task_host else "memory") if args
 binary = build / ("unison-adobe-validator" if mode == "single" else "unison-adobe-validator-" + mode + "-unqualified")
 link_flags = [*libraries, "-lz", "-framework", "CoreFoundation", "-framework", "CoreServices",
               "-framework", "Security"]
-if not args.fixture_only:
+if not args.fixture_only and not args.fixture_writer_build_only:
     run(["clang++", "-std=c++17", *objects, *link_flags, "-o", binary])
 fixture_object = compile_one((here / "fixture_writer.cpp", dng_flags))
-fixture_sdk_objects = objects if args.fixture_only else objects[:-1]
+fixture_sdk_objects = objects if args.fixture_only or args.fixture_writer_build_only else objects[:-1]
 run(["clang++", "-std=c++17", *fixture_sdk_objects, fixture_object, *link_flags,
      "-o", build / "fixture-writer"])
+if args.fixture_writer_build_only:
+    if (build / "build-manifest.json").exists() or any(p.name.startswith("unison-adobe-validator") for p in build.iterdir()):
+        raise RuntimeError("standalone fixture build unexpectedly produced validator artifacts")
+    fixture_binary = build / "fixture-writer"
+    fixture_manifest = {
+        "schema": "unison-sdk-fixture-writer-build/1",
+        "sdk": "Adobe DNG SDK 1.7.1 build 2768",
+        "sdk_root": str(sdk), "reviewed_release": reviewed_sdk_release,
+        "sdk_readme_sha256": hashlib.sha256((sdk / "DNG_ReadMe.txt").read_bytes()).hexdigest(),
+        "sdk_license_sha256": hashlib.sha256((sdk / "LICENSE.txt").read_bytes()).hexdigest(),
+        "build_id": "unison-sdk171-2768-fixture-writer-build-v1",
+        "executable": str(fixture_binary),
+        "executable_sha256": hashlib.sha256(fixture_binary.read_bytes()).hexdigest(),
+        "source_sha256": hashlib.sha256((here / "fixture_writer.cpp").read_bytes()).hexdigest(),
+        "builder_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "release_selector_sha256": hashlib.sha256((here / "sdk_source_identity.py").read_bytes()).hexdigest(),
+        "object_cache_sha256": hashlib.sha256((here / "object_cache.py").read_bytes()).hexdigest(),
+        "linked_objects": {str(p): hashlib.sha256(p.read_bytes()).hexdigest()
+                           for p in [*fixture_sdk_objects, fixture_object, *libraries]},
+        "compiler_jobs": args.jobs, "validator_written": False,
+        "runtime_qualified": False, "SDK_fixture_generation_calls": 0,
+        "qualification": "BUILD ONLY: no fixture writer or validator invocation; separate native qualification required"
+    }
+    (build / "fixture-writer-build-manifest.json").write_text(json.dumps(fixture_manifest, indent=2) + "\n")
+    print(json.dumps(fixture_manifest, indent=2))
+    raise SystemExit(0)
 if args.fixture_only:
     assert (build / "build-manifest.json").read_bytes() == preserved_manifest
     assert hashlib.sha256(binary.read_bytes()).hexdigest() == qualified["executable_sha256"]

@@ -1,0 +1,90 @@
+{
+  "schema": "unison-standalone-sdk2768-fixture-build-plan/1",
+  "repository": "/Users/alexy/src/unison-final-adobe-20261019",
+  "source_head": "9c40508a plus exact fixture-only builder/owner/control pins",
+  "workspace": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/fixture-build-owner-4d127a2179a04612b9898609bcb6e23b",
+  "sdk_manifest": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/MANIFEST.json",
+    "sha256": "98672df101e9c2e1526622391404fe138e330cca578ea90e93196c8c786466d4",
+    "bytes": 703248
+  },
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "tools": {
+    "clang": {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769"
+    },
+    "clang++": {
+      "path": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769"
+    },
+    "cmake": {
+      "path": "/usr/local/Cellar/cmake/4.4.4/bin/cmake",
+      "sha256": "89393018ba59a7e0e6d3a3c7dd336a24002581b6238d399679633edc3354b838"
+    },
+    "make": {
+      "path": "/usr/bin/make",
+      "sha256": "7f30f076d0e9c38f772a76449fca9da8cf97f6a3d43b94c90a00e4f9ce7ad39e"
+    },
+    "plutil": {
+      "path": "/usr/bin/plutil",
+      "sha256": "bedd6d002493e7a0c99a0bead459e1701cbf5b0c0a18b6010cb63f614950d5ee"
+    },
+    "SDKSettings": {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.2.sdk/SDKSettings.json",
+      "sha256": "95882a9cea02396e76f3e406a5728269b2a1a11bcd241430a84c9e63d09a6cd3"
+    }
+  },
+  "environment": {
+    "PATH": "/Library/Developer/CommandLineTools/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.2.sdk",
+    "CXX": "/Library/Developer/CommandLineTools/usr/bin/clang++"
+  },
+  "preserved_validator": {
+    "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+    "sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a"
+  },
+  "source_pins": {
+    "tests/sdk_fixture_build_owner.py": "b04d63abb4892a67410d0e788acb314c794387e64331b30e31e00bdb249d126d",
+    "tools/adobe-validator/build.py": "421a93120013b6fe91b697ef8bc18f7e124c000bcd31609dc9accefdffbab78c",
+    "tools/adobe-validator/fixture_writer.cpp": "47e0d6e12882a4c3eecaadbf28d9fdfc3fc278c5ea79c4cad522aec475e83928",
+    "tools/adobe-validator/object_cache.py": "e9f12ed825d02f80185b4664cc1ce77eccb6d8835045b6d83663b00796afd656",
+    "tools/adobe-validator/sdk_source_identity.py": "f60810cb347104a195ef17ae7a97f055208bdc18d24bb7af07472692392b3595",
+    "tests/sdk_fixture_builder_test.py": "36eff9b536a675ee0f90722dca12d4b1f907639eb0bc35151dcaba8a6f1e09d7",
+    "tests/sdk_source_identity_test.py": "edc829befd516a4c59297712bee7bbd9d5531435c7f251013df3b9761f307b11",
+    "tests/sdk_host_matrix/shared_child.py": "b4491baf26abecc3a38796529f0fb132a22994e18cbb83537502c4f51e1d8712",
+    "bench/sync/batch_child.py": "902e5532fb6480adb4b840a36d3c4713d22d234fb12d623cefa7af3368d71484",
+    "bench/sync/batch_capture.py": "603971d6c38677982b451e34fc79dee77436d9e33499a80e78c73fe22440c64f",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3",
+    "tests/final_profile_owner.py": "e5f42ee1ed089462e75e088189a4ddd15521d7e49c9d430ce8e6de5e4ef16d50"
+  },
+  "limits": {
+    "compiler_jobs": 2,
+    "CPU_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "io_mode": "EX_GLOBAL",
+    "owner_observation_seconds": 900,
+    "declared_logical_IO_budget_bytes": 8589934592,
+    "physical_IO_enforced": false,
+    "fixture_or_validator_calls": 0
+  },
+  "original_controls": "0bb271/0 ten actual-builder orchestration/refusal/source identity tests with original doubles; no real compiler/SDK",
+  "authority": "User independent Unison preparation during Photo drain, standing8; no original/media/Main/cache/SDK-runtime/18borrow."
+}

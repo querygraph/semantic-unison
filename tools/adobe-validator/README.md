@@ -43,6 +43,23 @@ python3 tools/adobe-validator/qualify.py \
   --build-dir /absolute/path/adobe-validator-build
 ```
 
+For the separately reviewed SDK2768 **fixture writer only**, use a fresh
+build directory and at most two compiler jobs:
+
+```
+python3 build.py --sdk-root /absolute/official-sdk2768/dng_sdk_1_7_1 \
+  --build-dir /absolute/new-private-fixture-build --jobs 2 --fixture-writer-build-only
+```
+
+This path excludes the validator and writes `fixture-writer-build-manifest.json`
+with build ID `unison-sdk171-2768-fixture-writer-build-v1`; runtime qualification
+starts false. It refuses an existing build directory, source overlap, old2724
+sources and validator/experimental mode combinations. It does not rebuild or
+replace the qualified2724 validator. [Actual build-only result](../../doc/sdk2768-fixture-writer-build-20261019.md)
+records the independently verified binary, source/cache/artifact provenance and
+the understated logical-read planning estimate. Do not execute the writer merely
+because the build passed; the finite generated-input owner is separate.
+
 No Xcode.app or SDK installation is required. The build reads Adobe's Xcode
 source manifests and compiles static XMP, JPEG, and JPEG XL dependencies. The
 qualified target uses embedded XMP support, `qDNGValidate=1`, and SDK error
