@@ -1,0 +1,39 @@
+{
+  "schema": "unison-current-named-producer-source-controls/1",
+  "actual_tool": {
+    "session_id": 74259,
+    "terminal_chunk": "89b817",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 69,
+  "source_sha256": {
+    "tests/current_validation_paths/external_evidence.py": "d3520435a8cb41e04b511a1cf8a70261c8dabdec3e477d43dd0319b10633c937",
+    "tests/current_validation_paths/external_evidence_test.py": "a7c2eb3e09fbbd261a6318752364d20416296423222f1434d46410599d73d57a",
+    "tests/current_validation_paths/producer_observation.py": "1526012e28229ebd15ecdb0364bbea7924c2050fd970545b68a675073f106e6e",
+    "tests/current_validation_paths/producer_observation_test.py": "ddfebd17a6363edf9802c645534c9395814d49355ae655d363bdb3f1dda3783b",
+    "tests/current_validation_paths/producer_proxy.py": "b9c707442035fdcf087e4565f45b708b85811ea978429fb7b7ab3b6f61f2c4b8",
+    "tests/current_validation_paths/producer_proxy_test.py": "8c690dc7fe41cdfb06de361bde5c3827357f51e685f2faefcbf520d55570303e",
+    "tests/current_validation_paths/producer_evidence.py": "a5abdc192e20bc4184a9278df40d0db80fd18496162862ea01bde806cbc5ad98",
+    "tests/current_validation_paths/producer_evidence_test.py": "5d029737df2e70523a8a79ad679e0ca72dd6029f920201dee5fbb457d628d528",
+    "tests/current_validation_paths/session.py": "983edf56ccc74295a9915f15dda8d88070525ea3190542afee5f0a133d7afe71",
+    "tests/current_validation_paths/evidence.py": "c823f4ecda5c42cd8216530f463fcdbafb3ac97d1e7cd1a2051c71d9f44e27eb",
+    "tests/current_validation_paths/invoke.py": "d2fd958349fed4821f72ba1813d4723678089d061668aabbaa88c9fcaa5ee88a"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "initial_failed_control": {
+    "terminal_chunk": "42c01f",
+    "exit_code": 1,
+    "reason": "inert no-event pump test omitted write adapter and received EBADF on fake FD; adapter corrected; CPU00 closed"
+  },
+  "scope": "Generated complete/partial stages, original source-bound external counter/group audit, fake native/socket/signal crash proxy and pure raw crash audit; 69 unittest methods, NOT 69 actual CLI calls",
+  "remaining": [
+    "bind producer proxy and audit to Actor.interrupt and global69CLI budget",
+    "parent/worker/plan/entry/admission binding",
+    "actual complete21case stock/Ox receiving runs"
+  ]
+}

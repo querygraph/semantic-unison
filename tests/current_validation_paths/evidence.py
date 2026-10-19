@@ -9,6 +9,7 @@ from camera_sdk_receiving.sdk_audit import FIELDS,records
 from sdk_merge_receiving.admission import exact
 from sdk_merge_receiving.evidence import child,unique
 from sdk_merge_receiving.plan import require
+from current_validation_paths.external_evidence import audit as external_audit
 
 
 def terminal(out,command,code):
@@ -77,7 +78,7 @@ def helpers(log,expected,transport_pids):
     return verdicts
 
 
-def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers,terminal_audit):
+def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers,terminal_audit,expected_external=()):
     trace(client_command);trace(server_command)
     require(type(pair) is dict and set(pair)=={'client','proxy','raw_proxy','external_sdk_audit_required','resource_release_authorized'}
         and pair['external_sdk_audit_required'] is True and pair['resource_release_authorized'] is False,
@@ -102,9 +103,11 @@ def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,ex
         and all(type(v) is int and 0<v<2**63 for v in counts.values()),'both typed protocol directions required')
     log='\n'.join(pair[p][s] for p in ('client','proxy') for s in ('stdout','stderr'))
     require(expected_client_exit==0 or bool(expected_helpers),'failed no-helper prefix needs separate source/creation audit')
-    verdicts=helpers(log,expected_helpers,{client_pid,proxy_pid,frame['server_pid']})
+    identities={client_pid,proxy_pid,frame['server_pid']}
+    verdicts=helpers(log,expected_helpers,identities)
+    externals=external_audit(log,list(expected_external),identities|{e['pid'] for e in expected_helpers})
     return dict(command=client_command,client_returncode=expected_client_exit,log=log,
-        external_children_settled=True,helper_observations=verdicts,raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
+        external_children_settled=True,helper_observations=verdicts,external_observations=externals,raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
         publication_fence_required=True,worker_settlement_required=True,parent_terminal_proved=False,
         real_SDK_calls=0,resource_release_authorized=False)
 

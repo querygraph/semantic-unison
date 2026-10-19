@@ -125,6 +125,17 @@ class Actor:
                 result.append(dict(endpoint=endpoint,pid=value['pid'],candidate_sha256=value['sha256'],candidate_bytes=value['size'],
                     mode=control['mode'],outcome=hang_outcome if control['mode']=='hang' else 'completed'))
         return result
+    def _external(self,session,intent):
+        values=[]
+        for kind,path in (('copy',session.copy),('merge',session.merger)):
+            before=intent['before_external_counts'][kind]
+            current=session.original_assertions['records'](path.with_suffix('.calls.jsonl'))
+            if type(before) is not int or not 0<=before<=len(current) or len(current)-before>1:
+                raise ValueError('one exact external fixture child per kind/call required')
+            for record in current[before:]:
+                # Original copy/merge commands execute on the initiating client.
+                values.append(dict(endpoint='client',pid=record['group'],fixture_pid=record['pid'],kind=kind))
+        return values
     def audit(self,session,intent,outcome):
         self._ready()
         try:
@@ -137,10 +148,11 @@ class Actor:
             arguments=dict(client_command=intent['command'],proxy_command=active['proxy_command'],server_command=intent['server_command'],raw_proxy_bytes=raw)
             if 'cancellation' in intent:
                 pin=active['cancellation_pin'];cancellation=store.read_json(pin['name'],expected_sha256=pin['sha256'])
+                if self._external(session,intent):raise ValueError('cancellation must not create copy/merge fixture children')
                 verdict=audit_cancel(record['pair'],**arguments,cancellation=cancellation,
                     expected_helpers=self._helpers(session,intent,hang_outcome='cancelled'))
             else:
-                verdict=audit_pair(record['pair'],**arguments,expected_client_exit=intent['expected_client_exit'],expected_helpers=self._helpers(session,intent))
+                verdict=audit_pair(record['pair'],**arguments,expected_client_exit=intent['expected_client_exit'],expected_helpers=self._helpers(session,intent),expected_external=self._external(session,intent))
             store.write(active['stem']+'-AUDIT.json',verdict)
             self.calls[active['number']]=dict(root=active['root'],intent=deepcopy(intent),pair_pin=active['pair_pin'],verdict=verdict)
             if 'cancellation_pin' in active:self.calls[active['number']]['cancellation_pin']=active['cancellation_pin']

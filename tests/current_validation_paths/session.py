@@ -15,6 +15,14 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
     ns['HELPER_CONFIG']={};ns['SERVER_HELPER_DESCRIPTORS']=None
     templates={name:ns[name] for name in ('DRIVER','COPY','MERGE')}
     if not all(text.startswith('#!/usr/bin/python3\n') for text in templates.values()):raise ValueError('qualified original helper template spelling required')
+    def replace_once(text,before,after):
+        if text.count(before)!=1:raise ValueError('exact original external fixture source binding required')
+        return text.replace(before,after,1)
+    old_hold="if control['interrupt']!='no':\n    while True:time.sleep(.02)\n"
+    templates['COPY']=replace_once(templates['COPY'],old_hold,"if control['interrupt']!='no':\n    while not here.with_suffix('.release').exists():time.sleep(.02)\n")
+    templates['COPY']=replace_once(templates['COPY'],'pid=os.getpid(),interrupt=','pid=os.getpid(),group=os.getpgrp(),interrupt=')
+    templates['MERGE']=replace_once(templates['MERGE'],'import hashlib,json,pathlib,sys,resource','import hashlib,json,pathlib,sys,resource,os')
+    templates['MERGE']=replace_once(templates['MERGE'],"result=hashlib.sha256(result).hexdigest(),output=sys.argv[3],","result=hashlib.sha256(result).hexdigest(),output=sys.argv[3],pid=os.getpid(),group=os.getpgrp(),")
     imports=[str(repository)+'/tests',str(repository)+'/tests/sdk_host_matrix',str(repository)+'/bench/sync']
     launcher='#!'+PYTHON+'\nimport sys\nsys.path[:0]='+repr(imports)+'\nfrom sdk_merge_receiving.child_entry import launcher_main\nraise SystemExit(launcher_main())\n'
     class Session(legacy):
@@ -75,7 +83,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             return ['-clone','off','-semanticworkers','2','-semanticcpubudget','2','-maxthreads','1',
                 '-semanticvolumejobs','1','-semanticmaxinflight','4','-adobevalidate',policy,
                 '-adobevalidatescope','received','-debug','copy','-debug','semantic',
-                '-debug','validation-process','-debug','validation-group','-debug','validation-input']
+                '-debug','validation-process','-debug','validation-group','-debug','validation-input','-debug','external-process']
         def command(self,*,policy='require',options=()):
             self._ready();settings=[value for k,v in self.config('client').items() for value in ('-'+k,v)]
             return [self.binary,str(self.left),'ssh://localhost/'+str(self.right),'-sshcmd',str(self.launcher),
@@ -102,6 +110,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
                 intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
                     server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
                     expected_client_exit=expected_exit,before_fake_helper_counts=before,
+                    before_external_counts={kind:len(ns['records'](path.with_suffix('.calls.jsonl'))) for kind,path in (('copy',self.copy),('merge',self.merger))},
                     helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},
                     server_profile_sha256=hashlib.sha256((self.server_state/'endpoint.prf').read_bytes()).hexdigest(),
                     resource_release_authorized=False)
