@@ -40,7 +40,7 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   independent748b45/0 andb3f93e/0 reacquired/closed whole8EX. Earlier generic
   clone43369/a6d4ef/0, interruption61494/84393d/0 and components38297/b5ca6f/0
   also closed. No18borrow or report-sealing hold. Standalone2768 fixture-writer
-  is still BUILD ONLY; no writer/newfixture runtime execution. Historical SDK
+  now has one closed actual JXL generation/12validation qualification above; no automatic successor. Historical SDK
   qualifications remain distinct from pending final generated merge evidence.
 - **Scheduling — USER CORRECTION, authoritative:** Photo must remain available
   for its own work and Capitola. NEVER retain a blanket Photo pause while Unison
@@ -61,6 +61,34 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   held through actual settlement, unknown retains; close-only/no numeric retry.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
+
+## Authentic SDK fixtures NOW ACTUAL; new merge request UNADMITTED
+
+Capitola cleared exact048d0ae7 via3f805a8b (Photo relay); fresh6397e3/0 metadata
+passed571sources/6JSON/2sourceepochs/unusednamespaces. Actualowner76654 initial
+e2ad8d→590918/0/NOsession,PID1144: one2768JXLwriter1163 and12qualified2724single
+validators allreaped0/groups absent. Allparents/store/CPU8EX closed; Photoactual
+closureACK recorded, no sealing/resourcehold or automatic successor.
+12readonlysinglelinkstates501039656B total: uncompressed48005534/JPEG39016722/
+JXL38237658 each×4. Allstructure/decode/rawdigestVALID/errors0; warnings4 EACH,
+not warning-free/pixel/camera/corpus proof. Retainedsource2epochs exact, nofresh
+retainedsourcehash/mutation. Manifest5694B SHAfcae555def5d94cf3a722463e98f6bc157577e4586c4e9555550593220e26488
+at retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/INPUT-MANIFEST.json.
+Independentc47876/0 source/protocol/JSON/lstat-only audit (CPU00closed/noEX/no
+DNG/executablereopen); first1f95b2/1 count correction13=writer+12, CPUclosed,
+NO native rerun. Receipt sdk-fixture-generation-actual-20261019.json.
+Two ORIGINAL generator→freezer tiny Python-double controls198ea8/0 passed,
+child801reaped0/CPU00closed/noSDK. Realmetadatafreezerf9078b/0 child3772closed/
+CPU00closed produced doc/current-sdk-merge-native-20261019-01 INDEX/PLAN/REQUEST:
+PLAN7047511856ed22ea39bd4b7a8b29fb8f10a17900ddd854810f515ec649cf2eb7,
+REQUEST66c0bfe11dd8be169033a11cec2963818e8bd97c2bf4da6253a02fd7fd12e450.
+139execution/329production/10JSON/12lstat, nineCLI/sixSDK stockclient/Oxserver,
+EX→Unison8/600owner570worker/120CLI90SDK/32GiBdeclared. NEW workspace
+/private/tmp/u-smg-19b4448de9564e4a ABSENT. PREPARED_UNADMITTED; Photo hashchecks
+accepted and routed separateCapitola question, NOanswer/admissionyet. Do not
+reusefixtureclearance. ExactlaunchtemplateINDEX; allresourcesZERO, noPhoto
+blankethold. Sourcequestion to user is resolved for priorfixture by actual
+Capitolaclearance; not an authority to auto-run this separate merge.
 
 ## Current whole-file native/Copy caller suite — ACTUAL passed/closed
 

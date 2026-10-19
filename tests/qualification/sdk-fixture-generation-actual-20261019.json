@@ -1,0 +1,638 @@
+{
+  "schema": "unison-generated-sdk-fixtures-actual-audit/1",
+  "actual_owner": {
+    "tool": 76654,
+    "initial_chunk": "e2ad8d",
+    "terminal_chunk": "590918",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-fixture-generation-plan-v2-20261019.json",
+    "sha256": "048d0ae7aac95e89d3bae5aaf74e9d5bd2842df38ffd3ec42eefe7101d3b424c"
+  },
+  "workspace": "/private/tmp/u-sdk-states-7211c304f957",
+  "result_sha256": "337befc788919b93c28bc90edeb90f18304d18a8336e109cbb98140dcd1480c8",
+  "input_manifest": {
+    "bytes": 5694,
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/INPUT-MANIFEST.json",
+    "sha256": "fcae555def5d94cf3a722463e98f6bc157577e4586c4e9555550593220e26488"
+  },
+  "source_pins_verified": 571,
+  "prerequisites_verified": 6,
+  "calls": [
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-00.json",
+      "sha256": "a413eeee1d25ba235eb429cd77e2ec6cde4d98e7df4750450d10786dddb15f27",
+      "pid": 1163,
+      "command": [
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/fixture-build-owner-4d127a2179a04612b9898609bcb6e23b/build/fixture-writer",
+        "jxl",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed.dng",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-01.json",
+      "sha256": "97fe8c224841c7a47d5329218e253cb433fd230ded5661aef54286fb9667aa22",
+      "pid": 1695,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+        "--expected-size",
+        "48005534",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-base.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-02.json",
+      "sha256": "8e5ad5c162e98a9e9a806cec04386eed0cc038971f8d886848d9b149fa1d144b",
+      "pid": 1697,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "80ec76aef7e389f4565894d98b2e739b6a72ee5f289314a4f556bb95f9cb6d99",
+        "--expected-size",
+        "48005534",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-left.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-03.json",
+      "sha256": "7a664b33e60342488e5f961b7ca838dfdf71204623c913e2ea2aaa4393c21185",
+      "pid": 1700,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "269609a4f7ed67e4e5b564bc2206d9170a397ee292345f39f9e4142c7aeaae8f",
+        "--expected-size",
+        "48005534",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-right.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-04.json",
+      "sha256": "61cbcbf41479d5a6cf87817691fa0ac019438d584c70cac453545b1ce0064bbb",
+      "pid": 1702,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+        "--expected-size",
+        "48005534",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-target.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-05.json",
+      "sha256": "3e6a49c081dbd019acc5e68e0a2554d5f2d56629963e023aaeefdeb8bd7c973c",
+      "pid": 1713,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+        "--expected-size",
+        "39016722",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-base.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-06.json",
+      "sha256": "74ff9f320da1ee4389b09cc40153ac1dfa31df79945e3c04c09986d5ba426926",
+      "pid": 1717,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "396391049ebbb2017bb808b93bbf6878c43abd49489c0d102130465a57107c93",
+        "--expected-size",
+        "39016722",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-left.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-07.json",
+      "sha256": "45a9b08fa547c3d341c99e0102f9efbcec07263a915972f39cd64fdc72b167ac",
+      "pid": 1719,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "e45c197f4531fa3a54f818dcbcf06e6d6f2d21d604d6830449dcf094d73fa9ec",
+        "--expected-size",
+        "39016722",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-right.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-08.json",
+      "sha256": "3316d13a451124778743a26008e1cbf894f1373266d89ef21ec81125173146cd",
+      "pid": 1730,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+        "--expected-size",
+        "39016722",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-target.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-09.json",
+      "sha256": "799afd4c3f33d3b12c36207596d32ff83061392f9bc2f6090ad733f327a89a88",
+      "pid": 1732,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "6755600e16ab13e3db48941e33d018baf97db4bd30773c1af5882280ef69de5c",
+        "--expected-size",
+        "38237658",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-base.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-10.json",
+      "sha256": "b0c9af798ff5b43cb9ebac49f96f6fdfd3a10d7d1a5202ac0556a8638eb8c02c",
+      "pid": 1753,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "64826dd8870c3f3e0380eaf30e2142db05c44649e3b2c2ac481b8ec95c0f9fbb",
+        "--expected-size",
+        "38237658",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-left.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-11.json",
+      "sha256": "2f500cfd5e1a99ac5aaaccf75634892bbd8733ff7c4d647a994989a78f2287ab",
+      "pid": 1757,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "98d4460a66d5b6a31925b4b1ddd6ffefcbf033894fe564ddd2ecd0d5b8b321e7",
+        "--expected-size",
+        "38237658",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-right.dng"
+      ],
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-sdk-states-7211c304f957/call-12.json",
+      "sha256": "a2806002a5dc75b2578d60f6011ed16f743025bcbd4ff0965d075c5f3ecbd68b",
+      "pid": 1766,
+      "command": [
+        "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+        "--unison-dng-validation-v1",
+        "--expected-sha256",
+        "a8271b171913e61d56aeeb67ca1e8baeee0932574c0c6d71cdb0bee3d25f0305",
+        "--expected-size",
+        "38237658",
+        "--threads",
+        "1",
+        "--",
+        "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-target.dng"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "findings": [
+    {
+      "codec": "uncompressed",
+      "state": "base",
+      "candidate": {
+        "bytes": 48005534,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-base.dng",
+        "sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586"
+      },
+      "report": {
+        "candidate-sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+        "candidate-size": "48005534",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428044165947510,
+        "st_dev": 16777223,
+        "st_ino": 313696052,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428044163714807,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "uncompressed",
+      "state": "left",
+      "candidate": {
+        "bytes": 48005534,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-left.dng",
+        "sha256": "80ec76aef7e389f4565894d98b2e739b6a72ee5f289314a4f556bb95f9cb6d99"
+      },
+      "report": {
+        "candidate-sha256": "80ec76aef7e389f4565894d98b2e739b6a72ee5f289314a4f556bb95f9cb6d99",
+        "candidate-size": "48005534",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428044809557100,
+        "st_dev": 16777223,
+        "st_ino": 313696057,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428044807674887,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "uncompressed",
+      "state": "right",
+      "candidate": {
+        "bytes": 48005534,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-right.dng",
+        "sha256": "269609a4f7ed67e4e5b564bc2206d9170a397ee292345f39f9e4142c7aeaae8f"
+      },
+      "report": {
+        "candidate-sha256": "269609a4f7ed67e4e5b564bc2206d9170a397ee292345f39f9e4142c7aeaae8f",
+        "candidate-size": "48005534",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428045452805648,
+        "st_dev": 16777223,
+        "st_ino": 313696060,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428045450500098,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "uncompressed",
+      "state": "target",
+      "candidate": {
+        "bytes": 48005534,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/uncompressed-target.dng",
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "report": {
+        "candidate-sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+        "candidate-size": "48005534",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428046093945766,
+        "st_dev": 16777223,
+        "st_ino": 313696063,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428046091606403,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "state": "base",
+      "candidate": {
+        "bytes": 39016722,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-base.dng",
+        "sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac"
+      },
+      "report": {
+        "candidate-sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+        "candidate-size": "39016722",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428047069479732,
+        "st_dev": 16777223,
+        "st_ino": 313696066,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428047067056290,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "state": "left",
+      "candidate": {
+        "bytes": 39016722,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-left.dng",
+        "sha256": "396391049ebbb2017bb808b93bbf6878c43abd49489c0d102130465a57107c93"
+      },
+      "report": {
+        "candidate-sha256": "396391049ebbb2017bb808b93bbf6878c43abd49489c0d102130465a57107c93",
+        "candidate-size": "39016722",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428047890270393,
+        "st_dev": 16777223,
+        "st_ino": 313696071,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428047887830213,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "state": "right",
+      "candidate": {
+        "bytes": 39016722,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-right.dng",
+        "sha256": "e45c197f4531fa3a54f818dcbcf06e6d6f2d21d604d6830449dcf094d73fa9ec"
+      },
+      "report": {
+        "candidate-sha256": "e45c197f4531fa3a54f818dcbcf06e6d6f2d21d604d6830449dcf094d73fa9ec",
+        "candidate-size": "39016722",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428048702106069,
+        "st_dev": 16777223,
+        "st_ino": 313696075,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428048699572446,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "state": "target",
+      "candidate": {
+        "bytes": 39016722,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jpeg-target.dng",
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "report": {
+        "candidate-sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+        "candidate-size": "39016722",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428049514601098,
+        "st_dev": 16777223,
+        "st_ino": 313696078,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428049512100404,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jxl",
+      "state": "base",
+      "candidate": {
+        "bytes": 38237658,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-base.dng",
+        "sha256": "6755600e16ab13e3db48941e33d018baf97db4bd30773c1af5882280ef69de5c"
+      },
+      "report": {
+        "candidate-sha256": "6755600e16ab13e3db48941e33d018baf97db4bd30773c1af5882280ef69de5c",
+        "candidate-size": "38237658",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428050607444602,
+        "st_dev": 16777223,
+        "st_ino": 313696081,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428050605040563,
+        "st_nlink": 1,
+        "st_size": 38237658,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jxl",
+      "state": "left",
+      "candidate": {
+        "bytes": 38237658,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-left.dng",
+        "sha256": "64826dd8870c3f3e0380eaf30e2142db05c44649e3b2c2ac481b8ec95c0f9fbb"
+      },
+      "report": {
+        "candidate-sha256": "64826dd8870c3f3e0380eaf30e2142db05c44649e3b2c2ac481b8ec95c0f9fbb",
+        "candidate-size": "38237658",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428052827619708,
+        "st_dev": 16777223,
+        "st_ino": 313696129,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428052822262287,
+        "st_nlink": 1,
+        "st_size": 38237658,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jxl",
+      "state": "right",
+      "candidate": {
+        "bytes": 38237658,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-right.dng",
+        "sha256": "98d4460a66d5b6a31925b4b1ddd6ffefcbf033894fe564ddd2ecd0d5b8b321e7"
+      },
+      "report": {
+        "candidate-sha256": "98d4460a66d5b6a31925b4b1ddd6ffefcbf033894fe564ddd2ecd0d5b8b321e7",
+        "candidate-size": "38237658",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428055015881714,
+        "st_dev": 16777223,
+        "st_ino": 313696135,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428055013396593,
+        "st_nlink": 1,
+        "st_size": 38237658,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jxl",
+      "state": "target",
+      "candidate": {
+        "bytes": 38237658,
+        "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/7211c304f95745eab5ff2485ec0e5175/jxl-target.dng",
+        "sha256": "a8271b171913e61d56aeeb67ca1e8baeee0932574c0c6d71cdb0bee3d25f0305"
+      },
+      "report": {
+        "candidate-sha256": "a8271b171913e61d56aeeb67ca1e8baeee0932574c0c6d71cdb0bee3d25f0305",
+        "candidate-size": "38237658",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "valid",
+        "errors": "0",
+        "warnings": "4",
+        "raw_digest_verified": true
+      },
+      "epoch": {
+        "st_ctime_ns": 1792428057217800753,
+        "st_dev": 16777223,
+        "st_ino": 313696148,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792428057216293032,
+        "st_nlink": 1,
+        "st_size": 38237658,
+        "st_uid": 501
+      }
+    }
+  ],
+  "retained_source_epochs_unchanged": 2,
+  "input_payload_reopened_by_audit": false,
+  "execution_artifact_reopened_by_audit": false,
+  "EX_acquired_by_audit": false,
+  "scope": "one2768writer generated JXL and12readonly scalarstates independently2724validated with rawdigestvalid; not actual merge receiving/pixel/corpus/production proof",
+  "audit_CPU00_closed": true,
+  "independent_audit_tool": {
+    "terminal_chunk": "c47876",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit_source_sha256": "ae254c4712e73f7ace109ae7e9f2f01a81302f892d8f810a0976e69dbc713e5f",
+  "clearance_reference": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/CAPITOLA-UNISON-SDK-FIXTURE-WINDOW-CLEARED-20261019.json",
+    "sha256": "3f805a8b1f2557abec30d0d7e10426004e0e5a3c85f9da4957a81cbae18d405b",
+    "consumed_once": true,
+    "automatic_successor": false
+  },
+  "earlier_audit": {
+    "terminal_chunk": "1f95b2",
+    "exit_code": 1,
+    "scope": "audit count assumed12 SDKcalls but result correctly counts writer+12validators=13; CPU finally closed, no native replay"
+  }
+}

@@ -71,10 +71,11 @@ membership and current blob hashes; it is navigation, not acceptance evidence.
 
 ## Open acceptance before the draft can be completed
 
-Authentic generated JXL/twelve-state SDK fixture generation and final
-three-encoding mixed stock/Ox merge receiving remain unexecuted. The concrete
-SDK generator is prepared, but its immediate shared-machine window is not
-allocated; Photo is not held during preparation. The remaining prescribed
+Authentic generated JXL/twelve-state SDK fixtures are now actually qualified;
+see sdk-fixture-generation-result-20261019.md. Final three-encoding mixed
+stock/Ox merge receiving remains unexecuted under separate prepared request
+66c0bfe1; the fixture clearance is consumed, and Photo is not held during
+preparation. The remaining prescribed
 large/workload/topology and original/upstream performance comparisons, plus the
 last requirement-to-evidence joins, remain open. Already saved failures and
 partial matrices must stay visible. This guide neither shrinks those

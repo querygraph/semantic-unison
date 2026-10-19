@@ -2,6 +2,16 @@
 
 ## Current status — 2026-10-19
 
+**Latest actual state:** generator76654/590918/0 closed one genuine2768 JXL writer
+and12qualified2724validations, all structure/decode/rawdigest valid (warnings4
+retained). Authentic readonly12states now exist. Metadata-only freezerf9078b/0
+produced `doc/current-sdk-merge-native-20261019-01` plan70475118/request66c0bfe1;
+139execution/329production/10JSON/12lstat. This successor is UNADMITTED and its
+workspace is absent. Exactfixture048d0ae7 is consumed; no replay/automatic merge.
+See `doc/sdk-fixture-generation-result-20261019.md`. Earlier readiness/missing-file
+notes below are historical, not a current missing-fixture blocker.
+
+
 The current receiving entry/freezer/independent audit are implemented; native
 qualification still awaits actual generated inputs. Two base fixtures are now
 preserved as readonly private clones, and a separately reviewed2768 fixture

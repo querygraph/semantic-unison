@@ -1,0 +1,41 @@
+{
+  "schema": "unison-sdk-followon-source-actual/1",
+  "actual_tool": {
+    "terminal_chunk": "198ea8",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "source_pins": {
+    "tests/sdk_fixture_generation.py": "57f30bc0dc5e27e8a00ed7137c345fb3dc3e6f6cb6acbad34204c269ed23a1d5",
+    "tests/sdk_fixture_generation_owner.py": "ab0e2929a76868b84e930821c4b36da8eae7cf8a7f3f408600b5bc7239ee97af",
+    "tests/sdk_fixture_generation_test.py": "80df39ccbd4b0126b6e96cd8d228670b17ebe2bf7c2a5048895f17d977553973",
+    "tests/sdk_fixture_states.py": "ec6e8d03d7466f72557d078cefa19dcb8d8cae1f1a1a58e81a757a14dc8a6d47",
+    "tests/sdk_fixture_states_test.py": "e00d9a4f1cc8822da2aaa8ccec333a4e4e2889f67dbfa066b13b70ee13dafffb",
+    "tests/sdk_generation_merge_join_test.py": "7e60d1d66beb91ebe8a6df8b43aa6b2765b2fe94976ddd5cceb22933b6bcef1c",
+    "tests/sdk_merge_receiving/freeze.py": "938ea9d898ba3b6f9f4dc9375465eed1a04abbbacf6b375781962bd21574f6a9",
+    "tests/sdk_merge_receiving/metadata.py": "85e1bc7d0a87b85165637ff0377be5e131f84c4082c92713aaa7682d817466f1"
+  },
+  "child": {
+    "group_cleanup_before_leader_reap": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "pid": 801,
+    "reaped": true,
+    "returncode": 0
+  },
+  "CPU00_closed": true,
+  "EX_acquired": false,
+  "scope": "Two original composition controls; tiny Python SDK doubles only, no actual SDK or real input request",
+  "raw_references": [
+    {
+      "path": "/private/tmp/unison-sdk-generation-merge-join-controls-20261019-001/RESULT.json",
+      "bytes": 1070,
+      "sha256": "7ecbe3a50352b8c623285f89a4c13ba5db8dbe11bc8994a89579ab23249b0c1a"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-generation-merge-join-controls-20261019-001/CHILD.json",
+      "bytes": 591,
+      "sha256": "7aeef90e405db83e227747b30bb4e7d3e9efe2db7a26db2658f5b364fd8a5258"
+    }
+  ]
+}

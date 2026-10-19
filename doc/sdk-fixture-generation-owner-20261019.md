@@ -1,10 +1,13 @@
-# Final generated-fixture owner readiness
+# Generated-fixture owner readiness and consumed actual run
 
 The original owner `tests/sdk_fixture_generation_owner.py` and output helper
 `tests/sdk_fixture_generation.py` now implement one clone-only/JXL/twelve-state
 qualification. [PlanV2](sdk-fixture-generation-plan-v2-20261019.json) is frozen at
 SHA048d0ae7aac95e89d3bae5aaf74e9d5bd2842df38ffd3ec42eefe7101d3b424c.
-This is source readiness, not a runtime admission or native result.
+This records the earlier source readiness. The exactV2 plan is now consumed:
+actual76654/590918/0 completed one JXL writer plus twelve raw-digest-valid SDK
+validations and closed all resources. See [actual result](sdk-fixture-generation-result-20261019.md).
+Do not rerun this consumed namespace or infer a receiving successor grant.
 
 The owner is restricted to the two preserved generated bases under manifest
 3f690df1, separately built2768writer3a5c9f98, and unchanged qualified2724validator
@@ -46,8 +49,8 @@ V1plan27636b47 is preserved SUPERSEDED_UNSTARTED, never a consumed runtime.
 The [source readiness receipt](../tests/qualification/sdk-fixture-generation-source-readiness-20261019.json)
 pins the actual control/metadata outcomes and all predecessors.
 
-No scheduling pause exists. Worker plancc71c911 is the pending immediate,
-SDK-free request; the SDK generation window must be separately coordinated only
-when it is ready for immediate dispatch and Capitola priority is clear. Native
-writer qualification, authentic JXL/12state files, current3codec merged receiving,
-negative-policy mapping and broader goal acceptance remain open.
+No scheduling pause exists. Worker plancc71c911 was withdrawn unstarted and its
+CPU-only successor passed. The exactV2 fixture plan subsequently ran once under
+separate clearance and is closed/consumed. Native writer/generated JXL/12state
+qualification is now actual; current3codec merged receiving, negative-policy
+mapping and broader goal acceptance remain open under a separate fresh request.
