@@ -6315,3 +6315,22 @@ steering: drainnormalcheckpoint ifsupported, do notcancelunsafepublication or
 liveowner, finishatomicadmitted256ifrequired, HOLDsuccessors thenactualclosure.
 No UnisonIO/Adobe/18borrow dispatched; sourceworkunderown8continues. Frozen10
 cohortrequests stillUNADMITTED/unused, sourcepinsunchanged.
+
+
+### 2026-10-18 — completion audit and changed-Runtime renewals
+Current 14receipt explicit-pin audit actual48a315/0/child61565closed found worker/
+XMP/SDE/range/reconciliation matchingpins, but cacheRuntime and warningRuntime
+changed solelybyCPUceiling. Oldzero-bindingcamera/SDK/transport summaries not
+promotedtocurrent. Renewed exact6CPU-only controls stock/Ox currentqualified
+builds: cachejoint20scenarios+designatednegative, asynchronous64KiBpipeline,
+11warning/cancellationcases each (--skip-cli; synthetichelperonly). Actualowner
+59806/68e562/0/no session, all6childrenreaped0/groupsabsent/CPU4closed.
+Evidence cpu-ceiling-dependent-composition-actual-20261018.json containscurrent
+329sourcepins perstep, rawresults/closures/artifactpins; deliberatelyretained
+cacheuncertainty endsattestprocessexit, notnormalinprocesscleanup. NoSDK/
+transport/EXIO/Photo payload. No production/frozenrequest sourcechanged.
+New doc/sol-completion-checklist-current.md recordsfullM0..M6/12area closure
+work; tenplannedcohorts alone doNOTcomplete fullsize/workload/topologymatrix.
+HardRSS remainsunavailable/refuses, notenforced; native/pixel/corpusclaims
+remainseparate. Next actualcohorts+directAdobeafterPhotoactualhandoff; meanwhile
+noownresourcesheld/goalactive.

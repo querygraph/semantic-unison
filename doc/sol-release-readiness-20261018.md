@@ -1,3 +1,6 @@
+Current successor checklist: [full completion audit](sol-completion-checklist-current.md).
+The chronological checkpoints below retain their historical sources and scopes.
+
 # SOL resource consolidation and remaining work
 
 Working source is now `implementation/output-queue-ownership` in
