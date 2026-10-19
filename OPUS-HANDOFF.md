@@ -6505,3 +6505,16 @@ DirectAdobe readiness3ec347/0 checked362sources+generatedinputepoch/unusedworksp
 noSDK/mediaopened. Exactrequestf9c93745/planb054d77e pathsin doc/mixed-validation-current-cpu-ceiling-{request,plan}-v1.json.
 Next freshUnison8+EX SDK/ExifTool/hash admission; PhotoCPU8source mayresume,
 Photo nativeSDKbulkIO pause continues through separate directqualification, MainstillPhoto-exclusive.
+
+
+### Current direct Adobe/ExifTool/hash ACTUAL PASS/CLOSED
+Ownertool15556/557bdc→682f67/0/NOsession,parent89542/worker89558;
+freshadmissiondb1b955cconsumedonce,workspaceunison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136.
+Two currentstock/Oxproductionlinkedprobes,2SDKv1single+2ExifTool13.59helpers/32hash tasks.
+SDKstructurevalid/decodesuccess/rawdigestvalid/errors0/warnings4edgepadding each;
+allreportedhelperwait/groupsclosed/probewait0/workerreaped0/CPU8EXclosed.
+362sourcescurrent/parentheldIOtool/build/clonebytesreverified; borrowedgeneratedsource8fieldsunchanged.
+Evidence tests/qualification/current-mixed-adobe-actual-20261018.json; OWNERRETURN17d4509f6757ef852e9224dc1e11e88341599754646a4378d1f8ee68fa2f28dd.
+PromptPhotoactualrelease01a152c7-2e87; no reportsealinghold. ALLownjobs/resourcesclosed,
+standing8/8+2. UserPhoto-at-end steering continues: noPhotoMain/original/SDKgrantreuse.
+This closes currentmixedcomposition only; finalreceivingoff/warn/require+largerworkloads/edges/reviewremain.

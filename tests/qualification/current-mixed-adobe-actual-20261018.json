@@ -1,0 +1,175 @@
+{
+  "schema": "unison-current-mixed-adobe-actual/1",
+  "state": "PASS_CLOSED",
+  "production_source": "971271a8",
+  "workspace": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136",
+  "request": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/mixed-validation-current-cpu-ceiling-request-v1.json",
+    "sha256": "f9c93745d873b5dc4f1c84381d74ebd4583ef1b93c0a9b1449bffeb805a689c9"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/mixed-validation-current-cpu-ceiling-plan-v1.json",
+    "sha256": "b054d77ecd3fac4930355176582d30c5261b46276265fbfbbaf2e8c736584c50"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-mixed-current-cpu-ceiling-admission-14c746e6d75c42d99591e2d4eb020532.json",
+    "sha256": "db1b955c56be3231c69c89f24f79c5c1bdd53d82f97b3ce9e6ca04289718d047"
+  },
+  "actual_owner": {
+    "schema": "unison-actual-owning-tool-terminal/1",
+    "state": "ACTUAL_TERMINAL",
+    "session_id": 15556,
+    "initial_chunk": "557bdc",
+    "terminal_chunk": "682f67",
+    "exit_code": 0,
+    "no_running_session": true,
+    "owner_pid": 89542,
+    "worker_pid": 89558,
+    "source": "Direct own write_stdin personally observed; not ps or marker inference",
+    "unix": 1792390175.195928
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-START.json",
+      "bytes": 37230,
+      "sha256": "6ba5bd91c552f9f786ba6b7505c53b6078e88bbd9de22a4babcf503ce8b8ae13"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "07d9c1333c34e022c5d25175c485862a2009f1580313e5bd5d45476220677b27"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-SERVER-AUDIT.json",
+      "bytes": 5566,
+      "sha256": "8471ce1e6aea04affec05ae5c5bc0d443067d7c464492cba6ced23d06660f6b2"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-WORKER-EXIT-AUDIT.json",
+      "bytes": 5565,
+      "sha256": "5b74a68da6bdb7c4067cae9f86a9cf96f054e6c7fae1b8aadb8a5bd891ea8984"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/RESULT.json",
+      "bytes": 7015,
+      "sha256": "279f5e29d1772c167d71ef18c2003419d69dbc619af6f0c3249d4058139681d6"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-current-cpu-ceiling-3cff5cf671d44f31b072f7617c091136/OWNER-TERMINAL.json",
+      "bytes": 375,
+      "sha256": "0e15a386fd6720a296652661c250858882051809e875b024cc6f609763fd6441"
+    }
+  ],
+  "closed": {
+    "child": {
+      "pid": 89558,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 89558,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "saved_metadata_reaudit": {
+    "functional_status": "PASSED",
+    "attempted_probes": 2,
+    "sdk_helpers_settled": 2,
+    "metadata_helpers_settled": 2,
+    "case_audits": [
+      {
+        "functional_status": "PASSED",
+        "sdk_accepted": true,
+        "metadata_accepted": true,
+        "metadata_fields_verified": true,
+        "sdk_helper_pid": 89572,
+        "metadata_helper_pid": 89562,
+        "sdk_report": {
+          "candidate-sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+          "candidate-size": "48005534",
+          "driver-build": "unison-sdk171-2724-v1-single",
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        },
+        "sdk_protocol_finding": null,
+        "metadata_protocol_finding": null,
+        "sdk_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620616365323036616636396636613834313363623763666335616432363361323739613836306633306266636238663739653736346436393730373434303735650a63616e6469646174652d73697a652034383030353533340a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+        "sdk_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303933207365630a",
+        "worker_hashes_reported": 16,
+        "known_helper_settlements": 2,
+        "independent_helper_ledger_bound": false,
+        "backend_envelope_accounted": true,
+        "backend_payload_bytes": 2298478592,
+        "backend_descriptor_credits": 64,
+        "owning_tool_terminal_proved": false,
+        "worker_bytes_rehashed": false,
+        "resource_release_authorized": false,
+        "producer_authenticated": false,
+        "scope": "Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations."
+      },
+      {
+        "functional_status": "PASSED",
+        "sdk_accepted": true,
+        "metadata_accepted": true,
+        "metadata_fields_verified": true,
+        "sdk_helper_pid": 89583,
+        "metadata_helper_pid": 89582,
+        "sdk_report": {
+          "candidate-sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+          "candidate-size": "48005534",
+          "driver-build": "unison-sdk171-2724-v1-single",
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        },
+        "sdk_protocol_finding": null,
+        "metadata_protocol_finding": null,
+        "sdk_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620616365323036616636396636613834313363623763666335616432363361323739613836306633306266636238663739653736346436393730373434303735650a63616e6469646174652d73697a652034383030353533340a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+        "sdk_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303933207365630a",
+        "worker_hashes_reported": 16,
+        "known_helper_settlements": 2,
+        "independent_helper_ledger_bound": false,
+        "backend_envelope_accounted": true,
+        "backend_payload_bytes": 2298478592,
+        "backend_descriptor_credits": 64,
+        "owning_tool_terminal_proved": false,
+        "worker_bytes_rehashed": false,
+        "resource_release_authorized": false,
+        "producer_authenticated": false,
+        "scope": "Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations."
+      }
+    ],
+    "resource_release_authorized": false,
+    "aggregate_parent_fd_closure_proved": false,
+    "parent_input_bytes_reverified": false,
+    "execution_source_bytes_reverified": false,
+    "worker_exit_bound": true
+  },
+  "scope": "Two current-production-linked stock/Ox probes,2qualifiedSDKv1single+2ExifTool13.59+32hash tasks on cloned retainedgeneratedDNG. Source362current, parentinsideIO build/tool/source/clone rehash; no fresh borrowedsourcehash. SDKvalidstructure/decode/rawdigest,4edgepaddingwarnings preserved. Independenthelperledgerbinding false; saved reported supervisor wait/group evidence, not independent OS census or producer authentication. No Photo/Main/original/pixels/corpus/OSthreads/hardRSS/receivingallpaths/fullSOLclaim.",
+  "sdk_manifest_recovery": "Exact historical619bytes ede0fb50 recreated in new repo path from retained build record; no old temporary path recreation or SDK source reproducibility claim."
+}
