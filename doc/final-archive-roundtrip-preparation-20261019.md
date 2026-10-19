@@ -1,0 +1,11 @@
+# Current archive round-trip successor
+
+The old `tests/archive_downgrade/run.py` establishes the intended ten-stage scenario but uses the older transport/timeout ownership. It must not be rerun as if it supplied current retained-owner evidence.
+
+`tests/archive_roundtrip_contract.py` now describes all ten transitions, generated fixed 65536-byte TIFF/XMP fixtures, baseline-only phases, two exact disjoint merges, and the designated missing-common-base refusal. Its verifier requires both edited replicas to survive the refusal. It refuses archive disappearance/name changes, baseline archive rebuild/mismatch diagnostics, unexpected merge markers, wrong bytes and receiver identity changes at no-op phases. Archive hashes may legitimately change; names and same logical state roots must remain bound by the future owner.
+
+Six original disposable control methods actually passed under canonical Unison CPU token00: owning tool `2251ca/exit0/NOsession`, child37544 genuinely reaped0 with group absent before reap, token closed. Receipt: `tests/qualification/archive-roundtrip-contract-controls-20261019.json`. No sync, SDK, camera or Photo payload operation occurred.
+
+This pure contract grants no process/resource release. The retained owning driver remains to implement: current stock and Ox against pinned installed old binary; unchanged logical roots/state/hostname and no archive deletion; explicit current worker/validation budgets; pinned old-peer argv without fork flags; raw retained client/proxy/server captures and exact inherited canonical resource identities; fresh whole bundle closure audit. The negative phase needs a separate exact known-nonzero adapter: observed normal exit1 or2 plus the specific missing-base diagnostic, exact variant preservation, and independently proved child/server/group closure. Existing zero-only `batch_pair` and `batch_transport` contracts remain unchanged. Neither ordinary errors nor close uncertainty may be treated as a release proof. Forced RPCv0 is a separate remaining test.
+
+No archive compatibility completion is claimed until that actual owner runs and its raw proofs are independently audited. This source successor leaves production unchanged.

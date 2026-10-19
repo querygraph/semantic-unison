@@ -81,6 +81,13 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   whole8EXclosed. `doc/final-default-upstream-result-20261019.md`. Default
   new-RPC startup/customloopback only, not forcedRPC0/archive/realSSH/SDK.
 
+- **Archive successor source:** six original contract controls passed actual
+  `2251ca/0/NOsession`, child37544 reaped0/groupabsent/token00closed. Ten-stage
+  scenario/variant-preserving missing-base refusal/archive reset/noop guards
+  implemented in `tests/archive_roundtrip_contract.py`; retained current/old
+  owning driver and actual execution still pending. Existing zero-only pair
+  audits unchanged. `doc/final-archive-roundtrip-preparation-20261019.md`.
+
 ## Remaining work — do not mark goal complete
 
 1. Reconcile current full-sync properties, archive round-trip/installedoldpeers/forcedRPC0
