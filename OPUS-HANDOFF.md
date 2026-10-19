@@ -6348,3 +6348,27 @@ addeddisposableCLIroundtrip/hashrefusal e0ac07/0. All3childrenreaped/groupsabsen
 CPU4closed/noEXIO. Evidence auto-cohort-report-controls-actual-20261018.json.
 All53frozencohortexecutionsourcepins stillMATCH; no planrepin/admission/run.
 Photo bulk256actualhandoffstillrequired; own8source/reportworkcontinues.
+
+
+### 2026-10-18 — direct Adobe successor prepared/current probes built
+Built exact stock/Ox mixedprobes fromcurrentqualifiedCPUceilingCMX graph, actual
+50303/aae501/0/no session; rootchildren65297/65309 reaped0/groupsabsent/CPU4
+closed, compilerchildproofs inrawbuildreceipts. ZEROprobe/SDKcalls.
+Metadata preparation09e8e9/1 foundmissinghistoricalSDKbuildmanifest (no plan
+created/no dispatch); recovered619exactbytes from2a05c4bf schema/driverSHA+
+recordedqualification fields, matchesindependenthistoricalSHAede0fb503aee...
+Newdoc/adobe-sdk171-retained-build-manifest.json only; oldtmpnamespaceNOTrecreated.
+SDKsourcetreeabsent, no SDKrebuildclaim; retainedbinarymustfreshhashinsideSDKIO.
+Successor doc/mixed-validation-current-cpu-ceiling-request-v1.json
+SHAf9c93745d873b5dc4f1c84381d74ebd4583ef1b93c0a9b1449bffeb805a689c9,
+planb054d77e/362sources, twoSDKv1single+twoExiftool13.59+32hash tasks. Source
+checked, input8fields unchanged by lstatONLY; no newpayloadhash. UNADMITTED.
+Evidence current-mixed-probe-builds-actual-20261018.json.
+ActualPhotohandoff received/adopted:69656/bc04d0/137 recoveryclosed (NOTsuccess),
+receipt7546b5521f83f452493ec01f0d13dc0043dfc290007bbc446bc00342412768d8,
+fresh4bca1e/0 entirebundlefree; PhotoNEWIO/nativeheld, MainstillPhotoexclusive.
+Userdirectqualificationnowinprogress: stock1actualtool22685/f83404, parent66497/
+worker66520, admissione5f4a2e4, workspace941741d1619946e1b45f876ad800c0c6.
+EXglobal+Unison8held untilactualparentterminal+all54call/group/FDaudit.
+Metadata/sourceinspectionduringrun disclosed; no quiettimingclaim. NoSDK/
+18borrow. MUSTcollect22685actualterminal; doNOTreplaythisconsumedslot.
