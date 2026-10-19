@@ -46,8 +46,9 @@ def run(command,environment,*,proxy_command,proxy_environment,socket_path,
         observation=before_interrupt(client,deadline)
         if time.monotonic()>=deadline:raise TimeoutError('fixture observation expired; no signal')
         sent=interrupt.send()
-        client_result=client.finish(deadline)
-        proxy_result=proxy.finish(deadline)
+        settlement_deadline=min(deadline,time.monotonic()+10)
+        client_result=client.finish(settlement_deadline)
+        proxy_result=proxy.finish(settlement_deadline)
         if client_result['capture_truncated'] or proxy_result['capture_truncated']:
             raise ValueError('complete cancellation captures required')
         frame=read_proxy()

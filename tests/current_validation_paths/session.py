@@ -6,6 +6,7 @@ never packet callbacks; an admitted owner must supply them and all resource FDs.
 import hashlib,json
 from shared_cpu_pool import UnresolvedOwnership
 from sdk_merge_receiving.admission import PYTHON
+from current_validation_paths.cancel_observation import validate_fixture
 
 
 def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
@@ -17,6 +18,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
     imports=[str(repository)+'/tests',str(repository)+'/tests/sdk_host_matrix',str(repository)+'/bench/sync']
     launcher='#!'+PYTHON+'\nimport sys\nsys.path[:0]='+repr(imports)+'\nfrom sdk_merge_receiving.child_entry import launcher_main\nraise SystemExit(launcher_main())\n'
     class Session(legacy):
+        original_assertions=ns
         def _ready(self):
             if self.retained is not None:raise self.retained
             files._ready()
@@ -31,7 +33,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             return retained
         def __init__(self,root,selected_binary):
             self.retained=None;self.sequence=0;self.active_intent=None
-            self.last_outcome=None;self.last_verdict=None
+            self.last_outcome=None;self.last_verdict=None;self.cancel_fixture=None
             self.invoke_adapter=invoke;self.audit_adapter=audit;self.interrupt_adapter=interrupt;self.persist_adapter=persist
             try:
                 if selected_binary!=binary:raise ValueError('exact prepared compiler binary required')
@@ -79,18 +81,34 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             return [self.binary,str(self.left),'ssh://localhost/'+str(self.right),'-sshcmd',str(self.launcher),
                 '-servercmd',self.binary,'-batch','-auto','-fastcheck','false',*self.common_flags(policy),*settings,*self._options(options)]
         def sync(self,*,policy='require',options=(),success=True):
+            if type(success) is not bool:raise self._retain(ValueError('exact case expectation required'))
+            return self._run(policy,options,0 if success else 2)
+        def cancel(self,name,incoming,previous,*,policy):
             self._ready()
             try:
-                if type(success) is not bool:raise ValueError('exact case expectation required')
+                validate_fixture(name,incoming,previous,len(self.calls('client')))
+                if policy not in ('require','warn') or self.cancel_fixture is not None:raise ValueError('one exact require/warn cancellation fixture required')
+            except BaseException as error:raise self._retain(error) from error
+            self.cancel_fixture=dict(name=name,incoming=incoming,previous=previous)
+            result=self._run(policy,(),3)
+            self.cancel_fixture=None
+            return result
+        def _run(self,policy,options,expected_exit):
+            self._ready()
+            try:
                 self.last_outcome=None;self.last_verdict=None
                 self.sequence+=1
                 before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
                 intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
                     server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
-                    expected_client_exit=0 if success else 2,before_fake_helper_counts=before,
+                    expected_client_exit=expected_exit,before_fake_helper_counts=before,
                     helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},
                     server_profile_sha256=hashlib.sha256((self.server_state/'endpoint.prf').read_bytes()).hexdigest(),
                     resource_release_authorized=False)
+                if self.cancel_fixture is not None:
+                    f=self.cancel_fixture
+                    intent['cancellation']=dict(name=f['name'],incoming_sha256=hashlib.sha256(f['incoming']).hexdigest(),
+                        incoming_bytes=len(f['incoming']),previous_sha256=hashlib.sha256(f['previous']).hexdigest(),previous_bytes=len(f['previous']))
                 self.active_intent=intent
                 persist('INTENT',self,intent) # Must finish before any child adapter.
                 outcome=invoke(self,intent);self.last_outcome=outcome

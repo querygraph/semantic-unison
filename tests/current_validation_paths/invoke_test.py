@@ -69,4 +69,66 @@ class NormalActor(unittest.TestCase):
         with self.assertRaises(UnresolvedOwnership):self.session.sync()
         self.assertEqual(self.events,['artifacts','pair']);self.assertIsNone(self.session.last_outcome)
 
+class CancellationActor(NormalActor):
+    # Reuse real tiny owned files, but every process/signal remains fabricated.
+    def setUp(self):
+        super().setUp()
+        import hashlib
+        from current_validation_paths.evidence_test import expected,lines
+        self.previous=b'original old receiving bytes';self.incoming=b'N'*4096;self.sha=hashlib.sha256(self.incoming).hexdigest()
+        self.name='cancelled.dng';(self.session.left/self.name).write_bytes(self.previous);(self.session.right/self.name).write_bytes(self.incoming)
+        self.session.control(self.name,client='hang');self.cancel_fault=None
+        def cancel_call(row,env,**kwargs):
+            self.events.append('cancel-pair')
+            candidate=self.session.left/'private-cancellation-stage';candidate.write_bytes(self.incoming);st=candidate.lstat()
+            record=dict(endpoint='client',mode='hang',pid=321,candidate=str(candidate),destination=str(self.session.left/self.name),
+                sha256=self.sha,size=4096,destination_sha256=hashlib.sha256(self.previous).hexdigest(),device=st.st_dev,inode=st.st_ino,
+                argv=['--unison-dng-validation-v1','--expected-sha256',self.sha,'--expected-size','4096','--threads','1','--',str(candidate)])
+            self.session.drivers['client'].with_suffix('.calls.jsonl').write_text(json.dumps(record)+'\n')
+            from types import SimpleNamespace
+            observed=kwargs['before_interrupt'](SimpleNamespace(owner=SimpleNamespace(pid=101,reaped=False,terminal=lambda:False)),__import__('time').monotonic()+1)
+            _,pair=fixture('seed');pair['client']['command']=row['command'];pair['proxy']['command']=kwargs['proxy_command']
+            pair['client']['returncode']=pair['client']['client_cleanup']['returncode']=3
+            entry=expected('hang',endpoint='client');entry['outcome']='cancelled'
+            pair['client']['stderr']=lines(entry).replace('a'*64,self.sha)+'[semantic] 1 jobs per filesystem\nUpdate propagation interrupted\nAborted by user request\n'
+            pair['raw_proxy']['server_command']=self.actor.active['intent']['server_command']
+            raw=json.dumps(pair['raw_proxy']).encode();kwargs['persist'](row,pair,raw)
+            sent=dict(pid=101,signal=2,sent=True,client_reaped_before_signal=False,resource_release_authorized=False)
+            if self.cancel_fault=='signal':sent['pid']=102
+            if self.cancel_fault=='persist':raise UnresolvedOwnership('original inert cancellation persistence failure',retained_fds=(999,))
+            return pair,raw,dict(fixture_observation=observed,client_interrupt=sent)
+        self.actor.cancellation_call=cancel_call
+    # Inherited normal-call controls deliberately remain valid with this setup.
+    def test_cancel_uses_same_global_budget_and_durable_independent_audit(self):
+        log=self.session.cancel(self.name,self.incoming,self.previous,policy='require')
+        self.assertIn('Aborted by user request',log);self.assertEqual(self.actor.attempts,1)
+        self.assertEqual(self.actor.calls[1]['verdict']['client_returncode'],3)
+        self.assertEqual(self.actor.calls[1]['pair_pin']['name'],'call-001-PAIR.json')
+        self.assertEqual(self.actor.calls[1]['cancellation_pin']['name'],'call-001-CANCELLATION.json')
+        self.assertTrue((self.root/'case/call-001-CANCELLATION.json').exists())
+        self.assertIsNone(self.session.cancel_fixture)
+        self.session.control(self.name);self.session.sync();self.assertEqual(self.actor.attempts,2)
+        self.assertEqual(self.events,['artifacts','cancel-pair','artifacts','pair']);self.actor.close()
+    def test_invalid_cancellation_fixture_refuses_before_any_process_adapter(self):
+        with self.assertRaises(UnresolvedOwnership):self.session.cancel('../escape',self.incoming,self.previous,policy='warn')
+        self.assertEqual(self.events,[]);self.assertEqual(self.actor.attempts,0)
+    def test_nonhang_control_refuses_before_cancellation_process_adapter(self):
+        self.session.control(self.name)
+        with self.assertRaises(UnresolvedOwnership):self.session.cancel(self.name,self.incoming,self.previous,policy='require')
+        self.assertEqual(self.events,['artifacts']);self.assertEqual(self.actor.calls,{})
+    def test_cancel_cannot_bypass_exhausted_global_call_budget(self):
+        self.actor.packet['limits']['CLI_calls']=0
+        with self.assertRaises(UnresolvedOwnership):self.session.cancel(self.name,self.incoming,self.previous,policy='require')
+        self.assertEqual(self.events,[]);self.assertEqual(self.actor.attempts,0)
+    def test_wrong_actual_signal_binding_retains_every_owner(self):
+        self.cancel_fault='signal'
+        with self.assertRaises(UnresolvedOwnership):self.session.cancel(self.name,self.incoming,self.previous,policy='warn')
+        self.assertEqual(self.actor.calls,{})
+        with self.assertRaises(UnresolvedOwnership):self.actor.close()
+    def test_cancellation_persistence_uncertainty_not_normal_failed_prefix(self):
+        self.cancel_fault='persist'
+        with self.assertRaises(UnresolvedOwnership) as caught:self.session.cancel(self.name,self.incoming,self.previous,policy='require')
+        self.assertIn(999,caught.exception.retained_fds);self.assertEqual(self.actor.calls,{})
+        self.assertIsNone(self.session.last_outcome)
+
 if __name__=='__main__':unittest.main()

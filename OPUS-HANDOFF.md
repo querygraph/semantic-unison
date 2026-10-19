@@ -29,6 +29,8 @@ admissions or statements that consumed jobs remain unstarted.
 
 ## Actual resources and scheduling — ZERO held
 
+- Cancellation is now integrated into retained Session/Actor: same global CLI budget and ordered sequence, durable independent PAIR + CANCELLATION pins, exact source-derived user-cancel exit3 (distinct from validation failure2), receiving-client helper raw cancelled/group audit, original seed/cancel/recover/no-op assertions. Final combined60controls actualsession67840/037217/0 passed with CPU00 closed; all process/signal adapters fabricated, no actual native/SDK/EX. Earlier2df12c/1 fixture omission retained in evidence. Producer interruption, whole-worker/parent/admission binding and actual full21case stock/Ox runs still needed. No named-path runtime admission or Photo hold exists.
+
 - Cancellation source successor added: retained two-endpoint transport exposes only one SIGINT to the exact live unreaped client, retaining both handles/inherited descriptors on observer/signal/finish uncertainty. Pre-signal observer binds one new hang-helper counter to candidate inode/bytes, source bytes and preserved old receiver. Actual source controlsfc76a1/0 (7) +0cd6c2/0 (8) passed with CPU00 closed after each; all process/signal observations were inert doubles. No CLI/SDK/EX or actual cancellation qualification. Actor integration/global budget/durable audit and producer interruption remain next; do not treat these modules alone as a runtime grant.
 
 - Latest user scheduling answer: run finite SDK work when shared IO barrier is available; do not wait solely for Capitola clearance. Existing consumed runs remain closed, with no replay.

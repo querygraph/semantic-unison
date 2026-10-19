@@ -7,11 +7,15 @@ this exact helper observation before any resource release is considered.
 import hashlib,time
 
 
-def wait(session,name,incoming,previous,before,client,deadline):
+def validate_fixture(name,incoming,previous,before):
     if (type(name) is not str or '/' in name or name in ('','.','..')
         or type(incoming) is not bytes or type(previous) is not bytes
         or not 0<len(previous)<len(incoming)<=16*1048576
         or type(before) is not int or before<0):raise ValueError('bounded original cancellation fixture required')
+
+
+def wait(session,name,incoming,previous,before,client,deadline):
+    validate_fixture(name,incoming,previous,before)
     expected=hashlib.sha256(incoming).hexdigest();old=hashlib.sha256(previous).hexdigest()
     phase=min(deadline,time.monotonic()+30)
     while time.monotonic()<phase:

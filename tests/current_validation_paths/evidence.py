@@ -77,12 +77,12 @@ def helpers(log,expected,transport_pids):
     return verdicts
 
 
-def audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers):
+def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers,terminal_audit):
     trace(client_command);trace(server_command)
     require(type(pair) is dict and set(pair)=={'client','proxy','raw_proxy','external_sdk_audit_required','resource_release_authorized'}
         and pair['external_sdk_audit_required'] is True and pair['resource_release_authorized'] is False,
         'exact non-releasing retained pair required')
-    client_pid=terminal(pair['client'],client_command,expected_client_exit);proxy_pid=child(pair['proxy'],proxy_command)
+    client_pid=terminal_audit(pair['client'],client_command,expected_client_exit);proxy_pid=child(pair['proxy'],proxy_command)
     require(client_pid!=proxy_pid and type(raw_proxy_bytes) is bytes and 0<len(raw_proxy_bytes)<=65536,'distinct owners/bounded raw proxy required')
     frame=json.loads(raw_proxy_bytes,object_pairs_hook=unique,
         parse_constant=lambda _:(_ for _ in ()).throw(ValueError('nonfinite raw proxy')))
@@ -107,3 +107,7 @@ def audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,exp
         external_children_settled=True,helper_observations=verdicts,raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
         publication_fence_required=True,worker_settlement_required=True,parent_terminal_proved=False,
         real_SDK_calls=0,resource_release_authorized=False)
+
+
+def audit(pair,**arguments):
+    return _audit(pair,terminal_audit=terminal,**arguments)

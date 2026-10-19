@@ -12,6 +12,9 @@ from sdk_merge_receiving.admission import PYTHON,exact
 from sdk_merge_receiving.store import Store
 from sdk_negative_receiving.bound_call import call
 from current_validation_paths.evidence import audit as audit_pair
+from current_validation_paths.cancel_call import call as cancel_call
+from current_validation_paths.cancel_observation import wait as observe_cancel,validate_fixture
+from current_validation_paths.cancel_evidence import audit as audit_cancel
 
 
 def artifacts(packet):
@@ -20,10 +23,10 @@ def artifacts(packet):
 
 
 class Actor:
-    def __init__(self,packet,resources,deadline,*,pair_call=call,artifact_check=artifacts):
+    def __init__(self,packet,resources,deadline,*,pair_call=call,cancellation_call=cancel_call,artifact_check=artifacts):
         if len(resources)!=9 or len({r['fd'] for r in resources})!=9:raise ValueError('exact previously verified inherited nine-resource rows required')
         self.packet=deepcopy(packet);self.resources=deepcopy(resources);self.deadline=deadline
-        self.pair_call=pair_call;self.artifact_check=artifact_check;self.stores={};self.calls={}
+        self.pair_call=pair_call;self.cancellation_call=cancellation_call;self.artifact_check=artifact_check;self.stores={};self.calls={}
         self.attempts=0;self.active=None;self.retained=None;self.closed=False;self.normal_sequences={}
         self.allowed={r['directory'] for r in packet['rows']}
     def _ready(self):
@@ -81,14 +84,31 @@ class Actor:
             def persist(row,pair,raw):
                 if 'pair_pin' in self.active:raise ValueError('one-use pair already persisted')
                 self.active['pair_pin']=store.write(stem+'-PAIR.json',dict(pair=pair,raw_proxy_hex=raw.hex(),resource_release_authorized=False))
-            result=self.pair_call(dict(command=intent['command']),client_env,proxy_command=proxy,
-                proxy_environment=dict(env,UNISON=str(session.server_state)),socket_path=socket,deadline=phase,
-                pass_fds=tuple(r['fd'] for r in self.resources),read_proxy_bytes=lambda:store.read(stem+'-PROXY.json',maximum=65536),persist=persist)
+            arguments=dict(proxy_command=proxy,proxy_environment=dict(env,UNISON=str(session.server_state)),
+                socket_path=socket,deadline=phase,pass_fds=tuple(r['fd'] for r in self.resources),
+                read_proxy_bytes=lambda:store.read(stem+'-PROXY.json',maximum=65536),persist=persist)
+            if 'cancellation' in intent:
+                fixture=session.cancel_fixture
+                if type(fixture) is not dict or intent['expected_client_exit']!=3 or not exact(intent['cancellation'],dict(
+                    name=fixture['name'],incoming_sha256=hashlib.sha256(fixture['incoming']).hexdigest(),incoming_bytes=len(fixture['incoming']),
+                    previous_sha256=hashlib.sha256(fixture['previous']).hexdigest(),previous_bytes=len(fixture['previous']))):
+                    raise ValueError('exact source-owned cancellation fixture required')
+                before=intent['before_fake_helper_counts']['client']
+                validate_fixture(fixture['name'],fixture['incoming'],fixture['previous'],before)
+                control=intent['helper_controls']['client']
+                if control['mode']!='hang' or control['destination']!=str(session.left/fixture['name']):
+                    raise ValueError('declared receiving-client hang control required before any child')
+                value=self.cancellation_call(dict(command=intent['command']),client_env,**arguments,
+                    before_interrupt=lambda child,limit:observe_cancel(session,fixture['name'],fixture['incoming'],fixture['previous'],before,child,limit))
+                result=value[:2];self.active['cancellation_pin']=store.write(stem+'-CANCELLATION.json',value[2])
+            else:
+                if intent['expected_client_exit'] not in (0,2):raise ValueError('normal call cannot claim cancellation')
+                result=self.pair_call(dict(command=intent['command']),client_env,**arguments)
             self.active.update(returned=result,proxy_command=proxy)
             return dict(global_call=number,pair_pin=deepcopy(self.active['pair_pin']),resource_release_authorized=False)
         except UnresolvedOwnership as error:self._retain(error);raise
         except BaseException as error:raise self._retain(error) from error
-    def _helpers(self,session,intent):
+    def _helpers(self,session,intent,*,hang_outcome='timed-out'):
         result=[]
         for endpoint in ('client','server'):
             before=intent['before_fake_helper_counts'][endpoint];values=session.calls(endpoint)
@@ -103,7 +123,7 @@ class Actor:
                 if destination!=expected_destination or value['argv']!=['--unison-dng-validation-v1','--expected-sha256',value['sha256'],
                     '--expected-size',str(value['size']),'--threads','1','--',str(candidate)]:raise ValueError('exact helper invocation/destination counter required')
                 result.append(dict(endpoint=endpoint,pid=value['pid'],candidate_sha256=value['sha256'],candidate_bytes=value['size'],
-                    mode=control['mode'],outcome='timed-out' if control['mode']=='hang' else 'completed'))
+                    mode=control['mode'],outcome=hang_outcome if control['mode']=='hang' else 'completed'))
         return result
     def audit(self,session,intent,outcome):
         self._ready()
@@ -114,11 +134,16 @@ class Actor:
             store=self.stores[active['root']];pin=active['pair_pin'];record=store.read_json(pin['name'],expected_sha256=pin['sha256'])
             raw=bytes.fromhex(record['raw_proxy_hex'])
             if raw.hex()!=record['raw_proxy_hex'] or not exact(record['pair'],active['returned'][0]) or raw!=active['returned'][1]:raise ValueError('independently read pair differs')
-            verdict=audit_pair(record['pair'],client_command=intent['command'],proxy_command=active['proxy_command'],
-                server_command=intent['server_command'],raw_proxy_bytes=raw,expected_client_exit=intent['expected_client_exit'],
-                expected_helpers=self._helpers(session,intent))
+            arguments=dict(client_command=intent['command'],proxy_command=active['proxy_command'],server_command=intent['server_command'],raw_proxy_bytes=raw)
+            if 'cancellation' in intent:
+                pin=active['cancellation_pin'];cancellation=store.read_json(pin['name'],expected_sha256=pin['sha256'])
+                verdict=audit_cancel(record['pair'],**arguments,cancellation=cancellation,
+                    expected_helpers=self._helpers(session,intent,hang_outcome='cancelled'))
+            else:
+                verdict=audit_pair(record['pair'],**arguments,expected_client_exit=intent['expected_client_exit'],expected_helpers=self._helpers(session,intent))
             store.write(active['stem']+'-AUDIT.json',verdict)
-            self.calls[active['number']]=dict(root=active['root'],intent=deepcopy(intent),pair_pin=pin,verdict=verdict)
+            self.calls[active['number']]=dict(root=active['root'],intent=deepcopy(intent),pair_pin=active['pair_pin'],verdict=verdict)
+            if 'cancellation_pin' in active:self.calls[active['number']]['cancellation_pin']=active['cancellation_pin']
             self.active=None;return verdict
         except UnresolvedOwnership as error:self._retain(error);raise
         except BaseException as error:raise self._retain(error) from error

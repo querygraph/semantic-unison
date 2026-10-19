@@ -1,0 +1,40 @@
+{
+  "schema": "unison-current-named-cancel-integration-controls/1",
+  "actual_tool": {
+    "session_id": 67840,
+    "terminal_chunk": "037217",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 60,
+  "source_sha256": {
+    "tests/current_validation_paths/cancel_observation.py": "061edd7a916662c0190e2f196a804f26d813fb28c30480720ab29854e209950d",
+    "tests/current_validation_paths/evidence.py": "2abb6acc047aa9d9bd6124931c30e065f3fc55d03f8398970b019cf4a5499ae7",
+    "tests/current_validation_paths/invoke.py": "d1ff1b0b6d1fd29ac84043a193d429abd233963e519a7d06c2255fe4e642543e",
+    "tests/current_validation_paths/invoke_test.py": "3b28e5ee1c0c5f21f04e533c3a283b0a36df6e22164834537a264fe1cce10736",
+    "tests/current_validation_paths/session.py": "0f262504a14c41040a96f6b98dced801a0c30f0fa623b87980900077984402cd",
+    "tests/current_validation_paths/signal_transport.py": "ad463af038e84a8009a95c78b29aaa2da149a7b731470893b0cd7dc33f9b6b09",
+    "tests/current_validation_paths/cancel_call.py": "4dada53e7cfbeaa7616bf5534a5d2ee185e091eaba8a24eb1cd59cb821f5a78c",
+    "tests/current_validation_paths/cancel_call_test.py": "c659f1d456b5bbdfb83a99ca39e5c7967bf5d8cc9b5c3ee8f4580fa31403eaf5",
+    "tests/current_validation_paths/cancel_case.py": "c6e34eff39ad45a847709a94c941cd3335fb4c4369f9eeeec9616da7bab84603",
+    "tests/current_validation_paths/cancel_case_test.py": "6f0b1c26e6a576241c51cde04099598a63d4207c06fc853d88fede08533ce5e5",
+    "tests/current_validation_paths/cancel_evidence.py": "394338b8005feb0427da2b6ac3389125ef5715143394f4541bdc1c9359be3f46",
+    "tests/current_validation_paths/cancel_evidence_test.py": "e6667d5959854946525c46c37485f21019349bfddfd18639da5a9c99fa854455"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "prior_failed_control": {
+    "terminal_chunk": "2df12c",
+    "exit_code": 1,
+    "reason": "fabricated cancellation capture omitted required semantic filesystem execution trace; fixture corrected, actual process transport not run"
+  },
+  "scope": "Retained normal and cancellation actor integration, source-specific exit3 audit, original cancellation case assertions, private tiny files and fabricated process/signal adapters only",
+  "remaining": [
+    "producer-interruption actor",
+    "full parent audit/worker/entry/admission binding",
+    "actual stock and Ox complete 21-case runs"
+  ]
+}
