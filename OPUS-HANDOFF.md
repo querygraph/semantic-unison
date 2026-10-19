@@ -7194,3 +7194,18 @@ reuse-resume-merge pathmapping remainsseparate/open. Receiptindex doc/sol-
 validation-policy-final-bindings-20261019.json. Photo49291bulkprioritycontinues;
 noownedresources, goalactive. Next exactreceivingpath/negative matrix source
 readiness or filesystemcasebindings; no bulk/native dispatch.
+
+
+## 2026-10-19 — Inherited-rsync final native check source-ready
+
+Runneralreadyusedshared_child; addedexplicitobserver/persistence/ownership source
+pins, correctedstale archive-hints labels/prefix, preservedall8phaseconstant.
+Unknown evidence nowincludes retainedFDs/uncertaincloseidentities, notbare repr.
+No production edit. Originalsourcecheck901cbc/0 and actualCLIhelp08d377/0,
+Python62900reaped0/groupempty/CPU4closed; no compiler/nativeclone/IO. Newplan
+doc/final-rsync-publication-plan-v1-20261019.json freezes exactstock+Ox command,
+10supportsourcepins, both current329productionbuildreceipts,20serialcalls expected.
+Native8KiB-family fixtures afterPhotoIOrelease only; modelexpectedretainedfault
+cases are not normalnativeownershipqualification. No pendingrun/reservation/
+admission/replay. Photo49291recoveryclosed reported but immediatefix/retrypriority
+remains; holdnewEXIO/native/SDK/benchmark. Goalactive/sourceworkcontinues.

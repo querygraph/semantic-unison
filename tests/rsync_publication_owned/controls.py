@@ -1,4 +1,4 @@
-"""Production-linked empty-root archive hint controls; no SDK or transport."""
+"""Owned receiver rsync publication controls; synthetic bytes, no SDK/transport."""
 import argparse
 import hashlib
 import json
@@ -14,6 +14,14 @@ from shared_child import invoke
 from camera_sdk_concurrency.persistence import save
 from shared_cpu_pool import UnresolvedOwnership
 from shared_process_owner import retain_after_record
+from shared_io_pool import uncertainty_records
+
+PHASES=('normal','growth','shrink','inherited','adopt-close','disarm-close',
+        'progress-close','progress-cancel')
+SUPPORT=('tests/sdk_host_matrix/shared_child.py','tests/shared_cpu_pool.py',
+         'tests/shared_io_pool.py','tests/shared_process_owner.py',
+         'tests/camera_sdk_concurrency/persistence.py',
+         'bench/sync/ownership.py','bench/sync/measure.py')
 
 def objects(text,name):
  match=re.search(r'^'+name+r' = (.*?)(?=\n\n)',text,re.M|re.S);assert match,name
@@ -21,9 +29,10 @@ def objects(text,name):
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--stock-build',type=Path,required=True);p.add_argument('--ox-build',type=Path);a=p.parse_args()
- work=Path(tempfile.mkdtemp(prefix='unison-archive-hints-',dir='/private/tmp'));work.chmod(0o700)
- result=dict(complete=False,calls=[],source_pins={},linked_artifacts={},private_archives=[],work=str(work),SDK_invoked=False,transport_invoked=False,real_media_opened=False)
- for path in (Path(__file__),ROOT/'tests/rsync_publication_owned/probe.ml',ROOT/'tests/stage_publication_owned/fixture.c'):
+ work=Path(tempfile.mkdtemp(prefix='unison-rsync-publication-',dir='/private/tmp'));work.chmod(0o700)
+ result=dict(complete=False,calls=[],source_pins={},linked_artifacts={},private_archives=[],work=str(work),SDK_invoked=False,transport_invoked=False,real_media_opened=False,phases=list(PHASES),
+  scope='Eight original actual-codec/native-publication controls/compiler; in-process sender delivery, not external transport')
+ for path in (Path(__file__),ROOT/'tests/rsync_publication_owned/probe.ml',ROOT/'tests/stage_publication_owned/fixture.c',*(ROOT/name for name in SUPPORT)):
   result['source_pins'][str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
  def call(argv,cwd,env):
   previous=Path.cwd()
@@ -32,7 +41,7 @@ def main():
   finally:os.chdir(previous)
   result['calls'].append(out);save(work,result)
   c=out['client_cleanup']
-  if not(c['reaped'] and c['other_group_members_absent_before_reap']):raise UnresolvedOwnership('archive probe group unresolved')
+  if not(c['reaped'] and c['other_group_members_absent_before_reap']):raise UnresolvedOwnership('receiver rsync probe group unresolved')
   assert out['returncode']==0 and not out['capture_truncated'],out['stderr']
  for label,path in [('stock',a.stock_build)]+([('ox',a.ox_build)] if a.ox_build else []):
   receipt=json.loads(path.read_text());assert receipt['complete'] and receipt['build_exit']==0 and receipt['build_system']=='make'
@@ -73,7 +82,7 @@ let compressRemotely connection ((blocks,root,path,_),(length,_,file_id)) =
   argv += [str(build/name) for name in modules]+[str(controlled),str(source)]+[str(case/'fixture.o') if name=='stagePublication_stubs.o' else str(build/name) for name in cobjects]+['-o',str(case/'probe')]
   env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',UNISON=str(case/'state'))
   call(argv,case,env)
-  for phase in ('normal','growth','shrink','inherited','adopt-close','disarm-close','progress-close','progress-cancel'):
+  for phase in PHASES:
    namespace=case/phase;namespace.mkdir(mode=0o700)
    call([str(case/'probe'),str(namespace),phase,'unused'],case,env)
   assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in pins.items())
@@ -81,4 +90,7 @@ let compressRemotely connection ((blocks,root,path,_),(length,_,file_id)) =
  result['complete']=True;save(work,result);print(work,flush=True)
 if __name__=='__main__':
  try:main()
- except UnresolvedOwnership as error:retain_after_record(lambda:print(repr(error),file=sys.stderr,flush=True))
+ except UnresolvedOwnership as error:
+  retain_after_record(lambda:print(json.dumps(dict(state='UNRESOLVED_RETAIN_OWNER',
+   error=repr(error),retained_fds=list(error.retained_fds),
+   uncertain_closes=list(uncertainty_records(error,{})))),file=sys.stderr,flush=True))
