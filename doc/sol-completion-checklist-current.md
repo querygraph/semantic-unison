@@ -76,3 +76,13 @@ cohorts remain. Publish a fresh exact individual admission before each named
 serial run, without waiting for another per-cohort Photo ACK. The series-wide
 coordination hold remains until final explicit restoration. No own IO/Adobe owner is active.
 The Main catalog remains Photo-exclusive.
+
+
+### Ox4 temporary18 ACTUAL PASS/CLOSED
+Actual54329/923568→e08bd5/0/no session,parent78745/worker78761;18rows54CLI
+exact,auditedworkerreaped0/groupsabsent/CPU18EXclosed/source53unchanged.
+Workspacee4ba98011a8d4909a52b1246579e51de,admission56178224consumedonce.
+OWNER-RETURN 754cff65973d420cd6e344c05d60b7d934488ee48baef17d5e70e0e3fd6effd5; evidenceauto-cohort-ox4-actual-20261018.json.
+PromptPhotoqueue01a152b1-50bc BEFOREseal. Sixof10cohorts/108rows324CLI closed;
+remainingstock8,Ox8,stockauto,Oxauto freshserial underACTIVE84ced306.
+Serieshold continues,no SDK/Main/compiler dispatch or finalstandingrestorationyet.
