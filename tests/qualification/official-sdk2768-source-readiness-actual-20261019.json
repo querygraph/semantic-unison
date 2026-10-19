@@ -1,0 +1,79 @@
+{
+  "schema": "unison-official-sdk2768-source-readiness/1",
+  "fetch_terminal": {
+    "session_id": 97807,
+    "initial_chunk": "e5b8bb",
+    "terminal_chunk": "a2bf20",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 42938
+  },
+  "fetch_record": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/RESULT.json",
+    "bytes": 1212,
+    "sha256": "7bcba65742676dd85735f915a56d759b7511caf9b68cad95365ce55fb10ac22a"
+  },
+  "source_archive": {
+    "SDK_executions": 0,
+    "URL": "https://download.adobe.com/pub/adobe/dng/dng_sdk_1_7_1_2768_20261013.zip",
+    "archive": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/dng_sdk_1_7_1_2768.zip",
+    "bytes": 80509918,
+    "children": 0,
+    "discovery": "Adobe official Digital Negative page downloadlink/go/dng_sdk HEAD200 resolved exactURL; SDK1.7.1Build2768 Oct13 2026",
+    "elapsed_seconds": 1.7033660600427538,
+    "headers": {
+      "Accept-Ranges": "bytes",
+      "Connection": "close",
+      "Content-Length": "80509918",
+      "Content-Type": "application/zip",
+      "Date": "Mon, 19 Oct 2026 13:43:17 GMT",
+      "ETag": "\"4cc7bde-65d74f0372800\"",
+      "Last-Modified": "Sat, 10 Oct 2026 04:31:28 GMT",
+      "Server": "Apache"
+    },
+    "identity": {
+      "st_ctime_ns": 1792417399091637048,
+      "st_dev": 16777223,
+      "st_ino": 313634400,
+      "st_mode": 33024,
+      "st_mtime_ns": 1792417399089790545,
+      "st_nlink": 1,
+      "st_size": 80509918,
+      "st_uid": 501
+    },
+    "qualified_2724_validator_unchanged": true,
+    "schema": "unison-official-sdk-source-fetch/1",
+    "scope": "TLS source provenance and captured byteSHA only; not restoration2724/build/license-reviewed/fixture/semantic/decode/pixel/production qualification",
+    "sha256": "c1d3a545ed45b150e59af2e6aa0695c1551f0e2bed34ad87436898a05194d2b1"
+  },
+  "index_terminal": "e27c2f/0/NOsession",
+  "index": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/official-sdk2768-source-index-v2-20261019.json",
+    "bytes": 36181,
+    "sha256": "b299d37774fd743963010f2e57f1cf24c7e421938e70ce3b570a46fda2f26361"
+  },
+  "independent_tool_identity_audit": {
+    "actual_terminal": "1eb9cb/0/NOsession",
+    "archive_epoch_unchanged": true,
+    "archive_payload_rehash_bytes": 0,
+    "validator_SHA256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+    "whole8_EX_reacquired_closed": true
+  },
+  "persistent_input_contract_controls": {
+    "actual_terminal": "7cdd5e/0/NOsession",
+    "methods": 4,
+    "child_pid": 43238,
+    "result": {
+      "path": "/private/tmp/unison-sdk-persistent-input-controls-20261019-001/RESULT.json",
+      "bytes": 453,
+      "sha256": "c8a8a6a0bd9b346434faf2931ba8d2e8eb7ef69ab75e7929029de33550d58861"
+    },
+    "source_pins": {
+      "tests/sdk_merge_receiving/inputs.py": "20d76e40f11428726e45222bd899bd3fbc21b3c82dfb681582dd903446898d58",
+      "tests/sdk_merge_receiving/inputs_test.py": "628539f4d0e5470df5a993d249e89dbec2b9cd421a60444bcf9514d60adaa8de"
+    }
+  },
+  "SDK_executions": 0,
+  "extracted_files": 0,
+  "scope": "Official new2768 source recovery and metadata-only trusted persistent input policy; not old2724source restoration/build/newJXL/12states/SDKmerge/production proof."
+}

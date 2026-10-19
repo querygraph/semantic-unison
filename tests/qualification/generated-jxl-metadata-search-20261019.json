@@ -1,0 +1,349 @@
+{
+  "schema": "unison-owned-temp-jxl-metadata-search/1",
+  "payload_opened": false,
+  "roots_considered": 3299,
+  "entries": 50001,
+  "depth_limit": 5,
+  "entry_cap": 50000,
+  "complete_within_declared_filter": false,
+  "matches": [
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl",
+      "mode": 16877,
+      "bytes": 192,
+      "device": 16777223,
+      "inode": 306601844
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/include/jxl",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306602539
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-obj.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602725
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306602774
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602754
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_threads.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602794
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_export.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306602701
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602764
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_enc-obj.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 306602739
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_dec.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602784
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_cms.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 306602709
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_cms.dir/jxl",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306602715
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_enc-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 306602746
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-link-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 306602731
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl",
+      "mode": 16877,
+      "bytes": 192,
+      "device": 16777223,
+      "inode": 306649849
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/include/jxl",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306650514
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-obj.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650695
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306650744
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650724
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_threads.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650764
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_export.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 306650671
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650734
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_enc-obj.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 306650709
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_dec.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650754
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_cms.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 306650679
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_cms.dir/jxl",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 306650685
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_enc-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 306650716
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jxl/lib/CMakeFiles/jxl_dec-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 306650701
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 303937850
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 303932980
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl/libjxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 303932981
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl/client_projects/mac/jxl.xcodeproj",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303933843
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl/client_projects/include/jxl",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 303933838
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl/libjxl/lib/jxl",
+      "mode": 16877,
+      "bytes": 256,
+      "device": 16777223,
+      "inode": 303933356
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/libjxl/libjxl/lib/include/jxl",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 303933712
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/include/jxl",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 303938529
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_dec-obj.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938710
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 303938759
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_dec-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938739
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_threads.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938779
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_export.dir",
+      "mode": 16877,
+      "bytes": 64,
+      "device": 16777223,
+      "inode": 303938686
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl-internal.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938749
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_enc-obj.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 303938724
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_dec.dir",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938769
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_cms.dir",
+      "mode": 16877,
+      "bytes": 128,
+      "device": 16777223,
+      "inode": 303938694
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_cms.dir/jxl",
+      "mode": 16877,
+      "bytes": 96,
+      "device": 16777223,
+      "inode": 303938700
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_enc-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 303938731
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/jxl-build/lib/CMakeFiles/jxl_dec-obj.dir/jxl",
+      "mode": 16877,
+      "bytes": 160,
+      "device": 16777223,
+      "inode": 303938716
+    }
+  ],
+  "filter": "own uid realdirectories with unison-/u- prefix; exclude build/sdk-source/upstream/dune/archive/ocaml/source-audit roots",
+  "elapsed_seconds": 1.1177210807800293
+}

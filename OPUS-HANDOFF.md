@@ -8,9 +8,9 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest saved
-  profile pair28308/7b837c/0/NOsession, independent455c91/0 reacquired/closed
-  Unison8+EX. Sixnativepairsclosed. No SDK/Photo operation or sealinghold.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest official
+  SDKsourcefetch97807/a2bf20/0; indexe27c2f/0 and independenttoolidentityaudit
+  1eb9cb/0 allclosed/whole8EXreacquiredclosed. ZERO SDKexecutions/extractedfiles.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -134,10 +134,17 @@ checkpoint; historical snapshots below do not create resource holds or grants.
    epochs unchanged/no source hash/chmod. V2plan736594b0 consumed; V1unexecuted.
    JXL/12scalarstates still missing. SharedSDKhostV1/V2 metadata references only
    deleted originals, no recovered clone. Current inputs.bind only/private/tmp;
-   add versioned trusted persistent-root integration before matrix execution.
+   exact trustedpersistent codec-state path integration NOW controlsqualified
+   7cdd5e/0; actual12states/ancestry/nativeclones still required before execution.
    Validator2724 survives; SDKtree skeleton/writer absent. Manifest sourceSHA
-   is driver.cpp, notSDKarchive. Official2768 needs distinct ancestry, never
-   relabel as restored2724/replace qualifiedvalidator. No SDK call this milestone.
+   is driver.cpp, notSDKarchive. Official2768 source NOW persistently fetched:
+   97807/a2bf20/0,80509918B SHA c1d3a545ed45b150e59af2e6aa0695c1551f0e2bed34ad87436898a05194d2b1,
+   `~/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001`.
+   Index4215entries/133855079declaredbytes, license/readme inspected,0extraction/
+   SDKexecution/build. Independent1eb9cb/0 archiveepoch+unchanged2724toolSHA/full8EXclosed.
+   New2768 is distinct ancestry, NOTrestored2724 or validatorreplacement.
+   `doc/sdk-generated-fixture-readiness-successor-20261019.md`. FirstJXLsearch
+   capped50000; narrowed91roots1554entriesfound no namedpayload, notglobalabsence.
 5. Reconcile final candidate/review and report all requirement scopes. PR13
    fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
    last verified OPEN DRAFT atf6bfd653; local final qualification successor not

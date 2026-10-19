@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from sdk_merge_receiving.inputs import bind, STATES
+from sdk_merge_receiving.inputs import bind, STATES, PERSISTENT_STATES
 from sdk_merge_receiving.plan import CODECS
 
 
@@ -30,6 +30,34 @@ class Inputs(unittest.TestCase):
         self.assertEqual(len(rows),12); self.assertEqual((cases,epochs),before)
         rows[0]['identity']['st_size'] = 0
         self.assertEqual((cases,epochs),before)
+
+    def persistent(self):
+        cases,epochs=fixture();out={}
+        for case in cases:
+            for state,ref in case['states'].items():
+                previous=ref['path'];ref['path']=str(PERSISTENT_STATES/('a'*32)/(case['codec']+'-'+state+'.dng'))
+                out[ref['path']]=epochs[previous]
+        return cases,out
+
+    def test_exact_persistent_codec_states_bind_without_payload_or_mutation(self):
+        cases,epochs=self.persistent();before=copy.deepcopy((cases,epochs))
+        rows=bind(cases,epochs,expected_uid=501)
+        self.assertEqual(len(rows),12);self.assertEqual((cases,epochs),before)
+        self.assertTrue(all(r['path'].startswith(str(PERSISTENT_STATES)+'/') for r in rows))
+
+    def test_persistent_namespace_cannot_be_arbitrary_root_codec_or_state(self):
+        for variant in ('wrongroot','shortnonce','uppercase','extra','wrongcodec','wrongstate','basefile','traversal'):
+            cases,epochs=self.persistent();ref=cases[0]['states']['base'];old=ref['path']
+            if variant=='wrongroot':new=old.replace('retained-sdk-fixtures-v1','retained-sdk-sources-v1')
+            elif variant=='shortnonce':new=old.replace('a'*32,'abc')
+            elif variant=='uppercase':new=old.replace('a'*32,'A'*32)
+            elif variant=='extra':new=old.replace('/uncompressed-base','/extra/uncompressed-base')
+            elif variant=='wrongcodec':new=old.replace('uncompressed-base','jpeg-base')
+            elif variant=='wrongstate':new=old.replace('uncompressed-base','uncompressed-left')
+            elif variant=='basefile':new=old.replace('uncompressed-base','uncompressed')
+            else:new=old.replace('/uncompressed-base','/../uncompressed-base')
+            ref['path']=new;epochs[new]=epochs.pop(old)
+            with self.subTest(variant=variant),self.assertRaises(ValueError):bind(cases,epochs,expected_uid=501)
 
     def test_refuses_every_unbound_or_ambiguous_metadata_form(self):
         for mutation in ('uid','mode','links','size','boolean','missing','extra',

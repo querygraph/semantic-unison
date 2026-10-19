@@ -1,9 +1,22 @@
 """Pure retained-state/observed-metadata join; neither reads nor grants payload IO."""
 from pathlib import PurePosixPath
+import re
 from sdk_merge_receiving.plan import CODECS, path, digest, require
 
 STATES = ('base', 'left', 'right', 'target')
 FIELDS = ('st_dev','st_ino','st_mode','st_size','st_mtime_ns','st_ctime_ns','st_nlink','st_uid')
+# Local qualified-data namespace, not a caller-selected trusted root. Base fixture
+# preservation is separate: only exact codec/state successor names are eligible.
+PERSISTENT_STATES = PurePosixPath('/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1')
+
+
+def admitted_state_path(name, codec, state):
+    value=PurePosixPath(name)
+    if value.is_relative_to('/private/tmp'):return True
+    if not value.is_relative_to(PERSISTENT_STATES):return False
+    parts=value.relative_to(PERSISTENT_STATES).parts
+    return len(parts)==2 and re.fullmatch('[0-9a-f]{32}',parts[0]) is not None and parts[1]==codec+'-'+state+'.dng'
+
 
 
 def bind(cases, observed, *, expected_uid):
@@ -31,8 +44,8 @@ def bind(cases, observed, *, expected_uid):
             require(type(reference) is dict and set(reference) == {'path','sha256','bytes'},
                     'exact historical state reference required')
             name = path(reference['path']); digest(reference['sha256'])
-            require(PurePosixPath(name).is_relative_to('/private/tmp') and name not in names,
-                    'distinct retained private state path required')
+            require(admitted_state_path(name,case['codec'],state) and name not in names,
+                    'distinct temporary or exact trusted persistent state path required')
             count = reference['bytes']
             require(type(count) is int and 0 < count <= 128*1048576 and offset+size <= count,
                     'bounded state bytes and in-file XMP extent required')

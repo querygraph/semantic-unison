@@ -150,3 +150,7 @@ full logical model are retained as negative optimization evidence.
 ### Current saved-profile/backup/metadata sync properties
 
 [Actual result](final-sync-properties-result-20261019.md): stock/Ox eachseed/update/noop,28308/7b837c/0,6pairs/18primaryroles normallyclosed. Namedprofiles honorignore/localversionedbackup/symlink; generatedDNG+binary remove selectedxattr/nonemptyfork/mode640→400, exacttimestamps, heldoldreaders preserved; nooptarget8fields andbackupsunchanged. Independent455c91/0 reaudited538source329production/rawpairs/9canonicalbindings+786432Bfreshcurrent/backupbytes+nativeattributes; full8EX reacquiredclosed. V1preentry1/V2fixturefailure+137recovery separatelypreserved/no originalproxywait4 claim. Not allACL/compressed/crash/platform/fullgoalproof.
+
+### Final SDK fixture readiness source successor
+
+[Source readiness](sdk-generated-fixture-readiness-successor-20261019.md): official SDK2768 source archive persistently fetched97807/a2bf20/0 (80509918B/SHA c1d3a545...), distinct ancestry from2724. Source index/license/readme observatione27c2f/0; zero extraction/build/SDK calls. Independent1eb9cb/0 stablearchiveepoch+unchangedqualified2724validator/full8EXclosed. Exact persistent codec/state metadata path policy controls7cdd5e/0 pass; no arbitrary root or payload grant. Existing uncompressed/JPEG bases preserved; JXL/12scalarstates/native finalmerge remain incomplete. Metadata search caps/scopes explicitly retained, not global absence evidence.
