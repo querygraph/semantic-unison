@@ -534,3 +534,34 @@ process closure. These are inclusive phase intervals, not total commit time,
 physical IO, aggregate RSS limits, or quiet-machine/scaling proof. This entry
 point has source/control qualification only until a fresh actual run is admitted
 and audited. It covers one dataset in the larger SOL benchmark matrix.
+
+## Budgeted automatic worker selection
+
+The runner now accepts `--workers 1,2,4,8,auto` with an explicit
+`--endpoint-cpu-budget 8`. Only use binaries implementing semanticcpubudget.
+The auto row passes semanticworkers=0 and semanticcpubudget=8 to both current
+endpoints. It remains labeled `auto`; its recorded eight permits are a
+conservative upper bound, not measured domains or OS threads. A smaller physical
+CPU count may select fewer. Explicit8 with ceiling3 refuses rather than reporting
+a clipped3-worker execution as8.
+
+Two endpoints at eight permits plus two owner credits require the explicit
+`--loopback-cpu-credits 18 --orchestration-cpu-credits 2` declaration AND a fresh
+coordinated machine grant. This is not the standing default and this document
+creates no reservation. An ordinary shared8 declaration can use1/2/auto with
+ceiling3, subject to a separately reviewed IO job. CPU/IO acquisition/settlement
+remains the launching owner's responsibility.
+
+Uncapped auto, a reference peer with a new ceiling flag, insufficient loopback
+credits, invalid ceiling values and auto/ceiling overrides of fixed qualification
+or legacy partition profiles refuse before binary metadata. Old integer-only
+arguments are unchanged. Parameters record the selection and conservative bound
+before the first saved result; zero actual performance is inferred from source
+controls. Existing fixed-profile audit modules do not automatically qualify a
+new auto matrix; it needs its own exact versioned plan/audit/owner integration.
+
+[Source-control qualification](../../tests/qualification/benchmark-auto-budget-source-actual-20261018.json)
+uses mocked metadata and launches no binary/transport. `--prepare-only` in a real
+invocation still queries executable metadata, so it is not a zero-executable
+permission. Actual measurement needs current artifact pins, the exact reviewed
+command and its own coordination window. No quiet-host or hard-cap claim.

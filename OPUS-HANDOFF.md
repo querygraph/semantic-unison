@@ -6155,3 +6155,23 @@ runs untouched/consumed; priorblockednotes superseded. GoalACTIVE/incomplete,
 no waitingforuser, noownedlivejobs/resources. Nextsubstantivework benchmark
 auto-label/effectivebudget support/sourceplanning thenexplicitPhotoIOcoordination
 whenappropriate; preservePhoto catalogwide5Kpriority/PID37018/session45622.
+
+
+## 2026-10-18 benchmark explicit auto label/CPU budget source ready
+
+Active endpoint-cpu-ceiling sourcebranch now adds bench/sync/worker_config.py
+and run.py optional --endpoint-cpu-budget; --workers accepts labeledauto only
+withceiling/currentendpoints/explicitloopbackbound. No silent8→3 clipping in
+benchlabels; runtimecanclipbutbenchmarkrefusesmisleadingcomparison. Both
+endpoints receivecap; params saveconservativeboundbeforeinitialsave. Fixed
+qualification/legacypartition overrides refuse; oldintegerflags unchanged.
+
+Actuald46957/0 threeCPU4controljobsclosed:5newtests(9mainargumentcases),15
+existingbudgetadmissions/refusals,6artifactpincontrols. Initial6c602d/1 CLOSED:
+testexpected1savewhilepreparerwrites2; fixedexpectation+initialrecorddeclaration
+placement, failedbytespreserved. No binary/transport/compiler/payload/EXglobal.
+Evidence tests/qualification/benchmark-auto-budget-source-actual-20261018.json
+SHA 4c2b786950e2325d727bdac64b8264c7a5d979ec185264006b3e47300a8fed7a. Sourceonly, notactualauto-matrixqualification; needsversioned
+plan/auditor/owner andfutureexplicitIOcoordination. Full586compiledinputproofs
+from971271a8 remainunchanged; benchmarkPython notcompiledintoCLI. Photo
+catalogwide5Kpriority unchanged; no resourcesheld/goalnotblocked.

@@ -27,11 +27,11 @@ from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
 from phase_stats import parse as semantic_phase_counters
+from worker_config import WORKER_CHOICES, parse_workers, endpoint_bound, worker_options
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 MODES = ("ordinary", "receiver-clone", "semantic", "source-clone")
-WORKER_CHOICES = (1, 2, 3, 4, 6, 8, 18, 36)
 SDE = re.compile(
     r"Remote semantic clone wrote (\d+) logical metadata bytes in (\d+) write calls "
     r"\((\d+) payload bytes; (\d+)-byte comparison windows; ([^)]+)\)")
@@ -252,7 +252,9 @@ def main():
                         help="unmodified original/upstream binary; no new preferences")
     parser.add_argument("--compiler", action="append", default=[], metavar="LABEL=OCAMLOPT")
     parser.add_argument("--modes", default="ordinary,receiver-clone,semantic")
-    parser.add_argument("--workers", default="1")
+    parser.add_argument("--workers", default="1", help="comma-separated selections, including auto with an explicit endpoint budget")
+    parser.add_argument("--endpoint-cpu-budget", type=int,
+                        help="explicit semanticcpubudget ceiling1..36 on each current endpoint; required for auto")
     parser.add_argument("--partition", type=int,
                         help="one explicit0..5 stock/Ox worker partition; never starts other parts")
     parser.add_argument("--loopback-cpu-credits",type=int,
@@ -293,12 +295,16 @@ def main():
         parser.error("reference/current labels must differ; compiler labels must match current binaries")
     modes = args.modes.split(",")
     try:
-        workers = [int(value) for value in args.workers.split(",")]
-    except ValueError:
-        parser.error("workers must be comma-separated integers")
+        workers = parse_workers(args.workers)
+    except ValueError as error:
+        parser.error(str(error))
     if args.qualification and args.shared_qualification:
         parser.error("choose one qualification profile")
     finite_qualification = args.qualification or args.shared_qualification
+    if ('auto' in workers or args.endpoint_cpu_budget is not None) and (finite_qualification or args.partition is not None):
+        parser.error("automatic/ceiling selections require a separate versioned matrix, not fixed qualification or legacy partitions")
+    if args.endpoint_cpu_budget is not None and (references or args.loopback_cpu_credits is None):
+        parser.error("endpoint CPU budget requires current endpoints and explicit loopback credits")
     if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2, 3] if args.shared_qualification else [1, 2]
@@ -308,8 +314,10 @@ def main():
         parser.error("property-removal controls require the Darwin shared qualification matrix")
     if args.shared_qualification and (args.loopback_cpu_credits != 8 or args.orchestration_cpu_credits != 2):
         parser.error("shared qualification requires eight credits including two owner credits")
-    if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
-        parser.error("workers must be unique values from 1,2,3,4,6,8,18,36")
+    try:
+        worker_bounds = [endpoint_bound(value, args.endpoint_cpu_budget) for value in workers]
+    except ValueError as error:
+        parser.error(str(error))
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
         parser.error("invalid/duplicate mode")
     endpoint_count=2 if any(mode!="source-clone" for mode in modes) else 1
@@ -320,7 +328,7 @@ def main():
     if args.loopback_cpu_credits is not None:
         if references:parser.error("reference CPU budgets cannot be qualified by the loopback credit bound")
         if (args.loopback_cpu_credits<=0 or
-                endpoint_count*max(workers)+args.orchestration_cpu_credits>args.loopback_cpu_credits):
+                endpoint_count*max(worker_bounds)+args.orchestration_cpu_credits>args.loopback_cpu_credits):
             parser.error("endpoint plus orchestration CPU credits exceed loopback budget")
     if not (args.warmups >= 0 and 1 <= args.repetitions <= 50 and args.timeout > 0):
         parser.error("fixture/count bounds exceeded")
@@ -380,9 +388,9 @@ def main():
                     "property_removal_controls": args.property_removal_controls,
                     "layout_only_controls": args.layout_only_controls,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
-                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers),
+                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(worker_bounds),
                     "orchestration_cpu_credits":args.orchestration_cpu_credits,
-                    "maximum_declared_cpu_credit_sum":endpoint_count*max(workers)+args.orchestration_cpu_credits},
+                    "maximum_declared_cpu_credit_sum":endpoint_count*max(worker_bounds)+args.orchestration_cpu_credits},
               "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
               "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
               "rss_units": "bytes on Darwin; KiB on Linux; native OS units elsewhere",
@@ -392,6 +400,13 @@ def main():
                     "range/extent sharing", "cross-volume or non-APFS behavior", "cold cache",
                     "real SSH/network behavior", "Adobe validation or photographic rendering"],
               "samples": [], "summary": []}
+    if args.endpoint_cpu_budget is not None:
+        result['parameters']['endpoint_cpu_budget_ceiling'] = args.endpoint_cpu_budget
+        result['parameters']['endpoint_cpu_permit_upper_bounds'] = [
+            dict(selection=selection, upper_bound=bound) for selection, bound in zip(workers, worker_bounds)]
+        result['parameters']['automatic_cpu_scope'] = (
+            'auto is semanticworkers=0 with explicit semanticcpubudget; these are conservative '
+            'permit upper bounds, not measured domain/OS-thread counts or a machine token grant')
     if args.partition is not None:
         result['partition'] = partitions.specification(args.partition)
     save(args.output, result)
@@ -443,7 +458,7 @@ def main():
                 flags += ["-debug", "semantic-timings"]
             if worker is not None:
                 flags += ["-clone", "off" if mode == "ordinary" else "auto",
-                          "-semanticworkers", str(worker), "-maxthreads", str(max(2, worker))]
+                          *worker_options(worker, args.endpoint_cpu_budget)]
                 if mode == "semantic":
                     flags += ["-semanticdng"]
             if args.property_removal_controls:
