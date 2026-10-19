@@ -72,6 +72,7 @@ def run(corpus, binaries, directory, *, repository, mode, workers, store,
                 read_proxy_bytes=lambda:store.read(stage+'-PROXY.json',maximum=65536))
             store.write(stage+'-OUTCOME.json',dict(intent=current,pair=pair_pins[stage],
                                                  resource_release_authorized=False))
+            print('BATCH_PHASE_CLOSED',stage,flush=True)
         result = sample(corpus, root/'left', root/'right', invoke=call, record=events)
         if len(pair_pins) != 3 or len(events.pins) != 6:
             raise ValueError('batch sample evidence incomplete')

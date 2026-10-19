@@ -4,6 +4,7 @@ import json
 import sys
 import time
 from shared_cpu_pool import UnresolvedOwnership
+from shared_io_pool import uncertainty_records
 from shared_process_owner import retain_after_record
 from sdk_host_matrix.shared_binding import descriptors
 from sdk_merge_receiving.admission import PYTHON
@@ -18,6 +19,9 @@ def diagnostic(role,error):
     native=getattr(error,'proxy_native_child',None)
     return dict(role=role,pid=os.getpid(),failure=repr(error),
         original_failure=repr(getattr(error,'original_failure',None)),
+        failure_phase=getattr(error,'proxy_failure_phase',None),
+        original_errno=getattr(error,'proxy_original_errno',None),
+        pump_state=getattr(error,'proxy_pump_state',None),
         close_failure=repr(getattr(error,'close_failure',None)),
         retained_fds=list(getattr(error,'retained_fds',())),
         uncertain_closes=list(getattr(error,'uncertain_closes',())),
@@ -41,6 +45,14 @@ def proxy_main(config):
         store.write(config['stage']+'-PROXY.json',frame);store.close()
         return 0
     except BaseException as error:
+        # A plain forwarding/lifecycle error can be recorded through the still
+        # known Store. Do not open new records after uncertain descriptor close.
+        if store is not None and not store.closed and not uncertainty_records(error,{}):
+            try:store.write(config['stage']+'-RETAINED.json',diagnostic('proxy',error))
+            except BaseException as record_error:
+                if isinstance(record_error,UnresolvedOwnership):
+                    record_error.proxy_original_failure=error;error=record_error
+                else:error.proxy_diagnostic_failure=record_error
         # The worker/outer owner retain the same leases. No exit on unknown.
         retain_after_record(lambda:print('MERGE-PROXY-RETAINED '+json.dumps(diagnostic('proxy',error)),file=sys.stderr,flush=True))
 

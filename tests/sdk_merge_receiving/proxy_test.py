@@ -1,5 +1,6 @@
 """Original tiny socket/pipe forwarding and inert native-process doubles only."""
 import json
+import errno
 import os
 import socket
 import struct
@@ -43,6 +44,34 @@ class Pump(unittest.TestCase):
         finally:
             connection.close();peer.close()
             for fd in (read_in,write_in,read_out,write_out):os.close(fd)
+
+    def test_fully_disconnected_peer_after_both_eofs_is_only_transport_completion(self):
+        connection,peer=socket.socketpair();read_in,write_in=os.pipe();read_out,write_out=os.pipe()
+        owned=[read_out,write_in]
+        peer.close();os.close(write_out)
+        try:
+            result=proxy.pump(connection,read_out,write_in,time.monotonic()+2,owned)
+            self.assertEqual(result,dict(client_to_server_bytes=0,server_to_client_bytes=0))
+            self.assertEqual(owned,[read_out])
+        finally:
+            connection.close();os.close(read_in)
+            for fd in owned:os.close(fd)
+
+    def test_disconnected_error_requires_both_eofs_and_empty_queues(self):
+        for state in ((False,True,b'',b''),(True,False,b'',b''),
+                      (True,True,b'pending',b''),(True,True,b'',b'pending')):
+            connection=Mock();marker=OSError(errno.ENOTCONN,'not connected')
+            connection.shutdown.side_effect=marker
+            with self.assertRaises(OSError) as got:
+                proxy.finish_write(connection,client_eof=state[0],server_eof=state[1],incoming=state[2],outgoing=state[3])
+            self.assertIs(got.exception,marker);connection.shutdown.assert_called_once()
+
+    def test_other_shutdown_errors_are_never_normalized(self):
+        connection=Mock();marker=OSError(errno.EPERM,'denied');connection.shutdown.side_effect=marker
+        with self.assertRaises(OSError) as got:
+            proxy.finish_write(connection,client_eof=True,server_eof=True,incoming=b'',outgoing=b'')
+        self.assertIs(got.exception,marker)
+
 
 class Server(unittest.TestCase):
     def execute(self, *, expired=False, close_error=None, arguments=None):

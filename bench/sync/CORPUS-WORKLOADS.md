@@ -185,3 +185,28 @@ Final result requires independent external-child source audit and explicitly
 sets per_class_path_audit_complete=false. Two original seam controls passed
 actualb95088/0/no session/CPU00closed; no native/EXIO/payload. This is not the
 owning CLI/dispatcher or an actual receiving result; dispatcher_ready stays false.
+
+## First real many-file functional result
+
+The direct `final_batch_owner` now authenticates152execution pins/current build
+receipts/329production sources and artifact hashes under EX→Unison8, connects
+runtime to independent `batch_parent`, and keeps ownership on incomplete state.
+First attempt failed lifecycle after successful seed; exact source/proofs and
+independent recovery137 preserved, not a complete pass. A fresh same1024-file
+attempt completed allthree calls/nine distinct client/proxy/server roles with
+normal reaps. Its postrun generic `run` import failed; replaced with explicit
+`batch_counters`, then saved evidence/fresh outputs were re-audited OFFLINE,
+without repeating transfers. Original owner recovery137 is not relabeledexit0.
+Actual offline3b6193/0 passed with1024SDEupdates,524288returnedlogical writebytes,
+all1024left/right targets exact and no-opreceiver8fieldidentity unchanged.
+32MiB generatedtarget content; no physical-write/timing/speedup claim.
+[Adoption](../../tests/qualification/final-many-small-functional-adoption-actual-20261019.json).
+The proxy's already-disconnected shutdown case is tolerated only after BOTH EOFs
+and empty queues; nativewait4/qualifiedclose still mandatory. RealoriginalOSprobe
+reproducedENOTCONN, but first failure's exact cause remains unproven. Durable
+phase/errno/pump-state diagnostics now preserve subsequent ordinary failures;
+no new diagnostic FD is opened following uncertainclose. Nine proxy and two
+original diagnosticcontrols passed; three aggregatecountercontrols passed.
+Still required: normal outer-entry completion for new/mixed workloads, repeated
+measured runs/topology coverage, review update and final acceptance. Planner's
+conservative dispatcher_ready=false remains until those owner paths qualify.

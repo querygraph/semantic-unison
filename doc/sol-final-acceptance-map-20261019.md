@@ -90,3 +90,11 @@ transport claim. Injected unknown native owners/reservations remain retained
 until test process exit; process closure does not relabel normal object teardown.
 Predecessorv3 refused compiler symlinks beforechild and was independently
 recoveryclosed137; preserve that failure separately from this freshv4 pass.
+
+### Many-small actual functional scope,2026-10-19
+
+[Actual1024-file adoption](../tests/qualification/final-many-small-functional-adoption-actual-20261019.json)
+records3exact CLI/nine normal peer reaps,1024SDEupdates/524288returned logical
+writebytes over32MiBgeneratedtarget and unchangedno-opidentity. Runtimeowner
+recovery137 and successfulsaved-evidence offline audit0 are distinct. Not a
+repeated/timed/corpus/physical-write claim; new/mixed/repeated workloads remain.

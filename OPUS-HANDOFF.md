@@ -6,7 +6,7 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `f8878900`. No `src/` differences from frozen review
+  before this checkpoint: `2314c80e`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
@@ -20,9 +20,11 @@ scheduling statements below; preserve original receipts and their scopes.
 - **New batch source:** canonical thousands/new/mixed plan, exact chunked byte
   artifacts and per-sample inventories, recursive verification, seed/update/noop
   composition, retained peer/server audits, ordered event storage and bounded4MiB
-  captures. Actual original controls are recorded below; actual batch runtime
-  remains unexecuted, dispatcher/per-class path audit not complete. Runtime
-  composition is source-tested only, not an admitted benchmark.
+  captures. First actual1024-file sample now has threeexactCLI, nineclosedroles,
+  1024SDEupdates/524288logicalmetadatawrites, freshhashes+noopidentity proof.
+  Runtimeowner recovery137 and successfuloffline3b6193/0 audit remain distinct;
+  no transferreplay. Normalouterentrycompletion onnewfiles/mixed stillneeded.
+  Dispatcher/per-filemixed attribution/repeatedbenchmark remain unqualified.
 - **Final parser renewed:** actual88003/d7e7af/0/no session; stock/Ox each
  1253fixedcases/6288assertions+three designated negatives/four sparse cases.
   Twenty nested children+two runners closed; Store/Unison8/EXclosed. Receipt
@@ -7550,3 +7552,30 @@ Injectedunknownnativeownership retaineduntilprocessExit, notnormalobjectteardown
 Actualreceipt tests/qualification/final-rsync-publication-actual-20261019.json.
 Photoactualreleasequeue01a153b5-7d80 sent beforeseal. CurrentzeroUnisonresources.
 Next batchowner/perclassaudit+actualgeneratedworkloads; Adobequalificationlast.
+
+
+## 2026-10-19 real1024-file semantic sample / preserved recovery + offline pass
+
+Implemented final_batch_owner/batch_parent. Firstv1 planee39e075 actual90192/
+72609/3208da→a01704/137 FAILEDafterseed: client90209 actualreaped0, both1024
+replicashashesexact; proxyretained/serverZ, no originalproxy/serverwait4claim.
+Source152archivedexact, source+censusproof→exactretainedproxy/rootstop, fresh
+EX8reacquiredclosed. Causeunproven. Independentoriginalsocketpair7af0fb/0
+reproducedENOTCONNafterbothEOF/drainedqueues. Narrowfinish_writefixonlythat
+state, wait4/closeunchanged; phase/errno/pumpcounts durablefailurediagnostics
+withoutnewfileopenaftercloseuncertainty.9proxytests769839/0+2diagnosticcontrols
+d33f6f/0 passed. No pastfailure relabelednormalnativeexit.
+Freshv2 plan55664840 /private/tmp/u-batch-18f59288d4e042fa actual93139/25005
+allseed/update/noopcalls+9client/proxy/serverroles normalreaped0/groupsabsent.
+Onlypostrun audit ImportError: genericrun resolvedSDKhostrun. Independently
+rawcalls/freshbothreplicas/noop8fields audited, exactidleowner recovery actual
+eeea41/137/no session; originalnormalownerexitNOTclaimed; freshEX8closed.
+Fixedto batch_counters (3originaltestseab874/0), preservedoldparent source.
+OUTPUTONLYactual3b6193/0/no session re-audited savedcalls +freshalltargethashes
+underEX8, no transfersrepeated. Actual1024SDEupdates,524288returnedlogical
+metadatawritebytes over33554432generatedtargetbytes; physicalwritebytesUNKNOWN.
+All1024targetsleft/right exact/noopreceiveridentityunchanged; noSDK/Photo.
+Adoption final-many-small-functional-adoption-actual-20261019.json bindsrawpins,
+sourcechanges/recoveries and actualofflinepassseparately. No benchmark/quiet/
+throughput/wholecorpus claim. CurrentzeroUnisonowners/resources. Next normal
+entrycompletion newfiles/mixed, repeatedworkloads + remainingacceptance.
