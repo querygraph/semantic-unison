@@ -1,0 +1,57 @@
+import hashlib,json,os,sys
+from pathlib import Path
+ROOT=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'tests/sdk_host_matrix'),str(ROOT/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import log_sha
+from shared_cpu_pool import Pool,UnresolvedOwnership,authorized_unison_tokens
+from shared_io_pool import close_unstarted
+from shared_process_owner import retain_after_record
+
+def document(path,digest=None):
+ raw=read_bytes(str(path),2*1048576);h=hashlib.sha256(raw).hexdigest()
+ assert digest is None or h==digest
+ return json.loads(raw),dict(path=str(path),bytes=len(raw),sha256=h)
+policy=read_bytes(str(ROOT.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json'),1048576);assert authorized_unison_tokens(policy)==tuple(range(8))
+pool=Pool.read(str(ROOT.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');cpu=pool.try_acquire((0,))
+if cpu is None:raise SystemExit(2)
+try:
+ actual,actual_pin=document(ROOT/'tests/qualification/current-xmp-kernel-observation-actual-20261018.json');assert actual['status']=='PASS_CLOSED' and actual['actual_controller']['terminal_chunk']=='c277e0' and actual['actual_controller']['exit_code']==0 and actual['actual_controller']['no_session'] is True
+ source_pins={};bindings=[]
+ for job in actual['jobs']:
+  for name,digest in job['source_pins'].items():
+   assert hashlib.sha256(read_bytes(str(ROOT/name),4*1048576)).hexdigest()==digest,name
+   assert name not in source_pins or source_pins[name]==digest;source_pins[name]=digest
+  documents={}
+  for ref in job['artifacts']:
+   r,pin=document(ref['path'],ref['sha256']);assert pin['bytes']==ref['bytes'];documents[Path(ref['path']).name]=(r,pin)
+  r,ref=documents['RESULT.json'];closed,closed_ref=documents['SHARED-CLOSED.json'];c=closed['child']
+  assert type(c['pid']) is int and c['pid']>0 and c['returncode']==0 and c['reaped'] is True and c['other_group_members_absent_before_reap'] is True and c['timed_out'] is False and closed['tokens_closed'] is True and closed['source_pins_unchanged'] is True
+  if job['family']=='kernel':
+   assert r['status']=='passed' and r['fileMergeEnabled'] is False and r['sourcePins']==job['source_pins']
+   w=Path(r['workspace']);text=read_bytes(str(ROOT/'tests/xmp_merge/test.ml'),65536).decode()
+   if job['flavor']=='ox':text=text.replace('let () =','let controls () =')+'\nlet () = let ds=List.init 4(fun _ -> Domain.Safe.spawn(fun () -> controls())) in List.iter Domain.join ds\n'
+   assert hashlib.sha256(text.encode()).hexdigest()==r['actualCompiledTestSha256']
+   assert read_bytes(str(w/'test.ml'),65536)==text.encode()
+   assert log_sha(w/'test.log')==r['testLogSha256'] and log_sha(w/'compile.log')==r['compileLogSha256']
+   assert hashlib.sha256(read_bytes(str(w/'test'),64*1048576)).hexdigest()==r['binarySha256']
+   expected=4 if job['flavor']=='ox' else 1
+   assert r['concurrentControlDomains']==expected and (w/'test.log').read_text().splitlines()==['PASS25 original scalar controls +343 rating decisions/symmetry +4 RDF conflicts']*expected
+   scope=dict(original_scalar_controls=25,rating_decisions=343,RDF_conflicts=4,control_domains=expected,file_merge_enabled=False)
+  else:
+   assert job['family']=='observation' and r['exit_code']==0 and r['source_sha256']==job['source_pins']
+   assert r['fixed_only'] is True and r['random_byte_cases']==0 and r['negative_control'] is None and r['test_argv'][-1]=='--fixed-only'
+   assert 'PASS: 458 bounded XMP observation checks\n' in r['stdout'] and r['stderr']==''
+   scope=dict(fixed_observation_checks=458,random_byte_cases=0,independent_recorded_digest_vectors=5)
+  bindings.append(dict(compiler=job['flavor'],family=job['family'],result=ref,closed=closed_ref,scope=scope))
+ assert {(r['compiler'],r['family']) for r in bindings}=={('stock','kernel'),('stock','observation'),('ox','kernel'),('ox','observation')}
+ observation_source=read_bytes(str(ROOT/'tests/xmp_observation/test.ml'),65536).decode()
+ labels=['DTD unsupported','external entity declaration unsupported','truncated XML entity','truncated element','1 MiB exact packet limit','1 MiB plus one packet rejected','depth 64 accepted','depth 65 rejected','128 properties accepted','129 properties rejected','8192 nodes accepted','8193 nodes rejected','16384 packet attributes accepted','16385 packet attributes rejected','namespace prefix exactly 128','namespace prefix 129 rejected']
+ for label in labels:assert '"'+label+'"' in observation_source,label
+ close_unstarted(cpu)
+ out=dict(schema='unison-final-xmp-case-binding/1',verified=True,actual_original_receipt=actual_pin,source_pins=source_pins,bindings=bindings,named_XML_limit_cases=labels,new_native_execution=False,new_fuzz_or_sanitizer_campaign=False,EXglobal_acquired=False,CPU00_closed=True,Photo_or_Capitola_hold=False,limitations=['Kernel/observation scope only; final current generatedSDK receiving merge remains unrun','343decisions are the seven canonical rating values across base/left/right, not arbitrary XMP values','Compound/delete/rendering shape changes conservatively refuse; not general RDF merge support','Recorded footprint numbers are neither whole-process RSS peaks nor enforced memory caps'])
+ target=ROOT/'tests/qualification/final-xmp-case-binding-20261019.json';target.write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(dict(verified=True,bindings=len(bindings),source_pins=len(source_pins),kernel_rating_decisions=343,observation_fixed_checks=458,new_native_execution=False,CPU00_closed=True,EXglobal_acquired=False,output=str(target))))
+except BaseException as error:
+ if isinstance(error,UnresolvedOwnership):retain_after_record(lambda:print('XMP_METADATA_UNCERTAIN_RETAIN',repr(error),flush=True))
+ try:close_unstarted(cpu)
+ except BaseException as cleanup:retain_after_record(lambda:print('XMP_METADATA_CLOSE_RETAIN',repr(cleanup),repr(error),flush=True))
+ raise

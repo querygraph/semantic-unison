@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:52:37.576347+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:57:38.716722+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
@@ -174,6 +174,22 @@ closure01a154db-7d34 sent promptly. No furtherPhoto/Capitola ACK or scheduling
 hold exists for workercontrols or audit. Reportfinal-worker-state-cpu-result and
 actual/independent audit receipts retained. SDKgeneration remainsUNSTARTED and
 needs separate activeEXcoordination; ordinary own8 work should not wait for it.
+
+Current XMP requirement mapping complete at packet/observation scope:
+`doc/final-xmp-policy-case-map-20261019.md`, metadataaudit9cb39c/0/NOsession
+rehashes17sources/eight original RESULT+SHARED-CLOSED records, kernel executables
+and rawlogs/compiledtest transforms. Existingactual65831/c277e0/0 stock/Ox
+25scalar+343canonicalrating truth/symmetry+4RDFconflicts and458fixedobservation
+checks/compiler bound. ExactnamedDTD/entity/truncation/XMLlimits and scalar/
+rendering/opaque/refusal cases recorded; no new native/fuzz/SDK run, noEX,
+CPU00closed. Container image+XMP/base recovery/rollback/receiving-convergence
+proof remains separate, not claimed from the packet kernel.
+
+SDKgeneration immediate active-window request048d0ae7 queued01a154de-5e8e;
+PhotoownsZEROresources but still has no currentCapitola yes/no. It is UNALLOCATED,
+not an actual live job or Photo source-review blocker. NoPhoto pause or tokens
+held. Routine own8 source/build/tinycontrols remain independent as workeractual
+88752/cde84c/0 already demonstrated; do not wait all work behind SDKcoordination.
 
 ## Actual current evidence
 

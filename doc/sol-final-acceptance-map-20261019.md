@@ -18,7 +18,7 @@ by the new current329pin composition receipt; the older originals are preserved.
 | --- | --- | --- |
 | 1 Exactness | Current independent SDE/golden/apply controls; current ranges and clone-backed reconciliation; all ten32MiB cohorts plus first128MiB cohort verify exact outputs, unchanged bases and no-op inode behavior. | Trace the named first/last/zero/multiple packet and fork/property cases to exact current or justified unchanged-source evidence; benchmark byte equality alone does not cover every edge. |
 | 2 Coverage | Current component/worker source bindings, XMP kernel/observation, opaque exact-layout predecessor receiving and conservative refusal contracts. | Named parser mapping is now in final-parser-case-map-20261019.md: both byte orders/classic+BigTIFF,33wire cases,936protected edits and247refusals/compiler. Complete later component/private-field mapping separately. Unknown private meanings remain opaque and are NOT a deployment blocker. No universal camera/pixel claim. |
-| 3 Malformed input | Fixed current SDE malformed/binding vectors, constrained range cases and bounded parser ownership controls are retained. | Named parser inventory binds cycles/aliases/count/offset/overflow to actual command/PASS logs. Match remaining truncation/XML observation limits to their separate actual sources. User excludes new fuzz/sanitizer campaigns; do not invent a missing campaign or universal malformed-input proof. |
+| 3 Malformed input | Fixed current SDE malformed/binding vectors, constrained range cases and bounded parser ownership controls are retained. | Named parser inventory binds cycles/aliases/count/offset/overflow to actual command/PASS logs. Named XML/truncation boundaries now map to458fixed observation checks/compiler in final-xmp-policy-case-map-20261019.md; arbitrary malformed inputs and full process memory remain outside that proof. User excludes new fuzz/sanitizer campaigns; do not invent a missing campaign or universal malformed-input proof. |
 | 4 Integrity | Current SDE/base/hash/opaque guards; current realSDK structure/decode/raw-digestvalid full receiving and no-op scan results. | Current-candidate negative raw-digest/corrupt-output receiving proof and exact opaque/different-encoding counterexample mapping; SDK digest equality is not pixel/semantic equality. |
 | 5 Concurrent modification | Current source/worker apply-cancel controls and source/native ownership scopes; frozen V6 property/transport originals retained. | Map receiver/source/symlink/inode/cache/late-completion/mtime-restoration cases. Uncooperative check-to-rename race remains documented, not “eliminated” by a test. |
 | 6 Failure/recovery | Current warning/cancel/cache/input-pipeline composition; independent native range errors; preserved actual failed-prefix/recovery receipts. | Explicit clone/pwrite/property/flush/rename/archive/ENOSPC/drop/abort case-to-current-source map. Known recovery is not original-owner normal wait or crash durability. |
@@ -252,3 +252,15 @@ exactCPU8reacquire/close. NoEX acquired or IO-exclusion claim; routine compiler/
 tinyfixture work required no Capitola yield. OriginalEXplancc71c911 stays
 UNSTARTED, scheduling request withdrawn. This closes those named unit cases in
 SOL5/9; full receiving/path races/SDK/wholematrix limits remain separate.
+
+### Scalar merge and fixed XML requirements source-bound
+
+[Policy map](final-xmp-policy-case-map-20261019.md) binds actual65831/c277e0/0
+stock/Ox kernel/observation results to17unchanged source pins, eight metadata
+artifacts and exact kernel executable/log/compiled-test bindings. New metadata
+actual9cb39c/0 closedCPU00/noEX/no native rerun. Explicit25scalar+343rating
+truth/symmetry+4RDFconflict cases and458fixedXML checks/compiler map identical,
+disjoint/divergent/delete/RDF/qualifier/rendering/opaque/determinism and named
+DTD/entity/truncation/count/depth/size boundaries. No new fuzz, wholeRSS,
+container/base recovery or final SDK receiving convergence claim. Those latter
+scopes stay open; the packet API alone cannot prove them.
