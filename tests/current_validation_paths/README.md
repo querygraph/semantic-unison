@@ -80,3 +80,20 @@ Still unimplemented: actual invoke/audit actor, producer-interruption and
 client-SIGINT actors, whole-run independent prefix audit, entry/freezer and fresh
 runtime request. A caller-supplied fabricated audit in the controls is not
 canonical process/group qualification. No Photo or SDK slot is requested yet.
+
+## Normal-call evidence auditor
+
+`evidence.py` now binds exact success0/failed2 client terminals, normal proxy/server
+completion, both protocol pumps and explicit fake-helper expectations. Each
+helper needs matching candidate/PID/process/group observations and full capture;
+the original pass/error/wrong-receipt/mutation/delay modes remain distinct from
+owned timeout/cancellation dispositions. Six directory helpers are accounted
+individually. No-helper failure is refused as an arbitrary failed-prefix proof.
+Positive fake reports explicitly retain raw-digest-missing/unverified and never
+claim real SDK or publication authority.
+
+Five fabricated-record controls passedb2c128/0 with missing/duplicate/unknown/
+truncated/aliased/incorrect-status and trace/frame/counter refusals. CPU00 closed;
+no child, payload, SDK or EX. [Evidence](../qualification/current-named-evidence-controls-actual-20261019.json).
+The actual retained invocation and signal actors, whole-run parent audit and
+fresh runnable request are still pending. No IO scheduling hold exists.

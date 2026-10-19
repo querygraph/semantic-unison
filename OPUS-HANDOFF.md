@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T17:53:57.841178+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T17:57:02.994548+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -96,7 +96,12 @@ admissions or statements that consumed jobs remain unstarted.
   intent→invoke→independentaudit→accept. Originalcarrier and lastoutcome/verdict/
   adapters/filesroot retained onfailure; no retry/release. Eightoriginal tiny/
   inertcontrols8c0ee1/0 passed (earlier6methods3e2c2c/0), CPU00closed/noCLI/SDK/EX.
-- Implement actualinvoke/audit+producerinterrupt/clientSIGINTactors+rawfullprefixaudit next;
+- Normal-call pureevidence auditor nowimplemented `evidence.py`: exactclient0/2,
+  proxy/server0+fullpumps, perhelpercandidate/PID/group/capture and allfake modes;
+  dir6helpers individuallybound; failednohelperprefix refused. Five original
+  fabricatedrecordcontrolsb2c128/0 passed; CPU00closed/nochild/SDK/EX/payload.
+  Publication andworker/parent settlement stayseparate; no realSDK claim.
+- Implement actualinvoke+producerinterrupt/clientSIGINTactors+rawfullprefixaudit next;
   no nativeentry/request/admission exists yet. Do not runlegacybareharness or
   swapproductionChelper forinheritedgroupstub. README maps exactscope/nextwork.
 

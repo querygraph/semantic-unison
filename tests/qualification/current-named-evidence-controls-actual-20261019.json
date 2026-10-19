@@ -1,0 +1,20 @@
+{
+  "schema": "unison-current-named-evidence-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "b2c128",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 5,
+  "source_sha256": {
+    "tests/current_validation_paths/evidence.py": "e3b1ae1289a514fc5a6232dbdec2469643ebc662eeca0f11dc2a80a86e6446ef",
+    "tests/current_validation_paths/evidence_test.py": "6a38a42300272e2b5eebab0b7abd36319821e07cb1b2f717af1ca7c17533d21e",
+    "tests/validation_process/records.py": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "payload_opened": false,
+  "scope": "Fabricated exact normal-call proxy/helper records only; no actual process/lifecycle/receiving/publication qualification"
+}
