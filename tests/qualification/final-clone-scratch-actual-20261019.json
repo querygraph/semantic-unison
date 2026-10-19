@@ -1,0 +1,853 @@
+{
+  "schema": "unison-current-clone-scratch-actual/1",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": {
+        "tool": 93759,
+        "terminal_chunk": "ad106a",
+        "exit_code": 1,
+        "running_session": false,
+        "scope": "native suite passed; outer summary schema KeyError; known prefix all26settled/CPUclosed"
+      },
+      "result_path": "/private/tmp/u-scratch-current-9d83e2fa17/stock-RESULT.json",
+      "result_sha256": "caa822cd8c1e2b15f1993b919329843744edef8fc64965ae0318e91edf8d57bb",
+      "calls": [
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-000.json",
+          "sha256": "0b0c9f7530cfe2f2e030ad578de3a96412668183333f29672f9c2992bef7dc3e",
+          "pid": 94707,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-001.json",
+          "sha256": "9a28f4d469b2a9590b3cf960e64517da831b01884d36fb84e60e064dae95db4e",
+          "pid": 94709,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-002.json",
+          "sha256": "5befd60aa97aac1538ba1d92c914d710580bf421673ed1f455b5ab39bb6dd7c7",
+          "pid": 94711,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-003.json",
+          "sha256": "1122629c4520ac81a7a4f518b30513843a1dfabacd28bbd5a933a004894e9870",
+          "pid": 94713,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-004.json",
+          "sha256": "14fc9a05c88ec8ae608644965c64d7c983e380c6a6a39d83bd786978643baf85",
+          "pid": 94718,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-005.json",
+          "sha256": "67b36284932276a4c3836b1671cd77db9c1f44ccc01112e6291ffb3218efd693",
+          "pid": 94727,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-006.json",
+          "sha256": "9d8ae82f658c600e749f5c772388993f8f32523e92ceda4399cac4dd9400efc8",
+          "pid": 94729,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-007.json",
+          "sha256": "874bc92b3d6f965d489f612c2549995929b58b75fc2107336a1e02786768ea50",
+          "pid": 94734,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-008.json",
+          "sha256": "d90b229cca21eca4864e8d46fb5e9c4a70119afeddfe3fd26b48ff3de144a6f3",
+          "pid": 94738,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-009.json",
+          "sha256": "f253bda56d2a62fdc04fdcd4891f6ed8d7d3a5830143d8281f2ca11bc860ba0b",
+          "pid": 94748,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-010.json",
+          "sha256": "bd29295594857705d30abdff687d2aa5b02325ecacd654244d7408994b5b5cd6",
+          "pid": 94752,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-011.json",
+          "sha256": "bebe34be951f1a0661981280dab6f2eef99f7e6ddc69ac43156a65a4fd36d46f",
+          "pid": 94759,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-012.json",
+          "sha256": "192a149d275621be5a80e25cd9168f45615527b93787bb21621a1a62a0660676",
+          "pid": 94761,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-013.json",
+          "sha256": "95adc74779b398ac4c1a346877a8a684c0e0e2bd9bcdf4eeb10b121e635c9e30",
+          "pid": 94766,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-014.json",
+          "sha256": "0258d47d38abce9984aa4029cb9ec6ea627fccecd0c60350b49ca0321eb7c669",
+          "pid": 94772,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-015.json",
+          "sha256": "7fd9abd1218294c4c992680f610b5a7f2b705f5f1c6022bd138ccdb11eca90bf",
+          "pid": 94782,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-016.json",
+          "sha256": "343689a86cf350621dfd47d2d31dcf3ea7292a14fa21a3506f5fb4ab0a513b0d",
+          "pid": 94785,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-017.json",
+          "sha256": "7fa782d5a3b387d39018f66ef9b12b314c6227c60a0ab7010885f301b86883dd",
+          "pid": 94788,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-018.json",
+          "sha256": "f9d504d7c19ed227fb7022c2cb3cd2d8e4d8547932295835292a819566916dca",
+          "pid": 94795,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-019.json",
+          "sha256": "aff56fa91b59bea1ba706f8f8889d4d844818ae9b0dfeb8d3ec43e365032b5cf",
+          "pid": 94800,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-020.json",
+          "sha256": "de97f6ff97b4049a84afdaf68f4a34d904defe1cfe7f0b5c130c0992ab4adcd9",
+          "pid": 94802,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-021.json",
+          "sha256": "5c0155dead0ee1f0e875d3e622e476dab845e277aca7aee2818bfeeb6c58c0ba",
+          "pid": 94807,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-022.json",
+          "sha256": "070553930476f4d03146f6d79b3a7ed8bb85d0f68ef2583616eff52c58babfa3",
+          "pid": 94811,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-023.json",
+          "sha256": "c0ff193db3a4acd0c77e07df3b109e61d564046068dd391c2d7fa462ffaa675a",
+          "pid": 94821,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-024.json",
+          "sha256": "fdd4497e08e63b43f79cf0d5c0c0bb539dd9332505311b19967149c7319f674e",
+          "pid": 94823,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-9d83e2fa17/call-025.json",
+          "sha256": "c7cc4ae26faaf70baf0ff272f3cc72a67d2fd1d017e2a0de7f0875883cb2cb04",
+          "pid": 94825,
+          "exit_code": 2
+        }
+      ],
+      "native_cases": [
+        "legacy/normal",
+        "legacy/held-parent-rebind",
+        "legacy/three-collision-kinds",
+        "legacy/128-collision-exhaustion",
+        "legacy/reservation-replacement",
+        "legacy/reservation-missing",
+        "legacy/reserve-EIO",
+        "legacy/reserve-ENOSPC",
+        "legacy/reserve-EACCES",
+        "legacy/reserve-EMFILE",
+        "legacy/reservation-stat-once",
+        "legacy/reservation-stat-always",
+        "legacy/reservation-unlink-once",
+        "legacy/reservation-unlink-always",
+        "legacy/basis-unsupported",
+        "legacy/basis-cross-device",
+        "legacy/basis-unavailable",
+        "legacy/basis-clone-EIO",
+        "legacy/basis-first-open",
+        "legacy/basis-first-stat",
+        "legacy/basis-replacement",
+        "legacy/basis-missing",
+        "legacy/output-clone-EIO",
+        "legacy/output-first-open",
+        "legacy/output-first-stat",
+        "legacy/output-replacement-preserves-primary",
+        "legacy/output-missing-preserves-primary",
+        "legacy/output-mode-EACCES",
+        "legacy/clear-before-close-recycled-fd",
+        "legacy/output-write-open",
+        "legacy/output-reopen-identity",
+        "legacy/basis-unlink-once",
+        "legacy/basis-unlink-always",
+        "legacy/source-stat-EIO",
+        "legacy/source-name-EACCES",
+        "legacy/reservation-alias-after-admission",
+        "legacy/basis-alias-after-admission",
+        "legacy/output-alias-after-admission",
+        "legacy/source-replacement",
+        "legacy/source-close-recycled-fd",
+        "legacy/output-read-close-recycled-fd",
+        "legacy/parent-close-recycled-fd",
+        "legacy/reservation-symlink-replacement",
+        "legacy/reservation-directory-replacement",
+        "legacy/basis-symlink-replacement",
+        "legacy/basis-directory-replacement",
+        "legacy/output-symlink-replacement",
+        "legacy/output-directory-replacement",
+        "legacy/reservation-mode-mtime-change",
+        "legacy/basis-mode-mtime-change",
+        "legacy/output-mode-mtime-change",
+        "legacy/missing-cleanup-name-bad-witness",
+        "legacy/basis-unproven-replaced-first-open",
+        "legacy/output-unproven-replaced-first-open",
+        "legacy/255-byte-output-leaf",
+        "legacy/unicode-output-leaf",
+        "legacy/relative-output-leaf",
+        "legacy/parent-close-preserves-primary",
+        "legacy/source-close-overrides-pure-decline",
+        "legacy/read-close-preserves-primary",
+        "legacy/254-byte-output-leaf",
+        "strict/normal",
+        "strict/held-parent-rebind",
+        "strict/three-collision-kinds",
+        "strict/128-collision-exhaustion",
+        "strict/reservation-replacement",
+        "strict/reservation-missing",
+        "strict/reserve-EIO",
+        "strict/reserve-ENOSPC",
+        "strict/reserve-EACCES",
+        "strict/reserve-EMFILE",
+        "strict/reservation-stat-once",
+        "strict/reservation-stat-always",
+        "strict/reservation-unlink-once",
+        "strict/reservation-unlink-always",
+        "strict/basis-unsupported",
+        "strict/basis-cross-device",
+        "strict/basis-unavailable",
+        "strict/basis-clone-EIO",
+        "strict/basis-first-open",
+        "strict/basis-first-stat",
+        "strict/basis-replacement",
+        "strict/basis-missing",
+        "strict/output-clone-EIO",
+        "strict/output-first-open",
+        "strict/output-first-stat",
+        "strict/output-replacement-preserves-primary",
+        "strict/output-missing-preserves-primary",
+        "strict/output-mode-EACCES",
+        "strict/clear-before-close-recycled-fd",
+        "strict/output-write-open",
+        "strict/output-reopen-identity",
+        "strict/basis-unlink-once",
+        "strict/basis-unlink-always",
+        "strict/source-stat-EIO",
+        "strict/source-name-EACCES",
+        "strict/reservation-alias-after-admission",
+        "strict/basis-alias-after-admission",
+        "strict/output-alias-after-admission",
+        "strict/source-replacement",
+        "strict/source-close-recycled-fd",
+        "strict/output-read-close-recycled-fd",
+        "strict/parent-close-recycled-fd",
+        "strict/reservation-symlink-replacement",
+        "strict/reservation-directory-replacement",
+        "strict/basis-symlink-replacement",
+        "strict/basis-directory-replacement",
+        "strict/output-symlink-replacement",
+        "strict/output-directory-replacement",
+        "strict/reservation-mode-mtime-change",
+        "strict/basis-mode-mtime-change",
+        "strict/output-mode-mtime-change",
+        "strict/missing-cleanup-name-bad-witness",
+        "strict/basis-unproven-replaced-first-open",
+        "strict/output-unproven-replaced-first-open",
+        "strict/255-byte-output-leaf",
+        "strict/unicode-output-leaf",
+        "strict/relative-output-leaf",
+        "strict/parent-close-preserves-primary",
+        "strict/source-close-overrides-pure-decline",
+        "strict/read-close-preserves-primary",
+        "strict/254-byte-output-leaf",
+        "handles/normal",
+        "handles/held-parent-rebind",
+        "handles/three-collision-kinds",
+        "handles/128-collision-exhaustion",
+        "handles/reservation-replacement",
+        "handles/reservation-missing",
+        "handles/reserve-EIO",
+        "handles/reserve-ENOSPC",
+        "handles/reserve-EACCES",
+        "handles/reserve-EMFILE",
+        "handles/reservation-stat-once",
+        "handles/reservation-stat-always",
+        "handles/reservation-unlink-once",
+        "handles/reservation-unlink-always",
+        "handles/basis-unsupported",
+        "handles/basis-cross-device",
+        "handles/basis-unavailable",
+        "handles/basis-clone-EIO",
+        "handles/basis-first-open",
+        "handles/basis-first-stat",
+        "handles/basis-replacement",
+        "handles/basis-missing",
+        "handles/output-clone-EIO",
+        "handles/output-first-open",
+        "handles/output-first-stat",
+        "handles/output-replacement-preserves-primary",
+        "handles/output-missing-preserves-primary",
+        "handles/output-mode-EACCES",
+        "handles/clear-before-close-recycled-fd",
+        "handles/output-write-open",
+        "handles/output-reopen-identity",
+        "handles/basis-unlink-once",
+        "handles/basis-unlink-always",
+        "handles/source-stat-EIO",
+        "handles/source-name-EACCES",
+        "handles/reservation-alias-after-admission",
+        "handles/basis-alias-after-admission",
+        "handles/output-alias-after-admission",
+        "handles/source-replacement",
+        "handles/source-close-recycled-fd",
+        "handles/output-read-close-recycled-fd",
+        "handles/reservation-symlink-replacement",
+        "handles/reservation-directory-replacement",
+        "handles/basis-symlink-replacement",
+        "handles/basis-directory-replacement",
+        "handles/output-symlink-replacement",
+        "handles/output-directory-replacement",
+        "handles/reservation-mode-mtime-change",
+        "handles/basis-mode-mtime-change",
+        "handles/output-mode-mtime-change",
+        "handles/missing-cleanup-name-bad-witness",
+        "handles/basis-unproven-replaced-first-open",
+        "handles/output-unproven-replaced-first-open",
+        "handles/255-byte-output-leaf",
+        "handles/unicode-output-leaf",
+        "handles/relative-output-leaf",
+        "handles/parent-close-preserves-primary",
+        "handles/source-close-overrides-pure-decline",
+        "handles/read-close-preserves-primary",
+        "handles/254-byte-output-leaf"
+      ],
+      "cases_by_api": {
+        "legacy": 61,
+        "strict": 61,
+        "handles": 60
+      },
+      "assertions": 1984,
+      "negative_controls": [
+        {
+          "abi": "legacy",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "strict",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "handles",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "legacy",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        },
+        {
+          "abi": "strict",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        },
+        {
+          "abi": "handles",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        }
+      ],
+      "derivatives": [
+        {
+          "mode": "fixed",
+          "production_copy_sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "binary_sha256": "74f393009b7ede02fb831e02c848332a97f2ea39343fa0c3132a526fad0d447c"
+        },
+        {
+          "mode": "absolute-reservation",
+          "production_copy_sha256": "fc7c825bf61dac9cdbec1de96a2476657a108c6dd3b7f3752b1a4dab49d648e8",
+          "binary_sha256": "aef6d2bed4009ff9c5b37eab9cc9ede90062782e9fc2923a389550ad86f9a230"
+        },
+        {
+          "mode": "missing-reservation-guard",
+          "production_copy_sha256": "7ddf19f913279c839c30ccd6e7cbf891b2c8b0fa7adb48ce16ef3e3b0727d94a",
+          "binary_sha256": "f0dee9b41b49f965a351e41c405d8558214549cdf12103ca429f4dba8ed0d135"
+        }
+      ],
+      "source_pins": {
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_scratch/fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+        "tests/clone_scratch/test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b",
+        "tests/clone_scratch/run.py": "6b059798d56dfb64b02749e22339a3862c465f30954db7821cb7ab3eafad0970",
+        "tests/clone_scratch/README.md": "a0c06881967dee5d6839c73cde07ee534b555fecc43ed31142a5824c3e334d65"
+      }
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": {
+        "tool": 28661,
+        "terminal_chunk": "6ba333",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "result_path": "/private/tmp/u-scratch-current-0518b0da37/ox-RESULT.json",
+      "result_sha256": "d675246aa8d3fab73065c7fa9a3965393011e1b125616a97df1fcfd825b6ee9e",
+      "calls": [
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-000.json",
+          "sha256": "72472b1cf3d174285d0896649b2540e20e500a2941da21b748aeaa5247fc85be",
+          "pid": 94964,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-001.json",
+          "sha256": "da7de545b4513231af99333ebaa28d8ee3ad37f985399095a8d70661f50c4c75",
+          "pid": 94966,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-002.json",
+          "sha256": "211da1a6f2a6a69f70238686bb2caeb543f2c9743036309e6fb1947a21cd24f3",
+          "pid": 94968,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-003.json",
+          "sha256": "318e701a225ddf3825c752a646349f52e0c8289912a8d5720bf184a568e6b710",
+          "pid": 94970,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-004.json",
+          "sha256": "19e286d18e2b58b54ccb98faf3b351a9cbc80b5ef6218f1a615038cf3309b8a0",
+          "pid": 94979,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-005.json",
+          "sha256": "cac0a95bb87e9b2fa1348b0ca8b427f04a0538b2e7d6c288727f7e44fd7279f5",
+          "pid": 94985,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-006.json",
+          "sha256": "17a7fb20b34cb60935c5163e82577bc22f837958fba3a021e6819de64152b4a7",
+          "pid": 94987,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-007.json",
+          "sha256": "34cb0fd412c39cd516b044616559409c97d5cba5404b25c107e28e34f7d742ca",
+          "pid": 94992,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-008.json",
+          "sha256": "c5989ee6e1c4fd335478c23b2165ae24dfc4f8ac4070b08190bca3957c1b39f6",
+          "pid": 94996,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-009.json",
+          "sha256": "0670c488eccf00a79922ee3cfbd8e6b521d906a0c523ccc55d66db8e3bc32f20",
+          "pid": 95006,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-010.json",
+          "sha256": "491d9591a7057ac78ba06727e85a95816b237574622f63d6caef49f464138869",
+          "pid": 95011,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-011.json",
+          "sha256": "9e828b0a91da6d36bb1be7fe1e80df936ccae528b26967ed0b41c8246de4e8c0",
+          "pid": 95022,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-012.json",
+          "sha256": "1c2c637acd1589af6a52667134dc5834751b40f264e7ed1b58edfebc8263f247",
+          "pid": 95024,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-013.json",
+          "sha256": "922451d16cf0d5a43b0f8abcc5e637dc36d582690fe6c83f2a8e7333e0c67b8f",
+          "pid": 95029,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-014.json",
+          "sha256": "e377a2f3c8c5ac03898ccc6e67f872cd0f68267b86b3eaf55abdf85f56a6de15",
+          "pid": 95033,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-015.json",
+          "sha256": "9ecc4a648b6d6f3ce9c054a9d9ff1860f9235c1218995295379bb9246213b5ca",
+          "pid": 95043,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-016.json",
+          "sha256": "bac1dcb39e9bc61a1a47c3a14f4e719ac89f172c3d9c12c861b9a075b3377055",
+          "pid": 95045,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-017.json",
+          "sha256": "615c482092f8cb0a43c68573cca56fc5f6f7c8e008424d8cb4a136e877321ca9",
+          "pid": 95047,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-018.json",
+          "sha256": "97b9924143d4b6b70a19c77a064f8a182de52a8725ef23222a517180f9fca282",
+          "pid": 95049,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-019.json",
+          "sha256": "0acbd605571b02d304d275ec8dc1db4fa732366a3167d1249838af02ab780316",
+          "pid": 95054,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-020.json",
+          "sha256": "8d2b78054c4a7bcd122b8e81b8b47d2bc46d2bec7c740bfa0194bacc63219f0d",
+          "pid": 95056,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-021.json",
+          "sha256": "63aa83d72149a3744c84dc6f2442fbd9607188226272c047dd38f089eb59cb89",
+          "pid": 95061,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-022.json",
+          "sha256": "40127399d25ac2968dbac8595937556176035c44e49e927b21944aabdc379a83",
+          "pid": 95065,
+          "exit_code": 0
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-023.json",
+          "sha256": "2af915adc7640982dcd11cdc9a13cdcb50d3f5a8f28be14fb9d96f475a59cde4",
+          "pid": 95082,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-024.json",
+          "sha256": "8778aabc9fdef981ec2a88513c28ee992cb3ec2feaf37057ff49f81ed7da23ea",
+          "pid": 95084,
+          "exit_code": 2
+        },
+        {
+          "path": "/private/tmp/u-scratch-current-0518b0da37/call-025.json",
+          "sha256": "e5747c4902f6b3d2c0880e4873a95be5f8f379afe138f9b28a5782ebccc058d4",
+          "pid": 95086,
+          "exit_code": 2
+        }
+      ],
+      "native_cases": [
+        "legacy/normal",
+        "legacy/held-parent-rebind",
+        "legacy/three-collision-kinds",
+        "legacy/128-collision-exhaustion",
+        "legacy/reservation-replacement",
+        "legacy/reservation-missing",
+        "legacy/reserve-EIO",
+        "legacy/reserve-ENOSPC",
+        "legacy/reserve-EACCES",
+        "legacy/reserve-EMFILE",
+        "legacy/reservation-stat-once",
+        "legacy/reservation-stat-always",
+        "legacy/reservation-unlink-once",
+        "legacy/reservation-unlink-always",
+        "legacy/basis-unsupported",
+        "legacy/basis-cross-device",
+        "legacy/basis-unavailable",
+        "legacy/basis-clone-EIO",
+        "legacy/basis-first-open",
+        "legacy/basis-first-stat",
+        "legacy/basis-replacement",
+        "legacy/basis-missing",
+        "legacy/output-clone-EIO",
+        "legacy/output-first-open",
+        "legacy/output-first-stat",
+        "legacy/output-replacement-preserves-primary",
+        "legacy/output-missing-preserves-primary",
+        "legacy/output-mode-EACCES",
+        "legacy/clear-before-close-recycled-fd",
+        "legacy/output-write-open",
+        "legacy/output-reopen-identity",
+        "legacy/basis-unlink-once",
+        "legacy/basis-unlink-always",
+        "legacy/source-stat-EIO",
+        "legacy/source-name-EACCES",
+        "legacy/reservation-alias-after-admission",
+        "legacy/basis-alias-after-admission",
+        "legacy/output-alias-after-admission",
+        "legacy/source-replacement",
+        "legacy/source-close-recycled-fd",
+        "legacy/output-read-close-recycled-fd",
+        "legacy/parent-close-recycled-fd",
+        "legacy/reservation-symlink-replacement",
+        "legacy/reservation-directory-replacement",
+        "legacy/basis-symlink-replacement",
+        "legacy/basis-directory-replacement",
+        "legacy/output-symlink-replacement",
+        "legacy/output-directory-replacement",
+        "legacy/reservation-mode-mtime-change",
+        "legacy/basis-mode-mtime-change",
+        "legacy/output-mode-mtime-change",
+        "legacy/missing-cleanup-name-bad-witness",
+        "legacy/basis-unproven-replaced-first-open",
+        "legacy/output-unproven-replaced-first-open",
+        "legacy/255-byte-output-leaf",
+        "legacy/unicode-output-leaf",
+        "legacy/relative-output-leaf",
+        "legacy/parent-close-preserves-primary",
+        "legacy/source-close-overrides-pure-decline",
+        "legacy/read-close-preserves-primary",
+        "legacy/254-byte-output-leaf",
+        "strict/normal",
+        "strict/held-parent-rebind",
+        "strict/three-collision-kinds",
+        "strict/128-collision-exhaustion",
+        "strict/reservation-replacement",
+        "strict/reservation-missing",
+        "strict/reserve-EIO",
+        "strict/reserve-ENOSPC",
+        "strict/reserve-EACCES",
+        "strict/reserve-EMFILE",
+        "strict/reservation-stat-once",
+        "strict/reservation-stat-always",
+        "strict/reservation-unlink-once",
+        "strict/reservation-unlink-always",
+        "strict/basis-unsupported",
+        "strict/basis-cross-device",
+        "strict/basis-unavailable",
+        "strict/basis-clone-EIO",
+        "strict/basis-first-open",
+        "strict/basis-first-stat",
+        "strict/basis-replacement",
+        "strict/basis-missing",
+        "strict/output-clone-EIO",
+        "strict/output-first-open",
+        "strict/output-first-stat",
+        "strict/output-replacement-preserves-primary",
+        "strict/output-missing-preserves-primary",
+        "strict/output-mode-EACCES",
+        "strict/clear-before-close-recycled-fd",
+        "strict/output-write-open",
+        "strict/output-reopen-identity",
+        "strict/basis-unlink-once",
+        "strict/basis-unlink-always",
+        "strict/source-stat-EIO",
+        "strict/source-name-EACCES",
+        "strict/reservation-alias-after-admission",
+        "strict/basis-alias-after-admission",
+        "strict/output-alias-after-admission",
+        "strict/source-replacement",
+        "strict/source-close-recycled-fd",
+        "strict/output-read-close-recycled-fd",
+        "strict/parent-close-recycled-fd",
+        "strict/reservation-symlink-replacement",
+        "strict/reservation-directory-replacement",
+        "strict/basis-symlink-replacement",
+        "strict/basis-directory-replacement",
+        "strict/output-symlink-replacement",
+        "strict/output-directory-replacement",
+        "strict/reservation-mode-mtime-change",
+        "strict/basis-mode-mtime-change",
+        "strict/output-mode-mtime-change",
+        "strict/missing-cleanup-name-bad-witness",
+        "strict/basis-unproven-replaced-first-open",
+        "strict/output-unproven-replaced-first-open",
+        "strict/255-byte-output-leaf",
+        "strict/unicode-output-leaf",
+        "strict/relative-output-leaf",
+        "strict/parent-close-preserves-primary",
+        "strict/source-close-overrides-pure-decline",
+        "strict/read-close-preserves-primary",
+        "strict/254-byte-output-leaf",
+        "handles/normal",
+        "handles/held-parent-rebind",
+        "handles/three-collision-kinds",
+        "handles/128-collision-exhaustion",
+        "handles/reservation-replacement",
+        "handles/reservation-missing",
+        "handles/reserve-EIO",
+        "handles/reserve-ENOSPC",
+        "handles/reserve-EACCES",
+        "handles/reserve-EMFILE",
+        "handles/reservation-stat-once",
+        "handles/reservation-stat-always",
+        "handles/reservation-unlink-once",
+        "handles/reservation-unlink-always",
+        "handles/basis-unsupported",
+        "handles/basis-cross-device",
+        "handles/basis-unavailable",
+        "handles/basis-clone-EIO",
+        "handles/basis-first-open",
+        "handles/basis-first-stat",
+        "handles/basis-replacement",
+        "handles/basis-missing",
+        "handles/output-clone-EIO",
+        "handles/output-first-open",
+        "handles/output-first-stat",
+        "handles/output-replacement-preserves-primary",
+        "handles/output-missing-preserves-primary",
+        "handles/output-mode-EACCES",
+        "handles/clear-before-close-recycled-fd",
+        "handles/output-write-open",
+        "handles/output-reopen-identity",
+        "handles/basis-unlink-once",
+        "handles/basis-unlink-always",
+        "handles/source-stat-EIO",
+        "handles/source-name-EACCES",
+        "handles/reservation-alias-after-admission",
+        "handles/basis-alias-after-admission",
+        "handles/output-alias-after-admission",
+        "handles/source-replacement",
+        "handles/source-close-recycled-fd",
+        "handles/output-read-close-recycled-fd",
+        "handles/reservation-symlink-replacement",
+        "handles/reservation-directory-replacement",
+        "handles/basis-symlink-replacement",
+        "handles/basis-directory-replacement",
+        "handles/output-symlink-replacement",
+        "handles/output-directory-replacement",
+        "handles/reservation-mode-mtime-change",
+        "handles/basis-mode-mtime-change",
+        "handles/output-mode-mtime-change",
+        "handles/missing-cleanup-name-bad-witness",
+        "handles/basis-unproven-replaced-first-open",
+        "handles/output-unproven-replaced-first-open",
+        "handles/255-byte-output-leaf",
+        "handles/unicode-output-leaf",
+        "handles/relative-output-leaf",
+        "handles/parent-close-preserves-primary",
+        "handles/source-close-overrides-pure-decline",
+        "handles/read-close-preserves-primary",
+        "handles/254-byte-output-leaf"
+      ],
+      "cases_by_api": {
+        "legacy": 61,
+        "strict": 61,
+        "handles": 60
+      },
+      "assertions": 1984,
+      "negative_controls": [
+        {
+          "abi": "legacy",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "strict",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "handles",
+          "defect": "held-parent-rebind",
+          "assertion": "reservation escaped held parent"
+        },
+        {
+          "abi": "legacy",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        },
+        {
+          "abi": "strict",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        },
+        {
+          "abi": "handles",
+          "defect": "reservation-replacement",
+          "assertion": "reservation-replacement: unexpected success"
+        }
+      ],
+      "derivatives": [
+        {
+          "mode": "fixed",
+          "production_copy_sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "binary_sha256": "eb39399018596bc0a32c248c72c4635891a9b21ec7b3ac4a437316d35f261a58"
+        },
+        {
+          "mode": "absolute-reservation",
+          "production_copy_sha256": "fc7c825bf61dac9cdbec1de96a2476657a108c6dd3b7f3752b1a4dab49d648e8",
+          "binary_sha256": "65580af50a2552323533872a4bc134c0a2c8d45ca13dcf6f0c6c65c1c015c8c8"
+        },
+        {
+          "mode": "missing-reservation-guard",
+          "production_copy_sha256": "7ddf19f913279c839c30ccd6e7cbf891b2c8b0fa7adb48ce16ef3e3b0727d94a",
+          "binary_sha256": "f7616c74844b0c858727b98a38f529cbd8941a340f79a5147070f90cff9b2894"
+        }
+      ],
+      "source_pins": {
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_scratch/fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+        "tests/clone_scratch/test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b",
+        "tests/clone_scratch/run.py": "6b059798d56dfb64b02749e22339a3862c465f30954db7821cb7ab3eafad0970",
+        "tests/clone_scratch/README.md": "a0c06881967dee5d6839c73cde07ee534b555fecc43ed31142a5824c3e334d65"
+      }
+    }
+  ],
+  "calls": 52,
+  "normal_zero": 40,
+  "designated_two": 12,
+  "CPU00_07_fresh_reacquired_closed": true,
+  "EX_acquired": false,
+  "SDK_or_Photo_calls": 0,
+  "scope": "current native small-APFS scratch ownership/rollback and six private guard removals/compiler; stock outer summary failed after native PASS; not physical exhaustion/full receiving/crash durability/performance",
+  "independent_audit_tool": {
+    "terminal_chunk": "63d602",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit_source_sha256": "dca50af6d0110e0e7f77612bf2309850be9e2d917a86c917b03cf0c8162e7765"
+}

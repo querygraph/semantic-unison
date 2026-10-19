@@ -62,6 +62,22 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Native clone-scratch current source — ACTUAL combined audit closed
+
+Original scratch fixture completed182cases/1984assertions percompiler across
+legacy61/strict61/handles60, plus6designated privateCdefectdetections each.
+Stock93759/ad106a/1 preserved outer summaryschemaKeyError AFTER nativePASS;
+all26children settled/knownfailedprefixCPU8closed. Summaryhandlingfixed, fresh
+Ox-only28661/6ba333/0 closed26children. NO stockrerun or falseouterexit0claim.
+Independent63d602/0 audits52calls(40zero/12expected2),364namedcases/current7pins,
+6binaries/extractedFsfacade/Cderivatives/manifesthashes/freshCPU8closed. NoEX,
+SDK, Photo, originals/Main/cache. Native reservationENOSPC/rollback/foreignname/
+firstopen/close-reuse now current, not physicaldiskfull/fullreceiving/durability.
+Reports `doc/final-clone-scratch-result-20261019.md` and
+`tests/qualification/final-clone-scratch-actual-20261019.json`. ZERO resources.
+RealSDKfixture048d0ae7 stillunallocated awaitingCapitola schedulinganswer;
+no blanketPhotohold or SDKdispatch permission from these CPU-only controls.
+
 ## Native positional-write current successor — ACTUAL passed/closed
 
 Original ML/C tests renewed against current18inputs: owner73365/68ce3c→d6f63a/0
