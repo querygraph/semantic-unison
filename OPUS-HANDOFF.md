@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:57:38.716722+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T16:30:23.549909+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
@@ -21,8 +21,8 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `querygraph/semantic-unison`, PUBLIC, same upstream parent bcpierce00/unison.
   Actual rename79a30d/0; independentdfb9cf/0 verifies OPEN DRAFT PR13 at newURL.
   Shared `fork` remote is git@github.com:querygraph/semantic-unison.git;
-  remote.pushDefault=fork; `origin` stays original upstream. No source push,
-  merge or upstream submission. Historical old-name URLs/receipts are preserved.
+  remote.pushDefault=fork; `origin` stays original upstream. The rename operation itself did not push or merge source
+  or submit anything upstream. Historical old-name URLs/receipts are preserved.
   `I-AM-AN-HONEST-WORKING-LLM.md` is the user-requested candid AI-written statement;
   README identifies the separate fork and links it. No upstream posting.
 - **Actual public docs push — USER AUTHORIZED:** master39577178 now exposes new
@@ -61,6 +61,22 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   held through actual settlement, unknown retains; close-only/no numeric retry.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
+
+## Draft PR13 current publication — ACTUAL refreshed, not merged
+
+PR13 https://github.com/querygraph/semantic-unison/pull/13 is OPEN DRAFT,
+base publicmaster39577178, head integration/sol-consolidated-review refreshed
+fromf6bfd653 to guide/evidence440bb0ee. Atomicpush34654/8894e5/0 updated both
+review+qualificationbranches; PRedittitle/body73428/9c146c/0 independentlyread
+back exacthead/draft/base. `doc/pr13-current-publication-20261019.json` retains
+metadata/bodySHA; finalHEAD can include this subsequent handoff/receipt commit.
+Production src/ is byte-identical tof6bfd653; publicmaster was NOTchanged.
+Publicidentitymaster ancestry merged locally ascc245ede; onlymanifesto evidence
+link resolution, no production/source/runtimeplan change. `doc/PR13-REVIEW-GUIDE.md`
+nowgroups all106productionchangedpaths againstmaster(9478+/977-) with exactblob
+inventory `doc/pr13-current-review-scope-20261019.json`; alltargetsexist/hashmatch.
+Guide+PR retain SDKfixture/merge, prescribedperformance/workload/topology and
+finalacceptance gaps. No ready/merge/goalcomplete or newSDKclaim. ZEROresources.
 
 ## Native clone-scratch current source — ACTUAL combined audit closed
 

@@ -1,0 +1,33 @@
+{
+  "schema": "semantic-unison-pr13-current-publication/1",
+  "pr": {
+    "baseRefName": "master",
+    "headRefName": "integration/sol-consolidated-review",
+    "headRefOid": "440bb0ee202a905739617a03e7797475e2260156",
+    "isDraft": true,
+    "mergeable": "MERGEABLE",
+    "number": 13,
+    "state": "OPEN",
+    "title": "Semantic Unison: componentized DNG sync, APFS receiving and owned workers",
+    "url": "https://github.com/querygraph/semantic-unison/pull/13"
+  },
+  "body_sha256": "81e9afc475e8c22c5ccec5aa119cfd1d5152f0f712dec87fd461549567c108a5",
+  "atomic_push_actual": {
+    "tool": 34654,
+    "terminal_chunk": "8894e5",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "pr_edit_actual": {
+    "tool": 73428,
+    "terminal_chunk": "9c146c",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "base_master_unchanged": "3957717819e3a64e3030eb02f422338ec1f0b751",
+  "production_identical_to_f6bfd653": true,
+  "guide_snapshot": "440bb0ee202a905739617a03e7797475e2260156",
+  "goal_complete": false,
+  "resources_held": false,
+  "merge_or_ready_review_requested": false
+}
