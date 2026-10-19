@@ -125,5 +125,14 @@ script, proxy and endpoint-profile bytes, strict complete JSONL counters, and
 refusal of call stems the worker did not report. Ten controls on actual tiny
 private records passed with all 145 methods under CPU00, then closed.
 [Evidence](../qualification/current-named-parent-io-controls-actual-20261019.json).
-A complete 21-case replay fixture and the owned entry/plan/admission remain
-before any runtime request.
+
+`parent_full_test.py` fabricates a complete 21-case run, 69 calls with per-call
+helper/copy/merge shapes taken from the original case bodies, and replays it to
+exactly 69/54/9/7/4/2. It also accepts a failed prefix inside the merge cases
+and refuses dropped, swapped, moved, missing, relabelled and extra calls or
+records. Nine methods passed with all 154 under CPU00, then closed.
+[Evidence](../qualification/current-named-parent-full-replay-controls-actual-20261019.json).
+A call whose own audit fails is never reported by the worker, so the reader
+refuses that run as unresolved rather than an ordinary failed prefix, matching
+worker retention. The owned entry/plan/admission remains before any runtime
+request.

@@ -1,0 +1,59 @@
+{
+  "schema": "unison-current-named-parent-full-replay-controls/1",
+  "actual_tool": {
+    "runner": "in-process unittest under standing CPU00 lease (scratchpad runner, not committed)",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 154,
+  "new_full_replay_methods": 9,
+  "source_sha256": {
+    "tests/current_validation_paths/parent.py": "a8e740898ab98edbefcc31c41d7a569c3e1cd72a3a0dafce359ce6035f79d4c4",
+    "tests/current_validation_paths/parent_counters.py": "bde812a9d594fad3a30ea9418513944d7428604cf50c1ca8fc5753c665bff772",
+    "tests/current_validation_paths/parent_full_test.py": "c09f40fa9a76ccb2de0d1303b717ccc4b5e8e09de358de46cabf3dac00b1c530",
+    "tests/current_validation_paths/parent_test.py": "95a4b3f56d0e6ae2b7f65d6c7597ec7ee92c96699d659d70ddd35b35bfad490a",
+    "tests/current_validation_paths/recipes.py": "6105a4be873246dcea2f52dc9a3bf8e5f70309d107dd6ec8673f34843114e22d",
+    "tests/current_validation_paths/runtime.py": "e0646abdefefa74a48815ba74dc9b54eb15a1766a3587dd670c0d2bf71dbad0f"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "payload_opened": false,
+  "complete_fixture": {
+    "cases": 21,
+    "cli_calls": 69,
+    "fake_validators": 54,
+    "copy": 9,
+    "merge": 7,
+    "producer_interruptions": 4,
+    "client_cancellations": 2,
+    "per_call_shapes": "derived from original case bodies in tests/validation_paths/run.py: interrupted resume then validated resume/retry/no-op; external copy with off/warn/require/mutate and retry; moved-file donor seed, reuse and retry; merge seed, first/second receiver failure and two-receiver recovery; timeout and cancellation seed/fault/retry/no-op; six directory helpers then unchanged no-op"
+  },
+  "refusals": [
+    "complete claim over 20 cases",
+    "dropped middle call",
+    "calls swapped across cases",
+    "server helper records swapped between calls",
+    "missing final merge counter",
+    "relabelled case summary result or helper count",
+    "70th call",
+    "missing root ACCEPTED record"
+  ],
+  "accepted": [
+    "complete 69-call original inventory",
+    "failed prefix after 13 cases plus 2 calls of merge-pass-error"
+  ],
+  "initial_failed_controls": {
+    "description": "first run 2 of 9 failed from test bugs only: mutated a summary dict shared with RESULT.json, and a no-op pop/insert at index 0; both tests corrected, replay source unchanged",
+    "CPU00_closed": true
+  },
+  "uncoordinated_diagnostic": "one ~1s in-process diagnostic printing four refusal messages ran without the CPU00 lease; no child, IO payload, SDK or EX",
+  "observation": "a call whose own audit fails is never added to the worker result inventory, so its pinned records make the parent reader refuse the whole run as unresolved rather than an ordinary failed prefix; this matches the worker, which retains ownership on any audit failure",
+  "scope": "Pure parent replay over a fabricated complete 21-case run. Not process, lifecycle, receiving or publication qualification.",
+  "remaining": [
+    "owned worker/owner/metadata plan/freezer/admission entry",
+    "actual complete 21-case stock/Ox runs under fresh coordination"
+  ]
+}
