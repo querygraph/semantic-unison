@@ -139,8 +139,8 @@ def check_launch(argv, cohort, **bindings):
         raise ValueError('exact cohort launch differs')
 
 
-def audit_bound(result, cohort, artifact, *, fixture_root):
-    """Full nested matrix plus declared parameters/artifacts; no file hashing."""
+def audit_bound_prefix(result, cohort, artifact, *, fixture_root):
+    """Declared parameters and every attempted command plus prefix lifecycle."""
     root = PurePosixPath(fixture_root)
     if (type(fixture_root) is not str or not root.is_absolute()
             or str(root) != fixture_root or '..' in root.parts or '\x00' in fixture_root):
@@ -159,7 +159,7 @@ def audit_bound(result, cohort, artifact, *, fixture_root):
     # Command equality in audit() binds nested row outcomes to their journal;
     # this additional check binds every attempted client/server to its artifact.
     for entry in result['invocations']:
-        if entry['command'][0] != artifact['binary'] or entry['outcome']['proxy']['server_command'][0] != artifact['binary']:
+        if entry['command'][0] != artifact['binary']:
             raise ValueError('cohort call artifact differs')
         identity = entry['identity']
         flags = ['-debug', 'copy', '-debug', 'semantic', '-debug', 'semantic-reads',
@@ -176,7 +176,13 @@ def audit_bound(result, cohort, artifact, *, fixture_root):
                   '-sshcmd', str(root / 'launcher.py'), '-servercmd', artifact['binary'],
                   '-batch', '-auto', '-fastcheck', 'false', '-times', *flags]
         server = [artifact['binary'], '-server', '__new-rpc-mode', *flags]
+        server_command = entry['outcome']['proxy']['server_command']
         if (not exact(entry['command'], client)
-                or not exact(entry['outcome']['proxy']['server_command'], server)):
+                or (server_command is not None and not exact(server_command, server))):
             raise ValueError('cohort client/server command differs')
+    return audit_attempted(result, cohort)
+
+
+def audit_bound(result, cohort, artifact, *, fixture_root):
+    audit_bound_prefix(result, cohort, artifact, fixture_root=fixture_root)
     return audit(result, cohort)

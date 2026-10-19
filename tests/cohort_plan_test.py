@@ -18,7 +18,7 @@ def fixture(selection):
            interpreter='/qualified/python',interpreter_sha256='b'*64,script='/repo/bench/sync/run.py',
            cohort=c,artifact=dict(binary='/build/unison',compiler='/switch/ocamlopt',
                                  binary_sha256='c'*64,compiler_sha256='d'*64),
-           execution_sha256={'bench/sync/run.py':'e'*64},prerequisite_sha256={'/proof/build.json':'f'*64},
+           build_receipt='/proof/build.json',execution_sha256={'bench/sync/run.py':'e'*64},prerequisite_sha256={'/proof/build.json':'f'*64},
            limits=copy.deepcopy(cohort_plan.LIMITS),cpu_token_indexes=list(range(c['reserved_credits'])),
            requires_temporary_borrow=c['reserved_credits']==18)
     p['launch_argv']=cohort.launch_argv(c,interpreter=p['interpreter'],script=p['script'],
@@ -42,6 +42,7 @@ class Plan(unittest.TestCase):
             p=fixture(1);p['script']=str(source)
             p['execution_sha256']={'bench/sync/run.py':hashlib.sha256(source.read_bytes()).hexdigest()}
             p['prerequisite_sha256']={str(proof):hashlib.sha256(proof.read_bytes()).hexdigest()}
+            p['build_receipt']=str(proof)
             for key in ('binary','compiler'):
                 f=root/key;f.write_bytes(('generated '+key).encode())
                 p['artifact'][key]=str(f)
@@ -85,6 +86,11 @@ class Plan(unittest.TestCase):
             receipt=dict(p['artifact'],complete=True,selftest_requested=True,build_exit=0,
                          selftest_exit=0,source_sha256=pins)
             self.assertEqual(cohort_plan.verify_build(p,receipt,repository=str(root))['production_sources_verified'],3)
+            actual=root/'ocamlopt.opt';actual.write_bytes(b'generated compiler')
+            alias=root/'ocamlopt';alias.symlink_to(actual.name)
+            alias_plan=copy.deepcopy(p);alias_plan['artifact']['compiler']=str(actual)
+            alias_receipt=copy.deepcopy(receipt);alias_receipt['compiler']=str(alias)
+            cohort_plan.verify_build(alias_plan,alias_receipt,repository=str(root))
             for mutation in ('omitted','stale','binary','boolean','failure'):
                 broken=copy.deepcopy(receipt)
                 if mutation=='omitted':del broken['source_sha256']['src/semanticRuntime.ml']

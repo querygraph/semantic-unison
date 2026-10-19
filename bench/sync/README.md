@@ -565,3 +565,34 @@ uses mocked metadata and launches no binary/transport. `--prepare-only` in a rea
 invocation still queries executable metadata, so it is not a zero-executable
 permission. Actual measurement needs current artifact pins, the exact reviewed
 command and its own coordination window. No quiet-host or hard-cap claim.
+
+### Versioned automatic-worker cohorts
+
+`auto_cohort.py` and `cohort_plan.py` define one compiler/selector cohort:
+workers `1`, `2`, `4`, `8`, or `auto`, endpoint ceiling 8, three modes,
+one warmup plus five measured repetitions (18 rows/54 CLI calls), and eight
+32 MiB generated fixtures per row. They distinguish configured permit upper
+bounds, declared owner-plus-endpoint credits, and actually reserved credits.
+These are cooperative declarations, not OS-thread or RSS hard caps.
+
+`tests/cohort_entry.py` is the dedicated authenticated-plan dispatcher entry.
+The current runtime route accepts **shared8 cohorts only** (selectors 1 or 2).
+It requires a fresh exact IO admission, existing EXglobal then Unison00..07,
+and an actual parent/worker/inherited-nine-descriptor binding. Binaries and
+compilers are hashed after acquisition; current production sources are rebound
+to a successful build/selftest receipt before execution and before release.
+A cohort plan must use canonical executable paths (the installed `ocamlopt`
+symlink resolves to `ocamlopt.opt`).
+
+Larger cohorts remain represented in the same plan schema, but this entry
+refuses them. They need a separately coordinated temporary-borrow owner;
+there is no silent clipping, retrospective resize, or automatic 18-credit grant.
+Source and directed synthetic-owner controls are qualified; no actual auto
+cohort transport run has yet been qualified.
+
+Complete results bind all client/server command words and every nested outcome.
+Failed prefixes are audited independently. A failure before benchmark entry has
+an explicit metadata-only zero-call record; an absent/unknown journal after
+benchmark entry retains the parent and its descriptors. Observation expiry is
+not authority to kill the worker. Parent terminal evidence is collected from
+the owning tool separately from worker/group receipts.

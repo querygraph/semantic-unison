@@ -6249,3 +6249,25 @@ Actual03a54f/0+80eb6c/0 directedgeneratedfixtures PASS; lastchild55574 reaped0
 /groupabsent/CPU4closed/noEXIO. Evidence auto-cohort-build-binding-actual-20261018.json.
 Next remains actual retained-owner/dispatcher integration and finite lifecycle
 controls; no runtimegrant/fullbenchmarkqualified claim.
+
+
+### 2026-10-18 — retained shared8 cohort owner integration
+Added tests/cohort_entry.py / sync-auto-cohort target to established dispatcher.
+Exact admitted worker/plan/workspace; actual inheritedcanonical9FD/parentbinding;
+afterIOartifacthash/current329productionbuildbinding pre/post; original failure
+record, source-bound prebenchmarkzero-call path; postentrymissingjournal UNKNOWN
+retains; complete/failedprefix auditedbeforeworkerreap andCPUthenIOclose.
+Plan schema2 adds authenticated build_receipt. Actual installed compiler alias
+ocamlopt→ocamlopt.opt resolved against historicalreceipt; canonicalexecutable
+paths required. Larger4/8/auto cohorts refused byshared8 entry, need separately
+coordinated18borrowowner; no silent clipping.
+Actual8aadce/0,86b30e/0,02d83e/0,f21a64/0 controlsPASS: new owner/plan/cohort,
+legacy timed/manual/binding regressions; inertdispatcher sixcases success/failure/
+unknown/live/exitcontradiction/closeuncertainty, onlyouterCPU4 real. Allchildren
+reaped0/groupsabsent/CPUclosed/noEXIO/transport/SDK/Photo payload. Evidence
+tests/qualification/auto-cohort-owner-source-actual-20261018.json.
+Runtime transport stillUNQUALIFIED; next finiteactualshared8 cohort and reviewed
+18borrowowner forfull1/2/4/8/auto matrix. User scheduling change: requested Photo
+finishliveoperationnormally thenholdnewIO/Adobe; queue01a15276-c403 delivered,
+actualPhotozero-resourcehandoffnotyetclaimed. CanqualifyAdobedirectlyhereafter
+actualhandoff, finalPhotoworkflowlast. No needfinalPhotoallowanceasgoalblocker.

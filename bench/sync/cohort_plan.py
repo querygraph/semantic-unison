@@ -3,7 +3,7 @@ from pathlib import PurePosixPath
 import re
 from auto_cohort import contract, exact, launch_argv
 
-SCHEMA = 'unison-auto-cohort-plan/1'
+SCHEMA = 'unison-auto-cohort-plan/2'
 LIMITS = dict(owner_observation_seconds=900, cli_observation_seconds=30,
               declared_logical_io_bytes=32*1024**3, physical_io_limit_enforced=False,
               retry_allowed=False, sdk_calls=0, camera_inputs=0)
@@ -30,7 +30,7 @@ def validate(plan, *, execution_sources):
     No runtime grant is created by accepting an 18-credit source plan.
     """
     fields = {'schema','workspace','interpreter','interpreter_sha256','script',
-              'cohort','artifact','execution_sha256','prerequisite_sha256',
+              'cohort','artifact','build_receipt','execution_sha256','prerequisite_sha256',
               'limits','launch_argv','cpu_token_indexes','requires_temporary_borrow'}
     if type(plan) is not dict or set(plan) != fields or plan['schema'] != SCHEMA:
         raise ValueError('exact cohort plan schema required')
@@ -63,6 +63,8 @@ def validate(plan, *, execution_sources):
         raise ValueError('qualified prerequisite receipts required')
     for name,value in prerequisites.items():
         path(name);digest(value)
+    if path(plan['build_receipt']) not in prerequisites:
+        raise ValueError('build receipt must be an authenticated prerequisite')
     expected=launch_argv(cohort,interpreter=plan['interpreter'],script=plan['script'],
                          output=str(workspace/'RESULT.json'),artifact=plan['artifact'])
     if not exact(plan['launch_argv'],expected):
@@ -142,7 +144,10 @@ def execution_sources(repository):
     names = [str(p.relative_to(root)) for p in (root/'bench/sync').glob('*.py')]
     names += ['tests/shared_dispatch.py','tests/manual.py','tests/shared_cpu_pool.py',
               'tests/shared_io_pool.py','tests/shared_process_owner.py',
-              'tests/cached_benchmark/contract.py',
+              'tests/cached_benchmark/contract.py','tests/cohort_entry.py',
+              'tests/sdk_host_matrix/shared_binding.py',
+              'tests/qualification/semantic-observation-20261013.json',
+              'tests/checked_worker/qualification.json',
               'tests/private_camera_receiving/close.py']
     return sorted(set(names))
 
@@ -162,7 +167,11 @@ def verify_build(plan, receipt, *, repository):
         raise ValueError('successful qualified build/selftest receipt required')
     artifact=plan['artifact']
     for key in ('binary','compiler','binary_sha256','compiler_sha256'):
-        if receipt.get(key) != artifact[key]:
+        actual=receipt.get(key)
+        if key in ('binary','compiler') and type(actual) is str:
+            from pathlib import Path
+            actual=str(Path(actual).resolve())
+        if actual != artifact[key]:
             raise ValueError('build artifact declaration differs: '+key)
     pins=receipt['source_sha256']
     names=production_sources(repository)
