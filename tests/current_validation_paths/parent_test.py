@@ -13,7 +13,7 @@ def encode(value):return (json.dumps(value,sort_keys=True,separators=(',',':'))+
 
 class Replay(unittest.TestCase):
     def setUp(self):
-        self.packet=plan(SOURCE,'/private/tmp/u-vpath-0123456789abcdef','stock')
+        self.packet=plan(SOURCE,getattr(self,'workspace','/private/tmp/u-vpath-0123456789abcdef'),'stock')
         self.packet.update(repository='/source-only/current-repository',binary=dict(path='/inert/current-unison',sha256='a'*64))
         row=self.packet['rows'][0];self.root=row['directory'];self.records={};self.root_records={}
         self.scripts=recipes.scripts(recipes.literal_templates(SOURCE),self.packet['repository'])
