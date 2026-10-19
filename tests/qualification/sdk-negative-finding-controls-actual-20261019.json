@@ -1,0 +1,22 @@
+{
+  "schema": "unison-negative-sdk-finding-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "134432",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_test_methods": 5,
+  "source_sha256": {
+    "tests/sdk_negative_receiving/finding.py": "76dbc3c498bdfc3980283bd9ffc3b9c6d71018334d44df2e72f4cf393526d00a",
+    "tests/sdk_negative_receiving/finding_test.py": "8e0ecd8edfe6be3409272d1ff1f5e5b801550f0a000daa6cb44148fa45c36050",
+    "tests/camera_sdk_receiving/sdk_audit.py": "cdfea583ad0e43548ce7463336c8025ff90fbdd50e9c3f66f0a964882340dca2",
+    "tests/validation_process/records.py": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+  },
+  "scope": "Synthetic exact negative receipt/helper group binding; positive parser still refuses negative; no SDK or publication proof",
+  "CPU00_closed": true,
+  "child_processes": 0,
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "retained_payload_opened": false,
+  "receiving_rejection_proved": false
+}

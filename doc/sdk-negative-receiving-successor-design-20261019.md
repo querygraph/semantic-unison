@@ -49,3 +49,16 @@ existing EXglobal→Unison00..07 and explicit one-use start deadline. Observatio
 limits are not broad-kill authority. Unknown retains actual owner/FD identities;
 release Photo promptly at actual parent terminal plus settled groups/FDs.
 No pixels, corpus, physical IO savings, performance or production claim follows.
+
+## Qualified source components now available
+
+`tests/sdk_negative_receiving/finding.py` implements the separate exact negative
+receipt and single-server-helper parser. Five original synthetic controls passed
+actual134432/exit0/no session: exact expected mismatch/errors, unchanged positive
+parser rejection, wrong candidate/build/count/framing refusals, and missing,
+duplicate, truncated, signaled, nonzero-exit or live-group helper refusals. It
+explicitly leaves parent CLI audit and destination fencing required; it cannot
+release resources. CPU00 closed, no children/EX/SDK/payload. See
+[control receipt](../tests/qualification/sdk-negative-finding-controls-actual-20261019.json).
+The runtime owner, designated-failure transport audit and immutable request are
+still to be implemented and qualified before scheduling; Photo is not waiting.

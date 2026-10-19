@@ -75,7 +75,11 @@ admissions or statements that consumed jobs remain unstarted.
 - Next genuine-negative receiving source work: pure `sdk_fixture_digest_fault.py`
   and four original controlsff1b99/0 passed all3codecs/bothorders, exactonebit plus
   shape/alias refusals; CPU00closed/nochildren/EX/SDK/payload. This is NOT an
-  actual negative SDK finding. `doc/sdk-negative-receiving-successor-design-20261019.md`
+  actual negative SDK finding. Separate strict negative receipt/helper parser
+  `sdk_negative_receiving/finding.py` five originalcontrols134432/0 passed;
+  positive parser unchanged/refusesnegative, unknown/nonzero/truncated/missing
+  helperproof refuses. CPU00closed/nochildren/EX/SDK. Runtime owner and exact
+  designated-failure transport audit remain source work before fresh request. `doc/sdk-negative-receiving-successor-design-20261019.md`
   specifies separate expected-exit/finding audits; no runtime request/grant yet.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
