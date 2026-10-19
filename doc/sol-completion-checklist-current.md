@@ -321,3 +321,7 @@ recoveryclosed137; preserve that failure separately from this freshv4 pass.
 ### Final SDK fixture readiness source successor
 
 [Source readiness](sdk-generated-fixture-readiness-successor-20261019.md): official SDK2768 source archive persistently fetched97807/a2bf20/0 (80509918B/SHA c1d3a545...), distinct ancestry from2724. Source index/license/readme observatione27c2f/0; zero extraction/build/SDK calls. Independent1eb9cb/0 stablearchiveepoch+unchangedqualified2724validator/full8EXclosed. Exact persistent codec/state metadata path policy controls7cdd5e/0 pass; no arbitrary root or payload grant. Existing uncompressed/JPEG bases preserved; JXL/12scalarstates/native finalmerge remain incomplete. Metadata search caps/scopes explicitly retained, not global absence evidence.
+
+### SDK source release identity corrected
+
+[Builder source fix](sdk-current-release-identity-fix-20261019.md): new2768README contains2724history, exposing old substringguard’s falseacceptance. Builder now requires exact firstcurrent2724release; six actualcontrolsa1f0de/0 include actualpreflight2768refusal beforebuildmkdir. OfficialsavedREADME9b2536/0 confirms2768current/2724refused. No SDK/compiler run or validatorreplacement; safeextraction/versioned2768fixture-writerbuild remain pending.

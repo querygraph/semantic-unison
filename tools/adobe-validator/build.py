@@ -13,6 +13,7 @@ from pathlib import Path
 import subprocess
 import sys
 from object_cache import compile_object
+from sdk_source_identity import require_release
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--sdk-root", type=Path, required=True)
@@ -34,8 +35,10 @@ if args.jobs < 1:
     parser.error("--jobs must be positive")
 if args.fixture_only and (args.experimental_area_task_host or args.experimental_memory_budget):
     parser.error("--fixture-only cannot select an experimental validator build")
-if "1.7.1 2724" not in (sdk / "DNG_ReadMe.txt").read_text():
-    parser.error("requires reviewed Adobe SDK 1.7.1 build 2724")
+try:
+    reviewed_sdk_release = require_release((sdk / "DNG_ReadMe.txt").read_text(), 2724)
+except ValueError as error:
+    parser.error(str(error))
 if not (sdk / "LICENSE.txt").is_file():
     parser.error("SDK license missing")
 build.mkdir(parents=True, exist_ok=True)
@@ -148,7 +151,10 @@ if args.fixture_only:
     raise SystemExit(0)
 digest = hashlib.sha256(binary.read_bytes()).hexdigest()
 experimental = mode != "single"
-manifest = {"sdk": "Adobe DNG SDK 1.7.1 build 2724", "sdk_root": str(sdk),
+manifest = {"sdk": "Adobe DNG SDK 1.7.1 build 2724", "reviewed_release": reviewed_sdk_release,
+            "sdk_readme_sha256": hashlib.sha256((sdk / "DNG_ReadMe.txt").read_bytes()).hexdigest(),
+            "sdk_license_sha256": hashlib.sha256((sdk / "LICENSE.txt").read_bytes()).hexdigest(),
+            "release_selector_sha256": hashlib.sha256((here / "sdk_source_identity.py").read_bytes()).hexdigest(), "sdk_root": str(sdk),
             "sdk_license": str(sdk / "LICENSE.txt"), "executable": str(binary),
             "executable_sha256": digest, "build_id": {"single":"unison-sdk171-2724-v1-single", "area":"unison-sdk171-2724-v2-area-unqualified", "memory":"unison-sdk171-2724-v3-memory-unqualified", "area-memory":"unison-sdk171-2724-v3-area-memory-unqualified"}[mode],
             "source_sha256": hashlib.sha256((here / "driver.cpp").read_bytes()).hexdigest(),

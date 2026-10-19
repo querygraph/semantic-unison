@@ -1,0 +1,44 @@
+{
+  "schema": "unison-sdk-current-release-source-controls/1",
+  "actual_terminal": {
+    "chunk_id": "a1f0de",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "methods": 6,
+  "child_result": {
+    "path": "/private/tmp/unison-sdk-release-controls-20261019-003/RESULT.json",
+    "bytes": 555,
+    "sha256": "39011bb3cb58207936e3129f97e13224ba77c8d2d3397f29b34257d79ca6ed1c"
+  },
+  "source_pins": {
+    "tools/adobe-validator/build.py": "672aceda0e71cdbf638ec11d18e21a1e631b5b567961b7ec39c248a711f9d082",
+    "tools/adobe-validator/sdk_source_identity.py": "f60810cb347104a195ef17ae7a97f055208bdc18d24bb7af07472692392b3595",
+    "tests/sdk_source_identity_test.py": "4881b4a7413499d868f79e0a7eae51c2474c3677b236e26aa8a9569130f23f96"
+  },
+  "actual_official_readme_check": {
+    "actual_terminal": "9b2536/0/NOsession",
+    "source": {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/official-sdk2768-source-index-v2-20261019.json",
+      "bytes": 36181,
+      "sha256": "b299d37774fd743963010f2e57f1cf24c7e421938e70ce3b570a46fda2f26361"
+    },
+    "current2768accepted_by_explicit2768_selector": true,
+    "current2768refused_by2724default": true
+  },
+  "prior_controls": [
+    {
+      "actual_terminal": "22f11f/0",
+      "reason": "initial source guard controls before manifest metadata addition"
+    },
+    {
+      "actual_terminal": "d2fc19/0",
+      "reason": "manifest provenance fields controls before Darwin-only test marker"
+    }
+  ],
+  "SDK_executions": 0,
+  "compiler_children": 0,
+  "build_directories_created_by_refusal": 0,
+  "cpu00_closed": true,
+  "scope": "Actual builder argument/preflight refusal on original synthetic README + source selection; not SDK2768 binary qualification/authentication of arbitrary source trees."
+}

@@ -50,6 +50,13 @@ reporting; unrelated XMPFiles/DocOps features are disabled. Native Windows and
 Linux build recipes are not yet qualified. Use a fresh build directory after
 changing SDK headers or dependency versions.
 
+The existing validator builder requires the **current first release entry** to
+be SDK1.7.1/build2724. Historical2724 notes in a newer SDK README do not qualify
+that source. SDK2768 is currently refused by this validator build path; any
+future fixture-writer-only successor must have separate provenance and must not
+replace the qualified2724 validator. [Source guard controls](../../doc/sdk-current-release-identity-fix-20261019.md)
+exercise actual preflight refusal without executing SDK code.
+
 The build writes `build-manifest.json` containing the executable SHA-256 pin,
 build ID, and SDK location. Qualification adds a result and writes the generated
 fixtures, stderr, receipts, and `qualification.json`. Only use the resulting

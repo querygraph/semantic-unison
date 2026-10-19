@@ -8,9 +8,9 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest official
-  SDKsourcefetch97807/a2bf20/0; indexe27c2f/0 and independenttoolidentityaudit
-  1eb9cb/0 allclosed/whole8EXreacquiredclosed. ZERO SDKexecutions/extractedfiles.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest SDK
+  releaseguardcontrols a1f0de/0/NOsession, child44723reaped0/groupabsent/token00
+  closed. ActualofficialREADME purecheck9b2536/0. No SDK/compiler executions.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -108,6 +108,16 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   exactidleRoot137recovery preserved; V3freshnamespacepass, originalproxywait4
   notclaimed. `doc/final-sync-properties-result-20261019.md`. OtherACL/compressed/
   races/crash/platform scopes remain separate. AllresourcesZERO.
+
+- **SDK builder provenance bug FIXED:** old substringguard accepted2768because
+  its history lists2724, then could labelnewobjects2724. No suchbuild occurred.
+  Existingvalidatorbuilder now requiresfirstcurrentrelease exactly2724; helper
+  recognizes2768only when explicitlyselected, not a runtime/build grant. Six
+  controls a1f0de/0 passed incl actualbuilder synthetic2768refusal beforemkdir,
+  officialsavedREADME9b2536/0 checked. Newmanifest includes release/readme/license/
+  selectorhashes. Qualified2724binary untouched. SDK2768archive STILL unextracted;
+  private safeextraction + separatefixture-writer-only2768build nextpreparation.
+  `doc/sdk-current-release-identity-fix-20261019.md`. No SDK execution yet.
 
 ## Remaining work — do not mark goal complete
 
