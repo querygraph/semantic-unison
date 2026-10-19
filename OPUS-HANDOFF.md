@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:10:39.099428+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:19:24.320630+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -70,20 +70,23 @@ only immediately ready finite operations may coordinate shared IO/Adobe access.
 Standalone2768 fixture writer still has NEVER RUN;
 JXL/12scalarstates and current3codec native merge matrix remain pending.
 
-Current uncommitted source-only follow-up: `tests/workers/restored_mutation.ml`
-is a new deterministic tiny-file recognizer-barrier regression (same-size source
-mutation with exact native mtime restored). It has NOT been compiled or run and
-has no admission, live owner, CPU/IO reservation or Photo hold. Finish source/
-object planning on Unison's own share; only acquire shared IO for actual work.
+Current worker follow-up is committed source a84994dd plus a prepared finite
+owner: `tests/final_worker_state_owner.py`, fourteen exact child commands,
+563sources/638artifact pins, both current Make builds. Plan
+`doc/final-worker-state-plan-v1-20261019.json` SHAcc71c91118e77ad6a957355b55ed7a8df5026909f2946d91af726fef3e85923e; workspace
+`/private/tmp/u-worker-state-39516db25cad` remains UNSTARTED. Eight current owner
+controls actual0f1e3d/0/no session, child69999 reaped0/groupabsent/CPU00 closed.
+Initial783e1c/0 controls preceded explicit C-tool/environment pinning and remain
+historical. No compiler/new worker program/EXIO/SDK operation has run. See
+`doc/worker-state-followup-20261019.md` and source-readiness receipt. Source-only
+capability review preserves no reusable cache; actual native lease21cases are
+not real remount qualification.
 
-Source successor prepared: `component_controls.py --state-controls` now adds
-original late-delivery/cancellation/shutdown and deterministic same-size,
-exact-restored-mtime mutation programs for both current Make builds. Fourteen
-serial contained calls are planned; Python source parsed successfully, but NO
-compiler/test/IO acquisition has run. See
-`doc/worker-state-followup-20261019.md`. Freeze owner/artifact pins before actual
-execution. Capitola has priority; Photo startup29526/bfa660/0 closed and all
-Photo resources released. No blanket Photo hold or new Unison IO grant exists.
+Photo startup29526/bfa660/0 closed; current operator priority is Photo's Capitola
+investigation, announced as a distinct active finite EX/Photo8/UI operation.
+Unison has ZERO resources and NO Photo/Capitola scheduling hold. Do not infer
+that operation's terminal from this handoff; coordinate only when Unison is
+ready for immediate shared IO execution, otherwise continue independent source.
 
 ## Actual current evidence
 

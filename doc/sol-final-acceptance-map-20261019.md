@@ -193,3 +193,23 @@ only for a concrete operation ready for immediate dispatch; release after actual
 terminal and resource settlement, without an automatic successor. Standing8/8
 remains. This changes scheduling, not functional qualification or permissions to
 open Photo originals/Main/catalog/cache.
+
+### Capability-cache interpretation and worker-state successor
+
+Source review of `doc/filesystem-capabilities-plan.md` explicitly preserves the
+absence of a reusable process-wide capability cache. SOL11's stale capability
+hazard is therefore addressed by per-call authoritative kernel results and
+fresh CloneLease/owner observations; a successful clone cannot authorize a later
+operation, and a per-file refusal must not poison a volume. Actual21 native
+lease cases/compiler in the final native-publication receipt cover their named
+owner/observation invalidations. They do not prove real mount-incarnation or
+unmount/remount behavior. A future reusable cache needs separately qualified
+mount-generation bindings; adding a cache just to satisfy a test label would
+increase risk and is not planned.
+
+[Worker follow-up](worker-state-followup-20261019.md) freezes a fourteen-call,
+both-compiler component/late-delivery/same-size-restored-mtime successor. Eight
+current owner controls passed actual0f1e3d/0, CPU00 closed; native execution is
+UNSTARTED. No additional worker/parity/race success is claimed from preparation,
+and no Photo/Capitola hold exists. Existing broad benchmark and final Adobe
+receiving gaps remain open independently.

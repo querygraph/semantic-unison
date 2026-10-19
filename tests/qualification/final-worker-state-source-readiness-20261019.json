@@ -1,0 +1,46 @@
+{
+  "schema": "unison-final-worker-state-source-readiness/1",
+  "status": "SOURCE_PREPARED_EIGHT_OWNER_CONTROLS_PASSED_NATIVE_UNSTARTED",
+  "plan": {
+    "path": "doc/final-worker-state-plan-v1-20261019.json",
+    "sha256": "cc71c91118e77ad6a957355b55ed7a8df5026909f2946d91af726fef3e85923e"
+  },
+  "owner_controls": {
+    "actual_tool_terminal": {
+      "chunk_id": "0f1e3d",
+      "exit_code": 0,
+      "running_session": false
+    },
+    "result": {
+      "child": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 69999,
+        "reaped": true,
+        "returncode": 0
+      },
+      "methods": 8,
+      "no_sync_SDK_or_payload": true,
+      "passed": true,
+      "source_pins": {
+        "tests/final_worker_state_owner.py": "ad339bedd7dc640df3e64510dc28757ccaa2fa2aab0f31acb4b39277994b98f3",
+        "tests/final_worker_state_owner_test.py": "1de0a8af3c84de04ba6485dc00f9f1d0fb7f4b02fa4b9da1edc50144cd2bde40",
+        "tests/workers/component_controls.py": "cf9b49f48602ef9569397d3f1ecd8a5c1b0f5cc6248b60cb77d6c360a9965b74",
+        "tests/workers/restored_mutation.ml": "3967026aa13388c4e1f2b74f5bd389744f0ec110f682acc7399995c97e482c75"
+      }
+    },
+    "result_path": "/private/tmp/unison-final-worker-state-controls-20261019-002/RESULT.json",
+    "result_sha256": "f49f097519d2b189126c61b56dcdd89f91e77aa2a85b3399635ebbe272375f9d",
+    "child_path": "/private/tmp/unison-final-worker-state-controls-20261019-002/CHILD.json",
+    "child_sha256": "3e250e6824fc18f22b4bc69f3bbe9ce75f6f1672de169770467f59e09ff06d3c"
+  },
+  "predecessor_controls_terminal": "783e1c/0/NOsession before installed-tool/environment binding was added",
+  "execution": {
+    "started": false,
+    "CPU_tokens_held": [],
+    "IO_held": false,
+    "Photo_or_Capitola_hold": false
+  },
+  "scope": "Audit/command/import/tempdir owner controls only; no compiler/new worker program executed"
+}
