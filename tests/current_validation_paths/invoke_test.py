@@ -17,7 +17,7 @@ class NormalActor(unittest.TestCase):
         st=self.root.lstat();self.files=Files(self.root,(st.st_dev,st.st_ino));self.events=[];self.fault=None
         packet=dict(workspace=str(self.root),repository=str(Path(__file__).resolve().parents[2]),
             binary=dict(path='/original/current-unison',sha256='a'*64),interpreter=dict(path=PYTHON,sha256='b'*64),
-            rows=[dict(directory=str(self.root/'case'))],limits=dict(CLI_calls=69,per_CLI_observation_seconds=90))
+            rows=[dict(directory=str(self.root/'case'),max_CLI_calls=69)],limits=dict(CLI_calls=69,per_CLI_observation_seconds=90))
         def pair_call(row,env,**kwargs):
             self.events.append('pair')
             if self.fault=='pair':raise UnresolvedOwnership('original inert child retained',retained_fds=(999,))
@@ -130,5 +130,72 @@ class CancellationActor(NormalActor):
         with self.assertRaises(UnresolvedOwnership) as caught:self.session.cancel(self.name,self.incoming,self.previous,policy='require')
         self.assertIn(999,caught.exception.retained_fds);self.assertEqual(self.actor.calls,{})
         self.assertIsNone(self.session.last_outcome)
+
+class ProducerActor(NormalActor):
+    def setUp(self):
+        super().setUp()
+        import hashlib
+        from current_validation_paths.files import epoch
+        from current_validation_paths.producer_evidence_test import fixture as crash_fixture
+        self.actor.rows[str(self.session.root)].update(family='resumed',arguments=['complete','pass'])
+        self.session.interrupt_adapter=self.actor.interrupt;self.crash_fault=None
+        normal_pair=self.actor.pair_call
+        def interrupted_pair(row,env,**kwargs):
+            intent=self.actor.active['intent']
+            if 'producer_interruption' not in intent:return normal_pair(row,env,**kwargs)
+            self.events.append('producer-pair')
+            if self.crash_fault=='pair':raise UnresolvedOwnership('original inert producer transport',retained_fds=(999,))
+            observer=intent['producer_interruption'];data=(self.session.left/'resumed.DNG').read_bytes()[:observer['staged_bytes']]
+            candidate=self.session.right/'.resumed.stage.unison.tmp';candidate.write_bytes(data);st=candidate.lstat()
+            record=dict(source=str(self.session.left/'resumed.DNG'),destination=str(candidate),pid=301,group=301,
+                size=len(data),sha256=hashlib.sha256(data).hexdigest(),device=st.st_dev,inode=st.st_ino,
+                interrupt=observer['kind'],nofile_hard=256)
+            self.session.copy.with_suffix('.calls.jsonl').write_text(json.dumps(record)+'\n')
+            self.session.copy.with_suffix('.release').write_bytes(b'fabricated source-controlled release')
+            _,pair,_=crash_fixture();pair['client']['command']=row['command'];pair['proxy']['command']=kwargs['proxy_command']
+            frame=pair['raw_proxy'];frame['server_command']=intent['server_command'];event=frame['transport']['event']
+            event['stage'].update(record=record,stage_identity=list(epoch(st)),source_sha256=observer['source_sha256'],
+                staged_sha256=observer['staged_sha256'],staged_bytes=len(data))
+            event['release']['marker']=str(self.session.copy.with_suffix('.release'))
+            pair['client']['stderr']=pair['client']['stderr'].replace('pid=201','pid=301')
+            if self.crash_fault=='group':pair['client']['stderr']=pair['client']['stderr'].replace('other-members=0','other-members=unknown')
+            raw=json.dumps(frame).encode();kwargs['persist'](row,pair,raw)
+            if self.crash_fault=='post-stage':candidate.write_bytes(b'changed after captured crash')
+            return pair,raw
+        self.actor.pair_call=interrupted_pair
+    def interrupt(self,kind='complete'):
+        self.actor.rows[str(self.session.root)]['arguments'][0]=kind
+        return self.session.interruption('resumed.DNG',bytes(range(256))*8192+b'synthetic resume tail\n',kind)
+    def test_initial_complete_interruption_then_normal_call_share_global_sequence(self):
+        record=self.interrupt();self.assertEqual(record['size'],len(bytes(range(256))*8192+b'synthetic resume tail\n'))
+        self.assertEqual(self.actor.attempts,1);self.assertEqual(self.session.sequence,1)
+        self.assertEqual(self.actor.calls[1]['verdict']['client_returncode'],3)
+        self.session.sync();self.assertEqual(self.actor.attempts,2);self.assertEqual(self.session.sequence,2)
+        self.assertEqual(self.events,['artifacts','producer-pair','artifacts','pair']);self.actor.close()
+    def test_partial_interruption_keeps_exact_original_staging_inode(self):
+        record=self.interrupt('partial');self.assertEqual(record['size'],len(bytes(range(256))*8192+b'synthetic resume tail\n')//2)
+        self.assertEqual(self.session.root.__class__(record['destination']).lstat().st_ino,record['inode'])
+    def test_producer_cannot_bypass_exhausted_global_budget(self):
+        self.actor.packet['limits']['CLI_calls']=0
+        with self.assertRaises(UnresolvedOwnership):self.interrupt()
+        self.assertEqual(self.events,[]);self.assertEqual(self.actor.attempts,0)
+    def test_unknown_transport_retains_same_inherited_resources(self):
+        self.crash_fault='pair'
+        with self.assertRaises(UnresolvedOwnership) as caught:self.interrupt()
+        self.assertTrue({999,*range(700,709)}<=set(caught.exception.retained_fds))
+        with self.assertRaises(UnresolvedOwnership):self.actor.close()
+    def test_unknown_producer_group_refuses_independent_audit(self):
+        self.crash_fault='group'
+        with self.assertRaises(UnresolvedOwnership):self.interrupt()
+        self.assertEqual(self.actor.calls,{})
+    def test_stage_change_after_raw_capture_retains_even_after_raw_audit(self):
+        self.crash_fault='post-stage'
+        with self.assertRaises(UnresolvedOwnership):self.interrupt()
+        self.assertEqual(len(self.actor.calls),1)
+        with self.assertRaises(UnresolvedOwnership):self.actor.close()
+    def test_nonresumed_case_refuses_interruption_before_process_adapter(self):
+        self.actor.rows[str(self.session.root)]['family']='external'
+        with self.assertRaises(UnresolvedOwnership):self.interrupt()
+        self.assertEqual(self.events,[]);self.assertEqual(self.actor.attempts,0)
 
 if __name__=='__main__':unittest.main()

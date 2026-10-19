@@ -1,0 +1,46 @@
+{
+  "schema": "unison-current-named-producer-integration-controls/1",
+  "actual_tools": [
+    {
+      "session_id": 16625,
+      "terminal_chunk": "dea7ce",
+      "exit_code": 0,
+      "running_session": false,
+      "original_methods": 120,
+      "scope": "complete named-path source-control package before final source-pin preflight and whole-inventory failure classification edits"
+    },
+    {
+      "terminal_chunk": "cd9ea9",
+      "exit_code": 0,
+      "running_session": false,
+      "original_methods": 10,
+      "scope": "final artifact preflight and failed-prefix accounting controls"
+    }
+  ],
+  "source_sha256": {
+    "tests/current_validation_paths/invoke.py": "a112763481ea01873a0f10d864b50f4755f2faa2667144cfc4544046c2090f93",
+    "tests/current_validation_paths/invoke_test.py": "d8799578c30cccc8bba7a2ad559ac837e97b41a1809835224e2ca5748f1d5c1b",
+    "tests/current_validation_paths/session.py": "5cc33674558e172f15fa833e2f41bd9fd1cb56d79e9616b63136af29ee7877f1",
+    "tests/current_validation_paths/producer_proxy.py": "46ff4dc70c016233ab6196b91ac075ba998739470bc46f6e5ec9fb19d1e7ab9a",
+    "tests/current_validation_paths/runtime.py": "e0646abdefefa74a48815ba74dc9b54eb15a1766a3587dd670c0d2bf71dbad0f",
+    "tests/current_validation_paths/runtime_test.py": "7b74da9ebbba7b14fdbc84d2937cb5e004d2fad25c6ee2dacbe2676d136edaec",
+    "tests/current_validation_paths/artifacts_test.py": "4c351eff73f55be2370a9c8e7323fc5b8f6060879da5bb1a20cba64da0a93b90"
+  },
+  "CPU00_closed_after_each": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "initial_failed_control": {
+    "session_id": 93252,
+    "terminal_chunk": "d81e95",
+    "exit_code": 1,
+    "reason": "two hardcoded test source-length expectations off by one; corrected to derive exact original byte length; CPU00 closed"
+  },
+  "scope": "Producer actor global ordered/bounded call integration, durable raw pins, original case-schedule worker source and prefix classification; generated private fixtures and inert transport only",
+  "remaining": [
+    "independent parent raw replay and generated script/profile binding",
+    "owned worker/owner/metadata plan/freezer/admission entry",
+    "actual complete21case stock/Ox runs"
+  ]
+}

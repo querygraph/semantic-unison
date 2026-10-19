@@ -5,12 +5,13 @@ observed. Only then is that owned child SIGKILLed, followed by a one-use marker
 letting the external copy fixture return normally to its native supervisor.
 No counter/helper PID is ever signalled. All ambiguous outcomes retain owners.
 """
-import json,os,select,signal,socket,struct,subprocess,time
+import json,os,select,signal,socket,struct,subprocess,time,sys
 from shared_cpu_pool import UnresolvedOwnership
 from shared_process_owner import retain_after_record
 from private_camera_receiving.close import close_descriptors
 from sdk_merge_receiving.proxy import close_socket,BUFFER
 from sdk_merge_receiving.store import Store
+from sdk_merge_receiving.admission import PYTHON
 from sdk_host_matrix.shared_binding import descriptors
 from clone_interruption_transport import interrupt_owned as interrupt_reserved
 from current_validation_paths.producer_observation import Observer
@@ -144,7 +145,11 @@ def serve(config):
 def proxy_main(config):
     store=None
     try:
-        store=Store(config['directory'],config['identity']);frame=serve(config)
+        if os.getppid()!=config['worker_pid'] or sys.executable!=PYTHON:raise ValueError('actual worker parent and qualified interpreter required')
+        binding=descriptors(config['resource_fds'])
+        store=Store(config['directory'],config['identity'])
+        store.write(config['stage']+'-INHERITED.json',dict(proxy_pid=os.getpid(),worker_pid=os.getppid(),resource_fds=config['resource_fds'],binding=binding))
+        frame=serve(config)
         store.write(config['stage']+'-PROXY.json',frame);store.close();return 0
     except BaseException as error:
         # Closure is never inferred from a recorded failure, including prestart.

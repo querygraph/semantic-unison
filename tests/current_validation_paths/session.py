@@ -56,10 +56,12 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
                 self.copy.with_suffix('.control.json').write_text(json.dumps(dict(interrupt='no')))
                 self.merger=self.root/'merge.py';self.merger.write_text(templates['MERGE'].replace('#!/usr/bin/python3\n','#!'+PYTHON+'\n',1));self.merger.chmod(0o700)
                 self.launcher=self.root/'loopback.py';self.launcher.write_text(launcher);self.launcher.chmod(0o700)
+                self.abort_launcher=self.root/'abort-loopback.py'
+                self.abort_launcher.write_text(launcher.replace('sdk_merge_receiving.child_entry import launcher_main','clone_interruption_transport import launcher_main',1));self.abort_launcher.chmod(0o700)
                 config=self.config('server');config['semanticvolumejobs']='1'
                 (self.server_state/'endpoint.prf').write_text(''.join(k+' = '+v+'\n' for k,v in config.items()))
                 self.control('image.dng')
-                self.prepared_scripts={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in (*self.drivers.values(),self.copy,self.merger,self.launcher)}
+                self.prepared_scripts={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in (*self.drivers.values(),self.copy,self.merger,self.launcher,self.abort_launcher)}
             except UnresolvedOwnership as error:self._retain(error);raise
             except BaseException as error:raise self._retain(error) from error
         def config(self,endpoint):
@@ -101,23 +103,27 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             result=self._run(policy,(),3)
             self.cancel_fixture=None
             return result
+        def _intent(self,policy,options,expected_exit):
+            self.sequence+=1
+            before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
+            intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
+                server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
+                expected_client_exit=expected_exit,before_fake_helper_counts=before,
+                before_external_counts={kind:len(ns['records'](path.with_suffix('.calls.jsonl'))) for kind,path in (('copy',self.copy),('merge',self.merger))},
+                helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},
+                server_profile_sha256=hashlib.sha256((self.server_state/'endpoint.prf').read_bytes()).hexdigest(),
+                resource_release_authorized=False)
+            if self.cancel_fixture is not None:
+                f=self.cancel_fixture
+                intent['cancellation']=dict(name=f['name'],incoming_sha256=hashlib.sha256(f['incoming']).hexdigest(),
+                    incoming_bytes=len(f['incoming']),previous_sha256=hashlib.sha256(f['previous']).hexdigest(),previous_bytes=len(f['previous']))
+            return intent
         def _run(self,policy,options,expected_exit):
             self._ready()
             try:
                 self.last_outcome=None;self.last_verdict=None
-                self.sequence+=1
-                before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
-                intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
-                    server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
-                    expected_client_exit=expected_exit,before_fake_helper_counts=before,
-                    before_external_counts={kind:len(ns['records'](path.with_suffix('.calls.jsonl'))) for kind,path in (('copy',self.copy),('merge',self.merger))},
-                    helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},
-                    server_profile_sha256=hashlib.sha256((self.server_state/'endpoint.prf').read_bytes()).hexdigest(),
-                    resource_release_authorized=False)
-                if self.cancel_fixture is not None:
-                    f=self.cancel_fixture
-                    intent['cancellation']=dict(name=f['name'],incoming_sha256=hashlib.sha256(f['incoming']).hexdigest(),
-                        incoming_bytes=len(f['incoming']),previous_sha256=hashlib.sha256(f['previous']).hexdigest(),previous_bytes=len(f['previous']))
+                intent=self._intent(policy,options,expected_exit)
+                before=intent['before_fake_helper_counts']
                 self.active_intent=intent
                 persist('INTENT',self,intent) # Must finish before any child adapter.
                 outcome=invoke(self,intent);self.last_outcome=outcome
@@ -143,7 +149,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             self._ready()
             try:
                 if kind not in ('complete','partial'):raise ValueError('two original owned producer-interruption controls only')
-                return interrupt(self,name,data,kind)
+                return self.interrupt_adapter(self,name,data,kind)
             except UnresolvedOwnership as error:self._retain(error);raise
             except BaseException as error:raise self._retain(error) from error
     return Session
