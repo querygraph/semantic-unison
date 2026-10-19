@@ -7351,3 +7351,18 @@ max255+inlineperfilelogs require separatebatchconsumer withboundedpinned
 fixtureinventory/rawartifactrefs/recursiveallfileverification/classcounts.
 CORPUS-WORKLOADS.md specifies remainingintegration; cannotbypassoldlimits.
 No implicit payloadgrant. Photo-firsthold unchanged; goalACTIVE.
+
+
+## 2026-10-19 bounded batch evidence source successor
+
+Added bench/sync/batch_artifacts.py and four original in-memory controls.
+Exact bytes become <=256KiB base64 chunks through qualified immutable Store,
+with <=4MiB artifact bound and per-chunk/whole SHA+size references. Overflow
+and tamper refuse; errors propagate without cleanup/retry/resource authority.
+Actual owning tool ed5368/exit0/no session: four tests passed under canonical
+Unison token00, descriptor qualified-closed; no children, EXIO, Adobe or payload.
+No live corpus dispatch or Store uncertainty qualification claimed. Still open:
+raw-byte capture integration, bounded per-sample inventory and batch dispatcher.
+User proposes postponing Photo IO/Adobe work until the end and then direct
+Unison qualification; active Photo recovery must close normally before handover.
+No active Photo owner was interrupted and no Adobe takeover claimed.

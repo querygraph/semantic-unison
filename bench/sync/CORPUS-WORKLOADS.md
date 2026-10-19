@@ -49,3 +49,20 @@ see tests/qualification/generated-corpus-source-controls-actual-20261019.json.
 Photo-first scheduling holds new IO/native/SDK/benchmark dispatch. This source
 contract does not override that hold or authorize a payload run. Concurrent-editor
 and filesystem/network topology workloads still require their own implementations.
+
+## Bounded artifact source successor
+
+`batch_artifacts.py` publishes byte-exact stdout/stderr or serialized inventory
+bytes through the existing qualified immutable Store. Each artifact is limited
+to4MiB, split into256KiB base64 JSON chunks below Store's2MiB record bound;
+aggregate evidence contains only chunk size/SHA references and a whole-byte SHA.
+Empty streams are explicit. Overflow, tampering and false lengths refuse; no
+truncation or UTF8-replacement round trip is accepted. Publication errors retain
+partial files and propagate the original ownership carrier without cleanup or
+numeric FD retry. Store/process/resource ownership remains with the caller.
+
+Four original in-memory controls passed on2026-10-19, owning tool terminal
+ed5368/exit0/no session, under canonical Unison token00 then qualified close.
+This proves the encoding/reference mechanism, not actual Store fault injection,
+raw stream capture, corpus dispatch or child settlement. Runner integration and
+bounded inventory serialization remain outstanding; dispatcher_ready stays false.
