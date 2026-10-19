@@ -6472,3 +6472,11 @@ Sevenof10/126rows378CLI closed; Ox8/stockauto/Oxauto remain.
 SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
 Preexecpublisher1fa37c/1 refused metadata equality(extra bytesfield) BEFOREadmission/workspace; comparison corrected, runtime sources unchanged.
 Postclosuresealer c2ff35/1 refused zerobyte stderr in nonempty metadata reader; hash corrected from savedbytes, no runtime repeated.
+
+
+### Ox8 temporary18 ACTUAL PASS/CLOSED
+Actual22458/b0ce77→d16f39/0/no session,parent82759/worker82782;18rows54CLI exact,workerreaped0/groupsabsent/CPU18EXclosed/source53unchanged.
+Workspace02f27a5d1e7f43d59f7f1fddbc5378ec,admission4ddd20bbconsumedonce.
+OWNER-RETURN 670cbdaf314b82b5789a604cb48a67cd728225bf41a6fc27bf03ccbdd86f3490; evidenceauto-cohort-ox8-actual-20261018.json.
+Eightof10/144rows432CLI closed; stockauto/Oxauto remain freshserial.
+SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
