@@ -226,3 +226,17 @@ difference is only four timestamp/wait4-usage observations, reverse-hash checked
 against both saved snapshots. Parser/fixture/kernel source matches current;
 current helper was NOT retroactively used. No new native/SDK/payload/EXIO or
 Photo hold; remaining XML/merge/receiving cases stay independently open.
+
+### Public fork identity — user-directed rename
+
+GitHub repository1417214876 was renamed from querygraph/unison to
+[querygraph/semantic-unison](https://github.com/querygraph/semantic-unison), still
+PUBLIC and a fork of bcpierce00/unison. Actual rename79a30d/0 and independent
+readbackdfb9cf/0 preserve repository ID and OPEN DRAFT PR13 (master ←
+integration/sol-consolidated-review). The shared local `fork` URL and default
+push remote now name semantic-unison; `origin` remains original upstream.
+No code push, merge or upstream submission occurred. Historical old-name
+receipts remain unchanged. The user-requested
+[I-AM-AN-HONEST-WORKING-LLM.md](../I-AM-AN-HONEST-WORKING-LLM.md) states this fork's
+AI-assisted approach, credits upstream, respects its contribution boundary,
+and distinguishes tested scopes from unfinished qualification.

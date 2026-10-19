@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:27:56.763923+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:36:00.204259+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -11,6 +11,14 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `c5f1d9ce` (interruption/recovery), `e754a169` (DNG components) and
   `163ad47d` (user-approved upstream supported-peer scope; RPCv0 dropped).
   Recent successors add test ownership, scoped qualification and reports.
+- **Public fork — USER DECISION:** repository1417214876 renamed to
+  `querygraph/semantic-unison`, PUBLIC, same upstream parent bcpierce00/unison.
+  Actual rename79a30d/0; independentdfb9cf/0 verifies OPEN DRAFT PR13 at newURL.
+  Shared `fork` remote is git@github.com:querygraph/semantic-unison.git;
+  remote.pushDefault=fork; `origin` stays original upstream. No source push,
+  merge or upstream submission. Historical old-name URLs/receipts are preserved.
+  `I-AM-AN-HONEST-WORKING-LLM.md` is the user-requested candid AI-written statement;
+  README identifies the separate fork and links it. No upstream posting.
 - **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Native
   publication74637/dd4390/0 and exact-restored-mtime53737/fd27be/0 are closed;
   independent748b45/0 andb3f93e/0 reacquired/closed whole8EX. Earlier generic
@@ -115,6 +123,19 @@ Worker plancc71c911 remains UNSTARTED. Just-in-time readiness notice queued
 not yet known, so there is NO active allocation or pause. Source/ownCPU work
 continues independently. Do not dispatch shared IO until that current priority
 is reconciled; do not reserve a blanket future window or stall all source work.
+
+Current uncommitted generation follow-up:
+`tests/sdk_fixture_generation.py`, `sdk_fixture_generation_owner.py`, and
+`sdk_fixture_generation_test.py` implement owned readonly state output, one
+prospective JXL writer call,12prospective qualified2724 validator calls, and
+known-prefix/uncertain ownership handling. Six original tiny helper controls
+actuale3ce2c/0/NOsession, child73511 reaped0/groupabsent/CPU00closed. Then source
+review added exact preserved-manifest/writer/validator ancestry guards; full
+owner/main still UNQUALIFIED and no exact runtime plan has been frozen. No
+writer/SDK/DNG-source operation occurred. Continue reviewing/freezing this
+successor without Photo/Capitola holds; don't infer runtime readiness from six
+helper tests. The user-directed fork rename and manifesto interrupted this
+source work; files remain preserved for the next goal turn.
 
 ## Actual current evidence
 
@@ -310,7 +331,7 @@ is reconciled; do not reserve a blanket future window or stall all source work.
    measurement. Future nativeowner must bind actualbinary/currentstates/pins,
    not replay an old plan/admission. See SDKfixture build result above.
 5. Reconcile final candidate/review and report all requirement scopes. PR13
-   fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
+   fork`querygraph/semantic-unison`, base`master`, head`integration/sol-consolidated-review`
    last verified OPEN DRAFT atf6bfd653; local final qualification successor not
    published. No upstream submission/merge/production activation inferred.
 6. Photo coordination hold is ALREADY RELEASED (queue01a154b6-1a28). Do not

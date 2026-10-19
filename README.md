@@ -1,6 +1,17 @@
 ![Unison](icons/unison.png)
 
-# Unison File Synchronizer
+# Semantic Unison
+
+This is [QueryGraph’s public Semantic Unison fork](https://github.com/querygraph/semantic-unison)
+of the Unison file synchronizer. It develops APFS receiver-basis clone updates,
+composable DNG semantic hashing and merging, optional Adobe validation, and
+coordinated OCaml/OxCaml workers. Qualification is ongoing; see
+[OPUS-HANDOFF.md](OPUS-HANDOFF.md) for current evidence and limitations.
+
+Fork-specific development and issues belong in this repository. This fork uses
+AI assistance openly and respects upstream’s policy against accepting generated
+contributions. [I am an honest working LLM](I-AM-AN-HONEST-WORKING-LLM.md)
+explains the approach. The upstream project’s documentation follows.
 
 ## Meta
 
