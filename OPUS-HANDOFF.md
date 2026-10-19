@@ -1,44 +1,79 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
-# Current checkpoint — larger workload qualification
+# Current checkpoint — final qualification source work; Photo goes first
 
-Updated UTC 2026-10-19T06:30:19.422171+00:00. Goal ACTIVE and incomplete.
+Updated UTC 2026-10-19T09:27:28.213321+00:00. Goal ACTIVE and incomplete. This block supersedes historical
+scheduling statements below; preserve original receipts and their scopes.
 
-- Active source worktree `/Users/alexy/src/unison-final-adobe-20261019`, branch
-  `implementation/final-adobe-qualification` (local SDK-merge source successor).
-  The benchmark worktree `/Users/alexy/src/unison-cpu-ceiling-20261018` stays frozen
-  for remaining plans; runtime-harness source63fd4c8a, draft review headf6bfd653.
-  Production remains `971271a8`; subsequent work is Python test tooling/evidence.
-- **No live owned jobs or resource descriptors.** Latest larger128stock1:
-  actual52223/3c264e/0/no session, worker97794reaped0/groupempty/CPU8EXclosed.
- 18rows54CLI passed. See `doc/larger128-stock1-checkpoint-20261019.md`.
-  No replay of consumedc08b51ff;29otherlargercohorts remainunstarted.
-- Completed: ten32MiB worker cohorts,180rows540CLI, actualparent/group/FDclosure;
-  combined report `doc/auto-cohort-all10-report-20261018.md`.
-  Temporary18 ended, standing8Unison/8Photo/2system restored.
-- Current Adobe qualification: mixed probes15556/682f67/0; full receiving
-  67541/5343fe/0 (2CLI/4SDK); all-scanned45243/e035b2/0 (4CLI/4SDK).
-  All actually CLOSED/resources released. Generated inputs only. Raw digests
-  valid/decodeSUCCESS/errors0, fourpaddingwarnings retained per SDK call.
-- Larger source successor passed46controls; three frozen size indexes under
-  `doc/auto-cohort-qualification-larger-{128,512,2048}-v1-20261019`.
-  Series82ee83dc covers30plannedcohorts; first128stock1 completed;29 remain unstarted.
-  No new18 grant. Conditional `fda6288a` is NOT ACTIVE/admission; activation
-  requires all12 shared8 actual closures, PhotoCPU drain and a new ACTIVE record.
-- Photo IO/native remains unstarted by user Photo-at-end steering; CPU8 source
-  work may continue. Main remains Photo-exclusive. No SDK/Photo job live here.
-- First128 actualclosure reached the runtime-estimate review checkpoint. Further
-  payload/SDK starts await the operator schedulingreview raisedbyPhoto; source
-  work continues. Preliminary
-  full30 byte-scaling estimate18–30h (~23h central), not a runtime guarantee or
-  continuousquiet grant. Preserve scope/samples; review schedule before blindly
-  starting later work. No new fuzz/sanitizer campaigns.
-- Remaining: final receiving-path/policy/merge evidence binding, larger and other
-  prescribed workload/topology comparisons, explicit platform/resource limits,
-  final source/review delivery, then any Photo workflow verification at the end.
-  Unknown MakerNotes remain opaque, not a deployment blocker. No production
-  activation/upstream submission or PR13 merge authority inferred.
+- **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
+  `implementation/final-adobe-qualification`. Last implementation/evidence commit
+  before this checkpoint: `fc6c2065`. No `src/` differences from frozen review
+  head `f6bfd653`; production remains `971271a8`. Local successor is qualification
+  tooling/evidence, not another production implementation or native pass.
+- **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
+  Unison00..07 / Photo08..15 / system16..17 remains. User now lets Photo go first.
+  Photo reported bulk49291/5abba8/137 recovery CLOSED (not bulk success),16total
+  published awaiting recognition, next group17..24 refused pre-native. Photo
+  retains scheduling priority for its source fix/fresh retry. HOLD new Unison
+  EXIO/native/SDK/benchmark dispatch until its actual coordination release;
+  source/CPU controls within standing8 may continue. No temporary18 grant.
+- **Published review:** PR13 OPEN DRAFT, fork`querygraph/unison`, base`master`,
+  head`integration/sol-consolidated-review` exactf6bfd6533477f265aa988a6cc24790753a2b3638.
+  Actual GitHub readbackfd0f5c/0 confirms. Local final harness is not published
+  into that head. No upstream submission, merge or production activation inferred.
+- **Actual current tests:** stock/Ox167transfer checks each +9negative participants
+  each renewed at6edaf71a, actualtool10579/6aaca5/0; all120 compiler/probe children
+  and both runners settled/CPU4closed. Receipt`final-transfer-controls-actual-20261019.json`.
+  Extended-parser runner eight injected ownership/import/close controls and CLI
+  help f63f6b/0 closed; this is NOT extended-parser/native qualification.
+- **Case maps:** `doc/sol-{xmp,clone,dng}-final-case-map-20261019.md` and
+  `doc/sol-validation-policy-final-map-20261019.md` link exact test bodies and
+  current saved bindings. Their explicit component scopes do not prove the
+  full goal. Current SDE127commands2224asserts/compiler, scalar343truth-table,
+  range960matrix, and warning11cases/compiler remain source-bound as documented.
+- **Prepared next parser run:** `doc/final-extended-profile-pair-plan-v1-20261019.json`,
+  33sourcepins, stock/Ox qualifiedcompilers,1253fixed cases/compiler+3negative
+  mutations+4sparseoffsetcases. Workspace absent at preparation; UNADMITTED and
+  unstarted. Serial compiler, Unison8+EXglobal. Recheck before any future run.
+- **Final SDK merge source:** entry/freezer/owner/worker/proxy/launcher/journal/
+  clone install+outputs/independentparent audit implemented at3db68092. Parent
+  audit independently binds9CLI/rawproxy/6helpers,19events and6freshfinalhashes;
+  source review found no needed change. Original directed controls passed;
+  native matrix has NOT run. Need authenticated3codec/12scalarstate inputs.
+- **Fixture recovery:** old2724SDK tree is a survivingdirectory skeleton only;
+  ReadMe/license/dng_host.h/JXLCMakeLists absent. Oldfixturewriter+buildmanifest
+  absent. Qualified2724validator and recent uncompressed/JPEG generated files
+  survive metadata; JXL and full12states missing. Historical manifest's
+  source_sha256 hashes DRIVER.CPP, notSDKtree. Officiallatest page lists2768;
+  never label it exact2724restoration. Newsource/build requires distinct honest
+  ancestry; preserve validator and all3codecs/6000x4000. No download/build/run
+  yet. See`doc/sdk-generated-fixture-source-recovery-review-v1-20261019.json`.
+- **Native evidence already complete:** current mixed15556/682f67/0, fullreceiving
+  67541/5343fe/0, allscanned45243/e035b2/0, all CLOSED. TenSDKcalls with rawdigest
+  valid/decodeSUCCESS/errors0 and4edgepaddingwarnings each retained. Historical
+  threecodec merge43830/699a51/0 remains predecessor scope, not current execution.
+- **Benchmarks:** ten32MiBcohorts180rows540CLI actualclosed. First128stock1
+  52223/3c264e/0 closed18rows54CLI;29largercohorts unstarted. Full30plan estimate
+  18–30h/central23h remains a scheduling projection. No further payload starts
+  before operator scheduling review; conditional18fda6288a is NOT ACTIVE.
 
-Older checkpoints below are historical; use this checkpoint and actual receipts.
+## Remaining work toward full SOL acceptance
+
+1. Run full final-source extended parser and inherited-rsync/publication/property
+   checks after IO release; retain explicit filesystem/platform limitations.
+2. Recover authentic generated SDK fixtures, freeze current9CLI/6SDK merge plan,
+   then run direct Unison Adobe qualification with fresh owned IO coordination.
+   Finish receiving off/warn/require/reuse/resume/merge and negative-finding scope.
+3. Complete prescribed benchmark sizes, workloads and available topologies;
+   reconcile actual upstream baselines and expose unsupported facilities honestly.
+4. Finish requirement-by-requirement evidence binding and final review delivery.
+   Unknown MakerNotes are opaque/incrementally refinable, not a deployment gate.
+   Positive hardRSS requests refuse here; estimates/samples are not enforcement.
+5. Any final Photo workflow verification comes after Unison readiness and is
+   separately coordinated. No permission to modify Main/cache/original photos.
+
+Previous turn classification: PROGRESS (source/evidence state changed); this
+checkpoint is source-only work, not a claim that an unobserved job is live or
+that waiting for Photo alone completes/blocks the goal.
 <!-- END-CURRENT-UNISON-CHECKPOINT -->
 
 # Unison implementation handoff
