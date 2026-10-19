@@ -134,5 +134,27 @@ records. Nine methods passed with all 154 under CPU00, then closed.
 [Evidence](../qualification/current-named-parent-full-replay-controls-actual-20261019.json).
 A call whose own audit fails is never reported by the worker, so the reader
 refuses that run as unresolved rather than an ordinary failed prefix, matching
-worker retention. The owned entry/plan/admission remains before any runtime
-request.
+worker retention. 
+## Owned entry, freezer and admission
+
+`freeze.py` writes one PLAN/REQUEST/INDEX per compiler under
+`doc/current-named-receiving-<compiler>-*`: original 21 rows and limits, the
+pinned legacy source, every execution and production source, and the build
+receipt naming the binary (used as both client and server). `metadata.py`
+re-authenticates all of it without opening executables. `admission.py` checks
+one fresh admission bound to that plan, command, compiler and deadline.
+
+`entry.py --check-plan` is metadata only. Owner mode (`owner.py`) consumes the
+workspace with mkdir, takes EXglobal IO then CPU00..07, hashes executables,
+starts the worker, waits, and calls `parent_runtime.audit`. That binds the
+worker terminal, inherited grant, WORKER-BINDING and WORKER-CLOSED records, then
+replays every call through `parent_io.Reader`. Only then are CPU and IO
+closed. A settled failed prefix closes and exits 1; any unknown state retains
+every lease, child and directory and exits through the retained diagnostic.
+
+`inventory_test.py` checks that every first-party module the run imports is
+pinned; only two uncalled generic dispatcher functions are excluded.
+Twenty-five methods passed with all 179 under CPU00, then closed.
+[Evidence](../qualification/current-named-entry-controls-actual-20261019.json).
+Stock and Ox plans are frozen and pass `--check-plan`. No admission has been
+written and no worker has run.

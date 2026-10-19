@@ -1,0 +1,89 @@
+{
+  "schema": "unison-current-named-entry-controls/1",
+  "source_commit": "f38018b3",
+  "actual_tool": {
+    "runner": "in-process unittest under standing CPU00 lease (scratchpad runner, not committed)",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 179,
+  "new_entry_methods": 25,
+  "shared_binding_consumers_rerun": {
+    "methods": 33,
+    "passed": true,
+    "note": "boundary_test needs its own directory on sys.path; first load attempt was a runner import error, not a failure"
+  },
+  "source_sha256": {
+    "tests/current_validation_paths/admission.py": "dc2b687732051d6cea1c80683076bbd0989a6478a59fa19a750c3e8ff1027e31",
+    "tests/current_validation_paths/admission_test.py": "78499b2d231bb8f45120523036438d42bec12c8136225a2912a145a9b77f3ea6",
+    "tests/current_validation_paths/entry.py": "d6e03ab1c6d43abde5969068263fe4dfa3a850c2194646f4e4b63d761c9b55e9",
+    "tests/current_validation_paths/entry_test.py": "c7059f2941ffd60b56df0c24499e917b50c2772e09e960e9d18a1697864b7e65",
+    "tests/current_validation_paths/freeze.py": "d8f3a241f18f3020a84134ce883b9300ef3ba86329a73d497289c140539a48d8",
+    "tests/current_validation_paths/freeze_test.py": "e164acbfe5dd2ab15c9ea8e000f9f5b54980ed84cccbc320cd794672b16da7ff",
+    "tests/current_validation_paths/inventory.py": "f97ef8402712d1d22fa6bb52ed3f33028dcdb333fec8da7bec349e6c5ffe170e",
+    "tests/current_validation_paths/inventory_test.py": "24a311fd0ce6bff42c2b4137daa979bdbc5c8a418c89c11b61a5ee6b11387a2b",
+    "tests/current_validation_paths/metadata.py": "6645630828438dbfca06138d5563080a53dc8cb7264a77d83b9753a3f796cbbb",
+    "tests/current_validation_paths/owner.py": "0ed76e09f865f33a37b8373923247c85e0a7dfa4b3c881f2a30fefc50bef4fa7",
+    "tests/current_validation_paths/owner_test.py": "fb32b4bb3b2e3c85cc64221560c471b69b885bca215afd012dec387368f3afa2",
+    "tests/current_validation_paths/parent_runtime.py": "e71da4c060d4db700ddee2d8aab23e4404b9782a2bfda34277bbf6e9116caebb",
+    "tests/current_validation_paths/parent_runtime_test.py": "42b4e5a39ec0bf271eeccb0231802d1555eb629a42db988159e59ffcc4fad232",
+    "tests/sdk_host_matrix/shared_binding.py": "4a58ce84926e90a856b81a76c04d1eb50790b132f44c198b880148e90e6976e6"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "payload_opened": false,
+  "inventory_closure": {
+    "method": "static AST closure of entry/freeze/producer_proxy/child_entry/clone_interruption_transport imports including function-local ones",
+    "excluded": [
+      "tests/shared_dispatch.py:checked_io_request",
+      "tests/shared_dispatch.py:run"
+    ],
+    "reason": "generic multi-harness dispatcher functions never called by this run; the module is imported only for manifest constants"
+  },
+  "frozen_plans": {
+    "stock": {
+      "PLAN.json": "cb142f069ef3afe63a1474d9d441e63fbc718d447348281eefd5c8625018b921",
+      "REQUEST.json": "d25b1a0deaa9739dddaba7cd28407f1ef563d24679769425cb282bc3033632a7",
+      "INDEX.json": "f2d2a0dcbb1af5a6a2f984ce96bb9cea7607d4e6974b68ce1a13dd79c213eaca",
+      "workspace": "/private/tmp/u-vpath-3b4b03528cfa4f05",
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison",
+        "sha256": "7d739bc8e3e9b0a8cef7f1b15cd5a276c530524d0313b15daf538de53d8bca8a"
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+        "sha256": "71e12a87fded7739949df93aceb3f006d115514742f751ac189e388cdd9a53e8"
+      },
+      "execution_sources": 232,
+      "production_sources": 329
+    },
+    "ox": {
+      "PLAN.json": "26556ea88ce9f30c69cf38f2c505424872714cf41846a46c0b032dae98fac45a",
+      "REQUEST.json": "d7057c44532b8c42f4af5b357594a7f8c819d66ccd649693a6af06e5028901be",
+      "INDEX.json": "2b41ead6600451a27505103501cdd2818e3a4c594dff1d1b8b59fe6a8f319ef8",
+      "workspace": "/private/tmp/u-vpath-7ef3b742c7d245e4",
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4elxvue8/src/unison",
+        "sha256": "950e1f5c2c7a511ed19fc31ed644e8b42d05fc5a0e8bd005a78f633c75752065"
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json",
+        "sha256": "4b00fc9ad5da85d94c545c3d6b59f9ff1d3fe35e31994d255d95bc264a21fd64"
+      },
+      "execution_sources": 232,
+      "production_sources": 329
+    }
+  },
+  "frozen_by": "in-process freeze.prepare + entry.main --check-plan under CPU00; metadata only, executables not opened",
+  "initial_failed_controls": {
+    "description": "first inventory closure run failed because function-local imports in shared_dispatch fanned into unrelated harnesses; closure now excludes exactly those two uncalled functions"
+  },
+  "scheduling": "User stated 2026-10-19 that Photo is paused; no Photo/Capitola clearance is required. Pool locks still acquired by the owner. Admission is written locally.",
+  "scope": "Entry, freezer, admission, metadata preflight, owner kernel, owner-side parent join and inventory closure. No actual worker, CLI, SDK or native run.",
+  "remaining": [
+    "write one fresh admission per compiler and run stock then Ox owners",
+    "post-run independent saved-record audit and result report"
+  ]
+}
