@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T17:29:09.256062+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T17:42:45.982612+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -73,6 +73,21 @@ admissions or statements that consumed jobs remain unstarted.
 - Old01 remains SUPERSEDED_UNSTARTED/noadmission. No pending SDK request or hold.
   Next currentnamedresume/reuse/external coverage and remaining measurement/
   platform/finalrequirement joins. No reuse/replay/automaticnativegrant.
+
+## Current named receiving successor — source work only
+
+- `tests/current_validation_paths/contract.py` preservesall21defaultlegacycases
+  bysourceASTinclusion/order. Declaredpercompiler69CLI/54fakevalidators includes
+  4producerinterruptions+2clientSIGINT controls; not measuredruntimecounts.
+  Stock/Ox runseparately under futurefinitegrants, noSDK/photos.
+- `original.py` exposes7casefamilies withoutoldmain/barecancel, requiresowned
+  Session constructor/command/sync/interruption, Pathread/write/open andcancel
+  actor source replacements. Seven original sourcecontrols96cdee/0 passed;
+  CPU00closed/noinstance/child/EX/SDK/fixtureconstructed. InitialASTTry omission
+  d28aea/1 andunchangedSessionacceptancecea650/1 preserved/corrected, noresources.
+- Implement actualownedPath/retainedSession+signalactors+rawfullprefixaudit next;
+  no nativeentry/request/admission exists yet. Do not runlegacybareharness or
+  swapproductionChelper forinheritedgroupstub. README maps exactscope/nextwork.
 
 ## Current three-codec SDK merge receiving — ACTUAL PASS/CLOSED
 

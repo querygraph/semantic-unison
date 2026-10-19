@@ -1,0 +1,41 @@
+{
+  "schema": "unison-current-named-path-source-contract/1",
+  "tests_run": 7,
+  "success": true,
+  "source_sha256": {
+    "tests/current_validation_paths/contract_test.py": "d74150c397a7b79b50956b4985e7c9e946ab0264753359077b12068dbb1c9ed8",
+    "tests/current_validation_paths/original_test.py": "6c47ba65060c1da33c875bd6043821fb8f8251eba73cd7789b1a738f2a019308",
+    "tests/current_validation_paths/original.py": "d3cc990d1ea46e39135ffff74be0733478684d8461ef3b26f05cc3d6a2e71e48",
+    "tests/current_validation_paths/contract.py": "7d639da3849d60303e1148556242456465d5ae3f87e3e9f0037c1a71e4af6273",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+  },
+  "source_case_count": 21,
+  "declared_per_compiler_CLI": 69,
+  "declared_per_compiler_fake_helpers": 54,
+  "actual_CLI_or_SDK_calls": 0,
+  "EX_acquired": false,
+  "fixture_constructed": false,
+  "scope": "Original source AST inventory/definition adapter only; no retained Session/cancel actor/owned Path/runtime implementation or native qualification yet",
+  "CPU00_closed": true,
+  "actual_tool": {
+    "terminal_chunk": "96cdee",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "earlier_source_attempts": [
+    {
+      "terminal_chunk": "d28aea",
+      "exit_code": 1,
+      "reason": "AST inventory initially missed main try-body; recursion corrected",
+      "CPU00_closed": true,
+      "children": 0
+    },
+    {
+      "terminal_chunk": "cea650",
+      "exit_code": 1,
+      "reason": "Adapter initially accepted unchanged legacy Session; strict successor and method-identity checks added",
+      "CPU00_closed": true,
+      "children": 0
+    }
+  ]
+}
