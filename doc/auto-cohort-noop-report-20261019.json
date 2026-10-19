@@ -1,0 +1,3311 @@
+{
+  "schema": "unison-saved-noop-report/1",
+  "state": "SAVED_OBSERVATIONS_ONLY",
+  "raw_samples": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7295707430457696,
+      "native_client_lifetime_seconds": 0.6315804510377347,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7287603530567139,
+      "native_client_lifetime_seconds": 0.6313444069819525,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7402451270027086,
+      "native_client_lifetime_seconds": 0.6344936039531603,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.732191329007037,
+      "native_client_lifetime_seconds": 0.6300597700756043,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7594405149575323,
+      "native_client_lifetime_seconds": 0.6548707650508732,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7428833979647607,
+      "native_client_lifetime_seconds": 0.6379481819458306,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.744746784097515,
+      "native_client_lifetime_seconds": 0.6393892311025411,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7312972679501399,
+      "native_client_lifetime_seconds": 0.6300898169865832,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.743412212934345,
+      "native_client_lifetime_seconds": 0.639549101004377,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7381747950566933,
+      "native_client_lifetime_seconds": 0.6318148439750075,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7437153119826689,
+      "native_client_lifetime_seconds": 0.6316111900378019,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7376632279483601,
+      "native_client_lifetime_seconds": 0.6340135870268568,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7427621530368924,
+      "native_client_lifetime_seconds": 0.6367516230093315,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7417919980362058,
+      "native_client_lifetime_seconds": 0.6372864079894498,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7599814069690183,
+      "native_client_lifetime_seconds": 0.6524403590010479,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7522645259741694,
+      "native_client_lifetime_seconds": 0.6394923080224544,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7503932439722121,
+      "native_client_lifetime_seconds": 0.6397341729607433,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7526895250193775,
+      "native_client_lifetime_seconds": 0.6430075929965824,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+        "bytes": 1987945
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.724060463020578,
+      "native_client_lifetime_seconds": 0.6267792580183595,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7202872679335997,
+      "native_client_lifetime_seconds": 0.6217708950862288,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7311502869706601,
+      "native_client_lifetime_seconds": 0.6265710749430582,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7317938390187919,
+      "native_client_lifetime_seconds": 0.6318719140253961,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7263295899610966,
+      "native_client_lifetime_seconds": 0.6255127689801157,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7367114429362118,
+      "native_client_lifetime_seconds": 0.6343870279379189,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7362373049836606,
+      "native_client_lifetime_seconds": 0.628874919959344,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7397541040554643,
+      "native_client_lifetime_seconds": 0.6333543990040198,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7383861609268934,
+      "native_client_lifetime_seconds": 0.6313457019859925,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7386869760230184,
+      "native_client_lifetime_seconds": 0.6348368549952284,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7433675749925897,
+      "native_client_lifetime_seconds": 0.6362493770429865,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7496612600516528,
+      "native_client_lifetime_seconds": 0.6421133310068399,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7453599030850455,
+      "native_client_lifetime_seconds": 0.6375862599816173,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7483030599541962,
+      "native_client_lifetime_seconds": 0.636041671037674,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7477899099467322,
+      "native_client_lifetime_seconds": 0.6379152819281444,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7436765269376338,
+      "native_client_lifetime_seconds": 0.6354819670086727,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7455961389932781,
+      "native_client_lifetime_seconds": 0.6328237050911412,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7476821370655671,
+      "native_client_lifetime_seconds": 0.637938475003466,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+        "bytes": 1989485
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7256084780674428,
+      "native_client_lifetime_seconds": 0.6317600129405037,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7240957319736481,
+      "native_client_lifetime_seconds": 0.6252563589951023,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7322141230106354,
+      "native_client_lifetime_seconds": 0.6316832700977102,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7567312319297343,
+      "native_client_lifetime_seconds": 0.6537209700327367,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7400065099354833,
+      "native_client_lifetime_seconds": 0.6322818580083549,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7350254149641842,
+      "native_client_lifetime_seconds": 0.6326045059831813,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7393381609581411,
+      "native_client_lifetime_seconds": 0.6363626408856362,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7442457729484886,
+      "native_client_lifetime_seconds": 0.643460875027813,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7462017179932445,
+      "native_client_lifetime_seconds": 0.641916605993174,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7489956769859418,
+      "native_client_lifetime_seconds": 0.6393107959302142,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7406704230234027,
+      "native_client_lifetime_seconds": 0.6373274279758334,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7443263540044427,
+      "native_client_lifetime_seconds": 0.640270497999154,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7418404079508036,
+      "native_client_lifetime_seconds": 0.6351699599763379,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7534879330778494,
+      "native_client_lifetime_seconds": 0.6440158259356394,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7443673259112984,
+      "native_client_lifetime_seconds": 0.6333119729533792,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7503999000182375,
+      "native_client_lifetime_seconds": 0.6430286898976192,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7513226179871708,
+      "native_client_lifetime_seconds": 0.6403005269821733,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.755333321983926,
+      "native_client_lifetime_seconds": 0.6460696590365842,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+        "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+        "bytes": 1987986
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7366146290441975,
+      "native_client_lifetime_seconds": 0.6383826880482957,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.73902309499681,
+      "native_client_lifetime_seconds": 0.6348528190283105,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7332525759702548,
+      "native_client_lifetime_seconds": 0.631947900983505,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7426081789890304,
+      "native_client_lifetime_seconds": 0.6348272929899395,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.744441626011394,
+      "native_client_lifetime_seconds": 0.6367382860044017,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7445776850217953,
+      "native_client_lifetime_seconds": 0.639910471974872,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7513358109863475,
+      "native_client_lifetime_seconds": 0.6401312169618905,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7439381380099803,
+      "native_client_lifetime_seconds": 0.6356039410457015,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7603164719184861,
+      "native_client_lifetime_seconds": 0.6471042089397088,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7550355569692329,
+      "native_client_lifetime_seconds": 0.6444682870060205,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7501621709670871,
+      "native_client_lifetime_seconds": 0.6428506480297074,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7435182209592313,
+      "native_client_lifetime_seconds": 0.6337514229817316,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7541610819753259,
+      "native_client_lifetime_seconds": 0.6432629419723526,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7444097379921004,
+      "native_client_lifetime_seconds": 0.6387144970940426,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7463232309091836,
+      "native_client_lifetime_seconds": 0.636100273928605,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.73960753204301,
+      "native_client_lifetime_seconds": 0.6297699399292469,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7436844289768487,
+      "native_client_lifetime_seconds": 0.6334825799567625,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7523266039788723,
+      "native_client_lifetime_seconds": 0.6399378749774769,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+        "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+        "bytes": 1989230
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7234521080972627,
+      "native_client_lifetime_seconds": 0.6259336860384792,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7370257959701121,
+      "native_client_lifetime_seconds": 0.6349236071109772,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7369168848963454,
+      "native_client_lifetime_seconds": 0.6346954359905794,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7379279859596863,
+      "native_client_lifetime_seconds": 0.6346603829879314,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7413598120911047,
+      "native_client_lifetime_seconds": 0.6361194300698116,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7396601309301332,
+      "native_client_lifetime_seconds": 0.6329875480150804,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7436932880664244,
+      "native_client_lifetime_seconds": 0.6338330180151388,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7559494919842109,
+      "native_client_lifetime_seconds": 0.6506581209832802,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7468584229936823,
+      "native_client_lifetime_seconds": 0.6369150470709428,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7535039560170844,
+      "native_client_lifetime_seconds": 0.6443330270703882,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7451060289749876,
+      "native_client_lifetime_seconds": 0.6338534109527245,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7515804619761184,
+      "native_client_lifetime_seconds": 0.641075353953056,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7458175650099292,
+      "native_client_lifetime_seconds": 0.6388462950708345,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7561114949639887,
+      "native_client_lifetime_seconds": 0.6415132420370355,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7516327479388565,
+      "native_client_lifetime_seconds": 0.6399976300308481,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7497425749897957,
+      "native_client_lifetime_seconds": 0.641689206007868,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7465830510482192,
+      "native_client_lifetime_seconds": 0.6340316249988973,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7490380340022966,
+      "native_client_lifetime_seconds": 0.6372867019381374,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+        "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+        "bytes": 1988120
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7256091550225392,
+      "native_client_lifetime_seconds": 0.6260761739686131,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7333189889322966,
+      "native_client_lifetime_seconds": 0.6332771349698305,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7389690630370751,
+      "native_client_lifetime_seconds": 0.6279572449857369,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7331813499331474,
+      "native_client_lifetime_seconds": 0.6294774549314752,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7250629710033536,
+      "native_client_lifetime_seconds": 0.6222175259608775,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7315388489514589,
+      "native_client_lifetime_seconds": 0.6276838559424505,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7415172030450776,
+      "native_client_lifetime_seconds": 0.6362888650037348,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7374934729887173,
+      "native_client_lifetime_seconds": 0.6316836460027844,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7467211890034378,
+      "native_client_lifetime_seconds": 0.6408608319470659,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7360182220581919,
+      "native_client_lifetime_seconds": 0.630185395013541,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7399657210335135,
+      "native_client_lifetime_seconds": 0.6369556819554418,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7282513609388843,
+      "native_client_lifetime_seconds": 0.6246273390715942,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7337064199382439,
+      "native_client_lifetime_seconds": 0.6281276040244848,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7326419909950346,
+      "native_client_lifetime_seconds": 0.6285904300166294,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7464086000109091,
+      "native_client_lifetime_seconds": 0.6359514920040965,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7375307279871777,
+      "native_client_lifetime_seconds": 0.6285677350824699,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7469260749639943,
+      "native_client_lifetime_seconds": 0.6322478810325265,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7396183619275689,
+      "native_client_lifetime_seconds": 0.6324277699459344,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+        "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+        "bytes": 1989504
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.726626017014496,
+      "native_client_lifetime_seconds": 0.6267840400105342,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7291774379555136,
+      "native_client_lifetime_seconds": 0.6287258599186316,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7286354709649459,
+      "native_client_lifetime_seconds": 0.6269278880208731,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.749449350987561,
+      "native_client_lifetime_seconds": 0.6423946639988571,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7463806250598282,
+      "native_client_lifetime_seconds": 0.642919673002325,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7476950659183785,
+      "native_client_lifetime_seconds": 0.639750293106772,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7522785809123889,
+      "native_client_lifetime_seconds": 0.6470259209163487,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7542026659939438,
+      "native_client_lifetime_seconds": 0.6501865399768576,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.750186703982763,
+      "native_client_lifetime_seconds": 0.6435331780230626,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.749387274030596,
+      "native_client_lifetime_seconds": 0.6424914670642465,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7606405400438234,
+      "native_client_lifetime_seconds": 0.64707345305942,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7578930100426078,
+      "native_client_lifetime_seconds": 0.6461692510638386,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7623010440729558,
+      "native_client_lifetime_seconds": 0.6512245379853994,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7513259190600365,
+      "native_client_lifetime_seconds": 0.6441383629571646,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7863967920420691,
+      "native_client_lifetime_seconds": 0.6751483309781179,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7430500129703432,
+      "native_client_lifetime_seconds": 0.6351273820037022,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7494599099736661,
+      "native_client_lifetime_seconds": 0.6423091569449753,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7467692990321666,
+      "native_client_lifetime_seconds": 0.63973968999926,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+        "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+        "bytes": 1988361
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7222933089360595,
+      "native_client_lifetime_seconds": 0.6266832320252433,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7272940549300984,
+      "native_client_lifetime_seconds": 0.6285915530752391,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7217986939940602,
+      "native_client_lifetime_seconds": 0.6216277049388736,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7320454069413245,
+      "native_client_lifetime_seconds": 0.6312830440001562,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.736754063051194,
+      "native_client_lifetime_seconds": 0.6326900339918211,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7337413539644331,
+      "native_client_lifetime_seconds": 0.6283800449455157,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7323640040121973,
+      "native_client_lifetime_seconds": 0.6270241920137778,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7384018480079249,
+      "native_client_lifetime_seconds": 0.6323485649190843,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7350536800222471,
+      "native_client_lifetime_seconds": 0.6318785588955507,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7440660960273817,
+      "native_client_lifetime_seconds": 0.6319421390071511,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7396429149666801,
+      "native_client_lifetime_seconds": 0.6287410889053717,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7427904598880559,
+      "native_client_lifetime_seconds": 0.6366965989582241,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7449242830043659,
+      "native_client_lifetime_seconds": 0.6365268570370972,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7472693749004975,
+      "native_client_lifetime_seconds": 0.6359072630293667,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7378248550230637,
+      "native_client_lifetime_seconds": 0.6302407380426303,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7466583589557558,
+      "native_client_lifetime_seconds": 0.6335775830084458,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7421639219392091,
+      "native_client_lifetime_seconds": 0.6335815079510212,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7475675189634785,
+      "native_client_lifetime_seconds": 0.6376326329773292,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+        "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+        "bytes": 1989297
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7313026930205524,
+      "native_client_lifetime_seconds": 0.6287070208927616,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7301821439759806,
+      "native_client_lifetime_seconds": 0.6310814130119979,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.7353537809103727,
+      "native_client_lifetime_seconds": 0.6312939940253273,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7333139639813453,
+      "native_client_lifetime_seconds": 0.6271548040676862,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7186187239130959,
+      "native_client_lifetime_seconds": 0.6202231149654835,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.734817658085376,
+      "native_client_lifetime_seconds": 0.6324869070667773,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7222843240015209,
+      "native_client_lifetime_seconds": 0.6215275090653449,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7272748820250854,
+      "native_client_lifetime_seconds": 0.6263244549045339,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.7260436459910125,
+      "native_client_lifetime_seconds": 0.6246133840177208,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7342853640438989,
+      "native_client_lifetime_seconds": 0.6324989879503846,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7298826879123226,
+      "native_client_lifetime_seconds": 0.6272637819638476,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7336943109985441,
+      "native_client_lifetime_seconds": 0.6288654619129375,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7410733239958063,
+      "native_client_lifetime_seconds": 0.6336783580482006,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7425445959670469,
+      "native_client_lifetime_seconds": 0.6348243929678574,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.7445430370280519,
+      "native_client_lifetime_seconds": 0.635754231014289,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7414650149876252,
+      "native_client_lifetime_seconds": 0.6334783240454271,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7496881539700553,
+      "native_client_lifetime_seconds": 0.6408044178970158,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7423210919369012,
+      "native_client_lifetime_seconds": 0.6311789740575477,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+        "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+        "bytes": 1988693
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 0,
+      "wall_seconds": 0.7295683820266277,
+      "native_client_lifetime_seconds": 0.63102848501876,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 1,
+      "wall_seconds": 0.7329043049830943,
+      "native_client_lifetime_seconds": 0.6267602080479264,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "warmup",
+      "repetition": 1,
+      "sample_index": 2,
+      "wall_seconds": 0.74024209799245,
+      "native_client_lifetime_seconds": 0.6365776730235666,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 3,
+      "wall_seconds": 0.7474070930620655,
+      "native_client_lifetime_seconds": 0.6417390339775011,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 4,
+      "wall_seconds": 0.7638871349627152,
+      "native_client_lifetime_seconds": 0.6498741449322551,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 1,
+      "sample_index": 5,
+      "wall_seconds": 0.7682681110454723,
+      "native_client_lifetime_seconds": 0.652735881973058,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 6,
+      "wall_seconds": 0.7607768800808117,
+      "native_client_lifetime_seconds": 0.6482870789477602,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 7,
+      "wall_seconds": 0.7541664069285616,
+      "native_client_lifetime_seconds": 0.6465192619943991,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 2,
+      "sample_index": 8,
+      "wall_seconds": 0.764503468060866,
+      "native_client_lifetime_seconds": 0.6506715769646689,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 9,
+      "wall_seconds": 0.7600823660613969,
+      "native_client_lifetime_seconds": 0.6475228200433776,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 10,
+      "wall_seconds": 0.7624033070169389,
+      "native_client_lifetime_seconds": 0.647363567026332,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 3,
+      "sample_index": 11,
+      "wall_seconds": 0.7686505409656093,
+      "native_client_lifetime_seconds": 0.6495966940419748,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 12,
+      "wall_seconds": 0.7633028189884499,
+      "native_client_lifetime_seconds": 0.6455356510123238,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 13,
+      "wall_seconds": 0.7847630589967594,
+      "native_client_lifetime_seconds": 0.6640800810419023,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 4,
+      "sample_index": 14,
+      "wall_seconds": 0.768384818919003,
+      "native_client_lifetime_seconds": 0.6540172679815441,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 15,
+      "wall_seconds": 0.7715118149062619,
+      "native_client_lifetime_seconds": 0.6525111619848758,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 16,
+      "wall_seconds": 0.7679818259784952,
+      "native_client_lifetime_seconds": 0.6546418040525168,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "phase": "measured",
+      "repetition": 5,
+      "sample_index": 17,
+      "wall_seconds": 0.7794257240602747,
+      "native_client_lifetime_seconds": 0.6608139370800927,
+      "artifact": {
+        "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+        "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+        "bytes": 1989732
+      }
+    }
+  ],
+  "groups": [
+    {
+      "label": "ox",
+      "selection": "1",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7386869760230184,
+      "minimum_seconds": 0.7317938390187919,
+      "maximum_seconds": 0.7477899099467322,
+      "sorted_seconds": [
+        0.7317938390187919,
+        0.7383861609268934,
+        0.7386869760230184,
+        0.7436765269376338,
+        0.7477899099467322
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "1",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7433675749925897,
+      "minimum_seconds": 0.7263295899610966,
+      "maximum_seconds": 0.7483030599541962,
+      "sorted_seconds": [
+        0.7263295899610966,
+        0.7397541040554643,
+        0.7433675749925897,
+        0.7455961389932781,
+        0.7483030599541962
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "1",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7453599030850455,
+      "minimum_seconds": 0.7362373049836606,
+      "maximum_seconds": 0.7496612600516528,
+      "sorted_seconds": [
+        0.7362373049836606,
+        0.7367114429362118,
+        0.7453599030850455,
+        0.7476821370655671,
+        0.7496612600516528
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "2",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7463232309091836,
+      "minimum_seconds": 0.73960753204301,
+      "maximum_seconds": 0.7603164719184861,
+      "sorted_seconds": [
+        0.73960753204301,
+        0.7426081789890304,
+        0.7463232309091836,
+        0.7550355569692329,
+        0.7603164719184861
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "2",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7444097379921004,
+      "minimum_seconds": 0.7436844289768487,
+      "maximum_seconds": 0.7501621709670871,
+      "sorted_seconds": [
+        0.7436844289768487,
+        0.7439381380099803,
+        0.7444097379921004,
+        0.744441626011394,
+        0.7501621709670871
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "2",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7513358109863475,
+      "minimum_seconds": 0.7435182209592313,
+      "maximum_seconds": 0.7541610819753259,
+      "sorted_seconds": [
+        0.7435182209592313,
+        0.7445776850217953,
+        0.7513358109863475,
+        0.7523266039788723,
+        0.7541610819753259
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "4",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7375307279871777,
+      "minimum_seconds": 0.7331813499331474,
+      "maximum_seconds": 0.7467211890034378,
+      "sorted_seconds": [
+        0.7331813499331474,
+        0.7360182220581919,
+        0.7375307279871777,
+        0.7464086000109091,
+        0.7467211890034378
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "4",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7374934729887173,
+      "minimum_seconds": 0.7250629710033536,
+      "maximum_seconds": 0.7469260749639943,
+      "sorted_seconds": [
+        0.7250629710033536,
+        0.7326419909950346,
+        0.7374934729887173,
+        0.7399657210335135,
+        0.7469260749639943
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "4",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7337064199382439,
+      "minimum_seconds": 0.7282513609388843,
+      "maximum_seconds": 0.7415172030450776,
+      "sorted_seconds": [
+        0.7282513609388843,
+        0.7315388489514589,
+        0.7337064199382439,
+        0.7396183619275689,
+        0.7415172030450776
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "8",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7378248550230637,
+      "minimum_seconds": 0.7320454069413245,
+      "maximum_seconds": 0.7466583589557558,
+      "sorted_seconds": [
+        0.7320454069413245,
+        0.7350536800222471,
+        0.7378248550230637,
+        0.7440660960273817,
+        0.7466583589557558
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "8",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7396429149666801,
+      "minimum_seconds": 0.736754063051194,
+      "maximum_seconds": 0.7472693749004975,
+      "sorted_seconds": [
+        0.736754063051194,
+        0.7384018480079249,
+        0.7396429149666801,
+        0.7421639219392091,
+        0.7472693749004975
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "8",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7427904598880559,
+      "minimum_seconds": 0.7323640040121973,
+      "maximum_seconds": 0.7475675189634785,
+      "sorted_seconds": [
+        0.7323640040121973,
+        0.7337413539644331,
+        0.7427904598880559,
+        0.7449242830043659,
+        0.7475675189634785
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.764503468060866,
+      "minimum_seconds": 0.7474070930620655,
+      "maximum_seconds": 0.7715118149062619,
+      "sorted_seconds": [
+        0.7474070930620655,
+        0.7600823660613969,
+        0.764503468060866,
+        0.768384818919003,
+        0.7715118149062619
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7638871349627152,
+      "minimum_seconds": 0.7541664069285616,
+      "maximum_seconds": 0.7847630589967594,
+      "sorted_seconds": [
+        0.7541664069285616,
+        0.7624033070169389,
+        0.7638871349627152,
+        0.7679818259784952,
+        0.7847630589967594
+      ]
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7682681110454723,
+      "minimum_seconds": 0.7607768800808117,
+      "maximum_seconds": 0.7794257240602747,
+      "sorted_seconds": [
+        0.7607768800808117,
+        0.7633028189884499,
+        0.7682681110454723,
+        0.7686505409656093,
+        0.7794257240602747
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "1",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.743412212934345,
+      "minimum_seconds": 0.732191329007037,
+      "maximum_seconds": 0.7599814069690183,
+      "sorted_seconds": [
+        0.732191329007037,
+        0.7381747950566933,
+        0.743412212934345,
+        0.7522645259741694,
+        0.7599814069690183
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "1",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7437153119826689,
+      "minimum_seconds": 0.7312972679501399,
+      "maximum_seconds": 0.7594405149575323,
+      "sorted_seconds": [
+        0.7312972679501399,
+        0.7417919980362058,
+        0.7437153119826689,
+        0.7503932439722121,
+        0.7594405149575323
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "1",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7428833979647607,
+      "minimum_seconds": 0.7376632279483601,
+      "maximum_seconds": 0.7526895250193775,
+      "sorted_seconds": [
+        0.7376632279483601,
+        0.7427621530368924,
+        0.7428833979647607,
+        0.744746784097515,
+        0.7526895250193775
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "2",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7489956769859418,
+      "minimum_seconds": 0.7443673259112984,
+      "maximum_seconds": 0.7567312319297343,
+      "sorted_seconds": [
+        0.7443673259112984,
+        0.7462017179932445,
+        0.7489956769859418,
+        0.7503999000182375,
+        0.7567312319297343
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "2",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7442457729484886,
+      "minimum_seconds": 0.7400065099354833,
+      "maximum_seconds": 0.7534879330778494,
+      "sorted_seconds": [
+        0.7400065099354833,
+        0.7406704230234027,
+        0.7442457729484886,
+        0.7513226179871708,
+        0.7534879330778494
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "2",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7418404079508036,
+      "minimum_seconds": 0.7350254149641842,
+      "maximum_seconds": 0.755333321983926,
+      "sorted_seconds": [
+        0.7350254149641842,
+        0.7393381609581411,
+        0.7418404079508036,
+        0.7443263540044427,
+        0.755333321983926
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "4",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7497425749897957,
+      "minimum_seconds": 0.7379279859596863,
+      "maximum_seconds": 0.7535039560170844,
+      "sorted_seconds": [
+        0.7379279859596863,
+        0.7468584229936823,
+        0.7497425749897957,
+        0.7516327479388565,
+        0.7535039560170844
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "4",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7465830510482192,
+      "minimum_seconds": 0.7413598120911047,
+      "maximum_seconds": 0.7561114949639887,
+      "sorted_seconds": [
+        0.7413598120911047,
+        0.7451060289749876,
+        0.7465830510482192,
+        0.7559494919842109,
+        0.7561114949639887
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "4",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7458175650099292,
+      "minimum_seconds": 0.7396601309301332,
+      "maximum_seconds": 0.7515804619761184,
+      "sorted_seconds": [
+        0.7396601309301332,
+        0.7436932880664244,
+        0.7458175650099292,
+        0.7490380340022966,
+        0.7515804619761184
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "8",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.749449350987561,
+      "minimum_seconds": 0.7430500129703432,
+      "maximum_seconds": 0.7863967920420691,
+      "sorted_seconds": [
+        0.7430500129703432,
+        0.749387274030596,
+        0.749449350987561,
+        0.750186703982763,
+        0.7863967920420691
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "8",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7513259190600365,
+      "minimum_seconds": 0.7463806250598282,
+      "maximum_seconds": 0.7606405400438234,
+      "sorted_seconds": [
+        0.7463806250598282,
+        0.7494599099736661,
+        0.7513259190600365,
+        0.7542026659939438,
+        0.7606405400438234
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "8",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.7522785809123889,
+      "minimum_seconds": 0.7467692990321666,
+      "maximum_seconds": 0.7623010440729558,
+      "sorted_seconds": [
+        0.7467692990321666,
+        0.7476950659183785,
+        0.7522785809123889,
+        0.7578930100426078,
+        0.7623010440729558
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "ordinary",
+      "samples": 5,
+      "median_seconds": 0.7342853640438989,
+      "minimum_seconds": 0.7260436459910125,
+      "maximum_seconds": 0.7445430370280519,
+      "sorted_seconds": [
+        0.7260436459910125,
+        0.7333139639813453,
+        0.7342853640438989,
+        0.7414650149876252,
+        0.7445430370280519
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "receiver-clone",
+      "samples": 5,
+      "median_seconds": 0.7298826879123226,
+      "minimum_seconds": 0.7186187239130959,
+      "maximum_seconds": 0.7496881539700553,
+      "sorted_seconds": [
+        0.7186187239130959,
+        0.7272748820250854,
+        0.7298826879123226,
+        0.7425445959670469,
+        0.7496881539700553
+      ]
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "mode": "semantic",
+      "samples": 5,
+      "median_seconds": 0.734817658085376,
+      "minimum_seconds": 0.7222843240015209,
+      "maximum_seconds": 0.7423210919369012,
+      "sorted_seconds": [
+        0.7222843240015209,
+        0.7336943109985441,
+        0.734817658085376,
+        0.7410733239958063,
+        0.7423210919369012
+      ]
+    }
+  ],
+  "warmup_samples": 30,
+  "measured_samples": 150,
+  "qualification": "Warm no-change scans immediately after exact update and independent verification, not clean/cold startup",
+  "timing_scope": "Saved invocation wall includes client and loopback supervisor settlement; native client lifetime retained separately",
+  "tail_scope": "With five samples, maximum is descriptive only, not a qualified population tail estimate",
+  "actual_new_execution": false,
+  "quiet_window_claim": false,
+  "resource_release_authorized": false,
+  "physical_IO_or_throughput_proved": false,
+  "current_production_proved": false,
+  "input_pins_verified": [
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-1-plan.json",
+      "sha256": "0abbd80addfbc371c8d7f2c02aee095d573f36885802e7473e4994b3ff3fe8c5",
+      "bytes": 9410
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+      "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a",
+      "bytes": 1987945
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-1-plan.json",
+      "sha256": "26ec758b2df729a08c44f4caa992efdd1116cb857f36e57221331014556af1a3",
+      "bytes": 9394
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+      "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009",
+      "bytes": 1989485
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-2-plan.json",
+      "sha256": "4db5ed5045b0d14f5216a9537a087eaed4bc9d58f7efcf917e43a2237cef2e05",
+      "bytes": 9410
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa/RESULT.json",
+      "sha256": "785fd02e3f3eb31bdde40a311e0dcbd54f82a5cae5e77a30d405799c041e20db",
+      "bytes": 1987986
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-2-plan.json",
+      "sha256": "083edf8a7ca544aaec69eaad13de5b042ed05434fb7da70af5bc6fae667a4589",
+      "bytes": 9394
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68/RESULT.json",
+      "sha256": "afe355d043fb198b81e35112c8cd8bf3386b2b70203e39672812d77f697572db",
+      "bytes": 1989230
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-4-plan.json",
+      "sha256": "dc831eb6fc9aa9a9cc17742cefbc0ad605465af5ed5657255c8c53e8d5a48238",
+      "bytes": 9490
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+      "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6",
+      "bytes": 1988120
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-4-plan.json",
+      "sha256": "562488d9a19653e33bb081a0a5841eda86c50566bb61ae5aa4f14ac3bb253532",
+      "bytes": 9474
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de/RESULT.json",
+      "sha256": "3293eb6f7a0b340f6cb8093d26b995fa75cf15f02ac1372b826bce5b33c0945e",
+      "bytes": 1989504
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-8-plan.json",
+      "sha256": "87b6f3a435d4c3bcbcf682043b0ac2dcbcf2dda21485452df9b3073c04129eb9",
+      "bytes": 9490
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec/RESULT.json",
+      "sha256": "7c391a1d453de42886c1e46e7e8fac2ba5159d16fcedea67e9b6784f48791913",
+      "bytes": 1988361
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-8-plan.json",
+      "sha256": "e231f55a9779548f2e788fdfdfab7b2013f0dd664a44aa2b3fc3916026decd23",
+      "bytes": 9474
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec/RESULT.json",
+      "sha256": "82402ab44e61fc7b8ed8da5676fef9228b57e67ebc9cc7d73e54d115605731f4",
+      "bytes": 1989297
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-auto-plan.json",
+      "sha256": "ab1e502e2eeab7080a58d15c998639bafb22025aa6a90fb554e4d80359d38ce9",
+      "bytes": 9498
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13/RESULT.json",
+      "sha256": "0ce651201f8eaa814c4b0564dafc5830877e39549114e8e79c80993f817f23cb",
+      "bytes": 1988693
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-auto-plan.json",
+      "sha256": "f41990f441f225e58c5261122f46716b31424b57aea65ddbfa7244982012a151",
+      "bytes": 9482
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/RESULT.json",
+      "sha256": "8ccf78523b0383e9e4678c9e62cc77980d3c29138e73fc3a0cfbbfa4f2584ba9",
+      "bytes": 1989732
+    }
+  ],
+  "input_matrix_complete_claim": true,
+  "saved_report_pin": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-all10-report-20261018.json",
+    "bytes": 2623647,
+    "sha256": "c8a54a6028ae6ab96938f84a7d44be95f9cc59983bbff7270c33d625417ccd79"
+  },
+  "closure_index_pin": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-all10-actual-closure-20261018.json",
+    "bytes": 10449,
+    "sha256": "b93e1d31cccb65760934f1ad3e78730ac58be87232540d2958e902538d1dc001"
+  }
+}

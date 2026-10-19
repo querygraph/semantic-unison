@@ -7300,3 +7300,20 @@ noEXIO/Unison/SDK/Photo/benchmark. Receiptgenerated-workload-extended-actual-
 20261019.json. All8newrecipesstillneedactualownedreceiving/measurement after
 Photo-firstIOrelease. Mixed/thousandssmall/new/concurrent-editor/topologies
 stillopen; donotcountsourcecontrolsasbenchmarkpass. Goalactive/resources0.
+
+
+## 2026-10-19 — Existing no-change workload measured evidence reported
+
+No extra synchronization. bench/sync/noop_report.py pure reader +pinnedmetadata
+CLI independentlyhashes20savedplan/results, checksallnoopfences/client+server+
+supervisor/pumps/groupbinding, extractsall180samples/30warmups+150measured/30groups.
+Originalfrozen32MiBcohorts alreadyincludedtimednoops; nowseparatehuman/JSONreport
+doc/auto-cohort-noop-report-20261019.*. Medianinvocation~0.73–0.77s; notcold/
+quiet/throughput/scaling orcausalstockOxclaim. n5maxdescriptiveonly, allsamples
+preserved. Fivepurecontrols+actualpinnedCLI e73a07/0/no session, children72627/
+72629reaped0/groupempty/CPU4closed. Earlierad-hocreader a21fba/0 matchedsame
+groups/rawsamplesbeforeCLIadoption; no runtime rerun. Receipt saved-noop-analysis-
+actual-20261019.json. Finitewarmnochange scopecovered; thousandssmall/new/editor/
+mixed/fullnewrecipe executions+larger/topology/upstreamperformance remainopen.
+LatestPhoto91034recoveryclosed, immediatelegacyretentionfix/retrypriority still
+holdsnewIO/native/SDK/benchmark. Noownresources. GoalACTIVE.

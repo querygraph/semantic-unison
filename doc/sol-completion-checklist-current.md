@@ -266,3 +266,10 @@ findings, receiving reuse/resume/merge paths, corpus or pixels.
 5expectedOxcompile refusals;41actualchildgroupssettled andCPU4closed. Decoder
 replacement preserves unaffected encodedpixelnode; private rereads stay localized.
 Checkpointrestore still revalidates current input. No newcamera/SDK/pixel proof.
+
+### Saved warm no-change workload reported — 2026-10-19
+
+[No-change report](auto-cohort-noop-report-20261019.md) extracts180existing
+noops/150measured/30warmups across30groups after exactupdates;20inputpins
+rehashed, allrawsamples preserved. No rerun or new timing/quiet/platform scope.
+This closes that finite no-change reporting gap, not remaining benchmark matrix.

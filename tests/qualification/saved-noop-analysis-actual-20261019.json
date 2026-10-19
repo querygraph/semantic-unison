@@ -1,0 +1,65 @@
+{
+  "schema": "unison-saved-noop-analysis-actual/1",
+  "state": "SAVED_METADATA_ANALYSIS_CLOSED_NO_RUNTIME_REPEATED",
+  "actual_tool": {
+    "chunk": "e73a07",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "actual_children": [
+    {
+      "pid": 72627,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    {
+      "pid": 72629,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    }
+  ],
+  "controls": 5,
+  "input_pins_rehashed": 20,
+  "warmup_samples_retained": 30,
+  "measured_samples": 150,
+  "groups": 30,
+  "source_pins": {
+    "bench/sync/noop_report.py": "46d837e7218d4d4cdef3a85bc635e469711becb2ad0199c30aa1bfff7cd1b180",
+    "bench/sync/noop_report_test.py": "06b37207ede3ffbe6dda47017873f98039f7adf7272906e8219241dc5e6a2e5c",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3",
+    "tests/cached_benchmark/entry.py": "77df71da38889f11cc7da3afc67817ebd76b9eb47b2c79160d1a5d439d42f1b5"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-noop-reproducible-report-_q8asgts/RESULT.json",
+      "bytes": 2791,
+      "sha256": "ec52e50d138c3a525a225839723ccb2c16b038b40a746ba33b0b18ebd5a0e165"
+    },
+    {
+      "path": "/private/tmp/unison-noop-reproducible-report-_q8asgts/REPORT.json",
+      "bytes": 107939,
+      "sha256": "505d144adb9d957ecafd88a07185e5b7750e37b97aec609f6192076e02259cde"
+    },
+    {
+      "path": "doc/auto-cohort-noop-report-20261019.json",
+      "bytes": 107939,
+      "sha256": "505d144adb9d957ecafd88a07185e5b7750e37b97aec609f6192076e02259cde"
+    }
+  ],
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false,
+  "sync_SDK_Photo_or_fixture_payload_opened": false,
+  "scope": "Saved reports/log metadata only; original execution scopes and timing disclosures preserved. Does not relabel source or close entire benchmark matrix."
+}
