@@ -7433,3 +7433,18 @@ actual113cdd/0/no session, child80456reaped0/groupothersabsent-before-reap,
 invalidUTF8 stdout+stderr exact through real Store; Store and CPU00 closed.
 Receipt tests/qualification/batch-transport-original-actual-20261019.json.
 No Unison/server/SDK/EXIO/Photo; batch dispatcher and peer audit still open.
+
+
+## 2026-10-19 batch retained peer/server audit
+
+Added batch_pair composition of retained client/proxy Calls and pinned rawserver
+frame; independently binds exact command, distinct client/proxy/server PIDs,
+servergroup=proxy, reaps/EOFs/positive protocolcounts. Externalchild sourceaudit
+required/resource_release_authorized=false. Exceptions preserve returned live
+handles+evidence+original carrier, no signals/cleanup/retry. Four original pure
+controls actuale97204/0/no session/CPU00closed, no actualsocket/EXIO/native.
+Owning entrypoint+sourcepolicy+actualpair/corpus qualification remain unfinished.
+Photo acknowledged queue01a153a1: actual2878live, supported stop-before-next-
+cohort marker installed without signal/sourceedit. Currentcohort drains normally;
+newPhotoIO/nativeSDKdispatches held prospectively. No actualterminal/IOrelease
+yet; Unison continues only tinyoriginalcontrols/source.

@@ -132,3 +132,14 @@ Four mocked controls and one real original Python stdout/stderr child passed;
 realStore roundtrip retained invalidUTF8 exactly, child80456reaped0/group absent,
 Store+CPU00 closed, actual113cdd/0/no session. No EXIO/server/SDK/Photo. Receipt:
 `tests/qualification/batch-transport-original-actual-20261019.json`.
+
+`batch_pair` now composes two retained byte-artifact calls with the existing
+retained thread-free proxy schema. Independent audit restores client/proxy pins,
+binds the exact server command, three distinct process roles, server-to-proxy
+group, normal reaps and both forwarded EOFs/counts. Source-bound external child
+policy remains explicitly required; pair audit is not a release ticket. Any
+post-launch failure carries every returned handle, partial evidence and original
+uncertainty. No signal, cancellation, retry or cleanup is introduced.
+Four original fake-evidence/handle controls passed actuale97204/0/no session
+under Unison00, including seven malformed frame variants. No socket/native/EXIO
+run. The owning entrypoint, source policy and actual pair/corpus run remain open.
