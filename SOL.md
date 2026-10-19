@@ -4998,3 +4998,21 @@ differs from the build snapshots; production/compiler/binary hashes match.
 See `tests/qualification/rpc-stream-classifier-actual-20261018.json`. Known error
 cache/abort and unregistered propagation remain; decoded custom arguments,
 workspace, heap/RSS and broader acceptance stay separately scoped.
+
+
+### Explicit endpoint CPU ceiling for automatic workers — source successor
+
+[Endpoint CPU budget](doc/endpoint-cpu-budget.md) adds semanticcpubudget=0
+(default unchanged) or a positive ceiling on the existing worker/helper permit
+owner. This lets automatic selection respect a coordinated endpoint grant,
+rather than implicitly selecting all host physical cores. Explicit worker
+requests are capped too; existing helper weight and restart rules remain.
+Machine-wide token acquisition remains with the dispatcher. Archives/SDE/RPC
+encodings are unchanged. Current fixed controls pass; full builds and later
+measured1/2/4/8/auto coordination remain separately recorded. No oldV6 replay.
+
+Endpoint CPU ceiling actual qualification: stock/Ox11fixed+ignored-capnegative
+passed, four Make/Dune full CLI/selftests passed with586currentinputhashes each.
+Actual49929/7b61b2/0 and96224/ca29d5/0; allgroups/CPU4or8closed. See
+[receipt](tests/qualification/endpoint-cpu-budget-actual-20261018.json). NoSDK,
+Photo, EXglobal, transport, timing or hardRSS/thread cap claim.

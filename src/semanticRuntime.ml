@@ -8,6 +8,13 @@ let workers = Prefs.createInt "semanticworkers" 0 ~local:true
    Auto uses physical cores on macOS and the available logical CPU count \
    when topology is unavailable. Set a positive count to override, including \
    all logical CPUs. A multithreaded SDK helper reserves its complete thread count."
+let cpu_ceiling = Prefs.createInt "semanticcpubudget" 0 ~local:true
+  ~category:(`Advanced `General)
+  "endpoint CPU permit ceiling for semantic work (0 means no additional ceiling)"
+  "Cap automatic or explicit semanticworkers selection to this endpoint's \
+   coordinated CPU allowance. Applies to the shared helper/domain permit owner. \
+   This does not acquire machine-wide credits or limit unrelated native threads, \
+   ordinary transfers or other processes. Changing the effective budget needs restart."
 let max_inflight = Prefs.createInt "semanticmaxinflight" 0 ~local:true
   ~category:(`Advanced `General)
   "maximum admitted semantic transactions (0 means domains plus source headroom)"
@@ -35,10 +42,15 @@ let runtime = ref None
 let resource_runtime = ref None
 let supervisor_runtime = ref None
 let debug = Trace.debug "semantic"
-let configured_cpus () = match Prefs.read workers with
+let configured_cpus () =
+  let requested = match Prefs.read workers with
     | 0 -> HelperSupervisor.available_physical_cpus ()
     | n when n > 0 -> n
-    | _ -> raise (Util.Fatal "semanticworkers must be zero or positive")
+    | _ -> raise (Util.Fatal "semanticworkers must be zero or positive") in
+  match Prefs.read cpu_ceiling with
+  | 0 -> requested
+  | n when n > 0 -> min requested n
+  | _ -> raise (Util.Fatal "semanticcpubudget must be zero or positive")
 let helper_supervisor () =
   let n = configured_cpus () in
   let supervisor = match !supervisor_runtime with

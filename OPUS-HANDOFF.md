@@ -6132,3 +6132,26 @@ Evidence tests/qualification/sol-stream-v6-actual-adoption-20261018.json SHA 035
 Priorblocked/admissionabsence records remainhistorical; no currentwaitinggate.
 FullgoalACTIVE/incomplete, next substantiveM6 resource/performance completion
 planning/implementation ratherthanrepeatV6. Do notwaitforuserorclaimnewSDKgrant.
+
+
+## 2026-10-18 endpoint CPU ceiling implemented and qualified
+
+Activeworktree /Users/alexy/src/unison-cpu-ceiling-20261018 branch
+implementation/endpoint-cpu-ceiling, basee3896900. New semanticcpubudget0
+defaultunchanged orpositive min(selectedCPU,ceiling), sameexisting worker/helper
+owner, no tokenpoolcreation orOSthread/RSS claim. This enablesbudgetedauto
+comparison1/2/4/8/auto withoutautoselectingallhostcoresoutsideendpointgrant.
+SourcechangeonlysemanticRuntime.ml; publicinterface unchanged.
+
+Originalstockcontrol0014952/274e02/1 CLOSED: over-budget rejection isfailedLwt
+promise, fixtureinitiallydidnotrun it. Fixedfixture002controller49929/7b61b2/0
+stock+Ox11cases/ignoredceilingnegativepass; maximum2idleworkerdomains, uncapped
+autocaseonlymetadata/nohost-sizedpool. Full4Make/Dune+selftestcontroller96224/
+ca29d5/0,no session, all586inputpinsmatchperbuild; groups/CPU8closed. Evidence
+tests/qualification/endpoint-cpu-budget-actual-20261018.json SHA 9fd71a8e75a5029f1789d4354ab444f8af4ecc186fb1e8916c06a979ee3f4a3e.
+NoEXglobal/nativeSDK/payload/Photo work, nextactualtransport/timingrequires
+separatelycoordinatedwindow. FrozenV6 candidate5cc96102 andits3PASS/CLOSED
+runs untouched/consumed; priorblockednotes superseded. GoalACTIVE/incomplete,
+no waitingforuser, noownedlivejobs/resources. Nextsubstantivework benchmark
+auto-label/effectivebudget support/sourceplanning thenexplicitPhotoIOcoordination
+whenappropriate; preservePhoto catalogwide5Kpriority/PID37018/session45622.
