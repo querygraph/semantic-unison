@@ -74,6 +74,34 @@ class Plan(unittest.TestCase):
             self.assertEqual(error.uncertain_fds,(901,))
             self.assertEqual(error.retained_fds,(900,))
 
+    def test_production_build_binding(self):
+        with tempfile.TemporaryDirectory(prefix='cohort-build-fixture-') as temporary:
+            root=Path(temporary).resolve();(root/'src').mkdir()
+            pins={}
+            for name in ('semanticRuntime.ml','semanticWorkers.ml','semanticMergeCache.ml'):
+                f=root/'src'/name;f.write_bytes(('generated source '+name).encode())
+                pins['src/'+name]=hashlib.sha256(f.read_bytes()).hexdigest()
+            p=fixture(1)
+            receipt=dict(p['artifact'],complete=True,selftest_requested=True,build_exit=0,
+                         selftest_exit=0,source_sha256=pins)
+            self.assertEqual(cohort_plan.verify_build(p,receipt,repository=str(root))['production_sources_verified'],3)
+            for mutation in ('omitted','stale','binary','boolean','failure'):
+                broken=copy.deepcopy(receipt)
+                if mutation=='omitted':del broken['source_sha256']['src/semanticRuntime.ml']
+                if mutation=='stale':broken['source_sha256']['src/semanticWorkers.ml']='a'*64
+                if mutation=='binary':broken['binary']='/unrelated/unison'
+                if mutation=='boolean':broken['build_exit']=False
+                if mutation=='failure':broken['selftest_exit']=1
+                with self.subTest(mutation=mutation),self.assertRaises(ValueError):
+                    cohort_plan.verify_build(p,broken,repository=str(root))
+
+    def test_real_execution_inventory_exists(self):
+        root=Path(__file__).resolve().parents[1]
+        names=cohort_plan.execution_sources(root)
+        self.assertTrue(all((root/name).is_file() for name in names))
+        self.assertIn('bench/sync/cohort_plan.py',names)
+        self.assertIn('tests/private_camera_receiving/close.py',names)
+
     def test_refusals(self):
         for mutation in ('extra','traversal','borrow','tokens','limit','pin','inventory','argv','prereq','bool'):
             p=fixture('auto')

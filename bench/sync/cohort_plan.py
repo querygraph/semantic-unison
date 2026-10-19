@@ -120,3 +120,57 @@ def verify_artifacts(plan):
         if actual[name] != expected:
             raise ValueError('executable artifact changed: '+name)
     return actual
+
+
+def production_sources(repository):
+    """Current source inventory, independently enumerated rather than plan-chosen."""
+    from pathlib import Path
+    root = Path(repository)
+    names = sorted(str(p.relative_to(root)) for p in (root/'src').rglob('*')
+                   if p.is_file() and (p.suffix in ('.ml','.mli','.c','.h')
+                       or p.name in ('Makefile','Makefile.OCaml','dune','dune-project')
+                       or p.name.endswith('.ox.mli.in')))
+    if not {'src/semanticRuntime.ml','src/semanticWorkers.ml','src/semanticMergeCache.ml'} <= set(names):
+        raise ValueError('production worker/runtime/cache inventory missing')
+    return names
+
+
+def execution_sources(repository):
+    """Fixed transitive benchmark/owner support inventory, metadata enumeration."""
+    from pathlib import Path
+    root=Path(repository)
+    names = [str(p.relative_to(root)) for p in (root/'bench/sync').glob('*.py')]
+    names += ['tests/shared_dispatch.py','tests/manual.py','tests/shared_cpu_pool.py',
+              'tests/shared_io_pool.py','tests/shared_process_owner.py',
+              'tests/cached_benchmark/contract.py',
+              'tests/private_camera_receiving/close.py']
+    return sorted(set(names))
+
+
+def verify_build(plan, receipt, *, repository):
+    """Bind successful current production build to declared binary and compiler.
+
+    Must run inside admitted IO ownership: reads current production sources.
+    The receipt itself must already be authenticated by checked_metadata.
+    This is neither an independent rerun of selftests nor a machine grant.
+    """
+    import hashlib
+    from cached_benchmark.contract import read_bytes
+    if (receipt.get('complete') is not True or receipt.get('selftest_requested') is not True
+            or type(receipt.get('build_exit')) is not int or receipt['build_exit'] != 0
+            or type(receipt.get('selftest_exit')) is not int or receipt['selftest_exit'] != 0):
+        raise ValueError('successful qualified build/selftest receipt required')
+    artifact=plan['artifact']
+    for key in ('binary','compiler','binary_sha256','compiler_sha256'):
+        if receipt.get(key) != artifact[key]:
+            raise ValueError('build artifact declaration differs: '+key)
+    pins=receipt['source_sha256']
+    names=production_sources(repository)
+    if {name for name in pins if name.startswith('src/')} != set(names):
+        raise ValueError('complete current production inventory required')
+    for name in names:
+        digest(pins[name])
+        if hashlib.sha256(read_bytes(str(PurePosixPath(repository)/name),16*1048576)).hexdigest() != pins[name]:
+            raise ValueError('production source changed: '+name)
+    return dict(production_sources_verified=len(names), build_selftest_receipt_bound=True,
+                selftests_rerun=False, scope='authenticated historical build plus current production bytes')

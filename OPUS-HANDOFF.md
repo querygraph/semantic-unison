@@ -6237,3 +6237,15 @@ lastchild55021reaped0/groupabsent/CPU4closed/noEXIO/realbinary/Photo payload.
 Carrieridentity, uncertainFDrecords and originalcause preserved, no readretry.
 Evidence auto-cohort-auth-actual-20261018.json. Not runtimequalified; reviewed
 fixedinventory+productionbuild binding+actual dispatcher/retainedowner stillneeded.
+
+
+### 2026-10-18 — current production build binding
+Added independent production inventory enumeration (current329 matches qualified
+receipt329 by metadata) and strict successful build/selftest/artifact receipt
+binding plus current sourcehash verification. Fixed execution inventory includes
+benchmarkPython and qualified close/owner dependencies; removed two nonexistent
+namespace __init__ entries foundduringmanualread, actualexistencecontrol added.
+Actual03a54f/0+80eb6c/0 directedgeneratedfixtures PASS; lastchild55574 reaped0
+/groupabsent/CPU4closed/noEXIO. Evidence auto-cohort-build-binding-actual-20261018.json.
+Next remains actual retained-owner/dispatcher integration and finite lifecycle
+controls; no runtimegrant/fullbenchmarkqualified claim.
