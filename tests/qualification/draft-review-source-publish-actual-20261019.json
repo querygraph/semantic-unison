@@ -1,0 +1,80 @@
+{
+  "schema": "unison-source-publish-actual/1",
+  "actual_tool": {
+    "session_id": 45392,
+    "initial_chunk": "72e265",
+    "terminal_chunk": "ebb27c",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "published_head": "04cdb11be6617882307579dc88e0ef9082133896",
+  "outcome": {
+    "command": [
+      "/usr/bin/git",
+      "-c",
+      "pack.threads=1",
+      "-c",
+      "pack.windowMemory=32m",
+      "-c",
+      "gc.auto=0",
+      "push",
+      "--atomic",
+      "fork",
+      "HEAD:refs/heads/implementation/endpoint-cpu-ceiling",
+      "HEAD:refs/heads/integration/sol-consolidated-review"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "To github.com:querygraph/unison.git\n   26d20b12..04cdb11b  HEAD -> implementation/endpoint-cpu-ceiling\n   e3896900..04cdb11b  HEAD -> integration/sol-consolidated-review\n",
+    "client_cleanup": {
+      "pid": 7406,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "closed": {
+    "child": {
+      "pid": 7406,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "cpu_closed": true,
+    "io_closed": true,
+    "SDK_invoked": false,
+    "media_payload_opened": false,
+    "source_only": true,
+    "expected_head": "04cdb11b",
+    "no_merge": true
+  },
+  "pr_body_actual": {
+    "session_id": 19654,
+    "initial_chunk": "e9ce23",
+    "terminal_chunk": "95fccf",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "readback_actual": {
+    "chunk": "dee1c2",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "pr": {
+    "number": 13,
+    "url": "https://github.com/querygraph/unison/pull/13",
+    "state": "OPEN",
+    "draft": true,
+    "base": "master",
+    "head": "integration/sol-consolidated-review"
+  },
+  "scope": "Atomic fast-forward fork source branches only, single git pack thread; actual child/group settled before CPU4/EXglobal close. No SDK/media/Photo/Main/benchmark/merge/upstream push. Later prose-only clarity edits kept separate."
+}

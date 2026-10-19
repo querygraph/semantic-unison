@@ -4,7 +4,7 @@
 Updated UTC 2026-10-19T06:30:19.422171+00:00. Goal ACTIVE and incomplete.
 
 - Active worktree `/Users/alexy/src/unison-cpu-ceiling-20261018`, branch
-  `implementation/endpoint-cpu-ceiling`, last committed `63fd4c8a`.
+  `implementation/endpoint-cpu-ceiling`, runtime-harness source commit `63fd4c8a` (later documentation/evidence commits are recorded by Git HEAD).
   Production remains `971271a8`; subsequent work is Python test tooling/evidence.
 - **No live owned jobs or resource descriptors.** Latest larger128stock1:
   actual52223/3c264e/0/no session, worker97794reaped0/groupempty/CPU8EXclosed.
@@ -6666,3 +6666,16 @@ so current CPUfeature/evidence not yetinreviewbranch. Source-only forkpublish
 anddraftbodyupdate authorized; no merge/upstreampush/productionactivation.
 Allpayload/nativeSDK remains atfirst128checkpoint pendingoperatorscheduling,
 noactiveownjobs/FDs; source-delivery/audit workcontinues standing8/8.
+
+
+### Fork draft review refreshed; no merge
+Atomic source-only forkpush actual45392/72e265→ebb27c/0/no session,
+head04cdb11be6617882307579dc88e0ef9082133896 published to both implementation and
+integration/sol-consolidated-review. Source Git child/group reaped0 before CPU4+EX close.
+No hooks/pre-push executable existed; pack thread1. No media/SDK/benchmark job.
+PR13 body actual19654/e9ce23→95fccf/0; independent readbackdee1c2/0
+confirms OPEN DRAFT/baseforkmaster/head04cdb11b. No upstream push or merge.
+Evidence tests/qualification/draft-review-source-publish-actual-20261019.json.
+PR text readability corrected separately (spaces/reader-facing final sentence),
+not a runtime change; follow-up docpublish may update sourcehead again.
+All resources/jobs currentlyclosed; payload/native remains at schedulingcheckpoint.
