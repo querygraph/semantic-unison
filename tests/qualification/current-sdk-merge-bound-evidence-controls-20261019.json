@@ -1,0 +1,47 @@
+{
+  "schema": "unison-current-sdk-merge-bound-evidence-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['sdk_merge_receiving.plan_test', 'sdk_merge_receiving.inputs_test', 'sdk_merge_receiving.ledger_test', 'sdk_merge_receiving.helpers_test', 'sdk_merge_receiving.worker_test', 'sdk_merge_receiving.proxy_test', 'sdk_merge_receiving.transport_test', 'sdk_merge_receiving.evidence_test', 'sdk_merge_receiving.bound_call_test']));sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_budgets_include_both_endpoints_and_source_headroom (sdk_merge_receiving.plan_test.Plan.test_budgets_include_both_endpoints_and_source_headroom) ... ok\ntest_exact_stages_peers_and_helper_count (sdk_merge_receiving.plan_test.Plan.test_exact_stages_peers_and_helper_count) ... ok\ntest_refuses_unqualified_or_ambiguous_input (sdk_merge_receiving.plan_test.Plan.test_refuses_unqualified_or_ambiguous_input) ... ok\ntest_exact_twelve_states_without_mutation (sdk_merge_receiving.inputs_test.Inputs.test_exact_twelve_states_without_mutation) ... ok\ntest_refuses_every_unbound_or_ambiguous_metadata_form (sdk_merge_receiving.inputs_test.Inputs.test_refuses_every_unbound_or_ambiguous_metadata_form) ... ok\ntest_bad_terminal_evidence_leaves_intent_pending (sdk_merge_receiving.ledger_test.Lifecycle.test_bad_terminal_evidence_leaves_intent_pending) ... ok\ntest_every_failed_helper_prefix_stops_without_noncreation_claim (sdk_merge_receiving.ledger_test.Lifecycle.test_every_failed_helper_prefix_stops_without_noncreation_claim) ... ok\ntest_full_matrix_still_requires_independent_audit (sdk_merge_receiving.ledger_test.Lifecycle.test_full_matrix_still_requires_independent_audit) ... ok\ntest_order_and_outcome_replacement_refused (sdk_merge_receiving.ledger_test.Lifecycle.test_order_and_outcome_replacement_refused) ... ok\ntest_pending_intent_never_becomes_known_failed_prefix (sdk_merge_receiving.ledger_test.Lifecycle.test_pending_intent_never_becomes_known_failed_prefix) ... ok\ntest_both_endpoint_receipts_preserve_warnings_and_scope (sdk_merge_receiving.helpers_test.Helpers.test_both_endpoint_receipts_preserve_warnings_and_scope) ... ok\ntest_failed_or_truncated_evidence_never_proves_noncreation (sdk_merge_receiving.helpers_test.Helpers.test_failed_or_truncated_evidence_never_proves_noncreation) ... ok\ntest_missing_digest_stays_explicitly_unverified (sdk_merge_receiving.helpers_test.Helpers.test_missing_digest_stays_explicitly_unverified) ... ok\ntest_successful_nonvalidating_phases_reject_helpers (sdk_merge_receiving.helpers_test.Helpers.test_successful_nonvalidating_phases_reject_helpers) ... ok\ntest_audit_output_and_failed_call_stop_with_retained_evidence (sdk_merge_receiving.worker_test.Worker.test_audit_output_and_failed_call_stop_with_retained_evidence) ... ok\ntest_existing_uncertainty_carrier_survives_unchanged (sdk_merge_receiving.worker_test.Worker.test_existing_uncertainty_carrier_survives_unchanged) ... ok\ntest_intent_write_failure_never_dispatches (sdk_merge_receiving.worker_test.Worker.test_intent_write_failure_never_dispatches) ... ok\ntest_nine_calls_with_durable_intent_before_each_dispatch (sdk_merge_receiving.worker_test.Worker.test_nine_calls_with_durable_intent_before_each_dispatch) ... ok\ntest_expiry_keeps_all_known_pipe_owners (sdk_merge_receiving.proxy_test.Pump.test_expiry_keeps_all_known_pipe_owners) ... ok\ntest_original_six_bytes_forward_and_stdin_eof_close_once (sdk_merge_receiving.proxy_test.Pump.test_original_six_bytes_forward_and_stdin_eof_close_once) ... ok\ntest_header_cannot_add_unreviewed_native_flags (sdk_merge_receiving.proxy_test.Server.test_header_cannot_add_unreviewed_native_flags) ... ok\ntest_live_native_after_eof_retains_sockets_and_pipe_no_reap (sdk_merge_receiving.proxy_test.Server.test_live_native_after_eof_retains_sockets_and_pipe_no_reap) ... ok\ntest_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles (sdk_merge_receiving.proxy_test.Server.test_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles) ... ok\ntest_normal_native_reap_and_all_handles_close_without_release_claim (sdk_merge_receiving.proxy_test.Server.test_normal_native_reap_and_all_handles_close_without_release_claim) ... ok\ntest_both_peers_started_before_any_finish_and_same_inherited_grant (sdk_merge_receiving.transport_test.Pair.test_both_peers_started_before_any_finish_and_same_inherited_grant) ... ok\ntest_capture_or_raw_frame_failure_is_not_failed_prefix_release (sdk_merge_receiving.transport_test.Pair.test_capture_or_raw_frame_failure_is_not_failed_prefix_release) ... ok\ntest_failed_client_start_keeps_proxy_and_nested_failed_start (sdk_merge_receiving.transport_test.Pair.test_failed_client_start_keeps_proxy_and_nested_failed_start) ... ok\ntest_failure_of_each_live_peer_retains_both_without_replacing_carrier (sdk_merge_receiving.transport_test.Pair.test_failure_of_each_live_peer_retains_both_without_replacing_carrier) ... ok\ntest_readiness_failure_keeps_proxy_without_starting_client (sdk_merge_receiving.transport_test.Pair.test_readiness_failure_keeps_proxy_without_starting_client) ... ok\ntest_all_phases_bind_to_both_peers_and_raw_bytes (sdk_merge_receiving.evidence_test.Evidence.test_all_phases_bind_to_both_peers_and_raw_bytes) ... ok\ntest_raw_diagnostic_changes_change_the_bound_transport_hash (sdk_merge_receiving.evidence_test.Evidence.test_raw_diagnostic_changes_change_the_bound_transport_hash) ... ok\ntest_rejects_unbound_or_unknown_lifecycle (sdk_merge_receiving.evidence_test.Evidence.test_rejects_unbound_or_unknown_lifecycle) ... ok\ntest_separate_raw_frame_and_duplicate_fields_cannot_be_substituted (sdk_merge_receiving.evidence_test.Evidence.test_separate_raw_frame_and_duplicate_fields_cannot_be_substituted) ... ok\ntest_binding_happens_after_independent_read_and_durable_evidence (sdk_merge_receiving.bound_call_test.Bound.test_binding_happens_after_independent_read_and_durable_evidence) ... ok\ntest_nested_invocation_or_writer_uncertainty_is_never_replaced (sdk_merge_receiving.bound_call_test.Bound.test_nested_invocation_or_writer_uncertainty_is_never_replaced) ... ok\ntest_raw_audit_failure_retains_pair_and_original_bytes (sdk_merge_receiving.bound_call_test.Bound.test_raw_audit_failure_retains_pair_and_original_bytes) ... ok\n\n----------------------------------------------------------------------\nRan 36 tests in 0.040s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 28620,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/bound_call.py": "f5d67582e0fbbc1c6017fcf0f73e7e9b28f1a4499030673f85e7b902386142fe",
+    "tests/sdk_merge_receiving/bound_call_test.py": "cdbee505648b30e5785ec9936526dffe1f6c22629a51d671fdb1f82f19bd6b15",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/sdk_merge_receiving/evidence_test.py": "38caac866f542fdd3f15ccb4e94bdffcd206de8540615345ff33b78a358efcc7",
+    "tests/sdk_merge_receiving/helpers.py": "699cc339f52303892a0cfad3f77c8762f39f1adadde39fda00af3bb991197bf7",
+    "tests/sdk_merge_receiving/helpers_test.py": "4f1cc9322a67b684dd750a2ee726be29a496360fe93854d84c40435bd505acfe",
+    "tests/sdk_merge_receiving/inputs.py": "c5af07c6ab9ebf5cb7fd8b6bf3088fca607984231e660ead8308983b4d6bde29",
+    "tests/sdk_merge_receiving/inputs_test.py": "9d48e0be058b095f489f9485daa37be39bb7647bbf0dc505561bfdf13eb9a53e",
+    "tests/sdk_merge_receiving/ledger.py": "d0ca4fc1112f8286a4d0dcc5660a32126f1544832e94b49d0727f8752eeafa7a",
+    "tests/sdk_merge_receiving/ledger_test.py": "626f2b71b3984f95a21f4dbbf724ca7a83b67f7d810069e2ff99c50b733b6757",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/sdk_merge_receiving/plan_test.py": "de74fc28c8549ebe95000f79b5e97ebd647b3c0986a9c601b0822f4a6f053038",
+    "tests/sdk_merge_receiving/proxy.py": "7402ba6e8fcb0d0a6f626a66493aac8fbd91fe0e203e26bd802a53bca5dcb6aa",
+    "tests/sdk_merge_receiving/proxy_test.py": "f0b010d7ba2177d10d8c52a27a9cf63d4bfdeb716b4dd34dcc15a26399e3e1c2",
+    "tests/sdk_merge_receiving/transport.py": "9e672a89d9fa6ac42748d3c7f462e5bdf5d6973de5a6c802b69b6fc942eac4b9",
+    "tests/sdk_merge_receiving/transport_test.py": "962b9d8030db8cd7f94f5603441c7e4aa438e5dde8412a7e667077fd07dd8d86",
+    "tests/sdk_merge_receiving/worker.py": "b98c50069ced2d04a3e3cb00143b0659d70be7462b33346e298781b00a54b653",
+    "tests/sdk_merge_receiving/worker_test.py": "61c4e3adfcefcf51e467c1f1924ce53b1c43308f05e94aad1743bfdf5046ee1d"
+  },
+  "scope": "Original fabricated process/SDK/raw evidence plus six generated socket/pipe bytes. No native/SDK/media/compiler/Unison or canonical IO operation; all process adapters inert except this reaped test child."
+}

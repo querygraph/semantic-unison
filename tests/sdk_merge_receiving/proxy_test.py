@@ -45,9 +45,9 @@ class Pump(unittest.TestCase):
             for fd in (read_in,write_in,read_out,write_out):os.close(fd)
 
 class Server(unittest.TestCase):
-    def execute(self, *, expired=False, close_error=None):
+    def execute(self, *, expired=False, close_error=None, arguments=None):
         self.endpoint=Mock();self.connection=Mock();self.native=SimpleNamespace(pid=101,returncode=None)
-        header=json.dumps(['/pinned/server','-server']).encode()
+        header=json.dumps(['/pinned/server','-server','__new-rpc-mode'] if arguments is None else arguments).encode()
         self.endpoint.accept.return_value=(self.connection,None)
         self.connection.recv.side_effect=[struct.pack('>I',len(header)),header]
         self.closed=[];clock=[0]
@@ -78,9 +78,18 @@ class Server(unittest.TestCase):
                 signals.assert_not_called();groups.assert_not_called()
                 self.reap_calls=reap.call_count
 
+    def test_header_cannot_add_unreviewed_native_flags(self):
+        for arguments in (['/pinned/server','-server'],
+                ['/different/server','-server','__new-rpc-mode'],
+                ['/pinned/server','-server','__new-rpc-mode','-root','/unadmitted']):
+            with self.subTest(arguments=arguments),self.assertRaises(UnresolvedOwnership) as caught:
+                self.execute(arguments=arguments)
+            self.assertIsNone(caught.exception.proxy_native_child)
+            self.assertEqual(self.reap_calls,0)
+
     def test_normal_native_reap_and_all_handles_close_without_release_claim(self):
         result=self.execute()
-        self.assertEqual(result['server_command'],['/pinned/server','-server','-semanticcpubudget','2'])
+        self.assertEqual(result['server_command'],['/pinned/server','-server','__new-rpc-mode','-semanticcpubudget','2'])
         self.assertEqual(self.reap_calls,1);self.assertTrue(result['server_reaped'])
         self.assertFalse(result['resource_release_authorized'])
         self.assertEqual(self.closed[:4],[10,13,11,12])

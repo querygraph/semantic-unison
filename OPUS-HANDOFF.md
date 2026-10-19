@@ -6809,3 +6809,24 @@ Receipts: `tests/qualification/current-sdk-merge-{proxy,transport}-controls-
 qualified. Next raw-receipt binding/worker adapter, input recovery and immutable
 owned freezer/admission; missing old generated fixtures are not silently replaced.
 Goal stays active/incomplete; no runtime grant or resource hold from source work.
+
+## Merge raw evidence binding and worker transport adapter — 2026-10-19
+
+`/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/evidence.py`
+now binds exact stock/Ox/proxy commands, both normal peer/group records, typed
+PID/counter/EOF fields and independently read raw proxy bytes (duplicate keys
+refused). Raw helper process/group lines are hashed as ledger references.
+`bound_call.py` composes retained pair/read/persist/bind and preserves uncertainty
+on audit or persistence failure. Final executor must independently re-read saved
+evidence for its audit callback; no-op audit is not qualified. Proxy control
+header is now exact current RPC invocation BEFORE native process creation;
+additional server arguments cannot be silently executed then rejected afterward.
+
+Actual61734c/0/no session:36 original source controls passed, child28620 reaped0/
+group-empty, CPU00..03 closed. Six generated socket/pipe bytes and fabricated
+native/process evidence only; no SDK/media/Unison/compiler/canonicalIO. Full
+receipt `tests/qualification/current-sdk-merge-bound-evidence-controls-20261019.json`.
+This advances the retained executor, not runtime qualification. Next exact
+owned writer/freezer/entry wiring, generated input recovery and actual paired
+transport qualification before immutable native admission. Goal remains active;
+no resources held or new Photo/native/payload starts from source qualification.

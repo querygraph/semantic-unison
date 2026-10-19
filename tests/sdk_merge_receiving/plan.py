@@ -95,6 +95,7 @@ def schedule(binaries, tool, workspace):
                          '-servercmd', binaries['ox']['path'],
                          '-batch', '-auto', '-fastcheck', 'false', '-times', *flags],
                 server_flags=flags,
+                server_command=[binaries['ox']['path'],'-server','__new-rpc-mode',*flags],
                 expected_sdk_helpers=2 if stage == 'update' else 0,
                 requires_unchanged_noop=stage == 'noop'))
     return dict(schema='unison-current-sdk-merge-schedule/1', rows=rows,

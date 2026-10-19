@@ -138,3 +138,32 @@ socket/pipe bytes and inert native/paired-process doubles. No native proxy/serve
 SDK, DNG, Unison, compiler or canonical IO operation ran. Actual paired process
 qualification, independent raw-receipt binding, input recovery and the owned
 freezer/admission remain pending. See qualification receipts for exact scope.
+
+## Independent transport evidence binding
+
+`evidence.py` now checks exact scheduled stock-client/Ox-server commands, the
+expected proxy command, typed normal peer cleanup/group observations, distinct
+peer/server identities, independently read raw proxy bytes, duplicate JSON keys,
+server-to-proxy group binding, complete EOF forwarding and directional counts.
+It binds helper ledger references to exact raw process/group diagnostic lines.
+It does not replace SDK receipt, output-byte, source/build or final owner audits.
+
+`bound_call.py` wires retained transport → independently read raw frame → durable
+evidence callback → binding → worker-compatible outcome. Writer or binding
+failures retain the pair/raw bytes and original cause; existing uncertain-close
+carriers propagate unchanged. The executor must re-read persisted evidence for
+the worker's independent audit callback; a no-op callback is not sufficient.
+
+Source review also tightened the launcher control header BEFORE server creation:
+only `[exactOxBinary,-server,__new-rpc-mode]` is accepted, matching current
+`src/remote.ml`; native server flags come solely from the pinned schedule. The
+plan now records the full expected server command. Additional/unreviewed header
+arguments are refused before Popen; old source records remain historical.
+
+Actual61734c/exit0/no session:36 original controls PASS, testchild28620 reaped0/
+group-empty thenCPU00..03 closed. Six socket/pipe bytes plus fabricated raw
+evidence/process doubles only; no SDK/media/Unison/compiler/canonicalIO or new
+native functionality qualification. Receipt `../qualification/current-sdk-merge-
+bound-evidence-controls-20261019.json`. Remaining: exact owned writer/freezer and
+launcher/proxy entry scripts, authenticated generated input recovery, actual
+paired transport qualification, immutable request/admission, then native matrix.

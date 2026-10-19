@@ -107,8 +107,7 @@ def serve(socket_path, binary, flags, deadline):
         length = struct.unpack('>I', exact(4))[0]
         require(0 < length <= 8192, 'bounded launcher header required')
         arguments = json.loads(exact(length))
-        require(type(arguments) is list and arguments and arguments[0] == binary
-                and '-server' in arguments and all(type(x) is str and '\0' not in x for x in arguments),
+        require(type(arguments) is list and arguments == [binary,'-server','__new-rpc-mode'],
                 'exact expected native server header required')
         command = arguments + flags
         read_in, write_in = os.pipe(); owned_fds.extend([read_in,write_in])
