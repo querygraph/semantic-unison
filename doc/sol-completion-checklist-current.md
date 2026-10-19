@@ -300,3 +300,8 @@ transport claim. Injected unknown native owners/reservations remain retained
 until test process exit; process closure does not relabel normal object teardown.
 Predecessorv3 refused compiler symlinks beforechild and was independently
 recoveryclosed137; preserve that failure separately from this freshv4 pass.
+
+
+### Current default-startup genuine-upstream interoperability
+
+[Actual result](final-default-upstream-result-20261019.md) and [receipt](../tests/qualification/final-default-upstream-peer-actual-20261019.json): current stock/Ox both client/server orientations versus unmodified8772;12calls/36primaryroles normalclosed, exact replicas/source fences/no-op8fields. Owning9111/c2e1e7/0/no session; independent07dc8d/0 raw/pin/shim/FD audit+65536Bfreshpayloadhashes/whole8EXclosed. This renews current default-startup interop, not forcedRPC0/installedoldrelease/archive-roundtrip/actualSSH/performance/semantic or SDK qualification.

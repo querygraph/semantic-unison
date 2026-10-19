@@ -1,16 +1,16 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T12:33:03.604551+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T12:59:30.983638+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest native
-  stage owner `5267/cfd95f/0/NOsession`, all50children closed; independent audit
-  `2a4ba1/0` acquired/closed the entire Unison8+EX bundle. No sealing hold.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest default-upstream owner
+  `9111/c2e1e7/0/NOsession`,12calls/36primaryrolesclosed; independent audit
+  `07dc8d/0` acquired/closed the entire Unison8+EX bundle. No sealing hold.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -74,9 +74,16 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   structurevalid/decodeSUCCESS/rawdigestvalid/errors0,4edgepaddingwarnings each.
   These do not close current final merge/negative-policy/corpus coverage.
 
+- **Current/genuine upstream:** `9111/c2e1e7/0`, four current stock/Ox client/
+  server orientations against unmodified8772,12CLI/36primaryroles normalclosed.
+  Exact8KiB fixtures/sourcefences/noop8fields, canonical9FDguards. Independent
+  `07dc8d/0` re-audited allrawpairs/argv/groups/shimAST/pins+64KiBfinalreplicas;
+  whole8EXclosed. `doc/final-default-upstream-result-20261019.md`. Default
+  new-RPC startup/customloopback only, not forcedRPC0/archive/realSSH/SDK.
+
 ## Remaining work — do not mark goal complete
 
-1. Reconcile current full-sync properties, archive round-trip/old peers/RPC
+1. Reconcile current full-sync properties, archive round-trip/installedoldpeers/forcedRPC0
    and remaining named edge cases to source-bound evidence or renew only the
    missing cases. Native stage qualification is not every sync property or
    compressed-input/crash/platform proof. See `doc/sol-final-acceptance-map-20261019.md`.
@@ -7886,3 +7893,26 @@ Next currentarchive/oldpeer/propertypipeline/baseline+remainingbenchmark
 closure; finalAdobe inputpreservation/genuine3codecfixture recovery and
 merge/policyreceiving stilllast. PhotoIO/nativehandovercontinues; source
 Photo8independent/MaincachePhotoexclusive. No18grant/oldadmissionreuse.
+
+
+## Current/genuine8772 default-RPC interop ACTUAL COMPLETE,2026-10-19
+
+Actual9111/cb5be9→c2e1e7/0/NOsession,owner30764,
+/private/tmp/u-peer-83e2c881a41e43b2; planfcc0b4ed. Fourorientations:current
+stock/Oxclient/server versusgenuineunmodified8772d26a,12seed/update/noopCLI
+and36primaryclient/proxy/serverrolesnormalclosed. Launcherdescendantsincluded
+inclientgroupclosure, notseparatetotalOSprocesscount. Default__new-rpc-mode
+startup only; no forcedRPC0/archiveRoundtrip/actualSSH/semanticSDKclaim.
+Allsource/target8192Bexact/source8fieldfences/noop8fieldtargetidentitiespassed.
+Currentonlyflagsseparatedfromupstream; currentworker2/budget2/threads2,
+endpoint2+2+owner2inside8. Retainedmodernbatchtransport, not oldcancellation
+proxy. Canonical9FDproxyguardsactualvalidated, allStore/Unison8EXclosed.
+UpstreamSOURCE.tar/source/buildselftest/compiler/binaryauth recheckedunderIO,
+current329sourcebindings and527harnesspins. Independent07dc8d/0 re-audited
+12rawpairs/actualargv/groups/clockrecords/shimAST/FDguards and65536Bfresh
+fullreplicahashes; whole8EXfreshacquired/closed. Sevencontrols4c7b3a/0.
+Actualreceipt tests/qualification/final-default-upstream-peer-actual-20261019.json;
+human doc/final-default-upstream-result-20261019.md. ResourcesZERO; noSDK/
+Photo/original/Main/cache/18borrow. Currentarchive/installedoldrelease/forced
+RPC0/end-to-endpropertypipeline andbenchmarkbaselines remainseparategaps.
+UserPhotoIOhandovercontinues; directAdobefinalmatrixstilllast.

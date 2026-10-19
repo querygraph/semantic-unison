@@ -133,3 +133,8 @@ full logical model are retained as negative optimization evidence.
 ### Current native stage property/ABI/sparse binding renewed
 
 [Result](final-native-stage-result-20261019.md) and [actual receipt](../tests/qualification/final-native-stage-v2-actual-20261019.json): both current production native objects,50actual compiler/native/metadata children,46zero+4expected77; owning5267/cfd95f/0/no session. Read-only/snapshot live-mutation isolation, xattr/fork/ACL stripping, FIFO/flags/refusal/error phases/exclusivity/descriptor counts and real sparse1MiB snapshots passed. Independent2a4ba1/0 rehashed2146342B and all source/object/toolchain/command bindings; whole8EXclosed. Earlier sparse-generator prerequisite failure/recovery137 and negative creation methods preserved. This closes native-stage binding, not every end-to-end sync property/compressed/platform/crash case.
+
+
+### Current default-startup genuine-upstream interoperability
+
+[Actual result](final-default-upstream-result-20261019.md) and [receipt](../tests/qualification/final-default-upstream-peer-actual-20261019.json): current stock/Ox both client/server orientations versus unmodified8772;12calls/36primaryroles normalclosed, exact replicas/source fences/no-op8fields. Owning9111/c2e1e7/0/no session; independent07dc8d/0 raw/pin/shim/FD audit+65536Bfreshpayloadhashes/whole8EXclosed. This renews current default-startup interop, not forcedRPC0/installedoldrelease/archive-roundtrip/actualSSH/performance/semantic or SDK qualification.
