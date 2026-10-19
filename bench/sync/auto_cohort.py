@@ -1,5 +1,6 @@
 """Versioned pure cohort accounting. No admission, lock access or FD release."""
 import json
+from pathlib import PurePosixPath
 from invocation_journal import _audit_attempted
 from worker_config import endpoint_bound, worker_options
 
@@ -43,6 +44,7 @@ def audit(result, cohort):
                 for phase, count in (('warmup', 1), ('measured', 5))
                 for repetition in range(1, count + 1)}
     seen = set()
+    directories = set()
     entries = result['invocations']
     if len(entries) != 54 or len(result['samples']) != 18:
         raise ValueError('exact 18 rows/54 calls required')
@@ -57,11 +59,15 @@ def audit(result, cohort):
                      'staging_cleaned', 'private_fixture_removed'):
             if row.get(name) is not True:
                 raise ValueError('functional proof missing')
+        directory = entries[index * 3]['identity']['directory']
+        if directory in directories:
+            raise ValueError('reused cohort fixture directory')
+        directories.add(directory)
         for offset, (stage, field) in enumerate(STAGES):
             entry = entries[index * 3 + offset]
             identity = entry['identity']
             run = row[field]
-            if (identity['mode'] != row['mode'] or identity['stage'] != stage
+            if (identity['directory'] != directory or identity['mode'] != row['mode'] or identity['stage'] != stage
                     or not exact(entry['outcome'], run)):
                 raise ValueError('row/journal outcome binding differs')
             proxy = run['proxy']
@@ -133,8 +139,12 @@ def check_launch(argv, cohort, **bindings):
         raise ValueError('exact cohort launch differs')
 
 
-def audit_bound(result, cohort, artifact):
+def audit_bound(result, cohort, artifact, *, fixture_root):
     """Full nested matrix plus declared parameters/artifacts; no file hashing."""
+    root = PurePosixPath(fixture_root)
+    if (type(fixture_root) is not str or not root.is_absolute()
+            or str(root) != fixture_root or '..' in root.parts or '\x00' in fixture_root):
+        raise ValueError('canonical absolute fixture root required')
     expected = parameters(cohort)
     for key, value in expected.items():
         if not exact(result['parameters'].get(key), value):
@@ -158,6 +168,15 @@ def audit_bound(result, cohort, artifact):
                  *worker_options(cohort['selection'], 8)]
         if identity['mode'] == 'semantic':
             flags += ['-semanticdng']
-        if entry['command'][-len(flags):] != flags:
-            raise ValueError('cohort endpoint flags differ')
+        directory = PurePosixPath(identity['directory'])
+        if directory.parent != root or str(directory) != identity['directory'] or '..' in directory.parts:
+            raise ValueError('fixture outside bound namespace')
+        client = [artifact['binary'], str(directory / 'left'),
+                  'ssh://localhost/' + str(directory / 'right'),
+                  '-sshcmd', str(root / 'launcher.py'), '-servercmd', artifact['binary'],
+                  '-batch', '-auto', '-fastcheck', 'false', '-times', *flags]
+        server = [artifact['binary'], '-server', '__new-rpc-mode', *flags]
+        if (not exact(entry['command'], client)
+                or not exact(entry['outcome']['proxy']['server_command'], server)):
+            raise ValueError('cohort client/server command differs')
     return audit(result, cohort)

@@ -74,18 +74,25 @@ class Cohort(unittest.TestCase):
                    '-debug','semantic-timings','-clone','off' if mode=='ordinary' else 'auto',
                    '-semanticworkers','0','-semanticcpubudget','8','-maxthreads','8']
             if mode=='semantic':flags+=['-semanticdng']
-            command=['/fabricated/unison',entry['identity']['directory'],*flags]
+            directory=entry['identity']['directory']
+            command=['/fabricated/unison',directory+'/left','ssh://localhost/'+directory+'/right',
+                     '-sshcmd','/fabricated/launcher.py','-servercmd','/fabricated/unison',
+                     '-batch','-auto','-fastcheck','false','-times',*flags]
+            entry['outcome']['proxy']['server_command']=['/fabricated/unison','-server','__new-rpc-mode',*flags]
             entry['command']=command;entry['outcome']['command']=command
             row=value['samples'][index//3]
             row[auto_cohort.STAGES[index%3][1]]=copy.deepcopy(entry['outcome'])
-        auto_cohort.audit_bound(value,cohort,artifact)
-        for mutation in ('budget','hash','flags'):
+        auto_cohort.audit_bound(value,cohort,artifact,fixture_root='/fabricated')
+        for mutation in ('budget','hash','flags','server','escape','client-extra'):
             broken=copy.deepcopy(value)
             if mutation=='budget':broken['parameters']['loopback_cpu_credit_bound']=8
             if mutation=='hash':broken['admitted_binary_sha256']['stock']='c'*64
             if mutation=='flags':broken['invocations'][0]['command'][-1]='2'
+            if mutation=='server':broken['invocations'][0]['outcome']['proxy']['server_command'][-1]='2'
+            if mutation=='escape':broken['invocations'][0]['identity']['directory']='/elsewhere/0'
+            if mutation=='client-extra':broken['invocations'][0]['command'].insert(1,'-ignorearchives')
             with self.subTest(mutation=mutation),self.assertRaises(ValueError):
-                auto_cohort.audit_bound(broken,cohort,artifact)
+                auto_cohort.audit_bound(broken,cohort,artifact,fixture_root='/fabricated')
 
     def test_failed_prefix_separate_and_legacy_unchanged(self):
         value=receipt(8); value['complete']=False; value['invocations']=value['invocations'][:1]

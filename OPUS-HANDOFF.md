@@ -6203,3 +6203,13 @@ No admission or actual benchmark. Remaining: server flag/whole client command
 namespace binding, authenticated immutable plan/artifact checks under IO, and
 dispatcher owner integration before fresh coordinated matrix. Auto upperbound
 is not observed domain count; reserved18 requires fresh Photo coordination.
+
+
+### 2026-10-18 — full cohort client/server command binding
+Bound full client argv (bothroots/launcher/servercmd/fixedflags) and server argv
+(exact -server __new-rpc-mode plus selectedflags), lexical canonical fixture
+root, unique rowdirectories and same-directory seed/update/noop. Actual516ab2/0
+and268326/0 controls passed; finalchild54431 reaped0/groupabsent/CPU4closed.
+No transport/EXIO/Photo payload. Evidence auto-cohort-commands-actual-20261018.json.
+Next is authenticated plan/current artifact hashing and actual dispatcher owner
+integration. These pureaudits alone never authorize release or establishparentexit.
