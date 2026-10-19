@@ -14,4 +14,14 @@ The corpus doubles the earlier32MiB×8 corpus but halves the number of files; th
 
 A simple byte-scaled full30cohort projection is roughly23hours, with preliminary18–30hour planning uncertainty. This is not a runtime guarantee or a request for continuous quiet ownership. The empirical checkpoint has been reached; further payload starts await the scheduling review already raised by Photo. No new18ACTIVE grant exists. Independent source/design work continues.
 
+The selected semantic path returned12,288logical write bytes and modeled the same
+non-inherited output extents; the ordinary extent model is536,870,912bytes and
+receiver-clone model65,536bytes. These are different accounting quantities,
+not whole-application or physical writes. Selected primary-reader bytes were
+1,610,613,648; total application reads remain unknown. Server→client protocol
+median was299,245bytes ordinary/receiver-clone versus4,802semantic; this is one
+direction, not total network traffic, and generated compressibility matters.
+Semantic mode did perform the selected optimization despite slower one-worker
+wall time; no elapsed-time win is claimed.
+
 [Saved observations](larger128-stock1-saved-report-20261019.json) are INCOMPLETE_MATRIX: only1of10cohorts at this size, not completion of the30cohort series. [Actual terminal and closure](../tests/qualification/larger128-stock1-actual-20261019.json).

@@ -1,0 +1,18 @@
+{
+  "schema": "unison-acceptance-audit-actual/1",
+  "actual_tool": {
+    "chunk": "d87e99",
+    "exit_code": 0,
+    "no_running_session": true,
+    "source": "Direct exec_command completed result personally observed"
+  },
+  "owner": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/sol-current-acceptance-audit-owner-20261019.json",
+    "sha256": "343fdf4673027ba07b5b102d859879a82bacb25adba8e135a3406685dd9af0a6"
+  },
+  "audit": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sol-current-acceptance-bindings-20261019-v1.json",
+    "sha256": "a15f59824c91b0ee9ba7a66f0d44a4d2b615e9a0b5ef37727b941b2b0079d401"
+  },
+  "scope": "21metadatareceipts/buildrecords;9all-direct-match,3historical/mixed,9withoutdirectbindings. OnePythonchildreaped0/groupempty/CPU4closed. NoSDK/media/EXIO/benchmark or fullgoal proof."
+}

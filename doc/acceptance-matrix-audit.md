@@ -1,3 +1,5 @@
+Latest requirement-by-requirement checkpoint: [2026-10-19 final acceptance map](sol-final-acceptance-map-20261019.md). Older snapshots below retain their original scope.
+
 # Required acceptance matrix: scope audit
 
 Current consolidated review: [2026-10-17 release readiness](sol-release-readiness-20261017.md).

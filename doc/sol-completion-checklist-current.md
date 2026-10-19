@@ -1,3 +1,5 @@
+Latest requirement-by-requirement checkpoint: [2026-10-19 final acceptance map](sol-final-acceptance-map-20261019.md). Older snapshots below retain their original scope.
+
 # Current SOL completion checklist
 
 This is a completion audit, not a completion declaration. Production successor
