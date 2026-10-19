@@ -7267,3 +7267,22 @@ newexactplans mustreportexpectedfallback separatelyfromfixedXMP SDEsuccess.
 Noactualbenchmarkperformed. WORKLOADS.md listsallremainingSOLscenariofamilies
 andtopologies; no redefining completion to existingmatrix. Photo91034priority
 holdsnewIO/native/SDK/benchmark; own8sourcecontrols continue. Goalactive.
+
+
+## 2026-10-19 — New workload recipes connected to benchmark runner source
+
+run.py now --workload fixed-xmp(defaultunchanged),growing-xmp,metadata-preview/
+raw/opaque. Nonfixed usesnewgenerated6taglayout/ownedconsumer, distinctpreview/
+primary extents, strictsource8field/digestfence, exclusive600creates, qualified
+closes. Existing fixtures.py bytecode/sourceunchanged. Nonfixed refusesfrozen
+partition/sharedqual/layout/propertymatrices; requires separatefreshplans.
+Counters retain strictfixedSDEexpectation and refuseSDEforfallback workloads;
+growntargetsize usedforlogicalmodel+capacitylargestextents, no physicalIOclaim.
+Actualcontrols432e08/0 initial12+legacyfixture+help; final0318dd/0 14original
+recipe/file/counter/closeuncertaintytests; guard9a2c1a/0 twoexpectedCLIexit2/no
+output/noinertbinaryexecution. All6directchildgroupsclosed/CPU4closedaftereach,
+noEXglobal/Unison/SDK/Photo/bulkIO. TinygeneratedfixturefilesWEREcreatedfor
+consumercontrols, notbenchmark/camera; no receiving/performanceclaim. Receipt
+generated-workload-integration-actual-20261019.json. WORKLOADS.md updated; no
+automatic grant. Sourceplans foractualnewscenarios nextafterPhoto priority.
+GoalACTIVE; otherSOLworkloads/topologies remainrequired.

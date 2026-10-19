@@ -19,6 +19,8 @@ import time
 import zlib
 
 from fixtures import create, edit, equal_files, sha256, validate_dimensions
+from workloads import KINDS as WORKLOADS, layout as workload_layout, recipe as workload_recipe
+from workload_fixtures import create as create_workload, edit as edit_workload
 import partitions
 import artifact_pins
 import properties as property_controls
@@ -132,7 +134,9 @@ def diagnostic_text(outcome):
     return "\n".join(outcome[name] for name in ('stdout','stderr','supervisor_output'))
 
 
-def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timings=False):
+def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timings=False, expect_semantic=True):
+    if type(expect_semantic) is not bool:
+        raise ValueError("typed semantic expectation required")
     semantic = [tuple(int(value) for value in match[:4]) + (match[4],)
                 for match in SDE.findall(log)]
     preserved = [int(value) for value in PRESERVED.findall(log)]
@@ -145,7 +149,7 @@ def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timi
     elif preserved:
         logical_writes = None
         model = files * size - sum(preserved)
-        model_basis = "complete fixed-length output minus same-offset inherited clone bytes"
+        model_basis = "complete output extents minus same-offset inherited clone bytes"
     elif source_clones == files:
         logical_writes = None
         model = 0
@@ -154,8 +158,11 @@ def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timi
         logical_writes = None
         model = files * size
         model_basis = "full output extent; syscall/physical-write accounting unavailable"
-    if mode == "semantic" and (len(semantic) != files or preserved or clone_started or source_clones):
+    if mode == "semantic" and expect_semantic and (len(semantic) != files or preserved or clone_started or source_clones):
         raise AssertionError("semantic mode failed to select exactly one SDE update per file")
+    if mode == "semantic" and not expect_semantic and (semantic or source_clones
+            or clone_started != len(preserved) or clone_started > files):
+        raise AssertionError("fallback workload has inconsistent semantic/receiver path evidence")
     if mode == "receiver-clone" and (len(preserved) != files or clone_started != files or semantic or source_clones):
         raise AssertionError("receiver-clone mode did not qualify every receiver basis")
     if mode in ("ordinary", "reference") and (semantic or clone_started or source_clones or preserved):
@@ -164,7 +171,7 @@ def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timi
         raise AssertionError("same-volume local source cloning was not selected")
     if not 0 <= model <= files * size:
         raise AssertionError("logical output model outside expected size")
-    return {"semantic_updates": len(semantic), "receiver_clone_starts": clone_started,
+    return {"semantic_updates": len(semantic), "expected_semantic_update": mode == "semantic" and expect_semantic, "receiver_clone_starts": clone_started,
             "receiver_clone_completed": len(preserved), "source_clone_completed": source_clones,
             "same_offset_inherited_bytes": sum(preserved),
             "semantic_logical_write_bytes": logical_writes,
@@ -176,9 +183,9 @@ def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timi
             "materialization_model_basis": model_basis,
             "receiver_clone_declines": log.count("Receiver clone declined:"),
             "semantic_fallback_events": log.count("Remote semantic fallback:"),
-            "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic")
+            "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic" and expect_semantic)
               if primary_reads else None,
-            "semantic_phase_observations": semantic_phase_counters(log, required_workers=mode == "semantic")
+            "semantic_phase_observations": semantic_phase_counters(log, required_workers=mode == "semantic" and expect_semantic)
               if phase_timings else None,
             "application_read_bytes": None, "hash_parse_verify_commit_seconds": None,
             "physical_storage_write_bytes": None, "queue_descriptor_peaks": None}
@@ -264,6 +271,8 @@ def main():
     parser.add_argument("--file-mib", type=int, default=32)
     parser.add_argument("--files", type=int, default=2)
     parser.add_argument("--packet-bytes", type=int, default=8192)
+    parser.add_argument("--workload", choices=WORKLOADS, default="fixed-xmp",
+                        help="versioned generated workload; nonfixed cases expect exact fallback, not SDE success")
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--repetitions", type=int, default=5)
     parser.add_argument("--timeout", type=float, default=180)
@@ -301,6 +310,9 @@ def main():
     if args.qualification and args.shared_qualification:
         parser.error("choose one qualification profile")
     finite_qualification = args.qualification or args.shared_qualification
+    if args.workload != "fixed-xmp" and (finite_qualification or args.partition is not None
+            or args.layout_only_controls or args.property_removal_controls):
+        parser.error("new workloads require a separate explicit matrix, not frozen qualification/partition controls")
     if ('auto' in workers or args.endpoint_cpu_budget is not None) and (finite_qualification or args.partition is not None):
         parser.error("automatic/ceiling selections require a separate versioned matrix, not fixed qualification or legacy partitions")
     if args.endpoint_cpu_budget is not None and (references or args.loopback_cpu_credits is None):
@@ -334,6 +346,12 @@ def main():
         parser.error("fixture/count bounds exceeded")
     try:
         size = validate_dimensions(args.file_mib, args.files, args.packet_bytes)
+        largest_fixture_size = size
+        if args.workload != "fixed-xmp":
+            changed = workload_recipe(workload_layout(size, args.packet_bytes), args.workload)
+            largest_fixture_size = max(size, changed.target_size)
+            if changed.target_size * args.files > 8*1024**3:
+                raise ValueError("grown generated working set exceeds8GiB")
     except ValueError as error:
         parser.error(str(error))
     if not finite_qualification and (args.warmups < 1 or args.repetitions < 5):
@@ -380,7 +398,8 @@ def main():
                     "configuration": subprocess.check_output([str(path), "-config"], text=True)}
                     for label, path in compilers.items()},
               "parameters": {"modes": modes, "workers": workers, "file_mib": args.file_mib,
-                    "files": args.files, "packet_bytes": args.packet_bytes,
+                    "files": args.files, "packet_bytes": args.packet_bytes, "workload": args.workload,
+                    "maximum_source_or_target_file_bytes": largest_fixture_size,
                     "warmups": args.warmups, "repetitions": args.repetitions,
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
@@ -419,11 +438,11 @@ def main():
         work = Path(temporary)
         capacity=os.statvfs(work)
         available=capacity.f_bavail*capacity.f_frsize
-        required=4*size*args.files+64*1048576
+        required=4*largest_fixture_size*args.files+64*1048576
         if args.property_removal_controls:
             required += size * args.files * len(configurations)
         result["fixture_capacity"]={"available_bytes_before_run":available,
-            "required_bytes":required,"model":"four full corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
+            "required_bytes":required,"model":"four largest source/target corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
         if available<required:raise RuntimeError("insufficient private fixture capacity")
         for name in ("proxy.py", "measure.py", "launcher.py", "ownership.py"):
             shutil.copy2(HERE / name, work / name)
@@ -504,8 +523,11 @@ def main():
                         for name in ("left", "right", "state", "basis"):
                             (directory / name).mkdir(parents=True)
                         start = time.monotonic()
-                        fixtures = [create(directory / "left" / f"image-{index:04d}.dng", size,
-                                           args.packet_bytes, index, layout_only=args.layout_only_controls) for index in range(args.files)]
+                        fixtures = [(create(directory / "left" / f"image-{index:04d}.dng", size,
+                                           args.packet_bytes, index, layout_only=args.layout_only_controls)
+                                     if args.workload == "fixed-xmp" else
+                                     create_workload(directory / "left" / f"image-{index:04d}.dng", size,
+                                                     args.packet_bytes, index)) for index in range(args.files)]
                         if args.property_removal_controls:
                             for item in fixtures:
                                 property_controls.initialise(directory / "left" / item["name"])
@@ -522,7 +544,9 @@ def main():
                                 observed = property_controls.old_reader_snapshot(handle.fileno())
                                 assert observed['sha256'] == item['before_sha256']
                                 old_readers[name] = (handle, observed)
-                            item["expected_after_sha256"] = edit(directory / "left" / name, item)
+                            item["expected_after_sha256"] = (edit(directory / "left" / name, item)
+                                if args.workload == "fixed-xmp" else
+                                edit_workload(directory / "left" / name, item, args.workload))
                             if args.property_removal_controls:
                                 property_controls.remove_source(directory / "left" / name)
                         sample = {"label": label, "mode": mode, "workers": worker,
@@ -534,7 +558,8 @@ def main():
                         measured = invoke(label, binary, mode, worker, directory, "update")
                         sample["update_sync"] = measured
                         log = diagnostic_text(measured)
-                        sample["counters"] = internal_counters(log, mode, args.files, size,
+                        sample["counters"] = internal_counters(log, mode, args.files, fixtures[0].get("after_size_bytes", size),
+                            expect_semantic=args.workload == "fixed-xmp",
                             primary_reads=args.measure_primary_reads and mode != "reference",
                             phase_timings=args.measure_semantic_phases and mode != "reference")
                         if args.layout_only_controls and mode=="semantic":

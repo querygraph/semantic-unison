@@ -29,11 +29,15 @@ They are not parser acceptance tests or timings. See
 
 ## Next integration and outstanding workloads
 
-The benchmark runner does NOT consume these recipes yet. Add a versioned owned
-consumer and source-qualified CLI/plan field; preserve existing default fixture
-bytes. Independently hash the final generated donor and received file; keep the
-old receiver/basis unchanged and verify no-op inode behavior after receiving.
-Record source/target sizes separately, especially when XMP grows. Strict SDE
+The benchmark runner now consumes non-fixed recipes through `--workload`.
+`fixed-xmp` retains the original generator/bytes; the added preview-capable
+container is used only for new scenarios. The new owned consumer creates0600
+exclusive generated files, guards identity/digest before editing and uses
+qualified one-shot descriptor closes. The runner independently hashes final
+donor/received files, preserves the old basis and verifies no-op receiver inodes.
+New workloads refuse legacy partition/qualification controls; fresh versioned
+source-qualified IO plans and actual Unison execution remain required.
+Source/target sizes are recorded separately and capacity uses the larger extent. Strict SDE
 success expectations must remain for fixed-XMP cohorts; fallback workloads must
 be reported as fallback, never silently counted as semantic acceleration.
 
@@ -44,3 +48,15 @@ non-APFS and actual network/cold-cache scopes remain separate. At least five
 measured repetitions after declared warmups remain the SOL benchmark contract.
 Larger sizes alone do not replace these workloads. Do not start any IO until the
 current Photo window is released and the new exact owned run is coordinated.
+
+## Current source integration evidence
+
+Fourteen tiny recipe/owned-file/counter controls passed, including close
+uncertainty (original carrier preserved/no numeric retry), alias/replacement
+refusal and independent changed-byte oracles. Legacy fixed/layout fixtures and
+actualCLIhelp passed separately. Two actualCLIpreexec guards refused insertion
+into frozen partition/qualification runs without creating output or executing
+the supplied inert binary. See
+`tests/qualification/generated-workload-integration-actual-20261019.json`.
+No Unison sync or benchmark was run; fallback expectations are still predictions
+until the separately coordinated native qualification. No SDK/Photo data used.
