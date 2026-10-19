@@ -2,14 +2,18 @@
 
 ## Current status — 2026-10-19
 
-**Latest actual state:** generator76654/590918/0 closed one genuine2768 JXL writer
-and12qualified2724validations, all structure/decode/rawdigest valid (warnings4
-retained). Authentic readonly12states now exist. Metadata-only freezerf9078b/0
-produced `doc/current-sdk-merge-native-20261019-01` plan70475118/request66c0bfe1;
-139execution/329production/10JSON/12lstat. This successor is UNADMITTED and its
-workspace is absent. Exactfixture048d0ae7 is consumed; no replay/automatic merge.
-See `doc/sdk-fixture-generation-result-20261019.md`. Earlier readiness/missing-file
-notes below are historical, not a current missing-fixture blocker.
+**Latest actual state:** three-codec receiving merge actually PASSED/CLOSED:
+owner exec61260/3d8747/0/no session, nine CLI/nine servers/six qualified2724SDK
+helpers, all groups settled and CPU8/EXglobal closed. Each encoding completed
+seed/off → scalar merge/require → unchanged no-op/require. All SDK findings
+structure/decode/rawdigest valid, errors0, warnings4 retained. Separate admission
+2620e2b5 consumed once; no replay. See [actual result](../../doc/current-sdk-merge-result-20261019.md)
+and its saved raw-protocol/source audit. Generator76654/590918/0 previously closed
+one2768writer plus12SDK calls; its clearance is separately consumed.
+
+Everything below is implementation history, including obsolete UNADMITTED,
+missing-fixture and not-yet-run statements. The current run is completed and
+released; none of these historical paragraphs authorizes another run.
 
 
 The current receiving entry/freezer/independent audit are implemented; native

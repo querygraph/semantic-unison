@@ -67,6 +67,16 @@ admissions or statements that consumed jobs remain unstarted.
   pins raw owner/audit/event/output receipts and faithful owning-tool terminal.
   Original audit correctly leaves parent-terminal false: that later fact is
   supplied separately by actual tool terminal, not rewritten into the raw audit.
+- Postclosure raw-protocol/source audit8b4b5c/0 rechecked139execution/329production,
+  tenJSON/twelveepochs/ninepairs/sixSDKreports without DNG/executable reopening;
+  CPU00closed/noEX. Initial eb4bef/1 auditor key mismatch closedCPU; no rerun.
+  Report `doc/current-sdk-merge-result-20261019.md` and saved-audit receipt link
+  exact scopes; review guide no longer claims this request unexecuted.
+- Next genuine-negative receiving source work: pure `sdk_fixture_digest_fault.py`
+  and four original controlsff1b99/0 passed all3codecs/bothorders, exactonebit plus
+  shape/alias refusals; CPU00closed/nochildren/EX/SDK/payload. This is NOT an
+  actual negative SDK finding. `doc/sdk-negative-receiving-successor-design-20261019.md`
+  specifies separate expected-exit/finding audits; no runtime request/grant yet.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement

@@ -59,6 +59,7 @@ qualified empty-log reader. No test or SDK call was repeated for that correction
 [Actual records and exact modes](../tests/qualification/final-validation-finding-policy-actual-20261019.json)
 link the full source/binary/log bindings. Existing receiving-path and actual SDK
 receipts remain separately scoped. Final candidate merged receiving under all
-three encodings, receiving publication on negative genuine findings, and the
-remaining named reuse/resume/merge policy mapping are still open. Passing this
+three encodings now passed [nine CLI/six genuine SDK calls](current-sdk-merge-result-20261019.md).
+Receiving publication on negative genuine findings and the remaining named
+reuse/resume/merge policy mapping are still open. Passing this
 core matrix is not completion of those broader requirements.

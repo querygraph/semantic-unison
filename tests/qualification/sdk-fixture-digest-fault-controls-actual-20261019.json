@@ -1,0 +1,43 @@
+{
+  "schema": "unison-generated-digest-fault-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "ff1b99",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "test_methods": 4,
+  "codecs": [
+    "uncompressed",
+    "jpeg",
+    "jxl"
+  ],
+  "byte_orders": [
+    "II",
+    "MM"
+  ],
+  "positive_observation": "Exactly one bit at the NewRawImageDigest payload changes; all other bytes identical",
+  "refusals": [
+    "missing tag",
+    "wrong type/count",
+    "out-of-bounds extent",
+    "primary table alias",
+    "XMP alias",
+    "duplicate tag",
+    "unknown field type",
+    "mutable input",
+    "wrong declared encoding"
+  ],
+  "source_sha256": {
+    "tests/sdk_fixture_digest_fault.py": "32de1200c2e65df2834f46626f54045eec77953e3a1f12cecbad2f4a9ae9bc70",
+    "tests/sdk_fixture_digest_fault_test.py": "417440577bfdf3ca5d96e3e5c35aa166a9daa190884d1d86b8e14c8e8580a9ba",
+    "tests/sdk_fixture_states.py": "ec6e8d03d7466f72557d078cefa19dcb8d8cae1f1a1a58e81a757a14dc8a6d47",
+    "tests/sdk_fixture_states_test.py": "e00d9a4f1cc8822da2aaa8ccec333a4e4e2889f67dbfa066b13b70ee13dafffb"
+  },
+  "CPU00_closed": true,
+  "child_processes": 0,
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "retained_payload_opened": false,
+  "actual_SDK_finding_proved": false,
+  "receiving_rejection_proved": false
+}
