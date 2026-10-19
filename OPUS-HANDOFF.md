@@ -76,6 +76,15 @@ mutation with exact native mtime restored). It has NOT been compiled or run and
 has no admission, live owner, CPU/IO reservation or Photo hold. Finish source/
 object planning on Unison's own share; only acquire shared IO for actual work.
 
+Source successor prepared: `component_controls.py --state-controls` now adds
+original late-delivery/cancellation/shutdown and deterministic same-size,
+exact-restored-mtime mutation programs for both current Make builds. Fourteen
+serial contained calls are planned; Python source parsed successfully, but NO
+compiler/test/IO acquisition has run. See
+`doc/worker-state-followup-20261019.md`. Freeze owner/artifact pins before actual
+execution. Capitola has priority; Photo startup29526/bfa660/0 closed and all
+Photo resources released. No blanket Photo hold or new Unison IO grant exists.
+
 ## Actual current evidence
 
 - **Builds:** current stock/Ox Make+Dune build/selftests,586inputs/329production
