@@ -29,6 +29,9 @@ admissions or statements that consumed jobs remain unstarted.
 
 ## Actual resources and scheduling — ZERO held
 
+- Latest user scheduling answer: run finite SDK work when shared IO barrier is available; do not wait solely for Capitola clearance. Existing consumed runs remain closed, with no replay.
+- Normal named receiving call actor now persists intent/raw capture, independently re-reads saved evidence, enforces shared call budget and rechecks prepared scripts/profile. Actual source controls5cbe42/0 passed13methods (CPU00 explicitly closed, inert process adapters only, no EX/CLI/SDK). Interruption/cancellation actors and full parent binding remain unfinished; no runtime admission requested for this successor.
+
 - SDK fixture owner76654/e2ad8d→590918/exit0/NOsession is CLOSED. One2768writer
   plus12qualified2724validator children allreaped0/groups absent. Parent/store/
   CPU00..07/EXglobal closed before actual tool terminal. Photo received immediate

@@ -1,0 +1,20 @@
+{
+  "schema": "unison-current-named-invoke-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "5cbe42",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 13,
+  "source_sha256": {
+    "tests/current_validation_paths/invoke.py": "4621626326b98e848e18ff3adbaec42a1eae295aff221aaf81d29622388d86ba",
+    "tests/current_validation_paths/invoke_test.py": "374f4c25a8fbae12c0270342f985227d2a4e2944d6303a7b807af7e25eb8ea48",
+    "tests/current_validation_paths/session.py": "685221c9e67df9983f3246885c35c051656bc08df3b5269209ee6248da36b1ad",
+    "tests/current_validation_paths/session_test.py": "e69ee032bb20b765c27c20b3b553537a15b40cff23ebf550e4f87f5d31e2c54b"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "scope": "Private tiny JSON/scripts and inert call adapters; no actual receiving/process settlement qualification"
+}

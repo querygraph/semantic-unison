@@ -49,6 +49,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
                 config=self.config('server');config['semanticvolumejobs']='1'
                 (self.server_state/'endpoint.prf').write_text(''.join(k+' = '+v+'\n' for k,v in config.items()))
                 self.control('image.dng')
+                self.prepared_scripts={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in (*self.drivers.values(),self.copy,self.merger,self.launcher)}
             except UnresolvedOwnership as error:self._retain(error);raise
             except BaseException as error:raise self._retain(error) from error
         def config(self,endpoint):
@@ -81,11 +82,14 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             self._ready()
             try:
                 if type(success) is not bool:raise ValueError('exact case expectation required')
+                self.last_outcome=None;self.last_verdict=None
                 self.sequence+=1
                 before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
                 intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
                     server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
                     expected_client_exit=0 if success else 2,before_fake_helper_counts=before,
+                    helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},
+                    server_profile_sha256=hashlib.sha256((self.server_state/'endpoint.prf').read_bytes()).hexdigest(),
                     resource_release_authorized=False)
                 self.active_intent=intent
                 persist('INTENT',self,intent) # Must finish before any child adapter.
