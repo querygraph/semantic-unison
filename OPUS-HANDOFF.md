@@ -7405,3 +7405,17 @@ session under Unison00/qualified close, no children/EXIO/SDK/Photo. Earlier
 2ce5f7/0 tested the same behavior in a transient common-helper edit, removed
 before commit to keep existing qualifications stable. Batch controller remains
 unfinished, dispatcher_ready=false, no actual new workload sync claimed.
+
+
+## 2026-10-19 generated-corpus sample phase composition
+
+Added batch_sample.sample canonical-plan/root checks and fail-stop seed/update/
+noop orchestration. New files created only after seed, recursive source+receiver
+verification around each phase, exact receiver identity retained by no-op.
+New verify_expected separates unchanged seed expectations from changed target
+inventory. Caller retains transport/resource/evidence ownership; component
+never retries, releases, cleans partial files or claims process audit.
+Actualcf7625/0/no session: eight tests (four tinyfilesystem +four mockedphase)
+passed within Unison00, qualified-closed. No real corpus/transport/SDK/Photo IO.
+Owning dispatcher/pinned commands/rawcapture/call audit/event persistence/counters
+and repeated actual runs remain; dispatcher_ready=false, goal not complete.

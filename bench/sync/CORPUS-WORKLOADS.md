@@ -96,3 +96,25 @@ objects/preclose identities on any uncertainty; this class does not establish
 child/group closure. Existing measure.CapturedStream and frozen plans remain
 unchanged. Four in-memory controls passed actualf7bca1/0/no session, Unison00
 closed, no subprocess/EXIO/Photo. End-to-end owning batch wrapper is still open.
+
+## Sample phase composition
+
+`batch_sample.sample` now composes the exact canonical unshrunk corpus:
+seed creation and seed inventory → donor/empty receiver verification → seed
+transport → both seed replicas verified → edits and source-only additions →
+pinned target inventory → update transport → both targets verified → no-op
+transport → both targets verified with identical receiver eight-field identities.
+It stops on the first exception, preserves partial files, never retries and
+never closes caller-owned resources. Both roots must initially be distinct,
+empty, absolute0700owned directories. Canonical corpus equality refuses shrinking.
+`verify_expected` handles seed expectations separately from changed-target
+inventories, including the explicit empty seed of an all-new corpus.
+
+Actualcf7625/0/no session passed four tiny verifier controls plus four phase
+controls. Phase controls substitute generated-file/transport seams and create
+only empty disposable directories; no actual thousand-file sync or child was
+run. These establish ordering/refusal, not transport or uncertainty settlement.
+Still required: owning dispatcher with pinned commands/admission/IOCPU acquisition,
+raw byte artifact capture and independent CLI/proxy/server audit, bounded event
+persistence, per-class counter joins, repeated measurements and actual runs.
+The planner's dispatcher_ready remains false until that integration is qualified.

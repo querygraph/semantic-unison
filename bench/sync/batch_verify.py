@@ -4,6 +4,7 @@ No process or FD release authority is supplied by the returned observations.
 Unknown close propagates through the qualified carrier; no retry or cleanup.
 """
 import os
+import re
 import stat
 from pathlib import Path
 from batch_inventory import validate
@@ -23,11 +24,30 @@ def verify(root, rows, *, phase):
     validate(rows)
     if phase not in ('before', 'target'):
         raise ValueError('explicit replica verification phase required')
+    expected = [dict(path=r['path'], sha256=r['target_sha256' if phase == 'target' else 'before_sha256'],
+                     bytes=r['target_bytes'])
+                for r in rows if phase == 'target' or r['before_present']]
+    return verify_expected(root, expected)
+
+
+def verify_expected(root, expected):
+    """Exact seed or target expectation; empty seed is explicit, not shrinkage."""
+    if type(expected) is not list or len(expected) > 16384:
+        raise ValueError('bounded exact file expectations required')
+    mapping = {}
+    for row in expected:
+        if (type(row) is not dict or set(row) != {'path', 'sha256', 'bytes'}
+                or type(row['path']) is not str
+                or re.fullmatch(r'group-[0-9]{3}/image-[0-9]{5}\.dng', row['path']) is None
+                or row['path'] in mapping
+                or type(row['sha256']) is not str or re.fullmatch('[0-9a-f]{64}', row['sha256']) is None
+                or type(row['bytes']) is not int or not 32768 <= row['bytes'] <= 262144):
+            raise ValueError('exact distinct generated file expectation required')
+        mapping[row['path']] = row
     root = Path(root)
     if not root.is_absolute(): raise ValueError('absolute owned replica required')
-    expected = {r['path']: r for r in rows if phase == 'target' or r['before_present']}
     groups = {}
-    for path, row in expected.items():
+    for path, row in mapping.items():
         group, leaf = path.split('/')
         groups.setdefault(group, {})[leaf] = row
     fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
@@ -50,11 +70,11 @@ def verify(root, rows, *, phase):
                         key = (before.st_dev, before.st_ino)
                         if not (stat.S_ISREG(before.st_mode) and stat.S_IMODE(before.st_mode) == 0o600
                                 and before.st_uid == os.getuid() and before.st_nlink == 1
-                                and before.st_size == row['target_bytes'] and key not in identities):
+                                and before.st_size == row['bytes'] and key not in identities):
                             raise ValueError('distinct private bounded replica file required')
                         identities.add(key)
                         sha = digest(ffd, before.st_size)
-                        if (sha != row['target_sha256' if phase == 'target' else 'before_sha256']
+                        if (sha != row['sha256']
                                 or epoch(before) != epoch(os.fstat(ffd))
                                 or epoch(before) != epoch(os.stat(leaf, dir_fd=gfd, follow_symlinks=False))):
                             raise ValueError('replica bytes or epoch differ')
