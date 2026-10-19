@@ -38,3 +38,22 @@ after the complete source composition is qualified, then freshly coordinated
 under Unison00..07 plus existing EXglobal; no Photo hold during preparation.
 No SDK/Adobe, camera payload, original source, Main/cache or production operation
 is part of this generated receiving-contract suite.
+
+## Owned private-file implementation
+
+`files.py` now provides one rooted descriptor and an explicit Path facade. Each
+parent component is opened relative to the retained root with NOFOLLOW and checked
+private ownership/mode. Bounded file reads/writes validate type, owner, single link,
+name binding and epochs; declared append logs allow growth only. Creates and text
+IO are bounded, UTF8 and private. Bare file contexts and undeclared rename/link
+mutations refuse. Class setup occurs before acquiring the root descriptor.
+
+Every acquired descriptor closes through the existing qualified carrier. Unknown
+file/root close retains all known descriptors and pre-close identities, freezes
+the owner and refuses new IO or numeric retry. Six original tiny-file controls
+passed590d8a/0: nested text/bytes/modes, outside paths, symlinks, hardlinks, and
+target/root close uncertainty. Injected uncertain closes were test-known successful
+OS closes; no actual unresolved descriptor escaped the tests. CPU00 closed and
+no CLI/SDK/EX or retained payload was used. [Evidence](../qualification/current-named-files-controls-actual-20261019.json).
+The retained Session and explicit signal actors still need implementation; no
+runtime request/admission exists.

@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T17:42:45.982612+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T17:46:43.902194+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -85,7 +85,13 @@ admissions or statements that consumed jobs remain unstarted.
   actor source replacements. Seven original sourcecontrols96cdee/0 passed;
   CPU00closed/noinstance/child/EX/SDK/fixtureconstructed. InitialASTTry omission
   d28aea/1 andunchangedSessionacceptancecea650/1 preserved/corrected, noresources.
-- Implement actualownedPath/retainedSession+signalactors+rawfullprefixaudit next;
+- OwnedprivatePath nowimplemented `files.py`: rootedNOFOLLOWtraversal, bounded
+  type/owner/singlelink/name/epoch IO, declaredappendgrowth, qualifiedclosecarrier.
+  Classsetup before rootFDacquisition. Unknown root/targetclose retainsknownFDs/
+  identities, freezesowner/refusesIO/closeretry. Sixoriginaltinycontrols590d8a/0
+  passed (c74939/0 before setup-order improvement); CPU00closed/noCLI/SDK/EX/
+  retainedpayload/actualunknownFD. Injected closes actuallyclosed onlytestFDs.
+- Implement retainedSession+signalactors+rawfullprefixaudit next;
   no nativeentry/request/admission exists yet. Do not runlegacybareharness or
   swapproductionChelper forinheritedgroupstub. README maps exactscope/nextwork.
 
