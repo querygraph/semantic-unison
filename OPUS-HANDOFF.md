@@ -6462,3 +6462,13 @@ OWNER-RETURN 754cff65973d420cd6e344c05d60b7d934488ee48baef17d5e70e0e3fd6effd5; e
 PromptPhotoqueue01a152b1-50bc BEFOREseal. Sixof10cohorts/108rows324CLI closed;
 remainingstock8,Ox8,stockauto,Oxauto freshserial underACTIVE84ced306.
 Serieshold continues,no SDK/Main/compiler dispatch or finalstandingrestorationyet.
+
+
+### Stock8 temporary18 ACTUAL PASS/CLOSED
+Actual16900/5d127d→dc6d60/0/no session,parent80746/worker80762;18rows54CLI exact,workerreaped0/groupsabsent/CPU18EXclosed/source53unchanged.
+Workspace16fdad99a19b4ae0a280559ace5563ec,admission07869063consumedonce.
+OWNER-RETURN 4fbb0f1498e7fe2833947e4a93a3fd44f3e0af7e4e4b592096c1d1c8c5b53970; evidenceauto-cohort-stock8-actual-20261018.json.
+Sevenof10/126rows378CLI closed; Ox8/stockauto/Oxauto remain.
+SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
+Preexecpublisher1fa37c/1 refused metadata equality(extra bytesfield) BEFOREadmission/workspace; comparison corrected, runtime sources unchanged.
+Postclosuresealer c2ff35/1 refused zerobyte stderr in nonempty metadata reader; hash corrected from savedbytes, no runtime repeated.
