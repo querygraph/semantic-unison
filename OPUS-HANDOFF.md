@@ -92,6 +92,13 @@ admissions or statements that consumed jobs remain unstarted.
   readback, hash/directory/hardlink/malformed refusals. QualifiedFDcloses/no
   retainedsourceopen; CPU00closed/nochildren/EX/SDK. AuthenticDNG operation
   remains unexecuted until owner/whole-run integration and fresh admission.
+- Negative successor integration: kernel d6f3a8/0, Cases93888f/0, parentraw
+  replayf001b1/0, admission+owner ca6e15/0. Currentcombined03b8c9/0 passed43
+  originalmethods/sourcepins, CPU00closed/nochildren/EX/SDK/retainedpayload.
+  `tests/sdk_negative_receiving/README.md` maps components. Nativeentry, durable
+  runtime/shim/preparation records and parentfinaloutput/worker/9FDcomposition
+  still missing; no request/admission/Photohold. Prior component source hashes
+  are historical; combinedreceipt pins currentdata/plan/owner composition.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement

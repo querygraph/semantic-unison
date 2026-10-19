@@ -33,6 +33,7 @@ def schedule(binaries,tool,workspace):
                     '-xferbycopying=false',*flags]
                 require(len(str(directory/(stage+'.sock')).encode())<100,'bounded native socket path required')
                 rows.append(dict(codec=codec,policy=policy,stage=stage,directory=str(directory),
+                    identity=dict(label='stock',workers=2,codec=codec,policy=policy,stage=stage,directory=str(directory)),
                     command=command,server_flags=flags,
                     server_command=[binaries['ox']['path'],'-server','__new-rpc-mode',*flags],
                     expected_client_exit=1 if stage=='negative' and policy=='require' else 0,

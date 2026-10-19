@@ -102,3 +102,22 @@ synthetic fixtures across all encodings/both orders, with exact-write/readback
 and bad-hash/directory/hardlink/malformed refusals. CPU00 closed/no children/EX/
 SDK/retained payload. Authentic generated DNG construction is still unexecuted;
 future caller must own the admitted IO/CPU bundle and source clone provenance.
+
+## Integrated source state
+
+The serial kernel now has original preparation/call/audit/persistence failure
+controls and propagates existing uncertain ownership without replacement. The
+Cases lifecycle composes native-clone installation with the one-byte fault and
+source/destination fences; tiny copy doubles exercised all twelve phases and
+refused accidental require publication or changed pre-fault destinations.
+The raw parent parser independently replays every pinned pair and reconstructs
+all24events, refusing changed raw bytes, hashes, verdicts, order and extra calls.
+Negative-only admission and retained owner source have separate identities;
+seven inherited owner lifecycle controls plus two admission controls passed.
+
+A final current-source combined run03b8c9/0 passed43 original methods, CPU00
+closed, no children/EX/SDK/retained inputs. Exact methods and source hashes:
+[integrated control receipt](../tests/qualification/sdk-negative-integrated-source-controls-actual-20261019.json).
+The native entry, durable runtime/shim/data record adapters and final parent
+worker/FD/output composition remain to be wired before freezing a request. This
+is progress toward the actual run, not a claim that it has run or is admitted.
