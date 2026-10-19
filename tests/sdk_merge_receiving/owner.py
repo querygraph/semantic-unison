@@ -70,7 +70,9 @@ def run(packet,admission,*,request_ref,plan_ref,cpu_pool,io_pool,
         store.write('OWNER-START.json',dict(owner_pid=os.getpid(),child_pid=child.owner.pid,
             target='current-sdk-merge',command=command,cpu_credits=8,token_indexes=list(range(8)),
             io_mode='EX_GLOBAL',inherited_resource_fds=describe_fds(cpu,io),
-            admission_nonce=admission['nonce']))
+            admission_nonce=admission['nonce'],owner_observation_deadline=deadline))
+        (workspace/'OWNER-START-READY').mkdir(mode=0o700)
+        os.fsync(store.fd)
         outcome=child.finish(deadline)
         audit=parent_audit(packet,store,outcome)
         A.require(type(audit) is dict and audit.get('external_children_settled') is True,

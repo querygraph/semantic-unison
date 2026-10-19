@@ -6963,3 +6963,27 @@ d2404b/0 preserved; focused successor removes duplicated inherited data cases.
 Receipts `tests/qualification/current-sdk-merge-runtime-controls{-v2,-v3}-20261019.json`.
 Next top-level entry+independent parent audit/freezer, then fixture recovery and
 actual native qualification. Goal active/incomplete; these controls hold nothing.
+
+## Independent native parent audit implemented — 2026-10-19
+
+`tests/sdk_merge_receiving/parent.py` now independently reparses allnine raw
+client/proxy/server/helper records, reconstructs the exact19 durable event
+snapshots, checks SDK candidate/build/report bindings and six helpers, clone
+backend/source/byte records, shim hashes, worker/proxy9FD observations and no-op
+identity. Default final callbacks metadata-fence allretained inputs and freshly
+hash allsix owned private finaloutputs while parent retainsIO. Return never
+claims owning-tool terminal, semantic eligibility or pixel comparison. Incomplete
+runs refuse rather than taking an ordinary failed-prefix release path.
+
+Owner now records monotonic observationdeadline and createsOWNER-START-READY
+onlyafter immutable START publication completes. Future entry must honor that
+marker before reading, avoiding a read of a partially written START file.
+
+Actual1e54ea/exit0/no session:two original parent tests/eight named refusal
+variants PASS, child44726 reaped0/group-empty/CPU4closed; allsource/native/helper
+evidence fabricated and final readers injected. Initial104b6b/0 passed parent+
+sevenowner regressions, child43843 closed. NoSDK/nativeclone/Unison/media/
+compiler/canonicalIO/newgrant. Receipts `tests/qualification/current-sdk-merge-
+parent-controls[-v2]-20261019.json`. Next top-level entry/freezer and authenticated
+generated fixture recovery, then actual native qualification. Goal active and
+incomplete; these controls own no remaining resources.

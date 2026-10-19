@@ -324,3 +324,29 @@ nine preparation pins, child40194 reaped0/group-empty/CPU4closed. Initiald2404b/
 removed from focused successor test discovery. No canonicalIO lock/native clone/
 SDK/Unison/compiler/media or new admission. Remaining top-level entry/freezer/
 parent audit and authenticated fixture recovery must precede native qualification.
+
+## Independent complete-run parent audit
+
+`parent.py` now reconstructs allnine calls and the exact19 intent/outcome event
+snapshots from independently opened pair/preparation records. It reparses both
+endpoint SDK/helper groups, binds each expected candidate and exact command,
+checks the six total helpers, current shim hashes, worker/proxy inherited9FD
+observations, native clone/source records and strict noop identities. The final
+parent step fences retained-source metadata and rehashes allsix private receiving
+outputs under the still-owned IO grant. It preserves warning/missing-digest scope
+and never claims parent tool terminal, decoded pixels or semantic eligibility.
+Incomplete reports refuse; safe failed-prefix recovery is a separate operation.
+
+The owner now writes its observation deadline in OWNER-START and only creates
+OWNER-START-READY after that immutable record has fully published. The future
+worker must wait for readiness before reading; file existence alone is not a
+complete publication signal.
+
+Actual1e54ea/exit0/no session:two original parent controls with eight directed
+refusals PASS, child44726 reaped0/group-empty/CPU00..03 closed. Fully fabricated
+native/helper/source records only; source/output readers injected. Initial
+104b6b/0 also passed seven owner regressions (child43843 closed). No SDK/native
+clone/Unison/media/compiler/canonicalIO grant/run. Receipts `../qualification/
+current-sdk-merge-parent-controls[-v2]-20261019.json`. This checks decoder/join
+logic, not actual native qualification. Remaining top-level entry/freezer and
+authenticated generated fixtures must precede the actual Unison–Adobe matrix.
