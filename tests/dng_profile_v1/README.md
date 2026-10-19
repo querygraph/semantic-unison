@@ -50,3 +50,15 @@ the complete retained artifact inventory. Pass --keep-work for review;
 without it the receipt records that its private artifact directory was
 deleted. No Photo, Lightroom, catalog/cache, production file or Adobe SDK
 invocation is part of this suite.
+
+## Final-source qualification runner lifecycle (2026-10-19)
+
+The runner now observes compiler metadata, compilation and test children with
+`shared_child.invoke`, retaining its owner without signals when settlement or
+close is uncertain. Log descriptors use the qualified close carrier; a child
+exit does not prove log closure. Eight original injected controls and actual
+Python CLI help passed; see
+`tests/qualification/extended-profile-owned-controls-actual-20261019.json`.
+The four fixed/negative modes and all sparse cases remain in the full run.
+This source change is not a new parser/native qualification. Run after the
+coordinated Photo IO window; retain private artifacts with `--keep-work`.

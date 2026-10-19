@@ -7091,3 +7091,21 @@ JSON inventories under doc/sol-dng-{fixed-case-inventory,final-case-bindings}-
 20261019.json. Extendedprofile/latercomponent parser actualbindings stillneed
 renewal/scopedmapping, not universallyqualified by SDE evidence. Allownjobs/
 resourcesclosed. GoalACTIVE, continue source work while Photo goesfirst.
+
+
+## 2026-10-19 — Extended-parser runner ready for owned final qualification
+
+Source-only successor removes subprocess timeout kills/check_output from
+DNGprofile/1 runner; compiler metadata+compile+test all use observed owned
+groups and capture actual cleanup. Log write/fsync/close qualified; combined
+write/close uncertainty preserves original and child outcome, no numeric retry.
+TopUnresolvedretains owner/evidence. Kept ALL fixed +3negative mutations +4sparse
+cases; no narrowing to easier subset. Generic fixtures import collision found
+actualdf33cb/1 before execution, fixed namespaced dng_profile_v1.fixtures.
+Eightoriginalinjected controls+actualCLIhelp f63f6b/0/no session, children58776/
+58778 actualreaped0/groupempty, CPU00..03closed/noEXIO/native/parser/compiler.
+All4mutation anchors validated current source without compiling. Receipt
+tests/qualification/extended-profile-owned-controls-actual-20261019.json.
+Full actual extended-parser run stillpending PhotoIOrelease; no new admission
+or payload/SDKstart. Earlier inventory runnerpin is historical afterthis edit;
+fixture data/test bodies unchanged. GoalACTIVE; no liveownedresources.

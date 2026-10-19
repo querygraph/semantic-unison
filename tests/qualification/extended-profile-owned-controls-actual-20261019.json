@@ -1,0 +1,74 @@
+{
+  "schema": "unison-extended-profile-owned-controls/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "actual_tool": {
+    "chunk": "f63f6b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "actual_children": [
+    {
+      "pid": 58776,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    {
+      "pid": 58778,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    }
+  ],
+  "controls": 8,
+  "actual_CLI_help_passed": true,
+  "source_pins": {
+    "tests/dng_profile_v1/run.py": "98a6b3fdb1879ba95a35b18ba3d1e043fdd6363132c01544842f5af10e44a1ac",
+    "tests/dng_profile_v1/owned_call.py": "db2c03e8c7293601314bf8df119e35c0ed18598e9c122a77ae87c75c8f946158",
+    "tests/dng_profile_v1/owned_call_test.py": "1291c28fb5e53af6062c4e55c0cd65774fe9a5bbab93b4d6d2b25dad31788827",
+    "tests/dng_profile_v1/fixtures.py": "8f668289b24e652162dc9ea1b8617bcefd3c5257d85d09645ccf3345a12215b7",
+    "tests/dng_profile_v1/test.ml": "e3b0b348beaa15ad73182f0698e570ba99a2777abdec19f5990e80ef0776d13d",
+    "tests/sdk_host_matrix/shared_child.py": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+  },
+  "saved_result": {
+    "path": "/private/tmp/unison-profile-owned-final-4y0cyuq1/RESULT.json",
+    "bytes": 2957,
+    "sha256": "342e0ddebf2f844443897011574eb64a53d38eb78f971f9d7a2c6835d43e4295"
+  },
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false,
+  "compiler_SDK_native_parser_Photo_invoked": false,
+  "scope": "Injected original observation/close tests and actual Python help, source mutation anchor checks. No extended-profile parser qualification, sparse files, compiler or Adobe run. All four original modes preserved.",
+  "preserved_predecessors": [
+    {
+      "chunk": "56a95d",
+      "exit_code": 0,
+      "scope": "initial seven original lifecycle tests, child58249reaped0/groupabsent/CPU4closed"
+    },
+    {
+      "chunk": "df33cb",
+      "exit_code": 1,
+      "no_session": true,
+      "scope": "source import failure before parser/build: generic fixtures module collision; corrected to explicit dng_profile_v1.fixtures namespace, no files or resource acquisition"
+    },
+    {
+      "chunk": "fbbe00",
+      "exit_code": 0,
+      "scope": "source-only fixed/three negative mutation anchor checks after import fix"
+    }
+  ]
+}
