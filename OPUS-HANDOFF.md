@@ -6532,3 +6532,20 @@ Evidencecurrent-sdk-multifile-actual-20261018.json, OWNERRETURN419ad9d2b60206a99
 PromptPhotoactualrelease01a152ca-82d7; no sealgate, userPhotoIO-at-end stillcurrent.
 NoMain/original/pixels/corpus/computeoverlap/production inference.
 Next finalreceivingpath/policy matrix andlargerworkloadsourceprep, noautoSDKdispatch.
+
+
+### Current all-scanned actual PASS/CLOSED
+Generated48MBreadonlyclone preparedb47398/0(nochildren/Unison8EXclosed),
+fixture/private/tmp/u-asv-fixture-ea3c7dda, hash0daa233d/no borrowedsourcehash.
+Request7a77563e/planad740cd8, admissionf362b72bconsumedonce.
+Actual45243/895aac→e035b2/0/NOsession,parent94382/worker94398,
+workspace/private/tmp/u-asv-current-d84a0085.4CLI(2offnoSDK+2requireall-scanned
+noops/4realSDKhelpers) currentstock/Ox, exactno-transferstatuses; rawdigestvalid
+/decodeSUCCESS/errors0/warnings4preserved. Raw4proxyframes independentlybound.
+Workerreaped0/groupsabsent/Unison8EXclosed/191postpinsunchanged; currentproduction329
+checkedinexistingownerbuildbinding. OWNERRETURN8c1f3ff3985182c76fff7c827f0d7c46343c8593ce0565fdae43a6f525b60e09;
+evidencecurrent-all-scanned-adobe-actual-20261018.json. PromptPhotoactualrelease01a152ce-89cc.
+V1requesttargettypo supersededUNSTARTED;47e4fc metadata-relativepathguard refusedbeforeV2write;
+71ce11 createdcorrectabsoluteV2, no originalrequest/admissionreused/runtimefailure.
+Allownjobs/FDsclosed;PhotoIO-at-endstillheldperuser,CPU8sourceindependent.
+Nextpolicy/pathmatrixsourceaudit/largerworkloads, no automaticSDKgrant.
