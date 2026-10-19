@@ -6,7 +6,7 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `e28efbeb`. No `src/` differences from frozen review
+  before this checkpoint: `affb785e`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
@@ -23,10 +23,13 @@ scheduling statements below; preserve original receipts and their scopes.
   captures. Actual original controls are recorded below; actual batch runtime
   remains unexecuted, dispatcher/per-class path audit not complete. Runtime
   composition is source-tested only, not an admitted benchmark.
-- **Next prepared executions:** immutable refreshed final parser and inherited
-  rsync v2 plans match current helper source; v1 plans preserved STALE_UNSTARTED.
-  Both v2 remain unstarted. Recheck metadata/builds and acquire EX→Unison8;
-  preserve every actual child/group/FD outcome, retain unknown without signals.
+- **Final parser renewed:** actual88003/d7e7af/0/no session; stock/Ox each
+ 1253fixedcases/6288assertions+three designated negatives/four sparse cases.
+  Twenty nested children+two runners closed; Store/Unison8/EXclosed. Receipt
+  final-extended-profile-pair-actual-20261019.json. V3 consumed once.
+- **Next prepared execution:** inherited rsync v2 remains unstarted and matches
+  current helper source; recheck metadata/builds and acquire EX→Unison8.
+  Old v1 plans and unexecuted parser v2 preserved; no replay inferred.
 - **Published review:** PR13 OPEN DRAFT, fork`querygraph/unison`, base`master`,
   head`integration/sol-consolidated-review` exactf6bfd6533477f265aa988a6cc24790753a2b3638.
   Actual GitHub readbackfd0f5c/0 confirms. Local final harness is not published
@@ -7505,3 +7508,19 @@ bd3b40/1 hit rsync different source_pins schema after profilev2 written; explici
 rsync-schema successor5325fc/0 completed, no runtime/retry of actualtest.
 Next: directowned fullparser pair, then inheritedrsync, batchowner/counters and
 actualcorpus; Adobe fixtures/source recovery and finalmatrix later.
+
+
+## 2026-10-19 final full extended-profile actual PASS/CLOSED
+
+Direct user-authorized independent qualification after Photo actual normaldrain.
+Frozen v3 planf91435ba corrects olddispatch wording and pins new final_profile_owner
+plus all required qualified Store/reader/lifecycle helpers. Actualowner86095,
+toolsession88003 initialcd9153 terminald7e7af/exit0/NOsession. Stockrunner86111
+andOxrunner86348 genuinewait0/groupsabsent; each1253fixedcases/6288assertions,
+three designated negative mutations andfour sparseinspectioncases;20 nested
+metadata/compiler/tests reaped expected0/2, exactcall/rawlog+manifesthash audit.
+Store/Unison00..07/EXglobalclosed, noSDK/Photo/original/Main/cache.
+Receipt tests/qualification/final-extended-profile-pair-actual-20261019.json.
+ImmediatePhotoqueue01a153b1-3192 release sent, no sealinghold. NewPhotoIO/native
+SDK remainsheld forindependenthandover; own8source maycontinue. Next inherited
+rsync actualqualification. Fullgoal and actualbatchdispatch stillincomplete.

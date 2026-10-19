@@ -63,3 +63,16 @@ all MakerNotes or all future platforms. Scope unsupported capabilities honestly.
 - [Ten-cohort report](auto-cohort-all10-report-20261018.md),
   [first128 checkpoint](larger128-stock1-checkpoint-20261019.md),
   [larger source plans](auto-cohort-larger-plan-20261019.md).
+
+
+### Final extended-profile pair renewed,2026-10-19
+
+Actual owning88003/d7e7af/exit0/no session renewed full stock/Ox parser matrix:
+1253fixedcases/6288assertions each, allthree designated negative mutations and
+four sparse inspector cases each. Twenty nested compiler/metadata/test children
+and both runners genuinely reaped with expected exits/group closure; raw logs
+and manifests independently hash-bound. Store/Unison8/EXglobal closed.
+[Actual receipt](../tests/qualification/final-extended-profile-pair-actual-20261019.json).
+This closes the renewed extended-profile execution gap in the older map; it does
+not prove arbitrary malformed files, decoded pixels, SDK, transport or the whole
+goal. Later component/private forest coverage remains separately scoped.
