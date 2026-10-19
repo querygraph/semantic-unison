@@ -1,4 +1,4 @@
-"""Exact inherited canonical9FD metadata guard; not lock/settlement authority."""
+"""Exact inherited canonical FD metadata guard; not lock/settlement authority."""
 import os,stat,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
@@ -12,30 +12,33 @@ IO_MANIFEST=Path('/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-PO
 IO_SHA='f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636'
 TARGET='shared-sdk-host-matrix'
 
-def inventory():
+def inventory(credits=8):
     # Manifest readers touch metadata only, never acquire or create pool locks.
     from shared_io_pool import read_manifest
     policy=read_manifest(CPU_POLICY,CPU_POLICY_SHA)
     indexes=policy['locking']['defaultUnisonTokenIndexes']
     if policy['version']!=3 or policy['defaultShared']['unison']['cpuCredits']!=8 or indexes!=list(range(8)):
         raise ValueError('exact pinned standing Unison00..07 required')
+    if type(credits) is not int or credits not in (8,18):raise ValueError('known descriptor inventory required')
     cpu=Pool.read(MANIFEST,MANIFEST_SHA);io=GlobalPool.read(IO_MANIFEST,IO_SHA)
-    return tuple(cpu.token_identities[i] for i in range(8))+((io.barrier_identity['device'],io.barrier_identity['inode']),)
+    return tuple(cpu.token_identities[i] for i in range(credits))+((io.barrier_identity['device'],io.barrier_identity['inode']),)
 
-def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET):
+def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET,credits=8):
     def require(v,s):
         if not v:raise ValueError(s)
+    require(type(credits) is int and (credits==8 or credits==18 and target=='sync-auto-cohort'),'explicit known grant size required')
     require(type(parent_pid) is int and parent_pid>0 and type(worker_pid) is int and worker_pid>0,'actual parent/worker IDs required')
     require(target in ('sync-auto-cohort',TARGET,'cached-sha-benchmark','sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
     require(type(start) is dict and type(start.get('owner_pid')) is int and type(start.get('child_pid')) is int
         and start['owner_pid']==parent_pid and start['child_pid']==worker_pid
         and start.get('target')==target and start.get('command')==command
-        and type(start.get('cpu_credits')) is int and start['cpu_credits']==8
+        and type(start.get('cpu_credits')) is int and start['cpu_credits']==credits
         and type(start.get('token_indexes')) is list
         and all(type(i) is int for i in start['token_indexes'])
-        and start['token_indexes']==list(range(8)) and start.get('io_mode')=='EX_GLOBAL','actual parent/command/shared8/EXglobal binding differs')
-    expected=inventory();rows=start.get('inherited_resource_fds')
-    require(type(rows) is list and len(rows)==9,'exact9inherited descriptions required')
+        and start['token_indexes']==list(range(credits)) and start.get('io_mode')=='EX_GLOBAL','actual parent/command/grant/EXglobal binding differs')
+    expected=inventory() if credits==8 else inventory(credits=18)
+    rows=start.get('inherited_resource_fds')
+    require(type(rows) is list and len(rows)==credits+1,'exact inherited descriptor count required')
     fds=[]
     for row,identity in zip(rows,expected):
         require(type(row) is dict and set(row)=={'fd','device','inode'}

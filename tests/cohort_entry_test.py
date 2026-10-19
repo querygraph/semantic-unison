@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -57,6 +58,47 @@ class Entry(unittest.TestCase):
                 broken=copy.deepcopy(start);broken[key]=value
                 with self.subTest(key=key),self.assertRaises(ValueError):
                     B.verify(broken,command,parent_pid=11,worker_pid=22,observe=observe,target=E.TARGET)
+
+    def test_temporary18_needs_exact_root_authorization(self):
+        from shared_io_pool import CANONICAL_SHA256
+        from shared_cpu_pool import POLICY_SHA256
+        command=['/qualified/python','/repo/tests/cohort_entry.py']
+        value=dict(state='ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB',target=E.TARGET,command=command,
+            workspace='/private/tmp/owned',cpu_credits=18,io_manifest_sha256=CANONICAL_SHA256,
+            start_deadline_unix=time.time()+60,temporary_cpu_borrow=dict(
+                state='ROOT_COORDINATED_TEMPORARY18',token_indexes=list(range(18)),
+                standing_policy_sha256=POLICY_SHA256,restore_standing_policy=True,
+                coordination_receipt=dict(path='/pinned/coordination.json',sha256='a'*64)))
+        with patch('shared_io_pool.read_manifest',return_value=value),patch.object(E,'document',return_value={}):
+            self.assertEqual(E.authorize_temporary_borrow({'path':'/admission','sha256':'b'*64},
+                command,Path('/private/tmp/owned')),tuple(range(18)))
+        for mutation in ('missing','tokens','bool','policy','expiry','scope'):
+            broken=copy.deepcopy(value)
+            if mutation=='missing':del broken['temporary_cpu_borrow']
+            if mutation=='tokens':broken['temporary_cpu_borrow']['token_indexes']=list(range(8))
+            if mutation=='bool':broken['temporary_cpu_borrow']['restore_standing_policy']=1
+            if mutation=='policy':broken['temporary_cpu_borrow']['standing_policy_sha256']='c'*64
+            if mutation=='expiry':broken['start_deadline_unix']=0
+            if mutation=='scope':broken['target']='other'
+            with self.subTest(mutation=mutation),patch('shared_io_pool.read_manifest',return_value=broken), \
+                 patch.object(E,'document',side_effect=AssertionError('unqualified receipt read')),self.assertRaises(ValueError):
+                E.authorize_temporary_borrow({'path':'/admission','sha256':'b'*64},command,Path('/private/tmp/owned'))
+
+    def test_borrowed_binding_has_nineteen_descriptors(self):
+        from sdk_host_matrix import shared_binding as B
+        identities=tuple((1,100+i) for i in range(19));command=['/inert']
+        start=dict(owner_pid=11,child_pid=22,target=E.TARGET,command=command,cpu_credits=18,
+            token_indexes=list(range(18)),io_mode='EX_GLOBAL',inherited_resource_fds=[
+                dict(fd=30+i,device=dev,inode=ino) for i,(dev,ino) in enumerate(identities)])
+        def observe(fd):
+            dev,ino=identities[fd-30]
+            return SimpleNamespace(st_dev=dev,st_ino=ino,st_mode=stat.S_IFREG|0o600,
+                st_uid=os.getuid(),st_nlink=1,st_size=0)
+        with patch.object(B,'inventory',return_value=identities):
+            self.assertEqual(len(B.verify(start,command,parent_pid=11,worker_pid=22,
+                observe=observe,target=E.TARGET,credits=18)['inherited_fds']),19)
+            with self.assertRaises(ValueError):
+                B.verify(start,command,parent_pid=11,worker_pid=22,observe=observe,credits=18)
 
     def run_failed_worker(self,error,entered):
         with tempfile.TemporaryDirectory(prefix='cohort-entry-controls-') as temporary:

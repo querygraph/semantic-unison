@@ -62,11 +62,11 @@ def checked_io_request(request, target, argv, output, credits):
                     ROOT / 'tests/shared_cpu_pool.py', ROOT / 'tests/shared_process_owner.py',
                     ROOT / 'bench/sync/ownership.py', Path(argv[1])}
     if target == COHORT_TARGET:
-        from cohort_entry import checked_plan, worker_argv, require_shared8
+        from cohort_entry import checked_plan, worker_argv, require_grant
         from cohort_plan import execution_sources, LIMITS
         from auto_cohort import exact
-        require(credits==8 and len(argv)==9,'exact shared8 cohort worker required')
-        packet=checked_plan(argv[4],argv[6]);require_shared8(packet)
+        require(type(credits) is int and credits in (8,18) and len(argv)==9,'exact cohort worker required')
+        packet=checked_plan(argv[4],argv[6]);require_grant(packet,credits)
         require(argv==worker_argv(packet,argv[4],argv[6]) and packet['workspace']==str(output)
                 and exact(value['limits'],LIMITS),'exact cohort admission/namespace differs')
         source_paths.update(ROOT/name for name in execution_sources(ROOT))
@@ -173,9 +173,12 @@ def checked_io_request(request, target, argv, output, credits):
     return GlobalPool.read(CANONICAL_MANIFEST, CANONICAL_SHA256), value['start_deadline_unix']
 
 
-def run(target, argv, output, credits, *, io_admission=None):
+def run(target, argv, output, credits, *, io_admission=None, temporary_borrow=None):
     require(target in TARGETS, 'target has no shared owner scope')
-    require(type(credits) is int and 1 <= credits <= 8, 'shared credit count differs')
+    borrowed=(target==COHORT_TARGET and type(credits) is int and credits==18
+              and temporary_borrow is not None and temporary_borrow==io_admission)
+    require(type(credits) is int and (1<=credits<=8 or borrowed), 'shared credit count differs')
+    require(temporary_borrow is None or borrowed,'temporary borrowing is only an exact cohort18 admission')
     # Every supported target uses an explicit repository script. Reject e.g.
     # Python -m before acquiring descriptions, rather than failing while
     # constructing its source pin and retaining an idle no-child owner.
@@ -186,7 +189,9 @@ def run(target, argv, output, credits, *, io_admission=None):
             and script.resolve() == script, 'shared target requires canonical repository script path')
     require(target not in ('private-dng-framing-input',SLICE_TARGET,MODEL_TARGET) or io_admission is not None,
             'framing input has no CPU-only runtime route')
-    require(target not in (COHORT_TARGET,CACHED_TARGET,*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) or (io_admission is not None and credits==8),
+    require(target!=COHORT_TARGET or (io_admission is not None and credits in (8,18)),
+            'cohort has no unadmitted CPU-only route')
+    require(target not in (CACHED_TARGET,*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) or (io_admission is not None and credits==8),
             'camera receiving requires exact shared8 IO admission')
     require(not any(flag in argv for flag in ('--property-removal-controls','--layout-only-controls')) or io_admission is not None,
             'property-removal matrix has no CPU-only runtime route')
@@ -200,6 +205,9 @@ def run(target, argv, output, credits, *, io_admission=None):
     try:
         io_pool, io_deadline = (checked_io_request(io_admission, target, argv, output, credits)
                                 if io_admission is not None else (None, None))
+        if borrowed:
+            from cohort_entry import authorize_temporary_borrow
+            indexes=authorize_temporary_borrow(temporary_borrow,argv,output)
     except UnresolvedOwnership as error:
         retain_after_record(lambda: write(output / 'SHARED-OWNERSHIP-RETAINED.json', {
             'owner_pid':os.getpid(),'stage':'metadata_preflight_before_acquisition',
@@ -300,6 +308,9 @@ def run(target, argv, output, credits, *, io_admission=None):
             # launch. A known refusal with no child is rollback, not unknown.
             try:
                 checked_pool, checked_deadline = checked_io_request(io_admission, target, argv, output, credits)
+                if borrowed:
+                    require(authorize_temporary_borrow(temporary_borrow,argv,output)==indexes,
+                            'temporary grant changed before launch')
                 require(checked_pool == io_pool and checked_deadline == io_deadline
                         and time.time() < io_deadline, 'IO admission expired or changed before launch')
             except ValueError as refusal:

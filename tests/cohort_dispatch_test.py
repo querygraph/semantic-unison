@@ -19,6 +19,7 @@ class Retained(BaseException):
 
 
 class Dispatcher(unittest.TestCase):
+    credits=8
     def setUp(self):
         self.temporary=tempfile.TemporaryDirectory(prefix='cohort-dispatch-controls-')
         self.output=Path(self.temporary.name).resolve();self.events=[]
@@ -36,7 +37,7 @@ class Dispatcher(unittest.TestCase):
                     raise UnresolvedOwnership('injected BEFORE OS close')
                 for fd in self.fds:os.close(fd);outer.descriptors.remove(fd)
                 self.closed=True
-        self.cpu=Lease('cpu',8);self.io=Lease('io',1)
+        self.cpu=Lease('cpu',self.credits);self.io=Lease('io',1)
     def tearDown(self):
         # Only inert known-open test descriptors; injected error precedes OS close.
         for fd in self.descriptors:os.close(fd)
@@ -45,7 +46,7 @@ class Dispatcher(unittest.TestCase):
         outer=self
         class Pool:
             def try_acquire(self,indexes):
-                outer.assertEqual(indexes,tuple(range(8)));outer.events.append('acquire:cpu');return outer.cpu
+                outer.assertEqual(indexes,tuple(range(outer.credits)));outer.events.append('acquire:cpu');return outer.cpu
         class IO:
             def try_acquire(self):outer.events.append('acquire:io');return outer.io
         class Owner:
@@ -74,9 +75,11 @@ class Dispatcher(unittest.TestCase):
             stack.enter_context(patch.object(D,'settle',side_effect=settle))
             stack.enter_context(patch.object(D,'retain_after_record',side_effect=retain))
             stack.enter_context(patch.object(E,'parent_audit',side_effect=audit))
+            stack.enter_context(patch.object(E,'authorize_temporary_borrow',return_value=tuple(range(self.credits))))
             return D.run(E.TARGET,[sys.executable,str(E.ROOT/'tests/cohort_entry.py'),'--worker',
                          '--plan','/inert','--plan-sha256','a'*64,'--workspace',str(self.output)],
-                         self.output,8,io_admission=dict(path='/inert',sha256='b'*64))
+                         self.output,self.credits,io_admission=dict(path='/inert',sha256='b'*64),
+                         temporary_borrow=dict(path='/inert',sha256='b'*64) if self.credits==18 else None)
     def test_success_orders_audit_reap_and_close(self):
         self.assertEqual(self.run_parent(),0)
         self.assertEqual(self.events,['acquire:io','acquire:cpu','spawn:inert','await:inert',
@@ -101,6 +104,10 @@ class Dispatcher(unittest.TestCase):
         self.close_error=True
         with self.assertRaises(Retained):self.run_parent()
         self.assertEqual(self.events.count('close:cpu'),1);self.assertNotIn('close:io',self.events)
+
+
+class BorrowedDispatcher(Dispatcher):
+    credits=18
 
 
 if __name__=='__main__':unittest.main()

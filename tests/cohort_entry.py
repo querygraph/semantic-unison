@@ -1,7 +1,7 @@
-"""One admitted auto-worker cohort: retained shared8/EXglobal owner path.
+"""One admitted auto-worker cohort: retained CPU/EXglobal owner path.
 
-The plan can describe larger cohorts; this entry deliberately refuses them
-until a separately reviewed temporary-borrow owner exists. No silent clipping.
+Standing8 remains default. Larger cohorts require an explicit fresh Root
+temporary18 authorization and pinned coordination receipt; no idle-CPU inference.
 """
 import argparse
 import hashlib
@@ -50,6 +50,43 @@ def require_shared8(plan):
             'larger cohort requires a separately coordinated temporary-borrow owner')
 
 
+def require_grant(plan,credits):
+    require(type(credits) is int and credits in (8,18)
+            and plan['cohort']['reserved_credits']==credits
+            and plan['cpu_token_indexes']==list(range(credits))
+            and plan['requires_temporary_borrow'] is (credits==18),
+            'exact cohort resource request differs')
+
+
+def authorize_temporary_borrow(request,command,workspace):
+    """Consume a pinned Root authorization, never infer borrowing from idle CPUs.
+
+    Coordination receipt content is independently reviewed by its publisher;
+    this authenticates its exact bytes, not the historical process closures.
+    """
+    from shared_io_pool import read_manifest, CANONICAL_SHA256
+    from shared_cpu_pool import POLICY_SHA256
+    value=read_manifest(request['path'],request['sha256'])
+    require(value['state']=='ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB'
+            and value['target']==TARGET and value['command']==command
+            and value['workspace']==str(workspace) and type(value['cpu_credits']) is int
+            and value['cpu_credits']==18 and value['io_manifest_sha256']==CANONICAL_SHA256
+            and value['start_deadline_unix']>time.time(), 'fresh exact temporary18 admission required')
+    borrow=value.get('temporary_cpu_borrow')
+    require(type(borrow) is dict and set(borrow)=={'state','token_indexes','standing_policy_sha256',
+                'coordination_receipt','restore_standing_policy'}
+            and borrow['state']=='ROOT_COORDINATED_TEMPORARY18'
+            and A.exact(borrow['token_indexes'],list(range(18)))
+            and borrow['standing_policy_sha256']==POLICY_SHA256
+            and borrow['restore_standing_policy'] is True,
+            'Root explicit temporary18 authorization required')
+    receipt=borrow['coordination_receipt']
+    require(type(receipt) is dict and set(receipt)=={'path','sha256'},'pinned coordination receipt required')
+    C.path(receipt['path']);C.digest(receipt['sha256'])
+    document(receipt['path'],receipt['sha256'])
+    return tuple(range(18))
+
+
 def write(path,value):
     raw=(json.dumps(value,indent=2,allow_nan=False)+'\n').encode()
     require(len(raw)<=1048576,'bounded cohort owner metadata required')
@@ -65,7 +102,7 @@ def write(path,value):
 
 def binding(plan,command,workspace,*,parent_pid,worker_pid):
     start=document(workspace/'SHARED-START.json')
-    verify(start,command,parent_pid=parent_pid,worker_pid=worker_pid,target=TARGET)
+    verify(start,command,parent_pid=parent_pid,worker_pid=worker_pid,target=TARGET,credits=plan['cohort']['reserved_credits'])
     return start
 
 
@@ -93,7 +130,7 @@ def audit_result(result,plan):
 
 
 def parent_audit(result,command,workspace,*,parent_pid,worker_pid):
-    plan=checked_plan(command[4],command[6]);require_shared8(plan)
+    plan=checked_plan(command[4],command[6]);require_grant(plan,plan['cohort']['reserved_credits'])
     require(command==worker_argv(plan,command[4],command[6]),'exact owner worker command differs')
     start=binding(plan,command,workspace,parent_pid=parent_pid,worker_pid=worker_pid)
     record=document(workspace/'COHORT-BINDING.json')
@@ -113,7 +150,7 @@ def parent_audit(result,command,workspace,*,parent_pid,worker_pid):
 
 
 def worker(args,plan):
-    workspace=Path(plan['workspace']);require_shared8(plan)
+    workspace=Path(plan['workspace']);require_grant(plan,plan['cohort']['reserved_credits'])
     require(sys.executable==plan['interpreter'] and args.workspace==str(workspace),'exact worker context required')
     command=worker_argv(plan,args.plan,args.plan_sha256)
     deadline=time.monotonic()+3
@@ -158,7 +195,8 @@ def main():
     for name in ('workspace','admission','admission-sha256'):
         parser.add_argument('--'+name)
     args=parser.parse_args()
-    plan=checked_plan(args.plan,args.plan_sha256);require_shared8(plan)
+    plan=checked_plan(args.plan,args.plan_sha256)
+    credits=plan['cohort']['reserved_credits'];require_grant(plan,credits)
     if args.worker:
         require(not args.admission and not args.admission_sha256,'worker receives parent binding only')
         return worker(args,plan)
@@ -167,9 +205,12 @@ def main():
     from shared_dispatch import checked_io_request,run
     command=worker_argv(plan,args.plan,args.plan_sha256)
     admission=dict(path=args.admission,sha256=args.admission_sha256)
-    checked_io_request(admission,TARGET,command,workspace,8)
+    checked_io_request(admission,TARGET,command,workspace,credits)
+    if credits==18:
+        authorize_temporary_borrow(admission,command,workspace)
     os.umask(0o077);workspace.mkdir(mode=0o700)
-    return run(TARGET,command,workspace,8,io_admission=admission)
+    return run(TARGET,command,workspace,credits,io_admission=admission,
+               temporary_borrow=admission if credits==18 else None)
 
 
 if __name__=='__main__':

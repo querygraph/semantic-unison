@@ -576,7 +576,7 @@ bounds, declared owner-plus-endpoint credits, and actually reserved credits.
 These are cooperative declarations, not OS-thread or RSS hard caps.
 
 `tests/cohort_entry.py` is the dedicated authenticated-plan dispatcher entry.
-The current runtime route accepts **shared8 cohorts only** (selectors 1 or 2).
+The default runtime route accepts **shared8 cohorts** (selectors 1 or 2).
 It requires a fresh exact IO admission, existing EXglobal then Unison00..07,
 and an actual parent/worker/inherited-nine-descriptor binding. Binaries and
 compilers are hashed after acquisition; current production sources are rebound
@@ -584,11 +584,20 @@ to a successful build/selftest receipt before execution and before release.
 A cohort plan must use canonical executable paths (the installed `ocamlopt`
 symlink resolves to `ocamlopt.opt`).
 
-Larger cohorts remain represented in the same plan schema, but this entry
-refuses them. They need a separately coordinated temporary-borrow owner;
-there is no silent clipping, retrospective resize, or automatic 18-credit grant.
-Source and directed synthetic-owner controls are qualified; no actual auto
-cohort transport run has yet been qualified.
+Larger cohorts require a separately published temporary18 authorization in the
+same exact admission. Its `temporary_cpu_borrow` object must contain state
+`ROOT_COORDINATED_TEMPORARY18`, token indexes 0..17, the exact standing policy
+SHA, `restore_standing_policy: true`, and a pinned `coordination_receipt`
+(path/SHA). The publisher independently reviews the actual Photo handoff;
+the consumer authenticates its bytes, not historical process closure by itself.
+Only this target accepts the explicit temporary-borrow argument. The grant is
+rechecked before launch; worker and parent bind all nineteen inherited
+CPU/IO descriptors. Standing policy files are never rewritten. Unknown outcomes
+retain ownership of the full acquired set until actual settlement.
+
+There is no silent clipping, retrospective resize, or automatic 18-credit grant.
+Directed synthetic-owner controls cover shared8 and temporary18 paths; no actual
+auto cohort transport or live temporary18 run has yet been qualified.
 
 Complete results bind all client/server command words and every nested outcome.
 Failed prefixes are audited independently. A failure before benchmark entry has

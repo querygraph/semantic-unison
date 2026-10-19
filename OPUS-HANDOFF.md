@@ -6271,3 +6271,20 @@ Runtime transport stillUNQUALIFIED; next finiteactualshared8 cohort and reviewed
 finishliveoperationnormally thenholdnewIO/Adobe; queue01a15276-c403 delivered,
 actualPhotozero-resourcehandoffnotyetclaimed. CanqualifyAdobedirectlyhereafter
 actualhandoff, finalPhotoworkflowlast. No needfinalPhotoallowanceasgoalblocker.
+
+
+### 2026-10-18 — explicit temporary18 cohort owner source
+Extended ONLY sync-auto-cohort with explicit same-admission temporary_borrow
+argument: freshRootpublishedexacttarget/command/workspace/deadline18 grant, exact
+policySHA/token00..17, pinned independentlyreviewedcoordinationreceipt, restore
+standingpolicydeclaration. Authorizationcheckedbeforeacquisition+beforelaunch.
+Actualcanonical19FD metadata binding onlyforcohort18; all othertargets remain8.
+No pool or policyfilescreated/rewritten; no idlecoreinference/autogrant.
+Directed original controls actual2ce390/0+b59403/0 PASS including8/18 inert
+success/failedprefix/unknown/live/exitcontradiction/uncertainclose paths plus
+legacy lifecycle/binding/timed/plan. AllouterCPU4childrenreaped0/groupsabsent/
+tokensclosed; NOactualEXIO/18borrow/transport/SDK/Photopayload. Evidence
+auto-cohort-borrow-source-actual-20261018.json. Next metadatafreeze/request and
+finiteactualcohorts afterPhotoactualhandoff. User askedPhotoworklast; no need
+waitforPhoto toexecuteAdobe onourbehalf, but actualcurrentownerclosure still
+required beforeIO. Goalactive/no ownresourcesheld.
