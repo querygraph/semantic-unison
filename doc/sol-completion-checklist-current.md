@@ -45,7 +45,7 @@ interpretation as completion gates. Exact opaque preservation remains mandatory.
 | M5 / reconciliation | Current scalar-policy controls and guarded publication evidence; required conflict/delete/stale/rollback cases must be traced explicitly. Unsupported compound/rendering merges must refuse, not guess. |
 | M6 / measured parallelism | The ten stock/Ox × 1/2/4/8/auto cohorts are actual PASS/CLOSED and reported (180 rows/540 calls). Account next for remaining prescribed sizes/workloads/topologies; this matrix alone does not close the benchmark requirement. |
 | M6 / resources and platforms | Optional per-process FD96 evidence exists. Positive hard-RSS requests currently refuse; there is no working hard-RSS backend on this host. Payload estimates, allocator callbacks and bounded samples are not substitutes. Preserve explicit unsupported capability/platform scope. |
-| Reviewable delivery | Reconcile evidence to the exact final candidate and update the fork review. PR13 is draft and does not yet contain the CPU-ceiling successor. No merge or production activation is inferred. |
+| Reviewable delivery | Reconcile evidence to the exact final candidate and update the fork review. PR13 is OPEN DRAFT at f6bfd653 and includes the CPU-ceiling successor (fresh GitHub readback baa847/0, 2026-10-19). The final Adobe harness successor is still local on implementation/final-adobe-qualification and not runtime qualified or in that review head. No merge or production activation is inferred. |
 
 ## Execution order after the scheduling handoff
 
@@ -202,3 +202,19 @@ Preliminaryfull30projection18–30h/central23h remainsrough, notcontinuousquietg
 PhotoIO/native remainsUNSTARTEDperuserat-end pendingoperatorchoice, CPU8sourceokay.
 New18conditionalfda6288a remainsNOTACTIVE; allother29largercohorts UNSTARTED.
 Continueindependent source/finalacceptancework, GOALACTIVE, no replay/goalpause.
+
+### Current final-Adobe source continuation — 2026-10-19
+
+The local `implementation/final-adobe-qualification` worktree contains retained
+owner/worker/proxy/launcher/journal/admission/preflight and now clone-install/output
+callbacks. Original Python paired-process control passed with actual child FD
+observations; data controls use arbitrary generated64-byte strings and a clone
+double. These are harness/source evidence, not new Adobe receiving proof. Native
+entry/freezer/resource-binding composition and authenticated three-codec fixture
+recovery remain before that run. Existing real SDK scopes above stay intact.
+
+Re-read SOL Required acceptance matrix and Benchmark plan: representative sizes,
+other named workloads/topologies and final-case mapping are explicit requirements.
+The new harness does not replace those, and the proposed large fixed-XMP matrix
+alone would not close them. Do not expand completion into exhaustive MakerNote
+meaning or future-platform certification; do not shrink it to passing pure tests.

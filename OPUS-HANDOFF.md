@@ -6914,3 +6914,29 @@ SDK, Unison, media, compiler or new grant. Receipt `tests/qualification/current-
 sdk-merge-owner-controls-20261019.json`. Next actual resource binding, native
 worker fixture/runtime callbacks, entry/freezer and authenticated input recovery
 before final native matrix. Goal active/incomplete; no active jobs/resources.
+
+## Generated-state runtime data callbacks — 2026-10-19
+
+Final Adobe branch now has `tests/sdk_merge_receiving/data.py`: native-clone-only
+seed/update installation into disposable receiving files using existing
+fclonefileat primitive, readonly retained-source epoch fences, distinct-inode
+check before chmod, disposable clone hash+epoch fences, guarded atomic install,
+full receiving output hashes and no-staging check. Noop requires unchanged bytes
+and all eight identity fields. No source hash/write or copy fallback in native
+path; injected test backend explicitly reports unknown source-hash-byte count.
+
+Actual80cd7a/exit0/no session:15 original data/input/worker controls PASS, child
+36753 reaped0/group-empty, CPU00..03 closed. Data fixtures arbitrary64-byte strings,
+not DNGs; no real native clone/SDK/Unison/camera/compiler/canonicalIO. Receipt
+`tests/qualification/current-sdk-merge-data-controls-20261019.json`. Actual
+retained-source epochs preserved across the successful simulatednine phases.
+Next native entry/resource-binding/script/freezer composition and authenticated
+fixture recovery before actual merge qualification. Goal remains incomplete.
+
+Completion-checklist re-audit confirmed SOL explicitly requires representative
+sizes/other workloads/topologies and final receiving case mapping; not all closed
+by current generated cohorts or pure tests. No extra exhaustive MakerNote gate.
+Fresh GitHub metadata baa847/0 confirms PR13 OPEN DRAFT, headf6bfd653 againstfork
+master; it includes CPU-ceiling source, but this new Adobe harness branch remains
+local. Corrected stale checklist statement that CPU ceiling was absent. No merge,
+push, runtime grant or payload dispatch occurred from that metadata readback.

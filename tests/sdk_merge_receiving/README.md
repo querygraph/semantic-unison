@@ -274,3 +274,25 @@ outer canonicalCPU4 are real. No canonicalIO/SDK/Unison/media/compiler/newgrant.
 Receipt `../qualification/current-sdk-merge-owner-controls-20261019.json`.
 Next wire the actual worker, resource binding, runtime fixture operations and
 entry/freezer, then recover/authenticate the inputs and qualify the native matrix.
+
+## Actual fixture/data callbacks implemented
+
+`data.py` now supplies the runtime case callbacks: exact seed→update→noop order
+for each of three codecs, existing native fclonefileat primitive (no new clone
+engine/fallback), readonly source epoch fences, distinct private clone check
+BEFORE chmod, disposable-clone hash/epoch verification and guarded atomic install
+into the owned receiving endpoint. Each phase independently hashes both output
+images and rejects receiving staging. Noop additionally requires unchanged full
+eight-field identity, not merely equal bytes. All FD cleanup uses the qualified
+multi-close uncertainty carrier. Retained sources are never hashed or written
+by the native path; the clone-test backend explicitly makes no zero-read claim.
+
+Actual80cd7a/exit0/no session:15 original data/input/worker controls PASS, child
+36753 reaped0/group-empty thenCPU00..03 closed. Data fixtures are arbitrary64-byte
+strings, NOT valid DNGs, and clone/transport operations use original test doubles.
+Allnine phases ran against disposable receiving files; retained fixture epochs
+were unchanged in the successful matrix. Refusal/alias/staging/noop-time/candidate
+mutation controls passed. No native fclonefileat/SDK/Unison/camera/compiler/
+canonicalIO. Receipt `../qualification/current-sdk-merge-data-controls-20261019.json`.
+The data callbacks now exist; remaining entry/resource binding/script/freezer
+composition and authenticated fixture recovery precede native qualification.
