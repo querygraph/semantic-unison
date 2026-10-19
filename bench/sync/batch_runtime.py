@@ -21,10 +21,10 @@ from batch_pair import invoke
 
 
 def run(corpus, binaries, directory, *, repository, mode, workers, store,
-        resource_rows, deadline, artifact_check):
+        resource_rows, deadline, artifact_check, sample_runner=sample):
     """Exactly one seed/update/no-op sample; no resource release authority."""
     if (type(binaries) is not dict or set(binaries) != {'client', 'server'}
-            or not callable(artifact_check) or type(deadline) not in (int, float)
+            or not callable(artifact_check) or not callable(sample_runner) or type(deadline) not in (int, float)
             or not time.monotonic() < deadline < float('inf')):
         raise ValueError('exact authenticated batch context required')
     root = Path(directory)
@@ -73,7 +73,7 @@ def run(corpus, binaries, directory, *, repository, mode, workers, store,
             store.write(stage+'-OUTCOME.json',dict(intent=current,pair=pair_pins[stage],
                                                  resource_release_authorized=False))
             print('BATCH_PHASE_CLOSED',stage,flush=True)
-        result = sample(corpus, root/'left', root/'right', invoke=call, record=events)
+        result = sample_runner(corpus, root/'left', root/'right', invoke=call, record=events)
         if len(pair_pins) != 3 or len(events.pins) != 6:
             raise ValueError('batch sample evidence incomplete')
         artifact_check()

@@ -108,3 +108,13 @@ exact1024targethashes/noopidentities and Store/CPU8/EXclosure. Mixed logs show
 820SDE+153receiverclones;51additions had no receiverbasis. Singlefunctional
 sample per shape, aggregate path counts only, not repeated scaling/quiet timing
 or physicalwrites. The prior normalouter-entry gap is closed for these shapes.
+
+### Nonfixed workload functional coverage,2026-10-19
+
+[Seven actualrecipes](../tests/qualification/final-generated-recipes-functional-actual-20261019.json)
+close first real receiving coverage for growingXMP, metadata+preview/raw/opaque,
+fullreplacement, malformedIFD and unsupported signature. Two2MiBfiles/case,
+21CLI/63peerrolesnormal0, oldreaders/exactfreshoutputs/noopidentity and allleases
+closed. SDE0/genericreceiverclones2 percase as expected; no photographic validity,
+repeated/timed/topology/physicalwrite claim. Fullchange's zero inherited bytes and
+full logical model are retained as negative optimization evidence.

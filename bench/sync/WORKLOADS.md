@@ -77,3 +77,21 @@ recipe is an injected negative control: it must fail and cannot become a fast
 "full-change" no-op sample. Sixteen tiny source controls passed; actual receiving
 still remains unstarted. No-change measurements use their separately reported
 saved no-op calls, not this change-only recipe interface.
+
+## Current actual receiving qualification,2026-10-19
+
+The earlier "await actual" statements above are historical. All seven nonfixed
+recipes now have actual stock-client/Ox-server two2MiB-file functional samples
+through the retained owner:21CLI/63normalpeerroles, exactfreshoutputs, oldreceiver
+FDbytesunchanged acrossupdate/noop, no-op8fieldidentitypreserved. SDE was refused
+as expected; two genericreceiverclones completed per case. Growing added9216B
+perfile. Fullchange preserved zero inherited bytes and modeled a full4194304B
+materialization, an unsuccessful optimization rather than a hidden fast no-op.
+Logicalmodels are not physicalwrites; these are not valid photographic encodings
+or SDK inputs, and no repeated timing/scaling claim is made.
+See [actualcases](../../tests/qualification/final-generated-recipes-functional-actual-20261019.json).
+`recipe_sample` is a trusted versioned consumer with explicit2MiB/8192B geometry,
+not an arbitrary camera editor. Default oldinventory/verification limits remain
+unchanged; only this pinned provider supplies the larger bounded ceiling.
+Repeatedmeasurement, concurrenteditor and remaining baseline/topology/resource
+acceptance remain open. These results do not complete the full goal.

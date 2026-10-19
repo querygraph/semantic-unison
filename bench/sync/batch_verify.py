@@ -20,18 +20,20 @@ def directory(fd):
     return value
 
 
-def verify(root, rows, *, phase):
-    validate(rows)
+def verify(root, rows, *, phase, maximum_file_bytes=262144):
+    validate(rows,maximum_file_bytes=maximum_file_bytes)
     if phase not in ('before', 'target'):
         raise ValueError('explicit replica verification phase required')
     expected = [dict(path=r['path'], sha256=r['target_sha256' if phase == 'target' else 'before_sha256'],
                      bytes=r['target_bytes'])
                 for r in rows if phase == 'target' or r['before_present']]
-    return verify_expected(root, expected)
+    return verify_expected(root, expected, maximum_file_bytes=maximum_file_bytes)
 
 
-def verify_expected(root, expected):
+def verify_expected(root, expected, *, maximum_file_bytes=262144):
     """Exact seed or target expectation; empty seed is explicit, not shrinkage."""
+    if type(maximum_file_bytes) is not int or not 262144 <= maximum_file_bytes <= 2*1024**3+2*1048576:
+        raise ValueError('trusted bounded file ceiling required')
     if type(expected) is not list or len(expected) > 16384:
         raise ValueError('bounded exact file expectations required')
     mapping = {}
@@ -41,9 +43,11 @@ def verify_expected(root, expected):
                 or re.fullmatch(r'group-[0-9]{3}/image-[0-9]{5}\.dng', row['path']) is None
                 or row['path'] in mapping
                 or type(row['sha256']) is not str or re.fullmatch('[0-9a-f]{64}', row['sha256']) is None
-                or type(row['bytes']) is not int or not 32768 <= row['bytes'] <= 262144):
+                or type(row['bytes']) is not int or not 32768 <= row['bytes'] <= maximum_file_bytes):
             raise ValueError('exact distinct generated file expectation required')
         mapping[row['path']] = row
+    if sum(row['bytes'] for row in mapping.values()) > 8*1024**3:
+        raise ValueError('declared replica extent exceeded')
     root = Path(root)
     if not root.is_absolute(): raise ValueError('absolute owned replica required')
     groups = {}

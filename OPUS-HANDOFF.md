@@ -6,7 +6,7 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `2535e2f8`. No `src/` differences from frozen review
+  before this checkpoint: `a684ed8b`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
@@ -26,7 +26,9 @@ scheduling statements below; preserve original receipts and their scopes.
   no transferreplay. Newfiles83087/fd77c6/0 andmixed35344/2eb6b1/0 now
   normaloutercompleted/closed,1024files each; mixedobserved820SDE+153receiver
   clones+51additions, exacttargets/noop. Per-filemixedattribution and repeated
-  timing remain unqualified; modelbytes are not physicalwrites.
+  timing remain unqualified; modelbytes are not physicalwrites. Sevennonfixed
+  recipe samples (growth/protectedchanges/full/malformed/unsupported) nowalso
+  normalPASS/CLOSED,21CLI/63roles, oldreaders+exactoutputs/noop. Repeats remain.
 - **Final parser renewed:** actual88003/d7e7af/0/no session; stock/Ox each
  1253fixedcases/6288assertions+three designated negatives/four sparse cases.
   Twenty nested children+two runners closed; Store/Unison8/EXclosed. Receipt
@@ -7601,3 +7603,28 @@ ImmediatePhotoIOclosure notices01a153c6-ba28 and01a153c7-9527 sent; nosealhold.
 NoSDK/Photo/original/Main/cache. CurrentzeroUnisonresources, standing8/8.
 Next repeatedsamples + otherrecipes/performance/compatibilityacceptance; final
 Adobe fixture/source recovery/matrixlast. PhotoIOhandoverpausecontinues.
+
+
+## 2026-10-19 allseven nonfixed recipes ACTUAL normalPASS/CLOSED
+
+Added source-selected RecipeCorpus/sample provider:two2MiBfiles/8192Bpacket,
+explicittargetgrowth, retained oldreceiverFDs acrossupdate/noop. Trustedmaximum
+parameters leave old256KiB corpus validators unchangedbydefault; totalextent
+bound8GiB. Runtime/parent provider hooks are pinnedsource, never packetcode.
+First20controlrun failedmock seam because Pythondefault capturedoldfunction;
+no native/Unisonchild, generatedfileonly; exactidle98905 recovered85692/70972a/
+137/source+censusproof. Testnow injectsexplicit sample_runner. Fresh20controls
+8fe415/0 closedCPU00+EX, including atomicgrowth/previewanddetectingbadinplacecopy.
+Sevenfreshfunctionalplans executedserial, all3CLI/9peerrolesnormal0 each:
+growing67464/9df066/0;preview25200/057505/0;raw32096/8825fc/0;
+opaque59727/640df3/0;full82376/0f7ee4/0;malformed2920/f263f0/0;
+unsupported13017/8ff70e/0; allNOsessions,7owners/21CLI/63rolesclosed.
+Everycase hasfreshboth-targethashes,oldreaderbytesunchanged/noop8fieldidentity,
+Store/Unison8/EXclosed before next. SDE0expected/actual,2genericreceiverclones
+each. Returnedlogicalmodels:notphysicalwrites. Fullchangepreserved0bytes/full
+4194304Bmodel, honestlynegativeoptimizationcase. NoSDK/Photo/actualphotoencoding.
+Actualreceipt final-generated-recipes-functional-actual-20261019.json and
+recipe-sample-controls-actual-20261019.json; rawplans/index preserved oneuse.
+Photo21CLIclosurequeue01a153d4-32ce sent promptly. CurrentzeroUnisonresources.
+Next repeatedmeasurement/sourcebaseline-topologyaudit; largerfixedmatrixstill
+29unstarted/noautomatic18borrow. Adobequalificationlast; PhotoIOheldperuser.

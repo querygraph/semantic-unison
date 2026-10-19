@@ -27,7 +27,15 @@ def main():
         for name,digest in packet['source_pins'].items():
             if sha(ROOT/name)!=digest:raise ValueError('source changed: '+name)
     sources()
-    corpus=plan(**packet['corpus'])
+    kind=packet.get('sample_kind','corpus')
+    if kind=='corpus':
+        corpus=plan(**packet['corpus']);runtime_options={};audit_options={}
+    elif kind=='recipe':
+        from recipe_sample import plan as recipe_plan,sample as recipe_sample,validate_rows,verify_replica
+        corpus=recipe_plan(**packet['corpus'])
+        runtime_options=dict(sample_runner=recipe_sample)
+        audit_options=dict(rows_validator=validate_rows,verify_replica=verify_replica)
+    else:raise ValueError('known source-selected sample kind required')
     policy=ROOT.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json'
     if sha(policy)!='1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352' or tuple(authorized_unison_tokens(read_bytes(str(policy),1048576)))!=tuple(range(8)):
         raise ValueError('standing8 policy differs')
@@ -64,8 +72,8 @@ def main():
         binaries=dict(client=packet['artifacts']['stock']['path'],server=packet['artifacts']['ox']['path'])
         runtime_attempted=True
         pin=run(corpus,binaries,str(root),repository=str(ROOT),mode=packet['mode'],workers=packet['workers'],
-            store=store,resource_rows=rows,deadline=time.monotonic()+600,artifact_check=artifacts)
-        report=audit(store,pin,corpus,binaries,mode=packet['mode'],workers=packet['workers'])
+            store=store,resource_rows=rows,deadline=time.monotonic()+600,artifact_check=artifacts,**runtime_options)
+        report=audit(store,pin,corpus,binaries,mode=packet['mode'],workers=packet['workers'],**audit_options)
         if report['external_children_settled'] is not True:raise ValueError('peer audit incomplete')
         artifacts();store.write('OWNER-RESULT.json',dict(complete=True,runtime=pin,audit=report,parent_tool_terminal_proved=False))
         store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)

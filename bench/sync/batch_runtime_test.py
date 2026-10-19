@@ -39,7 +39,7 @@ class RuntimeTests(unittest.TestCase):
             try:
                 pin=run(plan('new-files',count=1024),dict(client='/stock',server='/ox'),str(root),
                         repository='/repository',mode='semantic',workers=3,store=store,
-                        resource_rows=[],deadline=__import__('time').monotonic()+100,artifact_check=artifact)
+                        resource_rows=[],deadline=__import__('time').monotonic()+100,artifact_check=artifact,sample_runner=sample)
             except BaseException as error:
                 error.test_calls=calls;error.test_store=store;raise
             result=store.read_json(pin['name'],expected_sha256=pin['sha256'])

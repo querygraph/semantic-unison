@@ -1,0 +1,48 @@
+{
+  "schema": "unison-generated-recipe-plans/1",
+  "state": "PREPARED_NO_RUNS",
+  "samples": [
+    {
+      "workload": "growing-xmp",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-growing-xmp-plan-v1-20261019.json",
+      "sha256": "1eb21224a4a9571be1591844839c0c636a79b43a404f409d86834f0d2d3c8a25",
+      "workspace": "/private/tmp/u-recipe-7a2289375e8643a3"
+    },
+    {
+      "workload": "metadata-preview",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-metadata-preview-plan-v1-20261019.json",
+      "sha256": "763ebdeec99b6477d8f3d3a23fdc992fcce711e387c774f6ea31c95217148f5b",
+      "workspace": "/private/tmp/u-recipe-3eafc3617ab94656"
+    },
+    {
+      "workload": "metadata-raw",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-metadata-raw-plan-v1-20261019.json",
+      "sha256": "40aaa21c426475738e882f07154ed3e8967cf18ef53d811a32d9395492d818bf",
+      "workspace": "/private/tmp/u-recipe-866d677c05e944f1"
+    },
+    {
+      "workload": "metadata-opaque",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-metadata-opaque-plan-v1-20261019.json",
+      "sha256": "4c336b95bb0917b55c6391cb5f3b6f89b91ba0810faa49d881f56a7d61b8d78c",
+      "workspace": "/private/tmp/u-recipe-5300df5fba124140"
+    },
+    {
+      "workload": "full-change",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-full-change-plan-v1-20261019.json",
+      "sha256": "9392105ea457f52c28fe5902f6cb523a6b5ceb6f735be670ae198920a217564e",
+      "workspace": "/private/tmp/u-recipe-d4be2be01073418b"
+    },
+    {
+      "workload": "malformed-ifd",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-malformed-ifd-plan-v1-20261019.json",
+      "sha256": "44e3fc8fbb9c1d509969b55bbfcda04efca441c90bc5f6431ba5798e9b09c2ca",
+      "workspace": "/private/tmp/u-recipe-1c776f7fe2544521"
+    },
+    {
+      "workload": "unsupported-signature",
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-generated-recipe-unsupported-signature-plan-v1-20261019.json",
+      "sha256": "24cf84ec24043a925a16ceb4c2167fa783d8af964a5917945485008a7bee55d7",
+      "workspace": "/private/tmp/u-recipe-baaf9c6e53e44327"
+    }
+  ]
+}

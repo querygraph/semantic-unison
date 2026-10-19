@@ -11,7 +11,7 @@ from sdk_merge_receiving.parent import pinned
 from cached_benchmark.contract import read_bytes
 
 
-def audit(store,pin,corpus,binaries,*,mode,workers):
+def audit(store,pin,corpus,binaries,*,mode,workers,rows_validator=validate,verify_replica=verify):
     result=pinned(store,pin,'BATCH-RESULT.json')
     expected=schedule(binaries['client'],binaries['server'],store.root,mode=mode,workers=workers)
     if (result['schema']!='unison-generated-batch-runtime/1' or result['contract']!=expected
@@ -36,19 +36,19 @@ def audit(store,pin,corpus,binaries,*,mode,workers):
                 rows.extend(part)
             value=rows
         events.append(value)
-    rows=validate(events[3])
+    rows=rows_validator(events[3])
     if len(rows)!=len(corpus.files) or events[0]!=corpus.before_files or events[2]!=corpus.before_files:
         raise ValueError('sample shrank or seed scope differs')
     for file,row in zip(corpus.files,rows):
         classification='new-file' if not file.before_present else 'semantic-update' if file.semantic_update_expected else 'ordinary-fallback'
         if (row['path']!=file.relative_path or row['before_present']!=file.before_present
-                or row['expected_class']!=classification or row['target_bytes']!=corpus.file_bytes):
+                or row['expected_class']!=classification or row['target_bytes']!=getattr(corpus,'target_file_bytes',corpus.file_bytes)):
             raise ValueError('per-file planned identity/class differs')
     if len(events[1])!=corpus.before_files:raise ValueError('seed inventory missing')
     seed={r['path']:r for r in events[1]}
     for row in rows:
         if row['before_present']:
-            if seed.get(row['path'])!=dict(path=row['path'],sha256=row['before_sha256'],bytes=row['target_bytes']):
+            if seed.get(row['path'])!=dict(path=row['path'],sha256=row['before_sha256'],bytes=corpus.file_bytes):
                 raise ValueError('seed bytes differ from target ancestry')
         elif row['path'] in seed:raise ValueError('fabricated new-file basis')
     reports=[];logs={}
@@ -67,8 +67,8 @@ def audit(store,pin,corpus,binaries,*,mode,workers):
         reports.append(joined)
     for path,script in result['scripts'].items():
         if hashlib.sha256(read_bytes(path,65536)).hexdigest()!=script['sha256']:raise ValueError('generated script changed')
-    left=verify(Path(store.root)/'left',rows,phase='target')
-    right=verify(Path(store.root)/'right',rows,phase='target')
+    left=verify_replica(Path(store.root)/'left',rows,phase='target')
+    right=verify_replica(Path(store.root)/'right',rows,phase='target')
     if right!=events[4] or right!=events[5]:raise ValueError('fresh receiver differs from no-op/update observations')
     from batch_counters import audit as audit_counters
     counters=audit_counters(logs['update'],mode,corpus)

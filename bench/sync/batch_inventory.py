@@ -12,7 +12,9 @@ FIELDS = {'path', 'before_present', 'before_sha256', 'target_sha256', 'target_by
 CLASSES = {'semantic-update', 'ordinary-fallback', 'new-file'}
 
 
-def validate(rows):
+def validate(rows, *, maximum_file_bytes=262144):
+    if type(maximum_file_bytes) is not int or not 262144 <= maximum_file_bytes <= 2*1024**3+2*1048576:
+        raise ValueError('trusted bounded file ceiling required')
     if type(rows) is not list or not 1 <= len(rows) <= MAX_FILES:
         raise ValueError('bounded nonempty sample inventory required')
     names = set()
@@ -39,7 +41,7 @@ def validate(rows):
                     or re.fullmatch('[0-9a-f]{64}', before) is None or before == target))):
             raise ValueError('exact changed target and optional existing basis SHA required')
         size = row['target_bytes']
-        if type(size) is not int or not 32768 <= size <= 262144:
+        if type(size) is not int or not 32768 <= size <= maximum_file_bytes:
             raise ValueError('bounded generated target extent required')
         total += size
     if total > 8 * 1024**3:
