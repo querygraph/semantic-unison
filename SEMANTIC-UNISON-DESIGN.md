@@ -1,6 +1,551 @@
+<!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
 # Sol implementation handoff: clone-aware Unison, DNG semantics, and OxCaml
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
+
+## Design steering — gradual understanding and incremental semantic hashing
+
+**Current release verification, 2026-10-17:** draft fork PR13 now retains
+separate actual closed results for the older-fork and genuine pinned-upstream
+mixed matrices (four cases/12CLI each), current property transfer (18rows/54CLI),
+real-camera V6 complete byte partition plus30 MakerNote observations, and mixed
+SDK/ExifTool13.59/hash controls. Their admissions are consumed; no Photo hold or
+camera request remains pending. Unknown MakerNote meanings are not a deployment
+gate, and none of these results grants pixels, corpus or production authority.
+
+[Current cached-worker measurements](bench/semantic/results/shared-current-20261017.md)
+add48batches/288correct digests within Unison8, with measured primary logical
+reads and separately scoped CPU/RSS/FD observations. A subsequent XMP internal
+representation change retains namespace/local pairs and expands only public
+names; unchanged458directed digest/parse vectors and scalar merge controls pass
+on both compilers. For the same174KiB stress packet, managed allocation falls
+65–67% against the pinned eager-name implementation. Complete stock/Ox builds
+and selftests passed. These are selected representation/resource improvements,
+not whole-process hard RSS/FD ceilings or complete transfer performance proof.
+
+[Release readiness](doc/sol-release-readiness-20261017.md) maps remaining
+requirements; [current XMP evidence](tests/qualification/xmp-compact-names-actual-20261017.json)
+and [test-scope correction](tests/qualification/xmp-fixed-only-scope-correction-20261017.json)
+preserve exact execution and limitations. Historical checkpoint statements below
+retain their original scope. The full goal remains active; no production
+activation, new runtime permission, replay or merge is inferred.
+
+
+**Integration checkpoint, 2026-10-17:** consolidated draft PR13 against fork
+master contains the local managed-cache/report stack and producer-schema auditor
+correction. The consolidated candidate has stock/Ox Make+selftest evidence
+for cold namespace creation, portable component-source cleanup and index-capacity
+report preservation. User-facing cache setup is documented in the manual.
+Ordinary semantic-report source cleanup now has stock/Ox production-linked
+normal and injected-close uncertainty controls;
+current transfer/mixed-peer and camera-profile evidence remain separately scoped.
+The explicit native publication-owner backend and bound local SemanticSync
+transaction migration now have current stock/Ox Make/selftests/Dune and composed
+uncertainty/handoff controls. Bound remote receiving also has those controls with
+in-process planner delivery, not new transport evidence. Ordinary bound local
+Copy's source/receiver clone helper now has actual admitted-ticket/channel
+retention controls and current stock/Ox Make/selftests/Dune. Guarded rsync receiver
+staging also has actual-codec borrower/lease/EOF/cancellation controls via in-process
+delivery; actual transport remains unverified by those units. Legacy named/unbound/
+older-peer and raw/channel cleanup remain separate.
+Historical isolated checkpoints below are retained as history, not statements
+that integration is still absent or new execution authority. Local opt-in cache
+routing is implemented; remote endpoint cache routing is not. Unknown private
+fields remain exact opaque components and do not block baseline deployment.
+
+
+Current isolated local report successor now wires UI component details through
+an explicit endpoint-owner worker callback. Opt-in componentownercache plus an
+existing configured private componentcacheparent enables capture/reuse/restart;
+empty/off stays uncached and remote summary transport is unchanged. Parent
+replacement, permissions, cancellation, source/head fences and cache-carrier
+outer admission retention have original production-linked controls. Current
+stock/Ox Make+selftests/Dune pass. See doc/component-managed-store.md and the
+component-local-report / component-report-admission qualification receipts.
+No production activation, automatic parent provisioning, remote cache route,
+SDK/media/physical-IO claim or full-goal completion is implied.
+
+Latest isolated managed-store successor (`feat/component-cache-store`, bf0527b0)
+now composes quota-bound stage creation, authenticated record/entry/manifest
+publication, close-uncertainty retention and expected-head guarded archive
+adoption. Stock/Ox production Make/fullselftests and normal archive commit plus
+fresh-process cold reload passed. Original tiny controls cover all four close,
+all four open and every observed sync failure position. This is not automatic
+report routing: the current SemanticRemote component inspector still invokes
+fresh extraction, and durable trusted namespace identity remains to be wired.
+See `doc/component-managed-store.md` and its actual qualification receipts.
+
+Latest isolated namespace successor (`feat/component-cache-namespace`, based on
+PR8) now provides one-use fixed-child creation or trusted device/inode reopen,
+retained mkdir effects on sync failure, scoped directory settlement and nested
+known/uncertain/borrowed FD preservation. Current stock/Ox full Make selftests/
+Dune and original namespace/loader/worker/archive controls passed. It installs
+no production namespace or automatic capture/report path; durable owner identity
+binding and store orchestration remain explicit follow-ons. See
+`doc/component-cache-namespace.md`. Main's separate RPC was exercised once with
+all8commands0 but original final auditor exit1; its saved-only schema correction
+is separate evidence, not an original successful exit or permission to replay.
+
+Latest isolated managed-loader successor (`feat/component-cache-loader`, based
+on PR7) now authenticates digest-named UIX/UDI/UCR metadata through a borrowed
+private directory and an actual loaded-archive-owned reference. It closes each
+leaf once; uncertainty preserves original failure, known/uncertain descriptors
+and last observable identity without numeric retry. Current stock/Ox full Make
+selftests/Dune and original loader/archive/worker controls passed; exact scope
+is in `doc/component-cache-loader.md`. Namespace provisioning, automatic capture/
+archive adoption and normal report routing remain explicit follow-ons. This is
+not a main merge, production deployment or new RPC/media/SDK admission.
+
+Isolated checkpoint successor in `feat/component-cache-input-binding` now provides
+bounded owner-authenticated metadata export/restore with complete current-input
+SHA verification and private-subtree reset/replacement. Stock/Ox focused controls
+and full Make+selftests/Dune compile checks passed; see
+`doc/component-checkpoints.md` and
+`tests/qualification/component-checkpoint-core-actual-20261017.json`. This is not
+yet main/worker/archive/store integration, nor an epoch-only/IO-free cache. Main's
+reviewed342 RPC pins are deliberately unchanged while its actual run is pending.
+
+<!-- Parallel historical checkpoint retained from RPC auditor branch. -->
+Current actual RPC note: admission53a52254 was exercised ONCE, all8probe commands
+returned0, but original final auditor KeyError(cancel_reason) leaves actual parent
+91491/7ec39a/exit1. Root independently accepted resource closure/released; original
+failure bytes remain. Outside-frozen saved-only producer-schema audit verifies
+all8receipts and in-run hashes/current metadata without payload rehash or replay;
+see `doc/component-remote-actual-saved-audit.md`. This is separate evidence, not an
+original successful controller exit or independent new payload readback.
+
+Latest cache namespace source ed67f0eb, draft PR9 on PR8, provides one-use private
+fixed-child creation/exact trusted identity reopen with retained creation effects
+and nested descriptor uncertainty. Current stock/Ox fullselftests/Dune and original
+namespace/loader/archive/worker controls pass. No production namespace is installed;
+owner identity persistence and automatic capture/report wiring remain follow-ons.
+See sibling `unison-component-namespace-20261017/doc/component-cache-namespace.md`.
+
+Latest isolated cache loader is source `3d35cf81`, draft PR8, stacked on PR7:
+bounded macOS UIX/UDI/UCR reads now bind to an actual loaded local archive hint,
+with no-follow digest-leaf opens and retained close uncertainty. Current stock/Ox
+full Make selftests/Dune and original loader/archive/worker controls passed.
+This does not provision a namespace, automatically capture/adopt/report caches,
+merge into main or qualify new RPC/media/SDK/production work. See the sibling
+`unison-component-loader-20261017` handoff and `doc/component-cache-loader.md`.
+
+Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
+commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
+record publication now have current stock/Ox Make+selftests/Dune and original
+native error-path evidence. This does not implement the trusted persistent owner
+index/automatic cache selection, merge the branch, or qualify actual new RPC.
+Main's reviewed342 source pins remain unchanged; see OPUS-HANDOFF.md for receipts.
+
+Isolated successor `feat/component-cache-input-binding` now reaches `c55a90de`:
+current-parser partition checks, DNG authenticated checkpoint restore, guarded
+private-view replacement and coordinated worker restore are implemented there.
+Both current Make builds/full selftests and focused stock/Ox controls pass;
+worker lifecycle controls include102checks/compiler. Durable owner storage and
+automatic decoder/cache selection remain open. This branch is not merged into
+main and does not change main's reviewed RPC pins or imply runtime admission.
+
+Checkpoint-core successor is now tested on separate branch
+`feat/component-cache-input-binding` (569395d9), preserving main's reviewed342
+RPC pins. It exports/restores bounded metadata using the owner's prior trusted
+digest and complete current-input SHA verification, then supports private-view
+invalidation/replacement with pixel-hash reuse.41existing+454checkpoint checks per
+stock/Ox compiler, full Make+selftests/Dune compile builds and1272 source checks
+pass. It is NOT yet main/worker/store/archive integration or an IO-free shortcut.
+See that branch's `doc/component-checkpoints.md` and qualification. Main RPC source
+review is accepted; actual transport is separately deferred for Photo's active
+Smart Preview IO scheduling, not incomplete private-field interpretation.
+
+**User direction, 2026-10-17:** separating pixels from standard metadata is
+already a valuable deployable baseline. Exhaustively interpreting every byte
+of every camera format is neither a prerequisite nor a realistic completion
+criterion. Incomplete mapping of smaller private fields must not hold up the
+whole feature. Preserve those fields, hash them conservatively, and progressively
+refine their interpretation as evidence becomes available. This supersedes any
+older wording that treats complete MakerNote understanding as a global
+deployment gate. It does not assert that the implementation below is already
+qualified for deployment.
+
+**Deployment rule:** incomplete mapping of a few smaller fields is not a release
+blocker. Ship the qualified separation of pixels and metadata with those fields
+preserved as exact opaque components. As their meaning and stability become
+known, introduce versioned child decoders and refine only the affected component
+and dependent roots. This improves precision without requiring a fresh pixel
+hash, an eager archive migration or complete camera-format understanding.
+
+**Bounded many-unit successor, 2026-10-17:** the actual camera component refusal
+was reproduced with an original600-strip fixture. Large advisory geometries now
+have a bounded role-run fallback: collect at most65536 raw claims, reject aliases,
+then coalesce only touching same-role claims to at most480 leaves. Gaps remain
+opaque; the core1024-node bound remains unchanged. Small accepted partitions keep
+schema/0, new grouped partitions use schema/1 with ordered membership provenance.
+Stock/Ox1500controls each plus CLI serialization, full Make/selftests, Dune build
+checks and standalone inspectors passed. [Scope and limits](doc/dng-component-role-runs.md)
+and [actual qualification](tests/qualification/dng-role-runs-actual-20261017.json)
+are explicit. A fresh camera request is prepared; generated success does not
+establish that camera's new coverage or authorize rereading it. The earlier
+30-MakerNote/region-refusal observation remains unchanged.
+
+**Measured large-forest limit, 2026-10-17:** the metadata-encoding and exact-node
+budget successor passed1540controls per compiler,37/40contained calls and all
+stock/Ox Make+selftests, Dune build checks and inspector builds. Actual camera
+V5 closed normally but reported2178raw claims,894field-encoding leaves and1747
+normalized nodes, above the unchanged1024-node core cap. Its full SHA and input
+metadata stayed unchanged; no complete forest was claimed. See
+[camera V5](tests/qualification/camera-field-encoding-v5-actual-20261017.json).
+Next source work is an explicit bounded larger-forest and versioned checkpoint
+contract preserving existing1024-node callers, rather than an implicit cap
+increase, stream-only substitute or another blind camera reread. Photo has no
+Unison resource hold from these completed observations.
+
+### Nested, composable format knowledge
+
+The core owns exact byte coverage, bounds, hashes, resource budgets, verified
+materialization and publication. A DNG plugin owns standard TIFF/DNG structure
+and delegates bounded subdomains to children: private-wrapper plugin → vendor/
+family/version plugin → nested structure or field plugin. Community extensions
+and our own piecemeal findings use the same contract. Locally selected immutable
+plugin snapshots are frozen before worker dispatch; no peer-delivered code,
+automatic installation, mutable worker registry or implicit subprocess access.
+
+Knowledge has independent dimensions: region geometry, interpretation, reference
+rules, stability/category policy and validation evidence. Do not collapse these
+into one camera-understood/semantic-eligible Boolean. A child can refine a
+parent's opaque region without having to explain unrelated siblings. Every byte
+remains covered; unrecognized fields, gaps and private structures become opaque
+atoms with exact digests and preservation constraints. Unknown does not mean
+absent, ignorable or unstable. A small field may still affect rendering or
+references; its size is not permission to discard it.
+
+The parent checks child bounds, incompatible claims, aliases, address spaces,
+shared recursive budgets and graph limits. Physical atoms form a canonical byte
+partition; semantic views may explicitly overlay it. Children cannot silently
+remove a preservation obligation or enlarge the reader's authority. Start with
+trusted compiled modules or a constrained declarative schema; this contract is
+not a sandbox for arbitrary native community code.
+
+### Separate hash components, useful before complete private decoding
+
+Retain the exact full-file hash alongside a versioned component-hash forest:
+
+| Component | Initial interpretation and hashing contract |
+|---|---|
+| Pixels | Delineated encoded pixel units, logical ordering/geometry and encoding identity; distinguish raw image, previews and thumbnails |
+| Standard metadata | Known TIFF/DNG/EXIF/XMP fields, with separate descriptive, rendering, identity and workflow views where justified |
+| Private metadata | Recognized child-plugin fields plus exact opaque atoms for everything not yet mapped |
+| Layout / residual bytes | Structural bytes, placement constraints and otherwise unclaimed bytes; retained and hash-covered |
+
+An encoded-pixel digest is not a decoded-pixel/rendering-equivalence claim.
+Calibration, CFA, orientation and other rendering inputs remain separately
+represented dependencies. Unknown atoms participate conservatively in identity
+and change reports. We can report "same encoded pixels; metadata differs;
+private interpretation incomplete" without suppressing the byte difference or
+claiming the images render identically.
+
+Component hashes use explicit domain separation, typed/length-delimited canonical
+encoding and versioned semantics. Physical placement belongs in the layout view;
+content views use declared logical identities rather than accidentally making
+every semantic pixel digest depend on its current file offset. A meaningful
+comparison identifies its hash schema, parser/child contract versions and
+projection policy, not just an untyped digest string.
+
+### Rehashing is incremental refinement, not a new full-file project
+
+**Deploy first, refine without an archive-wide upgrade:** release the qualified
+pixel/metadata separation even when some smaller fields remain uninterpreted.
+Track coverage per component rather than assigning the whole file an
+"understood/not understood" status. Unknown fields retain exact byte hashes;
+learning their meaning or stability changes a versioned view, never silently
+changes an existing digest's meaning or drops byte-integrity checks.
+
+The refinement unit is a stable component plus its dependency closure. For
+example, upgrading one vendor field decoder from v1 to v2 should preserve the
+verified pixel component and unrelated metadata components, replace only that
+field's subtree, and recompute dependent roots. A failed upgrade leaves the
+previous verified view usable. Persist both versions until compatibility policy
+permits retiring the old one; pending refinement must not force retransmission
+or disable the already qualified exact-byte path.
+
+Treat each refinement as a composable change set: `(input binding, component ID,
+old contract, new contract, dependency digests) → replacement subtree + new roots`.
+Validate the input binding and old contract before applying it. Independent sibling
+change sets must produce the same roots in either order; a stale or conflicting
+change set is refused without discarding the last verified view. Publish the new
+view atomically only after its coverage, dependencies and hashes validate.
+
+For example, learning one MakerNote field replaces that field's opaque component,
+rehashes its affected bytes and recomposes its private-metadata ancestors. It
+reuses verified pixel and unrelated standard-metadata hashes when their input and
+dependency bindings remain valid. Until that refinement is available, exact opaque
+hashing remains a supported deployed behavior, not a pending deployment blocker.
+
+Adding a subplugin can split one opaque atom into smaller known/unknown children,
+add named interpretations or revise an explicitly versioned stability policy.
+Invalidate that component and its dependent parent/view roots, not unrelated
+pixel or metadata components. Recompose roots deterministically from cached
+child digests. Keep prior schema roots/provenance for compatibility and audit;
+never silently reinterpret a previously stored semantic identity.
+
+A hash of an opaque parent cannot yield hashes of newly discovered children.
+Read the affected bytes once under the normal IO budget, or use an already
+qualified retained-byte cache. Reuse unaffected pixel hashes only with a valid
+snapshot/epoch and dependency binding, or an independently verified preservation
+proof from our own exact transformation. An unexplained external change to the
+source epoch invalidates reuse; timestamps alone are not universal content proof.
+Incremental composition is a logical-work property, not an unmeasured claim that
+the filesystem performed no physical reads.
+
+Rehash lazily/on demand or in bounded background work, with per-component cache
+keys including input binding, region/logical identity, decoder/schema version,
+policy version and dependency digests. A new MakerNote decoder must not force
+retransfer of unchanged files, rehash of already verified pixels, or an eager
+whole-corpus migration merely to begin using its more precise view. Existing
+archives and ordinary exact transfer continue functioning while refinement is
+pending. Peers negotiate the operation/hash projection they share; missing child
+knowledge falls back to an opaque atom or exact transfer, rather than requiring
+identical complete plugin collections.
+
+### Gate the operation, not deployment on total camera knowledge
+
+Local owner-report groundwork now exists in `SemanticReport.render_components`:
+explicit versioned projection contracts, independent full-byte comparison, five
+role lanes with missing values reported unknown, and conservative schema mismatch.
+Stock/Ox focused report controls pass. The off-default `semanticcomponents`
+preference now wires explicit local details through the owner/worker lifecycle;
+remote component RPC and persistent reuse remain open. Current Make+Dune both
+compilers, Make full selftests and owner/cache controls passed with1272 source
+checks; no Photo media or SDK. See
+`tests/qualification/component-report-focused-actual-20261017.json` and
+`tests/qualification/component-owner-local-actual-20261017.json`.
+
+The separately negotiated remote successor is now implemented in source:
+`semantic-components-v0`/`semanticComponentsV0`, bounded SIC/0 with exact nonce/
+contract binding and fixed five-role slots. Current stock/Ox Make+selftests and
+Dune compile checks pass;25 report controls/compiler and local/refusal owner
+controls pass. Source scope retains model admission through reply encoding with
+no nested transaction. See `doc/component-report-v0.md` and
+`tests/qualification/component-remote-source-actual-20261017.json`. Actual new-RPC
+loopback/mixed-version/failure transport trials remain unqualified and need a
+fresh finite IO coordination; peer hashes remain advisory, not preservation or
+archive authority. Earlier local/receiving receipts keep their historical pins.
+
+The production-linked remote probe now compiles under stock/Ox, with exact
+preentry refusal and offline preference controls:10 contained calls,320 source
+pins and474 linked artifacts verified, all groups/CPU grants closed. See
+`doc/component-remote-probe.md` and
+`tests/qualification/component-remote-probe-build-actual-20261017.json`. This
+prepares an eight-case new/old-peer/unsupported/disabled matrix; its owned
+coordinator, independent raw lifecycle audit and fresh IO admission remain
+required before actual transport. No connection/media/SDK was invoked here.
+
+The finite coordinator and independent raw prefix/functional audit are now
+implemented under `tests/component_remote/`.18 original disposable/fabricated
+controls passed,343 source pins before/after, all test groups/Unison8 closed.
+The exact eight-case plan/request are frozen for source review only in
+`doc/component-remote-plan-v1.json` / `doc/component-remote-request-v1.json`.
+They bind342 runtime sources, six prerequisites and canonical EXglobal+8CPU;
+uncertainty retains owners/descriptors and known failures stop successors.
+No canonical lock or RPC was exercised in these controls. Source review and a
+fresh finite IO admission remain required for actual transport, never inferred
+from source acceptance or release of previous slots.
+
+The unchanged frozen runtime now has an independent metadata-only readback tool
+outside its342-file closure, with eight original fabricated controls passed and
+all test CPU/groups closed. It explicitly does not authenticate parent terminal,
+rehash inputs or grant release. `doc/component-remote-readiness-v1.json` requests
+one window only after Root source acceptance; it is not runtime authorization.
+
+**Acceptance boundary for progressive rehashing:** release readiness is measured
+against the declared supported operations, not a percentage of fields decoded.
+A partially mapped camera may use the qualified pixel/metadata separation and
+exact-byte receiving path while its remaining fields stay opaque. Learning one
+field's meaning does not establish its stability: record those as independent,
+versioned claims, and retain exact hashing until an explicit projection policy
+justifies a different treatment.
+
+Each refinement must expose its affected component IDs, old/new schema and
+decoder identities, dependencies and new roots. It must compose with independent
+sibling refinements deterministically; overlapping or incompatible claims refuse
+that refinement while preserving the prior usable view. A decoder or policy
+upgrade schedules only affected leaves and dependent ancestors. Retain old roots
+so peers with different knowledge can compare a common version or fall back to
+exact bytes. Pending refinement is a reported precision limit, not a reason to
+disable an otherwise qualified deployment. Persistent cross-session reuse still
+requires the input-binding proof described above; this design does not claim
+that cache is already implemented.
+
+The deployable baseline is standard metadata/pixel delineation plus opaque
+preservation and exact integrity. Deploy it when its own correctness, ownership,
+compatibility and failure checks pass; do not wait for complete MakerNote
+coverage. Additional interpretation unlocks additional narrowly scoped behavior.
+
+**Release and refinement are independent tracks.** A release checklist must not
+require zero opaque bytes or complete private-field mapping. Report the supported
+pixel/metadata projections and remaining opaque coverage explicitly; qualify the
+operations being shipped. An unresolved small field blocks only an operation
+whose safety depends on interpreting that field. Field size alone establishes
+neither harmlessness nor a deployment blocker.
+
+Represent later knowledge as immutable refinement revisions, not an in-place
+rewrite of the old identity. A revision records the prior component contract,
+new decoder and policy versions, affected byte ranges, dependency closure and
+validation evidence. Interpretation and stability revisions are separate: merely
+naming a field does not authorize excluding it from a semantic hash. Apply
+independent revisions in either order with identical resulting roots; reject
+conflicting revisions while retaining the prior usable view. Schedule affected
+reads and ancestor recomposition lazily within the existing resource budget.
+The exact file digest and opaque preservation remain available throughout;
+refinement is neither an eager archive migration nor a prerequisite for continuing
+the qualified deployment. These are design requirements, not a new deployment
+authorization or a claim that automatic refinement routing is complete.
+
+In particular, same-layout accelerated receiving can reconstruct the **actual
+donor's exact bytes**, retaining opaque private regions in place. Bound the
+source/basis, size and spans; verify the complement and independently verify the
+complete staged-file hash against the donor before publication. Hidden private
+references then cannot make the result differ from an ordinary exact copy.
+They need not all be understood for this operation. Current SDE already has
+these full-target-hash mechanics; a new layout-only profile must explicitly
+separate span confinement from a claim about understood metadata semantics.
+
+Ignoring a difference, assigning a stable semantic projection that excludes a
+field, relocating referenced bytes, or synthesizing a three-way merged target
+requires the corresponding dependency/meaning contract. Lack of that contract
+limits **that operation or view**, not the entire camera/plugin/deployment.
+Optional SDK/decode validation remains a separately reported policy and does not
+turn incomplete field knowledge into a complete semantic proof. Existing
+profiles0/1 and their reconciliation authority remain unchanged until a
+separately qualified successor is implemented.
+
+Implementation sequence: common typed knowledge/region and hash-component
+contracts; bounded nested composition with opaque fallbacks; a layout-only exact
+DNG delta profile; incremental component caches and versioned rehash; then
+progressively qualified vendor/field modules and stronger scoped operations.
+Original synthetic fixtures and representative retained-camera controls should
+prove partial coverage, unknown-byte preservation, localized invalidation,
+cross-version fallback, hidden-reference exact reconstruction and bad-hash
+publication refusal. Full vendor coverage is not a test-suite completion gate.
+
+The expanded design, current-code mapping and Photo consultation are in
+[gradual camera understanding](doc/gradual-camera-understanding.md). The latest
+bounded model observation reads `X2D 100C`; it is a lead for a child plugin, not
+a reason to make all other cameras or fields wait.
+
+## Current checkpoint — opt-in all-scanned validation
+
+The [typed component worker API](doc/component-workers.md) is now integrated
+and [qualified](tests/qualification/component-domain-workers-actual-20261017.json):
+stock/Ox87checks each, four production-linked calls, four full Make/Dune builds
+and both Dune selftests passed; all canonicalCPU8/groups closed. It accepts frozen
+decoders and returns compact immutable observations without exporting reader/
+session/snapshot capabilities. Read reporting includes bounded parser reads;
+operational failures, queued/late cancellation and shutdown preserve settlement.
+[Current main source rebind](tests/qualification/component-workers-main-rebind-20261017.json)
+confirms320 qualified files at that historical checkpoint. Subsequent owner/cache
+integration is implemented: [managed store](doc/component-managed-store.md),
+[archive hints](doc/component-archive-hints.md), [identity-bound namespace](doc/component-cache-namespace.md)
+and [configured worker routing](doc/component-worker-cache-routing.md). These
+remain opt-in and endpoint-local. Their tiny-fixture/current-source evidence and
+limitations must be read separately from that older worker receipt. Real-camera
+component coverage is pending; no default transfer/archive change.
+
+The [layout-only receiving successor](tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
+now actually PASSED/CLOSED: stock/Ox18rows54CLI through production loopback
+ordinary/receiver-clone/semantic paths with workers1/2/3. Six semantic rows/twelve
+updates selected the new exact-layout profile; generated opaque private pointers
+into changed XMP remained exact, old bases and no-op epochs passed. All38source
+pins and strict client/server/supervisor/pump/group/IOCPU audits passed. Actual
+parent11517/85a4a8/0/no session and [Root independent adoption/release](tests/qualification/layout-receiving-root-adoption-actual-20261017.json)
+are retained. Original V1 expired unstarted; separate rescheduleddcc2d5cb was
+consumed once. Postrun metadata schema refusal/projection is preserved without
+repeating runtime. This qualifies generated current-current exact receiving,
+not camera/private grammar, old-peer transport, semantic merge, pixels or
+physical savings. Complete private mapping was not required for this operation.
+
+A [bounded private ASCII-field prototype](tools/dng-fields/README.md) now produces
+child plugins for owner-selected tags, byte order and explicit address-space
+translation. Unknown entries/links stay opaque and are not followed. Its
+[generated DNG nesting evidence](tests/qualification/private-ifd-fields-prototype-actual-20261017.json)
+passed59checks per stock/Ox compiler/47 contained calls, including private view
+provenance and unaffected pixel reuse. This is not an installed vendor decoder
+or actual camera-field qualification; it leaves production/receiving sources
+unchanged while that run awaits fresh scheduling.
+
+Owner-frozen nested DNG decoder dispatch is now implemented and
+[qualified on generated fixtures](tests/qualification/frozen-dng-decoders-actual-20261017.json).
+An immutable sequence of at most64 checked bindings refines private/opaque
+parents and their children inside one snapshot session. Unmatched/unsupported
+bindings retain the prior view, with decoder provenance in every outcome;
+private decoders cannot create pixel/standard claims. Operational errors
+propagate. Stock/Ox80checks each,58 contained calls and four full builds passed;
+all groups/CPU8 closed. Actual vendor decoders, persistent cache and broader
+runtime integration remain open; lack of complete vendor coverage is not a
+release gate for the qualified baseline.
+
+The [DNG component adapter](doc/component-hashes.md#dng-adapter-and-inspector)
+now supplies bounded physical partitions from the same TIFF graph reader:
+inline/outlined standard and private values, encoded image-unit ranges,
+structural descriptors/padding and opaque gaps. Physical aliases refuse rather
+than double-count; XMP is optional for observation, unchanged for transfer.
+Read-only inspector `--components` exposes full SHA and five counted hash lanes.
+[Adapter evidence](tests/qualification/dng-components-actual-20261017.json)
+records stock/Ox68checks each plus existing layout/strict regressions,57 contained
+calls, four full Make/Dune builds and both inspector launcher builds. All owners
+and CPU8 closed; no real camera/SDK was read. These are encoded byte projections,
+not complete image/rendering identity. Subsequent managed persistent-cache and
+archive integration is implemented separately; actual vendor child modules remain
+open. The preceding adapter/core receipts retain their original scopes.
+
+The worker-local [component hashing core](doc/component-hashes.md) now implements
+opaque gap coverage, separate typed hash lanes, bounded nested-decoder readers
+and incremental leaf refinement with unaffected pixel-node/hash reuse. Missing
+projections are unavailable rather than a constant empty pixel identity.
+[Current evidence](tests/qualification/component-hash-core-actual-20261017.json)
+records stock/Ox41checks each, scope-escape compile refusals, delivered-read
+accounting and four full builds. The adapter above now connects DNG fragments
+and inspector output. Subsequent worker/archive integration and authenticated
+persistent-cache capture/restore are implemented with separate evidence below.
+Restore still verifies the complete current input; it is not a physical IO-saving
+claim. Actual camera coverage and installed vendor children remain open.
+
+The first gradual-understanding transfer successor is now implemented:
+[DNG exact-layout profile](doc/dng-layout-exact.md), capability
+`dng-layout-exact-v0`, preserves opaque private bytes while reconstructing the
+actual donor exactly. Opt-in `semanticdng` prefers strict1/0 before this fallback;
+default behavior remains off. Immutable local span-interpretation annotations
+and an uninterpreted-region classification prevent a layout claim from becoming
+semantic merge authority. Existing strict merge/cache whitelists remain intact.
+[Source/build/kernel evidence](tests/qualification/dng-layout-exact-source-actual-20261017.json)
+records stock/Ox49checks each, strict-profile safety regressions, four Make/Dune
+builds and the stock legacy kernel/inspector. It does not yet prove new remote
+receiving or camera/corpus deployment. The component core and adapter above
+now provide the separate hash forest. Incremental refinement, authenticated
+cache storage and optional owner/archive routing are implemented separately;
+actual vendor child modules and broader deployment qualification remain work.
+
+Latest real-SDK successor **PASSED/CLOSED**:
+[four-call stock/Ox unchanged-file qualification](tests/qualification/all-scanned-sdk-v2-actual-20261017.json).
+Actual parent unified-exec process98564 completed0, worker11084reaped0,
+all client/server/supervisor/helper groups and CPU8/EXglobal closed. Four actual
+single-thread SDK calls reported valid raw digests, successful decode, errors0,
+warnings0. This supersedes the historical "not real SDK" status of the narrower
+007/006 checkpoints below; it is still one retained-camera case, not corpus,
+pixel/rendering, private-grammar, performance or production deployment evidence.
+
+Latest007 [private-input qualification](tests/qualification/all-scanned-input-current-actual-20261017.json)
+adds opt-in owner-context path records joined to helper hash/PID and private stage
+provenance. Current stock/Ox Make+Dune builds,14nested compiler/test calls,
+4actual original fake helper/input records and49inert SDK controls passed/closed.
+No OS argv tracing/real SDK/remote all-scanned qualification is inferred; the
+previous006 evidence below remains historical. Full scope remains incomplete.
+
+The optional received/all-scanned scope now runs through the actual local scan
+RPC, including unchanged files, private snapshot ownership and frozen per-phase
+policies. Default off/received behavior remains unchanged. Current stock/Ox Make
+and Dune builds plus14compile/test calls and4original fake protocol helpers pass:
+[qualification](tests/qualification/all-scanned-current-v4-actual-20261017.json),
+[usage/contracts](doc/all-scanned-validation.md). This is NOT real SDK all-scanned,
+remote-process/corpus or full-goal qualification. Those and private-MakN reference
+grammar/resource/platform work remain open; no consumed admission may be replayed.
 
 ## Current checkpoint — 2026-10-16
 
@@ -2880,7 +3425,9 @@ The implemented format has one canonical fixed binary encoding with checked big-
 
 Hashes protect integrity and bind a plan to its base; they do not authenticate an untrusted peer. Rely on Unison's configured trusted connection/security model, and validate all lengths/ranges even from authenticated peers. Keep the existing legacy fullfingerprint for archive compatibility; SDE adds SHA-256 rather than silently changing MD5-based historical archive identities.
 
-Register features such as `semantic-delta-v0` and `dng-xmp-v0` with `arcFormatChange=false`. Exchange profile/policy versions explicitly. Only invoke new RPC commands when both endpoints advertise support and the negotiated RPC encoding is qualified; RPC v0 peers fall back. Avoid changing existing command payloads and `convV0` types. New RPCs should have distinct names and bounded decoders. APFS availability is a destination-local capability, not a requirement that both peers run macOS.
+Register features such as `semantic-delta-v0` and `dng-xmp-v0` with `arcFormatChange=false`. Exchange profile/policy versions explicitly. Only invoke new RPC commands when both endpoints advertise support and the negotiated RPC encoding is qualified; Peers within upstream’s supported range that lack the extension fall back to ordinary transfer. Preserve existing supported command payloads; unsupported RPC versions are explicitly refused. New RPCs should have distinct names and bounded decoders. APFS availability is a destination-local capability, not a requirement that both peers run macOS.
+
+**Supported-peer decision (2026-10-19, explicitly approved by the user):** retain the selected upstream’s supported-peer range and drop the obsolete RPCv0 fallback requirement. Upstream `8772d26a2eb77cfd0cb6da81807e81f24f51044c` removed RPCv0 converters and 2.48–2.51 transport compatibility in `7b1911e7a0dcb847b849e7e74bad43a956f7997b`; restoring them is outside this goal. Current stock/Ox probes accept RPC1 and explicitly refuse0/999. Tested interoperability includes genuine8772 and installed2.53.5 over RPC1; this does not claim every supported release has been tested. Capability-absent ordinary transfer and archive compatibility remain acceptance requirements. [Source lineage and actual boundary](doc/final-rpc-version-result-20261019.md).
 
 No first-release archive format bump is necessary: exact target bytes preserve existing archive invariants. Optional classification caches are disposable and keyed by full identity plus parser/schema version, never just path, mtime, row count, or raw digest. Any future authoritative semantic archive change must declare `arcFormatChange=true`, audit archive naming/loading/hash logic, preserve or intentionally migrate historical formats, and prohibit silent downgrade.
 
@@ -2968,7 +3515,7 @@ Deliver generic APFS-aware transfer and a usable exact DNG extension after M2-G/
 5. **Concurrent modification:** source changes during inspection/transfer; receiver changes before clone/during verification/before rename; pathname replaced with symlink; inode replacement; mtime restored with changed bytes; cache made stale; canceled worker returns late. Explain the remaining uncooperative-writer check/rename race rather than writing a test that claims to eliminate it.
 6. **Failure/recovery:** inject errors after clone, mid-pwrite, before/after verification, property setting, flush, rename, and archive update; ENOSPC; permission denied; connection drop; abort; process kill. Each live path is old or a verified new file, never a partial packet; archives are either committed or trigger correct recovery/rescan. Existing rename/stash failure semantics remain accounted for.
 7. **Filesystem behavior:** APFS same/different volumes, no clone support, read-only files, sparse/compressed files if supported, destination hardlinks, open readers, symlinks, case/Unicode path handling, nonempty-to-empty resource forks, xattrs/ACL removal, permissions/timestamps, stashing/backups. No silent inherited-clone property leakage.
-8. **Compatibility:** archive round-trip before/after extension use; extension disabled; old peer/new peer both directions; RPC v0 fallback; compiler switch; platform guard builds; existing profiles, ignore rules, merges and cancellation. First-release archives must remain readable by baseline Unison.
+8. **Compatibility:** archive round-trip before/after extension use; extension disabled; supported old peer/new peer both directions; capability-absent ordinary fallback and explicit unsupported-RPC refusal; compiler switch; platform guard builds; existing profiles, ignore rules, merges and cancellation. First-release archives must remain readable by baseline Unison.
 9. **Parallelism:** sequential vs 1/2/4/8 worker parity, randomized task completion/cancellation, one busy volume, independent volumes, bounded memory/descriptors/queues, no legacy global-state access from workers. Run relevant race instrumentation only where actually supported.
 10. **Semantic merge:** same edit on both sides, disjoint allowlisted descriptive fields, same field divergent edits, delete/update, Bag/Seq/Alt/qualifiers, rendering cross-field conflicts, unknown namespaces, image change plus XMP change, missing/stale base, and deterministic one-artifact convergence.
 11. **Generic cloned transfer:** non-DNG same-size local edit; inserted/deleted prefix; duplicate blocks matched at a different offset; all-literal and all-matched streams; shorter/longer target; STRING→skip→range-copy→STRING transitions; same-volume source clone versus receiver-basis clone; immutable-basis lifetime; partial-resume exclusion; capability cache invalidation; range-alignment/tail and partial-operation errors. Second synchronization must be a true no-op.
@@ -4356,3 +4903,118 @@ serial commands/proposed1credit/<60s coordination request
 bench/sync/results/lifecycle-successor-request-20261015.json. Timing DEFER
 remains; these small regressions also await explicit allocation to avoid another
 crossed dispatch. Future refreshed timing plan follows runtime qualification.
+
+
+## Release evidence refresh — 2026-10-17
+
+The consolidated review candidate is draft PR13 against the fork master. Current
+acceptance map: [release readiness](doc/sol-release-readiness-20261017.md). Native
+publication uncertainty has an explicit owned backend used by modern bound local
+and remote semantic producers and ordinary local/rsync clone staging; composed
+controls preserve producer ownership through unknown close outcomes. Legacy named/
+unbound/older-peer paths retain separately stated limitations. In-process codec
+controls are not a substitute for current-candidate transport qualification.
+
+Gradual camera support remains operation-specific: known encoded image units,
+standard/private/structural regions and opaque complements have separate exact
+projections. Unknown MakerNote meanings do not disable exact reconstruction or
+require delaying deployment until exhaustive interpretation. Nested trusted
+plugins and versioned checkpoints can refine private views without discarding
+unaffected pixel hashes or relabeling old evidence. An authenticated cache hit
+currently revalidates complete source bytes before reusing the interpretation.
+
+The refreshed stock/Ox standalone inspectors passed sixteen original tiny TIFF
+calls; manual advisory component selection and metadata-only IO admission/input
+fences have directed controls. The [one retained-clone request](doc/camera-components-request-v1.json)
+is prepared for separate review/admission; preparation did not open camera bytes.
+A resulting report is advisory byte-role/hash evidence, not decoded-pixel identity,
+SDK eligibility, semantic merge authority or automatic receiving permission.
+
+
+## Pinned exiftool-rs MakerNote integration — 2026-10-17
+
+The [read-only Rust bridge](tools/exiftool-bridge/README.md) now integrates the
+actual local exiftool-rs library into the DNG inspector through optional
+`--exiftool-build`. This replaces the earlier deferral of reuse until the
+exiftool-rs work completed for this explicitly requested integration. It pins
+revision3cd699a2 and records the build/executable/engine domain; the other checkout
+is not modified. MakerNote interpretation is nested under DNG by vendor and
+field, preserving typed values and duplicates. Per-field hashes compose without
+reclassifying or discarding opaque source bytes. Original Canon fixture tests
+show private values changing while encoded-image projection stays unchanged.
+
+The current Rust Tag API lacks source byte spans. Its decoded values are therefore
+a separate knowledge view, not an invented physical partition or authority to
+ignore, relocate or merge source fields. Exact full/component hashes remain
+authoritative; previous profiles and default inspector behavior remain unchanged.
+A future span/provenance export can support stronger narrowly qualified vendor
+children. Full original ExifTool parity is not asserted: corpus and rich-flag
+coverage remain scoped. Existing camera request bytes are preserved but their
+runner pin is stale; a fresh successor is required before any camera IO.
+
+
+### Encoder producer boundary: qualified hook, pending RPC ownership
+
+The serializer now measures builtin wire size without payload buffers and offers
+`marshal_to_bytearray_accounted`: selected cumulative framed-result/header and
+builtin scratch bytes are admitted before allocation, with immediate partial
+result publication. Successful reservations are never refunded by the codec;
+its caller must retain the published buffer and charges through actual use or
+uncertain failure. Exact public codec format is unchanged. Conversion callbacks,
+closures, boxing, traversal, depth and all-heap/RSS are not covered by this byte
+bound. Stock/Ox Make+Dune+selftests and directed refusal/partial-error/output
+regressions passed; evidence is
+`tests/qualification/umarshal-encoder-accounted-actual-20261018.json`.
+Next is explicit RPC producer ownership through actual queued consumption:
+queue logical-byte admission cannot retroactively own pre-serialization work.
+Do not count the additive hook alone as that integration or full SOL completion.
+
+
+### Standard RPC producer ownership qualified
+
+Standard builtin request/reply/exception and stream builders now admit producer
+owners before encoding and retain prepared partial-buffer roots and cumulative
+selected allocation charges through actual output consumption. The synchronous
+encoder context restores before asynchronous waits, including nested and failed
+builders. Producer settlement is independent of later unrelated queue draining;
+known queued cancellation releases once and recognized uncertainty retains.
+No resources are retained for a refused unacquired slot merely because an
+ownership classifier throws. Endpoint-local normal/idle and urgent budgets are
+separate. Custom/raw/string producers and caller/conversion/backing/connection
+baseline allocations remain separately scoped; no allheap/RSS claim is made.
+Actual evidence: `tests/qualification/rpc-producer-ownership-actual-20261018.json`
+(four stock/Ox Make+Dune+selftests,53 negatives/compiler,584 input hashes matched).
+This is an implementation milestone; actual compatibility/transfer, remaining
+platform/resource/performance requirements and full goal acceptance remain open.
+
+
+### Stream classifier failure retains original raw ownership
+
+The synchronous stream callback now runs under a prepared RetainedOwnership
+guard before ordinary diagnostic caching. A throwing registered predicate
+preserves both its failure and the original exception; raw input stays retained
+through uncertainty and connection closure. Original tiny counterexamples and
+55 negative participants/compiler qualify this boundary with four stock/Ox
+Make+Dune+selftests. One corrected, separately compiled nonproduction test fixture
+differs from the build snapshots; production/compiler/binary hashes match.
+See `tests/qualification/rpc-stream-classifier-actual-20261018.json`. Known error
+cache/abort and unregistered propagation remain; decoded custom arguments,
+workspace, heap/RSS and broader acceptance stay separately scoped.
+
+
+### Explicit endpoint CPU ceiling for automatic workers — source successor
+
+[Endpoint CPU budget](doc/endpoint-cpu-budget.md) adds semanticcpubudget=0
+(default unchanged) or a positive ceiling on the existing worker/helper permit
+owner. This lets automatic selection respect a coordinated endpoint grant,
+rather than implicitly selecting all host physical cores. Explicit worker
+requests are capped too; existing helper weight and restart rules remain.
+Machine-wide token acquisition remains with the dispatcher. Archives/SDE/RPC
+encodings are unchanged. Current fixed controls pass; full builds and later
+measured1/2/4/8/auto coordination remain separately recorded. No oldV6 replay.
+
+Endpoint CPU ceiling actual qualification: stock/Ox11fixed+ignored-capnegative
+passed, four Make/Dune full CLI/selftests passed with586currentinputhashes each.
+Actual49929/7b61b2/0 and96224/ca29d5/0; allgroups/CPU4or8closed. See
+[receipt](tests/qualification/endpoint-cpu-budget-actual-20261018.json). NoSDK,
+Photo, EXglobal, transport, timing or hardRSS/thread cap claim.
