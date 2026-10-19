@@ -1,9 +1,17 @@
 # Gradual camera understanding and nested DNG plugins
 
-Status: user-directed architecture, now specified in [SOL.md](../SOL.md).
-Photo Root has been asked for its assessment (queues01a14797-40b2 and01a14798-408d).
-This document grants no new payload access or transformation capability and
-does not activate a permissive private-data profile.
+Status (2026-10-19): the architecture is specified in [SOL.md](../SOL.md),
+and its component/refinement/checkpoint kernel, frozen DNG child dispatch,
+layout-only exact-transfer profile, and optional exiftool-rs knowledge bridge
+are implemented. They have different qualification scopes; none grants general
+relocation, camera equivalence or rendering authority. Photo consultation is
+historical, not an outstanding design-approval gate.
+
+The latest [actual stock/Ox component controls](../tests/qualification/current-component-refinement-actual-20261019.json)
+renew private-view replacement, nested refinement, unchanged encoded-pixel reuse,
+checkpoint authentication and input revalidation. Actual camera/container and
+receiving coverage remains scoped by the final acceptance checklist. Unknown
+small fields do not prevent deployment of independently qualified exact paths.
 
 The user explicitly confirmed that separate pixel/metadata hashing is a large
 enough win to deploy without waiting for complete mapping of smaller fields.
@@ -107,30 +115,37 @@ using a hash computed from that same unvalidated synthesis.
 
 ## Mapping to current Unison
 
-The current [FormatExtension](../src/formatExtension.mli) contract exposes only
-editable spans plus optional advisory observations. Its owner freezes locally
-trusted compiled handles before worker dispatch. It does not yet represent a
-nested knowledge graph or separate transformation capabilities.
+[FormatExtension](../src/formatExtension.mli) remains the exact-transfer
+contract: bounded spans and optional advisory observations. Nested byte-role
+knowledge lives separately in [ComponentHash](../src/componentHash.mli) and
+[DngComponents](../src/dngComponents.mli), not in a widened transfer authority.
+The owner freezes trusted compiled decoder handles; workers receive immutable
+selection and scoped readers. This is not a native-code sandbox.
 
-[SemanticDelta](../src/semanticDelta.ml) already supplies useful exact mechanics:
-`plan` requires matching profile, size, regions and preservation digest;
-`apply_report_with_extension` verifies the retained basis and private stage,
-patches only declared spans, then checks the complete target SHA256. This is
-the candidate foundation for a **new layout-only exact-transfer profile**.
-Current DNG profiles0/1 still refuse private tags; their behavior stays intact.
+[SemanticDelta](../src/semanticDelta.ml) binds the profile, size, regions,
+protected complement and complete target digest. The implemented
+`org.firstpair.dng-layout/0` profile uses `Opaque_spans`, so its classification
+is `Uninterpreted_regions`, not `Editable_metadata`. Exact reconstruction of the
+selected donor remains safe without interpreting hidden references, provided
+all independent basis/stage/target verification succeeds. Strict XMP profiles
+`org.firstpair.dng-xmp/0` and `/1` retain their separate eligibility rules;
+layout-only support does not gain their synthesized reconciliation authority.
 
-The current `Editable_metadata` classification can overstate what a layout-only
-plugin knows. A successor API must distinguish "differences confined to these
-spans" from "these changes have understood metadata semantics." The stronger
-claim must not leak into UI, archive-base caching or reconciliation through
-the old enum. Existing `reconcile_xmp` expressly accepts only profiles0/1; a
-new layout-only profile must not inherit that authority.
+`ComponentHash.apply_plugin` refines one parent domain with a shared bounded
+reader. `DngComponents.freeze_decoders` supplies ordered, locally trusted
+bindings, allowing plugins inside plugin-exposed children without a global
+mutable registry per nested level. Unknown gaps stay opaque. Replacing a
+private decoder resets only that private view, rechecks its bytes and recomputes
+dependent views; unaffected encoded-pixel nodes can be reused within the valid
+session. Checkpoint restoration still authenticates owner-held metadata and
+revalidates the complete current input before incremental refinement.
 
-A plugin hierarchy should therefore sit inside the DNG extension, while the
-core owns the common evidence/capability checks. Avoid one global registry per
-nested decoder. Freeze a deterministic local plugin-set snapshot on the owner,
-then pass immutable handles and worker-local state, preserving the existing
-OxCaml portability contract.
+The optional [exiftool-rs bridge](../tools/exiftool-bridge/README.md) contributes
+a nested vendor/field knowledge view. Its current Tag API does not export source
+byte spans, so decoded fields cannot be promoted into physical ownership,
+relocation rules or permission to ignore differences. Engine/schema provenance
+stays separate from exact byte hashes. More decoded names are useful knowledge,
+not a blanket semantic-equivalence certificate.
 
 ## Community extension contract
 
@@ -153,7 +168,11 @@ versions, malformed counts/offsets, aliases, hidden-reference counterexamples,
 unknown-tag preservation, deterministic failure, cancellation and ownership
 controls. Camera samples add scoped evidence, not universal camera support.
 
-## First implementation sequence
+## Historical first implementation sequence
+
+The steps below preserve the original sequencing proposal; use the current
+implementation/evidence links above for status, not this historical list as a
+new approval or deployment gate.
 
 1. Record Photo Root's feedback on shared interfaces and the operation/evidence
    split; consultation does not postpone the user's approved partial-coverage baseline.

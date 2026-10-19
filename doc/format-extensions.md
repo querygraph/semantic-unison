@@ -27,7 +27,9 @@ Add this registration alongside the built-in DNG registration in
 `semanticFormats.ml`, and include the new source module in the build. Enable
 it with `semanticprofile = <versioned profile ID>`. No transfer or worker
 dispatch changes are needed. `semanticdng = true` remains a shorthand for
-both built-in DNG profiles. An unavailable peer capability uses ordinary transfer.
+the three built-in DNG profiles: XMP `/1`, XMP `/0`, then layout-only `/0`.
+The layout profile preserves exact donor bytes while reporting uninterpreted
+regions; it does not gain metadata-merge authority. An unavailable peer capability uses ordinary transfer.
 
 The optional `max_payload` declaration bounds total editable bytes per proof.
 It defaults to the 16 MiB core ceiling; DNG declares 1 MiB. The core rejects a

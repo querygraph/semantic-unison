@@ -9,9 +9,23 @@ archive/RPC authority; earlier qualifications below retain their original scope.
 `ComponentHash` implements the worker-local hashing/composition core of SOL.md's
 gradual-understanding design. The DNG adapter below now supplies physical
 components; [explicit typed worker inspection](component-workers.md) now consumes
-frozen decoder handles. Wire/report consumers, archive identity and persistent
-cache integration remain open. It grants no transformation,
+frozen decoder handles. Local component reports, optional owner-managed metadata storage and archive
+hints are implemented through separate [report](component-report-v0.md),
+[store](component-managed-store.md), and [routing](component-worker-cache-routing.md)
+contracts. Remote endpoint cache routing and changing reconciliation/archive
+identity are not supplied by this kernel. It grants no transformation,
 conflict-resolution, publication or decoded-pixel-equivalence authority.
+
+## Current kernel qualification — 2026-10-19
+
+[Current actual receipt](../tests/qualification/current-component-refinement-actual-20261019.json)
+records56refinement,1005checkpoint,13reader-fault and27publication-fault checks
+percompiler, five expected OxCaml capability-escape compile refusals and41
+settled child groups. No Adobe, camera/Photo payload or benchmark ran. These
+controls verify incremental private decoder/schema replacement and unchanged
+encoded-pixel node reuse. They do not extend camera coverage, authorize
+transformation, or turn encoded-byte projections into decoded-pixel equality.
+The historical scopes below remain evidence for their original inputs only.
 
 An owner supplies an immutable input snapshot and a root specification covering
 the whole file. Nodes have a logical ID, schema, role, relative extent and
@@ -92,7 +106,7 @@ It binds the knowledge manifest's geometry and provenance: it may change after
 decoder refinement even when the file's bytes and full SHA remain unchanged.
 It must not be displayed as independent evidence that the physical file changed.
 
-## Actual scope and next integration
+## Historical initial qualification and integration scope
 
 [Evidence](../tests/qualification/component-hash-core-actual-20261017.json)
 records41 checks per stock/Ox compiler,22 contained calls (including three

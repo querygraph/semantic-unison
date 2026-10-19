@@ -20,6 +20,11 @@ scheduling statements below; preserve original receipts and their scopes.
   head`integration/sol-consolidated-review` exactf6bfd6533477f265aa988a6cc24790753a2b3638.
   Actual GitHub readbackfd0f5c/0 confirms. Local final harness is not published
   into that head. No upstream submission, merge or production activation inferred.
+- **Recent component qualification:** d04da784, actual99658/eae204/0/no session,
+  current stock/Ox56refinement+1005checkpoint+13readerfault+27publicationfault
+  checks each;5expectedOxcompile refusals/41childgroupssettled/CPU4closed.
+  Incremental private decoder replacement reuses unchanged encodedpixel nodes;
+  no new camera coverage or SDK claim. Current source docs now reflect this.
 - **Actual current tests:** stock/Ox167transfer checks each +9negative participants
   each renewed at6edaf71a, actualtool10579/6aaca5/0; all120 compiler/probe children
   and both runners settled/CPU4closed. Receipt`final-transfer-controls-actual-20261019.json`.
@@ -7230,3 +7235,19 @@ privateparentonly and reuses unchanged encodedpixelnode; full checkpointrestore
 stillrevalidatesinputfirst. Projectionnotdecodedpixels/rendering/cameraeligibility.
 This renews component kernel, notDNGcontainerparser/productionnativeSDK. Photo
 priorityfix/retryhold unchanged; goalACTIVE/allownresourcesclosed.
+
+
+## 2026-10-19 — Plugin/gradual-understanding docs reconciled with current code
+
+Updated gradual-camera-understanding.md, component-hashes.md, format-extensions.md.
+Removedstale future-only framing for implementednestedcomponent/checkpoint/layout
+exactprofile and stale two-profile shorthand; actualselection isXMP/1,XMP/0,layout/0.
+LayoutusesOpaque_spans→Uninterpreted_regions, notmetadata-merge authority.
+Exiftool-rs decodedknowledge lacksphysicalspans; noauthoritytoignore/relocate
+sourcefields. Componentreport/store/owner-cache routeslinkedwiththeiractualscope;
+remoteendcache/semanticidentity remainseparate. Preservedhistoricalimplementation
+sequenceexplicitlyhistorical, notnewgate. Currentkernelactuald04da784linked:56/
+1005/13/27checks/compiler, noextra native/SDKcamera qualification. Localdoclinks
+verified; no runtime/resources. Photo latestreported80421/15a1f2normalstartup
+andprefix16resumeplanned, prior49291recoveryclosed; Photo-firsthold remains.
+GoalACTIVE; no exhaustiveMakerNote interpretation deploymentblocker.
