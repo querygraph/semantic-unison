@@ -7251,3 +7251,19 @@ sequenceexplicitlyhistorical, notnewgate. Currentkernelactuald04da784linked:56/
 verified; no runtime/resources. Photo latestreported80421/15a1f2normalstartup
 andprefix16resumeplanned, prior49291recoveryclosed; Photo-firsthold remains.
 GoalACTIVE; no exhaustiveMakerNote interpretation deploymentblocker.
+
+
+## 2026-10-19 — Additional SOL workload recipe source implemented
+
+Newbench/sync/workloads.py pure immutableClassicTIFF layout/mutationrecipes:
+fixedXMP,growing+relocatedXMP,metadata+preview,metadata+raw,metadata+opaque.
+Distinctdeclaredprimary/previewextents; growthupdatescount/pointer+appendsnew
+packetwhilepreservingalloldpayload. No realfileTIFeditor/IO orSDKclaims. Six
+original32768B in-memory independentbyteoracle tests dca0c1/0/no session,
+child67420reaped0/groupempty/CPU4closed. Receiptgenerated-workload-recipes-
+actual-20261019.json. Existing fixtures.py/run/frozencohortsunchanged.
+IMPORTANTstillNOTconnectedto benchmarkrunner: next versionedconsumer/CLI and
+newexactplans mustreportexpectedfallback separatelyfromfixedXMP SDEsuccess.
+Noactualbenchmarkperformed. WORKLOADS.md listsallremainingSOLscenariofamilies
+andtopologies; no redefining completion to existingmatrix. Photo91034priority
+holdsnewIO/native/SDK/benchmark; own8sourcecontrols continue. Goalactive.

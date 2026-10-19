@@ -1,0 +1,36 @@
+{
+  "schema": "unison-generated-workload-recipes-controls/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "actual_tool": {
+    "chunk": "dca0c1",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "child": {
+    "pid": 67420,
+    "returncode": 0,
+    "reaped": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "group_cleanup_before_leader_reap": true
+  },
+  "tests": 6,
+  "source_pins": {
+    "bench/sync/workloads.py": "6279f743f135879eabfdab4d8627f0fbe73834b3c190863df7ef5bcb9ecb6714",
+    "bench/sync/workloads_test.py": "3845fb871c72c3ed7a1afbdc28f8fdd21c6deb052b573a3d4a83d50b356aa709"
+  },
+  "saved_result": {
+    "path": "/private/tmp/unison-workload-source-controls-0p9_lnga/RESULT.json",
+    "bytes": 1530,
+    "sha256": "775ce7e4cd8cb32a32962ed6f4049bce70a8a96897239dc809367ca1c3f413eb"
+  },
+  "scope": "Pure generated-layout/mutation plans tested by independent32768-byte in-memory byte oracle. No fixture files, compiler, Unison, SDK, Photo, payload IO or benchmark measurement. Existing fixture/runner/cohort bytes unchanged. Runner integration remains incomplete.",
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false
+}
