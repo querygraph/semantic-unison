@@ -286,3 +286,17 @@ and manifests independently hash-bound. Store/Unison8/EXglobal closed.
 This closes the renewed extended-profile execution gap in the older map; it does
 not prove arbitrary malformed files, decoded pixels, SDK, transport or the whole
 goal. Later component/private forest coverage remains separately scoped.
+
+
+### Current inherited rsync/native publication qualification
+
+Actual42166/f5665c/exit0/no session qualifies normal/growth/shrink/inherited/
+adopt-close/disarm-close/progress-close/progress-cancel on both current stock/Ox
+builds.20nestedcompiler/probe calls+runner reaped0/groupsabsent,466linkedartifact
+pins and339source/support pins rehashed. Store/Unison8/EXglobalclosed.
+[Actual receipt](../tests/qualification/final-rsync-publication-actual-20261019.json).
+Actual codec and receiver callback use in-process delivery; not an external
+transport claim. Injected unknown native owners/reservations remain retained
+until test process exit; process closure does not relabel normal object teardown.
+Predecessorv3 refused compiler symlinks beforechild and was independently
+recoveryclosed137; preserve that failure separately from this freshv4 pass.

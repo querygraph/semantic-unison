@@ -51,3 +51,17 @@ probe children and both runner groups settled; actual owning tool10579/6aaca5/0
 no session. Both329production inventories match current; direct runner source
 pins match. This supersedes reliance on the partial historical transfer pins
 for this component only. Inherited-rsync/native publication remains open.
+
+
+### Current inherited rsync/native publication qualification
+
+Actual42166/f5665c/exit0/no session qualifies normal/growth/shrink/inherited/
+adopt-close/disarm-close/progress-close/progress-cancel on both current stock/Ox
+builds.20nestedcompiler/probe calls+runner reaped0/groupsabsent,466linkedartifact
+pins and339source/support pins rehashed. Store/Unison8/EXglobalclosed.
+[Actual receipt](../tests/qualification/final-rsync-publication-actual-20261019.json).
+Actual codec and receiver callback use in-process delivery; not an external
+transport claim. Injected unknown native owners/reservations remain retained
+until test process exit; process closure does not relabel normal object teardown.
+Predecessorv3 refused compiler symlinks beforechild and was independently
+recoveryclosed137; preserve that failure separately from this freshv4 pass.

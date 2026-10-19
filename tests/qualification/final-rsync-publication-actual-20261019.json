@@ -1,0 +1,111 @@
+{
+  "schema": "unison-final-rsync-publication-actual/1",
+  "state": "PASS_CLOSED",
+  "owning_tool": {
+    "session": 42166,
+    "initial_chunk": "80dfd7",
+    "terminal_chunk": "f5665c",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "owner_pid": 88312,
+  "plan": {
+    "path": "doc/final-rsync-publication-plan-v4-20261019.json",
+    "sha256": "b38b0e301ff38ced7f179117a5fb7fddd94756f382fa25935a60f189948b144d"
+  },
+  "audit": {
+    "complete": true,
+    "external_transport": false,
+    "linked_artifacts": 466,
+    "nested_calls": 20,
+    "parent_tool_terminal_proved": false,
+    "phases_per_compiler": [
+      "normal",
+      "growth",
+      "shrink",
+      "inherited",
+      "adopt-close",
+      "disarm-close",
+      "progress-close",
+      "progress-cancel"
+    ],
+    "production_source_pins": 339,
+    "result": {
+      "path": "/private/tmp/unison-rsync-publication-vqy7p9vb/RESULT.json",
+      "sha256": "620023602541da61479748004b63eae7d72ee43c2cdefb9cb5d03f2a71b3b48f"
+    },
+    "runner": {
+      "group_cleanup_before_leader_reap": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "pid": 88332,
+      "reaped": true,
+      "returncode": 0
+    },
+    "unknown_native_fixture_ownership_retained_until_process_exit": true
+  },
+  "source_pins": {
+    "tests/rsync_publication_owned/controls.py": "32c03686794ce1d6d84f442a4a685a4b444e3f813518bf4a67d5f1acefdd06a3",
+    "tests/rsync_publication_owned/probe.ml": "4eda1c868b38c887b64ae84d996905aac7926ab92d54fdcf5da620bd4f5f1886",
+    "tests/stage_publication_owned/fixture.c": "a6b0c3ad2bd0977fcdfb1e626ef2c8b67e9385d341dfba7b145ad56184cd1850",
+    "tests/sdk_host_matrix/shared_child.py": "408097836323a1131921ceb9439201ce76b267f02b9187e81689db86aaf82783",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/camera_sdk_concurrency/persistence.py": "6cdc729e4ac75443f9931cd210acb9a6df41188330c92ac9660db96ebb6048a3",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "tests/final_rsync_owner.py": "e13cec14f3c038260fd85ca07535aa901a3ec63cbb27f786ccfbe62ec34d42c6",
+    "tests/final_profile_owner.py": "e5f42ee1ed089462e75e088189a4ddd15521d7e49c9d430ce8e6de5e4ef16d50",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+  },
+  "owner_artifacts": [
+    {
+      "path": "/private/tmp/unison-final-rsync-owner-31126e05edf84df692b8b3a7bc2ed711/RESULT.json",
+      "bytes": 666,
+      "sha256": "549e5beefed5574088bae3780a18b4174d42da3a2e3c29f49fde2012feb85bc6"
+    },
+    {
+      "path": "/private/tmp/unison-final-rsync-owner-31126e05edf84df692b8b3a7bc2ed711/RUNNER.json",
+      "bytes": 755,
+      "sha256": "de1198c86558f887a442709286a72576e320f48e2a67be20097eb06db8ceb65e"
+    },
+    {
+      "path": "/private/tmp/unison-final-rsync-owner-31126e05edf84df692b8b3a7bc2ed711/START.json",
+      "bytes": 554,
+      "sha256": "0c51223877a11e9f9ec0b7b760650de24d59e6098697eab0aded7c034b4bc0d3"
+    }
+  ],
+  "raw_result": {
+    "path": "/private/tmp/unison-rsync-publication-vqy7p9vb/RESULT.json",
+    "sha256": "620023602541da61479748004b63eae7d72ee43c2cdefb9cb5d03f2a71b3b48f"
+  },
+  "resources": {
+    "cpu_tokens": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "cpu_closed": true,
+    "exglobal_closed": true,
+    "store_closed": true
+  },
+  "preentry_negative": {
+    "actual_tool": "e381d1",
+    "exit_code": 1,
+    "no_session": true,
+    "child_attempted": false,
+    "record_path": "/private/tmp/unison-final-rsync-preentry-control-86650e90da1c4d8ba742bc7a87535c6d/PREENTRY-REFUSED.json"
+  },
+  "scope": "eight original native publication/actual rsync codec cases percompiler via inprocessdelivery, not externaltransport/SDK/media/normal teardown of injected unknown fixtures",
+  "goal_complete": false
+}

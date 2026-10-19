@@ -1,0 +1,123 @@
+{
+  "schema": "unison-final-rsync-publication-plan/1",
+  "state": "PREPARED_V3_AFTER_ACTUAL_PHOTO_HANDOVER",
+  "repository": "/Users/alexy/src/unison-final-adobe-20261019",
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-final-adobe-20261019/tests/rsync_publication_owned/controls.py",
+    "--stock-build",
+    "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+    "--ox-build",
+    "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json"
+  ],
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "source_pins": {
+    "tests/rsync_publication_owned/controls.py": "32c03686794ce1d6d84f442a4a685a4b444e3f813518bf4a67d5f1acefdd06a3",
+    "tests/rsync_publication_owned/probe.ml": "4eda1c868b38c887b64ae84d996905aac7926ab92d54fdcf5da620bd4f5f1886",
+    "tests/stage_publication_owned/fixture.c": "a6b0c3ad2bd0977fcdfb1e626ef2c8b67e9385d341dfba7b145ad56184cd1850",
+    "tests/sdk_host_matrix/shared_child.py": "408097836323a1131921ceb9439201ce76b267f02b9187e81689db86aaf82783",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/camera_sdk_concurrency/persistence.py": "6cdc729e4ac75443f9931cd210acb9a6df41188330c92ac9660db96ebb6048a3",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "tests/final_rsync_owner.py": "bd3f3e23ba50630634a4f1e58990f6b902b78e4e282b58ef9e2d20fc7fc2fee4",
+    "tests/final_profile_owner.py": "e5f42ee1ed089462e75e088189a4ddd15521d7e49c9d430ce8e6de5e4ef16d50",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+  },
+  "build_receipts": [
+    {
+      "compiler": "stock",
+      "path": "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+      "bytes": 61240,
+      "sha256": "71e12a87fded7739949df93aceb3f006d115514742f751ac189e388cdd9a53e8",
+      "production_sources_matched": 329,
+      "build_system": "make"
+    },
+    {
+      "compiler": "ox",
+      "path": "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json",
+      "bytes": 61246,
+      "sha256": "4b00fc9ad5da85d94c545c3d6b59f9ff1d3fe35e31994d255d95bc264a21fd64",
+      "production_sources_matched": 329,
+      "build_system": "make"
+    }
+  ],
+  "phases_per_compiler": [
+    "normal",
+    "growth",
+    "shrink",
+    "inherited",
+    "adopt-close",
+    "disarm-close",
+    "progress-close",
+    "progress-cancel"
+  ],
+  "private_workspace_contract": "Runner creates fresh0700 /private/tmp/unison-rsync-publication-* with unique kernel-created directory; binds actual path in result and prints it. Outer owner records actual returned namespace, never guesses or replays a path.",
+  "scope": "Two sequential compilers, 8original phases each, arbitrary8KiB-family private fixtures, production codec/native publication through in-process delivery. No Adobe/SDK/camera/Photo/original payloads or external transport.",
+  "resources": {
+    "CPU_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "EXglobal_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+    "order": [
+      "EXglobal",
+      "CPU00..07"
+    ],
+    "compiler_jobs_max": 1,
+    "calls_expected": 20,
+    "call_observation_seconds": 60,
+    "owner_observation_seconds": 300,
+    "unknown_retains_no_signals": true
+  },
+  "dispatch_gate": "Photo actual2878/a2c2a1/0 normaldrain released CPU/EXIO; newPhotoIO/nativeSDKheld for handover. Revalidate all source/build/interpreter pins and acquire canonicalEX thenUnison8 before execution; unknown retains. This metadata plan is not a process terminal or resource grant.",
+  "source_CLI_control": {
+    "actual_tool_chunk": "08d377",
+    "exit_code": 0,
+    "no_session": true,
+    "child_cleanup": {
+      "pid": 62900,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "CPU4_closed": true,
+    "native_or_compiler_or_EXIO": false,
+    "saved_result": {
+      "path": "/private/tmp/unison-rsync-qualified-help-594krxgp/RESULT.json",
+      "bytes": 775,
+      "sha256": "9b9c893114f690472799a1045e1e2d56daba843b46bcb5d2240f6b3fb1f59934"
+    }
+  },
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-rsync-publication-plan-v2-20261019.json",
+    "sha256": "8330d8550f57158f1fd91815bdda2a7f4a23144f11e6022787942fac64ef9173"
+  },
+  "source_refresh": {
+    "changed": {
+      "tests/sdk_host_matrix/shared_child.py": {
+        "before": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da",
+        "after": "408097836323a1131921ceb9439201ce76b267f02b9187e81689db86aaf82783"
+      }
+    },
+    "execution_repeated": false
+  },
+  "owner_workspace": "/private/tmp/unison-final-rsync-owner-c5dec47bc10847f59e534e5070ca120a"
+}

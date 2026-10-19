@@ -6,7 +6,7 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `affb785e`. No `src/` differences from frozen review
+  before this checkpoint: `f8878900`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
@@ -27,9 +27,14 @@ scheduling statements below; preserve original receipts and their scopes.
  1253fixedcases/6288assertions+three designated negatives/four sparse cases.
   Twenty nested children+two runners closed; Store/Unison8/EXclosed. Receipt
   final-extended-profile-pair-actual-20261019.json. V3 consumed once.
-- **Next prepared execution:** inherited rsync v2 remains unstarted and matches
-  current helper source; recheck metadata/builds and acquire EX→Unison8.
-  Old v1 plans and unexecuted parser v2 preserved; no replay inferred.
+- **Inherited rsync renewed:** actual42166/f5665c/0/no session,20nestedcalls
+  andrunnerclosed;8phases/compiler passed.466linkedpins+339source/supportpins
+  rehashed; Store/Unison8/EXclosed. V3 preentryrecovery137 preserved separately.
+  This is actual codec/inprocess delivery, not externaltransport.
+- **Next:** owning batch dispatcher/per-classaudit and actual generated workloads,
+  then remaining prescribed benchmark/topology/compatibility acceptance; direct
+  Adobe fixture/source recovery and finalmatrix later. No automatic29largecohort
+  dispatch: oldseries18–30h estimate needs explicit prioritization/scheduling.
 - **Published review:** PR13 OPEN DRAFT, fork`querygraph/unison`, base`master`,
   head`integration/sol-consolidated-review` exactf6bfd6533477f265aa988a6cc24790753a2b3638.
   Actual GitHub readbackfd0f5c/0 confirms. Local final harness is not published
@@ -7524,3 +7529,24 @@ Receipt tests/qualification/final-extended-profile-pair-actual-20261019.json.
 ImmediatePhotoqueue01a153b1-3192 release sent, no sealinghold. NewPhotoIO/native
 SDK remainsheld forindependenthandover; own8source maycontinue. Next inherited
 rsync actualqualification. Fullgoal and actualbatchdispatch stillincomplete.
+
+
+## 2026-10-19 inherited rsync publication actual PASS/CLOSED
+
+V3 firstattempt owner87548/session83838 initial9c9f2e refusedrecordedocamlopt
+symlink throughNOFOLLOW beforeSTART/ANYchild. Exactpinnedsource+emptyworkspace+
+process/group/FDcensus provedknownidleprefix; TERMignoredbyqualifiedretainloop,
+secondsource/census thenexactPIDKILL. Actual239b25/137/no session, no normal
+ownerclose claim. FreshEX8acquiredclosed; source snapshot+recoveryreceipt retained.
+V4 pinsresolvedqualifiedocamlopt.opt targets, and ordinaryknownpreentryfailure
+now savesrefusal/closesStore+knownleases withoutretention. Actualbadtarget
+controle381d1/1/no session nochild closed; freshv4 planb38b0e30 thenexecutedONCE.
+Actualowner88312/session42166 initial80dfd7 terminalf5665c/0/NOsession. Runner
+88332reaped0/groupabsent;20nestedcompiler/probechildren allactualreaped0/groups
+absent. Eightnormal/growth/shrink/inherited/close/cancelphases eachcompiler,
+466linkedpins+339source/supportpins rehashed. Store/CPU00..07/EXglobalclosed.
+NoSDK/Photo/transport; actualcodec+nativepublication inprocessdelivery only.
+Injectedunknownnativeownership retaineduntilprocessExit, notnormalobjectteardown.
+Actualreceipt tests/qualification/final-rsync-publication-actual-20261019.json.
+Photoactualreleasequeue01a153b5-7d80 sent beforeseal. CurrentzeroUnisonresources.
+Next batchowner/perclassaudit+actualgeneratedworkloads; Adobequalificationlast.
