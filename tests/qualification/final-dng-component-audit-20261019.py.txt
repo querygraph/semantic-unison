@@ -1,0 +1,56 @@
+import hashlib,json,os,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha,closed
+from shared_cpu_pool import Pool
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+P=R/'doc/final-dng-component-plan-v1-20261019.json';assert sha(P)=='453a61ab9a62485df06f97681dcbd43829072fd9f5546c32072cfe10a547e535';p=json.loads(read_bytes(str(P),2*1048576));root=Path(p['workspace'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle
+try:
+ result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576));start=json.loads(read_bytes(str(root/'START.json'),65536));runner=json.loads(read_bytes(str(root/'RUNNER-CHILD.json'),1048576));closed(runner,0)
+ assert start['owner_pid']==56659 and runner['client_cleanup']['pid']==56679
+ assert start['command']==runner['command']==[p['interpreter']['path'],'-B',str(R/'tests/semantic/dng_component_controls.py'),'--compiler-scope','both']
+ assert {(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in (*cpu.fds,*io.fds)}=={(row['device'],row['inode']) for row in start['resource_rows']}
+ assert result['complete'] is True and result['SDK_or_Photo_calls']==0 and result['parent_tool_terminal_proved'] is False
+ raw=read_bytes(result['original_result']['path'],16*1048576);assert len(raw)==result['original_result']['bytes'] and hashlib.sha256(raw).hexdigest()==result['original_result']['sha256'];suite=json.loads(raw);directory=Path(result['original_result']['path']).parent
+ assert suite['complete'] is True and suite['SDK_invoked'] is False and suite['media_payload_opened'] is False
+ for name,digest in p['source_pins'].items():assert sha(R/name)==digest,name
+ for name,digest in suite['source_pins'].items():assert Path(name).is_relative_to(R) and sha(name)==digest,name
+ assert sha(p['interpreter']['path'],64*1048576)==p['interpreter']['sha256']
+ for ref in p['compilers'].values():assert str(Path(ref['invocation']).resolve())==ref['path'] and sha(ref['path'],128*1048576)==ref['sha256']
+ counts={0:0,2:0};summaries=[];pids=[]
+ for call in suite['calls']:
+  argv=call['command'];expected=0
+  if Path(argv[0]).name=='dng-component-ablation':
+   expected=2;assert 'changed named record escaped lookup before reader retirement' in call['stderr']
+  elif '-c' in argv and Path(argv[-1]).name in ('owner_only_cache_capture.ml','owner_only_owner_index_publication.ml'):
+   expected=2;assert any(x in call['stderr'] for x in ('nonportable','contended'))
+  closed(call,expected);c=call['client_cleanup'];assert type(c['pid']) is int and 0<c['pid']<2**31
+  assert call['aggregate_or_parent_terminal_proved'] is False and call['io_cpu_release_authorized'] is False
+  pids.append(c['pid']);counts[expected]+=1
+  if Path(argv[0]).name in ('dng-component-controls','archive-reference-fault'):summaries.append(dict(command=argv,stdout=call['stdout']))
+ assert len(pids)==len(set(pids))==76 and counts=={0:72,2:4} and summaries==result['audit']['summaries']
+ artifacts=[];generated_bytes=0
+ for label in ('stock','ox'):
+  work=directory/label
+  for executable in ('dng-component-controls','archive-reference-fault','component-inspector','dng-component-ablation'):
+   path=work/executable;artifacts.append(dict(path=str(path),sha256=sha(path,64*1048576)))
+  fault=suite['archive_reference_fault_builds'][label];assert fault['production_fault_switch'] is False and fault['macro']=='fsync=unison_record_control_fsync' and sha(work/'archive-reference-fault',64*1048576)==fault['executable_sha256']
+  ablation=suite['lookup_guard_ablations'][label];assert ablation['production_source_modified'] is False and sha(work/'dngComponents.ml')==ablation['filtered_original_sha256']
+  summaries_for_label=[x['stdout'] for x in summaries if Path(x['command'][0]).parent==work]
+  assert any('DNG component controls: 1590 checks PASS' in x and 'PASS 49 layout checks' in x and 'PASS four scalar baselines/eight private safety refusals' in x for x in summaries_for_label)
+  assert any('PASS 29 owner archive-reference publication fault checks' in x for x in summaries_for_label)
+  for name,report in [('original-tiny.dng',suite['inspector_reports'][label]['target']),('original-600-strip.dng',suite['coalesced_inspector_reports'][label]),('original-600-inline-fields.dng',suite['dense_inspector_reports'][label])]:
+   path=work/name;data=read_bytes(str(path),65536);assert hashlib.sha256(data).hexdigest()==report['sha256'];generated_bytes+=len(data)
+  assert suite['coalesced_inspector_reports'][label]['partition_schema']=='dng-physical-partition/1' and suite['dense_inspector_reports'][label]['partition_schema']=='dng-physical-partition/2'
+ refs=[]
+ for path in (root/'START.json',root/'RUNNER-CHILD.json',root/'RESULT.json',Path(result['original_result']['path'])):
+  refs.append(dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path,16*1048576)))
+ cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ receipt=dict(schema='unison-final-dng-component-independent-audit/1',actual_owner_terminal=dict(session_id=38297,initial_chunk='c250e5',terminal_chunk='b5ca6f',exit_code=0,running_session=None,pid=56659),plan=dict(path=str(P),sha256=sha(P)),workspace=str(root),runner=runner['client_cleanup'],nested_calls=76,normal_zero=72,designated_two=4,component_checks_per_compiler=1590,layout_checks_per_compiler=49,private_refusals_per_compiler=8,archive_reference_fault_checks_per_compiler=29,source_pins=len(p['source_pins']),production_pins=sum(name.startswith('src/') for name in p['source_pins']),original_suite_pins=len(suite['source_pins']),raw_references=refs,executables=artifacts,fresh_generated_inspector_fixture_hash_bytes=generated_bytes,filtered_ablation_source_restored=True,canonical9_reacquired_closed=True,SDK_or_Photo_calls=0,scope='Generated original current stock/Ox component/private-layout/partition schema1+2/refinement/cache/archive-reference fault/guard ablation; not real receiving, full Unison archive crash durability, physical ENOSPC, camera semantics or pixels.')
+ path=R/'tests/qualification/final-dng-component-actual-20261019.json';assert not path.exists();path.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(receipt=str(path),sha256=sha(path),nested_calls=76,generated_hash_bytes=generated_bytes,CPU8_EX_closed=True)))
+except BaseException as error:retain_after_record(lambda:print('AUDIT_RETAIN',repr(error),flush=True))

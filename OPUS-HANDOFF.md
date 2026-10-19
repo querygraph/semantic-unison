@@ -146,6 +146,18 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   can regenerateJXL/12states whenfinalSDKphase reached; no blindwriterdispatch.
   `doc/sdk2768-fixture-writer-build-20261019.md`. AllresourcesZERO.
 
+- **Current full DNG component/publication controls CLOSED:** actual38297/
+  b5ca6f/0/no session, runner56679reaped0,76nestedchildren72zero+4designated2
+  genuinelyreaped/groupsabsent. Percompiler1590component+49layout+8private
+  refusals+29archive-reference publication-fault checks; schema1/2 inspector
+  generated fixtures bound. Both private guard ablations detect stale named
+  record; filteredsourcesrestored, productionunchanged. Independentcbcdaf/0
+  rehashed565plan/329production pins/eight executables/115712Bgeneratedbytes,
+  whole8EXreacquiredclosed. Five owner controls984cbc/0. AllresourcesZERO.
+  `doc/final-dng-component-result-20261019.md`. Not fullreceiving/archivecrash/
+  physicalENOSPC/SDK/pixels; goal ACTIVE. Next independent fullsync/failure map
+  remains before final generated Adobe fixture/runtime qualification.
+
 ## Remaining work — do not mark goal complete
 
 1. Reconcile remaining full-sync/archive/profile/platform cases and
