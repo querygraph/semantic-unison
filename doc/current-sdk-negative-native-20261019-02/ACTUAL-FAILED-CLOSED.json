@@ -1,0 +1,20 @@
+{
+  "state": "CONSUMED_ACTUAL_FAILED_INDEPENDENT_RECOVERY_CLOSED",
+  "request": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/REQUEST.json",
+    "sha256": "405caf1433fa8d25f04d0b56c4195809dc94089c9572242646a55aeb8b9d4939"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/PLAN.json",
+    "sha256": "175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33"
+  },
+  "admission_sha256": "1b016d1eb7141e598d026b81ba145fd226c6e7abe1e7e493a9adb682db743bbc",
+  "actual_owner": {
+    "session": 39507,
+    "terminal_chunk": "e243f6",
+    "exit_code": 137,
+    "running_session": false
+  },
+  "scope": "Two CLI/one genuine mismatch SDK; wrong frozen expectedexit1 stopped before third call; no full matrix pass",
+  "replay_allowed": false
+}

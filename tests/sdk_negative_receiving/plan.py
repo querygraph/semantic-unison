@@ -36,7 +36,7 @@ def schedule(binaries,tool,workspace):
                     identity=dict(label='stock',workers=2,codec=codec,policy=policy,stage=stage,directory=str(directory)),
                     command=command,server_flags=flags,
                     server_command=[binaries['ox']['path'],'-server','__new-rpc-mode',*flags],
-                    expected_client_exit=1 if stage=='negative' and policy=='require' else 0,
+                    expected_client_exit=2 if stage=='negative' and policy=='require' else 0,
                     expected_sdk_helpers=1 if stage=='negative' else 0,
                     destination_preserved=stage=='negative' and policy=='require'))
     return dict(rows=rows,limits=deepcopy(LIMITS),token_indexes=list(range(8)),

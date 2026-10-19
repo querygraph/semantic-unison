@@ -75,8 +75,9 @@ Authentic generated JXL/twelve-state SDK fixtures are now actually qualified;
 see sdk-fixture-generation-result-20261019.md. Final three-encoding mixed
 stock/Ox merge receiving now passed nine CLI/six SDK calls under its separate
 consumed admission; see [actual scope and evidence](current-sdk-merge-result-20261019.md).
-Photo has no resource hold. Genuine negative-SDK publication and the final named
-validation-path coverage joins remain separately open. The remaining prescribed
+Photo has no resource hold. [Genuine negative-SDK receiving](sdk-negative03-result-20261019.md) now passed
+12CLI/sixSDK across allthree encodings under require/warn. Final named
+validation-path current-source joins remain open. The remaining prescribed
 large/workload/topology and original/upstream performance comparisons, plus the
 last requirement-to-evidence joins, remain open. Already saved failures and
 partial matrices must stay visible. This guide neither shrinks those

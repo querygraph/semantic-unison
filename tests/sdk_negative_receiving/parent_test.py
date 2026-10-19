@@ -18,7 +18,7 @@ def setup():
         _,pair=fixture('seed');pair['client']['command']=copy.deepcopy(row['command'])
         pair['proxy']['command']=PROXY[:];pair['raw_proxy']['server_command']=copy.deepcopy(row['server_command'])
         if row['stage']=='negative':
-            code=1 if row['policy']=='require' else 0
+            code=2 if row['policy']=='require' else 0
             pair['client']['returncode']=pair['client']['client_cleanup']['returncode']=code
             marker='rejected' if row['policy']=='require' else 'warning'
             pair['client']['stderr']='Adobe DNG validation '+marker+': SDK driver reported validation errors'

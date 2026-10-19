@@ -1,0 +1,23 @@
+{
+  "state": "CONSUMED_ACTUAL_PASS_CLOSED",
+  "request": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/REQUEST.json",
+    "sha256": "468f1c65deb55a11c04dfe69932cd29da007154a1c223260724082067fdc9cfc"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/PLAN.json",
+    "sha256": "796e788f3efb46935e015f7effc5670731fc04eed37e4de8b966973f94cbde62"
+  },
+  "admission_sha256": "6f9ab09324f57a1ccfda6a4456a25e2c8b2175490e4cba8bf7c4f1bc6e97945d",
+  "actual_owner": {
+    "session": 34408,
+    "terminal_chunk": "396851",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "CLI_calls": 12,
+  "SDK_calls": 6,
+  "CPU8_closed": true,
+  "EX_global_closed": true,
+  "replay_allowed": false
+}

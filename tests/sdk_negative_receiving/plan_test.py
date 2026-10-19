@@ -15,7 +15,7 @@ class Plan(unittest.TestCase):
             expected='off' if r['stage']=='seed' else r['policy']
             for command in (r['command'],r['server_command']):self.assertEqual(command[command.index('-adobevalidate')+1],expected)
             self.assertEqual(r['command'][r['command'].index('-force')+1],r['directory']+'/left')
-            self.assertEqual(r['expected_client_exit'],1 if r['stage']=='negative' and r['policy']=='require' else 0)
+            self.assertEqual(r['expected_client_exit'],2 if r['stage']=='negative' and r['policy']=='require' else 0)
     def test_old_or_noncanonical_namespace_refuses(self):
         binaries,tool,old=inputs()
         for name in (old,'/tmp/u-snr-'+'a'*16,'/private/tmp/u-snr-'+'a'*15,'/private/tmp/../tmp/u-snr-'+'a'*16):

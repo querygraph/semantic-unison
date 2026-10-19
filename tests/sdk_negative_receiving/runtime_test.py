@@ -52,7 +52,7 @@ class Runtime(unittest.TestCase):
             if row['stage']=='negative':
                 image=Path(row['directory'])/'left/image.dng';digest=hashlib.sha256(image.read_bytes()).hexdigest()
                 receipt=negative_raw().replace(SHA.encode(),digest.encode())
-                code=1 if row['policy']=='require' else 0
+                code=2 if row['policy']=='require' else 0
                 pair['client']['returncode']=pair['client']['client_cleanup']['returncode']=code
                 marker='rejected' if row['policy']=='require' else 'warning'
                 pair['client']['stderr']='Adobe DNG validation '+marker+': SDK driver reported validation errors'

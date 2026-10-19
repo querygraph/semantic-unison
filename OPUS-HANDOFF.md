@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T16:51:50.166614+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T17:29:09.256062+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -49,28 +49,30 @@ admissions or statements that consumed jobs remain unstarted.
   AgImageMetadata getter on Main is explicitly unsafe (may resolve/update auto
   values); do not invoke it. No SDK/UI grant is implied by routine CPU policy.
 
-## Next exact request — negative receiving02 READY/UNADMITTED
+## Genuine negative SDK receiving03 — ACTUAL PASS/CLOSED
 
-- `doc/current-sdk-negative-native-20261019-02/INDEX.json` gives exact launch;
-  REQUEST405caf1433fa8d25f04d0b56c4195809dc94089c9572242646a55aeb8b9d4939,
-  PLAN175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33.
-  Workspace `/private/tmp/u-snr-313af230e9374ebd` absent at metadata freeze.
-- Exactly12CLI/6qualifiedSDKsingle/generated3codecs, each separate require/warn
-  off-seed then one-way negative update. Onebit NewRawImageDigest fault only in
-  disposable clone; require olddestination bytes/eightfields preserved, warn
-  exactcandidate+visiblefinding. Unison8EXglobal;600owner570worker120CLI90SDK
-  observation/32GiBdeclarednotphysicalcap/unknownretains/no retry/successor.
-- Nativeentry/runtime/durablepairs+preps+outputs+events and independentparent
-  worker/9FD/finaloutput composition now implemented. Combined63originalmethods
-  118edd/0 passed usingtinyfiles/fabricatedSDK/group/clone/FDobservations only;
-  CPU00closed/noactualchildren/SDK/EX/retainedpayload. Not a native result.
-- Source review caught missing shared-verifier target allowlist after initial61
-  methods mocked verify. Exacttarget+realverifier/fabricatedFD controls fixed it;
-  old01 REQUEST7a59758e is SUPERSEDED_UNSTARTED, Root confirms no admission.
-  Never admit/dispatch01. Actual freezerb5dcd0/0/checkc77495/0 verified176execution
-  +329production/12JSON/12lstat with no payload/artifact open. Fresh02 sent Root
-  for exact review/finite coordination; no admission or Photo hold yet. Run once
-  promptly when fresh exact grant arrives; never reuse fixture/merge clearance.
+- Actual exec34408 initiala72265→396851/exit0/NOsession. Owner16099/worker16122
+  reaped0/nohardkill/groupothersabsent-before-reap. Parent independent12CLI/
+  12server/6SDK audit+24events+finalprivatehashes completed; CPU8+EXglobal CLOSED,
+  PhotoACK immediate release. Freshadmission6f9ab093 CONSUMED once/no successor.
+- Generateduncompressed/JPEG/JXL each offseed thenrequire/warn in separatefresh
+  namespaces. All6realSDK reports: structurevalid/decodesuccess/rawdigestmismatch/
+  errors1/warnings4. Require client2 preservedrightSHA+8nativefields; warn client0
+  visiblyreportedfinding and exactcandidatepublished. Sourceonlydisposableonebit
+  mutation; retained12inputepochs unchanged/nooriginals/Main/cache/UI operations.
+- `doc/sdk-negative03-result-20261019.md` and actualreceipt link rawproof. Saved
+  audit07f9ff/0 rechecked176exec329prod/13JSON/12inputepochs/12rawpairs/24events
+  +12privateoutputlstatforms; noDNG/executable reopen/EX; CPU00closed. Parentactual
+  ownedIO supplies freshoutputhashes; do not relabel reporting as freshhashing.
+- Failed02 admission1b016d1e stays separatelyFAILED/RECOVERYCLOSED: exec39507/
+  e243f6/137/no session, only2CLI/1genuineSDK requirepreservation. Frozenexpected1
+  waswrong; sourceuicommon failed2/skipped1. Nativegroupssettled before exactidle
+  Pythonworker14166/Root14150 stops; noSDK/CLI/group killed, originalworkerwait4
+  NOTclaimed. FreshwholeEX→CPU8 reacquiredcloseda810c2/0; RootACKrelease.
+  Report `doc/sdk-negative02-failed-recovery-20261019.md`; no rewrite into pass.
+- Old01 remains SUPERSEDED_UNSTARTED/noadmission. No pending SDK request or hold.
+  Next currentnamedresume/reuse/external coverage and remaining measurement/
+  platform/finalrequirement joins. No reuse/replay/automaticnativegrant.
 
 ## Current three-codec SDK merge receiving — ACTUAL PASS/CLOSED
 

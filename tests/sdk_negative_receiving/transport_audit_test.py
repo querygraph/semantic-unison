@@ -11,7 +11,7 @@ def packet(policy='require'):
         at=command.index('-adobevalidate');command[at+1]=policy
     pair['client']['command']=copy.deepcopy(row['command'])
     pair['raw_proxy']['server_command']=copy.deepcopy(row['server_command'])
-    pair['client']['returncode']=pair['client']['client_cleanup']['returncode']=1 if policy=='require' else 0
+    pair['client']['returncode']=pair['client']['client_cleanup']['returncode']=2 if policy=='require' else 0
     marker='rejected' if policy=='require' else 'warning'
     pair['client']['stderr']='Adobe DNG validation '+marker+': SDK driver reported validation errors\n'
     pair['proxy']['stderr']=log()
@@ -28,7 +28,7 @@ class DesignatedFailure(unittest.TestCase):
     def test_require_and_warn_keep_actual_exits_and_resource_limits(self):
         for policy in ('require','warn'):
             row,pair=packet(policy);before=copy.deepcopy(pair);value=check(row,pair,policy)
-            self.assertEqual(pair,before);self.assertEqual(value['expected_client_exit'],1 if policy=='require' else 0)
+            self.assertEqual(pair,before);self.assertEqual(value['expected_client_exit'],2 if policy=='require' else 0)
             self.assertTrue(value['destination_fence_required']);self.assertTrue(value['worker_settlement_required'])
             self.assertFalse(value['resource_release_authorized']);self.assertFalse(value['parent_terminal_proved'])
     def test_generic_failed_cli_or_missing_negative_never_passes(self):
@@ -39,7 +39,7 @@ class DesignatedFailure(unittest.TestCase):
             if part=='helper':pair['proxy']['stderr']=''
             with self.assertRaises(ValueError):check(row,pair)
     def test_status_group_capture_and_server_failures_refuse(self):
-        mutations=[('client-code',2),('client-code',False),('reap',False),('group',False),
+        mutations=[('client-code',1),('client-code',False),('reap',False),('group',False),
             ('kill',True),('clip',True),('timeout',True),('server-code',1),('server-code',False),
             ('server-reap',False),('input-eof',False),('server-alias',101),('proxy-code',1),('counter',True)]
         for kind,value in mutations:

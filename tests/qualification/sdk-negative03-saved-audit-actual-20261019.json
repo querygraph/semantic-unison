@@ -1,0 +1,207 @@
+{
+  "schema": "unison-negative03-saved-actual-audit/1",
+  "actual_owner": {
+    "kind": "faithful_owning_tool_terminal_transcription",
+    "session_id": 34408,
+    "initial_chunk": "a72265",
+    "terminal_chunk": "396851",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "owner_pid": 16099,
+    "worker_pid": 16122,
+    "source": "Actual owning write_stdin result, not process absence"
+  },
+  "production_pins_verified": 329,
+  "execution_pins_verified": 176,
+  "JSON_prerequisites_verified": 13,
+  "retained_input_epochs_unchanged": 12,
+  "current_private_output_metadata_fences": 12,
+  "raw_replay": {
+    "cli_calls": 12,
+    "SDK_helpers": 6,
+    "raw_pairs_reparsed": 12,
+    "events_reconstructed": 24,
+    "output_evidence_adapter_consumed": true,
+    "worker_settlement_required": true,
+    "inherited_resource_binding_required": true,
+    "parent_terminal_proved": false,
+    "resource_release_authorized": false
+  },
+  "decisions": [
+    {
+      "codec": "uncompressed",
+      "policy": "require",
+      "publication": {
+        "policy": "require",
+        "destination_preserved": true,
+        "exact_candidate_published": false,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    },
+    {
+      "codec": "uncompressed",
+      "policy": "warn",
+      "publication": {
+        "policy": "warn",
+        "destination_preserved": false,
+        "exact_candidate_published": true,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    },
+    {
+      "codec": "jpeg",
+      "policy": "require",
+      "publication": {
+        "policy": "require",
+        "destination_preserved": true,
+        "exact_candidate_published": false,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    },
+    {
+      "codec": "jpeg",
+      "policy": "warn",
+      "publication": {
+        "policy": "warn",
+        "destination_preserved": false,
+        "exact_candidate_published": true,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    },
+    {
+      "codec": "jxl",
+      "policy": "require",
+      "publication": {
+        "policy": "require",
+        "destination_preserved": true,
+        "exact_candidate_published": false,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    },
+    {
+      "codec": "jxl",
+      "policy": "warn",
+      "publication": {
+        "policy": "warn",
+        "destination_preserved": false,
+        "exact_candidate_published": true,
+        "fresh_payload_observations_required": true,
+        "helper_audit_required": true,
+        "worker_settlement_required": true,
+        "resource_release_authorized": false
+      }
+    }
+  ],
+  "SDK_findings": [
+    {
+      "candidate-sha256": "09717f7a0260dbb4c60a6e7aba00998e83c7ec0000d312f66a758500226e4754",
+      "candidate-size": "48005534",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    },
+    {
+      "candidate-sha256": "09717f7a0260dbb4c60a6e7aba00998e83c7ec0000d312f66a758500226e4754",
+      "candidate-size": "48005534",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    },
+    {
+      "candidate-sha256": "11ef541810d90c45a3cea1c05f8fc71a4bba9e0c447c2d9d8e3a7baafc439f1d",
+      "candidate-size": "39016722",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    },
+    {
+      "candidate-sha256": "11ef541810d90c45a3cea1c05f8fc71a4bba9e0c447c2d9d8e3a7baafc439f1d",
+      "candidate-size": "39016722",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    },
+    {
+      "candidate-sha256": "cd449a9d3d50b057c72c0ec185cd01943fca44c4986ff80522a49930f1cf9d1a",
+      "candidate-size": "38237658",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    },
+    {
+      "candidate-sha256": "cd449a9d3d50b057c72c0ec185cd01943fca44c4986ff80522a49930f1cf9d1a",
+      "candidate-size": "38237658",
+      "decode": "success",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "errors": "1",
+      "expected_negative_finding": true,
+      "raw-digest": "mismatch",
+      "receiving_publication_proved": false,
+      "resource_release_authorized": false,
+      "structure": "valid",
+      "validation_passed": false,
+      "warnings": "4"
+    }
+  ],
+  "actual_parent_fresh_output_hashes_adopted": true,
+  "fresh_payload_or_executable_opened": false,
+  "new_CLI_or_SDK_calls": 0,
+  "EX_acquired": false,
+  "scope": "Generated3codecs require preservation/warn exact publication with genuine negative SDK findings; not camera/pixels/corpus/performance/production",
+  "CPU00_closed": true,
+  "actual_audit_tool": {
+    "terminal_chunk": "07f9ff",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

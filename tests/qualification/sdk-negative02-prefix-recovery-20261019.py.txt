@@ -1,0 +1,75 @@
+import hashlib,json,os,signal,subprocess,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');W=Path('/private/tmp/u-snr-313af230e9374ebd')
+sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha
+from sdk_merge_receiving.evidence import bind,child
+from sdk_merge_receiving.admission import exact
+from sdk_merge_receiving.data import inspect,stamp
+from sdk_merge_receiving.store import Store
+from sdk_negative_receiving.plan import schedule
+from sdk_negative_receiving.runtime import proxy_command
+from sdk_negative_receiving.finding import helper
+P=R/'doc/current-sdk-negative-native-20261019-02/PLAN.json'
+assert sha(P,1048576)=='175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33'
+p=json.loads(read_bytes(str(P),1048576))
+for name,digest in {**p['execution_sha256'],**p['production_sha256']}.items():assert sha(R/name,16*1048576)==digest,name
+start=json.loads(read_bytes(str(W/'OWNER-START.json'),65536));assert start['owner_pid']==14150 and start['child_pid']==14166
+rows=schedule(p['binaries'],p['tool'],p['workspace'])['rows'];assert len(rows)==12
+pairs=sorted(W.glob('*-PAIR.json'));assert [x.name for x in pairs]==['uncompressed-require-negative-PAIR.json','uncompressed-require-seed-PAIR.json']
+seed=json.loads(read_bytes(str(W/'uncompressed-require-seed-PAIR.json'),2*1048576));assert exact(seed['identity'],rows[0]['identity'])
+seed_audit=bind(rows[0],seed['pair'],expected_proxy_command=proxy_command(p,rows[0]),raw_proxy_bytes=bytes.fromhex(seed['raw_proxy_hex']))
+r=json.loads(read_bytes(str(W/'uncompressed-require-negative-PAIR.json'),2*1048576));row=rows[1];assert exact(r['identity'],row['identity'])
+pair=r['pair'];out=pair['client'];c=out['client_cleanup']
+assert out['command']==row['command'] and type(out['returncode']) is int and out['returncode']==2
+assert c['pid']==14193 and type(c['returncode']) is int and c['returncode']==2
+assert c['reaped'] is True and c['hard_kill_required'] is False and c['other_group_members_absent_before_reap'] is True and c['group_cleanup_before_leader_reap'] is True
+assert out['timed_out'] is False and out['capture_truncated'] is False
+proxy_pid=child(pair['proxy'],proxy_command(p,row));assert proxy_pid==14192
+raw=bytes.fromhex(r['raw_proxy_hex']);frame=json.loads(raw);assert exact(frame,pair['raw_proxy'])
+assert frame['schema']=='unison-retained-merge-proxy/1' and frame['server_command']==row['server_command']
+assert frame['server_pid']==14195 and type(frame['server_returncode']) is int and frame['server_returncode']==0 and frame['server_reaped'] is True and frame['server_group']==proxy_pid
+assert frame['input_eof_forwarded'] is True and frame['output_eof_forwarded'] is True
+assert set(frame['forwarded_protocol_bytes'])=={'client_to_server_bytes','server_to_client_bytes'} and all(type(v) is int and v>0 for v in frame['forwarded_protocol_bytes'].values())
+prep=json.loads(read_bytes(str(W/'uncompressed-require-negative-PREPARED.json'),1048576))
+expected=prep['data']['candidate'];log='\n'.join(pair[e][s] for e in ('client','proxy') for s in ('stdout','stderr'))
+finding=helper(log,candidate_sha256=expected['sha256'],candidate_bytes=expected['bytes'])
+assert finding['settlement']['helper_pid']==14203
+assert 'Adobe DNG validation rejected' in log and 'SDK driver reported validation errors' in log
+base=json.loads(read_bytes(str(W/'uncompressed-require-seed-OUTPUTS.json'),1048576))['outputs']
+observed={}
+for side,value in [('right',base['right']),('left',prep['data']['fault']['after'])]:
+ path=W/'uncompressed-require'/side;st=path.lstat();observed[side]=inspect(path,(st.st_dev,st.st_ino),{k:value[k] for k in ('sha256','bytes')});assert exact(observed[side],value)
+for name,epoch in p['source_observations'].items():assert stamp(os.lstat(name))==epoch
+# Exact source-bound stop: exit2 fails the frozen expected1 audit, then every
+# enclosing layer retains; no later prepare/invoke branch can run.
+sources={name:read_bytes(str(R/name),1048576).decode() for name in ['tests/sdk_negative_receiving/runtime.py','tests/sdk_negative_receiving/worker.py','tests/sdk_negative_receiving/transport_audit.py','tests/sdk_negative_receiving/entry.py','tests/shared_process_owner.py']}
+assert "out['returncode']==1" in sources['tests/sdk_negative_receiving/transport_audit.py']
+assert 'outcome=invoke' in sources['tests/sdk_negative_receiving/worker.py'] and 'audit_transport' in sources['tests/sdk_negative_receiving/worker.py']
+assert 'retain_after_record' in sources['tests/sdk_negative_receiving/entry.py'] and 'signal.SIG_IGN' in sources['tests/shared_process_owner.py']
+def census():
+ q=subprocess.run(['/bin/ps','-axo','pid=,ppid=,pgid=,stat=,command='],capture_output=True,text=True,check=True)
+ return [line.split(None,4) for line in q.stdout.splitlines()]
+ps=census();owners=[x for x in ps if int(x[0]) in (14150,14166)]
+assert len(owners)==2
+for row in owners:
+ assert row[3].startswith('S') and row[4].startswith(p['interpreter']['path']+' '+str(R/'tests/sdk_negative_receiving/entry.py')+' ')
+ assert '--plan '+str(P) in row[4] and '--plan-sha256 175d106c' in row[4]
+assert next(x for x in owners if int(x[0])==14166)[1:3]==['14150','14166']
+external={14192,14193,14195,14203}
+assert not any(int(x[0]) in external or int(x[2]) in (14192,14193,14203) for x in ps)
+assert not any(int(x[1])==14166 or int(x[2])==14166 and int(x[0])!=14166 for x in ps)
+record=dict(state='SOURCE_BOUND_FAILED_PREFIX_NATIVE_CLOSED_IDLE_PYTHON_RECOVERY_READY',owner_pid=14150,worker_pid=14166,
+ source_pins_verified=505,actual_attempted_CLI=2,actual_SDK_calls=1,complete_cases=0,seed_transport=seed_audit,negative_finding=finding,
+ negative_client_actual_exit=2,frozen_harness_expected_exit=1,negative_proxy_pid=proxy_pid,negative_server_pid=frame['server_pid'],
+ all_attempted_native_groups_settled=True,observed_private_outputs=observed,retained_input_epochs_unchanged=12,actual_owner_census=owners,
+ only_idle_python_worker_stop_authorized=True,original_worker_wait4_not_claimed=True,IO_CPU_not_yet_released=True,
+ references=[dict(path=str(path),sha256=sha(path,2*1048576)) for path in pairs])
+st=W.lstat();store=Store(str(W),dict(device=st.st_dev,inode=st.st_ino))
+try:pin=store.write('RECOVERY-PRESTOP-WORKER.json',record)
+finally:store.close()
+# One exact source-bound idle Python worker only, never an SDK/CLI/group.
+fresh=census();assert any(int(x[0])==14166 and int(x[1])==14150 and x[4]==next(y[4] for y in owners if int(y[0])==14166) for x in fresh)
+os.kill(14166,signal.SIGKILL)
+print(json.dumps(dict(worker_only_stop_sent=14166,proof=pin,owner_still_retains=True)),flush=True)

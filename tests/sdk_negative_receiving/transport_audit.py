@@ -1,6 +1,6 @@
 """Pure designated negative receiving audit; no ordinary failed-prefix release.
 
-Expected require exit1 and warn exit0 have distinct evidence contracts. Caller
+Expected require exit2 and warn exit0 have distinct evidence contracts. Caller
 still owns destination byte/epoch checks, worker settlement and all resources.
 The successful-merge transport auditor remains unchanged.
 """
@@ -16,14 +16,14 @@ def rejected_child(out,command):
         'capture_truncated','stdout','stderr','client_cleanup',
         'aggregate_or_parent_terminal_proved','io_cpu_release_authorized'},'exact child evidence required')
     require(exact(out['command'],command) and type(out['returncode']) is int
-        and out['returncode']==1 and out['timed_out'] is False
+        and out['returncode']==2 and out['timed_out'] is False
         and out['capture_truncated'] is False and out['aggregate_or_parent_terminal_proved'] is False
         and out['io_cpu_release_authorized'] is False,'exact designated rejection terminal required')
     c=out['client_cleanup']
     require(type(c) is dict and set(c)=={'pid','returncode','reaped','hard_kill_required',
         'other_group_members_absent_before_reap','group_cleanup_before_leader_reap'}
         and type(c['pid']) is int and 0<c['pid']<2**31 and type(c['returncode']) is int
-        and c['returncode']==1 and c['reaped'] is True and c['hard_kill_required'] is False
+        and c['returncode']==2 and c['reaped'] is True and c['hard_kill_required'] is False
         and c['other_group_members_absent_before_reap'] is True
         and c['group_cleanup_before_leader_reap'] is True,'designated failed child/group unresolved')
     for stream in ('stdout','stderr'):
@@ -80,7 +80,7 @@ def audit(pair,*,client_command,proxy_command,server_command,policy,
     marker='Adobe DNG validation rejected' if policy=='require' else 'Adobe DNG validation warning'
     require(marker in log and 'SDK driver reported validation errors' in log,
             'explicit native validation rejection/warning diagnostic required')
-    return dict(policy=policy,expected_client_exit=1 if policy=='require' else 0,
+    return dict(policy=policy,expected_client_exit=2 if policy=='require' else 0,
         client_pid=client_pid,proxy_pid=proxy_pid,server_pid=frame['server_pid'],finding=finding,
         raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
         destination_fence_required=True,worker_settlement_required=True,

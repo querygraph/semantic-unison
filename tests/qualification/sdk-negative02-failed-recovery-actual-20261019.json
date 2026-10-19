@@ -1,0 +1,106 @@
+{
+  "state": "FAILED_EXPECTED_CLI_STATUS_INDEPENDENT_RECOVERY_CLOSED",
+  "terminal": {
+    "kind": "faithful_owning_tool_terminal_transcription",
+    "session_id": 39507,
+    "initial_chunk": "49b9bf",
+    "terminal_chunk": "e243f6",
+    "exit_code": 137,
+    "running_session_returned": false,
+    "owner_pid": 14150,
+    "worker_pid": 14166,
+    "scope": "Failed contract mismatch independently recovered; not normal exit, no original worker wait4 claim"
+  },
+  "admission_sha256": "1b016d1eb7141e598d026b81ba145fd226c6e7abe1e7e493a9adb682db743bbc",
+  "workspace": "/private/tmp/u-snr-313af230e9374ebd",
+  "CLI_calls": 2,
+  "SDK_calls": 1,
+  "completed_matrix": false,
+  "expected_client_exit_in_consumed_plan": 1,
+  "actual_failed_transfer_exit": 2,
+  "original_worker_wait4_claimed": false,
+  "CPU8_and_EX_global_fresh_reacquired_closed": true,
+  "references": [
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/ADMISSION-BOUND.json",
+      "bytes": 953,
+      "sha256": "c078a00fb8262dd4ce4508611ca9a78b80cafb8146b07e0a9a084669d5f3c280"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/EVENT-00.json",
+      "bytes": 156,
+      "sha256": "34bbcd8945abb107ade77f13cea1e6ebf9cae6efefce8e9d8e09e0ccc9934f78"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/EVENT-01.json",
+      "bytes": 432,
+      "sha256": "d357ee351b63270b012b414482d33617cca225c3d02657f94ff4977dc62d9f81"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/EVENT-02.json",
+      "bytes": 3795,
+      "sha256": "9f2cb49b7b31fce274889115693e3a7a4101a5f313fed6b8b030897cad8b3474"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/EVENT-03.json",
+      "bytes": 4076,
+      "sha256": "5c955785acb3e2a353a24110e07e3bae92cefb96eee3d6773e471984efcfdf04"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/OWNER-START.json",
+      "bytes": 1126,
+      "sha256": "485c30b3fb6a4c3cdc18c8a9e603b170dd0390e5e368926d4ecce70281a58d22"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/OWNER-TOOL-TERMINAL.json",
+      "bytes": 356,
+      "sha256": "81802625d01364ec5dcd51bebd0f52b8d2393e87ba1f81d36895c2f9e0c6cffd"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/RECOVERY-CLOSED.json",
+      "bytes": 506,
+      "sha256": "5ac74e2e0d3bf589ed8fac901a569b40c5534760786700a3eaf8982267f8c2a0"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/RECOVERY-PRESTOP-ROOT.json",
+      "bytes": 1299,
+      "sha256": "b3fb71bb9024839e0b3faf436e3238c86b08e27f525498d6de7e3a302ccd5ca8"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/RECOVERY-PRESTOP-WORKER.json",
+      "bytes": 7326,
+      "sha256": "d660763e28c3a70577f906ddef5b362300dab6cad5123e83eeec4493307e475a"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/WORKER-BINDING.json",
+      "bytes": 682,
+      "sha256": "19ce9499b0a6c94b4e4828cec8a4d2df94d58b0658206c98f311a6a2a1ae705f"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/uncompressed-require-negative-PAIR.json",
+      "bytes": 10650,
+      "sha256": "257e83218b12c08ebcafbf8622992859d3b88cecadc7bcd5527926c741dd4ec4"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/uncompressed-require-negative-PREPARED.json",
+      "bytes": 3171,
+      "sha256": "904d200ee7ca3ac17d033abbf01e794710757152951f970a015cb68a460c89cb"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/uncompressed-require-seed-OUTPUTS.json",
+      "bytes": 723,
+      "sha256": "da02f8e55ce4bc335907232034d10ccc3178c338e8c50344b347c6a0b69e082f"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/uncompressed-require-seed-PAIR.json",
+      "bytes": 8567,
+      "sha256": "471b8d07547dfedbf6809a7a30f9bbb924998b32cfaa9206a06bc70b9ad09751"
+    },
+    {
+      "path": "/private/tmp/u-snr-313af230e9374ebd/uncompressed-require-seed-PREPARED.json",
+      "bytes": 2845,
+      "sha256": "6f5cb932939f26565e58a6d69cb03a8b35af055023e40ae3cac534e48f81b882"
+    }
+  ],
+  "scope": "One genuine SDK digest mismatch and require nonpublication observed; not whole matrix/warn/three-codec pass"
+}

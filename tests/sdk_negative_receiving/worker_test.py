@@ -23,7 +23,7 @@ class Worker(unittest.TestCase):
         run,trace,snapshots=self.run_case();result=run()
         self.assertEqual(trace,['persist']+['prepare','persist','invoke','audit','verify','persist']*12)
         self.assertEqual(len(snapshots),25);self.assertEqual(len(result['results']),12)
-        self.assertEqual([e['expected_client_exit'] for e in result['events'] if e['event']=='ACCEPTED'],[0,1,0,0]*3)
+        self.assertEqual([e['expected_client_exit'] for e in result['events'] if e['event']=='ACCEPTED'],[0,2,0,0]*3)
         self.assertTrue(result['parent_audit_required']);self.assertFalse(result['resource_release_authorized'])
     def test_failure_at_each_adapter_stops_new_calls_and_retains_original(self):
         for phase in ('prepare','persist','invoke','audit','verify'):

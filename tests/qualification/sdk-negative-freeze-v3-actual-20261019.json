@@ -1,0 +1,51 @@
+{
+  "schema": "unison-negative-sdk-metadata-freeze-actual/3",
+  "actual_freezer": {
+    "terminal_chunk": "106879",
+    "exit_code": 0,
+    "running_session": false,
+    "CPU00_closed": true
+  },
+  "actual_entry_check": {
+    "terminal_chunk": "a7c128",
+    "exit_code": 0,
+    "running_session": false,
+    "source_files_verified": 505,
+    "execution_sources": 176,
+    "production_sources": 329,
+    "JSON_prerequisites": 13,
+    "input_lstat_fences": 12
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/REQUEST.json",
+    "sha256": "468f1c65deb55a11c04dfe69932cd29da007154a1c223260724082067fdc9cfc"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/PLAN.json",
+    "sha256": "796e788f3efb46935e015f7effc5670731fc04eed37e4de8b966973f94cbde62"
+  },
+  "workspace": "/private/tmp/u-snr-af7627c229744a1a",
+  "workspace_absent_at_freeze": true,
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "input_payload_opened": false,
+  "execution_artifact_opened": false,
+  "old02_state": "CONSUMED_ACTUAL_FAILED_RECOVERY_CLOSED",
+  "references": [
+    {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/INDEX.json",
+      "bytes": 1062,
+      "sha256": "4b8f4efaa64c6f0f9bbed655e9ee6703d11f75f57d556b3624e05fede9f09629"
+    },
+    {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/PLAN.json",
+      "bytes": 59952,
+      "sha256": "796e788f3efb46935e015f7effc5670731fc04eed37e4de8b966973f94cbde62"
+    },
+    {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-03/REQUEST.json",
+      "bytes": 49274,
+      "sha256": "468f1c65deb55a11c04dfe69932cd29da007154a1c223260724082067fdc9cfc"
+    }
+  ]
+}

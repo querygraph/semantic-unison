@@ -60,8 +60,10 @@ qualified empty-log reader. No test or SDK call was repeated for that correction
 link the full source/binary/log bindings. Existing receiving-path and actual SDK
 receipts remain separately scoped. Final candidate merged receiving under all
 three encodings now passed [nine CLI/six genuine SDK calls](current-sdk-merge-result-20261019.md).
-Receiving publication on negative genuine findings and the remaining named
-reuse/resume/merge policy mapping are still open. Passing this
+Genuine negative receiving now also passed [three encodings under require/warn](sdk-negative03-result-20261019.md):
+12CLI/sixSDK, errors1/digest mismatch; require preserved destination and warn
+published the exact candidate. The remaining named reuse/resume/merge policy
+mapping stays open. Passing this
 core matrix is not completion of those broader requirements.
 
 ## Named receiving-path current-source binding
