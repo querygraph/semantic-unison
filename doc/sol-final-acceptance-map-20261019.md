@@ -240,3 +240,15 @@ receipts remain unchanged. The user-requested
 [I-AM-AN-HONEST-WORKING-LLM.md](../I-AM-AN-HONEST-WORKING-LLM.md) states this fork's
 AI-assisted approach, credits upstream, respects its contribution boundary,
 and distinguishes tested scopes from unfinished qualification.
+
+### Worker late-delivery and exact restored-mtime source mutation closed
+
+[CPU-only actual](final-worker-state-cpu-result-20261019.md): owner88752/cde84c/0,
+all14serial children genuinelyreaped/groupsabsent, stock/Ox each126component
+checks+explicitqueued-completion success/cancel/shutdown+active same-size source
+mutation with exact native mtime restored refused. Independent70570/e8f0ef/0
+checked564sources329production/638artifacts/eightprograms/raw14calls and fresh
+exactCPU8reacquire/close. NoEX acquired or IO-exclusion claim; routine compiler/
+tinyfixture work required no Capitola yield. OriginalEXplancc71c911 stays
+UNSTARTED, scheduling request withdrawn. This closes those named unit cases in
+SOL5/9; full receiving/path races/SDK/wholematrix limits remain separate.

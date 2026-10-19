@@ -1,0 +1,35 @@
+{
+  "verified": true,
+  "source_pins": 564,
+  "production_pins": 329,
+  "artifact_pins": 638,
+  "program_artifacts": 8,
+  "children": 14,
+  "child_pids": [
+    80026,
+    80036,
+    80038,
+    80048,
+    80059,
+    80063,
+    80073,
+    80075,
+    80085,
+    80087,
+    80104,
+    80106,
+    80110,
+    80120
+  ],
+  "component_checks_per_compiler": 126,
+  "late_delivery_modes_per_compiler": [
+    "success",
+    "cancel",
+    "shutdown"
+  ],
+  "same_size_exact_mtime_restored_mutation_refused_both_compilers": true,
+  "exact_CPU8_inodes_reacquired_closed": true,
+  "EXglobal_acquired": false,
+  "SDK_or_Photo_calls": 0,
+  "parent_terminal_source": "faithful owning tool transcription88752/cde84c/exit0/NOsession; not process absence"
+}

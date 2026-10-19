@@ -45,13 +45,20 @@ interpretation as completion gates. Exact opaque preservation remains mandatory.
 | M5 / reconciliation | Current scalar-policy controls and guarded publication evidence; required conflict/delete/stale/rollback cases must be traced explicitly. Unsupported compound/rendering merges must refuse, not guess. |
 | M6 / measured parallelism | The ten stock/Ox × 1/2/4/8/auto cohorts are actual PASS/CLOSED and reported (180 rows/540 calls). Account next for remaining prescribed sizes/workloads/topologies; this matrix alone does not close the benchmark requirement. |
 | M6 / resources and platforms | Optional per-process FD96 evidence exists. Positive hard-RSS requests currently refuse; there is no working hard-RSS backend on this host. Payload estimates, allocator callbacks and bounded samples are not substitutes. Preserve explicit unsupported capability/platform scope. |
-| Reviewable delivery | Reconcile evidence to the exact final candidate and update the fork review. PR13 is OPEN DRAFT at f6bfd653 and includes the CPU-ceiling successor (fresh GitHub readback baa847/0, 2026-10-19). The final Adobe harness successor is still local on implementation/final-adobe-qualification and not runtime qualified or in that review head. No merge or production activation is inferred. |
+| Reviewable delivery | Reconcile evidence to the exact final candidate and update the fork review. PR13 is OPEN DRAFT at f6bfd653 and includes the CPU-ceiling successor (fresh GitHub readback baa847/0, 2026-10-19). The qualification branch implementation/final-adobe-qualification is now separately public; final SDK generation/merge remains unrun and is not in PR13's head. No merge or production activation is inferred. |
 
-## Execution order after the scheduling handoff
+## Current execution policy after user correction
 
-1. Confirm actual closure of Photo's live bulk operation and its hold on new
-   IO/Adobe/native dispatch. An announced start, process absence or queued pause
-   request is not that confirmation. Finish live operations normally.
+Photo and Capitola must remain independently available. Do not reserve them for
+preparation, routine builds, tiny Adobe-free controls, audits or report sealing.
+Those controls use standing Unison00..07 and make no IO-exclusion claim. The
+fourteen worker controls actually closed this way (88752/cde84c/0), withdrawing
+the unnecessary EX request. Historical hold notices below are not current grants.
+
+1. Prepare shared-payload/SDK operations completely before requesting their
+   immediate finite IO window. Respect actual active Capitola/Photo owners;
+   release promptly after actual tool/group/FD closure, with no automatic
+   successor or report-sealing hold. Continue independent source/CPU work.
 2. Run the prepared generated transport cohorts with one-use exact admissions,
    shared8 or explicitly coordinated temporary18. Preserve every sample and
    failed prefix; report observations, modeled quantities and unknowns separately.

@@ -1,3 +1,8 @@
+Current outcome: the CPU-only successor has actually PASSED/CLOSED, all14calls
+and both compilers. See [actual result](final-worker-state-cpu-result-20261019.md).
+The original EX plan below is preserved UNSTARTED and its unnecessary scheduling
+request is withdrawn; it does not create a pending hold.
+
 # Bounded worker state follow-up
 
 Source preparation plus eight actual Python owner controls. No compiler,

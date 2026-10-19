@@ -1,0 +1,51 @@
+import hashlib,json,os,sys
+from pathlib import Path
+ROOT=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'tests/sdk_host_matrix'),str(ROOT/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha
+from sdk_fixture_build_owner import tool_sha
+from shared_cpu_pool import Pool,authorized_unison_tokens
+from shared_io_pool import close_unstarted
+from shared_process_owner import retain_after_record
+root=Path('/private/tmp/u-worker-state-cpu-77404b649cd8');plan_path=ROOT/'doc/final-worker-state-plan-v2-cpu-only-20261019.json';plan_raw=read_bytes(str(plan_path),2*1048576)
+assert hashlib.sha256(plan_raw).hexdigest()=='dfe32b0823c969bda29f119914f583e1703a4f888f023aaea6c82a124df909e5';plan=json.loads(plan_raw)
+policy=read_bytes(str(ROOT.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json'),1048576);assert authorized_unison_tokens(policy)==tuple(range(8))
+pool=Pool.read(str(ROOT.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');cpu=pool.try_acquire(tuple(range(8)))
+if cpu is None:raise SystemExit(2)
+try:
+ for name,digest in plan['source_pins'].items():assert sha(ROOT/name)==digest,name
+ for ref in plan['artifact_pins']:assert sha(ref['path'],128*1048576)==ref['sha256'],ref['path']
+ for tool in plan['installed_tools']:assert str(Path(tool['invocation']).resolve())==tool['path'] and tool_sha(tool['path'])==tool['sha256']
+ start=json.loads(read_bytes(str(root/'START.json'),1048576));result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576))
+ assert start['owner_pid']==80003 and start['plan_sha256']==hashlib.sha256(plan_raw).hexdigest()
+ assert start['io_mode']=='NONE_TINY_GENERATED_CONTROLS' and start['shared_IO_exclusion_claimed'] is False
+ assert len(start['resource_rows'])==8 and {(r['device'],r['inode']) for r in start['resource_rows']}=={(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in cpu.fds}
+ raw_calls=[];pids=[]
+ for pin,argv in zip(result['calls'],plan['commands']):
+  raw=read_bytes(str(root/pin['name']),1048576);assert len(raw)==pin['bytes'] and hashlib.sha256(raw).hexdigest()==pin['sha256'];out=json.loads(raw);c=out['client_cleanup']
+  assert out['command']==argv and type(out['returncode']) is int and out['returncode']==0
+  assert out['timed_out'] is False and out['capture_truncated'] is False
+  assert out['aggregate_or_parent_terminal_proved'] is False and out['io_cpu_release_authorized'] is False
+  assert type(c['pid']) is int and 0<c['pid']<2**31 and c['pid'] not in pids
+  assert type(c['returncode']) is int and c['returncode']==0 and c['reaped'] is True and c['other_group_members_absent_before_reap'] is True and c['group_cleanup_before_leader_reap'] is True and c['hard_kill_required'] is False
+  raw_calls.append(out);pids.append(c['pid'])
+ assert len(raw_calls)==len(result['calls'])==len(plan['commands'])==14 and result['complete'] is True and result['SDK_or_Photo_calls']==0
+ original=result['original_result'];raw=read_bytes(original['path'],16*1048576);assert len(raw)==original['bytes'] and hashlib.sha256(raw).hexdigest()==original['sha256'];r=json.loads(raw)
+ assert r['complete'] is True and r['state_controls'] is True and r['SDK_invoked'] is False and r['real_media_opened'] is False and r['calls']==raw_calls
+ artifacts={x['path']:x['sha256'] for x in plan['artifact_pins']}
+ assert all(artifacts.get(name)==digest for name,digest in r['linked_artifacts'].items())
+ for artifact in result['artifacts']:assert sha(artifact['path'],64*1048576)==artifact['sha256']
+ for label,offset in (('stock',0),('ox',7)):
+  assert raw_calls[offset+1]['stdout']=='PASS 126 component worker checks; parallel parity, off-owner refinement, read reporting, failure and queued/late cancellation\n'
+  assert raw_calls[offset+3]['stdout']==''.join('PASS completed-before-owner '+mode+': reply queued/accounting held/settlement closed\n' for mode in ('success','cancel','shutdown'))
+  assert raw_calls[offset+6]['stdout']=='PASS active worker same-size mutation with exact restored native mtime refused; callerFD/accounting settled\n'
+  work=root/'original'/label
+  assert read_bytes(str(work/'late_cancel/source.bin'),4096)==b'LATE owned fixture'
+  assert read_bytes(str(work/'restored_mutation/source.bin'),4096)==b'MUT1 owned source'
+  for name in ('components.ml','late_cancel/late_cancel.ml','restored_mutation/restored_mutation.ml'):
+   source=ROOT/'tests/workers'/Path(name).name;assert sha(work/name)==sha(source)
+  assert sha(work/'restored_mutation/restored_mtime_stubs.c')==sha(ROOT/'tests/final_publication/restored_mtime_stubs.c')
+ close_unstarted(cpu)
+ report=dict(verified=True,source_pins=len(plan['source_pins']),production_pins=sum(n.startswith('src/') for n in plan['source_pins']),artifact_pins=len(plan['artifact_pins']),program_artifacts=len(result['artifacts']),children=14,child_pids=pids,component_checks_per_compiler=126,late_delivery_modes_per_compiler=['success','cancel','shutdown'],same_size_exact_mtime_restored_mutation_refused_both_compilers=True,exact_CPU8_inodes_reacquired_closed=True,EXglobal_acquired=False,SDK_or_Photo_calls=0,parent_terminal_source='faithful owning tool transcription88752/cde84c/exit0/NOsession; not process absence')
+ target=ROOT/'tests/qualification/final-worker-state-cpu-independent-audit-20261019.json';target.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report))
+except BaseException as error:retain_after_record(lambda:print('WORKER_CPU_AUDIT_RETAIN',repr(error),flush=True))

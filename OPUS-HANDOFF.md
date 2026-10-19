@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:46:25.122105+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:52:37.576347+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
@@ -155,10 +155,25 @@ runtime/privateoutput nonce7211c304f95745eab5ff2485ec0e5175 BOTH ABSENT. V1
 27636b47 preservedSUPERSEDED_UNSTARTED. See owner readiness report and receipt.
 Real writer/JXL/12states/SDKgeneration/mergedreceiving still UNEXECUTED.
 
-Worker plancc71c911 remains ready/UNSTARTED, with active-only coordination
-followup01a154d6-d392 asking currentCapitola yes/no. NO Unison resources or Photo
-hold. SDKgeneration is NOT automatically allocated as a successor; coordinate
-its immediate concrete window separately. Continue independent work meanwhile.
+Worker EXplancc71c911 remains UNSTARTED and its coordination request is
+WITHDRAWN as unnecessary. The CPU-only successor below is actualPASS/CLOSED;
+no Capitola yield was required. SDKgeneration is NOT automatically allocated;
+coordinate its immediate concrete EX window separately. AllresourcesZERO.
+
+ACTUAL worker CPU-only successor PASSED/CLOSED, NOT waiting for Capitola:
+owner88752/147d3f→cde84c/0/NOsession/PID80003; all14childrenreaped0/groupsabsent.
+Stock/Ox each126componentchecks+late-delivery success/cancel/shutdown+same-size
+exact-native-mtime-restored source mutation refusal. Independent70570/e8f0ef/0
+checked564sources329production/638artifacts/eightprograms/raw14calls/exactCPU8
+inodes freshly reacquired+closed. Source tests and scopes retained. Plan
+`doc/final-worker-state-plan-v2-cpu-only-20261019.json` dfe32b08 consumedonce,
+workspace/private/tmp/u-worker-state-cpu-77404b649cd8. EXglobal NEVER acquired;
+normal compiler/artifact/tinyfixture IO still occurs, no quiet/IO-exclusion claim.
+Oldcc71c911 EXplan remainsUNSTARTED, unnecessaryrequestWITHDRAWN01a154da-d55e;
+closure01a154db-7d34 sent promptly. No furtherPhoto/Capitola ACK or scheduling
+hold exists for workercontrols or audit. Reportfinal-worker-state-cpu-result and
+actual/independent audit receipts retained. SDKgeneration remainsUNSTARTED and
+needs separate activeEXcoordination; ordinary own8 work should not wait for it.
 
 ## Actual current evidence
 
