@@ -28,7 +28,7 @@ def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET,
         if not v:raise ValueError(s)
     require(type(credits) is int and (credits==8 or credits==18 and target=='sync-auto-cohort'),'explicit known grant size required')
     require(type(parent_pid) is int and parent_pid>0 and type(worker_pid) is int and worker_pid>0,'actual parent/worker IDs required')
-    require(target in ('sync-auto-cohort',TARGET,'cached-sha-benchmark','sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
+    require(target in ('current-sdk-merge','sync-auto-cohort',TARGET,'cached-sha-benchmark','sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
     require(type(start) is dict and type(start.get('owner_pid')) is int and type(start.get('child_pid')) is int
         and start['owner_pid']==parent_pid and start['child_pid']==worker_pid
         and start.get('target')==target and start.get('command')==command
@@ -36,8 +36,15 @@ def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET,
         and type(start.get('token_indexes')) is list
         and all(type(i) is int for i in start['token_indexes'])
         and start['token_indexes']==list(range(credits)) and start.get('io_mode')=='EX_GLOBAL','actual parent/command/grant/EXglobal binding differs')
+    return descriptors(start.get('inherited_resource_fds'),credits=credits,observe=observe)
+
+
+def descriptors(rows,*,credits=8,observe=os.fstat):
+    """Inspect canonical inherited metadata only, never infer a grant or locks."""
+    def require(v,s):
+        if not v:raise ValueError(s)
+    require(type(credits) is int and credits in (8,18),'known descriptor inventory required')
     expected=inventory() if credits==8 else inventory(credits=18)
-    rows=start.get('inherited_resource_fds')
     require(type(rows) is list and len(rows)==credits+1,'exact inherited descriptor count required')
     fds=[]
     for row,identity in zip(rows,expected):

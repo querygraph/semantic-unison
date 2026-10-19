@@ -6940,3 +6940,26 @@ Fresh GitHub metadata baa847/0 confirms PR13 OPEN DRAFT, headf6bfd653 againstfor
 master; it includes CPU-ceiling source, but this new Adobe harness branch remains
 local. Corrected stale checklist statement that CPU ceiling was absent. No merge,
 push, runtime grant or payload dispatch occurred from that metadata readback.
+
+## Runtime composition + actual descriptor guards — 2026-10-19
+
+`tests/sdk_merge_receiving/runtime.py` now composes data/clone callbacks, private
+home/tmp/archive state, generated one-use shims, per-call artifact hashes, saved
+phase deadlines, retained transport, journal, helper and output checks. Result
+records allnine preparation pins so parent can independently re-open exact phase
+configs. `child_entry.py` checks proxy's real worker parent and canonical9FD
+metadata, records it, serves/writes frame, and retains on unknown with complete
+saved uncertainty diagnostics (no fstat/retry of uncertain numbers). Shared
+binding explicitly permits current-sdk-merge at8 only; metadata inspection still
+never asserts lock grant or resource release. Top-level entry/freezer and parent
+auditor are NOT yet implemented/runnable.
+
+Actuald061b3/exit0/no session:13 focused controls PASS, child39847 reaped0/group-
+empty/CPU00..03closed. Final1ad668/0 two runtime controls PASS after adding nine
+prepared-record pins, child40194 reaped0/group-empty/CPU4closed. Native transport/
+SDK/artifacts are fabricated; data are arbitrary64-byte strings. No canonicalIO
+lock, native clone, SDK/Unison/compiler/media or new grant. Earlier27-case
+d2404b/0 preserved; focused successor removes duplicated inherited data cases.
+Receipts `tests/qualification/current-sdk-merge-runtime-controls{-v2,-v3}-20261019.json`.
+Next top-level entry+independent parent audit/freezer, then fixture recovery and
+actual native qualification. Goal active/incomplete; these controls hold nothing.

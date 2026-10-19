@@ -296,3 +296,31 @@ mutation controls passed. No native fclonefileat/SDK/Unison/camera/compiler/
 canonicalIO. Receipt `../qualification/current-sdk-merge-data-controls-20261019.json`.
 The data callbacks now exist; remaining entry/resource binding/script/freezer
 composition and authenticated fixture recovery precede native qualification.
+
+## Runtime and child-shim composition
+
+`runtime.py` now connects native data callbacks, private home/tmp/archive state,
+one-use generated launcher/proxy shims, per-call artifact hashes, exact saved
+phase deadlines, retained transport, immutable evidence journal, helper parsing
+and receiving output verification. The final worker result carries allnine
+preparation hashes,19 event pins, pair evidence, data history and script hashes.
+Directory-close uncertainty retains the complete runtime and inherited grant;
+inherited resourceFD closure remains the entry owner's responsibility.
+
+`child_entry.py` supplies generated-shim targets: proxy verifies its direct
+worker parent and actual canonical nine descriptor identities before serve,
+records that observation, writes the proxy frame and closes normally. Launcher
+uses the bounded thread-free kernel. Failures retain the process; diagnostics
+serialize saved uncertain-close identities without querying/retrying those FDs.
+The shared binding guard accepts only the explicit current-sdk-merge target at8
+and keeps metadata binding distinct from independent lock authority.
+
+Actuald061b3/exit0/no session:13 focused binding/runtime/child controls PASS,
+child39847 reaped0/group-empty thenCPU00..03 closed. The full nine-call runtime
+uses arbitrary64-byte states and fabricated artifacts/SDK/transport, not native
+execution. Final1ad668/0 requalifies its two runtime cases after adding explicit
+nine preparation pins, child40194 reaped0/group-empty/CPU4closed. Initiald2404b/0
+27-case receipt preserved; it included duplicated inherited base-data cases,
+removed from focused successor test discovery. No canonicalIO lock/native clone/
+SDK/Unison/compiler/media or new admission. Remaining top-level entry/freezer/
+parent audit and authenticated fixture recovery must precede native qualification.
