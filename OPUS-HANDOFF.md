@@ -6896,3 +6896,21 @@ exists by lstat; oldfixture-writer binary was freshly observed absent97a466, no
 artifact opened/rehash or replacement inferred. No historical SDK source tree
 or generated JXL/state files were recreated. Next owner entry/freezer wiring,
 authenticated fixture recovery and native matrix. Goal active/incomplete.
+
+## Parent merge owner lifecycle source controls — 2026-10-19
+
+`tests/sdk_merge_receiving/owner.py` now composes atomic one-use mkdir, exact
+admission, existing EXglobal→CPU NB bundle, IO-owned artifact callback, retained
+worker start/inherited nineFDs, actual parent/worker records, independent external
+audit and directory→CPU→IO close order. Failed start attempts (even ordinary
+constructor errors) retain resources; only known no-start failures can take the
+preentry-close path. CPU-close uncertainty retains IO and remaining known FDs.
+No CLI/actual runtime callbacks/native admission is provided yet.
+
+Actual2b088a/exit0/no session:13 original owner/admission/preflight controls PASS,
+child35658 reaped0/group-empty, outerCPU00..03 closed. All tested pool/child/auditor
+interfaces inert, metadata records original/private/disposable. No canonicalIO,
+SDK, Unison, media, compiler or new grant. Receipt `tests/qualification/current-
+sdk-merge-owner-controls-20261019.json`. Next actual resource binding, native
+worker fixture/runtime callbacks, entry/freezer and authenticated input recovery
+before final native matrix. Goal active/incomplete; no active jobs/resources.

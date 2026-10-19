@@ -248,3 +248,29 @@ Unison/compiler/canonicalIO execution was created. `entry.py` is the specified
 future worker path, not an implemented runnable entry yet. Remaining: entry
 composition/one-use namespace/current inventory freezer, generated fixture
 recovery and actual native matrix. Source checks do not replace these gates.
+
+## One-use parent owner composition
+
+`owner.py` now consumes the namespace with mkdir (not an absence snapshot), binds
+the exact admission, uses existing nonblocking EXglobal→CPU bundle acquisition,
+hashes artifacts only through the IO-owned callback, starts a retained worker
+with all nine resource FDs, records actual parent/worker identities, then requires
+the independent external audit before closing directory→CPU→IO. Contention
+consumes the namespace without any child/retry. Known no-start failures may close
+known resources; once child start is attempted, even an ordinary constructor
+error retains all ownership instead of becoming an empty failed prefix.
+
+Nested uncertainty carriers keep the current worker, store, known leases and
+all still-held/uncertain identities. CPU-close uncertainty keeps IO; no numeric
+FD retry or parent-terminal inference is supplied. Artifact and external auditors
+are pinned entry-code callbacks, never packet-selected functions. A standalone
+entry and actual runtime callbacks are still required; this kernel is not a
+runnable native test or an admission publisher.
+
+Actual2b088a/exit0/no session:13 original owner/admission/preflight controls PASS,
+child35658 reaped0/group-empty thenCPU00..03 closed. IO/CPU/child/auditor interfaces
+under test are inert doubles; only tiny private original JSON records and the
+outer canonicalCPU4 are real. No canonicalIO/SDK/Unison/media/compiler/newgrant.
+Receipt `../qualification/current-sdk-merge-owner-controls-20261019.json`.
+Next wire the actual worker, resource binding, runtime fixture operations and
+entry/freezer, then recover/authenticate the inputs and qualify the native matrix.
