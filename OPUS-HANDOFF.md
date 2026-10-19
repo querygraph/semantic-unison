@@ -6213,3 +6213,15 @@ and268326/0 controls passed; finalchild54431 reaped0/groupabsent/CPU4closed.
 No transport/EXIO/Photo payload. Evidence auto-cohort-commands-actual-20261018.json.
 Next is authenticated plan/current artifact hashing and actual dispatcher owner
 integration. These pureaudits alone never authorize release or establishparentexit.
+
+
+### 2026-10-18 — cohort immutable plan schema
+Added cohort_plan.py pure exact schema: source/prerequisite SHA inventories,
+qualifiedartifact declarations, exact generated argv, private nonceworkspace,
+900s owner/30s CLI observation, 32GiB declared logical IO (not enforced),
+CPU8/18 exactindexes and explicit temporaryborrow requirement. All5selectors
+and10directed refusal variants passed actualbb514c/0; child54716 reaped0/group
+absent/CPU4closed/no EXIO. Evidence auto-cohort-plan-actual-20261018.json.
+Not current-file authentication or dispatch qualification. Next integrate stable
+metadata reads/current source+artifact checks and retained worker owner; do not
+request Photo quiet18 before exact executor/failedprefix closure is reviewable.
