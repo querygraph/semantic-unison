@@ -62,6 +62,20 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Baseline comparison successor — source prepared, builds pending
+
+The minimal upstream8772 OxCaml patch is now isolated in
+`doc/upstream-8772-minimal-oxcaml.patch` (SHAfc66b34420567a5c31abf20bb4b1a28087afcd7af388a9ae187daf2eb6fb91e5):
+nine eta expansions across safelist.ml, prefs.ml, system_generic.ml, with exact
+base/result hashes in `doc/upstream-baseline-source-preparation-20261019.json`.
+This is SOURCE preparation, not a new build or performance result. The genuine
+8772 stock binary still exists; the historical375 baseline binary path does
+not. Next: owned CPU-only baseline build/selftest successor, minimal patched
+8772 on both compilers and original375 rebuilt, then scoped comparison.
+No Photo hold, EX acquisition, SDK or photographic payload operation occurred.
+The qualification branch is publicly pushed through5a7233f9; master remains
+public documentation39577178, with no unfinished production merge.
+
 ## Resume point — current native qualification completed
 
 The previously unexecuted native driver bridge/owner is now actual qualified:

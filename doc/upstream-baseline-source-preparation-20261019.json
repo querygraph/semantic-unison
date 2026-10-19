@@ -1,0 +1,29 @@
+{
+  "schema": "unison-upstream-baseline-source-preparation/1",
+  "base": "8772d26a2eb77cfd0cb6da81807e81f24f51044c",
+  "patch": "doc/upstream-8772-minimal-oxcaml.patch",
+  "patch_sha256": "fc66b34420567a5c31abf20bb4b1a28087afcd7af388a9ae187daf2eb6fb91e5",
+  "files": {
+    "src/ubase/safelist.ml": {
+      "base_sha256": "f08cbb1b8edabeece0a0bb24ebbc338e5de1e62dd0a1632b543d0bc51479f2d3",
+      "patched_sha256": "043990d71e81b26d43f34ef1bd4bad2831b9bb304bb2315386c7939d3ddf272b",
+      "replacements": 1
+    },
+    "src/ubase/prefs.ml": {
+      "base_sha256": "18350a14d1cb55122452114fb227a3f1cd952ad8317c8ca6381ca18a7b53202a",
+      "patched_sha256": "901d7697338db21b17d21f65cd6008c61f1d58b6ad56c35bf384f9aa82cc1d7e",
+      "replacements": 1
+    },
+    "src/system/system_generic.ml": {
+      "base_sha256": "4f646b5ab5dd497b3a5e19428dc7cae94ba68aa46ef095c829a33083ae76980e",
+      "patched_sha256": "d7f3c22aed06945bc8aaf301d9da49b187cf1c5b06532c4499b0e6bd4cbadf7c",
+      "replacements": 7
+    }
+  },
+  "scope": "nine eta expansions only; no semantic/APFS/worker/protocol changes",
+  "minimal_ox_build_executed": false,
+  "original_baseline_binary_exists": false,
+  "genuine_stock_receipt": "/private/tmp/unison-genuine-upstream-stock-build-20261017-001/RESULT.json",
+  "genuine_stock_binary_exists": true,
+  "next": "Apply patch to fresh exact git archive, build both compilers under canonical Unison CPU ownership; independently bind artifact/source/child settlement before benchmark use. Rebuild original375 baseline separately."
+}
