@@ -52,7 +52,7 @@ def audit_validation_attempted(result):
                             stages=('baseline', 'validate'), maximum=4)
 
 
-def _audit_attempted(result, *, modes, stages, maximum):
+def _audit_attempted(result, *, modes, stages, maximum, workers=(1, 2, 3)):
     def require(value, message):
         if not value:
             raise ValueError(message)
@@ -66,7 +66,8 @@ def _audit_attempted(result, *, modes, stages, maximum):
         identity = entry['identity']
         require(identity['label'] in ('stock', 'ox')
                 and identity['mode'] in modes
-                and type(identity['workers']) is int and identity['workers'] in (1, 2, 3),
+                and any(type(identity['workers']) is type(value) and identity['workers'] == value
+                        for value in workers),
                 'unexpected invocation configuration')
         key = identity['directory']
         require(type(key) is str and key, 'invocation directory missing')

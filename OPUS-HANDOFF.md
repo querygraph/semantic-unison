@@ -6175,3 +6175,19 @@ SHA 4c2b786950e2325d727bdac64b8264c7a5d979ec185264006b3e47300a8fed7a. Sourceonly
 plan/auditor/owner andfutureexplicitIOcoordination. Full586compiledinputproofs
 from971271a8 remainunchanged; benchmarkPython notcompiledintoCLI. Photo
 catalogwide5Kpriority unchanged; no resourcesheld/goalnotblocked.
+
+
+### 2026-10-18 — versioned auto cohort auditor source controls
+
+Added bench/sync/auto_cohort.py: one compiler/selector cohort, 1/2/4/8/auto,
+18 rows/54 calls. Distinguishes endpoint permit upper bound, declared peak
+and reserved credits (8 or explicit future 18 borrow). Audits strict attempted
+prefix lifecycle separately from complete functional rows, binds nested outcomes,
+rejects unknown/reordered/cross-cohort evidence. Never authorizes FD release or
+claims actual parent terminal, command-policy authentication or measurements.
+Historical journal entrypoints retain their 1/2/3 default.
+Actual 1f9863/0 and ad0061/0: directed new controls plus existing timed-shared
+regression; both children reaped0/groups absent/CPU4 closed, no EXIO/payload.
+Evidence tests/qualification/auto-cohort-source-actual-20261018.json.
+Next: exact argv/parameter/artifact binding and dispatcher owner integration,
+then fresh coordinated IO qualification. Photo catalog-wide5K priority untouched.

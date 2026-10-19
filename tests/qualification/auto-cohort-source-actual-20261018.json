@@ -1,0 +1,88 @@
+{
+  "schema": "unison-auto-cohort-source-controls/1",
+  "actual_tools": [
+    {
+      "chunk": "1f9863",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "ad0061",
+      "exit": 0,
+      "no_session": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "bench/sync/auto_cohort.py",
+      "sha256": "1433bdcad54a0b01959736c38baef9893f54d7f6ee294872422819ac3d0dd50c"
+    },
+    {
+      "path": "bench/sync/invocation_journal.py",
+      "sha256": "33b1eb32d8af33560155a5fbe6fa977ef39fee05e7b28dc4390464b3f470e4be"
+    },
+    {
+      "path": "tests/auto_cohort_test.py",
+      "sha256": "4abb527742fc813187e81d79566111b0ebef663543cecce45423bb9b9fa21747"
+    },
+    {
+      "path": "tests/timed_shared_test.py",
+      "sha256": "b7ec5b3a43f5792b5c152772cf07519339e079057a5df89ef54a67278dae038c"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-auto-cohort-controls-20261018-001/SHARED-CLOSED.json",
+      "sha256": "6f4b57c2bd4a9abc32c090d2329df0e174ec8988182723142a4f41f1ef81fb33",
+      "closure": {
+        "child": {
+          "pid": 53551,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 53551,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-legacy-controls-20261018-001/SHARED-CLOSED.json",
+      "sha256": "3b9f88825dd81ebda9ad658e258d60a897cc2af128068563ae7023e3cb1c3081",
+      "closure": {
+        "child": {
+          "pid": 53599,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 53599,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "scope": "pure fabricated nested journal/functional cohort controls and legacy regression; no binary/transport/payload/EXIO",
+  "runtime_qualified": false,
+  "owner_integration_complete": false
+}
