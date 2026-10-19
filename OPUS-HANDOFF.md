@@ -62,6 +62,18 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Original + selected upstream comparison artifacts — ACTUAL binding complete
+
+Original375 stock5.2 build/selftests ACTUAL12764/8177fa/0/no session, five
+children reaped0/groups absent, CPU8closed; no patch. BinarySHA1713490bee5f70c0df28069e81654b829080c21dc7ad1aad13d54b354ecf00de.
+Independent089fef/0 rechecks original182/unmodified8772stock187/minimalOx187
+archive source/build files, all12 new call proofs, binaries and compilers;
+freshCPU8acquiredclosed, no EX. Exact table/fullpins in
+`tests/qualification/three-baseline-artifact-binding-20261019.json` and
+`doc/upstream-baseline-builds-20261019.md`. Historical missing5.5.1 original
+artifact is not relabelled; neworiginal5.2 matches retainedupstreamstock5.2.
+No current resources. Performance comparison still pending, not a build claim.
+
 ## Minimal upstream Ox baseline — ACTUAL build/selftests passed
 
 V2 patch `doc/upstream-8772-minimal-oxcaml-v2.patch` SHA7951aaede099632e392ba950f9381e52a1a46ac07e5dcf222b21996b3f401f3e
