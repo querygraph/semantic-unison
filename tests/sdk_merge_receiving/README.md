@@ -9,8 +9,9 @@ writer has built successfully without being executed. New pure
 `tests/sdk_fixture_states.py` controls passed e440a9/0 for all three declared
 encodings/both byte orders and four fixed-size scalar states. This does not
 create real JXL/twelve-state files. See
-`doc/sdk-scalar-state-generation-20261019.md`; the retained native generator owner
-and exact active IO/SDK window are next. Old chronology below is historical,
+`doc/sdk-scalar-state-generation-20261019.md`; the retained native generator owner now passes10originalcontrols and
+metadata-only571source/sixJSON/twoLSTAT checks; native generation and its exact
+active IO/SDK window remain unstarted. Old chronology below is historical,
 including earlier statements that the freezer/transport did not yet exist.
 
 

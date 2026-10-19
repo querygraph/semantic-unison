@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:43:54.667908+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:46:25.122105+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
@@ -140,36 +140,25 @@ not yet known, so there is NO active allocation or pause. Source/ownCPU work
 continues independently. Do not dispatch shared IO until that current priority
 is reconciled; do not reserve a blanket future window or stall all source work.
 
-Current uncommitted generation follow-up:
+Generation owner source is now ready:
 `tests/sdk_fixture_generation.py`, `sdk_fixture_generation_owner.py`, and
-`sdk_fixture_generation_test.py` implement owned readonly state output, one
-prospective JXL writer call,12prospective qualified2724 validator calls, and
-known-prefix/uncertain ownership handling. Six original tiny helper controls
-actuale3ce2c/0/NOsession, child73511 reaped0/groupabsent/CPU00closed. Then source
-review added exact preserved-manifest/writer/validator ancestry guards; full
-owner/main still UNQUALIFIED and no exact runtime plan has been frozen. No
-writer/SDK/DNG-source operation occurred. Continue reviewing/freezing this
-successor without Photo/Capitola holds; don't infer runtime readiness from six
-helper tests. The user-directed fork rename and manifesto interrupted this
-source work; files remain preserved for the next goal turn.
+`sdk_fixture_generation_test.py` implement exact retained-source/tool ancestry,
+owned readonly states, one prospective JXL transcode+12qualified2724 SDK checks,
+full manifest provenance, known-settled failure close and uncertain-owner
+retention. Ten current original tiny controls8e452f/0 child78036 reaped0/group
+absent/CPU00closed; metadata-onlyf46a7b/0 child78144 reaped0/CPU00closed verifies
+571sources/sixJSON/twoLSTAT, no payload/artifact open or IO acquired. Full13call
+composition used Python doubles only. Initial test-path refusalb43609/1 closed
+and preserved; path-only fix1aa036/0 retained; earlier6method e3ce2c/0 scoped.
+PlanV2 `doc/sdk-fixture-generation-plan-v2-20261019.json` SHA048d0ae7aac95e89d3bae5aaf74e9d5bd2842df38ffd3ec42eefe7101d3b424c;
+runtime/privateoutput nonce7211c304f95745eab5ff2485ec0e5175 BOTH ABSENT. V1
+27636b47 preservedSUPERSEDED_UNSTARTED. See owner readiness report and receipt.
+Real writer/JXL/12states/SDKgeneration/mergedreceiving still UNEXECUTED.
 
-README now replaced per user instruction with a concise LLM-friendly Semantic
-Unison introduction and goals only (semantic components, composable camera
-knowledge, exact deltas/merges, APFS clone updates, optional Adobe checks,
-coordinated OCaml/OxCaml workers). No unfinished-work list in README.
-
-Generation successor further progressed, still UNCOMMITTED/UNSTARTED:
-`generate` callable now qualifies full one-writer/twelve-validator ordering with
-original Python doubles and tiny private files. Ten controls actual1aa036/0,
-child75132 reaped0/groupabsent/CPU00closed; earlierb43609/1 test-temp-path refusal
-preserved (9/10passed); fixed only fixture path to /private/tmp. New main limits
-and after-IO executable hashing added afterward, no real SDK launch. Source-only
-plan `doc/sdk-fixture-generation-plan-v1-20261019.json` SHA27636b4787c28f3ae6b89924039ca575620b830311559d64f1a3464749c80d05
-has571source/sixJSONprerequisite pins, freshworkspace
-`/private/tmp/u-sdk-states-9520eefd4a92`, persistentstate nonce9520eefd4a924329a5a1cb6179977e25.
-No payload/artifact opened in preparation, no runtime allocation/Photo hold.
-Finish final source review/current controls and exact evidence before dispatch;
-older statement that no plan exists is superseded by this source-only freeze.
+Worker plancc71c911 remains ready/UNSTARTED, with active-only coordination
+followup01a154d6-d392 asking currentCapitola yes/no. NO Unison resources or Photo
+hold. SDKgeneration is NOT automatically allocated as a successor; coordinate
+its immediate concrete window separately. Continue independent work meanwhile.
 
 ## Actual current evidence
 

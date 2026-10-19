@@ -26,7 +26,8 @@ padding, DTD/entity/invalid UTF-8/deep XML refusal. Inputs are original4096B tin
 synthetic bytes, not valid SDK-generated photographs. No EXglobal or Photo hold.
 [Actual source-control receipt](../tests/qualification/sdk-scalar-state-source-controls-20261019.json).
 
-Next runtime composition is still unimplemented/unstarted: under an immediately
+The runtime composition is now implemented and source-qualified, still UNSTARTED
+([owner readiness](sdk-fixture-generation-owner-20261019.md)): under an immediately
 coordinated EXglobal→Unison00..07 owner, clone/hash only disposable descendants
 of the two retained generated bases; use the separately built2768 writer once
 to generate the missing JXL into a new private name; build12 distinct readonly
