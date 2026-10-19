@@ -1,21 +1,32 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
-# Current checkpoint — final qualification source work; Photo goes first
+# Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T09:27:28.213321+00:00. Goal ACTIVE and incomplete. This block supersedes historical
+Updated UTC 2026-10-19T10:21:45.522674+00:00. Goal ACTIVE and incomplete. This block supersedes historical
 scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `fc6c2065`. No `src/` differences from frozen review
+  before this checkpoint: `e28efbeb`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
-  Unison00..07 / Photo08..15 / system16..17 remains. User now lets Photo go first.
-  Photo reported bulk49291/5abba8/137 recovery CLOSED (not bulk success),16total
-  published awaiting recognition, next group17..24 refused pre-native. Photo
-  retains scheduling priority for its source fix/fresh retry. HOLD new Unison
-  EXIO/native/SDK/benchmark dispatch until its actual coordination release;
-  source/CPU controls within standing8 may continue. No temporary18 grant.
+  Unison00..07 / Photo08..15 / system16..17 remains. Photo actual normal drain
+  tool2878/cbaefa→a2c2a1/exit0/NOsession closed owner77136/all phase groups,
+  helper audit and Photo8+EXIO. Photo reports zero reservations and holds NEW
+  IO/native/SDK for handover.40published/storageverified,40recognitionpending,
+ 216pending preserved; Main not reopened/final startup required. This grants no
+  Main/cache/original access. Independent generated qualification proceeds first;
+  direct Adobe qualification later, Photo workflow verification last. No18grant.
+- **New batch source:** canonical thousands/new/mixed plan, exact chunked byte
+  artifacts and per-sample inventories, recursive verification, seed/update/noop
+  composition, retained peer/server audits, ordered event storage and bounded4MiB
+  captures. Actual original controls are recorded below; actual batch runtime
+  remains unexecuted, dispatcher/per-class path audit not complete. Runtime
+  composition is source-tested only, not an admitted benchmark.
+- **Next prepared executions:** immutable refreshed final parser and inherited
+  rsync v2 plans match current helper source; v1 plans preserved STALE_UNSTARTED.
+  Both v2 remain unstarted. Recheck metadata/builds and acquire EX→Unison8;
+  preserve every actual child/group/FD outcome, retain unknown without signals.
 - **Published review:** PR13 OPEN DRAFT, fork`querygraph/unison`, base`master`,
   head`integration/sol-consolidated-review` exactf6bfd6533477f265aa988a6cc24790753a2b3638.
   Actual GitHub readbackfd0f5c/0 confirms. Local final harness is not published
@@ -7476,3 +7487,21 @@ actual-20261019.json. Shared_child sourcehash changed (defaultbehaviorunchanged)
 so prepared final-extended-profile-pair-plan-v1 and final-rsync-publication-plan-v1
 are now STALE_UNSTARTED and need immutable refreshed successors beforeexecution.
 Oldplans/actualreceipts preserved; no stalepin execution or automaticadmission.
+
+
+## 2026-10-19 batch runtime composition and actual Photo handover
+
+Added batch_runtime.run: trusted inherited9FD metadata guard, exactcommands,
+generated pinned launcher/proxy programs, perphase intent/pair/outcome records,
+six bounded sampleevents and final artifactcheck. No enclosing resource/admission
+owner or perclasspath audit yet; result explicitlynonreleasing. Two source-seam
+controls actualb95088/0/no session/CPU00closed; no native/EXIO/payload.
+Photo actual2878/a2c2a1/0 normaldrain closed:40published/40recognitionpending/
+216pending, Mainnotreopened, Photozeroresources/newIO/nativeSDKheld forhandover.
+ACKqueued01a153ad-e647; independentgeneratedqualification canproceed underown8.
+Refreshed immutable finalprofilepair v2 SHA2cbb6e29 and finalrsync v2 SHA8330d855
+onlychanged commonhelper pin; oldv1 preservedstale/unstarted. Metadata refresh
+bd3b40/1 hit rsync different source_pins schema after profilev2 written; explicit
+rsync-schema successor5325fc/0 completed, no runtime/retry of actualtest.
+Next: directowned fullparser pair, then inheritedrsync, batchowner/counters and
+actualcorpus; Adobe fixtures/source recovery and finalmatrix later.

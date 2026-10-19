@@ -174,3 +174,14 @@ Both groups/reaps and Store/CPU00 closed;12pure controls2b1936/0 also passed.
 No server/SDK/Unison/EXIO. Receipt batch-large-capture-original-actual-20261019.json.
 The prepared parser/rsync v1 plans pin the old common-helper source and are now
 stale/unstarted; preserve them and freeze successors before any execution.
+
+`batch_runtime.run` now connects canonical commands, inherited9FD metadata guard,
+qualified generated peer programs, per-call intent/pair/outcome pins, sample
+phases and ordered event persistence. Trusted caller must still authenticate
+plan/build/source artifacts and own actual EXIO→CPU admission before calling.
+Any incomplete state retains inherited resource descriptors, Store and actual
+peer handles; no resource release or automatic failed-prefix recovery occurs.
+Final result requires independent external-child source audit and explicitly
+sets per_class_path_audit_complete=false. Two original seam controls passed
+actualb95088/0/no session/CPU00closed; no native/EXIO/payload. This is not the
+owning CLI/dispatcher or an actual receiving result; dispatcher_ready stays false.
