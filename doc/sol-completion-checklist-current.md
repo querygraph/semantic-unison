@@ -308,11 +308,11 @@ recoveryclosed137; preserve that failure separately from this freshv4 pass.
 
 ### Current installed-old-peer archive round trip
 
-[Actual result](final-archive-roundtrip-result-20261019.md): stock/Ox each ten stages through byte-pinned installed2.53.5, owning29608/8c45ae/0,18zero+2normal designated missing-base exit2,20pairs/60primaryroles closed. Same state/archive roots, old load/update, exact edited variants preserved, explicit known-common restoration and later disjoint merge/noop pass. Independent9841ff/0 re-audited allrawpairs/534source+329production pins/FDidentities/archive records+262144Bfreshfinalreplicas; entire8EX reacquiredclosed. Plan descriptive-field discrepancy and first metadata-audit137 recovery preserved in report, no native replay. ForcedRPCv0/realSSH/otherplatform/SDK remain separate.
+[Actual result](final-archive-roundtrip-result-20261019.md): stock/Ox each ten stages through byte-pinned installed2.53.5, owning29608/8c45ae/0,18zero+2normal designated missing-base exit2,20pairs/60primaryroles closed. Same state/archive roots, old load/update, exact edited variants preserved, explicit known-common restoration and later disjoint merge/noop pass. Independent9841ff/0 re-audited allrawpairs/534source+329production pins/FDidentities/archive records+262144Bfreshfinalreplicas; entire8EX reacquiredclosed. Plan descriptive-field discrepancy and first metadata-audit137 recovery preserved in report, no native replay. RPCv0 is outside the approved scope; realSSH/otherplatform/SDK remain separate.
 
-### Explicit inherited RPCv0 requirement mismatch
+### Supported-peer scope resolved by explicit user decision
 
-[Current boundary](final-rpc-version-result-20261019.md): selected8772 already removed v0 converters/transport in upstream7b1911e7. Actual17884/a57f83/0, six current stock/Ox generated handshake calls accept1/refuse0and999, allnormallyreaped; independentf10171/0 re-audited536source+329production pins/argv/rawresponses/64generatedbytes/canonical9 and closedwhole8EX. This is **not ordinary v0 fallback**, and SOL3428/3516 remains explicitly unmet on the selected base. No silent requirement removal or runtime transport restoration. Other independent qualification continues.
+The user explicitly chose upstream’s supported-peer range and dropped the obsolete RPCv0 requirement on2026-10-19. No legacy transport restoration is planned. [Current boundary](final-rpc-version-result-20261019.md) remains actual accept1/refuse0/999 evidence, not v0 fallback. Genuine8772 default interop and installed2.53.5 archive roundtrip remain the tested RPC1 scope; other supported releases are not automatically qualified. Prior mismatch evidence is preserved in the result report. This resolves the product-scope blocker without changing production code.
 
 ### Current saved-profile/backup/metadata sync properties
 

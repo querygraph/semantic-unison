@@ -90,16 +90,16 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   archive records+262144Bfreshfinalreplicas; entire8EXreacquiredclosed. Fourteen
   controls50316/e62cbf/0. First metadata-audit137 recovery and copied stale plan
   descriptivefields preserved; no sync replay. AllresourcesZERO. See
-  `doc/final-archive-roundtrip-result-20261019.md`. ForcedRPCv0/actualSSH and
+  `doc/final-archive-roundtrip-result-20261019.md`. RPCv0 is outside the user-approved scope; actualSSH and
   otherfullsync/archivecases stillopen; this is generatedprivatearchive evidence.
 
-- **RPC boundary/source mismatch:** selected8772 already removedv0 in upstream
-  7b1911e7; no v0converter remains. Currentpair actual17884/a57f83/0 sixcalls
-  acceptRPC1/refuse0and999; independentf10171/0 reaudited536source329production,
-  rawsamePIDexec/64generatedbytes and reacquiredclosedwhole8EX. This doesNOT
-  meet SOLv0ordinaryfallback: requirement remains visibly unresolved, no new
-  unsupported transport silently restored. `doc/final-rpc-version-result-20261019.md`.
-  Threecontrols b2606d/0; allresourcesZERO. Continue otherindependent work.
+- **RPC compatibility decision RESOLVED:** user explicitly chose upstream’s
+  supported-peer range and dropped obsolete RPCv0 fallback on2026-10-19.
+  No v0 restoration is planned. Existing actual17884/a57f83/0 acceptsRPC1,
+  refuses0/999; genuine8772 and installed2.53.5 interoperability evidence
+  remains valid, not a claim that every supported release was tested.
+  SOL item8 updated; prior mismatch report preserved with decision addendum.
+  No production code/runtime change or resource acquisition.
 
 - **Actual saved-profile properties:**28308/7b837c/0 bothcompilers6pairs,
   generatedDNG+binary: ignore/symlink/versionedbackups/mode640→400/xattr+fork
@@ -148,9 +148,8 @@ checkpoint; historical snapshots below do not create resource holds or grants.
 
 ## Remaining work — do not mark goal complete
 
-1. Reconcile remaining full-sync/archive/profile/platform cases and the
-   inherited RPCv0 requirement mismatch (safe refusal is NOT ordinaryfallback),
-   plus remaining named edge cases to source-bound evidence or renew only the
+1. Reconcile remaining full-sync/archive/profile/platform cases and
+   remaining named edge cases to source-bound evidence or renew only the
    missing cases. Native stage qualification is not every sync property or
    compressed-input/crash/platform proof. See `doc/sol-final-acceptance-map-20261019.md`.
 2. Complete prescribed benchmark/baseline/topology evidence: pinned local
