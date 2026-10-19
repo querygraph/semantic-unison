@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tests'))
 from private_camera_receiving.close import close_descriptors
 from workloads import initial_writes, layout, recipe
 
+INVERT = bytes(range(255, -1, -1))
 FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_size', 'st_mtime_ns', 'st_ctime_ns', 'st_nlink', 'st_uid')
 
 
@@ -90,6 +91,14 @@ def edit(path, metadata, kind):
         if digest(fd, shape.size) != metadata['before_sha256']:
             raise ValueError('generated source bytes changed before edit')
         fence(fd, path, metadata['source_identity'])
+        if changes.full_xor:
+            at = 0
+            while at < shape.size:
+                data = os.pread(fd, min(1048576, shape.size-at), at)
+                if not data:
+                    raise ValueError('full generated replacement ended early')
+                write_at(fd, data.translate(INVERT), at)
+                at += len(data)
         for change in changes.writes:
             data = change.data
             if change.xor:

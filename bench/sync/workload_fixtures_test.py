@@ -33,7 +33,13 @@ class Fixtures(unittest.TestCase):
                 self.assertNotEqual(got, info['before_sha256'])
                 outside = [i for i, (a,b) in enumerate(zip(before,after))
                            if a != b and not 1024 <= i < 1536]
-                if kind == 'growing-xmp':
+                if kind == 'full-change':
+                    self.assertEqual(after, bytes(value ^ 255 for value in before))
+                elif kind in ('malformed-ifd','unsupported-signature'):
+                    expected=set(range(4,8)) if kind=='malformed-ifd' else {0,1}
+                    self.assertTrue(outside and set(outside)<=expected)
+                    self.assertEqual(len(after),len(before))
+                elif kind == 'growing-xmp':
                     self.assertEqual(len(after), 32768+1536)
                     self.assertEqual(after[70:32768], before[70:])
                     self.assertTrue(all(62 <= i < 70 for i in outside))

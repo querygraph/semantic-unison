@@ -6,7 +6,8 @@ stream the initial payload, apply recipes, and independently hash final bytes.
 from dataclasses import dataclass
 import struct
 
-KINDS = ('fixed-xmp', 'growing-xmp', 'metadata-preview', 'metadata-raw', 'metadata-opaque')
+KINDS = ('fixed-xmp', 'growing-xmp', 'metadata-preview', 'metadata-raw', 'metadata-opaque',
+         'full-change', 'malformed-ifd', 'unsupported-signature')
 MAX_PACKET = 1048576
 
 
@@ -39,6 +40,7 @@ class Recipe:
     target_size: int
     writes: tuple[Write, ...]
     expected_transfer: str
+    full_xor: bool = False
     scope: str = 'Generated arbitrary encoded payloads only; no Adobe/photo validity'
 
 
@@ -85,7 +87,10 @@ def recipe(value, kind, *, growth=1024):
     if kind not in KINDS:
         raise ValueError('unknown generated workload')
     target = value.size
-    if kind == 'growing-xmp':
+    full_xor = kind == 'full-change'
+    if full_xor:
+        writes = ()
+    elif kind == 'growing-xmp':
         if type(growth) is not int or not 1 <= growth <= MAX_PACKET-value.packet_bytes:
             raise ValueError('bounded positive packet growth required')
         data = packet(value.packet_bytes+growth, 2)
@@ -95,7 +100,11 @@ def recipe(value, kind, *, growth=1024):
                   Write(value.size, data))
     else:
         writes = (Write(value.packet_offset, packet(value.packet_bytes, 2)),)
-        if kind != 'fixed-xmp':
+        if kind == 'malformed-ifd':
+            writes += (Write(4, struct.pack('<I', value.size+4096)),)
+        elif kind == 'unsupported-signature':
+            writes += (Write(0, b'NO'),)
+        elif kind != 'fixed-xmp':
             at = {'metadata-preview': value.preview_offset,
                   'metadata-raw': value.image_offset,
                   'metadata-opaque': 256}[kind]
@@ -106,4 +115,4 @@ def recipe(value, kind, *, growth=1024):
     if any(a.offset+len(a.data) > b.offset for a, b in zip(ordered, ordered[1:])):
         raise ValueError('overlapping generated mutations')
     return Recipe(kind, value.size, target, writes,
-                  'SDE-eligible-fixture' if kind == 'fixed-xmp' else 'exact-fallback-fixture')
+                  'SDE-eligible-fixture' if kind == 'fixed-xmp' else 'exact-fallback-fixture', full_xor=full_xor)

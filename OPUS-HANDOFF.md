@@ -7286,3 +7286,17 @@ consumercontrols, notbenchmark/camera; no receiving/performanceclaim. Receipt
 generated-workload-integration-actual-20261019.json. WORKLOADS.md updated; no
 automatic grant. Sourceplans foractualnewscenarios nextafterPhoto priority.
 GoalACTIVE; otherSOLworkloads/topologies remainrequired.
+
+
+## 2026-10-19 — Full-content and malformed workload recipe support
+
+Newkinds full-change (allbyteXOR255 inbounded1MiB streamingconsumer),malformed-ifd
+(firstIFDpastEOF),unsupported-signature (NObyteorder), plusprevious5. Header/
+XMPtypedbounds preserved. Exactfallback labelsareprediction NOTactualreceiving.
+Fullconsumerfileoracle independentlychecksallbyteschanged; malformedcases
+retainonlyintendedoutsideXMPeffects. Final987431/0/no session:15tests+legacy
+fixture+actualCLIhelp, children70793/70802/70804reaped0/groupempty/CPU4closed,
+noEXIO/Unison/SDK/Photo/benchmark. Receiptgenerated-workload-extended-actual-
+20261019.json. All8newrecipesstillneedactualownedreceiving/measurement after
+Photo-firstIOrelease. Mixed/thousandssmall/new/concurrent-editor/topologies
+stillopen; donotcountsourcecontrolsasbenchmarkpass. Goalactive/resources0.

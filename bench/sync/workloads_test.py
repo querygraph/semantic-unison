@@ -58,6 +58,21 @@ class Workloads(unittest.TestCase):
             self.assertEqual(outside, [position])
             self.assertEqual(p.expected_transfer, 'exact-fallback-fixture')
 
+    def test_full_and_malformed_recipes_are_explicit_fallbacks(self):
+        full=recipe(self.layout,'full-change')
+        self.assertTrue(full.full_xor)
+        self.assertEqual(full.writes,())
+        self.assertEqual(full.source_size,full.target_size)
+        for kind in ('malformed-ifd','unsupported-signature'):
+            p=recipe(self.layout,kind)
+            target=materialize(self.source,p.writes,p.target_size)
+            self.assertEqual(p.expected_transfer,'exact-fallback-fixture')
+            self.assertFalse(p.full_xor)
+            if kind=='malformed-ifd':
+                self.assertGreater(struct.unpack_from('<I',target,4)[0],len(target))
+                self.assertEqual(target[:4],self.source[:4])
+            else:self.assertEqual(target[:2],b'NO')
+
     def test_boolean_and_overflow_dimensions_refuse(self):
         for args in [(True, 512, 1024), (2147483649, 512, 1024),
                      (32768, True, 1024), (32768, 1048576, 1024), (32768, 512, True)]:
@@ -69,7 +84,7 @@ class Workloads(unittest.TestCase):
         for value in [replace(self.layout, image_offset=0), replace(self.layout, packet_count_field=0), replace(self.layout, header=b'bad')]:
             with self.assertRaises(ValueError): recipe(value, 'fixed-xmp')
         with self.assertRaises(ValueError): recipe(self.layout, 'unknown')
-        self.assertEqual(len(KINDS), 5)
+        self.assertEqual(len(KINDS), 8)
 
 
 if __name__ == '__main__':

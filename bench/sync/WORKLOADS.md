@@ -15,6 +15,9 @@ arbitrary, not valid photographic encodings or SDK qualification inputs.
 | metadata-preview | Replace XMP and XOR one declared preview byte | Exact fallback because protected complement changes |
 | metadata-raw | Replace XMP and XOR one primary encoded byte | Exact fallback because protected complement changes |
 | metadata-opaque | Replace XMP and XOR one unclaimed gap byte | Exact fallback because protected complement changes |
+| full-change | Stream XOR255 over every source byte in bounded1MiB chunks; same output length | Exact fallback; no declared image validity |
+| malformed-ifd | Replace XMP and point the firstIFD beyond EOF | Parser refusal/ordinary exact fallback expected |
+| unsupported-signature | Replace XMP and change TIFF byte-order signature toNO | Unsupported-container ordinary exact fallback expected |
 
 `initial_writes(layout)` overlays a separately streamed deterministic noise
 source. `recipe(layout, kind)` returns immutable, nonoverlapping byte actions and
@@ -41,8 +44,8 @@ Source/target sizes are recorded separately and capacity uses the larger extent.
 success expectations must remain for fixed-XMP cohorts; fallback workloads must
 be reported as fallback, never silently counted as semantic acceleration.
 
-No-change/new-file, full-content replacement, thousands of small files,
-malformed/unsupported mixes, concurrent editor and mostly eligible mixed corpus
+No-change/new-file, thousands of small files, mixed malformed/unsupported
+corpora, concurrent editor and mostly eligible mixed corpus
 still require their corresponding workload designs/execution. Same/cross-volume,
 non-APFS and actual network/cold-cache scopes remain separate. At least five
 measured repetitions after declared warmups remain the SOL benchmark contract.
@@ -60,3 +63,10 @@ the supplied inert binary. See
 `tests/qualification/generated-workload-integration-actual-20261019.json`.
 No Unison sync or benchmark was run; fallback expectations are still predictions
 until the separately coordinated native qualification. No SDK/Photo data used.
+
+Full-change and the two malformed/unsupported recipes now have directed tiny
+consumer controls in addition to the earlier five recipes. The complete15-test
+source suite passed, as did legacy fixture and actualCLIhelp checks; see
+`tests/qualification/generated-workload-extended-actual-20261019.json`.
+All eight recipes still await their actual Unison receiving/benchmark execution;
+a passing generator does not prove expected fallback or transfer correctness.
