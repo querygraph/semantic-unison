@@ -1,23 +1,23 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T14:56:17.435838+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:04:41.786983+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
-  Latest committed qualification: `b718c3f3` (generic clone sync), preceded by
+  Earlier committed qualification: `b718c3f3` (generic clone sync), preceded by
   `c5f1d9ce` (interruption/recovery), `e754a169` (DNG components) and
   `163ad47d` (user-approved upstream supported-peer scope; RPCv0 dropped).
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest generic
-  clone run43369/a6d4ef/0/NOsession and independent audit2ec05e/0 closed;
-  28CLI84primarypeerroles+4flagmodifierchildren settled, exact canonical9
-  reacquired/closed. Earlier interruption61494/84393d/0 and component38297/
-  b5ca6f/0 also closed. No active18 borrow or report-sealing hold. The new2768
-  fixture-writer remains BUILD ONLY: no writer execution or newly generated
-  fixture runtime qualification. Existing historical SDK results stay separate.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Native
+  publication74637/dd4390/0 and exact-restored-mtime53737/fd27be/0 are closed;
+  independent748b45/0 andb3f93e/0 reacquired/closed whole8EX. Earlier generic
+  clone43369/a6d4ef/0, interruption61494/84393d/0 and components38297/b5ca6f/0
+  also closed. No18borrow or report-sealing hold. Standalone2768 fixture-writer
+  is still BUILD ONLY; no writer/newfixture runtime execution. Historical SDK
+  qualifications remain distinct from pending final generated merge evidence.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -31,43 +31,35 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
-## Exact next work and uncommitted source — not executed
+## Resume point — current native qualification completed
 
-Current work is the native publication/race/failure and clone-lease renewal.
-Three untracked source files exist in the active worktree, not a committed or
-qualified runtime successor:
+The previously unexecuted native driver bridge/owner is now actual qualified:
+`tests/final_native_publication_owner.py` ran both pinned compilers through
+ordinary/timed/candidate-negative/producer-negative/lease modes. Actual74637/
+dd4390/0/no session;78 children, four specific expected exit2 programs, all groups
+settled. Each compiler177 publication/producer cases twice and21 CloneLease
+cases passed. Four bridge controls5e01c8/0; independent748b45/0 rehashed556
+sources329production/184artifacts and exact canonical9/whole8EX closed.
+`doc/final-native-publication-result-20261019.md` and actual case inventory give
+named scopes; original fixture bodies stayed unchanged, private guards explicit.
 
-- `tests/final_native_publication_owner.py` SHA256 `5166ac814681754cd36abd7eb9b9719f736c07b63e3ef8d0ee2dde3bc81f83fe`.
-- `tests/native_publication_driver_bridge.py` SHA256 `0e999d666d7fe411dce8ca91295707ba92337dce79dd911f3ef1b6d353140e0f`.
-- `tests/native_publication_driver_bridge_test.py` SHA256 `cce91b90f124162c91f7bfc65c5a1f3c3bd6c01ae83614e774bcedd98c74257f`.
+A concrete missing case was added separately, not hidden behind the broad suite:
+`tests/final_publication/restored_mtime.ml` plus metadata-only C probe and
+`tests/final_mtime_publication_owner.py`. Exact native mtime restored/ctime
+changed after same-size candidate or target byte edits; both refused. Actual
+53737/fd27be/0/no session,12children (10zero+2specific guard-ablation2), independent
+b3f93e/0 bound559sources/qualified prior object lineage/native time tuples and
+whole8EX closure. No failed native run/retry/recovery in these matrices.
 
-The draft owner runs the original `tests/final_publication/run.py` in ordinary,
-timed, candidate-baseline-negative and producer-descriptor-negative modes, plus
-`tests/clone_lease/run.py`, under each pinned stock/Ox compiler (10 serial driver
-runs). Original OCaml/C fixture bodies remain unchanged except the original
-driver's explicitly selected private negative controls and compiler-specific
-async-exception compatibility substitution. The bridge replaces only the two
-Python subprocess/tempfile import bindings; it does not monkeypatch the real
-subprocess module. Each actual compiler/test child is retained/reaped/audited;
-private build directories are preserved. No SDK/Photo data or process is involved.
-
-**Not yet done:** the four new bridge unit methods have NOT been run; no native
-publication plan has been frozen; no new native/compiler/test process has been
-started. Next: execute those controls through a fresh CPU00-owned retained
-wrapper (the consumed clone-sync controls wrapper is a source template only),
-fix any source issue, then freeze a fresh native-publication plan binding the
-original drivers, all relevant ML/C inputs, actual compiler aliases/targets,
-stdlib/Unix artifacts and `sys.mli`. Use existing qualified canonical IO→CPU
-00..07 acquisition; max1 compiler job. Dispatch a fresh workspace once, collect
-actual owning terminal and all nested proofs, independently audit raw outcomes
-and the four expected negative programs, then update acceptance maps. Do not
-label a source-only driver or a native object test as full transport/crash proof.
-The ordinary assertion-failure path may release only a proved settled prefix;
-UnresolvedOwnership/live child retains actual handles/FDs without timeout signals.
-
-This is independent authorized Unison qualification, not a Photo scheduling wait.
-After remaining named core failure/race evidence is reconciled, move to the
-final direct generated Adobe fixture/merge phase, then Photo workflow handback.
+No pending native publication dispatch or unstarted plan remains. All resources
+ZERO. Next: reconcile remaining named source/worker/capability-cache and full-sync
+failure cases against current receipts; renew only genuinely missing scopes.
+Do not equate these native primitive tests with whole-sync/archive crash recovery
+or an eliminated uncooperative check-to-rename race. Then complete final DIRECT
+Unison generated Adobe fixture/merge qualification, prescribed remaining
+benchmark/review scope, and Photo workflow handback. No new Photo allowance is
+blocking independent work. Standalone2768 fixture writer still has NEVER RUN;
+JXL/12scalarstates and current3codec native merge matrix remain pending.
 
 ## Actual current evidence
 

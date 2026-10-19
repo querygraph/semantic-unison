@@ -1,0 +1,139 @@
+{
+  "schema": "unison-final-native-publication-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 74637,
+    "initial_chunk": "80e98e",
+    "terminal_chunk": "dd4390",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 63804
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-native-publication-plan-v1-20261019.json",
+    "sha256": "f2c702324b9173a8183fcda2b705a44087211aa1b87c637d9760f0d8f7a52934"
+  },
+  "workspace": "/private/tmp/u-native-publish-f7cee17c9f57",
+  "calls": 78,
+  "normal_zero": 74,
+  "designated_two": 4,
+  "source_pins": 556,
+  "production_pins": 329,
+  "artifacts_rehashed": 184,
+  "runs": [
+    {
+      "compiler": "stock",
+      "mode": "normal",
+      "calls": 7,
+      "native_exit": 0,
+      "test_pid": 63859,
+      "summaries": {
+        "publication": 106,
+        "producer": 71,
+        "total": 177
+      }
+    },
+    {
+      "compiler": "stock",
+      "mode": "timed",
+      "calls": 7,
+      "native_exit": 0,
+      "test_pid": 63900,
+      "summaries": {
+        "publication": 106,
+        "producer": 71,
+        "total": 177
+      }
+    },
+    {
+      "compiler": "stock",
+      "mode": "candidate-negative",
+      "calls": 7,
+      "native_exit": 2,
+      "test_pid": 63940,
+      "summaries": {}
+    },
+    {
+      "compiler": "stock",
+      "mode": "producer-negative",
+      "calls": 7,
+      "native_exit": 2,
+      "test_pid": 63970,
+      "summaries": {}
+    },
+    {
+      "compiler": "stock",
+      "mode": "lease",
+      "calls": 11,
+      "native_exit": 0,
+      "test_pid": 64022,
+      "summaries": {
+        "lease": 21
+      }
+    },
+    {
+      "compiler": "ox",
+      "mode": "normal",
+      "calls": 7,
+      "native_exit": 0,
+      "test_pid": 64059,
+      "summaries": {
+        "publication": 106,
+        "producer": 71,
+        "total": 177
+      }
+    },
+    {
+      "compiler": "ox",
+      "mode": "timed",
+      "calls": 7,
+      "native_exit": 0,
+      "test_pid": 64110,
+      "summaries": {
+        "publication": 106,
+        "producer": 71,
+        "total": 177
+      }
+    },
+    {
+      "compiler": "ox",
+      "mode": "candidate-negative",
+      "calls": 7,
+      "native_exit": 2,
+      "test_pid": 64149,
+      "summaries": {}
+    },
+    {
+      "compiler": "ox",
+      "mode": "producer-negative",
+      "calls": 7,
+      "native_exit": 2,
+      "test_pid": 64186,
+      "summaries": {}
+    },
+    {
+      "compiler": "ox",
+      "mode": "lease",
+      "calls": 11,
+      "native_exit": 0,
+      "test_pid": 64238,
+      "summaries": {
+        "lease": 21
+      }
+    }
+  ],
+  "raw_references": [
+    {
+      "path": "/private/tmp/u-native-publish-f7cee17c9f57/START.json",
+      "bytes": 569,
+      "sha256": "d33cc71d2ccdffbdd72b97a7b6b4dbadcd69ea24c18fbe6e4ea01ace80c8ce85"
+    },
+    {
+      "path": "/private/tmp/u-native-publish-f7cee17c9f57/RESULT.json",
+      "bytes": 104956,
+      "sha256": "f86b7d78f3f4f48fe7e0f58dd65df62f99b5399492efb9ed596116682ff375cf"
+    }
+  ],
+  "canonical9_reacquired_closed": true,
+  "SDK_or_Photo_calls": 0,
+  "scope": "Current source native publication177cases ordinary+timed and CloneLease21 eachcompiler with four private guard-ablation negative programs; test-bound syscall errors/identity/symlink/rename/borrowedFD behavior, not full transport/powerloss/physicalENOSPC/SDK/photos."
+}

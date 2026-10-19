@@ -1,0 +1,14 @@
+{
+  "schema": "unison-directed-native-audit-terminal/1",
+  "actual_tool": {
+    "chunk_id": "b3f93e",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_source": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-restored-mtime-audit-20261019.py.txt",
+    "sha256": "7072f7b4b990bb2230a854622d41818879e9f4ad9179dedabaf84999b9a4bd2e"
+  },
+  "receipt_sha256": "2cd2c9d36127e8d001b56ccd87e3f3df2b90768fe34d62026dcd1402e102d150",
+  "CPU8_EX_closed": true
+}

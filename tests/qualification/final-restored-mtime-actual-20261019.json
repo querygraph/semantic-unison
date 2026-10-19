@@ -1,0 +1,166 @@
+{
+  "schema": "unison-restored-native-mtime-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 53737,
+    "initial_chunk": "778d24",
+    "terminal_chunk": "fd27be",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 65287
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-restored-mtime-plan-v1-20261019.json",
+    "sha256": "956a09dcd95db8f2d16aeda7af37f0c89ba8aa82deb034fa1f2b90084260dc25"
+  },
+  "workspace": "/private/tmp/u-restored-mtime-f0208edbd6c9",
+  "calls": 12,
+  "normal_zero": 10,
+  "designated_two": 2,
+  "source_pins": 559,
+  "production_pins": 329,
+  "runs": [
+    {
+      "label": "stock-normal",
+      "negative": false,
+      "child": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 65332,
+        "reaped": true,
+        "returncode": 0
+      },
+      "exact_native_time_rows": [
+        [
+          "1700000000",
+          "000000000",
+          "1792422133",
+          "687560330",
+          "1792422133",
+          "698236738"
+        ],
+        [
+          "1700000000",
+          "000000000",
+          "1792422133",
+          "698806630",
+          "1792422133",
+          "709148264"
+        ]
+      ],
+      "executable": {
+        "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/stock-normal/mtime-test",
+        "sha256": "fd674fbf6e4b7148624b0e532c774d0f6c756348ff447a0d717bebcdf052b2be"
+      }
+    },
+    {
+      "label": "stock-candidate-negative",
+      "negative": true,
+      "child": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 65351,
+        "reaped": true,
+        "returncode": 2
+      },
+      "exact_native_time_rows": [
+        [
+          "1700000000",
+          "000000000",
+          "1792422135",
+          "115763667",
+          "1792422135",
+          "126731181"
+        ]
+      ],
+      "executable": {
+        "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/stock-candidate-negative/mtime-test",
+        "sha256": "749decefe791f3d729685c940c8145d5e28f6aa55c118693b65e0413f277ebab"
+      }
+    },
+    {
+      "label": "ox-normal",
+      "negative": false,
+      "child": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 65375,
+        "reaped": true,
+        "returncode": 0
+      },
+      "exact_native_time_rows": [
+        [
+          "1700000000",
+          "000000000",
+          "1792422136",
+          "811811616",
+          "1792422136",
+          "823495734"
+        ],
+        [
+          "1700000000",
+          "000000000",
+          "1792422136",
+          "824151248",
+          "1792422136",
+          "835569146"
+        ]
+      ],
+      "executable": {
+        "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/ox-normal/mtime-test",
+        "sha256": "368839b8052c121e96a988b6352e88d94dfa94fdb7fbeb0edc66700df36458e3"
+      }
+    },
+    {
+      "label": "ox-candidate-negative",
+      "negative": true,
+      "child": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 65394,
+        "reaped": true,
+        "returncode": 2
+      },
+      "exact_native_time_rows": [
+        [
+          "1700000000",
+          "000000000",
+          "1792422138",
+          "496957417",
+          "1792422138",
+          "507379302"
+        ]
+      ],
+      "executable": {
+        "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/ox-candidate-negative/mtime-test",
+        "sha256": "e2fbc4d4061326a81b2de118ab7e288739ef9553e92d1aa1cf0c42364f81ea46"
+      }
+    }
+  ],
+  "raw_references": [
+    {
+      "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/START.json",
+      "bytes": 569,
+      "sha256": "657c6dbaca44be17f427bc899a746852df9915cc349ca3c0f72f33a9f272471a"
+    },
+    {
+      "path": "/private/tmp/u-restored-mtime-f0208edbd6c9/RESULT.json",
+      "bytes": 58479,
+      "sha256": "e8f39cd9cf52eeee9d425f32d6f2f3c096c18fe8bbea15c59d512e32158ed61b"
+    }
+  ],
+  "prior_object_lineage": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-native-publication-actual-20261019.json",
+    "sha256": "1f7afb0e784399a9650e61b1a4c35775c52b86511bc94684eb975f87836cc73f"
+  },
+  "exact_native_mtime_unchanged": true,
+  "native_ctime_changed": true,
+  "normal_candidate_and_target_mutations_refused": true,
+  "private_candidate_guard_ablations_detected": true,
+  "canonical9_reacquired_closed": true,
+  "SDK_or_Photo_calls": 0,
+  "scope": "Two generated same-size mutation/exactmtime-restoration cases/compiler and candidate-guard ablation; current native publication object lineage and actual group closure. Not an uncooperative writer race cure/powerloss/SDK/photos."
+}
