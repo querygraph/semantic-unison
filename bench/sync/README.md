@@ -605,3 +605,17 @@ an explicit metadata-only zero-call record; an absent/unknown journal after
 benchmark entry retains the parent and its descriptors. Observation expiry is
 not authority to kill the worker. Parent terminal evidence is collected from
 the owning tool separately from worker/group receipts.
+
+`tests/cohort_report.py` aggregates saved results using an explicit metadata
+manifest (`unison-auto-cohort-report-input/1`) with at most ten `records`, each
+containing pinned `plan` and `result` path/SHA pairs. It performs no sync, binary
+execution, payload hashing or resource release. Missing cohorts remain listed;
+known failed prefixes retain their row indexes and original failure and cannot
+become a successful full matrix. Unknown lifecycle evidence refuses reporting.
+Raw bytes stay in the authenticated input files, while all row indexes remain
+represented in the report. Client/server CPU/RSS and directional protocol
+counts remain separate. Missing read/physical-write observations stay unknown,
+and modeled extents never become measured write syscalls. Ratios to the
+one-worker median are descriptive, not causal scaling or quiet-host proof.
+The report tool is outside the frozen cohort execution closure, so preparing it
+does not silently repin the runtime requests.

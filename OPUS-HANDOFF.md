@@ -6334,3 +6334,17 @@ work; tenplannedcohorts alone doNOTcomplete fullsize/workload/topologymatrix.
 HardRSS remainsunavailable/refuses, notenforced; native/pixel/corpusclaims
 remainseparate. Next actualcohorts+directAdobeafterPhotoactualhandoff; meanwhile
 noownresourcesheld/goalactive.
+
+
+### 2026-10-18 — ten-cohort saved report preparation
+Added tests/cohort_report.py outsidefrozenruntimeclosure. Pure/reportCLI accepts
+pinned plan/resultJSONmetadata; all10×18rows expected, missingcohorts explicitly
+listed, knownfailedprefixes retainrowindexes+originalfailure/nopass, unknown
+refuses. Five measuredsamples kept/warmups onlydistributionexcluded; directional
+protocol/read/write/model/CPU/RSS separate, physicalIOunknown staysunknown.
+One-worker ratios descriptiveonly; rawbytes remainauthenticatedinputfiles.
+Originalcontrol14870a/1 pretestimportpathmissing CLOSED, fixed7d7247/0 then
+addeddisposableCLIroundtrip/hashrefusal e0ac07/0. All3childrenreaped/groupsabsent/
+CPU4closed/noEXIO. Evidence auto-cohort-report-controls-actual-20261018.json.
+All53frozencohortexecutionsourcepins stillMATCH; no planrepin/admission/run.
+Photo bulk256actualhandoffstillrequired; own8source/reportworkcontinues.
