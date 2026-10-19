@@ -4,6 +4,8 @@ from sdk_merge_receiving.admission_test import fixture as merge_fixture
 from sdk_negative_receiving import admission as A
 from sdk_negative_receiving.plan import LIMITS
 
+EXECUTION=['tests/sdk_negative_receiving/entry.py']
+PRODUCTION=['src/semanticRuntime.ml','src/semanticWorkers.ml']
 
 def fixture():
     packet,grant,request,plan,_=merge_fixture()

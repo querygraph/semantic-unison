@@ -1,0 +1,35 @@
+{
+  "state": "SUPERSEDED_UNSTARTED_DO_NOT_ADMIT_OR_DISPATCH",
+  "predecessor": {
+    "launch_argv_template": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_negative_receiving/entry.py",
+      "--plan",
+      "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-01/PLAN.json",
+      "--plan-sha256",
+      "7a170a897978de778221a7e2750835bdaa045340a5facf8431303a7c5ec5b46f",
+      "--admission",
+      "ROOT_PUBLISHED_PATH_REQUIRED",
+      "--admission-sha256",
+      "ROOT_PUBLISHED_SHA_REQUIRED"
+    ],
+    "plan": {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-01/PLAN.json",
+      "sha256": "7a170a897978de778221a7e2750835bdaa045340a5facf8431303a7c5ec5b46f"
+    },
+    "request": {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-01/REQUEST.json",
+      "sha256": "7a59758e4e31b0a6d4b00e97b3a90e0e5e85619b0d52061af21da3415655a00c"
+    },
+    "runtime_admitted": false,
+    "schema": "unison-current-sdk-negative-receiving-freeze/1",
+    "sdk_invoked": false,
+    "state": "PREPARED_UNADMITTED",
+    "workspace": "/private/tmp/u-snr-28fe65dfeb724907"
+  },
+  "reason": "Source review found shared FD binding target allowlist lacked new negative target; source successor adds exact target and real-verifier original controls",
+  "native_calls": 0,
+  "SDK_calls": 0,
+  "admission_created_by_Unison": false,
+  "old_plan_request_bytes_unchanged": true
+}

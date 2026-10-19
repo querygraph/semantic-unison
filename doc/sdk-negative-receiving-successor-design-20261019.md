@@ -121,3 +121,28 @@ closed, no children/EX/SDK/retained inputs. Exact methods and source hashes:
 The native entry, durable runtime/shim/data record adapters and final parent
 worker/FD/output composition remain to be wired before freezing a request. This
 is progress toward the actual run, not a claim that it has run or is admitted.
+
+## Native entry and immutable successor02 now prepared
+
+The real entry, current-source/metadata-only freezer, durable retained transport
+and runtime, and parent worker/9FD/source/final-output composition are implemented.
+A full original tiny executor/parent test uses explicitly fabricated captures,
+SDK reports, inherited observations and native-clone labels; it is not an actual
+SDK run. Source-only failures e1d697/1 (fixture reference) and6ff0df/1 (fixture PID)
+were preserved and corrected; no SDK/payload/children and CPU00 closed. Tests then
+passed0d79f6/0, entry/metadata/freezer12methods passed e7acf9/0.
+
+A final independent read found shared_binding.verify did not allow the new target
+while the entry tests mocked that call. Request01 was withdrawn before admission,
+not dispatched. Exact target support plus tests of the real verifier against
+fabricated native observations fixed that gap; eighteen-credit borrowing still
+refuses. Current combined118edd/0 passed63 original methods and CPU00 closed.
+[Exact current source controls](../tests/qualification/sdk-negative-runtime-entry-controls-v2-actual-20261019.json).
+
+Fresh metadata-only freeze b5dcd0/0 created immutable request02 REQUEST405caf14 /
+PLAN175d106c, absent workspace u-snr-313af230e9374ebd. Actual entry checkc77495/0
+revalidated176execution+329production/12JSON/12lstat, no input/executable reads.
+[Index and exact launch template](current-sdk-negative-native-20261019-02/INDEX.json).
+[Freeze/check evidence](../tests/qualification/sdk-negative-freeze-v2-actual-20261019.json).
+Exact source review and one finite IO admission are next; no runtime is inferred,
+no resource reservation is retained during review and no old request is reused.

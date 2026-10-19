@@ -1,7 +1,7 @@
 # Designated negative SDK receiving successor
 
-Current source composition passed43 original methods under standing CPU00;
-[exact source and actual terminal evidence](../qualification/sdk-negative-integrated-source-controls-actual-20261019.json).
+Current native-entry/runtime composition passed63 original methods under standing CPU00;
+[exact source and actual terminal evidence](../qualification/sdk-negative-runtime-entry-controls-v2-actual-20261019.json).
 All actual CPU ownership closed. No SDK, EXglobal, actual CLI/server or retained
 DNG was opened by these controls. No native request/admission exists yet.
 
@@ -23,12 +23,22 @@ The source separates these responsibilities:
 - `admission.py` and `owner.py`: fresh negative-only exact source/argv/deadline
   contract and IO→CPU lifetime, no old merge admission accepted, no blanket kill.
 
-Remaining wiring before runtime: native entry/metadata freezer/inventory,
-qualified generated shims and durable pair/data/preparation records, parent
-output/admission/worker-binding composition, original integrated executor
-controls, fresh immutable request and finite IO coordination. The declared
-worker entry path is not yet implemented and must not be dispatched.
-The original merge runtime remains separately consumed/closed, never reused.
+The native `entry.py`, metadata freezer/inventory, retained pair transport,
+`runtime.py` durable preparation/pair/output/events and `parent_runtime.py`
+worker/inherited-FD/source/output composition are now implemented. Original tiny
+executor tests emulate captures and native-clone provenance labels explicitly;
+no real CLI, SDK, clone syscall or canonical IO is qualified by those mocks.
+
+Fresh request02 is frozen in
+`doc/current-sdk-negative-native-20261019-02/INDEX.json`: REQUEST405caf14,
+PLAN175d106c, workspace /private/tmp/u-snr-313af230e9374ebd absent at preparation.
+Actual metadata-only freezer b5dcd0/0 and entry check c77495/0 verified176execution
++329production/12JSON/12lstat without opening inputs or artifacts. This remains
+UNADMITTED pending exact source/IO coordination; no Photo hold during review.
+The earlier01 request was superseded UNSTARTED: final source review found the
+shared verifier target allowlist missing this new target. Exact target support
+and real-verifier/fabricated-FD controls now pass; old01 bytes remain unchanged.
+Never reuse old merge/01 admissions or dispatch absent a fresh exact grant.
 
 All current result observations are original fabricated receipts/inert children
 or tiny synthetic generated files. They do not establish an actual SDK negative,

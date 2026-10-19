@@ -49,6 +49,29 @@ admissions or statements that consumed jobs remain unstarted.
   AgImageMetadata getter on Main is explicitly unsafe (may resolve/update auto
   values); do not invoke it. No SDK/UI grant is implied by routine CPU policy.
 
+## Next exact request — negative receiving02 READY/UNADMITTED
+
+- `doc/current-sdk-negative-native-20261019-02/INDEX.json` gives exact launch;
+  REQUEST405caf1433fa8d25f04d0b56c4195809dc94089c9572242646a55aeb8b9d4939,
+  PLAN175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33.
+  Workspace `/private/tmp/u-snr-313af230e9374ebd` absent at metadata freeze.
+- Exactly12CLI/6qualifiedSDKsingle/generated3codecs, each separate require/warn
+  off-seed then one-way negative update. Onebit NewRawImageDigest fault only in
+  disposable clone; require olddestination bytes/eightfields preserved, warn
+  exactcandidate+visiblefinding. Unison8EXglobal;600owner570worker120CLI90SDK
+  observation/32GiBdeclarednotphysicalcap/unknownretains/no retry/successor.
+- Nativeentry/runtime/durablepairs+preps+outputs+events and independentparent
+  worker/9FD/finaloutput composition now implemented. Combined63originalmethods
+  118edd/0 passed usingtinyfiles/fabricatedSDK/group/clone/FDobservations only;
+  CPU00closed/noactualchildren/SDK/EX/retainedpayload. Not a native result.
+- Source review caught missing shared-verifier target allowlist after initial61
+  methods mocked verify. Exacttarget+realverifier/fabricatedFD controls fixed it;
+  old01 REQUEST7a59758e is SUPERSEDED_UNSTARTED, Root confirms no admission.
+  Never admit/dispatch01. Actual freezerb5dcd0/0/checkc77495/0 verified176execution
+  +329production/12JSON/12lstat with no payload/artifact open. Fresh02 sent Root
+  for exact review/finite coordination; no admission or Photo hold yet. Run once
+  promptly when fresh exact grant arrives; never reuse fixture/merge clearance.
+
 ## Current three-codec SDK merge receiving — ACTUAL PASS/CLOSED
 
 - Separate fresh admission2620e2b5 was consumed ONCE after current source/deadline/
@@ -72,33 +95,10 @@ admissions or statements that consumed jobs remain unstarted.
   CPU00closed/noEX. Initial eb4bef/1 auditor key mismatch closedCPU; no rerun.
   Report `doc/current-sdk-merge-result-20261019.md` and saved-audit receipt link
   exact scopes; review guide no longer claims this request unexecuted.
-- Next genuine-negative receiving source work: pure `sdk_fixture_digest_fault.py`
-  and four original controlsff1b99/0 passed all3codecs/bothorders, exactonebit plus
-  shape/alias refusals; CPU00closed/nochildren/EX/SDK/payload. This is NOT an
-  actual negative SDK finding. Separate strict negative receipt/helper parser
-  `sdk_negative_receiving/finding.py` five originalcontrols134432/0 passed;
-  positive parser unchanged/refusesnegative, unknown/nonzero/truncated/missing
-  helperproof refuses. CPU00closed/nochildren/EX/SDK. Runtime owner and exact
-  designated-failure transport audit remain source work before fresh request. `doc/sdk-negative-receiving-successor-design-20261019.md`
-  specifies separate expected-exit/finding audits; no runtime request/grant yet.
-- Negative receiving successor source advanced: transport90d292/0 (5methods)
-  distinguishes designatedrequire1/warn0+normalproxy/server+actualnegativehelper;
-  publicationcf79fa/0 (4methods) fences fullhash/eightnativefields; schedule7892a4/0
-  (3methods) fixes12calls/6SDK/6freshdirs/onewayforcedleft/no mergeoptions. Alltiny
-  synthetic CPU00closed/nochildren/EX/SDK/payload. No immutable native request or
-  Photo hold; owner/data/orchestration/whole-run audit integration remains next.
-- Disposable fault installation now qualifiedb30d36/0 (3methods): only private
-  4096B originalsyntheticfiles, sixencoding/order variants, exactonebyte+fullhash
-  readback, hash/directory/hardlink/malformed refusals. QualifiedFDcloses/no
-  retainedsourceopen; CPU00closed/nochildren/EX/SDK. AuthenticDNG operation
-  remains unexecuted until owner/whole-run integration and fresh admission.
-- Negative successor integration: kernel d6f3a8/0, Cases93888f/0, parentraw
-  replayf001b1/0, admission+owner ca6e15/0. Currentcombined03b8c9/0 passed43
-  originalmethods/sourcepins, CPU00closed/nochildren/EX/SDK/retainedpayload.
-  `tests/sdk_negative_receiving/README.md` maps components. Nativeentry, durable
-  runtime/shim/preparation records and parentfinaloutput/worker/9FDcomposition
-  still missing; no request/admission/Photohold. Prior component source hashes
-  are historical; combinedreceipt pins currentdata/plan/owner composition.
+- Negative receiving source chronology and exact current63method qualification
+  are in `tests/sdk_negative_receiving/README.md` and the successor design doc.
+  Native source integration is now present; only fresh02 review/admission and
+  actual execution remain. Earlier missing-entry notes are historical.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement

@@ -28,7 +28,7 @@ def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET,
         if not v:raise ValueError(s)
     require(type(credits) is int and (credits==8 or credits==18 and target=='sync-auto-cohort'),'explicit known grant size required')
     require(type(parent_pid) is int and parent_pid>0 and type(worker_pid) is int and worker_pid>0,'actual parent/worker IDs required')
-    require(target in ('current-sdk-merge','sync-auto-cohort',TARGET,'cached-sha-benchmark','sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
+    require(target in ('current-sdk-negative-receiving','current-sdk-merge','sync-auto-cohort',TARGET,'cached-sha-benchmark','sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
     require(type(start) is dict and type(start.get('owner_pid')) is int and type(start.get('child_pid')) is int
         and start['owner_pid']==parent_pid and start['child_pid']==worker_pid
         and start.get('target')==target and start.get('command')==command
