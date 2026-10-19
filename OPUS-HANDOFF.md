@@ -9,8 +9,9 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
 - **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest SDK
-  releaseguardcontrols a1f0de/0/NOsession, child44723reaped0/groupabsent/token00
-  closed. ActualofficialREADME purecheck9b2536/0. No SDK/compiler executions.
+  sourceunpack7403/0feceb/0/NOsession, nativeunzip46216reaped0/groupabsent;
+  independentd725da/0 rereadall133855079B and reacquired/closedwhole8EX.
+  ZERO SDK/compiler executions. FirstCRCcontrolfixture137recovery closed.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -115,9 +116,22 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   recognizes2768only when explicitlyselected, not a runtime/build grant. Six
   controls a1f0de/0 passed incl actualbuilder synthetic2768refusal beforemkdir,
   officialsavedREADME9b2536/0 checked. Newmanifest includes release/readme/license/
-  selectorhashes. Qualified2724binary untouched. SDK2768archive STILL unextracted;
-  private safeextraction + separatefixture-writer-only2768build nextpreparation.
+  selectorhashes. Qualified2724binary untouched. SDK2768source NOW extracted/audited (below);
+  separatefixture-writer-only2768build remains nextpreparation.
   `doc/sdk-current-release-identity-fix-20261019.md`. No SDK execution yet.
+
+- **SDK2768source ACTUALLY extracted:**7403/0feceb/0, root/data SDK_root in
+  `tests/qualification/sdk2768-source-unpack-actual-20261019.json`;3769files/
+  133855079B, exactcensus+allSHA, nativeOSunzip0/groupclosed. Independentd725da/0
+  rehashedallsource/requiredSDK+XMP+JXLinputs/old2724tool/canonical9; full8EXclosed.
+  SDKsource at retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/
+  source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1.
+  Original `tools/adobe-validator/fixture_writer.cpp` exists; onlyoldwriterbinary
+  waslost. Existingvalidatorbuilder correctlyrefuses2768. NEXT sourcebuild
+  successor must fixture-writer-only2768/freshbuilddir/separateprovenance, NOT
+  rebuild/relabel2724validator. SDKruntime/fixturegeneration stillzero. First
+  CRCcontrolfixturefailure then idlecontroller137recovery retained; corrected
+  6controls a22bdd/0 pass, no nativeextractorretry. AllresourcesZERO.
 
 ## Remaining work — do not mark goal complete
 
@@ -146,12 +160,14 @@ checkpoint; historical snapshots below do not create resource holds or grants.
    deleted originals, no recovered clone. Current inputs.bind only/private/tmp;
    exact trustedpersistent codec-state path integration NOW controlsqualified
    7cdd5e/0; actual12states/ancestry/nativeclones still required before execution.
-   Validator2724 survives; SDKtree skeleton/writer absent. Manifest sourceSHA
+   Validator2724 survives; old2724SDKtree is skeleton/writerbinary absent.
+   Separate2768source is extracted below. Manifest sourceSHA
    is driver.cpp, notSDKarchive. Official2768 source NOW persistently fetched:
    97807/a2bf20/0,80509918B SHA c1d3a545ed45b150e59af2e6aa0695c1551f0e2bed34ad87436898a05194d2b1,
    `~/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001`.
-   Index4215entries/133855079declaredbytes, license/readme inspected,0extraction/
-   SDKexecution/build. Independent1eb9cb/0 archiveepoch+unchanged2724toolSHA/full8EXclosed.
+   Index4215entries/133855079declaredbytes, license/readme inspected; NOW
+   private extraction7403/0feceb/0 completed3769files/fullhashmanifest98672df1,
+   independentd725da/0 full133855079B rechecked/whole8EXclosed. ZERO SDK/build execution. Independent1eb9cb/0 archiveepoch+unchanged2724toolSHA/full8EXclosed.
    New2768 is distinct ancestry, NOTrestored2724 or validatorreplacement.
    `doc/sdk-generated-fixture-readiness-successor-20261019.md`. FirstJXLsearch
    capped50000; narrowed91roots1554entriesfound no namedpayload, notglobalabsence.

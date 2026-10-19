@@ -158,3 +158,7 @@ full logical model are retained as negative optimization evidence.
 ### SDK source release identity corrected
 
 [Builder source fix](sdk-current-release-identity-fix-20261019.md): new2768README contains2724history, exposing old substringguard’s falseacceptance. Builder now requires exact firstcurrent2724release; six actualcontrolsa1f0de/0 include actualpreflight2768refusal beforebuildmkdir. OfficialsavedREADME9b2536/0 confirms2768current/2724refused. No SDK/compiler run or validatorreplacement; safeextraction/versioned2768fixture-writerbuild remain pending.
+
+### SDK2768 complete private source extracted
+
+[Source extraction](sdk2768-private-source-unpack-20261019.md): actual7403/0feceb/0, pinned OSunzip46216reaped0/groupabsent,3769files/133855079B and exact bounded ZIPcensus. Independentd725da/0 rereadallsourcehashes/nativeproof/supportpins/canonical9; requiredSDK/XMP/JXLbuildinputs exist, old2724validatorunchanged, full8EXclosed. Sixcontrols a22bdd/0; first fabricatedCRCfixturefailure/recovery137 retained separately. ZERO SDK/compiler/fixture executions. Separate2768fixture-writer-only build and final12states/SDKmatrix remain.
