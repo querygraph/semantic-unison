@@ -62,6 +62,23 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
   not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
 
+## Native positional-write current successor — ACTUAL passed/closed
+
+Original ML/C tests renewed against current18inputs: owner73365/68ce3c→d6f63a/0
+no session,210children(202zero+8designated2), allgroups settled, CPU8closed/noEX.
+Each compiler64positive cases/1131assertions;59native+2MLinvalidprogress+
+3forced-MLfallback, fourguard removals. Independentacc901/0 checks210rawcalls,
+384source/object entries/12binaries/current18inputs, exactnative59casenames,
+privateCtransformations and freshCPU8closed. NoSDK/Photo/camera/receiving.
+`doc/final-positional-write-result-20261019.md` and
+`tests/qualification/final-positional-write-actual-20261019.json` retain all.
+Earlier62749/934272/1 and52520/7d333b/1 knownfailedprefixes(21/38children) closed;
+fixes only generatedhardlink reader and writer-onlyforcedfallback anchor.
+Auditf282bf/1 ambiguousargv join closedCPU; corrected ordered/probeaudit passes,
+no native rerun for auditfix. Sparsehole onlybounded128B samples/nofullhash.
+AllresourcesZERO. RealSDK048d0ae7 window stillseparate/unallocated;
+keep routineCPU work independent, no Photo blanket hold or automatic successor.
+
 ## Core validation findings — ACTUAL current stock/Ox controls closed
 
 New fixed synthetic production DngValidation/HelperSupervisor matrix ACTUAL

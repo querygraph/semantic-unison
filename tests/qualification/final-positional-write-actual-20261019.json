@@ -1,0 +1,1497 @@
+{
+  "schema": "unison-current-positional-native-audit/1",
+  "actual_owner": {
+    "tool": 73365,
+    "initial_chunk": "68ce3c",
+    "terminal_chunk": "d6f63a",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "workspace": "/private/tmp/u-positional-current-6de2a4f3c0",
+  "result_sha256": "9f5275434add39e4bcc9ebb81f9e4585d0610c47016e54fc4ef68bbb02f83637",
+  "source_pins": {
+    "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+    "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+    "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+    "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+    "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+    "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+    "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+    "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "tests/positional_write/README.md": "cf48d4410a10778a19b03585df7d038ea27fb1e181233e8db7f3e66204e14229",
+    "tests/positional_write/fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+    "tests/positional_write/run.py": "d82b64a948ca17730bb8f051e94490a873d84a1c27b21fa1df650750b6a5d625",
+    "tests/positional_write/test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b"
+  },
+  "calls": [
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-000.json",
+      "sha256": "2643d4c48bd6a64a3b98f6bee8cdbfd406f7adf29ab16c306a19eb7b0d95f0be",
+      "pid": 92702,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-001.json",
+      "sha256": "497efcc12997ea1388073169daadf36106d01b01ef948000abbca8318d3bb738",
+      "pid": 92704,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-002.json",
+      "sha256": "6dfad400cf68b5e988cce3b68e678912beccc8836f995e4ffc3c5b2f95290dad",
+      "pid": 92706,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-003.json",
+      "sha256": "3db84c4f1af264006363308fc069ffa631d64f3d2607f19308d005bc13aeff4d",
+      "pid": 92708,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-004.json",
+      "sha256": "19beedbd229f222b67f60fc8091ef68a4708106e76884283b7413e5c9a7438ba",
+      "pid": 92710,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-005.json",
+      "sha256": "d27865cdb8a30768d58a53a64a9add55cfd0e627db8dc56e8cdba404fff75311",
+      "pid": 92712,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-006.json",
+      "sha256": "bdb6befa5242b3ceb8238571920cf042092a56f7be9fa773b5b1e4e6b8d059fe",
+      "pid": 92716,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-007.json",
+      "sha256": "f665da43eeaa8edb48500715faad0aa4482c267ff84a65c9aa7f7b9bc9c17595",
+      "pid": 92720,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-008.json",
+      "sha256": "585490f1a6e05631cb18dcbdaab13148e11e4a80333ca74c5bcf57a6d6c55a0b",
+      "pid": 92722,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-009.json",
+      "sha256": "a59921d423df53a006ca440cb8dada8101c0c4a17c3f47281a14bb2281f995fb",
+      "pid": 92727,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-010.json",
+      "sha256": "b5735067a6b060c4ada515ecbffcad0e03cc25e44fb059d9fa409cfe3bfa7a55",
+      "pid": 92729,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-011.json",
+      "sha256": "8755f750c32d777f55e8410c0e356cce5be00c1e0bf6d3f397341751d4c93e6f",
+      "pid": 92734,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-012.json",
+      "sha256": "99b77d5331b9c4d068b8b72cd79f4e8c39a6a0264b1b80f925ad416673370879",
+      "pid": 92736,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-013.json",
+      "sha256": "6d05a1cc1bb26e169a9c4b9f8da21caeeac306f3731a5fd2afffd5ad7291e332",
+      "pid": 92741,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-014.json",
+      "sha256": "212e535e73b85154b38eea203e11680aa8866d19711ae885aa2b7d79319e7b3c",
+      "pid": 92744,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-015.json",
+      "sha256": "e3e533466d83b2fbdd2a690c30ec304dbf0cacf01fc07a7040b5a70825b8c76d",
+      "pid": 92750,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-016.json",
+      "sha256": "549dee68230b3fc74e1d1f29d173e23e1483c4628adf98aec265c2b1b0f39dd9",
+      "pid": 92752,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-017.json",
+      "sha256": "87c4abae1c2843678f8958447cddeb7b870877a619ee3199b31d9b5082c20ac1",
+      "pid": 92757,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-018.json",
+      "sha256": "80526237cd57d7df61ddc57c51d35303c78e6fdb21c3ca758f9e9f628d6126f0",
+      "pid": 92759,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-019.json",
+      "sha256": "5df9631c4643699cce8d3990e3902f4b49ad96b644234c7a89a8f1bc60397a4f",
+      "pid": 92769,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-020.json",
+      "sha256": "94e16e161e0af8144897e095d416d9b0b03b4c0ac612d2c3207295b9f4bc172b",
+      "pid": 92781,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-021.json",
+      "sha256": "81071319f08129bc72323bce143cfb2114d99c17cbfbc386e50a695289a41963",
+      "pid": 92783,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-022.json",
+      "sha256": "ade94045fd814909fe47dc7a9be4a348abf3533d86517ae87131e2d122d4d4b7",
+      "pid": 92787,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-023.json",
+      "sha256": "8997c2ddf1135846f827d4a7bfb37c5a401ff867fe8d99d57f59405e62fcb75e",
+      "pid": 92791,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-024.json",
+      "sha256": "1f15511483fb645073838d6659bd2de5b8768829381640d7538e9255723f6861",
+      "pid": 92793,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-025.json",
+      "sha256": "e32f6cbd3edfc74ca49e058b74b1045f216cef62175665a6cd25c288f5ec056e",
+      "pid": 92798,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-026.json",
+      "sha256": "c214be55b29ed6ea574fafdbd0927a34c836fd560a2648d387aebe356f96f114",
+      "pid": 92800,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-027.json",
+      "sha256": "9526e670c26eecf2d37a28baf4f30526fca9c456ade7edbe6f27e5a60b222a01",
+      "pid": 92805,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-028.json",
+      "sha256": "f8d5e9d5f2b61ef2b480fe0326b655ab2ea18177155d7bf7ac5428c7e9529362",
+      "pid": 92807,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-029.json",
+      "sha256": "d218b48e04b265bd396160db817cacba4660f6673e01cb00bdbb4008d9ff2e30",
+      "pid": 92812,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-030.json",
+      "sha256": "8b4ddbbb8c476b03f6fa568bc93b0a35797a2807aac11b207fabe6b20121c5a8",
+      "pid": 92814,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-031.json",
+      "sha256": "a3781d30d0639ecfaed464a6784bf09b18ddd4716f0aac21316e472aaa25fbe7",
+      "pid": 92819,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-032.json",
+      "sha256": "38ca4ce72b310314a83f9d5a4e04172d3773de54b318561105c1deb7b32cdbc1",
+      "pid": 92821,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-033.json",
+      "sha256": "1632ed0513144f98e9900996b511d71f70af6d49ad3c18d0f10dd109757539ff",
+      "pid": 92826,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-034.json",
+      "sha256": "037adc11097a7f4ccad89db03c05d8fc1160da127b7b5b5dfe18a5756f6e4225",
+      "pid": 92828,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-035.json",
+      "sha256": "46dd00b03c62a60bb4ac1449daee0ae9e37f53b5fdeca03d21cbb3284aa280ed",
+      "pid": 92835,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-036.json",
+      "sha256": "9c2f7b88bd131e0d635ee578695520f289b811d907a72d877e916e1884eb6900",
+      "pid": 92854,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-037.json",
+      "sha256": "82cf8be5da703851cb25e17149ee1ec3975ce30d423c477284b88c25e3a7c885",
+      "pid": 92856,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-038.json",
+      "sha256": "58da16848c4a7aeced82984bb1adf54e456f68340386527d738ecf58fca08c09",
+      "pid": 92858,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-039.json",
+      "sha256": "a4edc454bc3969df4afae4633d86b92b863966fab7e7c7bba4c1169892cc3266",
+      "pid": 92862,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-040.json",
+      "sha256": "fbd798fb38d80bd900c86b8fbb6ce97b20021657534c49bc3816c413b70da99c",
+      "pid": 92866,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-041.json",
+      "sha256": "87f3ab81812d81391adc8db072538ac19c1a0d0184534a61db4409973faaaaaa",
+      "pid": 92868,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-042.json",
+      "sha256": "859f21308a4ca8c6493a5d6ac1b92fdb79b9ebf4fa53c218de8820c8bf8c071a",
+      "pid": 92873,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-043.json",
+      "sha256": "825b2ca954bc33c2a9cc8078c32dce77c10d80d2b2e0b3fda3419731c7476a8d",
+      "pid": 92877,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-044.json",
+      "sha256": "dd45a355dc9679897e8c5cb9f8c89c4d926dd1c70f845a84ddb50ed2089b1ab0",
+      "pid": 92882,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-045.json",
+      "sha256": "c9a35b8f8a86b7ecf8ea1f32d43b4f5e532908135a9a6f6ffa40e36f9ac519cf",
+      "pid": 92884,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-046.json",
+      "sha256": "02b851cbe1ee205fff3da6c1588f680ad8b4395ef8409f5dee5c0c2afeb6bf1e",
+      "pid": 92889,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-047.json",
+      "sha256": "5819c9301cdf48587ce4418f3029138e95da2b81891a2afc1c8759b364948af0",
+      "pid": 92891,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-048.json",
+      "sha256": "ad3534d732dc4cb5c3c1949faa9499360aeb208fabd169364b000c2926fc16c6",
+      "pid": 92896,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-049.json",
+      "sha256": "e9be7c851c60485c24ffa8dee64940e2ebb44374d090dcc12c5dedb4ff782b91",
+      "pid": 92898,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-050.json",
+      "sha256": "8d73cec9cbcaf762e36099c6b9711c52ed7ca13321c8f5b46667a07f37fdc2d7",
+      "pid": 92903,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-051.json",
+      "sha256": "da17d519c6d42d4e71af00e7b496262fdb32efc03acf7f9ba23fa22c4c8a1b6c",
+      "pid": 92905,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-052.json",
+      "sha256": "d5997be345a340a93f596db5bfcffa51f3386d5acb592273e10634a103ad856d",
+      "pid": 92910,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-053.json",
+      "sha256": "6684be74e92df2be96d28ead8615b8ad7309c6ee6af890dc5de5863c935cd36b",
+      "pid": 92922,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-054.json",
+      "sha256": "f057e3f47ed80a78df37ec7908b71a56aa9437f363f3240b1b22cbdff10424ec",
+      "pid": 92929,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-055.json",
+      "sha256": "5d34671e14478dee330e4e380bd6c931669de6aa479c9fde4f3aea4f9427fff7",
+      "pid": 92931,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-056.json",
+      "sha256": "96694a06fd6cf5a35b4249f3289f98cc5ea5b9dba229ed7d38ce91a3f13a4be8",
+      "pid": 92933,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-057.json",
+      "sha256": "13ebdc3f14c6cdd7a918d84033c2df4cc3a2a820b9cf921f23cf5687f130b7b2",
+      "pid": 92937,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-058.json",
+      "sha256": "979b30a2cd359730466d79edc6d37b5ad9c03bd93c38360955c63c444e851172",
+      "pid": 92941,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-059.json",
+      "sha256": "1cc1668e394358511e0d6c64119afc64edce74df2d3c4ccae558ddc39c120f73",
+      "pid": 92943,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-060.json",
+      "sha256": "08037f4b74f49e3379fb7d07b110fe4839139c16eb3c67c7f74a8a5a099b1b83",
+      "pid": 92948,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-061.json",
+      "sha256": "23b2ffde3eae60bdd33a663f9f51b563bbf917ae60e469b48273f0ebc1ce5bb6",
+      "pid": 92950,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-062.json",
+      "sha256": "6c04fb0c63147031a8f4ab945f229b09a4360c0718644954c4ea5997892cc5ed",
+      "pid": 92955,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-063.json",
+      "sha256": "091b2c26619e5154b433bc52c0ea9a78e92df3993dd4831c97e918697148a28a",
+      "pid": 92957,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-064.json",
+      "sha256": "a28deeb0020fcb51c8ddb59ed388f20c8be7b66784bfc163e19eb78eba8fdd40",
+      "pid": 92962,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-065.json",
+      "sha256": "e35d433a238f9aec3f6ec35b475cd6a244159cacc6b37a65330a1655fe0f1111",
+      "pid": 92965,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-066.json",
+      "sha256": "a6d08d54ce8e74d3e0933a5806e472f417bd125d9fe0c1cb049b4711e5b4b0bf",
+      "pid": 92970,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-067.json",
+      "sha256": "c39777cb759c9b744b8fa3f2af8f164417a8c2f87178c80f42dbac04a91d8746",
+      "pid": 92972,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-068.json",
+      "sha256": "4b2c1cfdcf6ed5a01e32581770359f57caf20a973b8858fb8c973d2fed03a385",
+      "pid": 92977,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-069.json",
+      "sha256": "63d731aa43458c49a41161d5e66fecb568635613e025a37e005a4253657c5c30",
+      "pid": 92979,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-070.json",
+      "sha256": "e8726bae983336350ca7a1e572df8c159b6b49f4a317e7e4e152461b40696fcd",
+      "pid": 92984,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-071.json",
+      "sha256": "a08daee135a9cee34b79f992a012c177395dbbe774430a0522096d23cf7b1bf4",
+      "pid": 92994,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-072.json",
+      "sha256": "be5bfd3d4c6221c08e3cb389e8148f65af46a982188533478487e596ead531af",
+      "pid": 93003,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-073.json",
+      "sha256": "48b74e751bdbfb5e3294deed80865891124ea28990ee242bb59688777b72ff32",
+      "pid": 93007,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-074.json",
+      "sha256": "1661c21ca81d5bc71522f0981afdba432e7b3bbd6f4e7fc7eef0f45c1e61edba",
+      "pid": 93013,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-075.json",
+      "sha256": "c8b2ec41c01b3d86aed3bc9a5a89aca11f4f37f6063690c55004b9296e3345f5",
+      "pid": 93015,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-076.json",
+      "sha256": "e962daef0b5930517e0fe044720e8a52b9b371da4ec958372f89dd21f13734cb",
+      "pid": 93020,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-077.json",
+      "sha256": "cef5ab3a69204305bdfee672a678e2e83d625eea0e2b44bb37daf4f9b9564273",
+      "pid": 93022,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-078.json",
+      "sha256": "e70f40c2246f6476e6a71fd3e7979c91f253f221ee3d6df982d36c49c54c9996",
+      "pid": 93027,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-079.json",
+      "sha256": "787e74380abafb1612ff82793af9194fda26cfe8176bce94252301ff730bdefa",
+      "pid": 93029,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-080.json",
+      "sha256": "8d8f675c2e2e075b9b72e22f46a7899e19e935d2785441db61061314f2436658",
+      "pid": 93034,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-081.json",
+      "sha256": "c3816fc6653d106f5ca64e5cbfb38bb550339a62b387ff3648133a8e6e801a4d",
+      "pid": 93036,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-082.json",
+      "sha256": "f8d58959696815d86448d86c71d3d62973487a7f559882b0c89eca5581b60dfe",
+      "pid": 93041,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-083.json",
+      "sha256": "6a5d5ea9c2cb43ba820b645d14c70b650c33ce643093e99f823c2451e8c451c1",
+      "pid": 93043,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-084.json",
+      "sha256": "8bd30487ae152733c24f484b60b6e8a56b0e56ac92e426d4596ef93f81352d96",
+      "pid": 93048,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-085.json",
+      "sha256": "4b27e5218893229b43f74725d6e1460c305aa30041112e6ccd98fbfd12f26c2c",
+      "pid": 93050,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-086.json",
+      "sha256": "82ea9eac3c2e9e2b8e48f7079e22256fe432d1caac63cd9ee360bbbc70bd3187",
+      "pid": 93055,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-087.json",
+      "sha256": "6f8bf1a9a4ce4c16f927fceafd452f555b454b69c9d0da5a2051e84b811069bb",
+      "pid": 93067,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-088.json",
+      "sha256": "4ec2463550bc52f700005df25be409b53161c2e24d7a8eee19dda22b52173ac3",
+      "pid": 93069,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-089.json",
+      "sha256": "70758bcc09ca27a647302eba9f06a4e02990626aee572cfbad0539b027539efd",
+      "pid": 93071,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-090.json",
+      "sha256": "bb12895a60bad2130491506c3b37b0e2328f8530fafb24605fae5331bb2d3c83",
+      "pid": 93080,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-091.json",
+      "sha256": "f76b90140567c43eac801ed077bca1c26132222893665a314752c3a3aa988e36",
+      "pid": 93086,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-092.json",
+      "sha256": "c424e7b7c6e57c3759b7185a4f572dca40b51a47e9735bbe0cdae227df418260",
+      "pid": 93088,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-093.json",
+      "sha256": "759a1c19e0fd84d33beb400f9f53403d51af285546224b67c7fb6558549cd7dd",
+      "pid": 93093,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-094.json",
+      "sha256": "980dbd2fc5b2c3d428642bd03d4a2c37d65584b03094a3d8a9fb3d6311aec043",
+      "pid": 93095,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-095.json",
+      "sha256": "bfc152c54e14cba5b33c1630cf76bae5a2e58e4ee275d2c4940dcb770e0d27c2",
+      "pid": 93100,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-096.json",
+      "sha256": "83d959a7d9b8f582f023b340de015d4a0440e28e7b9c1f8c0eb41bf9cf5f2aba",
+      "pid": 93102,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-097.json",
+      "sha256": "ba21fa964c8b1ae6aa01b1ec170214713ce7b5eac6157e78d8bf862487ead5f7",
+      "pid": 93107,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-098.json",
+      "sha256": "17ffb185742a8ff9b2cc9b27a2d9d54db72e3d3c7b813627703d30269d82ca6a",
+      "pid": 93109,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-099.json",
+      "sha256": "e7d1f1467090bef25d45362ae4d06a1d14f7663f66fc1d0eb0b851316f6cecfe",
+      "pid": 93114,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-100.json",
+      "sha256": "66040431e1da2bfa39f3ec7f1bb57bc7e142ff3ded02fc65b1b8e90fc915ff3b",
+      "pid": 93116,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-101.json",
+      "sha256": "772fa4c2055f5c0021c15202a9d8f9643d202fbfb00094980f8a3faf9b600142",
+      "pid": 93121,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-102.json",
+      "sha256": "eacebd3f389c69efaf2434d52624d70167d01c5b0cac9b911a87996c6ae9f88b",
+      "pid": 93123,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-103.json",
+      "sha256": "9f52a01279af25b23581cdf13430fce6d79e07be03ff10d2a1b8ef7339355672",
+      "pid": 93128,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-104.json",
+      "sha256": "56dbf6641e9991359efcb13ffc9502b563a502cf19ca20407c37b07c55235a04",
+      "pid": 93138,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-105.json",
+      "sha256": "664be96766706254ec95316d1e4cb2e4b4cf37a0cc1df124852a74a91d0ff47b",
+      "pid": 93143,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-106.json",
+      "sha256": "6480fde411d1eb9956335f27707989c05290b2e05d09525ec61f96265b430465",
+      "pid": 93145,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-107.json",
+      "sha256": "be45653a2f550bf9f4aa3f910fa2236e26bfde77f5516ef59f61cb2b49ba2ddd",
+      "pid": 93147,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-108.json",
+      "sha256": "b7d20c9700ba25578f2c2416e09c146a7d6e87cb4b0dd52a8ae4f3539e2ee7cd",
+      "pid": 93149,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-109.json",
+      "sha256": "9024771839e2a8b491c1e412281e61956e00d4b857653705aaeb571d5aaef1b5",
+      "pid": 93152,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-110.json",
+      "sha256": "227bd909dbf9949a47816905d2201236b66c732bd36cf76db3a6435c3ba116e3",
+      "pid": 93160,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-111.json",
+      "sha256": "119d3889573120afe279a5db40e52900626cbacc5cddd08786e48925a8ad186b",
+      "pid": 93164,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-112.json",
+      "sha256": "9a9be9f61225adab1fde429b84861cc01c616df8b9f64697ac09193d36e9bacb",
+      "pid": 93168,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-113.json",
+      "sha256": "b5f7c8a2c26c045d2a0c893d6dfa98fe9eaec7d90eaa16cb14a92b15118b5fd5",
+      "pid": 93170,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-114.json",
+      "sha256": "1c5711495a9b6a62fba964b6929a55cf87a2b2b8abc9f84bf92201d83bb1a777",
+      "pid": 93175,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-115.json",
+      "sha256": "6864f62ca68f2408428b8cb818d3feb9eb2b465e9f82d987ac586c19b0c54a9f",
+      "pid": 93177,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-116.json",
+      "sha256": "d317bcfd3a2975468a129a75169cb41d82245ef0fc8166cc1770b3ff9473b7f2",
+      "pid": 93182,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-117.json",
+      "sha256": "f4075387f2a8b16c0b66c28bcd2cbb926eaff7d39a3f16c4ed9a927bc4ed470a",
+      "pid": 93184,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-118.json",
+      "sha256": "2277f537d82e56febb93469a212cf34c84e13938529905e48d6950a535b90e9c",
+      "pid": 93189,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-119.json",
+      "sha256": "ebead413d8cc1c288779ae803d2d88f971dda430596b1f87d35255e011d66642",
+      "pid": 93191,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-120.json",
+      "sha256": "d9083dbd4385f2d895f92f43a83c5d5d2cfdef127c1df32fc52e538b6a7c582e",
+      "pid": 93203,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-121.json",
+      "sha256": "efd440b90661a45ca9d58d2af145a5747502d25bfc919e277013ac00e9a7449f",
+      "pid": 93205,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-122.json",
+      "sha256": "b3c994220f2a9c487d357d43bf0f87b8e87895d748b78198760143a4a1e4ac94",
+      "pid": 93210,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-123.json",
+      "sha256": "ff01b10eebedccf1b44fd2310e188542eab7fd68a7ec421cea4519a8861e27e2",
+      "pid": 93212,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-124.json",
+      "sha256": "4def1c2de4a4dc388574fd67a0bd382be16f0d897810d3ad62e640cca3767c8f",
+      "pid": 93217,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-125.json",
+      "sha256": "604808618951bf8b50217e8902496778bf5f222183d682586f287015c71a2a84",
+      "pid": 93229,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-126.json",
+      "sha256": "05f6f8f0acc648e7c57c2a885509e5b2096e6a198bf523467b8c6dd445d81b5a",
+      "pid": 93231,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-127.json",
+      "sha256": "0e210777ad899093528177ebe5e83e9308a1ee33128dbae667292a78d7b28eb7",
+      "pid": 93235,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-128.json",
+      "sha256": "ba5e1f3ca886c1d7942ac856baf6776f131ac8e104571c65959e8a04feb74d78",
+      "pid": 93240,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-129.json",
+      "sha256": "6abd8b6b29844d6d68892ef9d3e83f115ac24416164dfa0e134161c885c42481",
+      "pid": 93248,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-130.json",
+      "sha256": "b8761e4ed243ca8ddf274aff7ae9823c9051b0663e98039dc7162986b40622b2",
+      "pid": 93253,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-131.json",
+      "sha256": "5dbdcb1fd76780753647203f7a1a891a24f61d1e129383f0af87b422d7a09922",
+      "pid": 93255,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-132.json",
+      "sha256": "d9fd56a985bf04412937e697686d403bc1e49f1534a28257895b6bdbd0d77cbf",
+      "pid": 93260,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-133.json",
+      "sha256": "bee08efdc8924e1f0ed7202f591b7e3d77d0f6731aaaef728e582ec8a1c2904e",
+      "pid": 93262,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-134.json",
+      "sha256": "8628dea6eae2b50e8f9f8c1f1a229de28f04e41754d52eb442745ba8089c18a1",
+      "pid": 93267,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-135.json",
+      "sha256": "03469c885698d82c5b71d73c51eff06f34be9799cc4a0d98964baf9eaf75d642",
+      "pid": 93269,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-136.json",
+      "sha256": "fd6f4f7502fa59041888b67dae5abcda8f3c500584780e9a723883dd589270e4",
+      "pid": 93274,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-137.json",
+      "sha256": "8af41b56d474b3b561098ff50df1b1ad6ba7a765f49e9e3907036b87e773f0f9",
+      "pid": 93276,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-138.json",
+      "sha256": "3a5070a17b33dd0eafaca751a6345ba611b6f6de4316d54e05dda69466ae94b4",
+      "pid": 93281,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-139.json",
+      "sha256": "ac9ac5f67e7a530297610951edb0b6cdc0ed616c7157e651825eaca18406cde4",
+      "pid": 93283,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-140.json",
+      "sha256": "386ad2381819b117133945065a5a4978bcc7bfc6e7d0a2a9062e635bab8954dc",
+      "pid": 93288,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-141.json",
+      "sha256": "c941d747258ac53892572576bf2548e5e633e41c75cafc07e306af51d6b17d8b",
+      "pid": 93305,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-142.json",
+      "sha256": "9311c1666d39133fcd378eb535018e7f95ac3eebbd5ebd3263506f0e2d9bd3e6",
+      "pid": 93309,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-143.json",
+      "sha256": "4ffe35cc1367351b67162cb293f9a316aad6e42b7203b33ddcf09753dbef663c",
+      "pid": 93311,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-144.json",
+      "sha256": "4ba3481cb75d90f7c2b0e67766349594e79f4cae185b96ed8c07275600b557b4",
+      "pid": 93315,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-145.json",
+      "sha256": "ab006086d787a1b1d1f7b5d6c640bf0e25f46929503c4a9f9823bef12efc0e37",
+      "pid": 93319,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-146.json",
+      "sha256": "bdd36db6e890ab8416852552e24ad3c1f923325142b5d289046256dd7d274a97",
+      "pid": 93321,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-147.json",
+      "sha256": "34e1b852efb95b8dbb09023395755f104dabbc07f1e881da800b909e169c0e60",
+      "pid": 93326,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-148.json",
+      "sha256": "555128c4eda3af51d16e43b34eb2149758a3e6c18344bed9d9dd8c837676f8e3",
+      "pid": 93328,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-149.json",
+      "sha256": "f87019fdf00bbd42114d83dd811de6d6c9237a5d76fefb6ad7f7702166bdeb73",
+      "pid": 93333,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-150.json",
+      "sha256": "03d0ea8a5fcf39527c6f48421f106ffb38418abd4dc19e1ed89512f207927ce1",
+      "pid": 93337,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-151.json",
+      "sha256": "92c28c2cc135d7d9b5ab49e9fb03b054a46685cb59aac920e9eaa79a5a80e405",
+      "pid": 93342,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-152.json",
+      "sha256": "d79124adc9ac66fe28b154d2f231f7f09cc318c11002d7458f46d6eb1d32aad6",
+      "pid": 93344,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-153.json",
+      "sha256": "e4805920b81522b35e40da7541c6690abff66f8787a2f4e9e8e58efb4cbcd327",
+      "pid": 93356,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-154.json",
+      "sha256": "d44b71400782aaeacd59294e39438ec1ae3fa5f5e0bf2d0c40ff7d81828a1a63",
+      "pid": 93358,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-155.json",
+      "sha256": "a5d0471c28265513684b66edaa420bca98455225befbe547be6b36fcf91f0c37",
+      "pid": 93363,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-156.json",
+      "sha256": "76b282df4dd048cf35195bc5cfc63b343dbde96c7bc8f24de123676e67ceb68f",
+      "pid": 93365,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-157.json",
+      "sha256": "50065d1895a312cf18ba2a30b9a9b5ee768490c8b062a1be7f5beda6f758d7b8",
+      "pid": 93370,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-158.json",
+      "sha256": "3ebe389b7479fc1750633a774da8dc1cda352a946c218090965ceda862aade95",
+      "pid": 93380,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-159.json",
+      "sha256": "a35ae4f5bd76d167a7215d52277b67c2e146a01d7767fac3d29d054515db3f38",
+      "pid": 93382,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-160.json",
+      "sha256": "831a6f3f2800023cb2dbbd216ad4d3fdcbe379097f05d0ff641a756cda0aa988",
+      "pid": 93384,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-161.json",
+      "sha256": "f02de60c7c96b8e456c0d40b61d1d8cb07e9a3c88a78e39666be0ecf200b962e",
+      "pid": 93386,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-162.json",
+      "sha256": "5b9c8813656cbbc0952a03e4621387d5068966c2130c7d072d412b229224f484",
+      "pid": 93393,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-163.json",
+      "sha256": "75872e982531bd4719fc2ab0df1c0da853c9560c208afc9ab84807bbd2524543",
+      "pid": 93404,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-164.json",
+      "sha256": "f5ef307043ff7d831854845b5dd6afc714a66beeaae99f719560c9fc6476eeb9",
+      "pid": 93406,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-165.json",
+      "sha256": "de959371824c898285f054be2f8ece7e63a74a6af52688d93ad995b08ec7411a",
+      "pid": 93411,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-166.json",
+      "sha256": "a782baf251fe73776b9561503c1b51d9eb2b2cf98970ed6eaf6edca20c0eedae",
+      "pid": 93413,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-167.json",
+      "sha256": "e872335388e6f59b5f324ac372dc4825e432f0880881887baa5505e4c0652aea",
+      "pid": 93418,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-168.json",
+      "sha256": "f1c2febc45aa6a328afb436e2b7ce74d3a43780bb0709068fc309722802af3e7",
+      "pid": 93420,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-169.json",
+      "sha256": "11fd3759b44bfcaf97af5e9f2365384439de446f8af0e1d8dde5b70860b03d0f",
+      "pid": 93425,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-170.json",
+      "sha256": "4202174e0b859daec7bdbec4f286626fedb364ff3b69a3eb26e3a2a1eed086f7",
+      "pid": 93427,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-171.json",
+      "sha256": "08d267666092001c075bbe96e05c9741331e496342f940c558ec65749ea5c901",
+      "pid": 93432,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-172.json",
+      "sha256": "b1b44575216fb96303a9bb1f3a82df85cf93b415c53d1b962f9a1ca81566549c",
+      "pid": 93434,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-173.json",
+      "sha256": "2495fae5eff746ddd0929b451ba21c65c50baf1ad3148bc2a19bb15ee92200fe",
+      "pid": 93439,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-174.json",
+      "sha256": "b67391f9cb7e411af7bd0658c3e00df373e2225908750a0916a41bac8b076286",
+      "pid": 93441,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-175.json",
+      "sha256": "a996cdb5d58b8b534cbbb69d43dd41802c01fdcd04ba39b18d8ddc9e31ce73a5",
+      "pid": 93446,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-176.json",
+      "sha256": "6753e3ef0e44a7c5de6501cc705f02b2de2dadb2d274bb87f59918d58cf9e935",
+      "pid": 93468,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-177.json",
+      "sha256": "2766053217f6cfe3c1a3f99b0d2798a5f8000a23b90192d68898871cebaffb5d",
+      "pid": 93470,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-178.json",
+      "sha256": "5f91e1b943b7783b4724b6012f15a314f783bd5fe87c42ad391567d26c3023cb",
+      "pid": 93474,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-179.json",
+      "sha256": "773428c8f248ab6a37812781deb55dce7ac5606a6c17d8fa246e8e2dc88fba0b",
+      "pid": 93480,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-180.json",
+      "sha256": "4d8d9e196a5b19062a9a3e0f16afb3b92fbd1371020506a399961875ecb1bf7f",
+      "pid": 93482,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-181.json",
+      "sha256": "a4255f8314cc647267d9c154f0464ca591136f1bb588b6398ba0e461eb696dc3",
+      "pid": 93487,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-182.json",
+      "sha256": "8ba583ef857be1694d470831c4a487acd1d023c751889fcaa65347b456aa2584",
+      "pid": 93489,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-183.json",
+      "sha256": "76ef5bcdd35c340bab09ef860040d4357acec645f6fec58a7bd64560677bd16d",
+      "pid": 93494,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-184.json",
+      "sha256": "0ac03fe183bb3bdd54bec77c1bd510204b29d486a9f7278ddfdecaf0bca11d5d",
+      "pid": 93496,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-185.json",
+      "sha256": "a7435e81b298487e78d565eb5c0c4fdc6a90bb01090ada6f6d8423cc370bc5df",
+      "pid": 93501,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-186.json",
+      "sha256": "423248dd2c067efd1b4cc18e09beebfb29f4288eb051415497e5dd7c5dc572d4",
+      "pid": 93505,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-187.json",
+      "sha256": "e80802fb0f4bd03e4db64809de9645a3f34fafadfe5903f03e5d4fb1bed3f401",
+      "pid": 93515,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-188.json",
+      "sha256": "e1c7e3859064e50249e8663d7e0c6c36db4b6a55ba657af2fa4188c9aeb031cf",
+      "pid": 93517,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-189.json",
+      "sha256": "834da5a7ea0f797336dc63088dff6219e945f1298f8abc8ec51df159d05df2b2",
+      "pid": 93522,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-190.json",
+      "sha256": "b47a846eb88318edd2ec0cfb581f127cde01d1033d33d297c1f677675421a842",
+      "pid": 93524,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-191.json",
+      "sha256": "18db438162730c8229502ba0171a6c059ecc711341964b3b2c3ec55005041e64",
+      "pid": 93529,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-192.json",
+      "sha256": "98757a33d9c2c5993548ab65d3888c0f22dd905690454729332b99f55b673f72",
+      "pid": 93539,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-193.json",
+      "sha256": "21227b9c2685af3d9c6761a5e88041800ce6294cda8cf44f2bd1458ae30e7142",
+      "pid": 93541,
+      "exit_code": 2
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-194.json",
+      "sha256": "1ba1456dcb18859b0949c810f117645c1c043927c40184a5e32a4c62d2dc7095",
+      "pid": 93543,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-195.json",
+      "sha256": "1a888882ed6e10b93cf68d2b779f3f1df19536e0d6345715b7f8f6f69ee18670",
+      "pid": 93547,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-196.json",
+      "sha256": "1e12b9c9b8cceef588352a0ab4597ff91e892eb5313b3e37d46513b90c86fa67",
+      "pid": 93558,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-197.json",
+      "sha256": "286bec03ac3871c88c82930a756c80b308538922bdce3023699283a42f6950c7",
+      "pid": 93560,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-198.json",
+      "sha256": "23a3ae01d3378696ab7ecf1bec28d8d4fe2023cb2112a827c73d7f6d5455b420",
+      "pid": 93565,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-199.json",
+      "sha256": "3816d657cc9f0049251946749fb861afb151e5e9b055bac9130170300fe21941",
+      "pid": 93569,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-200.json",
+      "sha256": "ad99b1b39c226731adb21036484504d102d7ff9aeab8692a9899d4b4ebe6d665",
+      "pid": 93574,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-201.json",
+      "sha256": "6e3569f0dffca9e0d1e9734e55c250fb71413f799c09c4873806b6b47e5021e3",
+      "pid": 93576,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-202.json",
+      "sha256": "cf0337ea6aed15d9589c9bfbcee830b04f404e71fbd5bf47cf6a7bfbdc1ff44c",
+      "pid": 93581,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-203.json",
+      "sha256": "c69e22e09f20a49b06c35d645c344d505e1d87e7660f4a14b6f3d23cff390c7b",
+      "pid": 93583,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-204.json",
+      "sha256": "2a3a27260d4b9236d28ac2f22e246fcef99d62a9e8e4d0e1431119c3858a1273",
+      "pid": 93588,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-205.json",
+      "sha256": "1c6a9ecbb562be272f6785fbae59728d6403276bf6277882df6aead7710a3120",
+      "pid": 93590,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-206.json",
+      "sha256": "51e5abbec57cf00fd46e05fabe52482338a32c6df291381ab405ed147bdf0603",
+      "pid": 93596,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-207.json",
+      "sha256": "d62f252d5ef471ab84562b6db631183cd52ca9a17761d7403d5be895e004e173",
+      "pid": 93599,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-208.json",
+      "sha256": "23d9e43cdf0d2bffac0d65d309c4b570989391fadaca091088290621c2074656",
+      "pid": 93608,
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/u-positional-current-6de2a4f3c0/call-209.json",
+      "sha256": "7d382494a2d289cd418efe062d2919b9d62ca186f986efdc23873e7440ce81cc",
+      "pid": 93621,
+      "exit_code": 2
+    }
+  ],
+  "normal_zero": 202,
+  "designated_two": 8,
+  "artifact_entries_rehashed": 384,
+  "summaries": [
+    {
+      "compiler": "stock",
+      "positive_cases": 64,
+      "assertions": 1131,
+      "negative_assertions": [
+        "positional write changed caller offset",
+        "append writer was admitted",
+        "expected Invalid argument at semantic writer flags",
+        "released write used borrowed heap pointer"
+      ]
+    },
+    {
+      "compiler": "ox",
+      "positive_cases": 64,
+      "assertions": 1131,
+      "negative_assertions": [
+        "positional write changed caller offset",
+        "append writer was admitted",
+        "expected Invalid argument at semantic writer flags",
+        "released write used borrowed heap pointer"
+      ]
+    }
+  ],
+  "named_cases": [
+    {
+      "compiler": "stock",
+      "named_native_cases": [
+        "direct-offset",
+        "shared-dup-offset",
+        "snapshot-copy",
+        "append-rejected",
+        "read-only-rejected",
+        "write-only-admitted",
+        "closed-descriptor-rejected",
+        "pipe-rejected",
+        "hardlink-rejected",
+        "admission-flags-EIO",
+        "admission-stat-EIO",
+        "admission-flags-empty-errno",
+        "admission-flags-EINTR",
+        "admission-stat-EINTR",
+        "admission-cancellation",
+        "admission-cancel-before-query",
+        "descriptor--1",
+        "descriptor-4611686018427387903",
+        "descriptor--4611686018427387904",
+        "slice-invalid-0",
+        "slice-invalid-1",
+        "slice-invalid-2",
+        "slice-invalid-3",
+        "slice-invalid-4",
+        "slice-invalid-5",
+        "slice-invalid-6",
+        "slice-invalid-7",
+        "slice-invalid-8",
+        "slice-invalid-9",
+        "offset-invalid-0",
+        "offset-invalid-1",
+        "offset-invalid-2",
+        "offset-invalid-3",
+        "slice-zero-end",
+        "slice-64KiB",
+        "maximum-offset-zero-fault",
+        "sparse-above-2GiB",
+        "direct-EINTR",
+        "direct-EIO",
+        "direct-overcount",
+        "direct-empty-errno",
+        "direct-invalid-negative",
+        "direct-short",
+        "pending-copy-signal",
+        "loop-full",
+        "loop-short",
+        "loop-EINTR-once",
+        "loop-EINTR-twice",
+        "loop-shared-dup",
+        "loop-EIO-before-write",
+        "loop-partial-EIO",
+        "loop-zero",
+        "loop-partial-zero",
+        "loop-overcount",
+        "loop-partial-overcount",
+        "loop-cancel-short",
+        "loop-cancel-EINTR",
+        "loop-unchanged-admission",
+        "loop-unchanged-append-rejected"
+      ]
+    },
+    {
+      "compiler": "ox",
+      "named_native_cases": [
+        "direct-offset",
+        "shared-dup-offset",
+        "snapshot-copy",
+        "append-rejected",
+        "read-only-rejected",
+        "write-only-admitted",
+        "closed-descriptor-rejected",
+        "pipe-rejected",
+        "hardlink-rejected",
+        "admission-flags-EIO",
+        "admission-stat-EIO",
+        "admission-flags-empty-errno",
+        "admission-flags-EINTR",
+        "admission-stat-EINTR",
+        "admission-cancellation",
+        "admission-cancel-before-query",
+        "descriptor--1",
+        "descriptor-4611686018427387903",
+        "descriptor--4611686018427387904",
+        "slice-invalid-0",
+        "slice-invalid-1",
+        "slice-invalid-2",
+        "slice-invalid-3",
+        "slice-invalid-4",
+        "slice-invalid-5",
+        "slice-invalid-6",
+        "slice-invalid-7",
+        "slice-invalid-8",
+        "slice-invalid-9",
+        "offset-invalid-0",
+        "offset-invalid-1",
+        "offset-invalid-2",
+        "offset-invalid-3",
+        "slice-zero-end",
+        "slice-64KiB",
+        "maximum-offset-zero-fault",
+        "sparse-above-2GiB",
+        "direct-EINTR",
+        "direct-EIO",
+        "direct-overcount",
+        "direct-empty-errno",
+        "direct-invalid-negative",
+        "direct-short",
+        "pending-copy-signal",
+        "loop-full",
+        "loop-short",
+        "loop-EINTR-once",
+        "loop-EINTR-twice",
+        "loop-shared-dup",
+        "loop-EIO-before-write",
+        "loop-partial-EIO",
+        "loop-zero",
+        "loop-partial-zero",
+        "loop-overcount",
+        "loop-partial-overcount",
+        "loop-cancel-short",
+        "loop-cancel-EINTR",
+        "loop-unchanged-admission",
+        "loop-unchanged-append-rejected"
+      ]
+    }
+  ],
+  "CPU00_07_fresh_reacquired_closed": true,
+  "EX_acquired": false,
+  "SDK_or_Photo_calls": 0,
+  "scope": "original fixed59 native pwrite cases plus5 ML-positive and4 designated private guard-ablation controls percompiler; not receiving/publication/crash durability/physicalIO/RSS proof",
+  "independent_audit_tool": {
+    "terminal_chunk": "acc901",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit_source_sha256": "b6bbe571b956ed27de0e2be0c1b92a7cb3040ccf557ff4792b2f8510f3be6abc",
+  "owner_source_sha256_at_current_audit": "f2e09d1f7ee6f841cc0e39ac0d37ae6dc1b01c26be5f6d0b3d5392652101b959",
+  "earlier_attempts": [
+    {
+      "workspace": "/private/tmp/u-positional-current-e9a30f26cd",
+      "tool": 62749,
+      "terminal_chunk": "934272",
+      "exit_code": 1,
+      "settled_calls": 21,
+      "scope": "stock fixed59 passed; artifact reader refused explicit hardlink fixture; known failed prefix CPU closed"
+    },
+    {
+      "workspace": "/private/tmp/u-positional-current-2b7de4cd8a",
+      "tool": 52520,
+      "terminal_chunk": "7d333b",
+      "exit_code": 1,
+      "settled_calls": 38,
+      "scope": "old forced-ML mutation anchor matched reader+writer; known failed prefix CPU closed"
+    }
+  ],
+  "audit_attempts": [
+    {
+      "terminal_chunk": "f282bf",
+      "exit_code": 1,
+      "scope": "ambiguous matching identical compiler argv across distinct mode directories; CPU finally closed"
+    },
+    {
+      "terminal_chunk": "91e7f5",
+      "exit_code": 0,
+      "scope": "ordered call binding succeeds"
+    },
+    {
+      "terminal_chunk": "acc901",
+      "exit_code": 0,
+      "scope": "ordered binding plus exact five probe commands/config succeeds"
+    }
+  ]
+}
