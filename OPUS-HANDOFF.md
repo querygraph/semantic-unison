@@ -6873,3 +6873,26 @@ and used fresh namespace, not a repeated native admission. Allresources closed.
 Remaining: production owned entry/freezer/admission, generated fixture recovery
 and actual Unison+Adobe merge matrix. Process control does not prove native
 merge/functionality. Goal active/incomplete; no current owner/resource hold.
+
+## Exact native admission contract + metadata preflight — 2026-10-19
+
+Final Adobe branch adds `sdk_merge_receiving/admission.py` and `metadata.py`.
+Packet declarations bind both builds/compilers, qualified SDK and interpreter,
+twelve typed input states/manifest ancestry, exact source inventories and
+standing8/EXglobal budgets. Pure admission checking requires owner-derived worker
+argv, exact request/plan/source maps, fresh finite start deadline and nonce;
+never renews/replays or borrows18. Metadata preflight hashes current source/JSON
+receipts, joins actual build/selftest declarations to current production, and
+lstat-fences DNG states without opening DNG or executable payload. Actual artifact
+and clone hashes still require admitted IO ownership. `entry.py` is specified
+but NOT implemented/runnable yet; no runtime packet/admission is frozen here.
+
+Actualbc3b95/exit0/no session:11 original controls PASS, child34478 reaped0/group-
+empty, CPU00..03 closed. Original reader doubles reject artifact/media opens.
+Earlierd3b8c1/0 nine contract controls preserved separately. No SDK/native/Unison/
+compiler/canonicalIO/media run or grant. Qualification receipt `tests/qualification/
+current-sdk-merge-preflight-controls-20261019.json`. Current SDK executable still
+exists by lstat; oldfixture-writer binary was freshly observed absent97a466, no
+artifact opened/rehash or replacement inferred. No historical SDK source tree
+or generated JXL/state files were recreated. Next owner entry/freezer wiring,
+authenticated fixture recovery and native matrix. Goal active/incomplete.

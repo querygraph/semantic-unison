@@ -220,3 +220,31 @@ rather than inferring them from pass_fds. No canonicalIO/SDK/DNG/Unison/compiler
 Remaining: production entry/freezer/admission and authenticated generated fixture
 recovery, followed by actual Unison+Adobe merge qualification. The original-Python
 control does not replace native merge, helper or output-byte requirements.
+
+## Admission declaration and metadata-only preflight
+
+`admission.py` checks the exact nine-call packet, qualified interpreter and two
+compiler references, both build receipts, SDK/input manifests, complete caller-
+trusted execution and production inventories, twelve typed readonly state
+observations and exact standing8/EXglobal/finite limits. Admission checking binds
+the exact request/plan, owner-derived worker argv, nonce and source maps; expired
+or nonfinite start deadlines and bool/int resource substitutions refuse. This
+pure contract does not acquire locks or consume a workspace. The future entry
+owner must atomically create the one-use namespace and verify current metadata.
+
+`metadata.py` authenticates the plan, current source bytes and bounded JSON
+prerequisites, including scalar-state manifest/ancestry, SDK build declaration
+and both successful build/selftest receipts matching current production maps.
+It uses only lstat for DNG state epochs. No executable or DNG payload is opened
+by this preflight; executable hashes and clone byte verification remain inside
+the IO-owned phase. The manifest is historical declaration, not new SDK or
+source-byte qualification.
+
+Actualbc3b95/exit0/no session:11 original admission/preflight/plan/input controls
+PASS, child34478 reaped0/group-empty thenCPU00..03 closed. Metadata readers are
+injected and explicitly forbid every artifact/media path. Earlierd3b8c1/0 nine
+contract controls retained. No runtime packet/admission or media/native/SDK/
+Unison/compiler/canonicalIO execution was created. `entry.py` is the specified
+future worker path, not an implemented runnable entry yet. Remaining: entry
+composition/one-use namespace/current inventory freezer, generated fixture
+recovery and actual native matrix. Source checks do not replace these gates.
