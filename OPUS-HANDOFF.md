@@ -6225,3 +6225,15 @@ absent/CPU4closed/no EXIO. Evidence auto-cohort-plan-actual-20261018.json.
 Not current-file authentication or dispatch qualification. Next integrate stable
 metadata reads/current source+artifact checks and retained worker owner; do not
 request Photo quiet18 before exact executor/failedprefix closure is reviewable.
+
+
+### 2026-10-18 — cohort bounded authentication
+Added checked_metadata authenticating planSHA/duplicate-freeJSON/current trusted
+sourceinventory/prerequisite bytes and runner location. Separate verify_artifacts
+hashes interpreter/binary/compiler only when futureowner already owns admittedIO.
+Uses existing cached_benchmark bounded epoch-fenced reader/qualified close carrier.
+Actualdfc1fe/0+a1db9e/0 generatedtinyfile controls and carrierpropagationPASS;
+lastchild55021reaped0/groupabsent/CPU4closed/noEXIO/realbinary/Photo payload.
+Carrieridentity, uncertainFDrecords and originalcause preserved, no readretry.
+Evidence auto-cohort-auth-actual-20261018.json. Not runtimequalified; reviewed
+fixedinventory+productionbuild binding+actual dispatcher/retainedowner stillneeded.

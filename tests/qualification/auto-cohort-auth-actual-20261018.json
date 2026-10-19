@@ -1,0 +1,71 @@
+{
+  "schema": "unison-auto-cohort-auth-controls/1",
+  "actual_tools": [
+    {
+      "chunk": "dfc1fe",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "a1db9e",
+      "exit": 0,
+      "no_session": true
+    }
+  ],
+  "closures": [
+    {
+      "child": {
+        "pid": 54948,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 54948,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    {
+      "child": {
+        "pid": 55021,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 55021,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  ],
+  "sources": [
+    {
+      "path": "bench/sync/cohort_plan.py",
+      "sha256": "f93b78145e1143014e36f32f4ca9a5ec399759f0ec56d1735f445623f36f1a21"
+    },
+    {
+      "path": "tests/cohort_plan_test.py",
+      "sha256": "cb8d48abaf2c257927ca013dea40b45648e561455d7f4fd82e773a89fa263b69"
+    }
+  ],
+  "scope": "generated disposable metadata/artifact authentication plus injected preexisting qualified uncertainty propagation; not new actual-close fault campaign or production artifact IO",
+  "runtime_qualified": false
+}

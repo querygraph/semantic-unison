@@ -68,3 +68,55 @@ def validate(plan, *, execution_sources):
     if not exact(plan['launch_argv'],expected):
         raise ValueError('exact plan launch differs')
     return plan
+
+
+def checked_metadata(plan_path, plan_sha256, *, repository, execution_sources):
+    """Authenticate bounded plan/source/receipt bytes, never executable payloads.
+
+    This is cooperative epoch fencing, not protection against hostile same-UID
+    writers. The supplied trusted inventory must be fixed by the reviewed owner.
+    read_bytes uses the qualified multi-close uncertainty carrier.
+    """
+    import hashlib
+    import json
+    from cached_benchmark.contract import read_bytes
+    from shared_cpu_pool import unique_object
+    digest(plan_sha256)
+    raw = read_bytes(path(plan_path), 1048576)
+    if hashlib.sha256(raw).hexdigest() != plan_sha256:
+        raise ValueError('plan SHA differs')
+    plan = validate(json.loads(raw, object_pairs_hook=unique_object),
+                    execution_sources=execution_sources)
+    root = PurePosixPath(path(str(repository)))
+    if plan['script'] != str(root/'bench/sync/run.py'):
+        raise ValueError('runner outside trusted repository')
+    for name, expected in plan['execution_sha256'].items():
+        if hashlib.sha256(read_bytes(str(root/name), 16*1048576)).hexdigest() != expected:
+            raise ValueError('execution source changed: '+name)
+    for name, expected in plan['prerequisite_sha256'].items():
+        if hashlib.sha256(read_bytes(name, 16*1048576)).hexdigest() != expected:
+            raise ValueError('prerequisite changed: '+name)
+    return plan
+
+
+def verify_artifacts(plan):
+    """Hash executable bytes; caller must already own admitted IO/CPU resources.
+
+    No lock ownership is inferred or acquired here. Returns hashes, not a grant.
+    An uncertain close propagates as retained ownership without numeric retry.
+    """
+    import hashlib
+    from cached_benchmark.contract import read_bytes
+    declarations = {
+        plan['interpreter']: plan['interpreter_sha256'],
+        plan['artifact']['binary']: plan['artifact']['binary_sha256'],
+        plan['artifact']['compiler']: plan['artifact']['compiler_sha256']}
+    if len(declarations) != 3:
+        raise ValueError('distinct interpreter/binary/compiler required')
+    actual = {}
+    for name, expected in declarations.items():
+        path(name);digest(expected)
+        actual[name] = hashlib.sha256(read_bytes(name, 256*1048576)).hexdigest()
+        if actual[name] != expected:
+            raise ValueError('executable artifact changed: '+name)
+    return actual

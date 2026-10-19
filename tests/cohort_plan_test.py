@@ -1,5 +1,9 @@
 """Original fixed metadata mutations; no file reads or process dispatch."""
 import copy
+import hashlib
+import json
+import tempfile
+from unittest.mock import patch
 from pathlib import Path
 import sys
 import unittest
@@ -28,6 +32,47 @@ class Plan(unittest.TestCase):
             p=fixture(selection); before=copy.deepcopy(p)
             self.assertEqual(cohort_plan.validate(p,execution_sources=['bench/sync/run.py']),before)
             self.assertEqual(p,before)
+
+    def test_metadata_and_artifact_authentication(self):
+        with tempfile.TemporaryDirectory(prefix='cohort-metadata-') as temporary:
+            root=Path(temporary).resolve()
+            (root/'bench/sync').mkdir(parents=True)
+            source=root/'bench/sync/run.py';source.write_bytes(b'original generated metadata fixture')
+            proof=root/'proof.json';proof.write_bytes(b'original prerequisite fixture')
+            p=fixture(1);p['script']=str(source)
+            p['execution_sha256']={'bench/sync/run.py':hashlib.sha256(source.read_bytes()).hexdigest()}
+            p['prerequisite_sha256']={str(proof):hashlib.sha256(proof.read_bytes()).hexdigest()}
+            for key in ('binary','compiler'):
+                f=root/key;f.write_bytes(('generated '+key).encode())
+                p['artifact'][key]=str(f)
+                p['artifact'][key+'_sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
+            interpreter=root/'python';interpreter.write_bytes(b'generated inert interpreter fixture')
+            p['interpreter']=str(interpreter);p['interpreter_sha256']=hashlib.sha256(interpreter.read_bytes()).hexdigest()
+            p['launch_argv']=cohort.launch_argv(p['cohort'],interpreter=p['interpreter'],script=p['script'],
+                output=p['workspace']+'/RESULT.json',artifact=p['artifact'])
+            f=root/'plan.json';raw=json.dumps(p).encode();f.write_bytes(raw)
+            h=hashlib.sha256(raw).hexdigest()
+            self.assertEqual(cohort_plan.checked_metadata(str(f),h,repository=root,
+                execution_sources=['bench/sync/run.py']),p)
+            self.assertEqual(len(cohort_plan.verify_artifacts(p)),3)
+            source.write_bytes(b'changed')
+            with self.assertRaises(ValueError):cohort_plan.checked_metadata(str(f),h,repository=root,
+                execution_sources=['bench/sync/run.py'])
+            (root/'binary').write_bytes(b'changed artifact')
+            with self.assertRaises(ValueError):cohort_plan.verify_artifacts(p)
+
+    def test_uncertainty_propagates_without_retry(self):
+        from shared_io_pool import UnresolvedIOOwnership
+        error=UnresolvedIOOwnership('injected qualified uncertainty',retained_fds=(900,),
+            uncertain_closes=({'fd':901,'observed_before_close':{'inode':123}},),
+            original_failure=ValueError('original refusal'))
+        with patch('cached_benchmark.contract.read_bytes',side_effect=error) as reader:
+            with self.assertRaises(UnresolvedIOOwnership) as caught:
+                cohort_plan.verify_artifacts(fixture(1))
+            self.assertIs(caught.exception,error)
+            self.assertEqual(reader.call_count,1)
+            self.assertEqual(error.uncertain_fds,(901,))
+            self.assertEqual(error.retained_fds,(900,))
 
     def test_refusals(self):
         for mutation in ('extra','traversal','borrow','tokens','limit','pin','inventory','argv','prereq','bool'):
