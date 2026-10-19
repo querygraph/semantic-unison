@@ -6372,3 +6372,21 @@ worker66520, admissione5f4a2e4, workspace941741d1619946e1b45f876ad800c0c6.
 EXglobal+Unison8held untilactualparentterminal+all54call/group/FDaudit.
 Metadata/sourceinspectionduringrun disclosed; no quiettimingclaim. NoSDK/
 18borrow. MUSTcollect22685actualterminal; doNOTreplaythisconsumedslot.
+
+
+### Actual stock1 cohort PASS/CLOSED — no stale hold
+Direct owningtool22685 initialf83404 terminala005f2/exit0/NOsession personally
+collected; worker66520genuinelyreaped0/othersabsent, CPU8+EXIOclosed/all53source
+pinsunchanged. 18rows54CLI exact/normalnestedsettlements; no errors. New
+OWNER-TERMINAL+OWNER-RETURN sealedworkspace941741d1619946e1b45f876ad800c0c6;
+return ebc9c0106842b136ac12156d0ad9ff8e44b15b7b59ed024b8cea977a27fc7668.
+Evidence tests/qualification/auto-cohort-stock1-actual-20261018.json.
+Admissione5f4a2e4 CONSUMED_ONCE/no replay. Rootactualclosurenotice01a15290-b30c
+sentBEFOREsealing. Prior runningnotesabovehistorical; no currentownresources.
+Measured5sampleupdate medians ordinary4.92975s/receiverclone4.87450s/semantic
+9.01267s; no semanticwall-speedup claim. Minor sourcemetadata/Gitwritesdisclosed,
+notquiet. 3warm+15measured retained, raw1987945B unchanged.
+Next separateOx1/stock2/Ox2 shared8 cohorts underuserhandoff; NOTautomaticreuse
+ofstock1grant. Larger18cohorts requireexplicitborrowcoordination (requested
+01a1528f-7385, notyetgranted). DirectmixedAdobe requestf9c93745 remainsUNADMITTED
+andnoSDKexecuted. MainstaysPhoto-exclusive. Goalactive.
