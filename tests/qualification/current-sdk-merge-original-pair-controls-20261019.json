@@ -1,0 +1,54 @@
+{
+  "schema": "unison-current-sdk-merge-original-pair-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['sdk_merge_receiving.launcher_test', 'sdk_merge_receiving.transport_actual_test']));sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "ORIGINAL-PAIR-PROOF {\"root\": \"/private/tmp/u-mgp-76fo52hc\", \"pin\": {\"name\": \"PAIR-PROOF.json\", \"sha256\": \"e731e2628d7d8328939096e40a0cc817c0492527923638d8c5865ad762f66d3f\", \"bytes\": 3323}, \"proof\": {\"scope\": \"Original Python control only; no SDK/media/Unison/native compiled code\", \"pair\": {\"client\": {\"command\": [\"/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14\", \"-B\", \"/private/tmp/u-mgp-76fo52hc/original-client.py\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"{\\\"answer\\\": \\\"ABC\\\", \\\"counts\\\": {\\\"local_to_remote_bytes\\\": 3, \\\"remote_to_local_bytes\\\": 3}}\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 32378, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}, \"proxy\": {\"command\": [\"/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14\", \"-B\", \"/private/tmp/u-mgp-76fo52hc/original-proxy.py\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 32377, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}, \"raw_proxy\": {\"forwarded_protocol_bytes\": {\"client_to_server_bytes\": 3, \"server_to_client_bytes\": 3}, \"input_eof_forwarded\": true, \"output_eof_forwarded\": true, \"parent_group_audit_required\": true, \"resource_release_authorized\": false, \"schema\": \"unison-retained-merge-proxy/1\", \"sdk_helper_audit_required\": true, \"server_command\": [\"/private/tmp/u-mgp-76fo52hc/original-server.py\", \"-server\", \"__new-rpc-mode\"], \"server_group\": 32377, \"server_pid\": 32379, \"server_reaped\": true, \"server_returncode\": 0}, \"external_sdk_audit_required\": true, \"resource_release_authorized\": false}, \"raw_proxy_hex\": \"7b22666f727761726465645f70726f746f636f6c5f6279746573223a7b22636c69656e745f746f5f7365727665725f6279746573223a332c227365727665725f746f5f636c69656e745f6279746573223a337d2c22696e7075745f656f665f666f72776172646564223a747275652c226f75747075745f656f665f666f72776172646564223a747275652c22706172656e745f67726f75705f61756469745f7265717569726564223a747275652c227265736f757263655f72656c656173655f617574686f72697a6564223a66616c73652c22736368656d61223a22756e69736f6e2d72657461696e65642d6d657267652d70726f78792f31222c2273646b5f68656c7065725f61756469745f7265717569726564223a747275652c227365727665725f636f6d6d616e64223a5b222f707269766174652f746d702f752d6d67702d3736666f353268632f6f726967696e616c2d7365727665722e7079222c222d736572766572222c225f5f6e65772d7270632d6d6f6465225d2c227365727665725f67726f7570223a33323337372c227365727665725f706964223a33323337392c227365727665725f726561706564223a747275652c227365727665725f72657475726e636f6465223a307d0a\", \"bound\": {\"returncode\": 0, \"log\": \"{\\\"answer\\\": \\\"ABC\\\", \\\"counts\\\": {\\\"local_to_remote_bytes\\\": 3, \\\"remote_to_local_bytes\\\": 3}}\\n\\n\\n\\n\", \"transport_record_sha256\": \"f4be1a6ef5b31529bb39a848684d488a6b62dc5dc5904939bf0fc674671a990e\", \"helper_record_sha256s\": []}, \"inherited_cpu_identities\": [[16777223, 307122463], [16777223, 307122464], [16777223, 307122465], [16777223, 307122466]], \"source_sha256\": {\"original-server.py\": \"4bcb05fb3086b788747c6699d3c4295a093afbb39f55935380258f1bdffe93df\", \"original-proxy.py\": \"bc3bc8c401968186984752222c71f8b91d6427d33fe5680d929f8aba20feaa40\", \"original-client.py\": \"8c319a263beb227f9db8830f0d9a325b6c1ecaf937ca833ec941212350bdedbc\"}}}\n",
+    "stderr": "test_exact_rpc_suffix_and_bounded_header (sdk_merge_receiving.launcher_test.Launcher.test_exact_rpc_suffix_and_bounded_header) ... ok\ntest_socket_failure_retains_owner_and_original_without_close_retry (sdk_merge_receiving.launcher_test.Launcher.test_socket_failure_retains_owner_and_original_without_close_retry) ... ok\ntest_thread_free_forwarding_with_original_pipe_and_socket_bytes (sdk_merge_receiving.launcher_test.Launcher.test_thread_free_forwarding_with_original_pipe_and_socket_bytes) ... ok\ntest_original_python_pair_reaps_and_binds_six_byte_protocol (sdk_merge_receiving.transport_actual_test.ActualPair.test_original_python_pair_reaps_and_binds_six_byte_protocol) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.476s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 32220,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/bound_call.py": "f5d67582e0fbbc1c6017fcf0f73e7e9b28f1a4499030673f85e7b902386142fe",
+    "tests/sdk_merge_receiving/bound_call_test.py": "cdbee505648b30e5785ec9936526dffe1f6c22629a51d671fdb1f82f19bd6b15",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/sdk_merge_receiving/evidence_test.py": "38caac866f542fdd3f15ccb4e94bdffcd206de8540615345ff33b78a358efcc7",
+    "tests/sdk_merge_receiving/helpers.py": "699cc339f52303892a0cfad3f77c8762f39f1adadde39fda00af3bb991197bf7",
+    "tests/sdk_merge_receiving/helpers_test.py": "4f1cc9322a67b684dd750a2ee726be29a496360fe93854d84c40435bd505acfe",
+    "tests/sdk_merge_receiving/inputs.py": "c5af07c6ab9ebf5cb7fd8b6bf3088fca607984231e660ead8308983b4d6bde29",
+    "tests/sdk_merge_receiving/inputs_test.py": "9d48e0be058b095f489f9485daa37be39bb7647bbf0dc505561bfdf13eb9a53e",
+    "tests/sdk_merge_receiving/journal.py": "7b3baa59ab5b1de891f4ce33db74427f6443cee2c779a19be3bac3192dd913d6",
+    "tests/sdk_merge_receiving/journal_test.py": "3138a27ed5e9f3db4c2a1ca53a1fdf07b7cc25f1bdc9c0ca161cfefb2731828a",
+    "tests/sdk_merge_receiving/launcher.py": "3d6007f2dc10f60d81961d526cd87fb255b9aeeae443c2be45d07e301431110f",
+    "tests/sdk_merge_receiving/launcher_test.py": "e8f827f851ea93aa0329fdbfded245e14b9c1c67c64e0f86be1bb4b320293a97",
+    "tests/sdk_merge_receiving/ledger.py": "d0ca4fc1112f8286a4d0dcc5660a32126f1544832e94b49d0727f8752eeafa7a",
+    "tests/sdk_merge_receiving/ledger_test.py": "626f2b71b3984f95a21f4dbbf724ca7a83b67f7d810069e2ff99c50b733b6757",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/sdk_merge_receiving/plan_test.py": "de74fc28c8549ebe95000f79b5e97ebd647b3c0986a9c601b0822f4a6f053038",
+    "tests/sdk_merge_receiving/proxy.py": "7402ba6e8fcb0d0a6f626a66493aac8fbd91fe0e203e26bd802a53bca5dcb6aa",
+    "tests/sdk_merge_receiving/proxy_test.py": "f0b010d7ba2177d10d8c52a27a9cf63d4bfdeb716b4dd34dcc15a26399e3e1c2",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/sdk_merge_receiving/store_test.py": "5f5ef82b480f5074aa850eb7bba55aec8498fba680f088e9c023ffeb7cdb0559",
+    "tests/sdk_merge_receiving/transport.py": "9e672a89d9fa6ac42748d3c7f462e5bdf5d6973de5a6c802b69b6fc942eac4b9",
+    "tests/sdk_merge_receiving/transport_actual_test.py": "f26619bd00fa97adfc5e707f0ebd5e45363344417ef949e69ea92ff778d8cb9d",
+    "tests/sdk_merge_receiving/transport_test.py": "962b9d8030db8cd7f94f5603441c7e4aa438e5dde8412a7e667077fd07dd8d86",
+    "tests/sdk_merge_receiving/worker.py": "b98c50069ced2d04a3e3cb00143b0659d70be7462b33346e298781b00a54b653",
+    "tests/sdk_merge_receiving/worker_test.py": "61c4e3adfcefcf51e467c1f1924ce53b1c43308f05e94aad1743bfdf5046ee1d"
+  },
+  "scope": "Three tiny/inert launcher controls and one actual pair of original Python programs, six generated protocol bytes. CPU4; no SDK/Adobe/Unison/DNG/Photo/compiler/canonicalIO. Not native merge qualification."
+}

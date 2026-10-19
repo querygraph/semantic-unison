@@ -6853,3 +6853,23 @@ Remaining before native qualification: exact owned entry/freezer/launcher wiring
 authenticated generated input recovery and real paired transport qualification.
 This advances validation harness/source only, not new production functionality.
 Goal remains active/incomplete; no resources held and no new payload dispatch.
+
+## Launcher + actual retained original-process pair qualified — 2026-10-19
+
+Active finalAdobe branch now has thread-free `sdk_merge_receiving/launcher.py`
+and a real original-Python pair control. Exact RPC header, bounded forwarding,
+normal server/client/proxy settlement and raw-evidence binding work together.
+Actualb9e9c7/exit0/no session:four controls PASS, client32666/proxy32665/original
+Pythonserver32667/controller32664 actualreaped0, groups empty, allcaptured/socket/
+directory owners closed thenCPU00..03 closed. Actual internal observations in
+client+proxy match allfour canonical CPU device/inode pairs (307122463..466 on
+dev16777223), parent identities unchanged. No SDK/Unison/media/compiler/
+canonicalIO; pair payload abc→ABC (six protocol bytes). Source artifacts and
+proof retained `/private/tmp/u-mgp-2gurkr37/PAIR-PROOF.json`3745B
+SHAc036ce5724299ffee1baebe1d4285146acd51fc386cae0a2e2dedc8ca17b5284.
+Receipt `tests/qualification/current-sdk-merge-original-pair-controls-v2-20261019.json`.
+First979341/0 proof preserved separately; v2 added child descriptor observations
+and used fresh namespace, not a repeated native admission. Allresources closed.
+Remaining: production owned entry/freezer/admission, generated fixture recovery
+and actual Unison+Adobe merge matrix. Process control does not prove native
+merge/functionality. Goal active/incomplete; no current owner/resource hold.

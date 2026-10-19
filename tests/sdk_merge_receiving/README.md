@@ -193,3 +193,30 @@ receipt preserved; final successor adds a name-substitution race control.
 No SDK/DNG/native/Unison/compiler/canonicalIO ran. Still required: exact owned
 entry/freezer and launcher scripts, authenticated generated fixture recovery,
 real paired transport qualification, immutable admission and final native matrix.
+
+## Thread-free launcher and actual original Python pair
+
+`launcher.py` validates the exact server/RPC suffix, bounds the control header and
+both protocol buffers, forwards EOF without a daemon pump thread, and retains
+its socket on failure. It creates no subprocess or SDK call. The future launcher
+shim must retain its uncertainty exception rather than exit over an unknown peer.
+
+`transport_actual_test.py` requires four inherited owner CPU FDs. It generates
+three tiny original Python scripts in a fresh private namespace, starts the real
+retained proxy+client, launches/reaps an original Python echo server through the
+exact RPC header and binds the saved proxy frame. The server only transforms
+`abc` to`ABC`; it never reads media or invokes Unison/SDK. Namespace and evidence
+are retained instead of removed. This is process/forwarding qualification only.
+
+Actualb9e9c7/exit0/no session:four controls PASS; client32666/proxy32665/server32667
+and controller32664 all actualreaped0, parent groups empty before reap, captures/
+sockets/metadata directory closed thenCPU00..03 closed. Client and proxy each
+observed the exact four canonical device/inode pairs internally; parent epochs
+unchanged. Pair evidence `/private/tmp/u-mgp-2gurkr37/PAIR-PROOF.json`,3745B,
+SHAc036ce5724299ffee1baebe1d4285146acd51fc386cae0a2e2dedc8ca17b5284.
+Receipt `../qualification/current-sdk-merge-original-pair-controls-v2-20261019.json`.
+Earlier979341/0 first-pair proof is preserved; v2 adds actual child FD observations
+rather than inferring them from pass_fds. No canonicalIO/SDK/DNG/Unison/compiler.
+Remaining: production entry/freezer/admission and authenticated generated fixture
+recovery, followed by actual Unison+Adobe merge qualification. The original-Python
+control does not replace native merge, helper or output-byte requirements.
