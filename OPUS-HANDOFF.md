@@ -1,3 +1,44 @@
+<!-- CURRENT-UNISON-CHECKPOINT -->
+# Current checkpoint — larger workload qualification
+
+Updated UTC 2026-10-19T06:30:19.422171+00:00. Goal ACTIVE and incomplete.
+
+- Active worktree `/Users/alexy/src/unison-cpu-ceiling-20261018`, branch
+  `implementation/endpoint-cpu-ceiling`, last committed `63fd4c8a`.
+  Production remains `971271a8`; subsequent work is Python test tooling/evidence.
+- **No live owned jobs or resource descriptors.** Latest larger128stock1:
+  actual52223/3c264e/0/no session, worker97794reaped0/groupempty/CPU8EXclosed.
+ 18rows54CLI passed. See `doc/larger128-stock1-checkpoint-20261019.md`.
+  No replay of consumedc08b51ff;29otherlargercohorts remainunstarted.
+- Completed: ten32MiB worker cohorts,180rows540CLI, actualparent/group/FDclosure;
+  combined report `doc/auto-cohort-all10-report-20261018.md`.
+  Temporary18 ended, standing8Unison/8Photo/2system restored.
+- Current Adobe qualification: mixed probes15556/682f67/0; full receiving
+  67541/5343fe/0 (2CLI/4SDK); all-scanned45243/e035b2/0 (4CLI/4SDK).
+  All actually CLOSED/resources released. Generated inputs only. Raw digests
+  valid/decodeSUCCESS/errors0, fourpaddingwarnings retained per SDK call.
+- Larger source successor passed46controls; three frozen size indexes under
+  `doc/auto-cohort-qualification-larger-{128,512,2048}-v1-20261019`.
+  Series82ee83dc covers30plannedcohorts; first128stock1 completed;29 remain unstarted.
+  No new18 grant. Conditional `fda6288a` is NOT ACTIVE/admission; activation
+  requires all12 shared8 actual closures, PhotoCPU drain and a new ACTIVE record.
+- Photo IO/native remains unstarted by user Photo-at-end steering; CPU8 source
+  work may continue. Main remains Photo-exclusive. No SDK/Photo job live here.
+- First128 actualclosure reached the runtime-estimate review checkpoint. Further
+  payload/SDK starts await the operator schedulingreview raisedbyPhoto; source
+  work continues. Preliminary
+  full30 byte-scaling estimate18–30h (~23h central), not a runtime guarantee or
+  continuousquiet grant. Preserve scope/samples; review schedule before blindly
+  starting later work. No new fuzz/sanitizer campaigns.
+- Remaining: final receiving-path/policy/merge evidence binding, larger and other
+  prescribed workload/topology comparisons, explicit platform/resource limits,
+  final source/review delivery, then any Photo workflow verification at the end.
+  Unknown MakerNotes remain opaque, not a deployment blocker. No production
+  activation/upstream submission or PR13 merge authority inferred.
+
+Older checkpoints below are historical; use this checkpoint and actual receipts.
+<!-- END-CURRENT-UNISON-CHECKPOINT -->
+
 # Unison implementation handoff
 
 
@@ -6569,3 +6610,45 @@ Allownjobs/resourcesclosed. UserPhotoIO-at-endhold remains;CPU8sourceindependent
 Nextfirst128stock1 freshshared8guard/admission; no18untilfreshPhoto coordination.
 CurrentSDKfull67541/5343fe/0 +allscanned45243/e035b2/0 source/harness scope preserved
 asactualpriorruns, not relabeled to this subsequent Python-only harness commit.
+
+
+### LIVE larger128 stock1 — do not replay
+Actual ownertool52223/initial91798e, parent97775/worker97794, workspace
+/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f.
+Fresh admission/private/tmp/unison-larger128-stock1-admission-9facb61ba14340c99dee08d14e2aaff7.json
+SHAc08b51ff0668cd600000ae18def1ada1bcfbe75da3f22f2c2ca868e7fef0e985,
+request4235fbe6, 128MiBx4/18rows54CLI/7200sOBSERVATION180CLI. StandingUnison00..07+EXonly,
+noSDK/camera/Main/18borrow. Last actual write_stdin c31ea4 retained session52223,
+not terminal. Must poll SAME handle; report source does not prove parentclosure.
+Do not edit frozen Python execution sources while live. Docs/metadata only.
+Photo receivesactualSTART01a152d7-8d8b and practicalestimate01a152d8-7d16.
+Photo source-reviewed all30newplans; newconditional18record
+/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-LARGER18-COHORTS-CONDITIONAL-20261019.json
+SHAfda6288a6cd634067aa5d0d2596282c84c542f42889a68818c5b1de60d2fa84c
+is NOT ACTIVE/admission/borrowauthority. All12shared8 mustactualclose, PhotoCPUdrain,
+thennewACTIVEbefore18borrow. Old84six-cohortcoordinationconsumed/NEVERreuse.
+Planning: old10 START→savedterminal intervals sum~3215s, includespoll/seal latency.
+Simplecorpusbyteprojection forlarger30~23h (rough18–30h),notruntimeguarantee;
+7200sperownerisobservationnotestimate. REVIEWCHECKPOINT afterthisfirst128actualclosure
+before blindlydispatchingmorepayload; calibrateestimate/orderwithoutdiscardingrequiredsamples.
+PhotoIO/native remainsUNSTARTEDperuserPhoto-at-end; CPU8source maycontinue.
+No mutualACKwaitgate forclosedhistoricalruns. Goalincomplete/active.
+
+
+### CHECKPOINT reached: first128 stock1 ACTUAL PASS/CLOSED
+Ownertool52223/91798e→3c264e/exit0/NOsession,97775parent/97794worker.
+18rows54CLIexact/nestedPASS/workerreaped0/groupempty/CPU8EXclosed/53postpinsunchanged.
+Admissionc08b51ff consumedonce, workspace18d2fe7b45df433ba9fb2ca9def4cb3f;
+OWNERRETURN0daeec580f42f65f8d62fed8c7af1ff45d54df7219845a1ee6762401010e187a.
+Evidence tests/qualification/larger128-stock1-actual-20261019.json.
+Saved-only reporte3f21b/0 INCOMPLETE_MATRIX/18rows,9sizecohortsmissing.
+Medianupdatesordinary11.266858/clone9.801000/semantic18.823947seconds,
+5measuredsamples each preserved. FinalRESULTmtime-START653.10s;sum54CLIwalls425.48s;
+terminaltranscription706.10s includespoll/seallatency, notpreciseworker/hardwall.
+Source-onlyhumaninterpretation doc/larger128-stock1-checkpoint-20261019.md.
+Promptactualcheckpoint01a152e1-7a28; timing/seal01a152e2-ab9d. Allownjobs/FDsCLOSED;
+no furtherpayload/SDKstarts until operator schedulingreview alreadyraisedbyPhoto.
+Preliminaryfull30projection18–30h/central23h remainsrough, notcontinuousquietgrant.
+PhotoIO/native remainsUNSTARTEDperuserat-end pendingoperatorchoice, CPU8sourceokay.
+New18conditionalfda6288a remainsNOTACTIVE; allother29largercohorts UNSTARTED.
+Continueindependent source/finalacceptancework, GOALACTIVE, no replay/goalpause.

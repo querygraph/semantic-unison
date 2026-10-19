@@ -181,3 +181,22 @@ Allownjobs/resourcesclosed. UserPhotoIO-at-endhold remains;CPU8sourceindependent
 Nextfirst128stock1 freshshared8guard/admission; no18untilfreshPhoto coordination.
 CurrentSDKfull67541/5343fe/0 +allscanned45243/e035b2/0 source/harness scope preserved
 asactualpriorruns, not relabeled to this subsequent Python-only harness commit.
+
+
+### CHECKPOINT reached: first128 stock1 ACTUAL PASS/CLOSED
+Ownertool52223/91798e→3c264e/exit0/NOsession,97775parent/97794worker.
+18rows54CLIexact/nestedPASS/workerreaped0/groupempty/CPU8EXclosed/53postpinsunchanged.
+Admissionc08b51ff consumedonce, workspace18d2fe7b45df433ba9fb2ca9def4cb3f;
+OWNERRETURN0daeec580f42f65f8d62fed8c7af1ff45d54df7219845a1ee6762401010e187a.
+Evidence tests/qualification/larger128-stock1-actual-20261019.json.
+Saved-only reporte3f21b/0 INCOMPLETE_MATRIX/18rows,9sizecohortsmissing.
+Medianupdatesordinary11.266858/clone9.801000/semantic18.823947seconds,
+5measuredsamples each preserved. FinalRESULTmtime-START653.10s;sum54CLIwalls425.48s;
+terminaltranscription706.10s includespoll/seallatency, notpreciseworker/hardwall.
+Source-onlyhumaninterpretation doc/larger128-stock1-checkpoint-20261019.md.
+Promptactualcheckpoint01a152e1-7a28; timing/seal01a152e2-ab9d. Allownjobs/FDsCLOSED;
+no furtherpayload/SDKstarts until operator schedulingreview alreadyraisedbyPhoto.
+Preliminaryfull30projection18–30h/central23h remainsrough, notcontinuousquietgrant.
+PhotoIO/native remainsUNSTARTEDperuserat-end pendingoperatorchoice, CPU8sourceokay.
+New18conditionalfda6288a remainsNOTACTIVE; allother29largercohorts UNSTARTED.
+Continueindependent source/finalacceptancework, GOALACTIVE, no replay/goalpause.

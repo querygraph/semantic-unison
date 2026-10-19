@@ -1,0 +1,124 @@
+{
+  "schema": "unison-larger-cohort-actual/1",
+  "state": "PASS_CLOSED",
+  "label": "stock",
+  "selection": 1,
+  "workload": {
+    "file_mib": 128,
+    "files": 4
+  },
+  "actual_owner": {
+    "schema": "unison-actual-owning-tool-terminal/1",
+    "state": "ACTUAL_TERMINAL",
+    "session_id": 52223,
+    "initial_chunk": "91798e",
+    "terminal_chunk": "3c264e",
+    "exit_code": 0,
+    "no_running_session": true,
+    "owner_pid": 97775,
+    "worker_pid": 97794,
+    "source": "Personally collected direct write_stdin result, not ps/marker inference",
+    "unix": 1792391870.9319801
+  },
+  "workspace": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f",
+  "plan": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-1-plan.json",
+    "sha256": "944176b8387a4ab9b8d0f1807e8f0a2149b111cbb3f68934849b8501f9d49490"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-larger128-stock1-admission-9facb61ba14340c99dee08d14e2aaff7.json",
+    "sha256": "c08b51ff0668cd600000ae18def1ada1bcfbe75da3f22f2c2ca868e7fef0e985"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/SHARED-START.json",
+      "bytes": 7344,
+      "sha256": "e54593f362b9ae086c44310b5649f8dc7a5cc952913763ee899e37a17a49ee9a"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "f4d8979ecc6a8b0fff8e339b841fca16adaa473c5d717a6bea6d19153e5c19b3"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/SHARED-SERVER-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/COHORT-BINDING.json",
+      "bytes": 797,
+      "sha256": "14a1693c88268764abe19bd3eb56ac5a649c7f742bb46effa16c9c845bd30aeb"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/WORKER-COHORT-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/RESULT.json",
+      "bytes": 1484728,
+      "sha256": "c40b4e6a729b4fa366d5dfbf18e2e3747f74f38de43dc122eb02dd03f85b5363"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/SHARED-STDOUT.txt",
+      "bytes": 1304,
+      "sha256": "a7d3c7a81275699b0da337bb0ed802f30dcf7929f942c44be4598952081a7b20"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/OWNER-TERMINAL.json",
+      "bytes": 377,
+      "sha256": "5426993a589fac7aaba23d43bab40de4446423b27acebf0682495c7a28dcbfe8"
+    }
+  ],
+  "closed": {
+    "child": {
+      "pid": 97794,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 97794,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "saved_metadata_reaudit": {
+    "attempted_cli_invocations": 54,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": true,
+    "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+    "rows": 18,
+    "cli_invocations": 54,
+    "parent_terminal_proved": false,
+    "token_release_authorized": false,
+    "functional_status": "PASSED"
+  },
+  "median_update_seconds": {
+    "ordinary": 11.266858018003404,
+    "receiver-clone": 9.801000162027776,
+    "semantic": 18.823946724063717
+  },
+  "observed_start_to_terminal_transcription_seconds": 706.1035752296448,
+  "observed_interval_scope": "Includes owning-tool polling and later transcription; not precise worker runtime or hardwall.",
+  "timing_disclosure": [
+    "Standing8 projectsharing; PhotoCPU8source/control preparation permitted. OS and background activity uncontrolled; no quiet causal performance claim.",
+    "All five measuredsamples retained; warmup excluded only from distribution. Models/returnedwrites/primaryreads are distinct from totalapplication/physicalIO."
+  ],
+  "scope": "First128MiBx4 stock1 cohort,18rows54CLI, actualparent/group/FDsettlement. NoSDK/Photo/Main/original/camera/18borrow. Oneof30planned largercohorts, no nextpayload until schedulingcheckpoint; notfullSOLcompletion."
+}
