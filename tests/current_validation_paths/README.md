@@ -57,3 +57,26 @@ OS closes; no actual unresolved descriptor escaped the tests. CPU00 closed and
 no CLI/SDK/EX or retained payload was used. [Evidence](../qualification/current-named-files-controls-actual-20261019.json).
 The retained Session and explicit signal actors still need implementation; no
 runtime request/admission exists.
+
+## Retained Session adapter
+
+`session.py` now constructs only private helper/control/state fixtures through
+Files. Generated scripts use the qualified pinned Python; only original declared
+copy/merge options are allowed, with explicit endpoint2+2 budgets, filesystem1,
+received-only validation and compiler identity. It persists intent before invoke,
+requires an independent exact-status/command/group-settlement audit before
+acceptance, and stores the returned outcome/verdict for retention. Failures keep
+the original carrier, adapters and file owner; no retry or release is supplied.
+The producer interruption method delegates exclusively to a retained actor.
+
+Eight original controls passed8c0ee1/0: intent ordering and failed persistence,
+exact failed2 versus skipped1, override refusal, missing settlement, retained
+outcome/file root and same-carrier interruption. Earlier six controls3e2c2c/0
+preceded explicit outcome/file-owner retention. Actual tests created tiny scripts
+and JSON only, invoked no executable/process/SDK and closed CPU00; EX was unused.
+[Source/actual evidence](../qualification/current-named-session-controls-actual-20261019.json).
+
+Still unimplemented: actual invoke/audit actor, producer-interruption and
+client-SIGINT actors, whole-run independent prefix audit, entry/freezer and fresh
+runtime request. A caller-supplied fabricated audit in the controls is not
+canonical process/group qualification. No Photo or SDK slot is requested yet.

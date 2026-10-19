@@ -1,0 +1,28 @@
+{
+  "schema": "unison-current-named-retained-session-controls/1",
+  "tests_run": 8,
+  "success": true,
+  "source_sha256": {
+    "tests/current_validation_paths/session.py": "bfaeb22396f344b34126b11b38418d8a67b3137a906f71c8a800ac366a401904",
+    "tests/current_validation_paths/session_test.py": "e69ee032bb20b765c27c20b3b553537a15b40cff23ebf550e4f87f5d31e2c54b",
+    "tests/current_validation_paths/files.py": "c3e5fab2136cfaf72293169edb7a4e11b3e861b05c38797acbfa2d7f5cccfd58",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+  },
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "retained_payload_opened": false,
+  "scope": "Tiny generated scripts/controls and inert invoke/audit/interrupt/persist doubles; no CLI/SDK/process/group/reacquisition qualification",
+  "CPU00_closed": true,
+  "actual_tool": {
+    "terminal_chunk": "8c0ee1",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "prior_actual": {
+    "terminal_chunk": "3e2c2c",
+    "exit_code": 0,
+    "methods": 6,
+    "source_successor": "Added explicit invocation outcome/verdict references and retained file-owner carrier; added unsettled audit/interruption controls"
+  }
+}

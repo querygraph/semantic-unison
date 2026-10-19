@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T17:46:43.902194+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T17:53:57.841178+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -91,7 +91,12 @@ admissions or statements that consumed jobs remain unstarted.
   identities, freezesowner/refusesIO/closeretry. Sixoriginaltinycontrols590d8a/0
   passed (c74939/0 before setup-order improvement); CPU00closed/noCLI/SDK/EX/
   retainedpayload/actualunknownFD. Injected closes actuallyclosed onlytestFDs.
-- Implement retainedSession+signalactors+rawfullprefixaudit next;
+- RetainedSession source nowimplemented `session.py`: ownedprivate scripts/
+  controls, qualifiedPython, exactbinary/options/endpointbudget/fsslot1, durable
+  intent→invoke→independentaudit→accept. Originalcarrier and lastoutcome/verdict/
+  adapters/filesroot retained onfailure; no retry/release. Eightoriginal tiny/
+  inertcontrols8c0ee1/0 passed (earlier6methods3e2c2c/0), CPU00closed/noCLI/SDK/EX.
+- Implement actualinvoke/audit+producerinterrupt/clientSIGINTactors+rawfullprefixaudit next;
   no nativeentry/request/admission exists yet. Do not runlegacybareharness or
   swapproductionChelper forinheritedgroupstub. README maps exactscope/nextwork.
 
