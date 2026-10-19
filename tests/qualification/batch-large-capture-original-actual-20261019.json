@@ -1,0 +1,68 @@
+{
+  "schema": "unison-batch-large-capture-original-control/1",
+  "owning_tool": {
+    "chunk": "1266b2",
+    "exit_code": 0,
+    "session": null
+  },
+  "pure_controls": {
+    "chunk": "2b1936",
+    "exit_code": 0,
+    "tests": 12,
+    "legacy_262145_refused_before_launch": true
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-batch-large-capture-control-dahbdq7t",
+  "cases": [
+    {
+      "pid": 83665,
+      "bytes": 300000,
+      "reaped": true,
+      "returncode": 0,
+      "group_others_absent_before_reap": true,
+      "raw_roundtrip_exact": true
+    },
+    {
+      "pid": 83667,
+      "bytes": 4194305,
+      "reaped": true,
+      "returncode": 0,
+      "group_others_absent_before_reap": true,
+      "overflow_refused": true
+    }
+  ],
+  "cpu_tokens": [
+    0
+  ],
+  "cpu_closed": true,
+  "store_closed": true,
+  "exio_acquired": false,
+  "source_sha256": {
+    "bench/sync/batch_child.py": "902e5532fb6480adb4b840a36d3c4713d22d234fb12d623cefa7af3368d71484",
+    "bench/sync/batch_capture.py": "603971d6c38677982b451e34fc79dee77436d9e33499a80e78c73fe22440c64f",
+    "bench/sync/batch_transport.py": "49049155661ce16b0710b5cd30fad296affdd187fb3f832d56a32379ddd706f4",
+    "bench/sync/batch_artifacts.py": "c19c37245bef13cf0b92f9dc6cf0303f7354ac53f1ef0af5c83853b8727544e5",
+    "tests/sdk_host_matrix/shared_child.py": "408097836323a1131921ceb9439201ce76b267f02b9187e81689db86aaf82783",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+  },
+  "artifacts": [
+    {
+      "name": "complete-call.json",
+      "bytes": 1182,
+      "sha256": "d755938c0e3201c7be7cdb38d9d8df6ca14e247691ccd4828f7ac5d924430964"
+    },
+    {
+      "name": "complete-stdout.00.json",
+      "bytes": 349579,
+      "sha256": "412ba21c733b791aede6ff33734bc126ecac140d6037606ecf186855d19d55f1"
+    },
+    {
+      "name": "complete-stdout.01.json",
+      "bytes": 50527,
+      "sha256": "b635320ba79338d66e65bd0ec2898f2d4794b72ac6ad8bce067c984280eca05d"
+    }
+  ],
+  "scope": "two original Python pipe-output children; no Unison/server/SDK/Photo",
+  "resource_release_authorized": false
+}

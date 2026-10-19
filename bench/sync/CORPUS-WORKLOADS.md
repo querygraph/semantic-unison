@@ -157,3 +157,20 @@ Three original pure controls passed actual09e739/0/no session/Unison00closed.
 No IO/resource/server grant is supplied. Runtime owning entry and per-class
 observed counters remain open;256KiB live capture limit is an explicit scaling
 constraint, not silently accepted truncation or a reason to shrink the corpus.
+
+## Current larger capture qualification
+
+The preceding256KiB batch constraint is superseded by `batch_child.start`, a
+fixed trusted4MiB capture factory over the retained child lifecycle. Existing SDK
+`shared_child.start` retains its256KiB ceiling and rejects262145before launch.
+The kernel extraction introduces no new process/group/close behavior. Batch
+outcomes use a separate auditor permitting bounded replacement diagnostics;
+whole raw bytes still have the4MiB artifact ceiling. No factory/limit is selected
+by a remote packet. Two simultaneous peers declare at most16MiB raw capture,
+which is not a whole-process RSS hardcap.
+Actual1266b2/0: original child83665returned0 with300000invalidUTF8 bytes exact
+through Store, child83667returned0 with4194305bytes and explicit overflow refusal.
+Both groups/reaps and Store/CPU00 closed;12pure controls2b1936/0 also passed.
+No server/SDK/Unison/EXIO. Receipt batch-large-capture-original-actual-20261019.json.
+The prepared parser/rsync v1 plans pin the old common-helper source and are now
+stale/unstarted; preserve them and freeze successors before any execution.

@@ -8,8 +8,7 @@ import sys
 from pathlib import Path
 sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tests'),
                 str(Path(__file__).resolve().parents[2] / 'tests/sdk_host_matrix')]
-from shared_child import start
-from sdk_merge_receiving.evidence import child
+from batch_child import start, audit_child as child
 from batch_artifacts import publish, read
 
 
@@ -53,7 +52,7 @@ def launch(command, environment, *, pass_fds, store, name):
     if (type(command) is not list or not command or any(type(x) is not str for x in command)
             or type(name) is not str or re.fullmatch('[A-Za-z0-9][A-Za-z0-9_-]{0,31}', name) is None):
         raise ValueError('exact command and bounded one-use call name required')
-    return Call(start(command, environment, pass_fds=pass_fds, capture_limit=262144),
+    return Call(start(command, environment, pass_fds=pass_fds, capture_limit=4*1048576),
                 list(command), store, name)
 
 

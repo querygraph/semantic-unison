@@ -7460,3 +7460,19 @@ no session/CPU00closed; earliercabec1/0 preserved before poison tightening.
 No dispatch/EXIO/SDK. Liveowner capture currently256KiB/stream: larger traces
 need qualified larger capture or bounded logpolicy before corpus qualification;
 nevertruncateaccept or silentlyshrink. Owning entry/per-class counters remain.
+
+
+## 2026-10-19 bounded4MiB retained batch capture qualification
+
+Added batch_child fixedtrustedfactory entry over existing retained lifecycle
+kernel; common SDK start keeps256KiB ceiling/default and rejects262145before
+launch. Batchtransport now uses4MiB perstream and independent boundedbatch
+childaudit; rawinvalidUTF8 replacementdiagnostics mayexpand3x butrawartifact
+cap remains4MiB. Pure12tests actual2b1936/0; originalPythonchildren actual
+1266b2/0/no session:83665reaped0 exact300000invalidUTF8 bytes through Store,
+83667reaped0 output4194305 bytes refusedoverflow; bothgroupsabsent,Store+CPU00
+closed, noEXIO/server/SDK/Photo. Actualreceipt batch-large-capture-original-
+actual-20261019.json. Shared_child sourcehash changed (defaultbehaviorunchanged),
+so prepared final-extended-profile-pair-plan-v1 and final-rsync-publication-plan-v1
+are now STALE_UNSTARTED and need immutable refreshed successors beforeexecution.
+Oldplans/actualreceipts preserved; no stalepin execution or automaticadmission.

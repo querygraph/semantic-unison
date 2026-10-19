@@ -26,7 +26,7 @@ class TransportTests(unittest.TestCase):
             call = launch(['never-execute'], {}, pass_fds=(7,), store=store, name='seed')
             pin = call.finish(100)
             self.assertEqual(restore(store, pin, ['never-execute']), call.outcome)
-            start.assert_called_once_with(['never-execute'], {}, pass_fds=(7,), capture_limit=262144)
+            start.assert_called_once_with(['never-execute'], {}, pass_fds=(7,), capture_limit=4*1048576)
             with self.assertRaises(ValueError): call.finish(101)
         self.assertNotIn('stdout', store.read_json(pin['name'], expected_sha256=pin['sha256'])['outcome'])
 

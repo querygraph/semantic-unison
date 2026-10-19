@@ -53,7 +53,15 @@ class PendingChild:
 
 
 def start(command,environment,*,pass_fds=(),capture_limit=262144):
-    if type(capture_limit) is not int or not 1<=capture_limit<=262144:
+    return _start(command,environment,pass_fds=pass_fds,capture_limit=capture_limit,
+                  capture_type=CapturedStream,maximum_capture=262144)
+
+
+def _start(command,environment,*,pass_fds,capture_limit,capture_type,maximum_capture):
+    # Trusted source composition only: no factory/limit is selected by a packet.
+    # Existing SDK entry start() retains its original strict256KiB ceiling.
+    if (maximum_capture not in (262144,4*1048576) or type(capture_limit) is not int
+            or not 1<=capture_limit<=maximum_capture):
         raise ValueError('bounded capture required')
     command=list(command)
     owner=OwnedGroup(command,env=environment,stdin=subprocess.DEVNULL,
@@ -71,7 +79,7 @@ def start(command,environment,*,pass_fds=(),capture_limit=262144):
         raise e from error
     try:
         for fd in fd_numbers:identities.append(descriptor_observation(fd,'shared_sdk_capture'))
-        for stream in streams:captures.append(CapturedStream(stream,capture_limit))
+        for stream in streams:captures.append(capture_type(stream,capture_limit))
     except BaseException as error:
         retain('SDK capture construction unresolved; retain launched child',error)
 
