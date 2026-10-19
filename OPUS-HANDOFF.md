@@ -7040,3 +7040,18 @@ Scheduling update from Photo Root: newer user steering lets Photo go first.
 Hold NEW EXIO/native/SDK/benchmark starts; standingUnison8 source work may
 continue. No currently owned Unison IO/process, preservation remains unadmitted
 and unstarted. This supersedes local execution ordering while Photo runs.
+
+
+## 2026-10-19 — Clone/range final case mapping and evidence gaps
+
+New doc/sol-clone-final-case-map-20261019.md maps geometry, short progress,
+unsupported/errors, indeterminate effects, immutable shifted/duplicate bases,
+volume/alias/EOF/binding changes and cancellation to actual test bodies. Fresh
+metadata audit ab4513/0: all60 current range source bindings and18 saved artifacts
+match. JSON saved as doc/sol-clone-final-case-bindings-20261019.json.
+Important: old transfer-output receipt0/5 pins current; later stream-cap6/9
+including currentcopy/transfer/probe/run. Remote dependencies differ; do not
+relabel as full final execution. Inherited-rsync predecessor and legacyclone
+filesystem case integration still need scoped binding/renewal. No test/native
+run, payload read, CPU/IO lease or production edit. Photo-goes-first hold remains
+for new IO/native; own8 source work continues. GoalACTIVE/incomplete.

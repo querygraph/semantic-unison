@@ -228,3 +228,11 @@ test bodies and freshly matched saved stock/Ox evidence. All104 explicit source
 pins and16 saved artifacts match. This closes that component mapping only;
 archive authority and final receiving merge remain unqualified. Adobe/Photo IO
 remains last. No new native work or scheduling hold was created.
+
+### Clone/range final case mapping — 2026-10-19
+
+[Case map](sol-clone-final-case-map-20261019.md) and fresh binding audit check60
+source bindings/18 saved artifacts, all matching current range controls. This
+closes that named component mapping, not filesystem/transport qualification.
+Transfer output/inherited-rsync predecessor dependencies still require scoped
+final binding or renewal; explicit remaining cases are listed in the map.
