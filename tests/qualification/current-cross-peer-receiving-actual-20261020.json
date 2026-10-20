@@ -1,0 +1,66 @@
+{
+  "schema": "unison-current-cross-peer-receiving-actual-pair/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "date": "2026-10-20",
+  "production_commit": "8581f357",
+  "plans_commit": "12bb45da",
+  "runs": {
+    "stock": {
+      "plan": "6583191967dd9f969831fe7e450b9b607c772ab543b9033629c1eaab41316025",
+      "admission": "82f8297df23c8b7aecd44ca47917c28dfeeef02bbce17e08285349d52e0605a6",
+      "workspace": "/private/tmp/u-xpeer-0fef469516374288",
+      "owner_pid": 66557,
+      "worker_pid": 66564,
+      "owner_audit_sha256": "83d99b7037badf202e6a70b64600e23f274a4015af8261c3cdca5438c2de9080",
+      "build_receipt": "/private/tmp/unison-named-build-stock-20261019-05.json",
+      "binary_sha256": "11440f082ea7ca88089c3f18e22921f8a3089de90d0df8990684e81d277ec2fd",
+      "build_receipt_sha256": "59619e3321a514f7fda3fae4dd49633fafb52e2db4e2952b0c9d1feee239e6f9",
+      "peer_compiler": "ox",
+      "peer_binary_sha256": "9e27a92822554701d051253c319b48d86cfea2ee5e689c566ddbeaa45d7980f7",
+      "totals": {
+        "original_completed_cases": 5,
+        "cli_calls": 12,
+        "fake_validators": 2,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    },
+    "ox": {
+      "plan": "2893eb39b6eb8cd9d5d055bc72e722d830510392b11e869e8e24af90f349bdc0",
+      "admission": "0bfec71b21d6845bca93f7549c27a9824d91f4c50325f3598719cd540d35129d",
+      "workspace": "/private/tmp/u-xpeer-3bcc0a2ed26e4469",
+      "owner_pid": 66776,
+      "worker_pid": 66783,
+      "owner_audit_sha256": "bd57239e44092ab266792e4332a1fe1aacc73a60bb001977ee2cd85674b3ef57",
+      "build_receipt": "/private/tmp/unison-named-build-ox-20261019-05.json",
+      "binary_sha256": "9e27a92822554701d051253c319b48d86cfea2ee5e689c566ddbeaa45d7980f7",
+      "build_receipt_sha256": "eb27e9e777e9996a08239ad351ee29748e5bc5e3e6679bdef82f84519e97d303",
+      "peer_compiler": "stock",
+      "peer_binary_sha256": "11440f082ea7ca88089c3f18e22921f8a3089de90d0df8990684e81d277ec2fd",
+      "totals": {
+        "original_completed_cases": 5,
+        "cli_calls": 12,
+        "fake_validators": 2,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    }
+  },
+  "directions": {
+    "stock": "stock client -> OxCaml server",
+    "ox": "OxCaml client -> stock server"
+  },
+  "failed_predecessors": [
+    "stock-02: client launcher expected the client binary and refused the peer server command; proxy accept expired (harness); recovered, not replayed"
+  ],
+  "independent_postclosure_replay": {
+    "token": "CPU04",
+    "matches_owner_audit": true,
+    "executables_opened": false
+  },
+  "scope": "Generated small files, one 300 KB delta payload and synthetic 64 KiB DNGs with fake validators over the loopback remote transport; stock 5.2.0 and OxCaml 5.2.0+ox builds of the same production source. No SDK, camera payload, real SSH or performance claim."
+}

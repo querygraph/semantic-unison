@@ -1,0 +1,105 @@
+{
+  "schema": "unison-auto-cohort-report-input/1",
+  "records": [
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-1-plan.json",
+        "sha256": "944176b8387a4ab9b8d0f1807e8f0a2149b111cbb3f68934849b8501f9d49490"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/RESULT.json",
+        "sha256": "c40b4e6a729b4fa366d5dfbf18e2e3747f74f38de43dc122eb02dd03f85b5363"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/ox-1-plan.json",
+        "sha256": "e8f2bc04053a37faf2c58535d599fffdcc882da756638b76d26a0178675f663e"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-8a209ad5f3e54e01b6530ed640297ea6/RESULT.json",
+        "sha256": "225157556f0d1594ffcbf638a606bd6dbb66d4fbc5c184d8899a3931019117e5"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-2-plan.json",
+        "sha256": "85da1b93b1849771b4bac42731412d60721d217dabb35747abffd120b7558623"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-dc63e34c32394e4793ead538859ff6ac/RESULT.json",
+        "sha256": "f46adbf98abec33abaf6e38d90e635ae6471ec5bcbce7da5ca10e1fa082fc632"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/ox-2-plan.json",
+        "sha256": "53e5362bb2d67c2ba96349a0aa7a03c33360759fc5e237a54615dedd1233574a"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-dd01a9491c2544c4afd17dc0c2447cdd/RESULT.json",
+        "sha256": "bf213364dfe0a8e7005f07f057ff1509716cb29ec828c20d57f52bdd2c34fe0a"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-4-plan.json",
+        "sha256": "654ae83eb714b1eef1815993740b102fcee774361626c85fe4de240ea7befed9"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-d3d908538b444e82982f7605e42599b4/RESULT.json",
+        "sha256": "ddf8490ac5074e3f3d842e1278ede8e68d37236531f71ee6a353b6e2b39aecaa"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/ox-4-plan.json",
+        "sha256": "20719bb67cec8700c756c2f3a8525dc14badbba5de300fd1aa11010e8360559f"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-ed5d6fc4e82947c58cb6aba1ab884511/RESULT.json",
+        "sha256": "4373219b00f998e7155d79a82ee47fb8dca89ee35ec1f156ca5c48a5e0e3c365"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-8-plan.json",
+        "sha256": "e9daa5077d4b5548ae40f400b11b261057e23de68c1bd72bc18f4c6d8b92eeef"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-9972da75e0894ecaa945faa9c3bddffb/RESULT.json",
+        "sha256": "64da637c2e84631532a0332bb88a4969f00d612d45128898c552f4eab3789403"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/ox-8-plan.json",
+        "sha256": "a537f31779d01a5323887408dbede051903347cb905080d9dd22e1d5df7f860f"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-9f98c8079364425cbbfab11d097e76dc/RESULT.json",
+        "sha256": "e0fe7ed4e00213ac6b91cdb715070944abe9c08989ab865074696043694a8064"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-auto-plan.json",
+        "sha256": "2655ab250ba0038f312ed4af5057eaa5bb15852ec94ba8ceba4dd5b8739dcc09"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-18f7d8de78c849de9433c401f680cba1/RESULT.json",
+        "sha256": "43be7b6d79c2ab0ff2e3fb07935a7bb6bea202df8ee604978014f02f55145b05"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/ox-auto-plan.json",
+        "sha256": "1cc5d38edf40041a2d09de2c6565c46ec1e3c68b872456e9fe9723acf8c3a272"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-49cabd7972eb491db7917a63045a8f7f/RESULT.json",
+        "sha256": "fed1e11c3260042d43c7886896e6504d47e283ead23f668b7eea1bd22a634772"
+      }
+    }
+  ]
+}
