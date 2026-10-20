@@ -50,3 +50,13 @@ The restore relies on the stored archive entry already being in stripped form
 (`Props.strip`), as `moveArchiveLocal` also assumes; both compilers' real runs
 committed identical archives after restoration. No unit-level OCaml test was
 added for the three fixes.
+
+## Addendum: `8581f357` (reserved `unison:` merge prefix)
+
+`files.ml` now refuses a merge command that starts with `unison:` but is not
+`unison:dng-xmp-scalars/0`, with "Unknown built-in merge policy", instead of
+running it through `/bin/sh` (which failed later with status 127). Reached only
+by a merge rule naming an unknown `unison:` policy; ordinary external merge
+commands and the built-in policy are unchanged. Exercised by the built-in DNG
+merge successor's `policy-mismatch` case; no earlier evidence used such a name
+except the bare `tests/dng_merge/run.py`, which accepted the old shell failure.

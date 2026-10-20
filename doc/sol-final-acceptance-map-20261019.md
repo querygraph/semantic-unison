@@ -14,6 +14,9 @@ Read-only case maps now exist for row 5
 and row 10 ([semantic merge](final-semantic-merge-case-map-20261019.md)), each
 with explicit gaps; the largest is that the built-in semantic DNG merge has not
 run end to end on the `10c5d159` binary.
+Rows 1, 7 and 8 now have read-only maps too:
+[exactness](final-exactness-case-map-20261019.md) and
+[filesystems/compatibility](final-filesystems-compatibility-case-map-20261019.md).
 Genuine-SDK negative receiving is separately PASS (negative03).
 
 Goal remains ACTIVE/incomplete. Production candidate971271a8 changes only
