@@ -1,0 +1,41 @@
+{
+  "schema": "unison-current-named-receiving-failed-recovery/1",
+  "state": "FAILED_RECOVERY_CLOSED",
+  "plan_sha256": "8fe65236a5bcad8366e712ab7b80932f21997c2ebf04d95acbf8374bf27c3b0c",
+  "admission_sha256": "124b4b2d93bb82620c8eefd2db8258eab2c8f295d114cf5825bba490b05b4fc5",
+  "admission_consumed": true,
+  "workspace": "/private/tmp/u-vpath-dc05cbd57a15415b",
+  "owner_pid": 72741,
+  "worker_pid": 72748,
+  "source_commit": "defd5732",
+  "progress": {
+    "cases_passed": 14,
+    "calls_accepted": 44,
+    "includes": [
+      "all 4 interrupted resumes with exit-disposed copy helper now settled and audited",
+      "all 5 external copy policies",
+      "all 3 moved-file reuse",
+      "merge-pass-pass",
+      "merge-error-pass"
+    ]
+  },
+  "failure": {
+    "case": "merge-pass-error",
+    "call": 45,
+    "error": "exact designated rejection terminal required (client exit 3, expected 2)",
+    "product_finding": "after client published the merge result and the server validator rejected, Unison raised Fatal \"Internal error: New archives are not identical\" because copyBack updated only the first replica archive; whole archive commit discarded"
+  },
+  "recovery": {
+    "evidence": "RECOVERY-EVIDENCE/",
+    "stopped": [
+      "SIGKILL exact pid 72748 (worker)",
+      "SIGKILL exact pid 72741 (owner)"
+    ],
+    "helper_counter_pids_live": 0,
+    "no_group_or_native_signal": true,
+    "locks_verified_free": "EXglobal + CPU00..07 freshly reacquired and closed"
+  },
+  "fix_commit": "files.ml merge: restore first replica archive entry when second copyBack fails",
+  "ox_run_started": false,
+  "no_replay": true
+}
