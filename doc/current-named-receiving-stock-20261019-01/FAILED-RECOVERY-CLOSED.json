@@ -1,0 +1,39 @@
+{
+  "schema": "unison-current-named-receiving-failed-recovery/1",
+  "state": "FAILED_RECOVERY_CLOSED",
+  "plan_sha256": "cb142f069ef3afe63a1474d9d441e63fbc718d447348281eefd5c8625018b921",
+  "admission_sha256": "e4386c728e27904505911b8ad9523251bd795293230e647d35a78fb61bf34e81",
+  "admission_consumed": true,
+  "workspace": "/private/tmp/u-vpath-3b4b03528cfa4f05",
+  "owner_pid": 97705,
+  "worker_pid": 97712,
+  "owner_shell_exit": 137,
+  "failure": {
+    "case": "resume-complete-pass",
+    "call": 1,
+    "auditor": "producer_evidence -> external_evidence",
+    "error": "all external children must have source-bound counters",
+    "observed": "server SIGKILLed after full 2097174-byte stage as designed; client exit3 Lost connection; copy child 97726 own group disposed by HelperSupervisor at_exit teardown (SIGKILL+reap) which emits no External result record",
+    "worker_parked_then_owner_observation_expired": "UnresolvedIOOwnership SDK observation expired; child retained without signals"
+  },
+  "recovery": {
+    "evidence_before_stop": "RECOVERY-EVIDENCE/ (ps, lsof owner/worker, group censuses 97712/97722/97726 empty except worker, native pids absent, workspace tree+sha256, worker stack sample, owner stdout/stderr)",
+    "stopped": [
+      "SIGKILL exact pid 97712 (worker, retain_forever ignores TERM/INT)",
+      "SIGKILL exact pid 97705 (owner)"
+    ],
+    "no_group_or_native_signal": true,
+    "locks_verified_free": "EXglobal + CPU00..07 freshly reacquired and closed"
+  },
+  "decision": {
+    "user": "Product: log at exit",
+    "plan": [
+      "helperSupervisor: optional observe_teardown called after exceptional teardown reap with group census and Cancelled result",
+      "supervisedExternal: pass trace_process so disposed helpers log External result",
+      "producer audit: interrupted call accepts copy outcome cancelled with exit:0 or signal:9, other-members=0",
+      "rebuild+selftest stock and Ox (tests/endpoint_cpu_budget build receipts pattern), refreeze plans -02, fresh admissions, run stock then Ox"
+    ]
+  },
+  "ox_run_started": false,
+  "no_replay": true
+}
