@@ -1,0 +1,34 @@
+{
+  "schema": "unison-current-named-receiving-failed-recovery/1",
+  "state": "FAILED_RECOVERY_CLOSED",
+  "plan_sha256": "41ee070afff1b89a74e7d917df0a386d1e1c35bdfb6db4293a8b81d632518748",
+  "admission_sha256": "50ee94413373331fadb0d5e28b67fba3f293a676b302de6ec4aebe0030e82079",
+  "admission_consumed": true,
+  "workspace": "/private/tmp/u-vpath-8ce8a4380b304b6d",
+  "owner_pid": 61667,
+  "worker_pid": 61673,
+  "source_commit": "a5fd1bfb",
+  "failure": {
+    "case": "resume-complete-pass",
+    "call": 1,
+    "error": "external fixture child/group/capture not normally settled",
+    "observed": "fix a5fd1bfb works: client now logs [external-process] External result v0 pid=61678 status=signal:-7 outcome=cancelled cpu-weight=1 other-members=unknown at exit",
+    "causes": [
+      "census taken immediately after SIGKILL before the leader exited, so retained_group_others raised EBUSY -> unknown",
+      "Unison traces OCaml signal constants (SIGKILL -7); harness expected POSIX 9 (same wrong assumption for validator SIGTERM 15 vs -11)"
+    ]
+  },
+  "recovery": {
+    "evidence": "RECOVERY-EVIDENCE/",
+    "stopped": [
+      "SIGKILL exact pid 61673 (worker)",
+      "SIGKILL exact pid 61667 (owner)"
+    ],
+    "copy_helper_61678_absent": true,
+    "no_group_or_native_signal": true,
+    "locks_verified_free": "EXglobal + CPU00..07 freshly reacquired and closed"
+  },
+  "fix_commit": "defd5732",
+  "ox_run_started": false,
+  "no_replay": true
+}

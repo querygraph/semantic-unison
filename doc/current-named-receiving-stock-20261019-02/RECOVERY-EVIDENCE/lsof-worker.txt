@@ -1,0 +1,18 @@
+COMMAND     PID  USER   FD   TYPE             DEVICE SIZE/OFF      NODE NAME
+python3.1 61673 alexy  cwd    DIR                1,7      864 313043532 /Users/alexy/src/unison-final-adobe-20261019
+python3.1 61673 alexy  txt    REG                1,7 18749552 303896329 /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14
+python3.1 61673 alexy    0u   CHR                3,2      0t0       314 /dev/null
+python3.1 61673 alexy    1   PIPE 0xa4f5b2ce2d04ac1b    16384           ->0x6f53e33ae69f8511
+python3.1 61673 alexy    2   PIPE 0x9e1d1dd9aaeee911    16384           ->0x6d849c54d1e6da47
+python3.1 61673 alexy    3r   DIR                1,7      288 313817677 /private/tmp/u-vpath-8ce8a4380b304b6d
+python3.1 61673 alexy    4r   DIR                1,7      288 313817677 /private/tmp/u-vpath-8ce8a4380b304b6d
+python3.1 61673 alexy    5u   REG                1,7        0 307225493 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/io-lanes-v1/all-devices.lock
+python3.1 61673 alexy    6u   REG                1,7        0 307122463 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-00.lock
+python3.1 61673 alexy    7u   REG                1,7        0 307122464 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-01.lock
+python3.1 61673 alexy    8u   REG                1,7        0 307122465 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-02.lock
+python3.1 61673 alexy    9u   REG                1,7        0 307122466 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-03.lock
+python3.1 61673 alexy   10u   REG                1,7        0 307122467 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-04.lock
+python3.1 61673 alexy   11u   REG                1,7        0 307122468 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-05.lock
+python3.1 61673 alexy   12u   REG                1,7        0 307122469 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-06.lock
+python3.1 61673 alexy   13u   REG                1,7        0 307122470 /Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/cpu-credits-v1/cpu-07.lock
+python3.1 61673 alexy   14r   DIR                1,7      832 313817683 /private/tmp/u-vpath-8ce8a4380b304b6d/resume-complete-pass
