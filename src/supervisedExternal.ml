@@ -72,6 +72,11 @@ let execute ~executable ~argv0 ~arguments =
   let observe_group=if Trace.enabled "external-process" then
     Some(fun count -> observation:=Some count) else None in
   let environment = Unix.environment () in
+  (* Registered cleanup at process exit reports through observe_teardown and
+     may also resume this continuation on cancellation: trace exactly once. *)
+  let traced = ref false in
+  let trace result =
+    if not !traced then begin traced := true; trace_process ~weight ~group:!observation result end in
   SemanticRuntime.with_cancellation (fun cancellation ->
     BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () ->
     Abort.checkAll ();
@@ -81,9 +86,9 @@ let execute ~executable ~argv0 ~arguments =
         raise (Util.Transient "External helper limiter cancelled") in
     BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
       ~inspect:(inspect_limiter cancellation) ~check_cancel (fun process_limits ->
-        HelperSupervisor.run ~argv0 ?process_limits ?observe_group supervisor
+        HelperSupervisor.run ~argv0 ?process_limits ?observe_group ~observe_teardown:trace supervisor
           ~weight cancellation ~limits ~executable ~arguments ~environment)) (fun result ->
-    trace_process ~weight ~group:!observation result;
+    trace result;
     Abort.checkAll ();
     if HelperSupervisor.is_cancelled cancellation then
       fail (Util.Transient "External helper cancelled")

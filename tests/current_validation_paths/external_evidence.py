@@ -7,7 +7,9 @@ No process operation or release authority is supplied by this parser.
 from supervised_external.external_records import parse
 
 
-def audit(log,expected,transport_pids):
+def audit(log,expected,transport_pids,*,disposed_at_exit=False):
+    # Only the deliberate receiver-crash call may see its copy helper settled by
+    # the client's exit-time teardown: SIGKILL+census+reap, outcome cancelled.
     if type(expected) is not list or len(expected)>2:raise ValueError('bounded original external expectations required')
     records=parse(log)
     if len(records)!=len(expected):raise ValueError('all external children must have source-bound counters')
@@ -25,10 +27,13 @@ def audit(log,expected,transport_pids):
         key=(entry['endpoint'],entry['pid'])
         if key not in remaining:raise ValueError('external counter/process binding differs')
         record=remaining.pop(key)
-        if (record.status!=('exit',0) or record.outcome!='completed' or record.cpu_weight!=1
+        normal=record.outcome=='completed' and record.status==('exit',0)
+        disposed=disposed_at_exit and record.outcome=='cancelled' and record.status in (('exit',0),('signal',9))
+        if (not (normal or disposed) or record.cpu_weight!=1
             or record.group_observation!='observed' or record.other_members!=0 or record.capture_truncated):
             raise ValueError('external fixture child/group/capture not normally settled')
         result.append(dict(expected=entry,actual_status=list(record.status),other_group_members_before_reap=0,
+            disposition='completed' if normal else 'disposed-at-client-exit',
             source_fixture_binding_required=True,resource_release_authorized=False))
     if remaining:raise ValueError('unbound external child remains')
     return result

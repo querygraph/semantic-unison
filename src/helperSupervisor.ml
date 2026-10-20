@@ -269,7 +269,7 @@ let drain scratch stream =
   in
   loop 65536
 
-let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
+let execute ?observe_group ?observe_alive ?observe_teardown c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
   let started = if Sys.win32 then 0. else monotonic_now () in
   let empty outcome =
     { outcome; status = None; child_pid = None; stdout = ""; stderr = "";
@@ -347,7 +347,7 @@ let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settl
       cleanup ();
       (try !unregister () with _ -> ());
       release () in
-    let teardown () =
+    let teardown ?(notify=false) () =
       (* A disconnected owner loop may never tick again. This exceptional
          synchronous path must kill/reap now; it does not run Lwt or wait
          through the ordinary graceful TERM timeout. *)
@@ -355,11 +355,24 @@ let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settl
         (* Keep the CPU/child reservation while the owned child settles.
            A status-allocation failure after reaping still retires pipes. *)
         match
-          (if owns_child () then
+          (if owns_child () then begin
              (try signal_group !owned_pid Sys.sigkill with Unix.Unix_error _ -> ());
+             if notify then observe_before_reap ()
+           end;
            reap_now ())
         with
-        | () -> retire ()
+        | () ->
+            retire ();
+            (* Registered cleanup (cancellation or process exit) may never
+               resume the Lwt monitor, so report the settled child here.
+               Observer failure cannot undo the completed reap. *)
+            (match notify, observe_teardown with
+             | true, Some observe ->
+                 (try observe { outcome = Cancelled; status = !reaped; child_pid = child_identity ();
+                   stdout = Buffer.contents out.buffer; stderr = Buffer.contents err.buffer;
+                   output_truncated = out.truncated || err.truncated;
+                   elapsed = monotonic_now () -. started } with _ -> ())
+             | _ -> ())
         | exception error ->
             if !owned_pid < 0 then retire ();
             raise error
@@ -447,7 +460,7 @@ let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settl
            elapsed = monotonic_now () -. started }
        with _ -> raise exn) in
     let start () =
-      unregister := register_cleanup c teardown;
+      unregister := register_cleanup c (fun () -> teardown ~notify:true ());
       pipe 0 1;
       pipe 2 3;
       out.fd <- descriptors.(0); err.fd <- descriptors.(2);
@@ -461,7 +474,7 @@ let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settl
     let is_settled () =
       !owned_pid < 0 && not owns_descriptor.(0) && not owns_descriptor.(1)
       && not owns_descriptor.(2) && not owns_descriptor.(3) in
-    owner_cleanup := teardown;
+    owner_cleanup := (fun () -> teardown ());
     owner_settled := is_settled;
     (* Legacy Lwt can also raise while installing a waiter after [start]
        has returned a running monitor. Synchronous failure must settle its
@@ -472,7 +485,7 @@ let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settl
       raise exn
 
 type process_limits = { launcher : string; descriptors : int; address_space_bytes : int64 }
-let run ?argv0 ?process_limits ?observe_group ?observe_alive t ~weight c ~limits ~executable ~arguments ~environment =
+let run ?argv0 ?process_limits ?observe_group ?observe_alive ?observe_teardown t ~weight c ~limits ~executable ~arguments ~environment =
   let argv0 = match argv0 with None -> executable | Some name -> name in
   if contains_nul argv0 then invalid_arg "HelperSupervisor: NUL in argv[0]";
   validate ~limits ~executable ~arguments ~environment;
@@ -499,7 +512,7 @@ let run ?argv0 ?process_limits ?observe_group ?observe_alive t ~weight c ~limits
       release t ~weight ~child:true
     end in
   let execute_owned () =
-    execute ?observe_group ?observe_alive c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
+    execute ?observe_group ?observe_alive ?observe_teardown c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
   let failed exn =
     (try !owner_cleanup () with _ -> ());
     release_once (); fail exn in

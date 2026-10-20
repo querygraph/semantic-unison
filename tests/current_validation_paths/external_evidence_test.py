@@ -20,6 +20,18 @@ class External(unittest.TestCase):
         for key,value in [('pid',101),('pid',True),('fixture_pid',103),('fixture_pid',False)]:
             entry=dict(ENTRY);entry[key]=value
             with self.subTest(key=key,value=value),self.assertRaises(ValueError):audit(LINE,[entry],{101,102,103})
+    def test_exit_disposed_copy_is_accepted_only_on_the_declared_interruption_call(self):
+        for status in ('exit:0','signal:9'):
+            log=LINE.replace('status=exit:0','status='+status).replace('outcome=completed','outcome=cancelled')
+            with self.subTest(status=status):
+                self.assertEqual(audit(log,[ENTRY],{101},disposed_at_exit=True)[0]['disposition'],'disposed-at-client-exit')
+                with self.assertRaises(ValueError):audit(log,[ENTRY],{101})
+        self.assertEqual(audit(LINE,[ENTRY],{101},disposed_at_exit=True)[0]['disposition'],'completed')
+        for old,new in [('status=exit:0','status=signal:15'),('status=exit:0','status=exit:1'),('other-members=0','other-members=unknown'),
+            ('other-members=0','other-members=1'),('capture-truncated=false','capture-truncated=true')]:
+            log=LINE.replace('outcome=completed','outcome=cancelled').replace(old,new)
+            with self.subTest(new=new),self.assertRaises(ValueError):audit(log,[ENTRY],{101},disposed_at_exit=True)
+        with self.assertRaises(ValueError):audit(LINE.replace('outcome=completed','outcome=timed-out'),[ENTRY],{101},disposed_at_exit=True)
     def test_no_external_expected_still_rejects_malformed_external_trace(self):
         self.assertEqual(audit('ordinary diagnostics',[],{101}),[])
         with self.assertRaises(ValueError):audit('[external-process] unknown record',[],{101})

@@ -96,7 +96,8 @@ type process_limits = {
 val run :
   ?argv0:string -> ?process_limits:process_limits ->
   ?observe_group:(int option -> unit) ->
-  ?observe_alive:(int -> float -> unit) -> t -> weight:int -> cancellation -> limits:limits ->
+  ?observe_alive:(int -> float -> unit) ->
+  ?observe_teardown:(result -> unit) -> t -> weight:int -> cancellation -> limits:limits ->
   executable:string -> arguments:string array -> environment:string array ->
   result Lwt.t
 (** [arguments] excludes argv[0]. The optional [argv0] preserves a generic
@@ -119,6 +120,14 @@ val run :
     proof. Exceptions from it are ignored. It must not block, reap children,
     signal processes, or reenter supervision. Default execution does not allocate
     a group binding or query the process table. *)
+
+(** [observe_teardown result] is optional diagnostics for a child settled by
+    registered cleanup (cancellation or process exit), where the Lwt result may
+    never be delivered. It runs synchronously after SIGKILL, an [observe_group]
+    census and reap, with outcome [Cancelled]. It is never called on the
+    ordinary or internal-failure paths, so a caller tracing both this and the
+    returned result must suppress a duplicate. Exceptions from it are ignored;
+    it must not block, signal, reap or reenter supervision. *)
 
 (** [observe_alive pid monotonic_seconds] is optional owner-loop diagnostics,
     called only after the retained direct child is observed nonterminal. The

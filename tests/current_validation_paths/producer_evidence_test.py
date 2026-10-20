@@ -47,6 +47,12 @@ class Evidence(unittest.TestCase):
         for old,new in [('other-members=0','other-members=unknown'),('status=exit:0','status=signal:9'),('pid=201','pid=999')]:
             row,pair,observer=fixture();pair['client']['stderr']=pair['client']['stderr'].replace(old,new)
             with self.subTest(new=new),self.assertRaises(ValueError):check(row,pair,observer)
+    def test_copy_disposed_by_client_exit_teardown_is_settled_but_unknown_group_is_not(self):
+        for status in ('exit:0','signal:9'):
+            row,pair,observer=fixture();pair['client']['stderr']=pair['client']['stderr'].replace('outcome=completed','outcome=cancelled').replace('status=exit:0','status='+status)
+            with self.subTest(status=status):self.assertEqual(check(row,pair,observer)['external_observations'][0]['disposition'],'disposed-at-client-exit')
+        row,pair,observer=fixture();pair['client']['stderr']=pair['client']['stderr'].replace('outcome=completed','outcome=cancelled').replace('other-members=0','other-members=unknown')
+        with self.assertRaises(ValueError):check(row,pair,observer)
     def test_protocol_or_release_claim_cannot_hide_interruption(self):
         row,pair,observer=fixture();pair['raw_proxy']['transport']['input_eof_forwarded']=True
         with self.assertRaises(ValueError):check(row,pair,observer)

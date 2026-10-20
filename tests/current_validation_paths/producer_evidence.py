@@ -56,7 +56,7 @@ def audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,obs
     if 'Lost connection with the server' not in log:raise ValueError('actual source-bound interrupted connection diagnostic required')
     identities={cp,pp,frame['server_pid']};helpers(log,[],identities)
     expected=dict(endpoint='client',pid=record['group'],fixture_pid=record['pid'],kind='copy')
-    externals=external_audit(log,[expected],identities)
+    externals=external_audit(log,[expected],identities,disposed_at_exit=True)
     return dict(command=client_command,client_returncode=code,log=log,external_children_settled=True,
         helper_observations=[],external_observations=externals,produced=record,stage_identity=identity,
         raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
