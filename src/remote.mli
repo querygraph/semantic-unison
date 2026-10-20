@@ -101,6 +101,29 @@ type connection
 val connectionVersion : connection -> int
 val connectionOfRoot : Common.root -> connection
 
+val register_body_ownership_classifier : (exn -> bool) -> unit
+(** Owner-loop initialization hook for ownership carriers defined after Remote.
+    Predicates must be pure/owner-only. Registration is additive; no unregister
+    or release authority. True or a classifier exception retains body allowance
+    through RetainedOwnership rather than translating uncertainty into cleanup.
+    This does not discover OS closure or recognize arbitrary unknown exceptions. *)
+
+(* Every incoming packet also obeys the endpoint-local rpcpacketmaxbytes
+   outer frame policy. Regular server arguments also use the independent
+   rpcdecodedrequestbudget/elements/slots selected-cost owner through actual
+   handler/reply settlement. Ordinary legacy registrations use finite owner
+   policy limits directly, without a frame-expansion heuristic; bounded
+   registrations additionally apply their declared per-decode limits.
+   Wire encodings are unchanged. User conversions/global escapes, client
+   results, custom streaming decoders, metadata and full heap/RSS are excluded.
+   Recognized ownership uncertainty retains selected charges and value roots.
+   Handler code must not let arguments escape its actual operation without a
+   separate owned lifetime. rpcpendingreplyslots independently bounds pending
+   waiter entries (default256/max65536), refusing without waiting before request
+   marshaling and rechecking before insertion. Entries end on actual response
+   handoff/failure/removal, not decoded client-value lifetime. Duplicate reply
+   IDs cannot replace a pending waiter. Frame limits alone are not aggregate
+   accounting; outgoing buffers and results still need their own ownership. *)
 val registerServerCmd :
   string
  -> 'a Umarshal.t -> 'b Umarshal.t
@@ -120,10 +143,43 @@ val registerBoundedServerCmd :
     queue, allowing retained-resource leases to cover the entire reply lifetime.
     A scope failure before the callback can produce an exception reply; failures
     after dispatch starts never produce an additional reply.
-    Does not change or bound the shared legacy RPC message-header schema. *)
+    Selected builtin decode allocations are limited per decode to
+    [65536 + 8 * frame_limit] charged bytes and collection counts to
+    [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
+    not decoded heap/RSS or aggregate request bounds. Scope and handler share
+    one decoded argument value. The endpoint-local rpcdecodedrequestbudget,
+    rpcdecodedrequestelements and rpcdecodedrequestslots independently admit
+    regular-command arguments before selected builtin allocations. Owners span
+    scope/handler and queued reply consumption, retaining recognized ownership
+    uncertainty and the decoded argument itself. Ordinary decode refusal releases
+    its partial debit after known failure. Conversion/global escapes, custom streaming
+    decoders, returned client values, metadata, recursion and full heap/RSS
+    are excluded; handlers/scopes must not retain arguments beyond their actual
+    operation without a separately owned lifetime. Valid wire bytes unchanged.
+    Shared RPC headers use independent endpoint-local frame/byte/slot limits.
+    All body registrations also use separate aggregate request/reply raw-input
+    lanes. These follow actual processing/queued output or result decoding and
+    preserve recognized ownership uncertainty; not decoded-object/RSS limits. *)
+val registerBoundedServerCmdWithResultScope :
+  ?withScope:(connection -> 'a -> (unit -> unit Lwt.t) -> unit Lwt.t) ->
+  ?maxResultForArgs:('a -> int) ->
+  string -> maxArgs:int -> maxResult:int -> 'a Umarshal.t -> 'b Umarshal.t ->
+  (connection -> 'a -> 'b Lwt.t) ->
+  connection -> 'a -> ('b -> 'c Lwt.t) -> 'c Lwt.t
+(** Like bounded registration, but the client supplies its actual asynchronous
+    result consumer. Independent endpoint-local rpcdecodedresultbudget/elements/
+    slots admit selected builtin decode costs before allocations and retain the
+    value through consumer settlement. Known failure releases partial charges;
+    recognized ownership uncertainty retains charges and explicit value roots.
+    The consumer must not let the decoded value escape into its return value,
+    a global, or independent work without separately owned lifetime accounting.
+    Copied/converted objects need their own budget; this is not heap/RSS or
+    automatic lifetime tracking. No wire change; legacy result APIs unchanged. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int
+(** Requires a complete five-byte field at a nonnegative offset. Truncation or
+    invalid offset raises Util.Fatal before any array access; checksum unchanged. *)
 val registerRootCmdWithConnection :
     string                          (* command name *)
  -> 'a Umarshal.t -> 'b Umarshal.t
@@ -136,12 +192,40 @@ val registerRootCmdWithConnection :
 val streamingActivated : bool Prefs.t
 
 val registerStreamCmd :
-  string ->
+  ?maxPayload:int -> string ->
   (connection -> 'a ->
    (Bytearray.t * int * int) list -> (Bytearray.t * int * int) list * int) *
   (connection -> Bytearray.t -> int -> 'a) ->
   (connection -> 'a -> unit) ->
   connection -> (('a -> unit Lwt.t) -> 'b Lwt.t) -> 'b Lwt.t
+(** Custom output triples are (buffer, offset, length), with a count rather
+    than an absolute end. Complete lists are validated before queuing/copying;
+    nonzero offsets and empty slices preserve their declared bytes. This does
+    not provide output allocation, queued-byte/owner or backing/RSS admission.
+    Optional nonnegative maximum custom encoded payload, excluding the RPC tag.
+    Includes all custom codec fields. Endpoint derives separate -str/-args body
+    caps, rejecting overflow at registration. Both stream and ordinary fallback
+    caps apply before raw body allocation, independently of the outer endpoint
+    limit and existing raw input lanes. Absent limit preserves the existing
+    custom registration behavior. This does not account custom heap/workspace.
+    rpcstreamerrorslots and rpcstreamerrorbudget independently limit stored
+    errors plus ping borrowers (default256 owners/8MiB known string fields).
+    Standard exceptions preserve exact causes and existing abort/ping behavior;
+    custom exceptions with unknown payload cost propagate unchanged instead of
+    entering the error table. Charges survive actual queued ping output and
+    recognized ownership uncertainty; disconnect only releases unborrowed entries.
+    This does not bound exception construction, arbitrary payloads or heap/RSS.
+    Normal/idle dumps independently admit selected logical bytes, slice elements
+    and owners via rpcoutputbudget/parts/slots (default512MiB/65536/256).
+    Urgent dumps have separate rpcurgentoutputbytes/parts/slots (65536/2048/256).
+    Admission refuses without waiting and rechecks after preparation. The exact
+    payload list remains owned through its actual action, including queued
+    cancellation and recognized uncertainty. Later unrelated queue draining
+    cannot extend that owner's payload root. Fixed connection buffers, caller
+    aliases/backing stores, pre-queue serialization allocations and generic
+    nonpayload scheduler/flow-control actions are separate; no heap/RSS cap.
+    Producers must await the returned send operation before modifying/reusing
+    borrowed buffers. Admission does not make a private copy of each slice. *)
 
 (* Register a function to be run when the connection between client and server
    is closed (willingly or unexpectedly). The function should not raise

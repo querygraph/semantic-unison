@@ -102,6 +102,7 @@ let minBlockSize = 700
 (* This should at most 65535+3 bytes, as we are using this size to
    ensure that string token lengths will fit in 2 bytes. *)
 let queueSize = 65500
+let maxInstructionBytes=queueSize
 let queueSizeFS = Uutil.Filesize.ofInt queueSize
 type tokenQueue =
   { mutable data : Bytearray.t;  (* the queued tokens *)
@@ -288,6 +289,54 @@ let send infd length showProgress transmit =
   Trace.showTimer timer;
   return ())))
 
+let malformed_instruction () =
+  raise(Util.Transient "Malformed transfer instruction")
+type output_limit={mutable output_remaining:int64;mutable output_ended:bool}
+let make_output_limit length =
+  let remaining=Uutil.Filesize.toInt64 length in
+  if remaining<0L then invalid_arg "Transfer.make_output_limit";
+  {output_remaining=remaining;output_ended=false}
+let check_output_limit owner =
+  if owner.output_ended then
+    raise(Util.Transient "Transfer output continues after EOF")
+let reserve_output limit bytes eof = match limit with
+  | None -> ()
+  | Some owner ->
+      check_output_limit owner;
+      let bytes=Int64.of_int bytes in
+      if bytes>owner.output_remaining then
+        raise(Util.Transient "Transfer exceeds expected output length");
+      if eof && bytes<>owner.output_remaining then
+        raise(Util.Transient "Transfer ended before expected output length");
+      owner.output_remaining<-Int64.sub owner.output_remaining bytes;
+      owner.output_ended<-eof
+
+let validate_instruction ~block_size data pos len =
+  let size=Bytearray.length data in
+  if pos<0 || len<0 || pos>size-len then malformed_instruction ();
+  let limit=pos+len and output_bytes=ref 0 and ended=ref false in
+  let add_output length =
+    if length>max_int- !output_bytes then malformed_instruction ();
+    output_bytes:= !output_bytes+length in
+  let require cursor count =
+    if count>limit-cursor then malformed_instruction () in
+  let rec loop cursor =
+    if cursor<>limit then match data.{cursor} with
+    | 'S' ->
+        require cursor 3;
+        let length=decodeInt2 data (cursor+1) in
+        require cursor (3+length);add_output length;loop(cursor+3+length)
+    | 'B' when block_size>0 ->
+        require cursor 5;
+        let count=decodeInt1 data (cursor+4) in
+        if count=0 || block_size>max_int/count then malformed_instruction ();
+        add_output(count*block_size);loop(cursor+5)
+    | 'E' ->
+        if cursor<>limit-1 then malformed_instruction ();
+        ended:=true
+    | _ -> malformed_instruction () in
+  loop pos;!output_bytes,!ended
+
 let rec receiveRec outfd showProgress data pos maxPos =
   if pos = maxPos then false else
   match data.{pos} with
@@ -303,7 +352,9 @@ let rec receiveRec outfd showProgress data pos maxPos =
   | _   ->
       assert false
 
-let receive outfd showProgress (data, pos, len) =
+let receive ?output_limit outfd showProgress (data, pos, len) =
+  let output_bytes,eof=validate_instruction ~block_size:0 data pos len in
+  reserve_output output_limit output_bytes eof;
   receiveRec outfd showProgress data pos (pos + len)
 
 (*************************************************************************)
@@ -468,31 +519,50 @@ struct
 
   (* For each transfer instruction, either output a string or copy one or
      several blocks from the old file. *)
-  let rsyncDecompress blockSize infd outfd ?copyFn showProgress (data, pos, len) =
+  let rsyncDecompress ?output_limit blockSize infd outfd ?copyFn showProgress (data, pos, len) =
+    if blockSize<=0 then malformed_instruction ();
+    let output_bytes,eof=validate_instruction ~block_size:blockSize data pos len in
+    reserve_output output_limit output_bytes eof;
     let decomprBuf = Bytes.create decomprBufSize in
+    (* Observe the seekable basis length once per instruction, only if a block
+       token needs it. Do not turn each inherited range into a metadata syscall.
+       Subsequent fallback reads still check their actual returned byte count. *)
+    let basis_size=lazy(LargeFile.in_channel_length infd) in
     let progress = ref 0 in
     let rec copy length =
       if length > decomprBufSize then begin
-        let _ = reallyRead infd decomprBuf 0 decomprBufSize in
+        if reallyRead infd decomprBuf 0 decomprBufSize<>decomprBufSize then
+          raise(Util.Transient "Rsync basis ended during block copy");
         reallyWrite outfd decomprBuf 0 decomprBufSize;
         copy (length - decomprBufSize)
-      end else
-        let _ = reallyRead infd decomprBuf 0 length in
+      end else begin
+        if reallyRead infd decomprBuf 0 length<>length then
+          raise(Util.Transient "Rsync basis ended during block copy");
         reallyWrite outfd decomprBuf 0 length
+      end
     in
     let copyBlocks' offs length =
       LargeFile.seek_in infd offs;
       copy length
     in
     let copyBlocks n k =
-      let offs = Int64.mul n (Int64.of_int blockSize) in
+      if k>max_int/blockSize then malformed_instruction ();
+      let width=Int64.of_int blockSize in
+      if n>Int64.div Int64.max_int width then malformed_instruction ();
+      let offs = Int64.mul n width in
       let length = k * blockSize in
+      if length>max_int- !progress then malformed_instruction ();
+      let basis_length=Lazy.force basis_size in
+      if offs>basis_length || Int64.of_int length>Int64.sub basis_length offs then
+        raise(Util.Transient "Rsync block range exceeds basis");
       begin match copyFn with
       | None -> copyBlocks' offs length
       | Some f ->
           let fallback copied =
-            let offs = Int64.add offs (Uutil.Filesize.toInt64 copied)
-            and length = length - (Uutil.Filesize.toInt copied) in
+            let copied64=Uutil.Filesize.toInt64 copied in
+            if copied64<0L || copied64>Int64.of_int length then malformed_instruction ();
+            let offs = Int64.add offs copied64
+            and length = length - Int64.to_int copied64 in
             copyBlocks' offs length
           in
           f (Uutil.Filesize.ofInt64 offs) (Uutil.Filesize.ofInt length) ~fallback;
@@ -508,6 +578,7 @@ struct
           if Trace.enabled "rsynctoken" then
             debugToken (fun() ->
               Util.msg "decompressing string (%d bytes)\n" length);
+          if length>max_int- !progress then malformed_instruction ();
           reallyWriteSubstring outfd (Bytearray.sub data (pos + 3) length) 0 length;
           progress := !progress + length;
           decode (pos + length + 3)

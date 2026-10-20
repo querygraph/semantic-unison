@@ -539,7 +539,22 @@ let renameLocalWithBinding ?binding
        checkPublication binding FinalPublication.check;
        Abort.checkAll ();
        Util.convertUnixErrorsToTransient "publishing bound candidate"
-         (fun () -> FinalPublication.publish (TargetBinding.native binding));
+         (fun () ->
+           if not (Trace.enabled "semantic-timings") then
+             FinalPublication.publish (TargetBinding.native binding)
+           else begin
+             let seconds = FinalPublication.publish_timed (TargetBinding.native binding) in
+             (* Native ownership is already PUBLISHED. A diagnostic sink failure
+                must not turn a successful rename into a failed transfer. Only
+                known sink/allocation errors are suppressed; unrelated/control
+                exceptions propagate with published ownership preserved. *)
+             try Trace.debug "semantic-timings" (fun () ->
+               if Float.is_finite seconds then
+                 Util.msg "Semantic bound publication native-inclusive-seconds=%.9f.\n" seconds
+               else Util.msg "Semantic bound publication timing unavailable.\n")
+             with
+             | Sys_error _ | Unix.Unix_error _ | Out_of_memory -> ()
+           end);
        (* Native ownership changes before pending exception delivery. Any
           failure from this point leaves live output for the next scan; the
           binding's cleanup never deletes it or advances an archive. *)
@@ -1279,14 +1294,13 @@ let rec diff root1 path1 ui1 root2 path2 ui2 showDiff id =
 
 (* Taken from ocamltk/jpf/fileselect.ml *)
 let get_files_in_directory dir =
-  let dirh = System.opendir dir in
-  let files = ref [] in
-  begin try
-    while true do files := dirh.System.readdir () :: !files done
-  with End_of_file ->
-    dirh.System.closedir ()
-  end;
-  List.sort String.compare !files
+  let files = System.with_directory dir (fun dirh ->
+    let files = ref [] in
+    try
+      while true do files := dirh.System.readdir () :: !files done;
+      !files
+    with End_of_file -> !files) in
+  List.sort String.compare files
 
 let ls dir pattern =
   Util.convertUnixErrorsToTransient

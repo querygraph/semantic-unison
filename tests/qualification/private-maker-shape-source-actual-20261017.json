@@ -1,0 +1,35 @@
+{
+  "scope": "Pure candidate MakerNote directory geometry over authored bytes only; no input/media/SDK/canonicalIO reads or semantic admission",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/private_maker_shape_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 10346,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "sources": {
+    "tests/private_maker_shape.py": "77de9b7e28b9b3c49b045cb93fa2e3a36964b2306e0d3358e91d1d2eeb86dd5c",
+    "tests/private_maker_shape_test.py": "4cc65d84eba41f76715ea8a29b99f32e08046ba33d0b354c41f768eb91613e91"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "85eed6",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

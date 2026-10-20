@@ -19,6 +19,9 @@ val with_io_file : HelperSupervisor.cancellation -> string ->
     Keep its nonblocking read descriptor until the callback settles. Never
     nest this with worker inspection or another lease from the same I/O gate.
     It is cooperative scheduling, not a pathname or physical-disk guarantee. *)
+val retained_ownership_count : unit -> int
+(** Owner-scope unresolved carrier count, not OS FD counts or a hard limit.
+    Reader/cache carriers remain rooted with unsettled borrowed reservations. *)
 val with_admission : ?reservation:SemanticAdmission.reservation -> ?role:SemanticAdmission.role -> HelperSupervisor.cancellation -> payload_bytes:int ->
   descriptors:int -> (unit -> 'a Lwt.t) -> 'a Lwt.t
 (** Reserve estimated retained resources before opening/allocating. Cancellation
@@ -34,6 +37,11 @@ val make_publication_reservation : unit -> SemanticAdmission.reservation
     if validators are currently off, preventing late policy enablement from
     consuming retained metadata capacity. This is selected-path accounting,
     not whole-process FD/RSS or external-child admission. *)
+val resource_accounting : unit -> SemanticAdmission.accounting
+(** Workspace plus reserved fixed pipe/completion-buffer costs, initialized
+    without starting worker domains or opening the pipe. Preferences remain
+    workspace-only budgets; total capacity includes the declared infrastructure.
+    Not whole-process baseline, RSS, peak census or a descendant hard cap. *)
 val admission_usage : unit -> SemanticAdmission.usage
 (** Owner-loop diagnostics without starting worker domains. *)
 val with_transaction : ?reservation:SemanticAdmission.reservation -> ?role:SemanticAdmission.role -> max_payload:int ->
@@ -45,3 +53,7 @@ val with_transaction : ?reservation:SemanticAdmission.reservation -> ?role:Seman
     256 KiB, with a 1 MiB consumer minimum for serialized validation. These are estimates,
     not process RSS, external child memory or per-volume I/O limits. Consumers
     preserve source headroom for peer-dependent bidirectional progress. *)
+
+val guard_ownership : (unit -> 'a Lwt.t) -> 'a Lwt.t
+(** Preserve a complete borrowed lifetime on recognized close uncertainty. Does
+    not acquire admission itself; surrounding owners must await the reply. *)

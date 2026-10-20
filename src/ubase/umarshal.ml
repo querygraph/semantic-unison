@@ -17,10 +17,64 @@
 
 exception Error of string
 
-type 'a t = {
-    read : (bytes -> int -> int -> unit) -> 'a;
-    write : (bytes -> int -> int -> unit) -> 'a -> unit;
+type input = {
+  receive:bytes -> int -> int -> unit;
+  remaining:int ref;
+  allocation_bounded:bool; mutable allocation_left:int;
+  elements_bounded:bool; mutable elements_left:int;
+  reserve:(bytes:int -> elements:int -> unit) option;
 }
+(* The measuring sink counts wire bytes without materializing builtin payloads.
+   Conversion callbacks still execute on both passes and own their allocations. *)
+type output = {
+  send : bytes -> int -> int -> unit;
+  measure : (int -> unit) option;
+  reserve_output : (int -> unit) option;
+}
+let writing ?reserve_output send = {send;measure=None;reserve_output}
+let emit output length produce =
+  match output.measure with
+  | Some count -> count length
+  | None ->
+      (match output.reserve_output with None -> () | Some reserve -> reserve length);
+      produce output.send
+
+type 'a t = {
+    read : input -> 'a;
+    write : output -> 'a -> unit;
+}
+
+let preflight input length =
+  if length<0 || length> !(input.remaining) then raise(Error "decode: end of framed input")
+let claim input bytes elements =
+  if bytes<0 || elements<0 then raise(Error "decode: negative allocation/count");
+  if input.allocation_bounded && bytes>input.allocation_left then raise(Error "decode: allocation budget exceeded");
+  if input.elements_bounded && elements>input.elements_left then raise(Error "decode: element budget exceeded");
+  (* Owner-defined aggregate admission happens before the selected allocation,
+     after local validation. Callback failures are neither retried nor wrapped. *)
+  (match input.reserve with None->() | Some reserve->reserve ~bytes ~elements);
+  if input.allocation_bounded then input.allocation_left<-input.allocation_left-bytes;
+  if input.elements_bounded then input.elements_left<-input.elements_left-elements
+let product count width =
+  if count<0 || width<0 || (width<>0 && count>max_int/width) then
+    raise(Error "decode: allocation size overflow");
+  count*width
+let claim_scaled input count width elements =
+  if count<0 then raise(Error "decode: negative allocation/count");
+  let bytes=if input.allocation_bounded then product count width else 0 in
+  claim input bytes elements
+let receive input buffer offset length =
+  preflight input length;
+  input.receive buffer offset length;
+  input.remaining:= !(input.remaining)-length
+let validate_limits allocation elements =
+  (match allocation with Some n when n<0->invalid_arg "Umarshal decode allocation budget" | _->());
+  (match elements with Some n when n<0->invalid_arg "Umarshal decode element budget" | _->())
+let make_input ?allocation ?elements ?reserve length receive =
+  validate_limits allocation elements;
+  {receive;remaining=ref length;allocation_bounded=Option.is_some allocation;
+   allocation_left=Option.value ~default:0 allocation;elements_bounded=Option.is_some elements;
+   elements_left=Option.value ~default:0 elements;reserve}
 
 external id : 'a -> 'a = "%identity"
 
@@ -30,7 +84,7 @@ let max_int_int64 = Int64.of_int max_int
 let min_int_int64 = Int64.of_int min_int
 
 let data_size header offset =
-  if offset + header_size <= Bytes.length header then
+  if offset>=0 && offset<=Bytes.length header-header_size then
     let n = Bytes.get_int64_be header offset in
     if n < 0L then
       raise (Error "data_size: negative size")
@@ -43,37 +97,41 @@ let data_size header offset =
 
 let to_string m x =
   let buffer = Buffer.create 1024 in
-  m.write (Buffer.add_subbytes buffer) x;
+  m.write (writing (Buffer.add_subbytes buffer)) x;
   let header = Bytes.create header_size in
   Bytes.set_int64_be header 0 (Int64.of_int (Buffer.length buffer));
   Bytes.to_string header ^ Buffer.contents buffer
 
-let from_bytes m buffer offset =
-  let length = Bytes.length buffer in
-  let offset = ref (offset + header_size) in
-  m.read (fun buffer' offset' n ->
-      let i = !offset in
-      if i + n <= length then (
-        offset := i + n;
-        Bytes.blit buffer i buffer' offset' n
-      ) else (
-        raise (Error "from_bytes: end of input")
-      )
-    )
-
-let from_string m buffer offset =
-  from_bytes m (Bytes.of_string buffer) offset
-
-let from_channel m ic =
-  let header = Bytes.create header_size in
+let from_bytes_internal ?allocation ?elements ?reserve m buffer offset =
+  validate_limits allocation elements;
+  let total=Bytes.length buffer in
+  let length=data_size buffer offset in
+  let start=offset+header_size in
+  if length>total-start then raise(Error "from_bytes: truncated frame");
+  let position=ref start in
+  m.read(make_input ?allocation ?elements ?reserve length (fun target target_offset n->
+    Bytes.blit buffer !position target target_offset n;position:= !position+n))
+let from_bytes m buffer offset=from_bytes_internal m buffer offset
+let from_string m buffer offset=from_bytes m (Bytes.of_string buffer) offset
+let from_bytes_accounted ~max_alloc_bytes ~max_elements ~reserve m buffer offset =
+  from_bytes_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m buffer offset
+let from_channel_internal ?allocation ?elements ?reserve m ic =
+  validate_limits allocation elements;
+  let header=Bytes.create header_size in
   really_input ic header 0 header_size;
-  m.read (really_input ic)
+  let length=data_size header 0 in
+  m.read(make_input ?allocation ?elements ?reserve length (really_input ic))
+let from_channel m ic=from_channel_internal m ic
+let from_channel_bounded ~max_alloc_bytes ~max_elements m ic =
+  from_channel_internal ~allocation:max_alloc_bytes ~elements:max_elements m ic
+let from_channel_accounted ~max_alloc_bytes ~max_elements ~reserve m ic =
+  from_channel_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m ic
 
 let to_channel m oc x =
   let header = Bytes.create header_size in
   let header_pos = pos_out oc in
   output oc header 0 header_size;
-  m.write (output oc) x;
+  m.write (writing (output oc)) x;
   let end_pos = pos_out oc in
   let data_size = end_pos - header_pos - header_size in
   Bytes.set_int64_be header 0 (Int64.of_int data_size);
@@ -114,15 +172,17 @@ let char =
   {
     read =
       (fun recv ->
+        preflight recv 1;claim recv 1 0;
         let buffer = Bytes.create 1 in
-        recv buffer 0 1;
+        receive recv buffer 0 1;
         Bytes.unsafe_get buffer 0
       );
     write =
       (fun send x ->
-        let res = Bytes.create 1 in
-        Bytes.unsafe_set res 0 x;
-        send res 0 1
+        emit send 1 (fun send ->
+          let res = Bytes.create 1 in
+          Bytes.unsafe_set res 0 x;
+          send res 0 1)
       );
   }
 
@@ -145,15 +205,17 @@ let int32 =
   {
     read =
       (fun recv ->
+        preflight recv 4;claim recv 4 0;
         let buffer = Bytes.create 4 in
-        recv buffer 0 4;
+        receive recv buffer 0 4;
         Bytes.get_int32_be buffer 0
       );
     write =
       (fun send x ->
-        let res = Bytes.create 4 in
-        Bytes.set_int32_be res 0 x;
-        send res 0 4
+        emit send 4 (fun send ->
+          let res = Bytes.create 4 in
+          Bytes.set_int32_be res 0 x;
+          send res 0 4)
       );
   }
 
@@ -162,8 +224,9 @@ let int64 =
     read =
       (fun recv ->
         let realize n get of_int =
+          preflight recv n;claim recv n 0;
           let buffer = Bytes.create n in
-          recv buffer 0 n;
+          receive recv buffer 0 n;
           of_int (get buffer 0)
         in
         match int_of_char (char.read recv) with
@@ -177,10 +240,11 @@ let int64 =
     write =
       (fun send x ->
         let realize n set to_int =
-          let buffer = Bytes.create (1 + n) in
-          Bytes.unsafe_set buffer 0 (char_of_int n);
-          set buffer 1 (to_int x);
-          send buffer 0 (1 + n)
+          emit send (1 + n) (fun send ->
+            let buffer = Bytes.create (1 + n) in
+            Bytes.unsafe_set buffer 0 (char_of_int n);
+            set buffer 1 (to_int x);
+            send buffer 0 (1 + n))
         in
         if x = 0L then
           char.write send '\000'
@@ -219,8 +283,9 @@ let bounded_string max_length =
         let length = int.read recv in
         if length < 0 || length > max_length then
           raise (Error "bounded_string: length exceeds limit");
+        preflight recv length;claim_scaled recv length 2 0;
         let buffer = Bytes.create length in
-        recv buffer 0 length;
+        receive recv buffer 0 length;
         Bytes.to_string buffer
       );
     write =
@@ -229,7 +294,7 @@ let bounded_string max_length =
         if length > max_length then
           raise (Error "bounded_string: length exceeds limit");
         int.write send length;
-        send (Bytes.of_string x) 0 length
+        emit send length (fun send -> send (Bytes.of_string x) 0 length)
       );
   }
 
@@ -249,12 +314,13 @@ let bytearray =
     read =
       (fun recv ->
         let length = int.read recv in
+        preflight recv length;claim_scaled recv length 2 length;
         let res = Bigarray.(Array1.create char c_layout length) in
         let rec loop offset length =
           if length > 0 then (
             let sub_length = min length Sys.max_string_length in
             let buffer = Bytes.create sub_length in
-            recv buffer 0 sub_length;
+            receive recv buffer 0 sub_length;
             unsafe_blit_from_bytes buffer 0 res offset sub_length;
             loop (offset + sub_length) (length - sub_length)
           )
@@ -266,6 +332,7 @@ let bytearray =
       (fun send x ->
         let length = Bigarray.Array1.dim x in
         int.write send length;
+        emit send length (fun send ->
         let buffer = Bytes.create (min length Sys.max_string_length) in
         let rec loop offset length =
           if length > 0 then (
@@ -275,44 +342,80 @@ let bytearray =
             loop (offset + sub_length) (length - sub_length)
           )
         in
-        loop 0 length
+        loop 0 length)
       );
   }
 
-let marshal_to_bytearray m x =
+let marshal_to_bytearray_internal ?allocation ?reserve ?publish m x =
+  (match allocation with Some n when n < 0 ->
+     invalid_arg "Umarshal encode allocation budget" | _ -> ());
+  let allocation_left = ref (Option.value ~default:0 allocation) in
+  let claim_output bytes =
+    if bytes < 0 then raise (Error "encode: negative allocation");
+    (match allocation with Some _ when bytes > !allocation_left ->
+       raise (Error "encode: allocation budget exceeded") | _ -> ());
+    (match reserve with None -> () | Some reserve -> reserve ~bytes);
+    if Option.is_some allocation then allocation_left := !allocation_left - bytes
+  in
+  let validate_slice buffer offset length =
+    if offset < 0 || length < 0 || offset > Bytes.length buffer ||
+       length > Bytes.length buffer - offset then
+      raise (Error "marshal_to_bytearray: invalid source slice")
+  in
   let data_size = ref 0 in
-  m.write (fun _ _ length -> data_size := !data_size + length) x;
+  let count length =
+    if length < 0 || length > max_int - header_size - !data_size then
+      raise (Error "marshal_to_bytearray: size overflow");
+    data_size := !data_size + length
+  in
+  m.write {measure=Some count;reserve_output=None;send=(fun buffer offset length ->
+      validate_slice buffer offset length; count length)} x;
+  let total_size = header_size + !data_size in
+  (* No buffer allocation precedes owner admission. Claims remain owned on
+     every failure; only the caller knows when partial work can be released. *)
+  claim_output total_size;
+  claim_output header_size;
   let header = Bytes.create header_size in
   Bytes.set_int64_be header 0 (Int64.of_int !data_size);
-  let total_size = header_size + !data_size in
   let result = Bigarray.(Array1.create char c_layout total_size) in
+  (match publish with None -> () | Some publish -> publish result);
   unsafe_blit_from_bytes header 0 result 0 header_size;
   let offset = ref header_size in
-  m.write (fun buffer offset' length ->
+  m.write (writing ~reserve_output:claim_output (fun buffer offset' length ->
+      validate_slice buffer offset' length;
       let i = !offset in
-      if i + length <= total_size then (
+      if length <= total_size - i then (
         unsafe_blit_from_bytes buffer offset' result i length;
         offset := i + length
       ) else (
         raise (Error "marshal_to_bytearray: length inconsistency")
       )
-    ) x;
+    )) x;
   if !offset <> total_size then
     raise (Error "marshal_to_bytearray: universe inconsistency");
   result
 
-let unmarshal_from_bytearray m x offset =
-  let length = Bigarray.Array1.dim x in
-  let offset = ref (offset + header_size) in
-  m.read (fun buffer' offset' n ->
-      let i = !offset in
-      if i + n <= length then (
-        offset := i + n;
-        unsafe_blit_to_bytes x i buffer' offset' n
-      ) else (
-        raise (Error "unmarshal_from_bytearray: end of input")
-      )
-    )
+let marshal_to_bytearray m x = marshal_to_bytearray_internal m x
+let marshal_to_bytearray_accounted ~max_alloc_bytes ~reserve ~publish m x =
+  marshal_to_bytearray_internal ~allocation:max_alloc_bytes ~reserve ~publish m x
+
+let unmarshal_from_bytearray_internal ?allocation ?elements ?reserve m x offset =
+  validate_limits allocation elements;
+  let total=Bigarray.Array1.dim x in
+  if offset<0 || offset>total-header_size then raise(Error "unmarshal_from_bytearray: header too short");
+  let header=Bytes.create header_size in
+  unsafe_blit_to_bytes x offset header 0 header_size;
+  let length=data_size header 0 in
+  let start=offset+header_size in
+  if length>total-start then raise(Error "unmarshal_from_bytearray: truncated frame");
+  let position=ref start in
+  m.read(make_input ?allocation ?elements ?reserve length (fun target target_offset n->
+    unsafe_blit_to_bytes x !position target target_offset n;position:= !position+n))
+let unmarshal_from_bytearray m x offset=unmarshal_from_bytearray_internal m x offset
+let unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m x offset =
+  unmarshal_from_bytearray_internal ~allocation:max_alloc_bytes ~elements:max_elements m x offset
+let unmarshal_from_bytearray_accounted ~max_alloc_bytes ~max_elements ~reserve m x offset =
+  unmarshal_from_bytearray_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m x offset
 
 type int32bigarray =
   (int32, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t
@@ -322,6 +425,8 @@ let int32bigarray =
     read =
       (fun recv ->
         let length = int.read recv in
+        if length<0 || length> !(recv.remaining)/4 then raise(Error "decode: int32 array exceeds frame");
+        claim_scaled recv length 4 length;
         let res = Bigarray.(Array1.create int32 c_layout length) in
         for i = 0 to length - 1 do
           res.{i} <- int32.read recv
@@ -355,6 +460,7 @@ let list m =
     read =
       (fun recv ->
         let length = int.read recv in
+        claim_scaled recv length (6*(Sys.word_size/8)) length;
         let result = ref [] in
         for _ = 1 to length do
           result := m.read recv :: !result
@@ -639,6 +745,7 @@ module Proplist (S : PROPLIST_S) = struct
       read =
         (fun recv ->
           let length = int.read recv in
+          claim recv 0 length;
           let res = ref S.empty in
           for _ = 1 to length do
             let key = string.read recv in

@@ -1,0 +1,94 @@
+{
+  "scope": "Current stock/Ox gradual refinement/cache/checkpoint/kernel regressions, generated tiny fixtures only",
+  "actual_terminal": {
+    "session": 18008,
+    "chunk": "1dfcee",
+    "exit": 0,
+    "no_session": true
+  },
+  "runs": [
+    {
+      "compiler": "stock",
+      "calls": 35,
+      "source_pins": 45,
+      "component_output": [
+        "org.firstpair.dng-xmp/0 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag50740 safe-flag-still-declines\nPASS four scalar baselines/eight private safety refusals\nPASS layout-only big classic\nPASS layout-only big BigTIFF\nPASS layout-only little classic\nPASS layout-only little BigTIFF\nPASS 49 layout checks; exact private preservation, no semantic merge\nDNG component controls: 1391 checks PASS\n",
+        "PASS 29 owner archive-reference publication fault checks\n",
+        "org.firstpair.dng-xmp/0 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag50740 safe-flag-still-declines\nPASS four scalar baselines/eight private safety refusals\nPASS layout-only big classic\nPASS layout-only big BigTIFF\nPASS layout-only little classic\nPASS layout-only little BigTIFF\nPASS 49 layout checks; exact private preservation, no semantic merge\n"
+      ]
+    },
+    {
+      "compiler": "ox",
+      "calls": 38,
+      "source_pins": 45,
+      "component_output": [
+        "org.firstpair.dng-xmp/0 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag50740 safe-flag-still-declines\nPASS four scalar baselines/eight private safety refusals\nPASS layout-only big classic\nPASS layout-only big BigTIFF\nPASS layout-only little classic\nPASS layout-only little BigTIFF\nPASS 49 layout checks; exact private preservation, no semantic merge\nDNG component controls: 1391 checks PASS\n",
+        "PASS 29 owner archive-reference publication fault checks\n",
+        "org.firstpair.dng-xmp/0 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 little tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/0 big tag50740 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag37500 safe-flag-still-declines\norg.firstpair.dng-xmp/1 big tag50740 safe-flag-still-declines\nPASS four scalar baselines/eight private safety refusals\nPASS layout-only big classic\nPASS layout-only big BigTIFF\nPASS layout-only little classic\nPASS layout-only little BigTIFF\nPASS 49 layout checks; exact private preservation, no semantic merge\n"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-stock-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "81b62236c92937039b49a57f8bcf688301779b2ceee2b3cee9c169b09f93327c"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-stock-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c51da18a61c5efb5991cd5ff3d1778a2cccddabee975e0209d02df0ef96bcc1d"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-stock-20261017-001/SHARED-START.json",
+      "bytes": 1158,
+      "sha256": "2109eb1b2b046b455396d030acbb219d0c00c7c3f0039b6cef5360b4a3069d98"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-stock-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-tbr48je0/RESULT.json",
+      "bytes": 267967,
+      "sha256": "f43ee8da00f395a9a96e3e4a0244b402edc1f2917f09fe4417fefee5a90f2939"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-ox-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "9fb1a1355c60d7d6306868b199a52ae419fba9f1a62c1abb8e8121b4056d65a3"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-ox-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "bf455296f1921595cf55b7a7f8134af3ffeb87b7ed0f208842dfa3138a426744"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-ox-20261017-001/SHARED-START.json",
+      "bytes": 1155,
+      "sha256": "5ff7ced0518c73797da53e8a32141f18a2696b3764bbbf8df5f6967a2b647072"
+    },
+    {
+      "path": "/private/tmp/unison-current-gradual-refinement-ox-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-k95_wulk/RESULT.json",
+      "bytes": 275631,
+      "sha256": "95401026811b1d1780680e8784c958100e60f285370da0f898b064df9653eafa"
+    }
+  ],
+  "preserved_incomplete_attempt": {
+    "workspace": "/private/tmp/unison-current-gradual-refinement-20261017-001",
+    "actual_terminal": "64542/f30359/exit1/no session",
+    "worker_returncode": -15,
+    "timed_out": true,
+    "worker_reaped": true,
+    "tokens_closed": true,
+    "completed": false,
+    "reason": "Combined suite exceeded60s wrapper after70 recorded calls; split compiler scopes, not a production retry"
+  },
+  "camera_payload": false
+}

@@ -1,0 +1,211 @@
+{
+  "schema": "unison-owned-fixture-jxl-metadata-search/2",
+  "payload_opened": false,
+  "roots": [
+    "/private/tmp/u-asv-boundary-mej98pxm",
+    "/private/tmp/u-asv-boundary-mn0d9w5k",
+    "/private/tmp/u-asv-boundary-n4xf1cij",
+    "/private/tmp/u-asv-ca5ec3ffcbff",
+    "/private/tmp/u-asv-current-d84a0085",
+    "/private/tmp/u-asv-fixture-ea3c7dda",
+    "/private/tmp/u-shm-entry-01na7322",
+    "/private/tmp/u-shm-entry-ihu_3c93",
+    "/private/tmp/u-shm-entry-obkffsw4",
+    "/private/tmp/u-shm-v1-c6642e3643",
+    "/private/tmp/u-shm-v2-36d2e4bba9",
+    "/private/tmp/u-smr-boundary-rjp5ypqy",
+    "/private/tmp/u-smr-current-9e2e489b",
+    "/private/tmp/u-smr-helpers-foo1kvrr",
+    "/private/tmp/u-smr-helpers-zuz_7pds",
+    "/private/tmp/u-smr-metadata-5oiqcxh3",
+    "/private/tmp/u-smr-nativeclone-5lm0j0p7",
+    "/private/tmp/u-smr-v1-13fc44d676",
+    "/private/tmp/u-smr-wire-tzeb9lni",
+    "/private/tmp/unison-native-cache-4ua2l8df",
+    "/private/tmp/unison-native-cache-d5f19dad",
+    "/private/tmp/unison-native-cache-jfyqx1k5",
+    "/private/tmp/unison-native-cache-l7fd59sr",
+    "/private/tmp/unison-native-copy-range-0dl7u08s",
+    "/private/tmp/unison-native-copy-range-_4jfw1s7",
+    "/private/tmp/unison-native-copy-range-e64a4wl3",
+    "/private/tmp/unison-native-copy-range-fux281dt",
+    "/private/tmp/unison-native-copy-range-kdy9imbt",
+    "/private/tmp/unison-native-copy-range-p4u054rl",
+    "/private/tmp/unison-native-copy-range-p7hxrchj",
+    "/private/tmp/unison-native-copy-range-qdga98v_",
+    "/private/tmp/unison-native-copy-range-qy09376f",
+    "/private/tmp/unison-native-copy-range-uclqrvgk",
+    "/private/tmp/unison-native-copy-range-wv12c2tg",
+    "/private/tmp/unison-native-deadline-3inq6uxh",
+    "/private/tmp/unison-native-deadline-dy6gwor0",
+    "/private/tmp/unison-native-group-peer-20261017-001",
+    "/private/tmp/unison-native-group-peer-20261017-002",
+    "/private/tmp/unison-native-group-unit-20261017-001",
+    "/private/tmp/unison-native-group-unit-20261017-002",
+    "/private/tmp/unison-native-settlement-lifecycle-v1",
+    "/private/tmp/unison-receive-admission-94crnlfz",
+    "/private/tmp/unison-receive-admission-erj1p2qe",
+    "/private/tmp/unison-receive-admission-rtoo9z24",
+    "/private/tmp/unison-receive-admission-sh8fl5bw",
+    "/private/tmp/unison-receive-admission-x25dw416",
+    "/private/tmp/unison-receive-guard-7og8lw49",
+    "/private/tmp/unison-receive-guard-mjo4elqn",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v1",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v2",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v3",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v4",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v5",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v6",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v7",
+    "/private/tmp/unison-receive-pilot-mock-20261014-v8",
+    "/private/tmp/unison-receive-pilot-native-prepared-20261014-v1",
+    "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2",
+    "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452",
+    "/private/tmp/unison-sdk-host-plan-1wx_w5ao",
+    "/private/tmp/unison-sdk-host-plan-6w1fdxq5",
+    "/private/tmp/unison-sdk-host-plan-8o1ednys",
+    "/private/tmp/unison-sdk-host-plan-roohesi8",
+    "/private/tmp/unison-sdk-host-plan-ubdtm836",
+    "/private/tmp/unison-sdk-host-plan-zyqe4t1c",
+    "/private/tmp/unison-semantic-afl-0nqjj10n",
+    "/private/tmp/unison-semantic-afl-0p203nj_",
+    "/private/tmp/unison-semantic-afl-1g1xq2wr",
+    "/private/tmp/unison-semantic-afl-9rdmfapk",
+    "/private/tmp/unison-semantic-handoff-417nj1ou",
+    "/private/tmp/unison-semantic-handoff-4hamfd7g",
+    "/private/tmp/unison-semantic-handoff-_f6uwipc",
+    "/private/tmp/unison-semantic-handoff-b5unmno5",
+    "/private/tmp/unison-semantic-handoff-compile-8471apz6",
+    "/private/tmp/unison-semantic-handoff-e4ns9agj",
+    "/private/tmp/unison-semantic-handoff-fyhmem7u",
+    "/private/tmp/unison-semantic-handoff-hhxhlkc3",
+    "/private/tmp/unison-semantic-handoff-hkkuyt_5",
+    "/private/tmp/unison-semantic-handoff-i4wzml5s",
+    "/private/tmp/unison-semantic-handoff-kp5at57p",
+    "/private/tmp/unison-semantic-handoff-l_1fsbnj",
+    "/private/tmp/unison-semantic-handoff-pm6sli1s",
+    "/private/tmp/unison-semantic-handoff-qc6zaqcb",
+    "/private/tmp/unison-semantic-handoff-skxr95yn",
+    "/private/tmp/unison-semantic-handoff-uc9oihb4",
+    "/private/tmp/unison-semantic-handoff-v3fjvkf0",
+    "/private/tmp/unison-semantic-source-both-report-20261017-001",
+    "/private/tmp/unison-semantic-source-both-retention-20261017-001",
+    "/private/tmp/unison-semantic-source-both-source-20261017-001",
+    "/private/tmp/unison-semantic-source-ox-make-20261017-001",
+    "/private/tmp/unison-semantic-source-stock-make-20261017-001"
+  ],
+  "entries": 1554,
+  "depth_limit": 5,
+  "entry_cap": 20000,
+  "complete_within_declared_filter": true,
+  "matches": [
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v3/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306597436
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v3/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306597511
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v4/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306598245
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v4/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306598320
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v5/jxl-original-receipt.json",
+      "mode": 33188,
+      "bytes": 503,
+      "inode": 306598581
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v5/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306598913
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v5/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306598991
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v6/jxl-original-receipt.json",
+      "mode": 33188,
+      "bytes": 503,
+      "inode": 306599245
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v6/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306599578
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v6/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306599654
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v7/jxl-original-receipt.json",
+      "mode": 33188,
+      "bytes": 501,
+      "inode": 306599895
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v7/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306600223
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v7/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306600298
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-original-receipt.json",
+      "mode": 33188,
+      "bytes": 501,
+      "inode": 306600629
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306600962
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 256,
+      "inode": 306601037
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-stock-ox",
+      "mode": 16877,
+      "bytes": 192,
+      "inode": 306606131
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-ox-stock",
+      "mode": 16877,
+      "bytes": 192,
+      "inode": 306606212
+    }
+  ]
+}

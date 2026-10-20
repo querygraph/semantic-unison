@@ -1,0 +1,428 @@
+{
+  "schema": "component-rpc-actual-producer-shapes/1",
+  "projection_only": true,
+  "scope": "Exact cleanup objects and top-level predicate inputs from eight consumed actual calls; no original payload, process action or original pass rewrite.",
+  "producer_source_sha256": {
+    "tests/sdk_host_matrix/shared_child.py": "da0c26a3c79a22f3e20358bec99d87b5b8aa291855130b568de52a7489962b52",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/component_remote/call.py": "cd9511fe4020fd9d89991b499bc69cdf0ce18ffed24ec26ee701eaef01257495"
+  },
+  "runs": [
+    {
+      "index": 0,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/0/OUTCOME.json",
+        "bytes": 3494,
+        "sha256": "5c36df49d5053c078bc7b65ec0968dc0647facbf4c2018a02b0e71a223298938"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62259,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62258,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62258,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62263,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0003039559815078974
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 1,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/1/OUTCOME.json",
+        "bytes": 3494,
+        "sha256": "caa4b1374b9c1fe2070480d63e9ce97f4a3540c51f56be47cb5485ca742ca91f"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62272,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62271,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62271,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62274,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002578010316938162
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 2,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/2/OUTCOME.json",
+        "bytes": 3493,
+        "sha256": "b5d0e13e598b93bbda90cd5550c72040ce14ea25c3c16f388abbbcfcb52db41b"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62278,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62277,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62277,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62280,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002531210193410516
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 3,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/3/OUTCOME.json",
+        "bytes": 3479,
+        "sha256": "c3d99ba0960f373a2ffc5b06326ca3a6284d3461f4c716da7de373c429d001f0"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62291,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62287,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62287,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62293,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.000242987007368356
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 4,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/4/OUTCOME.json",
+        "bytes": 2794,
+        "sha256": "1fd7ed08370f0e57d51a05649c73c3ab67c84d6a5322a2dd59619b71d8e3618e"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62317,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62307,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62307,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62319,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002523949951864779
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 5,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/5/OUTCOME.json",
+        "bytes": 2792,
+        "sha256": "a1e6bc713ae9e7fcee7c9d0eb9db930ac109b1579b75bad5a3c412b03e31433c"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62324,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62323,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62323,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62326,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002644999767653644
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 6,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/6/OUTCOME.json",
+        "bytes": 2833,
+        "sha256": "38d7e62766b2932af1f2a1f7950355b8a507c3a760e69e665b807320e20ebaea"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62337,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62336,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62336,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62339,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00024673104053363204
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    },
+    {
+      "index": 7,
+      "actual_metadata": {
+        "path": "/private/tmp/u-cr-cf119542138e/7/OUTCOME.json",
+        "bytes": 2779,
+        "sha256": "869a17ba6f51c9f22442bcfb9cb44005d09fe805ad820f43ee5841cc34a0f75e"
+      },
+      "projected_run": {
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "supervisor_capture_truncated": false,
+        "client_cleanup": {
+          "pid": 62344,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_cleanup": {
+          "pid": 62342,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62342,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs",
+          "group_cleanup_before_leader_reap": true
+        },
+        "proxy": {
+          "server_cleanup": {
+            "pid": 62346,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.000264620000962168
+          },
+          "server_returncode": 0,
+          "fault": null,
+          "pump_errors": [],
+          "input_pump_joined": true
+        }
+      }
+    }
+  ]
+}

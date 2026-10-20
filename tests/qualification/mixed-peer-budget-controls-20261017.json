@@ -1,0 +1,51 @@
+{
+  "scope": "Five command and nine composed fake-native parent controls after explicit older-fork worker budget correction",
+  "actual_terminal": {
+    "session": 68341,
+    "chunk": "049cb5",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-command-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "344b97ee31b9d942aaab2510f8408172ac201e1578b0fdb956d746e40a49332e"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-command-20261017-001/SHARED-START.json",
+      "bytes": 1136,
+      "sha256": "3f8bb4f05948504a5a8ecaf39e8d8e4950eadf81398bd9a0e697b1be6f378967"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-command-20261017-001/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "d03ce458f2a6cd2b4f27522f3aacad03ce1872c028853507c3ad02ca621bdcad"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-command-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-parent-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "0ea24462bbcbf3ad73e7e61684f4f8308c0584c27aef47159230a5f040155859"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-parent-20261017-001/SHARED-START.json",
+      "bytes": 1131,
+      "sha256": "2743bc89c739a5b372fd95537da15540dcde9e1faf88d280969c84c9ad53923a"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-parent-20261017-001/SHARED-STDERR.txt",
+      "bytes": 107,
+      "sha256": "6b186c867e8448b37f622daefda31b0bafc15a670b6ceb62e0e5b9679be3f979"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-budget-parent-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

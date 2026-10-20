@@ -1,0 +1,15 @@
+{
+  "state": "SOURCE_READY_AFTER_CACHE_BUILDS_REQUEST_FRESH_ROOT_SCHEDULING_ONLY",
+  "observed_unix": 1792218280.3696058,
+  "request_sha256": "d0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49",
+  "plan_sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad",
+  "execution_sources_checked": 342,
+  "workspace": "/private/tmp/u-cr-cf119542138e",
+  "workspace_exists": false,
+  "admission_exists": false,
+  "owned_build_test_handles": "all actual terminal and grants closed in isolated branch receipt dng-owner-entry-current-builds-actual-20261017.json",
+  "runtime_artifacts_rehashed": false,
+  "runtime_dispatched": false,
+  "requires": "Fresh Root scheduling/admission after its explicit IO release; recheck all artifact pins inside admitted guard. No grant inferred from this readiness or historical defer.",
+  "cache_draft_pr": "https://github.com/querygraph/unison/pull/3"
+}

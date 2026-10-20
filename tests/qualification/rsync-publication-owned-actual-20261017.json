@@ -1,0 +1,347 @@
+{
+  "complete": true,
+  "scope": "Guarded rsync receiver native publication and synchronous borrower/channel/range lifecycle; generated8KiB-family fixtures, actual codecs via in-process sender delivery only",
+  "actual_tool_terminals": [
+    {
+      "session": 24872,
+      "chunk": "ba2f1b",
+      "exit": 0,
+      "scope": "Stock/Ox Make+selftests, initial5stream cases and6local clone regression cases/compiler"
+    },
+    {
+      "session": 96532,
+      "chunk": "7b6734",
+      "exit": 0,
+      "scope": "Expanded7stream cases/compiler and both Dune builds"
+    },
+    {
+      "session": 98668,
+      "chunk": "b6bdf1",
+      "exit": 0,
+      "scope": "Final8stream cases/compiler including known progress cancellation; no production source changed between expansions"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "9476067be51fd38396864d2ad24db18d7375a6ca88fd9165f85de81abae73bda"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e818c759882887a12fdf145772785f4dbb2f5e357dea54a7c761a075f3cf6d14"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/RESULT.json",
+      "bytes": 52217,
+      "sha256": "079664dfc0f7b334e8a77418fb924332b4271a6351b98e5a70a26f06de6ec1ea"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "d142c84e1ce76749aedcba5bc0fd8e1f84cbf54d68cd87ae9098172d94795d60"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1312,
+      "sha256": "25bcc6fa353750b654d46686d9098c5096effbac50750e2081480a6d7e31c7a1"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "c72de1758b8d5f19e7ed1cf17e1da9f5a7b16333cbc415b7390b21e05210e31e"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/RESULT.json",
+      "bytes": 52223,
+      "sha256": "95310f43f233e390ee3939aa9b53164beb943ed7d6af07a2f27ee90bb71737d8"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "62ce23b39a3d8ab046e9704b54305fda3b7383a625f07c1bb5db7f5f97a31e21"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-001/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "211f975672593641523cd7db44a77329453be5895d9d5e3c93a38d891a25fa88"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "126501dd7d6803d2261ad5bd206ca6ed361cafc455b117cadcaf34a56a4a4f23"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "b72a5b639cd2b3c03dd841a49f0565ea6d0fbaf8c5f6c26568f17b6d39dacde5"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ylkmhf1y/RESULT.json",
+      "bytes": 156220,
+      "sha256": "3950b9c410752267b816d8b252b5f61a12526db95806b9746562a0bf447ee89e"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-local-controls-20261017-001/SHARED-START.json",
+      "bytes": 1296,
+      "sha256": "5d85e6737fca5cc86511d5aa42c151a8ab3c9e4c9fdb705251f76f66c54485a4"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-local-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b01bda74d0ef9c422dad905f3d15100426eda83ffc09be3720896de5a56032bf"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-local-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "57d8e300509b341e3ce4572b8e8bf0f8412bac813a16cc2a4ed693298cb1a418"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-local-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-1raqfg1w/RESULT.json",
+      "bytes": 157097,
+      "sha256": "7434be5f6f15908ad8abea225380adc441ec0ec82a055b62a3d8e98c1734ba04"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-002/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "3660be5ecde2faeedd087e02621fc90993ed0e91172ce5df27ab0b3e99c4c3ab"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "0cd8670ce64050084d681c50134822194cba6b18b8e4cc5a57825eebd86e078a"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "6dd5e7cec42ea3a9e217c4ecb6e54d8ea5961f47849b1dcd5d5262ad1f82d510"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ahwtlg5u/RESULT.json",
+      "bytes": 159230,
+      "sha256": "b49f8f8f328301667bb987a7eed6156cf30af0433f04a3868e448b34e9c9d3e2"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-003/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "138e42ecd40c5690d4077387bbf4cd1ebaa3c7e38026e4cd5446ea832868dc7b"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-003/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d47d5ac2b0dcd36bba98606f1630496e500e9302790d3459b34d1ba4294e9f13"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-003/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "89a5a1e5bd2dbd0d5ac94dffc25f3c46a09d3a8ea85e8dcb9fb6eec34c77f777"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-both-stream-controls-20261017-003/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/RESULT.json",
+      "bytes": 160780,
+      "sha256": "6f8341cd44229cc21a6f158d6d34a9664f9e934acca0db478733e432a0677d16"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-dune-20261017-001/SHARED-START.json",
+      "bytes": 1303,
+      "sha256": "24e1f653bdd20361701e1b53ff4d1d3666b3742478c03a87a9c39b6d004637ec"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "47098689c72adbc97a2026bb2639fbfe4a6166017175e14a3dc892636210a031"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-dune-20261017-001/RESULT.json",
+      "bytes": 51661,
+      "sha256": "ae5a16e294417d614425b1ed676c1a51ed9c31a838572b5456daceaf40c01e80"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "da70c3c0512290ef3b21e01f38e46ae8ea50de4acbeea89dc539125ba2ea7233"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-stock-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-dune-20261017-001/SHARED-START.json",
+      "bytes": 1298,
+      "sha256": "51a0e92e93e1dd8a91c252dfabeddd6b3783f687d751e1fea12787bba5e5b09c"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "25a8e4c916698117b200932196ab160ddd52ab352f79997443847e9221261c7e"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-dune-20261017-001/RESULT.json",
+      "bytes": 51665,
+      "sha256": "04771788a5068a7ea1958767a996051c7e3953aa08e2f06bb41d495e624b7926"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "5b2c2cbbe0d554e96f07e3683163d6854e1444d1baf0600fea55600b506e2e5e"
+    },
+    {
+      "path": "/private/tmp/unison-rsync-owned-ox-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/copyForStream.o",
+      "bytes": 283056,
+      "sha256": "fe4fc956e4fb56f1618d49c42b4eb3fcf8c5cfa97c9b3dd9dc0800118ab1b3e5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/fixture.o",
+      "bytes": 17880,
+      "sha256": "4d118eb1afcad8c224d5e27afd9a6cdcfb23681b4024f00bdbb83717f9b61870"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/probe.cmi",
+      "bytes": 3936,
+      "sha256": "acdd16ebbbe4e6ed10d36efd7b532acd5f4c761132ed2203865772fe22f47355"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/copyForStream.cmi",
+      "bytes": 48044,
+      "sha256": "a8ceea33e073b8531ab8bb7493c128b7d3fd7eed957084cee5986bac74eda522"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/probe.o",
+      "bytes": 25848,
+      "sha256": "01b1ee5ed312ec8183a8239ffc87bc437110156c8a2e6f91e2b46ab40d88a463"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/copyForStream.ml",
+      "bytes": 113872,
+      "sha256": "06e7bc5ac3a306a031e17efdf4714c6d0a39ca954134dad6f904d497d10f740c"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/copyForStream.cmx",
+      "bytes": 13986,
+      "sha256": "c0b23b16bce0e718451f27acaf27fb9979711e7402843f9e15e7bb778d5fc201"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/probe.cmx",
+      "bytes": 4086,
+      "sha256": "eaa13fed6e756c9246abc2e5ffb1b1f30b31630665447126367161313a7ddab6"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/stock/probe",
+      "bytes": 5181736,
+      "sha256": "ca52b9a588cfb57280a381c8e6342e636a447668dbb35d6e75a3a98b478c74a1"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/copyForStream.o",
+      "bytes": 320224,
+      "sha256": "5b1b4e6262d9ecdbc298268a03885b57c4634864b97e7e012f41a8b844164eba"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/fixture.o",
+      "bytes": 17880,
+      "sha256": "9e2baed9fb8809377a437433f9b0b3f9bc42e060b105006d4fa32f57da4187d5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/probe.cmi",
+      "bytes": 4878,
+      "sha256": "c177400cc0d35ece9439bdc71b94ff5d180c1da181098a913de2f457acb669df"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/copyForStream.cmi",
+      "bytes": 108071,
+      "sha256": "5ff75720f42afa9d75aad722a3c1f012480bb9c1ef0dee842f682ec9a3a3bb98"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/probe.o",
+      "bytes": 30088,
+      "sha256": "943510af3e2d092135259d150f9a1de92c0c48464e099ae6ed0338c2815c6047"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/copyForStream.ml",
+      "bytes": 113872,
+      "sha256": "06e7bc5ac3a306a031e17efdf4714c6d0a39ca954134dad6f904d497d10f740c"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/copyForStream.cmx",
+      "bytes": 202339,
+      "sha256": "a5a46c99788e2caf167ca2954499bbe4ba88f75f317245bb185c78a915783359"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/probe.cmx",
+      "bytes": 8039,
+      "sha256": "7e319f26ecd2d17549862ba88ffea50bf36cf0bf4e77265b745a1f4138e880d3"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-t66xq9uy/ox/probe",
+      "bytes": 7025832,
+      "sha256": "6560a808c9bfa0f06c6fce6d8dec683f3c27bc5994b08384e03c2add6a06b43e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/copy.ml",
+      "bytes": 113355,
+      "sha256": "bc6f331e988609233ea01e1619d89a3b122b85bdff5f2b0a1978910b3dd4a9da"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/rsync_publication_owned/controls.py",
+      "bytes": 5700,
+      "sha256": "2df42dd9afbaaaec4e99367a5d483417d3ef4625efed01f81503e04810ac1901"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/rsync_publication_owned/probe.ml",
+      "bytes": 6891,
+      "sha256": "4eda1c868b38c887b64ae84d996905aac7926ab92d54fdcf5da620bd4f5f1886"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/rsync-publication-owned-v1.md",
+      "bytes": 2913,
+      "sha256": "b44bee85e75689b03861f2a1d78165e6a2be326a4b8d0f6e926c7b60b959cc76"
+    }
+  ],
+  "limitations": [
+    "Only compressRemotely delivery replaced; no sockets/server/pump or actual transport run",
+    "Legacy/older-peer staging and raw/channel close uncertainty remain separate",
+    "No universal hostile-writer/arbitrary-async/OOM guarantee",
+    "Unknown application/native owners intentionally persist until disposable process exit; external group/OS closure verified separately",
+    "No SDK/Photo/camera/bulk IO grant, physical-sharing/performance/hard resource cap or production commit claim"
+  ],
+  "pending_property_admission": {
+    "unix": 1792242502.946164,
+    "exists": false
+  }
+}

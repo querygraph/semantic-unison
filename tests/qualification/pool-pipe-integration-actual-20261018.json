@@ -1,0 +1,65 @@
+{
+  "scope": "Pipe ledger integrated through actual pool creation/pump/shutdown; stock/Ox Make+selftests and 12 private actual-pool fixed faults. No domain-join fault/singleton handoff/Dune/current aggregate FD/RSS completion claim.",
+  "build_parent": {
+    "session": 87768,
+    "terminal_chunk": "56e260",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_parent": {
+    "session": 27195,
+    "terminal_chunk": "611a1a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 325,
+    "ox-check": 325
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-pipe-integrated-stock-check-20261018-001/RESULT.json",
+      "bytes": 55093,
+      "sha256": "983164641db32b57858927c3a697d7c795d1b6e16a5bbbc82dec43470f04345f"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pipe-integrated-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "66fef2abd1c0b17e01df6bb9727cac1e90e4ccd67bff4e5baaa4b474872eabe5"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-pipe-integrated-ox-check-20261018-001/RESULT.json",
+      "bytes": 55099,
+      "sha256": "cd3d316920aeae80211c00055e0b5e9c76538e3eecaf8fea3180edd38c48298f"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pipe-integrated-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "5dbe750e9b60aac246d1198186342ebf639ceaee1ecdd7e24e350dedd0f2e427"
+    },
+    "faults/RESULT.json": {
+      "path": "/private/tmp/unison-pool-pipe-integrated-20261018-003/RESULT.json",
+      "bytes": 116054,
+      "sha256": "a52d6b06063e1c941463b0543137eeea644bbacb0a5bf419143f4b2f4152c330"
+    },
+    "faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pool-pipe-integrated-20261018-003/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "2101903d48c729241f20a6bc2985876f7ef6214470f821395a502ca118196269"
+    }
+  },
+  "preserved_failed_harnesses": [
+    {
+      "workspace": "/private/tmp/unison-pool-pipe-integrated-20261018-001",
+      "terminal": "18878/4fc431/exit1/no session",
+      "reason": "private helper before Lwt in link order; no fault cases ran",
+      "closed": true
+    },
+    {
+      "workspace": "/private/tmp/unison-pool-pipe-integrated-20261018-002",
+      "terminal": "52372/509d0b/exit1/no session",
+      "reason": "first source replacement did not match; same link failure",
+      "closed": true
+    }
+  ]
+}

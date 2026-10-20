@@ -1,0 +1,32 @@
+{
+  "scope": "Seven composed worker + real prefix auditor + independent saved readback controls; fake native call boundary only; original8KiB fixtures",
+  "actual_terminal": {
+    "session": 37829,
+    "chunk": "9aa4ca",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-parent-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6d60c1fa24e32b5b8ff8fd5e64b68e229d75af9d24ac6a7a272941d91f2bf5a5"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-parent-controls-20261017-001/SHARED-START.json",
+      "bytes": 1132,
+      "sha256": "49c6817a14e6082526fb486539d489d9240a2988e00206b8a71fca24807861db"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-parent-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "2d0d239b33782801a4109035e9c66678f296110c1214724677eb67db7973884c"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-parent-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "actual_transport": false
+}

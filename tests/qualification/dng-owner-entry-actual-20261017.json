@@ -1,0 +1,37 @@
+{
+  "state": "FOCUSED_OWNER_ENTRY_PASS_CLOSED",
+  "scope": "UDI/0 bounded owner entry capture/decode and record-reference validation, not automatic index filesystem publication/lookup or full-build successor",
+  "actual_terminal": {
+    "session": 23340,
+    "chunk": "397bf5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-s5nfnxc7/RESULT.json",
+      "bytes": 392143,
+      "sha256": "f109a2586ee398b89e06dbaa30bc72d02b07e1857f67641aa53e7f94727517d6"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-controls-20261017-001/SHARED-START.json",
+      "bytes": 1125,
+      "sha256": "7426ed97d673171f9b512a77010be7dde9984dc1627f2247e17d18a1311d4ae2"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fad69ef34d22b0393f48af944d68c3035fb4933271a4f9d9b73a5f9ed3680a40"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "6364ec9a779918da721e3186c59d1df8300b403238dd8b498ac7d0c12f1a4272"
+    }
+  ]
+}

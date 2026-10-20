@@ -1,0 +1,49 @@
+{
+  "schema": "component-remote-readback-controls/1",
+  "complete": true,
+  "tests": 8,
+  "actual_parent_terminal": {
+    "initial_exec_chunk": "4fa3ff",
+    "exit_code": 0,
+    "session_remaining": false
+  },
+  "actual_child_pid": 6465,
+  "scope": "original fabricated metadata records; no actual RPC, input rehash or canonical IO lock",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/component_remote/readback.py",
+      "bytes": 5524,
+      "sha256": "62e06efc099422594d98ccc586c3095ade4c82d98adfbca14d5bd684c6b001ab"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/component_remote/readback_controls.py",
+      "bytes": 6626,
+      "sha256": "73e4d506368289d41e77e41d4c3a9acc31ceb23e7290519b7584b1fe56ef4dab"
+    }
+  ],
+  "owner_artifacts": [
+    {
+      "path": "/private/tmp/unison-component-remote-readback-controls-20261017-003/SHARED-START.json",
+      "bytes": 1105,
+      "sha256": "6ec94f92e58a253fa4de391aed04f3f0018583a30681a6471b2cbbba24045f90"
+    },
+    {
+      "path": "/private/tmp/unison-component-remote-readback-controls-20261017-003/SHARED-CLOSED.json",
+      "bytes": 498,
+      "sha256": "4672afcba7f22256aa3a0572bb7606fb38ecdf8e1f2ce627a3a8385b0a92758e"
+    },
+    {
+      "path": "/private/tmp/unison-component-remote-readback-controls-20261017-003/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-component-remote-readback-controls-20261017-003/SHARED-STDERR.txt",
+      "bytes": 106,
+      "sha256": "1327f170732ee47f216ae8aa32ed702ca689d7d7ecc0a8c9e1ed4592ceb31670"
+    }
+  ],
+  "runtime_source_closure_unchanged": true,
+  "parent_authentication_claimed": false,
+  "resources_closed": true
+}

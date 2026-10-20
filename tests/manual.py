@@ -25,6 +25,7 @@ Targets:
   read-workers            reader/worker controls; Make BUILD_RECEIPT required
   read-cli                synthetic telemetry sync; BUILD_RECEIPT required
   read-parser             pure telemetry parser controls
+  sync-timed              fixed shared8 repeated matrix; fresh IO admission required
   sync-functional         finite stock/Ox matrix; STOCK_RECEIPT and OX_RECEIPT required
   helper-stock / helper-ox finite synthetic helper suite; STOCK_PREFIX/OX_PREFIX required
   validation-cli          synthetic receiving diagnostics; BUILD_RECEIPT required
@@ -35,6 +36,7 @@ Targets:
   sde-conformance         serial stock/Ox fixed independent wire controls; no SDK/camera
   dng-private-framing     serial stock/Ox fixed synthetic framing checks; no SDK/image reads
   dng-private-diagnostic  serial stock/Ox stdin diagnostic controls; generated inputs only
+  private-maker-slice      admitted bounded private MakerNote geometry; no eligibility claim
   private-dng-framing-input  admitted bounded receiving-clone diagnostic; explicit FRAMING_PLAN and SHA required
   private-dng-local-clone  tiny synthetic local source-clone exact/no-op controls; no SDK/Photo
   interrupted-receipts    four fake-child interruption/receipt controls
@@ -94,8 +96,8 @@ def shared_resource_plan(target, environment):
     build = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check')
     framing = target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
-    inspect_file = target in ('inspect-file', 'private-dng-framing-input')
-    endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
+    inspect_file = target in ('inspect-file', 'private-dng-framing-input', 'private-maker-slice')
+    endpoints = [3, 3] if target in ('sync-functional', 'sync-timed') else [3] if target == 'private-dng-local-clone' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector or framing else 0
     selftest_endpoints = [3, 3] if target in ('stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check') else []
     overhead = 2 if build or inspector or framing or inspect_file or endpoints else 1
@@ -105,8 +107,8 @@ def shared_resource_plan(target, environment):
             'declared shared work exceeds project grant')
     implemented = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
-                             'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
-                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
+                             'shared-sync-controls', 'sync-functional', 'sync-timed', 'inspect-stock', 'inspect-ox',
+                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-maker-slice', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': declared_peak,
             'selftest_endpoint_workers': selftest_endpoints,
@@ -129,31 +131,48 @@ def command(target, output, environment):
         require(bool(io_path) and Path(io_path).is_absolute() and bool(io_sha)
                 and len(io_sha) == 64 and all(c in '0123456789abcdef' for c in io_sha)
                 and environment.get('SHARED_CPU_CREDITS') is not None
-                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'private-maker-slice', 'sync-functional', 'sync-timed'),
                 'IO mode requires pinned admission, shared CPU and complete job with qualified closure audit')
+    if target == 'sync-timed':
+        require(environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha),
+                'timed matrix requires exact shared8 IO admission')
     property_controls = environment.get('SYNC_PROPERTY_REMOVAL_CONTROLS')
     require(property_controls is None or (property_controls == '1' and target == 'sync-functional'
             and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)),
             'property-removal controls require explicit shared8 functional IO admission')
+    layout_controls = environment.get('SYNC_LAYOUT_ONLY_CONTROLS')
+    require(layout_controls is None or (layout_controls == '1' and target == 'sync-functional'
+            and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)
+            and property_controls is None),
+            'layout-only controls require separate explicit shared8 functional IO admission')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
-        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'sync-functional',
+        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'sync-functional', 'sync-timed',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
-                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
+                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-maker-slice', 'private-dng-local-clone'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'private-dng-local-clone':
             require(shared >= 5, 'local clone controls require three worker plus two owner credits')
         if target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic'):
             require(shared >= 3, 'framing controls require one compiler plus two owner credits')
-        if target == 'sync-functional':
+        if target in ('sync-functional', 'sync-timed'):
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
         if target in ('inspect-stock', 'inspect-ox'):
             require(shared >= 3, 'inspector build needs one compiler plus two owner credits')
         if target in ('inspect-file', 'private-dng-framing-input'):
             require(shared >= 3, 'inspector execution needs one worker plus two owner credits')
+    if target == 'private-maker-slice':
+        require(shared==8 and bool(io_path) and bool(io_sha),'slice requires exact shared8 IO admission')
+        path=environment.get('MAKER_SLICE_PLAN','');digest=environment.get('MAKER_SLICE_PLAN_SHA256','')
+        require(Path(path).is_absolute() and '..' not in Path(path).parts and len(digest)==64
+                and all(c in '0123456789abcdef' for c in digest),'exact slice plan path/digest required')
+        # Pure command construction: the retained dispatcher validates the plan
+        # and handles metadata-close uncertainty, before any payload access.
+        return [sys.executable,str(ROOT/'tests/private_maker_execute.py'),'--worker',
+                '--plan',path,'--plan-sha256',digest,'--workspace',str(output)]
     if target == 'private-dng-framing-input':
         require(shared is not None and environment.get('SHARED_IO_ADMISSION'),
                 'camera-derived framing input requires explicit shared IO admission')
@@ -179,10 +198,17 @@ def command(target, output, environment):
         for key in ('INSPECTOR_RECEIPT', 'INSPECT_INPUT'):
             require(bool(environment.get(key)) and Path(environment[key]).is_absolute(),
                     key + ' must be an explicit absolute path')
-        profile = environment.get('INSPECT_PROFILE', 'org.firstpair.dng-xmp/1')
-        require(profile in ('org.firstpair.dng-xmp/0', 'org.firstpair.dng-xmp/1'), 'unknown inspector profile')
+        components = environment.get('INSPECT_COMPONENTS', '0')
+        require(components in ('0', '1'), 'INSPECT_COMPONENTS must be 0 or 1')
         argv = [sys.executable, str(ROOT / 'tools/semantic-inspect/run.py'),
-                '--use-build', environment['INSPECTOR_RECEIPT'], '--', '--profile', profile]
+                '--use-build', environment['INSPECTOR_RECEIPT'], '--']
+        if components == '1':
+            require(not environment.get('INSPECT_PROFILE'), 'component observation does not select a transfer profile')
+            argv += ['--components']
+        else:
+            profile = environment.get('INSPECT_PROFILE', 'org.firstpair.dng-xmp/1')
+            require(profile in ('org.firstpair.dng-xmp/0', 'org.firstpair.dng-xmp/1'), 'unknown inspector profile')
+            argv += ['--profile', profile]
         if environment.get('INSPECT_BASE'):
             require(Path(environment['INSPECT_BASE']).is_absolute(), 'INSPECT_BASE must be absolute')
             argv += ['--base', environment['INSPECT_BASE']]
@@ -237,7 +263,7 @@ def command(target, output, environment):
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
                 '--build-system', system] + ([] if build_only else ['--selftest']) + (['--selftest-workers', '3'] if shared_check else []) + [
                 '--report', str(output / 'RESULT.json')]
-    if target == 'sync-functional':
+    if target in ('sync-functional', 'sync-timed'):
         argv = [sys.executable, str(ROOT / 'bench/sync/run.py')]
         for label, key in (('stock', 'STOCK_RECEIPT'), ('ox', 'OX_RECEIPT')):
             require(bool(environment.get(key)), key + ' is required')
@@ -246,8 +272,22 @@ def command(target, output, environment):
                          '--compiler', label + '=' + receipt['compiler'],
                          '--expected-binary-sha256', label + '=' + receipt['binary_sha256'],
                          '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
+        if target == 'sync-timed':
+            require(environment.get('MEASURE_SEMANTIC_PHASES', '1') == '1', 'timed phases must be enabled')
+            return argv + ['--modes', 'ordinary,receiver-clone,semantic', '--workers', '1,2,3',
+                '--file-mib', '32', '--files', '2', '--packet-bytes', '8192', '--warmups', '1',
+                '--repetitions', '5', '--timeout', '30', '--loopback-cpu-credits', '8',
+                '--orchestration-cpu-credits', '2', '--measure-primary-reads', '--measure-semantic-phases',
+                '--background-note', 'shared eight-core repeated generated matrix; host activity disclosed',
+                '--output', str(output / 'RESULT.json')]
+        phases = environment.get('MEASURE_SEMANTIC_PHASES', '0')
+        require(phases in ('0', '1'), 'MEASURE_SEMANTIC_PHASES must be0 or1')
+        if phases == '1':
+            argv += ['--measure-semantic-phases']
         if property_controls == '1':
             argv += ['--property-removal-controls']
+        if layout_controls == '1':
+            argv += ['--layout-only-controls']
         return argv + ['--shared-qualification' if shared is not None else '--qualification', '--measure-primary-reads',
                        '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
                        ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [

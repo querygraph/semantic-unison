@@ -33,6 +33,9 @@ val rename : fspath -> fspath -> unit
 val stat : fspath -> Unix.LargeFile.stats
 val lstat : fspath -> Unix.LargeFile.stats
 val opendir : fspath -> dir_handle
+val with_directory : fspath -> (dir_handle -> 'a) -> 'a
+(** Prepared opaque ownership; closes once after callback or propagates retained
+    close uncertainty with its original callback failure. *)
 val openfile :
   fspath -> Unix.open_flag list -> Unix.file_perm -> Unix.file_descr
 

@@ -1,0 +1,51 @@
+{
+  "state": "CURRENT_SOURCE_REVIEW_NOT_RUNTIME_ENFORCEMENT",
+  "head": "88cc716018199e9561aef14c2655cab15c1cdab6",
+  "files": [
+    {
+      "path": "src/semanticRuntime.ml",
+      "bytes": 13055,
+      "sha256": "6af635ce61cadc9531c50350aa33d1e71a9497648d444850c6a63febbd452e42"
+    },
+    {
+      "path": "src/semanticWorkers.ml",
+      "bytes": 32287,
+      "sha256": "487860c84a1872808d68f2bc50ab998f6d6737de0ae2e12efae2855d716f1da1"
+    },
+    {
+      "path": "src/semanticFile.ml",
+      "bytes": 10243,
+      "sha256": "2a3cd57872d2bafa4b5653a4972eb6c49b6c819e6cf5a8fbfefd297d75e0ca9e"
+    },
+    {
+      "path": "src/validationSnapshot.ml",
+      "bytes": 4694,
+      "sha256": "c876943e429ed9efe75db4f3b41256736c5373b456a5adbce3642d6ca193e3ff"
+    },
+    {
+      "path": "src/semanticAdmission.ml",
+      "bytes": 10765,
+      "sha256": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e"
+    },
+    {
+      "path": "src/backendResources.ml",
+      "bytes": 2307,
+      "sha256": "bf5a39fb6ac88ee7401eedd0c30b95b0ba8110b04a01e8f4cefa126da44d2e63"
+    },
+    {
+      "path": "src/remote.ml",
+      "bytes": 98315,
+      "sha256": "6f661121460481e6252eccfbb7a67666223975aa78caaa946c4fc654159e4391"
+    },
+    {
+      "path": "doc/resource-enforcement-current-20261018.md",
+      "bytes": 4856,
+      "sha256": "60f0f9296bf3050b99f708dcbb2263a80224033777f9176c4461531b8995ba80"
+    }
+  ],
+  "findings": [
+    "worker close errors can be suppressed before ordinary completion and admission release",
+    "pending and estimated credits do not establish OS descriptor or RSS caps"
+  ],
+  "runtime_or_payload_invocations": 0
+}

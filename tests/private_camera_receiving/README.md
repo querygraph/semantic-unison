@@ -97,7 +97,7 @@ sender, updates, and checks exact full-byte output/old-reader preservation and
 an unchanged no-op epoch. It must not silently patch unknown private metadata.
 Appending a trailer tests generic exact fallback; it is not a claim of valid
 camera encoding, semantic editing, private-reference closure, Adobe validation,
-decoded samples, or rendering equivalence. The full SOL.md corpus and optional
+decoded samples, or rendering equivalence. The full SEMANTIC-UNISON-DESIGN.md corpus and optional
 SDK receiving requirements remain open after any one such future control.
 
 No payload execution plan or admission is issued by this directory. Retained

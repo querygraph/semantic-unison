@@ -1,0 +1,1198 @@
+{
+  "schema": "unison-endpoint-cpu-budget-actual/1",
+  "state": "PASS_CLOSED",
+  "actual_control_controller": {
+    "session": 49929,
+    "initial_chunk": "396c6b",
+    "terminal_chunk": "7b61b2",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "actual_build_controller": {
+    "session": 96224,
+    "initial_chunk": "74170e",
+    "terminal_chunk": "ca29d5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_sha256": {
+    "src/semanticRuntime.ml": "14bef12ead984955efaf1c31c0a4c6085c19ff2c3df483e5d9e9a8ff54c5d320",
+    "src/semanticRuntime.mli": "5dc6a194ef00a6a60049c82ff4011abfef864085839c2cd2118cde27399f8c0e",
+    "tests/endpoint_cpu_budget/run.py": "426214b627f5b6e0e3dc2e45329d5373375e14d0dd94923c13edf1e4e399d1b7",
+    "tests/endpoint_cpu_budget/test.ml": "c7e0a1da6f41eaca1cd918e64d2c008328f32954d02da3643364d014c578d303"
+  },
+  "controls": [
+    {
+      "flavor": "stock",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-20261018-002/RESULT.json",
+        "bytes": 50438,
+        "sha256": "57d01eb9d9f8a7cf788645a8f6c9e4e93f3169a0c4d0fa1ac007667e9374628b"
+      },
+      "closure": {
+        "child": {
+          "pid": 42691,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 42691,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "85943f2cfac6725eda82cb7c90b43d38de74c4319f938ff99fc399a7d745f991"
+      },
+      "commands": [
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "semanticRuntime.ml"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/umarshal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/rx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/unicode_tables.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/unicode.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/bytearray.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/directoryOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/system_generic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic/system_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/projectInfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/myMap.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/safelist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/uarg.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/prefs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/trace.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/proplist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/pqueue.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt_util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic/lwt_unix_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt_unix.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/features.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/uutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/case.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/pred.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/terminal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/name.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/path.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fspath.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/stagePublication.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/wholeFileClone.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fingerprint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/abort.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/osx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fswatch.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/propsdata.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileinfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/os.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lock.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/clroot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/common.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/tree.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/checksum.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/transfer.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xferhint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ownedClose.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/borrowedWork.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/retainedOwnership.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/notificationPipe.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/domainOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/remote.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/external.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/negotiate.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/globals.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fswatchold.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFile.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/componentHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationSnapshot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/formatExtension.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/formatRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xmpObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xmpMerge.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngExtended.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngLayout.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngComponents.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/jpegSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticDelta.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticReport.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperSupervisor.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticMailbox.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ioAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticWorkers.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFormats.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/backendResources.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperLimiter.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/candidateValidator.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngCandidateValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/candidateValidators.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationTreeBudget.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationTreePolicy.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/semanticRuntime.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/test.ml",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/osxsupport.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/pty.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/bytearray_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/hash_compat.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props_xattr.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props_acl.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/copy_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/nativeCopyRange_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/wholeFileClone_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileObservation_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/stagePublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/finalPublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperSupervisor_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticHash_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFile_stubs.o",
+            "-o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-link.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "explicit-uncapped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-explicit-uncapped.log",
+          "sha256": "1fe9eea0c2c153219a00948aabcefddb193af2e703dc421d7951b75569b9750e"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "auto-uncapped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-auto-uncapped.log",
+          "sha256": "bdf08d9ab5c8ef97408ce1744ff46b62e30f47937b6bde459c8244571ebfc32a"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "auto-capped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-auto-capped.log",
+          "sha256": "c3e081aeb43c2696fb1520150235470edeb01c22e5c2339c93f452d50519bfa1"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "explicit-high"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-explicit-high.log",
+          "sha256": "2cbbada06539bda02df1cfc0dfd09512cc046534f69be5e2d38f0af9e417f3f7"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "explicit-low"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-explicit-low.log",
+          "sha256": "b67f30000e19d57c772dadd4ef88f23ea65794acb5e9a42234b5a285da579979"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "auto-one"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-auto-one.log",
+          "sha256": "f268f5f453598e95d29743aa0b6cc71f38a1b0c9be922655a63f68df77c246da"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "negative-ceiling"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-negative-ceiling.log",
+          "sha256": "3a34336857cbf7dc8cae744f9a86e6d6b2062dcebf9d50a3437b4df9cde40398"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "negative-workers"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-negative-workers.log",
+          "sha256": "a7906e908a9e362611823b3defc8d5ba500a55b88e78b44cada7bef1e8e32581"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "restart-up"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-restart-up.log",
+          "sha256": "f18e937eb44a284f8503f9e4ebdc5cd535049566df59198f9abda0c0e3348e2a"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "restart-down"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-restart-down.log",
+          "sha256": "9c9a2c3c26645a42e21ac6da0910dd43a3bbcc86076f21bb7e7055bc1f9b8290"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current/control",
+            "same-effective"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/current-same-effective.log",
+          "sha256": "3748b40e55ee2130d206eb5a809397b6d6e6d7c7be0d8e4140483b7bba4aa343"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "semanticRuntime.ml"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/umarshal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/rx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/unicode_tables.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/unicode.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/bytearray.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/directoryOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/system_generic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system/generic/system_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/system.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/projectInfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/myMap.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/safelist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/uarg.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/prefs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/trace.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ubase/proplist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/pqueue.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt_util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/generic/lwt_unix_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lwt/lwt_unix.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/features.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/uutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/case.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/pred.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/terminal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/name.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/path.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fspath.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/stagePublication.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/wholeFileClone.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fingerprint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/abort.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/osx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fswatch.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/propsdata.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileinfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/os.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/lock.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/clroot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/common.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/tree.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/checksum.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/transfer.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xferhint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ownedClose.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/borrowedWork.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/retainedOwnership.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/notificationPipe.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/domainOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/remote.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/external.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/negotiate.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/globals.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fswatchold.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFile.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/componentHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationSnapshot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/formatExtension.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/formatRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xmpObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/xmpMerge.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngExtended.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngLayout.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngComponents.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/jpegSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticDelta.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticReport.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperSupervisor.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticMailbox.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/ioAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticWorkers.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFormats.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/backendResources.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperLimiter.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/candidateValidator.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/dngCandidateValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/candidateValidators.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationTreeBudget.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/validationTreePolicy.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard/semanticRuntime.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard/test.ml",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/osxsupport.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/pty.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/bytearray_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/hash_compat.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props_xattr.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/props_acl.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/copy_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/nativeCopyRange_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/wholeFileClone_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/fileObservation_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/stagePublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/finalPublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/helperSupervisor_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticHash_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-3twfbyqc/src/semanticFile_stubs.o",
+            "-o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard/control"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard-link.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard/control",
+            "explicit-high"
+          ],
+          "returncode": 2,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-0kozrg5e/previous-guard-explicit-high.log",
+          "sha256": "616d8bbf5b3802c1b2912820de7ee9a8b8e1784d1d076f131545f593f262074e"
+        }
+      ],
+      "source_pins": {
+        "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/endpoint_cpu_budget/run.py": "426214b627f5b6e0e3dc2e45329d5373375e14d0dd94923c13edf1e4e399d1b7",
+        "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/endpoint_cpu_budget/test.ml": "c7e0a1da6f41eaca1cd918e64d2c008328f32954d02da3643364d014c578d303"
+      },
+      "runtime_source_sha256": "14bef12ead984955efaf1c31c0a4c6085c19ff2c3df483e5d9e9a8ff54c5d320"
+    },
+    {
+      "flavor": "ox",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-20261018-002/RESULT.json",
+        "bytes": 50443,
+        "sha256": "827c3edca96c7535bc8c87231669e1a6014d9e4c020189fbc46bae83b4420370"
+      },
+      "closure": {
+        "child": {
+          "pid": 42761,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 42761,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "9340ef67cc561e15c73b439d915a3a3646a23711231ef7ff804b40b8691a9588"
+      },
+      "commands": [
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "semanticRuntime.ml"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/umarshal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/rx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/unicode_tables.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/unicode.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/bytearray.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/directoryOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/system_generic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic/system_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/projectInfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/myMap.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/safelist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/uarg.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/prefs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/trace.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/proplist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/pqueue.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt_util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic/lwt_unix_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt_unix.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/features.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/uutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/case.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/pred.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/terminal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/name.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/path.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fspath.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/stagePublication.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/wholeFileClone.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fingerprint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/abort.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/osx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fswatch.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/propsdata.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileinfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/os.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lock.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/clroot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/common.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/tree.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/checksum.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/transfer.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xferhint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ownedClose.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/borrowedWork.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/retainedOwnership.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/notificationPipe.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/domainOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/remote.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/external.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/negotiate.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/globals.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fswatchold.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFile.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/componentHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationSnapshot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/formatExtension.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/formatRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xmpObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xmpMerge.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngExtended.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngLayout.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngComponents.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/jpegSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticDelta.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticReport.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperSupervisor.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticMailbox.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ioAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticWorkers.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFormats.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/backendResources.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperLimiter.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/candidateValidator.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngCandidateValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/candidateValidators.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationTreeBudget.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationTreePolicy.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/semanticRuntime.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/test.ml",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/osxsupport.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/pty.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/bytearray_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/hash_compat.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props_xattr.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props_acl.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/copy_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/nativeCopyRange_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/wholeFileClone_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileObservation_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/stagePublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/finalPublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperSupervisor_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticHash_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFile_stubs.o",
+            "-o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-link.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "explicit-uncapped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-explicit-uncapped.log",
+          "sha256": "1fe9eea0c2c153219a00948aabcefddb193af2e703dc421d7951b75569b9750e"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "auto-uncapped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-auto-uncapped.log",
+          "sha256": "bdf08d9ab5c8ef97408ce1744ff46b62e30f47937b6bde459c8244571ebfc32a"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "auto-capped"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-auto-capped.log",
+          "sha256": "c3e081aeb43c2696fb1520150235470edeb01c22e5c2339c93f452d50519bfa1"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "explicit-high"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-explicit-high.log",
+          "sha256": "2cbbada06539bda02df1cfc0dfd09512cc046534f69be5e2d38f0af9e417f3f7"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "explicit-low"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-explicit-low.log",
+          "sha256": "b67f30000e19d57c772dadd4ef88f23ea65794acb5e9a42234b5a285da579979"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "auto-one"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-auto-one.log",
+          "sha256": "f268f5f453598e95d29743aa0b6cc71f38a1b0c9be922655a63f68df77c246da"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "negative-ceiling"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-negative-ceiling.log",
+          "sha256": "3a34336857cbf7dc8cae744f9a86e6d6b2062dcebf9d50a3437b4df9cde40398"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "negative-workers"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-negative-workers.log",
+          "sha256": "a7906e908a9e362611823b3defc8d5ba500a55b88e78b44cada7bef1e8e32581"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "restart-up"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-restart-up.log",
+          "sha256": "f18e937eb44a284f8503f9e4ebdc5cd535049566df59198f9abda0c0e3348e2a"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "restart-down"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-restart-down.log",
+          "sha256": "9c9a2c3c26645a42e21ac6da0910dd43a3bbcc86076f21bb7e7055bc1f9b8290"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current/control",
+            "same-effective"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/current-same-effective.log",
+          "sha256": "3748b40e55ee2130d206eb5a809397b6d6e6d7c7be0d8e4140483b7bba4aa343"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "semanticRuntime.ml"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard-compile.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system",
+            "-I",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/umarshal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/rx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/unicode_tables.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/unicode.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/bytearray.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/directoryOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/system_generic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system/generic/system_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/system.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/projectInfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/myMap.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/safelist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/uarg.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/prefs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/trace.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ubase/proplist.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/pqueue.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt_util.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/generic/lwt_unix_impl.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lwt/lwt_unix.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/features.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/uutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/case.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/pred.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/terminal.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileutil.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/name.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/path.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fspath.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/stagePublication.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/wholeFileClone.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fs.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fingerprint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/abort.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/osx.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fswatch.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/propsdata.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileinfo.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/os.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/lock.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/clroot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/common.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/tree.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/checksum.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/transfer.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xferhint.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ownedClose.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/borrowedWork.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/retainedOwnership.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/notificationPipe.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/domainOwner.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/remote.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/external.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/negotiate.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/globals.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fswatchold.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFile.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/componentHash.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationSnapshot.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/formatExtension.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/formatRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xmpObservation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/xmpMerge.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngExtended.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngLayout.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngComponents.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/jpegSemantic.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngRecognition.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticDelta.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticReport.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperSupervisor.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticMailbox.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/ioAdmission.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticWorkers.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFormats.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/backendResources.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperLimiter.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/candidateValidator.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/dngCandidateValidation.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/candidateValidators.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationTreeBudget.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/validationTreePolicy.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard/semanticRuntime.cmx",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard/test.ml",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/osxsupport.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/pty.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/bytearray_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/hash_compat.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props_xattr.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/props_acl.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/copy_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/nativeCopyRange_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/wholeFileClone_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/fileObservation_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/stagePublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/finalPublication_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/helperSupervisor_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticHash_stubs.o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-obvp9zdf/src/semanticFile_stubs.o",
+            "-o",
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard/control"
+          ],
+          "returncode": 0,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard-link.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "argv": [
+            "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard/control",
+            "explicit-high"
+          ],
+          "returncode": 2,
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-endpoint-cpu-budget-msb_sk_n/previous-guard-explicit-high.log",
+          "sha256": "616d8bbf5b3802c1b2912820de7ee9a8b8e1784d1d076f131545f593f262074e"
+        }
+      ],
+      "source_pins": {
+        "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/endpoint_cpu_budget/run.py": "426214b627f5b6e0e3dc2e45329d5373375e14d0dd94923c13edf1e4e399d1b7",
+        "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/endpoint_cpu_budget/test.ml": "c7e0a1da6f41eaca1cd918e64d2c008328f32954d02da3643364d014c578d303"
+      },
+      "runtime_source_sha256": "14bef12ead984955efaf1c31c0a4c6085c19ff2c3df483e5d9e9a8ff54c5d320"
+    }
+  ],
+  "builds": [
+    {
+      "flavor": "stock",
+      "system": "check",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+        "bytes": 61240,
+        "sha256": "71e12a87fded7739949df93aceb3f006d115514742f751ac189e388cdd9a53e8"
+      },
+      "closure": {
+        "child": {
+          "pid": 43573,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 43573,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "04b616bb25dfde503e7c5179c66f14fc4ed4358212d1f9afc340d59fc04d054c"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison",
+        "bytes": 6352072,
+        "sha256": "7d739bc8e3e9b0a8cef7f1b15cd5a276c530524d0313b15daf538de53d8bca8a"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "input_pins_verified": 586
+    },
+    {
+      "flavor": "stock",
+      "system": "dune-check",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-dune-check-20261018-001/RESULT.json",
+        "bytes": 61067,
+        "sha256": "65ab20311b87525d73fbbe5da3688fb9c4a41906741e9da396f37a06464129ad"
+      },
+      "closure": {
+        "child": {
+          "pid": 44787,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 44787,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "16f5ac42d04a87ef57ba70bc9865934f50161b70b72259876c3b4c5a28b5c759"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-by7dw1r0/_build/default/src/linktext.exe",
+        "bytes": 6408072,
+        "sha256": "7cc6829bebdd238c1547a15746a552d023104f69f153a4a003a11cba898504c2"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "input_pins_verified": 586
+    },
+    {
+      "flavor": "ox",
+      "system": "check",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json",
+        "bytes": 61246,
+        "sha256": "4b00fc9ad5da85d94c545c3d6b59f9ff1d3fe35e31994d255d95bc264a21fd64"
+      },
+      "closure": {
+        "child": {
+          "pid": 45930,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 45930,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "bef066f44a1a92288bf09dd6c81b7f3f75946691d1fd89d04ee4b2f23b8594f0"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4elxvue8/src/unison",
+        "bytes": 8446184,
+        "sha256": "950e1f5c2c7a511ed19fc31ed644e8b42d05fc5a0e8bd005a78f633c75752065"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "input_pins_verified": 586
+    },
+    {
+      "flavor": "ox",
+      "system": "dune-check",
+      "receipt": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-dune-check-20261018-001/RESULT.json",
+        "bytes": 61071,
+        "sha256": "774cc26b9bb528dd2385aee14027e9c197eb54b9a87767461388127c82635be7"
+      },
+      "closure": {
+        "child": {
+          "pid": 47169,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 47169,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "2176cbd94c0998395bf2d65ac9283fea9564fbe08f83768df4d1470a7a4a980a"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4amani8a/_build/default/src/linktext.exe",
+        "bytes": 8083296,
+        "sha256": "f62140e4d6ca36819fdb3ba57255acb40f6b6f0dd44663fdfe407ce92307672d"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "input_pins_verified": 586
+    }
+  ],
+  "preserved_failure": {
+    "actual_controller": {
+      "session": 4952,
+      "initial_chunk": "4f0d88",
+      "terminal_chunk": "274e02",
+      "exit_code": 1,
+      "no_session": true
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "560faea6dcb74b4877f2ee7fa81cd05200307acca6ca1bb1b026c6236e2b1f92"
+      },
+      {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-20261018-001/SHARED-STDERR.txt",
+        "bytes": 856,
+        "sha256": "86c2b1124246b6b8677c1d52a0ae5001fea53cde2127e5de697e5dc76344fca2"
+      },
+      {
+        "path": "/private/tmp/unison-endpoint-cpu-budget-stock-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 85,
+        "sha256": "c0cfb8b54902e02480a222d7a8732719a8c50d728fa72fb9779aeca30831e011"
+      }
+    ],
+    "reason": "Original fixture ignored a failed Lwt promise for over-budget reservation; fixed by evaluating it with Lwt_unix.run. No production change was required for that failure."
+  },
+  "limits": "11fixed current cases+1ignored-ceiling negative/compiler; targeted currentRuntime recompile/unchanged interface and predecessor dependency objects; then four full current Make/Dune CLI/selftests. At most2worker domains in controls, no generated payload/SDK/Photo/EXglobal/transport/performance or OSthread/RSS hard-cap claim. Automatic uncapped case only creates permit-owner metadata, not18domains. FrozenV6 remains unchanged/completed."
+}

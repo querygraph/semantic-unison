@@ -1,0 +1,42 @@
+{
+  "schema": "unison-validation-stage-work/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/workers/stage_work_controls.py"
+    ],
+    "returncode": 1,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/workers/stage_work_controls.py\", line 64, in <module>\n    try:main()\n        ~~~~^^\n  File \"/Users/alexy/src/unison/tests/workers/stage_work_controls.py\", line 54, in main\n    assert outcome['returncode']==0 and not outcome['capture_truncated']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+    "client_cleanup": {
+      "pid": 34414,
+      "returncode": 1,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "all_scanned_enabled": false,
+  "runtime_test_executed": false,
+  "failure_scope": "Control compile failed before runtime: embedded Lwt has poll, not state. Production builds passed; no staging/validation invoked.",
+  "owning_tool_terminal": {
+    "chunk_id": "9a7e58",
+    "exit_code": 1,
+    "session_id": null,
+    "evidence": "Actual initial exec_command completion."
+  },
+  "failed_compiler_call": {
+    "path": "/private/tmp/unison-stage-work-t0lf6tav/CALL-1.json",
+    "bytes": 1641,
+    "sha256": "fa9c0ab435964cbbb0d382b25c67ef0699077d0e7ed51c47897f543d21e97b43"
+  }
+}

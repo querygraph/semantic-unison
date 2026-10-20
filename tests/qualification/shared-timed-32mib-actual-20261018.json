@@ -1,0 +1,107 @@
+{
+  "schema": "unison-shared-timed-actual/1",
+  "state": "FUNCTIONAL_MATRIX_COMPLETE_INDEPENDENT_RECOVERY_CLOSED",
+  "owner_return": {
+    "path": "/private/tmp/u-timed-8f2b6c91/OWNER-RETURN.json",
+    "bytes": 3821,
+    "sha256": "ce811f6c963cbdaf866472e22fb93b7d4e3c27396beef16763f31cc140bcb010"
+  },
+  "terminal": {
+    "path": "/private/tmp/u-timed-8f2b6c91/OWNER-TERMINAL.json",
+    "bytes": 330,
+    "sha256": "4b6bfc8f31fe75bd8966855512f2fed92c73c8a0c6a7e19b18ab09ebdaec86ae"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/SHARED-START.json",
+      "bytes": 6522,
+      "sha256": "8140a445d2c62e5b1c72c34f080130d60413c992988cb88ad5a0ef44e89f1fd8"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/RESULT.json",
+      "bytes": 6272262,
+      "sha256": "66422ef741e827bf527a4622f4c49e81f25e71ad6aa89e96bec95a1d8b67b437"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/SHARED-OWNERSHIP-RETAINED.json",
+      "bytes": 301,
+      "sha256": "bf139a7981a51d1f7a548c16b756d6ffd0c18f047e44f21815000c0470d1e4f5"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/SHARED-STDOUT.txt",
+      "bytes": 7578,
+      "sha256": "2b817bb19c1e03ab0a3f5f26fdbb8ee3e93fdacfeb84c22bece109b157e4b37d"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/INDEPENDENT-DARWIN-CENSUS-AUDIT.json",
+      "bytes": 438693,
+      "sha256": "7c90ece40608bb5ed91add4638adb611d07655e4423e8354ee10f042caa8832a"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/INDEPENDENT-IDLE-OWNER-STOP-PROOF.json",
+      "bytes": 1771,
+      "sha256": "cbeb58beaebbddd39e89f32c3c8a18afe17bee74a4837bac3ad6f4b68a5239df"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/INDEPENDENT-IDLE-OWNER-STOP.json",
+      "bytes": 378,
+      "sha256": "7c5dc025db4e163caf502a4a8151bf899be51a6c312aee928c0819cf7a2f59ac"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/OWNER-TERMINAL.json",
+      "bytes": 330,
+      "sha256": "4b6bfc8f31fe75bd8966855512f2fed92c73c8a0c6a7e19b18ab09ebdaec86ae"
+    },
+    {
+      "path": "/private/tmp/u-timed-8f2b6c91/INDEPENDENT-RECOVERY-CLOSURE.json",
+      "bytes": 1345,
+      "sha256": "ceb5db241b56d72f67644b49e388f2c7d8072268f97db239ded8a152ddc91751"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/sync/results/shared-timed-32mib-20261018.json",
+      "bytes": 592744,
+      "sha256": "8bb30b80fd465b3a91e281ff35db944d208da5c8bcf0b080c45bb1433f8acf31"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-timed-request-v1.json",
+      "bytes": 44103,
+      "sha256": "a569ca98086f1046dc5cdaf419b63559cc37df698c122a58a0d9f69bf9f5bd40"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-timed-plan-v1.json",
+      "bytes": 3378,
+      "sha256": "cc797cbe2616c1800cbe287ee45d0b8af6d3cdfaf53667fda71e2cd565fa4857"
+    },
+    {
+      "path": "/private/tmp/unison-sync-timed-admission-v1-8f2b6c91.json",
+      "bytes": 9983,
+      "sha256": "24b1b4e25c4b468a2eb52cff852f8480a356ee0a31daf69d00a461646064b362"
+    }
+  ],
+  "source_derivation_module": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_timed_darwin_audit.py",
+    "bytes": 2700,
+    "sha256": "a965c84719e1e7eb81408b7359159f4eb6d673e16564f086c3c1a2e33ced875f"
+  },
+  "summary_module": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_timed_saved_report.py",
+    "bytes": 1490,
+    "sha256": "8b0c0f4138bbf4a7cda78ca616b42a04012781a3b4c3f802a710b54d96bf71e5"
+  },
+  "saved_summary_owner": {
+    "terminal_chunk": "13908e",
+    "exit_code": 0,
+    "no_session": true,
+    "child": 83715,
+    "child_reaped": true,
+    "groups_absent": true,
+    "cpu3_closed": true,
+    "io_acquired": false
+  },
+  "next": "Fix future runner strict group selection (it used shared_qualification only); no rerun of consumed grant; continue resource successor separately"
+}

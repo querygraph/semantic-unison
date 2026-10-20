@@ -1,0 +1,42 @@
+import hashlib,json,os,re,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha,closed
+from sdk_merge_receiving.store import Store
+from shared_cpu_pool import Pool
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+P=R/'doc/final-restored-mtime-plan-v1-20261019.json';assert sha(P)=='956a09dcd95db8f2d16aeda7af37f0c89ba8aa82deb034fa1f2b90084260dc25';p=json.loads(read_bytes(str(P),2*1048576));root=Path(p['workspace'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle
+try:
+ start=json.loads(read_bytes(str(root/'START.json'),65536));result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576));assert start['owner_pid']==65287 and result['complete'] is True and len(result['runs'])==4 and len(result['calls'])==12 and result['SDK_or_Photo_calls']==0 and result['parent_tool_terminal_proved'] is False
+ assert {(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in (*cpu.fds,*io.fds)}=={(row['device'],row['inode']) for row in start['resource_rows']}
+ for name,digest in p['source_pins'].items():assert sha(R/name)==digest,name
+ assert sha(p['interpreter']['path'],64*1048576)==p['interpreter']['sha256']
+ prerequisite=p['prerequisites'][0];assert sha(prerequisite['path'],2*1048576)==prerequisite['sha256'];prior=json.loads(read_bytes(prerequisite['path'],2*1048576));prior_result=json.loads(read_bytes(str(Path(prior['workspace'])/'RESULT.json'),2*1048576))
+ s=root.stat();store=Store(str(root),dict(device=s.st_dev,inode=s.st_ino));pids=[];counts={0:0,2:0};records=[]
+ for job in p['jobs']:
+  run=next(v for v in result['runs'] if v['label']==job['label']);work=root/job['label'];assert len(run['calls'])==3 and run['negative']==job['negative']
+  compiler=job['compiler'];assert str(Path(compiler['invocation']).resolve())==compiler['path'] and sha(compiler['path'],128*1048576)==compiler['sha256']
+  for ref in compiler['library_pins']:assert sha(ref['path'],64*1048576)==ref['sha256']
+  oldrun=next(v for v in prior_result['runs'] if v['compiler']+'-'+v['mode']==job['label']);oldpins={row['path']:row['sha256'] for row in oldrun['artifacts']}
+  for ref in job['objects']:assert sha(ref['path'],64*1048576)==ref['sha256']==oldpins[ref['path']] and sha(work/Path(ref['path']).name,64*1048576)==ref['sha256']
+  for name in ('restored_mtime.ml','restored_mtime_stubs.c'):assert sha(work/name)==sha(R/'tests/final_publication'/name)
+  for index,pin in enumerate(run['calls']):
+   out=store.read_json(pin['name'],expected_sha256=pin['sha256']);expected=2 if index==2 and job['negative'] else 0;closed(out,expected);counts[expected]+=1
+   assert out['aggregate_or_parent_terminal_proved'] is False and out['io_cpu_release_authorized'] is False and type(out['client_cleanup']['pid']) is int and 0<out['client_cleanup']['pid']<2**31;pids.append(out['client_cleanup']['pid'])
+  assert out['command']==[str(work/'mtime-test'),str(work)] and out['client_cleanup']==run['test_child'] and sha(run['executable']['path'],64*1048576)==run['executable']['sha256']
+  observed=re.findall(r'native_mtime=(\d+)\.(\d+) unchanged native_ctime=(\d+)\.(\d+)->(\d+)\.(\d+)',out['stdout'])
+  for ms,mn,cs,cn,cs2,cn2 in observed:assert (ms,mn)==('1700000000','000000000') and (cs,cn)!=(cs2,cn2)
+  if job['negative']:assert len(observed)==1 and 'Failure("restored-mtime mutation published")' in out['stderr']
+  else:assert len(observed)==2 and 'PASS 2 restored-native-mtime publication mutation cases' in out['stdout'] and 'PASS candidate same-size changed bytes/exact restored mtime refused' in out['stdout'] and 'PASS target same-size changed bytes/exact restored mtime refused' in out['stdout']
+  records.append(dict(label=job['label'],negative=job['negative'],child=out['client_cleanup'],exact_native_time_rows=observed,executable=run['executable']))
+ assert len(set(pids))==len(pids)==12 and counts=={0:10,2:2}
+ refs=[dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path,2*1048576)) for path in (root/'START.json',root/'RESULT.json')]
+ store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ receipt=dict(schema='unison-restored-native-mtime-independent-audit/1',actual_owner_terminal=dict(session_id=53737,initial_chunk='778d24',terminal_chunk='fd27be',exit_code=0,running_session=None,pid=65287),plan=dict(path=str(P),sha256=sha(P)),workspace=str(root),calls=12,normal_zero=10,designated_two=2,source_pins=len(p['source_pins']),production_pins=sum(n.startswith('src/') for n in p['source_pins']),runs=records,raw_references=refs,prior_object_lineage=prerequisite,exact_native_mtime_unchanged=True,native_ctime_changed=True,normal_candidate_and_target_mutations_refused=True,private_candidate_guard_ablations_detected=True,canonical9_reacquired_closed=True,SDK_or_Photo_calls=0,scope='Two generated same-size mutation/exactmtime-restoration cases/compiler and candidate-guard ablation; current native publication object lineage and actual group closure. Not an uncooperative writer race cure/powerloss/SDK/photos.')
+ path=R/'tests/qualification/final-restored-mtime-actual-20261019.json';assert not path.exists();path.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(receipt=str(path),sha256=sha(path),calls=12,CPU8_EX_closed=True)))
+except BaseException as error:retain_after_record(lambda:print('MTIME_AUDIT_RETAIN',repr(error),flush=True))

@@ -1,0 +1,94 @@
+{
+  "schema": "unison-layout-receiving-build-selftests/1",
+  "state": "CURRENT_STOCK_OX_MAKE_AND_SELFTEST_PASS_CLOSED",
+  "actual_parent_terminal": {
+    "session": 24573,
+    "chunk_id": "212cf6",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/RESULT.json",
+        "bytes": 48726,
+        "sha256": "f8ca84c821b9b7e7580e7eb49e9746d237f0083213e66a9ee4e9776e94118308"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-6o61fbdz/src/unison",
+        "bytes": 5816688,
+        "sha256": "27a8895f046a01494db4c3b03e12a020a4ff33df47c2bb09964fced2032a5d5a"
+      },
+      "selftest_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-6o61fbdz/selftest.log",
+        "bytes": 683,
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/SHARED-START.json",
+          "bytes": 1307,
+          "sha256": "9b91c8935b7ff48be57911bab5cd644528b5228798080722aefcdc9ca19768e2"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ad101168ee843e01b9ed85246e9b8b46cc9fd539620d66cba134bf67fe706721"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "9154fc38a89e73d5fc61cb61e231bc686c4fba4156a7164537836681518427b6"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/RESULT.json",
+        "bytes": 48732,
+        "sha256": "4db543c280106745d11abad5ca94772119032d631cf8b51df122750409bc9e64"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-s7yfmp96/src/unison",
+        "bytes": 7783424,
+        "sha256": "e902f550b245a581296689f9066adafc3680cb5794696e064fc0ec8463da9f0f"
+      },
+      "selftest_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-s7yfmp96/selftest.log",
+        "bytes": 686,
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/SHARED-START.json",
+          "bytes": 1300,
+          "sha256": "f0e1bb1999fe3738c4819479a3378affd666dd938645f99e47d7d629ed10201d"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "3f45c21d8cca9dfb1798f048ccbb99f83fab52066c77bdac51ecbc80e6b30be1"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "04cd599cb49f076ce9a71b6fa7bc83ac630f89dd45863f0268f28117947060c2"
+        },
+        {
+          "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "source_hash_checks": 950,
+  "scope": "Two serial current Make builds/jobs2 and full standard selftests/workers3 per endpoint, Adobe validation off. All owned groups/CPU8 closed. No actual new layout-only receiving matrix, real camera/SDK or physical-IO claim."
+}

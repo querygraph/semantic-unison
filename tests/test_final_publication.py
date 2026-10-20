@@ -363,10 +363,10 @@ def instrument_copy(source):
     source=replace_once(source,declaration,declaration+
         '  ProducerCallerFault.log ["producer-owner";Fspath.toString root;'+
         '(match connection with None->"local"|Some _->"connection")];\n')
-    source=replace_once(source,'        f producer))',
-        '        Lwt.bind (f producer) (fun result ->\n'+
-        '          ProducerCallerFault.log ["producer-finished";Fspath.toString root;'+
-        'string_of_bool producer.frozen;string_of_bool producer.legacy]; Lwt.return result)))')
+    source=replace_once(source,'          (fun value -> if clone_scope.uncertain then pending else Lwt.return value)',
+        '          (fun value -> if clone_scope.uncertain then pending else begin\n'+
+        '            ProducerCallerFault.log ["producer-finished";Fspath.toString root;'+
+        'string_of_bool producer.frozen;string_of_bool producer.legacy]; Lwt.return value end)')
     return PRODUCER_PREFIX+source
 
 
@@ -869,7 +869,7 @@ class Suite:
               flush=True)
 
 
-def main():
+def arguments(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('build',type=Path)
     parser.add_argument('--ocamlopt',required=True)
@@ -877,7 +877,28 @@ def main():
     parser.add_argument('--keep-work',action='store_true')
     parser.add_argument('--negative-control',choices=['resolution','live-cleanup'])
     parser.add_argument('--only',help='run just the named mutation mode, NFC-copy, directory, conflict or old-peer')
-    args=parser.parse_args()
+    args=parser.parse_args(argv)
+    modes={'observe','candidate-before-attach','candidate-replaced-before-attach',
+           'candidate-after-validation','candidate-replaced-after-validation','target-after-validation',
+           'target-samebytes-after-validation','reject-validation','sidecar-after-validation',
+           'target-after-update','target-disappears-after-update','target-after-backup',
+           'candidate-after-backup','post-native-exception','post-native-OOM',
+           'post-native-target-replaced','native-rename-EIO','native-result-stat-EIO',
+           'archive-before-exception','target-appears-after-update','follow-after-update',
+           'root-after-validation','candidate-sidecar','target-sidecar','sidecar-second-rename-error',
+           'resume-complete','resume-prefix','resume-invalid','resume-empty','semantic',
+           'NFC-copy','directory','conflict','old-peer'}
+    if args.only is not None and args.only not in modes:
+        parser.error('unknown selected case: '+args.only)
+    if args.only=='old-peer' and args.old_peer is None:
+        parser.error('--only old-peer requires --old-peer')
+    if args.only and args.negative_control:
+        parser.error('--only cannot be combined with --negative-control')
+    return args
+
+
+def main():
+    args=arguments()
     root=Path(__file__).resolve().parents[1]
     environment=os.environ.copy()
     for name in ('OCAMLLIB','OCAMLPATH','CAML_LD_LIBRARY_PATH','OCAMLRUNPARAM'):
@@ -892,6 +913,7 @@ def main():
         suite=Suite(binary,args.old_peer,work,environment,args.negative_control,args.only)
         try:
             suite.run()
+            assert suite.passed, 'selected suite completed no cases'
             receipt['status']='PASS_SELECTED_CASES'
         except AssertionError as error:
             if not args.negative_control:

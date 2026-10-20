@@ -1,0 +1,41 @@
+{
+  "scope": "24 current linked actual Runtime/admission/reader controls, four pre-guard Runtime designated regression rejections; private real close-after-kernel-close plus numeric FD reuse, synthetic source only; unknown settles at process exit, not normal runtime shutdown. No pool/RSS/global FD claim.",
+  "actual_parent": {
+    "session": 27302,
+    "terminal_chunk": "694ca1",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "artifacts": {
+    "RESULT.json": {
+      "path": "/private/tmp/unison-runtime-owner-retention-20261018-004/RESULT.json",
+      "bytes": 160638,
+      "sha256": "1cceb0276e3a8a09f6ce6ba47101f2e51f1380e3ccb5018e67f0084a4c5291df"
+    },
+    "SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-runtime-owner-retention-20261018-004/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "8ecea9e8879ea20afd3f0817a8df0cd69b3615737cbedc27d1999e04cad86667"
+    }
+  },
+  "prior_attempts": [
+    {
+      "workspace": "/private/tmp/unison-runtime-owner-retention-20261018-001",
+      "terminal": "76495/9cafb9/exit1/no session",
+      "reason": "harness omitted original interfaces during dependency suffix rebuild",
+      "closed": true
+    },
+    {
+      "workspace": "/private/tmp/unison-runtime-owner-retention-20261018-002",
+      "terminal": "91189/d1cc29/exit1/no session",
+      "reason": "invalid fixture preference names before fault cases",
+      "closed": true
+    },
+    {
+      "workspace": "/private/tmp/unison-runtime-owner-retention-20261018-003",
+      "terminal": "57591/28ed95/exit0/no session",
+      "reason": "24 current controls passed before adding old-runtime regression comparisons",
+      "closed": true
+    }
+  ]
+}

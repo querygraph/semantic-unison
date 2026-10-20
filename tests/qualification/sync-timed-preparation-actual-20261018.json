@@ -1,0 +1,46 @@
+{
+  "state": "METADATA_PREPARATION_PASS_NO_RUNTIME_GRANT",
+  "actual_owner_tool": {
+    "session_id": 75158,
+    "terminal_chunk": "e8f946",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "child_pid": 68890,
+  "child_reaped": true,
+  "group_others_absent": true,
+  "cpu8_closed": true,
+  "io_acquired": false,
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-timed-request-v1.json",
+    "bytes": 44103,
+    "sha256": "a569ca98086f1046dc5cdaf419b63559cc37df698c122a58a0d9f69bf9f5bd40"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-timed-plan-v1.json",
+    "bytes": 3378,
+    "sha256": "cc797cbe2616c1800cbe287ee45d0b8af6d3cdfaf53667fda71e2cd565fa4857"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-timed-preparation-20261018-001/RESULT.json",
+      "bytes": 952,
+      "sha256": "e5911949080e7f38f7a74690622dedff6d53666a6cb97393c53bb58f836b0824"
+    },
+    {
+      "path": "/private/tmp/unison-timed-preparation-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "4076e97a491fe347e53783e3938e240e99b54702b73e6a5855f7d8711ed3a445"
+    },
+    {
+      "path": "/private/tmp/unison-timed-preparation-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 190,
+      "sha256": "9a2d682052086572373bb2f18589eeb65cd1e13582f30c3e643ceb764c736592"
+    },
+    {
+      "path": "/private/tmp/unison-timed-preparation-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

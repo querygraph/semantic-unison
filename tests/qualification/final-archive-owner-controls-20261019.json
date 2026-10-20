@@ -1,0 +1,17 @@
+{
+  "schema": "unison-final-archive-owner-controls/1",
+  "actual_terminal": {
+    "session_id": 50316,
+    "initial_chunk": "374162",
+    "terminal_chunk": "e62cbf",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "result": {
+    "path": "/private/tmp/unison-archive-owner-controls-20261019-001/RESULT.json",
+    "bytes": 878,
+    "sha256": "4ab5024f057585e7550d1862f021ad7acb9ff0e57d9ea6b49d35447e38af2eaf"
+  },
+  "methods": 14,
+  "scope": "Original disposable contract/refusal transport/command controls only; CPU00closed; no native sync/SDK/Photo."
+}

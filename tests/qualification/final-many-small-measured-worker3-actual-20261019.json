@@ -1,0 +1,71 @@
+{
+  "schema": "unison-many-small-measured-actual/1",
+  "state": "PASS_CLOSED",
+  "workers_per_endpoint": 3,
+  "actual_cohort_owner": {
+    "session": 89068,
+    "initial_chunk": "e4f954",
+    "terminal_chunk": "c424bf",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 12713
+  },
+  "independent_metadata_audit": {
+    "session": 73756,
+    "initial_chunk": "dec6f1",
+    "terminal_chunk": "f4c48d",
+    "exit_code": 0,
+    "running_session": null,
+    "raw_pairs": 108,
+    "case_owners": 36,
+    "io_cpu_closed": true
+  },
+  "targeted_controls": {
+    "terminal_chunk": "046d33",
+    "exit_code": 0,
+    "running_session": null,
+    "checks": 19,
+    "cpu00_closed": true,
+    "scope": "metric/report/source contract controls; two volume metadata methods, not a mount or volume runtime pass"
+  },
+  "sample_count": 36,
+  "warmups": 6,
+  "measured_samples": 30,
+  "cli_calls": 108,
+  "client_proxy_server_roles": 324,
+  "all_case_owners_reaped": true,
+  "all_case_groups_absent": true,
+  "all_io_cpu_closed": true,
+  "unknowns": [],
+  "raw_evidence_root": "/private/tmp/u-cohort-m3-53ffdb74530a4f1c",
+  "pins": {
+    "doc/final-many-small-measured-worker3-plan-v1-20261019.json": {
+      "bytes": 33475,
+      "sha256": "e0fbe12f39eb8f97223d5702c649c3f67e290a01391e06d84d23ff124f756cb3"
+    },
+    "doc/final-many-small-worker3-measurements-v1-20261019.json": {
+      "bytes": 114045,
+      "sha256": "5ef8ae739df044c3835d822ed01551fd18c7d0c155e18279499575d95ba0ca58"
+    },
+    "doc/final-many-small-worker3-measurements-v1-20261019.md": {
+      "bytes": 1968,
+      "sha256": "9debfe63b59b7c7ea08ed88f967e511096ac5391e8078a59ac7a76bb83e86a11"
+    },
+    "bench/sync/batch_series_report.py": {
+      "bytes": 8954,
+      "sha256": "fec60058a93e813ce5f2a51729a26ec4cfca1114b67770c094af06cfdeda15c1"
+    },
+    "bench/sync/batch_series_report_test.py": {
+      "bytes": 2357,
+      "sha256": "18de57f2f0de422deb6437ec87dc4c1e1e0d574963b18cef24527f020c4187c0"
+    },
+    "doc/final-many-small-worker-comparison-20261019.md": {
+      "bytes": 1304,
+      "sha256": "8f5e50a9dac7d92757e0c122059b744dda63461bcf055802bfd29a81feff2b30"
+    }
+  },
+  "no_sdk_or_photo_payload": true,
+  "physical_writes_measured": false,
+  "quiet_or_scaling_claim": false,
+  "parent_tool_authority": "faithful transcription of personally collected actual owning tool terminal; raw-audit no inference from ps or markers"
+}

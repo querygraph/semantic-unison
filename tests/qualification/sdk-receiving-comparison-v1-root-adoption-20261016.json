@@ -1,0 +1,15 @@
+{
+  "root_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-RECEIVING-COMPARISON-V1-ACTUAL-CLOSURE-20261017.json",
+    "bytes": 10221,
+    "sha256": "04535268f3601078d2bc8833db0ffd9efc95cf4c872e183d8c094ce3ec7ad120"
+  },
+  "root_state": "CONSUMED_ACTUAL_CLOSED_COORDINATION_RELEASED",
+  "verified_direct_pins": [
+    "actualParentTerminal",
+    "workerClosure",
+    "result"
+  ],
+  "scope": "Metadata-only adoption of Root independent actual closure, not a new runtime/payload validation or grant.",
+  "no_replay_or_successor": true
+}

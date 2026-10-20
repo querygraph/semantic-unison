@@ -1,0 +1,210 @@
+{
+  "state": "RPC_SINGLE_ARGUMENT_DECODE_FOUR_BUILDS_AND_CONTROLS_PASS",
+  "scope": "Same decoded value flows to scope and handler through actual marshaling/queued output. Not decoded aggregate admission or arbitrary caller lifetime bound.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 111078,
+      "sha256": "d399ebd7eaeec9d50fcefdc8fc4960a01201eb46fc4524828587355fb9a064f1"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 9651,
+      "sha256": "485dbdac9a1066d6ee8729008746b5a8e99657d0756a3a4a585823f023320654"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/remote_bounds.ml",
+      "bytes": 17110,
+      "sha256": "f194ee9bd35cab64ebb912b2f8ed188a70705c3c9986b605a242d9c9be88a486"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/test_remote_bounds.py",
+      "bytes": 16694,
+      "sha256": "77eba9658e47c5387caf5fe44cb52d648bc44593593ef540cde30157ce10b19a"
+    }
+  ],
+  "parent": {
+    "process_id": 15118,
+    "chunk_id": "0fc241",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": [
+    {
+      "compiler": "stock",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-20261018-002/CONTROL.json",
+          "bytes": 123705,
+          "sha256": "730bacbf28710e39103083420f8b76fcd8b3ebfa69162b80a50e6677690702d4"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "ffed7a5d9824a36326324d9d47aafc50261fdaa6604cba9bd9a95450f5db5a8e"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 796,
+          "sha256": "bc6ec0215f81dd08deb1f27549e898521400cc1d0456504f949aa4082ddcc0e6"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "double_decode_negative": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "Fatal error: exception Failure(\"DESIGNATED scope and handler received distinct decoded values\")\n",
+        "source_sha256": "191609a284d3bdbdda2f0b952b01dd6c9ddd434c9a404b6d040ade39cfb5da9a",
+        "binary_sha256": "27826a881a73ac282406000c88a13a04421f0d6baef691b8554ac305773e939d"
+      }
+    },
+    {
+      "compiler": "ox",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-20261018-002/CONTROL.json",
+          "bytes": 125998,
+          "sha256": "38697cdd306e0f4dab759c3f47b80141a8a73a1417ba8fa8af9f9da6ea9d161a"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "380be5378e51f4ee02f9f89ee548e33f2d29bf578d72c9d956d35cc7efe13f4f"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 796,
+          "sha256": "bc6ec0215f81dd08deb1f27549e898521400cc1d0456504f949aa4082ddcc0e6"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-20261018-002/SHARED-STDERR.txt",
+          "bytes": 220,
+          "sha256": "77f52fd0a49e75bbb23c3e9cf8060b143510f114afcfcd32c1bf922732ad14b4"
+        }
+      ],
+      "double_decode_negative": {
+        "exit_code": 2,
+        "stdout": "",
+        "stderr": "Fatal error: exception Failure(\"DESIGNATED scope and handler received distinct decoded values\")\n",
+        "source_sha256": "191609a284d3bdbdda2f0b952b01dd6c9ddd434c9a404b6d040ade39cfb5da9a",
+        "binary_sha256": "8e3808b4a120875253b19611f7bdf3766dc9bc80f562c1773346003ce81bfe9d"
+      }
+    }
+  ],
+  "preserved_failures": [
+    {
+      "workspace": "/private/tmp/unison-rpc-single-decode-stock-20261018-001",
+      "parent": "5489/fc36ff/exit1/no session",
+      "reason": "Negative participant caught second decode but generic post-dispatch assertion hid designated witness; positive suite passed, fixture assertion corrected."
+    }
+  ],
+  "build_parent": {
+    "process_id": 97888,
+    "chunk_id": "6fbef2",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "source_inputs": 574,
+      "all_source_hashes_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_w3flszt/src/unison",
+        "bytes": 6277040,
+        "sha256": "aaf4399d2cadb6eddb2a7feb8817e4846cc0d5982d8ed0364a2b9f3e404f94b3"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-check-20261018-002/RESULT.json",
+          "bytes": 59951,
+          "sha256": "33d4bfc8174a1bf8a5ba8b7d220414814158b816d5df63e1c573b24ef4d91311"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5b88cc8317cfc97087ea62581fdb2236f05b919ffb13cbdafdcd84b4289e61a3"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "source_inputs": 574,
+      "all_source_hashes_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qr2ws_y3/_build/default/src/linktext.exe",
+        "bytes": 6328968,
+        "sha256": "0671fc9b1b4399fd62036c682e2e0da302971862be5882cf4e25346de12d6de5"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-dune-check-20261018-002/RESULT.json",
+          "bytes": 59778,
+          "sha256": "5712fc1184389312802aa707234cb3af684ac3d00cb76e063670096f9c3254ae"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-stock-dune-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "32cb862f2eba9744071160f81c244292888135ef761f6c979010193239f74805"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "source_inputs": 574,
+      "all_source_hashes_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-knoodfkt/src/unison",
+        "bytes": 8358512,
+        "sha256": "68c74bafcbbea74b8e7071722b91acf7d54628c5b965743c5f5c3e017d0d5a49"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-check-20261018-002/RESULT.json",
+          "bytes": 59957,
+          "sha256": "12995be645bfb7d2a804caa36b3fb085e9d94274eee38a5f7158a6270851a43a"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a96d430239bd01efa324fe70e32076ae78c2cfb6ba4ec73d9c52a3460251287d"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "source_inputs": 574,
+      "all_source_hashes_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ffnbcaak/_build/default/src/linktext.exe",
+        "bytes": 7995976,
+        "sha256": "56b6141702612a9c7067b400c813e13ff038c1ef73c46b408cccefc7a83f9982"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-dune-check-20261018-002/RESULT.json",
+          "bytes": 59782,
+          "sha256": "d3d0d96e56b8e9257e5919902e689333ca14b62e799a90411f7e4cd31baf2ebe"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-single-decode-ox-dune-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d4393b473b405442e07e69800125a800b1b0632fa1c5107f0887dc0081b31e44"
+        }
+      ]
+    }
+  ],
+  "preserved_preentry_refusal": {
+    "parent": "aa4ee4/exit1/no session",
+    "reason": "driver passed opam root instead of compiler bin prefix; manual.command refused before dispatch/CPU acquisition/compiler execution",
+    "unused_workspace": "/private/tmp/unison-rpc-single-decode-stock-check-20261018-001"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schema": "unison-pr13-properties-actual/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "actual_tool": {
+    "owner_pid": 33847,
+    "session": 41218,
+    "chunk": "6e1b75",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/pr13-properties-request-v1.json",
+    "sha256": "5216c843388dd02ec9395f6d2ee14d772bc0e31a6aad41ccaebbf4236ea6e0f7"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-pr13-properties-admission-29c8a6e1.json",
+    "sha256": "c70ad0f9868ba1f7cf506da055ab1a8bb71c604f8e32b46a99314b0b95ebb197"
+  },
+  "closure": {
+    "child": {
+      "pid": 33869,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 33869,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "finite functional output/ownership only; no quiet timing, hard CPU/RSS or physical IO proof"
+  },
+  "production_source_pins_matched": 318,
+  "harness_source_pins_matched": 38,
+  "property_removal_controls": true,
+  "rows": 18,
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/INDEPENDENT-SAVED-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/OWNER-TERMINAL.json",
+      "bytes": 161,
+      "sha256": "6166c7e42284334f67377069fcce1856cc52c28e79b29937572953e0da1fa34a"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/RESULT.json",
+      "bytes": 1118924,
+      "sha256": "e62691e3e467416227a30a5c5c9ac84afa13b4e9730907672776471987f43a17"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "29e5fa542d66b179ce19f4f768715c625f3048c4e70b8dbed4f47c3048bb76e4"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-IO-ATTEMPT.json",
+      "bytes": 1586,
+      "sha256": "b84e998d57a333e9cebb1443d9dc528c040a107f4bc2b45256519a190a2f22ca"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-SERVER-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-START.json",
+      "bytes": 5815,
+      "sha256": "4bfd58314b0eb0371027be33bc88f5b081ae55cec2de71dc400c7533a8e9f8cb"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-pr13-properties-29c8a6e1/SHARED-STDOUT.txt",
+      "bytes": 1269,
+      "sha256": "e051faefd1c8f020117537353a14ee67ce8b42d6bcf92e34887eaa348b92c0e9"
+    }
+  ],
+  "scope": "Current PR13 binaries: generated2MiB ordinary/receiver-clone/semantic, stock/Ox workers1/2/3,18rows54CLI. Exact donor/basis and no-op identity; resource fork/xattr removal, retained old reader and no-op property witnesses. No camera/SDK/quiet timing/throughput/hardCPU/RSS/physical sharing claim."
+}

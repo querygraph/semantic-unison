@@ -1,0 +1,60 @@
+{
+  "schema": "unison-larger-cohort-source-controls/1",
+  "state": "PASS_CLOSED",
+  "actual_tool": {
+    "chunk": "52559a",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "tests": 46,
+  "source_sha256": {
+    "bench/sync/auto_cohort.py": "11e6e3fa1519c79d6c83ac546ad37ea4360e0d67b38cd52c82f0eff7d4380378",
+    "bench/sync/cohort_plan.py": "0c1b07e88a5bc352d23b5895901f358e454dd51036e75cfeaa98e3aed8b9349f",
+    "tests/shared_dispatch.py": "05f413d7d29adb2ab9fc4255d1479c7190d173ba1817c7af7ff9d3f9af85c231",
+    "tests/cohort_freeze.py": "6bd24b1ac800134f6b74a02526ebaa40a3cf11be59828a8029ed28c8378a73bb",
+    "tests/cohort_report.py": "877bf56fb2e995bea23620ae556640332fe5059e3b9765fb5afaaa3a9c160ad2",
+    "tests/auto_cohort_test.py": "6c3bb219403e68b84acba510afe19fd24fe98663fdfa779941527ab354a935f1",
+    "tests/cohort_plan_test.py": "28023c02a4ed0d9dfe3f5d41c54fc030a31c628a666dd94a697963b829274c51",
+    "tests/cohort_entry_test.py": "7e51b436ddb1ab759464113771ac9bcbe87aff0e9505cb0756f8c27da77823a9",
+    "tests/cohort_dispatch_test.py": "c33a22c789e5a4dbc8079c1d6879cb372f8d68cb326bb9ad785bd6cd70ac3ca3",
+    "tests/cohort_report_test.py": "12962256f4b02eb6e04ba6322a335d35d07c7fe5126dc17986bc6396daa2073f"
+  },
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path.insert(0,'tests');suite=unittest.defaultTestLoader.loadTestsFromNames(['auto_cohort_test','cohort_plan_test','cohort_entry_test','cohort_dispatch_test','cohort_report_test']);r=unittest.TextTestRunner(verbosity=2).run(suite);sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"state\": \"INCOMPLETE_MATRIX\", \"rows\": 18, \"runtime_invoked\": false}\n",
+    "stderr": "test_all_selectors_and_reservations (auto_cohort_test.Cohort.test_all_selectors_and_reservations) ... ok\ntest_directed_proof_corruptions (auto_cohort_test.Cohort.test_directed_proof_corruptions) ... ok\ntest_exact_launch_and_bound_result (auto_cohort_test.Cohort.test_exact_launch_and_bound_result) ... ok\ntest_failed_prefix_separate_and_legacy_unchanged (auto_cohort_test.Cohort.test_failed_prefix_separate_and_legacy_unchanged) ... ok\ntest_larger_dimensions_are_typed_and_bound_to_launch (auto_cohort_test.Cohort.test_larger_dimensions_are_typed_and_bound_to_launch) ... ok\ntest_typed_selection_and_contract (auto_cohort_test.Cohort.test_typed_selection_and_contract) ... ok\ntest_all_source_cohorts (cohort_plan_test.Plan.test_all_source_cohorts) ... ok\ntest_larger_limits_must_match_exact_dimensions (cohort_plan_test.Plan.test_larger_limits_must_match_exact_dimensions) ... ok\ntest_metadata_and_artifact_authentication (cohort_plan_test.Plan.test_metadata_and_artifact_authentication) ... ok\ntest_production_build_binding (cohort_plan_test.Plan.test_production_build_binding) ... ok\ntest_real_execution_inventory_exists (cohort_plan_test.Plan.test_real_execution_inventory_exists) ... ok\ntest_refusals (cohort_plan_test.Plan.test_refusals) ... ok\ntest_uncertainty_propagates_without_retry (cohort_plan_test.Plan.test_uncertainty_propagates_without_retry) ... ok\ntest_borrowed_binding_has_nineteen_descriptors (cohort_entry_test.Entry.test_borrowed_binding_has_nineteen_descriptors) ... ok\ntest_empty_or_unknown_runtime_prefix_refuses (cohort_entry_test.Entry.test_empty_or_unknown_runtime_prefix_refuses) ... ok\ntest_inherited_binding_requires_exact_nine_and_actual_target (cohort_entry_test.Entry.test_inherited_binding_requires_exact_nine_and_actual_target) ... ok\ntest_known_metadata_failure_has_zero_external_calls (cohort_entry_test.Entry.test_known_metadata_failure_has_zero_external_calls) ... ok\ntest_shared_route_refuses_borrow_and_missing_admission (cohort_entry_test.Entry.test_shared_route_refuses_borrow_and_missing_admission) ... ok\ntest_temporary18_needs_exact_root_authorization (cohort_entry_test.Entry.test_temporary18_needs_exact_root_authorization) ... ok\ntest_uncertainty_bypasses_known_failure_reporting (cohort_entry_test.Entry.test_uncertainty_bypasses_known_failure_reporting) ... ok\ntest_unknown_after_entry_never_fabricates_empty_prefix (cohort_entry_test.Entry.test_unknown_after_entry_never_fabricates_empty_prefix) ... ok\ntest_worker_exact_argv (cohort_entry_test.Entry.test_worker_exact_argv) ... ok\ntest_close_uncertainty_retains_io_without_retry (cohort_dispatch_test.BorrowedDispatcher.test_close_uncertainty_retains_io_without_retry) ... ok\ntest_contradictory_worker_exit_retains (cohort_dispatch_test.BorrowedDispatcher.test_contradictory_worker_exit_retains) ... ok\ntest_known_failed_prefix_closes_without_pass (cohort_dispatch_test.BorrowedDispatcher.test_known_failed_prefix_closes_without_pass) ... ok\ntest_live_worker_not_killed_or_reaped (cohort_dispatch_test.BorrowedDispatcher.test_live_worker_not_killed_or_reaped) ... ok\ntest_success_orders_audit_reap_and_close (cohort_dispatch_test.BorrowedDispatcher.test_success_orders_audit_reap_and_close) ... ok\ntest_unknown_group_retains_before_reap (cohort_dispatch_test.BorrowedDispatcher.test_unknown_group_retains_before_reap) ... ok\ntest_close_uncertainty_retains_io_without_retry (cohort_dispatch_test.Dispatcher.test_close_uncertainty_retains_io_without_retry) ... ok\ntest_contradictory_worker_exit_retains (cohort_dispatch_test.Dispatcher.test_contradictory_worker_exit_retains) ... ok\ntest_known_failed_prefix_closes_without_pass (cohort_dispatch_test.Dispatcher.test_known_failed_prefix_closes_without_pass) ... ok\ntest_live_worker_not_killed_or_reaped (cohort_dispatch_test.Dispatcher.test_live_worker_not_killed_or_reaped) ... ok\ntest_success_orders_audit_reap_and_close (cohort_dispatch_test.Dispatcher.test_success_orders_audit_reap_and_close) ... ok\ntest_unknown_group_retains_before_reap (cohort_dispatch_test.Dispatcher.test_unknown_group_retains_before_reap) ... ok\ntest_close_uncertainty_retains_io_without_retry (cohort_dispatch_test.LargerDispatcher.test_close_uncertainty_retains_io_without_retry) ... ok\ntest_contradictory_worker_exit_retains (cohort_dispatch_test.LargerDispatcher.test_contradictory_worker_exit_retains) ... ok\ntest_known_failed_prefix_closes_without_pass (cohort_dispatch_test.LargerDispatcher.test_known_failed_prefix_closes_without_pass) ... ok\ntest_live_worker_not_killed_or_reaped (cohort_dispatch_test.LargerDispatcher.test_live_worker_not_killed_or_reaped) ... ok\ntest_success_orders_audit_reap_and_close (cohort_dispatch_test.LargerDispatcher.test_success_orders_audit_reap_and_close) ... ok\ntest_unknown_group_retains_before_reap (cohort_dispatch_test.LargerDispatcher.test_unknown_group_retains_before_reap) ... ok\ntest_full_typed_matrix_all_samples_and_unknowns (cohort_report_test.Report.test_full_typed_matrix_all_samples_and_unknowns) ... ok\ntest_mixed_sizes_cannot_become_one_completed_matrix (cohort_report_test.Report.test_mixed_sizes_cannot_become_one_completed_matrix) ... ok\ntest_no_baseline_or_zero_denominator_invents_no_ratio (cohort_report_test.Report.test_no_baseline_or_zero_denominator_invents_no_ratio) ... ok\ntest_partial_matrix_not_promoted_and_failed_prefix_retained (cohort_report_test.Report.test_partial_matrix_not_promoted_and_failed_prefix_retained) ... ok\ntest_saved_manifest_roundtrip_and_hash_refusal (cohort_report_test.Report.test_saved_manifest_roundtrip_and_hash_refusal) ... ok\ntest_unknown_or_duplicate_refuses (cohort_report_test.Report.test_unknown_or_duplicate_refuses) ... ok\n\n----------------------------------------------------------------------\nRan 46 tests in 0.770s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 96488,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "closed": {
+    "child": {
+      "pid": 96488,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "cpu_closed": true,
+    "SDK_invoked": false,
+    "physical_IO_pool_accessed": false,
+    "disposable_tests_only": true
+  },
+  "scope": "Original fixed/disposable Python contracts+inert-owner lifecycle; no actual18 acquisition/CLI/SDK/benchmark payload. Parent heldcanonical00..03 and actualchildwait/groupclosure verified. Inlineowner used close_unstarted helper after actual verified childsettlement; no no-child execution claim, correct settlement facts existed; futureowners use explicit proof-bearing leaseclose."
+}

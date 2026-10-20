@@ -1,0 +1,28 @@
+{
+  "schema": "unison-final-rpc-version-audit-terminal/1",
+  "actual_terminal": {
+    "chunk_id": "f10171",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_source": {
+    "path": "/private/tmp/unison-rpc-version-independent-audit-20261019.py",
+    "bytes": 4998,
+    "sha256": "ab9d9ab64593d1ee36b80924f336692b8b3d92c9e049a80c1d923148994ef951"
+  },
+  "actual": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-rpc-version-actual-20261019.json",
+    "bytes": 910,
+    "sha256": "d8e39ac3cdf0997a20511bbdf59cb1336814fa776d0c4613a8ae9eb867bf6329"
+  },
+  "controls": {
+    "actual_terminal": "b2606d/0/NOsession",
+    "methods": 3,
+    "result": {
+      "path": "/private/tmp/unison-rpc-version-controls-20261019-001/RESULT.json",
+      "bytes": 447,
+      "sha256": "4c75a96d8f422ecebc4f0fbe1b88884af20233e395d0540f066f7a1eaa900261"
+    }
+  },
+  "resources_closed": true
+}

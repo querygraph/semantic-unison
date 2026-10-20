@@ -1,0 +1,27 @@
+{
+  "schema": "unison-final-archive-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 29608,
+    "initial_chunk": "2004a6",
+    "terminal_chunk": "8c45ae",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 38416
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-archive-roundtrip-plan-v1-20261019.json",
+    "sha256": "f93f2cf4e3da5ab314ade353f51c209faa5ee64452f946bf96917498620f728e"
+  },
+  "workspace": "/private/tmp/u-archive-ddb9271b9aa14ac5",
+  "calls": 20,
+  "normal_zero_calls": 18,
+  "designated_missing_base_exit2_calls": 2,
+  "primary_role_observations": 60,
+  "source_pins": 534,
+  "production_pins": 329,
+  "fresh_final_replica_bytes": 262144,
+  "all_peer_proofs_reaudited": true,
+  "canonical9_reacquired_closed": true,
+  "plan_metadata_disclosure": "Consumed plan retained unchanged: inherited expected{4cases,12calls,8192B} and original_controls7 from upstream preparation are stale descriptive fields. Runtime schema/new pinned owner and limits explicitly select2cases/20calls/65536B; actual14controls recorded separately. resources observation300 differs from limits/owner600; actualrun completed about20s, belowboth. No resource expansion or rerun claimed.",
+  "scope": "Two current stock/Ox through installed pinned2.53.5 archive load/update/reopen/knownmissingbase refusal/explicitcommonrestore/latermerge, generatedfixtures/defaultRPCcustomloopback only; notRPCv0/realSSH/SDK/productionarchives."
+}

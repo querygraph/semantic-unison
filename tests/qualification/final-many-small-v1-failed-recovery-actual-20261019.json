@@ -1,0 +1,31 @@
+{
+  "state": "FAILED_AFTER_SEED_INDEPENDENT_RECOVERY_CLOSED",
+  "actual_owner": {
+    "session": 72609,
+    "initial_chunk": "3208da",
+    "terminal_chunk": "a01704",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 90192
+  },
+  "client_pid": 90209,
+  "client_reaped0_source_receipt": true,
+  "seed1024both_replicas_hash_exact": true,
+  "update_started": false,
+  "proxy90208_original_wait4_claimed": false,
+  "server90211_original_wait4_claimed": false,
+  "fresh_cpu8_exglobal_acquired_closed": true,
+  "recovery_proof": {
+    "path": "/private/tmp/unison-many-small-v1-recovery-proof.json",
+    "sha256": "a3e28653af5dca16194b64444af8ea78dd5cbb0cf89a563ce868e200683b6757"
+  },
+  "source_snapshot": {
+    "directory": "/private/tmp/unison-many-small-v1-source-snapshot-mhwed_km",
+    "index": {
+      "name": "INDEX.json",
+      "sha256": "f3bbda6a2ae1e775642d7237b31eb36e57a7ae5fbfb2feeeac93afac32d18623",
+      "bytes": 61195
+    }
+  },
+  "scope": "failed first functional sample; generated seed bytes exact, not complete lifecycle/SDK/performance"
+}

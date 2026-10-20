@@ -1,0 +1,31 @@
+{
+  "scope": "25 fake-owner/fake-lease composed dispatcher lifecycle controls; four new inspector cases; zero canonical IO/payload",
+  "actual_tool": {
+    "session": 61538,
+    "chunk": "fba2a2",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-inspector-dispatch-lifecycle-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c480ccf07712c84a96dda557d12563811739475bdf63f04b429277bc80b732e3"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-dispatch-lifecycle-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "8b5706eb7eb3414aaa323c3c616b4ed1c56b48dac788d9d05db6a39325e2e364"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-dispatch-lifecycle-20261017-001/SHARED-STDERR.txt",
+      "bytes": 124,
+      "sha256": "1c573a336419383c097769d91cb9486db304a9de81e58e79094a6a8c15025fe6"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-dispatch-lifecycle-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

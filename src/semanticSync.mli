@@ -48,3 +48,31 @@ val merge_local_async_with_cache : cache:(Fspath.t * Path.local) ->
   right:Fspath.t -> output:Fspath.t -> SemanticDelta.application Lwt.t
 (** Resolve a private compact base under the agreeing previous archive binding;
     a miss retains verified saved-file fallback. No current replica is a base. *)
+
+
+type retained_publication
+val retained_publications : unit -> retained_publication list
+val retained_publication_cause : retained_publication -> exn
+val retained_publication_native : retained_publication -> StagePublication.owned option
+val retained_publication_descriptors : retained_publication -> Unix.file_descr list
+(** Owner-loop diagnostics for local async descriptor/native publication uncertainty.
+    Transaction admission and remaining known descriptors stay held inside the
+    pending operation. These observations grant no cleanup/retry authority. *)
+
+val retained_publication_pair_ownership : retained_publication -> NotificationPipe.t option
+val retained_publication_source_ownership : retained_publication -> NotificationPipe.t option
+val retained_publication_parent_ownership : retained_publication -> NotificationPipe.t option
+(** Owner-loop forensic ledgers, including legacy async transactions. Known FD
+    inventory excludes uncertain/closed/transferred numbers. No cleanup/retry
+    authority or native known-close assertion is granted by these observations. *)
+
+type retained_inputs
+val retained_inputs : unit -> retained_inputs list
+val retained_input_count : retained_inputs -> int
+val retained_input_slot : retained_inputs -> int -> NotificationPipe.t
+val retained_input_path : retained_inputs -> int -> string
+val retained_input_failure : retained_inputs -> exn option
+val retained_input_uncertainty : retained_inputs -> exn
+(** Owner-loop diagnostics for separate compact-base capture/scalar-merge scopes.
+    Immutable slot selection, no array replacement/reset/close-retry authority.
+    A path is not inode identity; consult per-slot pre-close observations. *)

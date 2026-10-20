@@ -1,0 +1,14 @@
+{
+  "baseRefName": "master",
+  "headRefOid": "ad042761fc5f217e3909e7d1e75d88066d7d7468",
+  "isDraft": true,
+  "state": "OPEN",
+  "url": "https://github.com/querygraph/unison/pull/13",
+  "body_sha256": "ada9fff54ad207fdb2b94897f25569bd26b06d63cd6a02bbd6943d0ae223062a",
+  "actual_publication_tool_terminal": {
+    "chunk": "d02fc5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "scope": "Draft branch fast-forward and description update only. No merge, runtime, admission, resource allocation or frozen V6 mutation."
+}

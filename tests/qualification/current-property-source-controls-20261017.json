@@ -1,0 +1,51 @@
+{
+  "scope": "Original disposable property controls and shared8 budget controls; no transport",
+  "actual_tool": {
+    "session": 24067,
+    "chunk": "ccc775",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-current-property-properties-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "ae34e61c8d11ef7c7642746021f7252f9ff64a678bfff2d98720a24e8b15b49b"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-properties-controls-20261017-001/SHARED-START.json",
+      "bytes": 1097,
+      "sha256": "b0257b844d42d2d39ca87acee242ff24119ea092f388951e5736b0cea508c336"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-properties-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 107,
+      "sha256": "a2f243794c6d0bb3411a92861920e8af2aa57f8f26a66b669fec6894341696f0"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-properties-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-budget-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "28730fe0b24a2aec8b6b398556aecbd14ef9ea97c201708fe208ee8dfc14316e"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-budget-controls-20261017-001/SHARED-START.json",
+      "bytes": 1103,
+      "sha256": "05e114330a63bfd0673820cd94974b7fd4ec6c42ad0d9a6952fbd806aea0734a"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-budget-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-property-budget-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 79,
+      "sha256": "b9811efc5e215d8ccb51a1299d83d2b04467f683a97314bbf2bd9e86152e1857"
+    }
+  ]
+}

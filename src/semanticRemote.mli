@@ -18,6 +18,22 @@ type inspection = {
   observation : SemanticReport.observation;
   local_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
 }
+type component_inspection = {
+  component_observation : (SemanticReport.component_observation, string) result;
+  component_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
+}
+val component_details_enabled : unit -> bool
+val observe_components : root:Common.root -> path:Fspath.t -> component_inspection Lwt.t
+val observe_components_with_worker : local_worker:(pool:SemanticWorkers.t ->
+  cancellation:HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> SemanticWorkers.component_inspection option Lwt.t) ->
+  root:Common.root -> path:Fspath.t -> component_inspection Lwt.t
+(** Explicit full-file DNG component inspection with an empty frozen
+    decoder set, using existing owner admission/worker/descriptor settlement.
+    The owner retains local snapshot facts for stale-display checks. Remote
+    roots require separately negotiated semantic-components-v0 and an enabled
+    DNG profile, with bounded nonce/schema-bound SIC/0. Peer results are advisory
+    current observations, not local snapshot/preservation capabilities. *)
 val observe : root:Common.root -> path:Fspath.t -> extension:FormatExtension.handle -> inspection Lwt.t
 (** Read-only observation of one absolute, already translated current path.
     The owner selects an enabled trusted handle. Local inspection uses workers;
@@ -32,3 +48,28 @@ val try_transfer_reserved : reservation:SemanticAdmission.reservation ->
   expected_size:int64 -> bool Lwt.t
 (** Borrow the receiver's retained envelope. Source RPCs keep their independent
     source admission and headroom; None producer covers explicit legacy handoff. *)
+
+val component_retained_ownership : unit -> DngComponents.cache_ownership list
+(** Owner-loop diagnostics only. Uncertain component-cache, semantic-report or transfer-planning source cleanup retains its
+    carrier and a non-cancellable pending promise INSIDE its transaction admission.
+    No cleanup, numeric-FD retry, implicit settlement or release authority. *)
+
+
+type retained_publication
+val retained_publications : unit -> retained_publication list
+val retained_publication_cause : retained_publication -> exn
+val retained_publication_native : retained_publication -> StagePublication.owned option
+val retained_publication_descriptors : retained_publication -> Unix.file_descr list
+(** Owner-loop observations for bound remote receiver native publication
+    uncertainty. Remaining known descriptors and transaction admission remain
+    held. No numeric retry, cleanup or implicit settlement authority. *)
+
+val retained_publication_pair_ownership : retained_publication -> NotificationPipe.t option
+(** Read-only pair ledger evidence, including separate uncertain/known slots,
+    original failure and pre-close identities. Descriptor numbers are historical;
+    no numeric retry, cleanup, transfer or settlement authority is supplied. *)
+
+val retained_publication_parent_ownership : retained_publication -> NotificationPipe.t option
+(** Owner-loop diagnostics for the independently acquired parent. Native
+    consumption transfers authority, not OS-close settlement. Never retry or
+    close these historical descriptor numbers from an observation. *)

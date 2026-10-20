@@ -1,0 +1,266 @@
+{
+  "schema": "unison-final-default-upstream-actual/1",
+  "state": "FOUR_CASE_PASS_CLOSED",
+  "actual_owner": {
+    "session": 9111,
+    "initial_chunk": "cb5be9",
+    "terminal_chunk": "c2e1e7",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 30764
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-default-upstream-plan-v1-20261019.json",
+    "bytes": 56805,
+    "sha256": "fcc0b4eda5116190a343ebfe45fe57c7855e9795088200d89d75f7c7c2892a72"
+  },
+  "result": {
+    "path": "/private/tmp/u-peer-83e2c881a41e43b2/RESULT.json",
+    "bytes": 91844,
+    "sha256": "ebd281dbf61191cc6b4b0eda93310cdec745c1a5a966799d295c4cbf9d435c41"
+  },
+  "upstream_commit": "8772d26a2eb77cfd0cb6da81807e81f24f51044c",
+  "upstream_build": {
+    "path": "/private/tmp/unison-genuine-upstream-stock-build-20261017-001/RESULT.json",
+    "sha256": "68b8321b344409f4e6011588a616de6a3a96119c08fd9dba50a33bd6d32c4c2e"
+  },
+  "artifacts": {
+    "ox": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4elxvue8/src/unison",
+      "sha256": "950e1f5c2c7a511ed19fc31ed644e8b42d05fc5a0e8bd005a78f633c75752065"
+    },
+    "stock": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison",
+      "sha256": "7d739bc8e3e9b0a8cef7f1b15cd5a276c530524d0313b15daf538de53d8bca8a"
+    },
+    "old-stock": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ldvnn5yz/src/unison",
+      "sha256": "5886a3b15e15b23bc16173e88d7b37d171855777e9fd56ee8d95568b3c8aae8c"
+    }
+  },
+  "source_pins_matched": 527,
+  "production_pins_matched": 329,
+  "calls": 12,
+  "primary_client_proxy_server_roles": 36,
+  "raw_reaudit": [
+    {
+      "index": 0,
+      "phase": "seed",
+      "client_pid": 30781,
+      "proxy_pid": 30780,
+      "server_pid": 30783,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c0-seed-pair.json",
+        "sha256": "0865ee4bb0524f6c8405d476f40bcac885b71909fe5fbebfe66912b52ef4f7fe"
+      }
+    },
+    {
+      "index": 0,
+      "phase": "update",
+      "client_pid": 30796,
+      "proxy_pid": 30795,
+      "server_pid": 30798,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 887,
+        "name": "c0-update-pair.json",
+        "sha256": "4617933b7ce5f7157f8ffda79a4ee7076e0044cfe44ff41dfc8f0a8b5f71545e"
+      }
+    },
+    {
+      "index": 0,
+      "phase": "noop",
+      "client_pid": 30802,
+      "proxy_pid": 30801,
+      "server_pid": 30804,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c0-noop-pair.json",
+        "sha256": "b4e7025518e3641131be637c25e38916827acd3f657ebefed5101dd93a3dee97"
+      }
+    },
+    {
+      "index": 1,
+      "phase": "seed",
+      "client_pid": 30808,
+      "proxy_pid": 30807,
+      "server_pid": 30810,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c1-seed-pair.json",
+        "sha256": "1e292ad62b8bf0d70d0696261893437a4468e7b5e5eb91aa5dd88e9b1bde07fd"
+      }
+    },
+    {
+      "index": 1,
+      "phase": "update",
+      "client_pid": 30814,
+      "proxy_pid": 30813,
+      "server_pid": 30816,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 887,
+        "name": "c1-update-pair.json",
+        "sha256": "e8423b6623f42b9df08fb12206e2d6e649082fe85a53dc207dc7dfbe10507e99"
+      }
+    },
+    {
+      "index": 1,
+      "phase": "noop",
+      "client_pid": 30827,
+      "proxy_pid": 30821,
+      "server_pid": 30829,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c1-noop-pair.json",
+        "sha256": "56a72b27775c40f4c0bd53a7094ca78d10a0c9eb31e101c8da45a3d9ef1429a0"
+      }
+    },
+    {
+      "index": 2,
+      "phase": "seed",
+      "client_pid": 30833,
+      "proxy_pid": 30832,
+      "server_pid": 30835,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c2-seed-pair.json",
+        "sha256": "e64ff20086af4fc66e4c97ef6ea2f5bafcdc776ea3c0c098b9d47e0b29c105ea"
+      }
+    },
+    {
+      "index": 2,
+      "phase": "update",
+      "client_pid": 30839,
+      "proxy_pid": 30838,
+      "server_pid": 30841,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 887,
+        "name": "c2-update-pair.json",
+        "sha256": "793d3c8b2629b43ce955d7e28d9ec2ea482dd898e064bc89be81ef84fa98ca4d"
+      }
+    },
+    {
+      "index": 2,
+      "phase": "noop",
+      "client_pid": 30847,
+      "proxy_pid": 30846,
+      "server_pid": 30849,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c2-noop-pair.json",
+        "sha256": "ddef2bdfd8e7771d04c36b131553e05b63cc8ffc244bfbdecf98c24225517e53"
+      }
+    },
+    {
+      "index": 3,
+      "phase": "seed",
+      "client_pid": 30853,
+      "proxy_pid": 30852,
+      "server_pid": 30856,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c3-seed-pair.json",
+        "sha256": "9d1e2857bb7980b823f50ba66c1d122af278d8356cd1db598e3791fa973a7a57"
+      }
+    },
+    {
+      "index": 3,
+      "phase": "update",
+      "client_pid": 30866,
+      "proxy_pid": 30865,
+      "server_pid": 30868,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 887,
+        "name": "c3-update-pair.json",
+        "sha256": "eb8653a316fb27526ece7a894fcf0ede22e6320bec054f814e47686a62e36a3e"
+      }
+    },
+    {
+      "index": 3,
+      "phase": "noop",
+      "client_pid": 30874,
+      "proxy_pid": 30872,
+      "server_pid": 30876,
+      "default_header": "__new-rpc-mode",
+      "inherited9_guard_verified": true,
+      "pair_pin": {
+        "bytes": 879,
+        "name": "c3-noop-pair.json",
+        "sha256": "257a9aa1435adb2198fd9d04ffc163758de970ecbc23ba644670a1178e8902c9"
+      }
+    }
+  ],
+  "independent_payload_hashes": [
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/0/left/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/0/right/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/1/left/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/1/right/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/2/left/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/2/right/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/3/left/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    },
+    {
+      "path": "/private/tmp/u-peer-83e2c881a41e43b2/3/right/item.dng",
+      "bytes": 8192,
+      "sha256": "9f8801f6ee6433c4f3c5a8ff815a7b68724459372500c0dc21e86e33c4029fb4"
+    }
+  ],
+  "inherited9_proxy_guards_verified": 12,
+  "canonical9rebound": true,
+  "scripts_semantically_reconstructed": true,
+  "no_sdk_or_photo": true,
+  "all_primary_groups_settled": true,
+  "whole8_ex_freshly_acquired_and_closed": true,
+  "original_controls": "4c7b3a/0 seven original command/provenance controls",
+  "scope": "default new-RPC startup loopback interoperability currentstock/Ox in both orientations versus genuine8772; not realSSH/forcedRPCv0/archive-downgrade/semanticeligibility/pixel/performance/corpus proof",
+  "parent_terminal_authority": "faithful personally collected actual owning-tool terminal; no ps or marker inference"
+}

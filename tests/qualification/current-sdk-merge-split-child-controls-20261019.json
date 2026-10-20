@@ -1,0 +1,38 @@
+{
+  "schema": "unison-sdk-merge-split-child-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];s=unittest.defaultTestLoader.loadTestsFromNames(['shared_child_test','shared_child_fault_test','sdk_merge_receiving.plan_test','sdk_merge_receiving.inputs_test','sdk_merge_receiving.ledger_test','sdk_merge_receiving.helpers_test','sdk_merge_receiving.worker_test']);r=unittest.TextTestRunner(verbosity=2).run(s);sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_actual_capture_limit_keeps_drain_and_reap (shared_child_test.Children.test_actual_capture_limit_keeps_drain_and_reap) ... ok\ntest_actual_success_and_nonzero_children_normally_reaped (shared_child_test.Children.test_actual_success_and_nonzero_children_normally_reaped) ... ok\ntest_invalid_budget_refuses_before_spawn (shared_child_test.Children.test_invalid_budget_refuses_before_spawn) ... ok\ntest_split_start_drains_before_finish_and_reaps_only_once (shared_child_test.Children.test_split_start_drains_before_finish_and_reaps_only_once) ... ok\ntest_two_split_handles_have_independent_captures_and_reaps (shared_child_test.Children.test_two_split_handles_have_independent_captures_and_reaps) ... ok\ntest_close_uncertainty_preserves_preclose_identity_no_retry (shared_child_fault_test.Faults.test_close_uncertainty_preserves_preclose_identity_no_retry) ... ok\ntest_invalid_finish_of_launched_child_retains_every_owner (shared_child_fault_test.Faults.test_invalid_finish_of_launched_child_retains_every_owner) ... ok\ntest_live_observation_retains_without_reap_or_signals (shared_child_fault_test.Faults.test_live_observation_retains_without_reap_or_signals) ... ok\ntest_nested_uncertainty_keeps_child_and_original_record (shared_child_fault_test.Faults.test_nested_uncertainty_keeps_child_and_original_record) ... ok\ntest_observer_failure_retains_without_reap_or_signal (shared_child_fault_test.Faults.test_observer_failure_retains_without_reap_or_signal) ... ok\ntest_partial_capture_construction_preserves_first_capture (shared_child_fault_test.Faults.test_partial_capture_construction_preserves_first_capture) ... ok\ntest_unknown_group_keeps_reserved_leader (shared_child_fault_test.Faults.test_unknown_group_keeps_reserved_leader) ... ok\ntest_budgets_include_both_endpoints_and_source_headroom (sdk_merge_receiving.plan_test.Plan.test_budgets_include_both_endpoints_and_source_headroom) ... ok\ntest_exact_stages_peers_and_helper_count (sdk_merge_receiving.plan_test.Plan.test_exact_stages_peers_and_helper_count) ... ok\ntest_refuses_unqualified_or_ambiguous_input (sdk_merge_receiving.plan_test.Plan.test_refuses_unqualified_or_ambiguous_input) ... ok\ntest_exact_twelve_states_without_mutation (sdk_merge_receiving.inputs_test.Inputs.test_exact_twelve_states_without_mutation) ... ok\ntest_refuses_every_unbound_or_ambiguous_metadata_form (sdk_merge_receiving.inputs_test.Inputs.test_refuses_every_unbound_or_ambiguous_metadata_form) ... ok\ntest_bad_terminal_evidence_leaves_intent_pending (sdk_merge_receiving.ledger_test.Lifecycle.test_bad_terminal_evidence_leaves_intent_pending) ... ok\ntest_every_failed_helper_prefix_stops_without_noncreation_claim (sdk_merge_receiving.ledger_test.Lifecycle.test_every_failed_helper_prefix_stops_without_noncreation_claim) ... ok\ntest_full_matrix_still_requires_independent_audit (sdk_merge_receiving.ledger_test.Lifecycle.test_full_matrix_still_requires_independent_audit) ... ok\ntest_order_and_outcome_replacement_refused (sdk_merge_receiving.ledger_test.Lifecycle.test_order_and_outcome_replacement_refused) ... ok\ntest_pending_intent_never_becomes_known_failed_prefix (sdk_merge_receiving.ledger_test.Lifecycle.test_pending_intent_never_becomes_known_failed_prefix) ... ok\ntest_both_endpoint_receipts_preserve_warnings_and_scope (sdk_merge_receiving.helpers_test.Helpers.test_both_endpoint_receipts_preserve_warnings_and_scope) ... ok\ntest_failed_or_truncated_evidence_never_proves_noncreation (sdk_merge_receiving.helpers_test.Helpers.test_failed_or_truncated_evidence_never_proves_noncreation) ... ok\ntest_missing_digest_stays_explicitly_unverified (sdk_merge_receiving.helpers_test.Helpers.test_missing_digest_stays_explicitly_unverified) ... ok\ntest_successful_nonvalidating_phases_reject_helpers (sdk_merge_receiving.helpers_test.Helpers.test_successful_nonvalidating_phases_reject_helpers) ... ok\ntest_audit_output_and_failed_call_stop_with_retained_evidence (sdk_merge_receiving.worker_test.Worker.test_audit_output_and_failed_call_stop_with_retained_evidence) ... ok\ntest_existing_uncertainty_carrier_survives_unchanged (sdk_merge_receiving.worker_test.Worker.test_existing_uncertainty_carrier_survives_unchanged) ... ok\ntest_intent_write_failure_never_dispatches (sdk_merge_receiving.worker_test.Worker.test_intent_write_failure_never_dispatches) ... ok\ntest_nine_calls_with_durable_intent_before_each_dispatch (sdk_merge_receiving.worker_test.Worker.test_nine_calls_with_durable_intent_before_each_dispatch) ... ok\n\n----------------------------------------------------------------------\nRan 30 tests in 0.429s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 26236,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "token_indexes": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "source_pins": {
+    "tests/sdk_host_matrix/shared_child.py": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da",
+    "tests/sdk_host_matrix/shared_child_test.py": "aaf64fd79ff3ec6eb4c834384fb888e8d8413110c61148f16ad08c11bed77cae",
+    "tests/sdk_host_matrix/shared_child_fault_test.py": "e138a938117fdc13b117a3bba734ad4e0e5dc48b41acb0111b0dddf6f12e5f84"
+  },
+  "scope": "Tiny Python children and original inert merge controls; no SDK/media/canonical IO/Unison transport."
+}

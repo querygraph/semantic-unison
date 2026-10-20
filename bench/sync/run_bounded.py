@@ -21,7 +21,7 @@ SOURCES = ('bench/sync/run_bounded.py', 'bench/sync/batch_audit.py',
            'bench/sync/prepare_plan.py', 'bench/sync/run.py', 'bench/sync/fixtures.py',
            'bench/sync/partitions.py',
            'bench/sync/measure.py', 'bench/sync/ownership.py', 'bench/sync/proxy.py',
-           'bench/sync/launcher.py', 'bench/sync/read_stats.py',
+           'bench/sync/launcher.py', 'bench/sync/read_stats.py', 'bench/sync/phase_stats.py',
            'tests/sdk_container_receive/live_merge_aggregate.py',
            'tests/sdk_container_receive/live_merge_owner.py',
            'tests/sdk_container_receive/prepare_merged.py')

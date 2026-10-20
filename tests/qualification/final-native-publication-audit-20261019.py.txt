@@ -1,0 +1,56 @@
+import hashlib,json,os,re,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha,closed
+from native_publication_driver_bridge import driver_source
+from sdk_merge_receiving.store import Store
+from shared_cpu_pool import Pool
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+P=R/'doc/final-native-publication-plan-v1-20261019.json';assert sha(P)=='f2c702324b9173a8183fcda2b705a44087211aa1b87c637d9760f0d8f7a52934';p=json.loads(read_bytes(str(P),2*1048576));root=Path(p['workspace'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle
+try:
+ start=json.loads(read_bytes(str(root/'START.json'),65536));result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576));assert start['owner_pid']==63804 and result['complete'] is True and len(result['runs'])==10 and len(result['calls'])==78 and result['SDK_or_Photo_calls']==0 and result['parent_tool_terminal_proved'] is False
+ assert {(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in (*cpu.fds,*io.fds)}=={(r['device'],r['inode']) for r in start['resource_rows']}
+ for name,digest in p['source_pins'].items():assert sha(R/name)==digest,name
+ assert sha(p['interpreter']['path'],64*1048576)==p['interpreter']['sha256']
+ for job in p['compilers']:
+  assert str(Path(job['invocation']).resolve())==job['path'] and sha(job['path'],128*1048576)==job['sha256']
+  for ref in job['library_pins']:assert sha(ref['path'],64*1048576)==ref['sha256']
+ st=root.stat();store=Store(str(root),dict(device=st.st_dev,inode=st.st_ino));pids=[];counts={0:0,2:0};runs=[];artifacts=0
+ for run in result['runs']:
+  label=run['compiler']+'-'+run['mode'];work=root/label;mode=run['mode'];log=json.loads(read_bytes(str(root/run['log_record']),1048576));script=Path(run['driver']);assert log['original_driver_sha256']==sha(script) and log['filtered_import_binding_sha256']==hashlib.sha256(driver_source(read_bytes(str(script),65536).decode()).encode()).hexdigest()
+  native=[]
+  for pin in run['calls']:
+   out=store.read_json(pin['name'],expected_sha256=pin['sha256']);code=2 if Path(out['command'][0]).name=='publication-test' and mode in ('candidate-negative','producer-negative') else 0;closed(out,code)
+   c=out['client_cleanup'];assert type(c['pid']) is int and 0<c['pid']<2**31 and out['aggregate_or_parent_terminal_proved'] is False and out['io_cpu_release_authorized'] is False;pids.append(c['pid']);counts[code]+=1
+   if Path(out['command'][0]).name in ('publication-test','lease-test'):native.append(out)
+  assert len(native)==1;out=native[0];assert out['command'][0]==str(work/('lease-test' if mode=='lease' else 'publication-test')) and out['client_cleanup']['pid']==run['test_pid']
+  summaries={};last=[line for line in out['stdout'].splitlines() if line.startswith('RUN ')]
+  if mode in ('normal','timed'):
+   assert '106 final publication cases passed' in out['stdout'] and '71 retained producer cases passed (177 total including original regressions)' in out['stdout'];assert len(last)==177 and sum(line.startswith('PASS ') for line in out['stdout'].splitlines())==177;summaries=dict(publication=106,producer=71,total=177)
+   assert out['command']==[str(work/'publication-test'),str(work)]+(['--timed'] if mode=='timed' else [])
+  elif mode=='lease':assert 'CloneLease: 21 independent native/injected bridge tests passed' in out['stdout'];summaries=dict(lease=21)
+  elif mode=='candidate-negative':assert last[-1]=='RUN candidate mutation after attach' and 'Failure("candidate mutation was published")' in out['stderr']
+  else:assert last[-1]=='RUN same-byte replacement before producer adoption' and 'Failure("wrong producer descriptor admitted")' in out['stderr']
+  if mode!='lease':
+   source=read_bytes(str(R/'src/finalPublication_stubs.c'),2*1048576).decode()
+   if mode=='candidate-negative':source=source.replace('if (require_baseline && !same_file(&context->candidate_stat, &before)) return EBUSY;','(void)require_baseline; /* private negative control */')
+   if mode=='producer-negative':source=source.replace('context->witness_fd = fcntl(borrowed, F_DUPFD_CLOEXEC, 0);','context->witness_fd = openat(context->candidate_parent_fd, context->candidate_name, O_RDONLY | O_NONBLOCK | O_NOFOLLOW | O_CLOEXEC); /* private reopen control */')
+   assert read_bytes(str(work/'finalPublication_stubs.c'),2*1048576).decode()==source
+   assert sha(work/'finalPublication.ml')==sha(R/'src/finalPublication.ml') and sha(work/'finalPublication.mli')==sha(R/'src/finalPublication.mli')
+  else:
+   for name in ('fileObservation.ml','fileObservation.mli','fileObservation_stubs.c','cloneRange.ml','cloneRange.mli','cloneLease.ml','cloneLease.mli'):assert sha(work/name)==sha(R/'src'/name)
+  for row in run['artifacts']:assert sha(row['path'],64*1048576)==row['sha256'];artifacts+=1
+  runs.append(dict(compiler=run['compiler'],mode=mode,calls=len(run['calls']),native_exit=out['returncode'],test_pid=run['test_pid'],summaries=summaries))
+ assert len(set(pids))==len(pids)==78 and counts=={0:74,2:4}
+ refs=[]
+ for path in (root/'START.json',root/'RESULT.json'):
+  refs.append(dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path,2*1048576)))
+ store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ receipt=dict(schema='unison-final-native-publication-independent-audit/1',actual_owner_terminal=dict(session_id=74637,initial_chunk='80e98e',terminal_chunk='dd4390',exit_code=0,running_session=None,pid=63804),plan=dict(path=str(P),sha256=sha(P)),workspace=str(root),calls=78,normal_zero=74,designated_two=4,source_pins=len(p['source_pins']),production_pins=sum(n.startswith('src/') for n in p['source_pins']),artifacts_rehashed=artifacts,runs=runs,raw_references=refs,canonical9_reacquired_closed=True,SDK_or_Photo_calls=0,scope='Current source native publication177cases ordinary+timed and CloneLease21 eachcompiler with four private guard-ablation negative programs; test-bound syscall errors/identity/symlink/rename/borrowedFD behavior, not full transport/powerloss/physicalENOSPC/SDK/photos.')
+ path=R/'tests/qualification/final-native-publication-actual-20261019.json';assert not path.exists();path.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(receipt=str(path),sha256=sha(path),calls=78,artifacts=artifacts,CPU8_EX_closed=True)))
+except BaseException as error:retain_after_record(lambda:print('PUBLICATION_AUDIT_RETAIN',repr(error),flush=True))

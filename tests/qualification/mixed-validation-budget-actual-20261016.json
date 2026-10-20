@@ -1,0 +1,32 @@
+{
+  "scope": "Exact plan with conservative declared8GiB, not enforced physical IO; pure/inert controls only",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/plan_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.017s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 5571,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "source_sha256": "b33c1862b8cf3af6b628227709abc38ff9aa716f50048f43eb24fb64baaf9a22",
+  "owning_tool_terminal": {
+    "chunk_id": "8c8b0a",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

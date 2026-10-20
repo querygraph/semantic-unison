@@ -1,0 +1,142 @@
+{
+  "schema": "unison-auto-cohort-freeze-actual/1",
+  "actual_tool": {
+    "chunk": "17cc9c",
+    "exit": 0,
+    "no_session": true
+  },
+  "closure": {
+    "child": {
+      "pid": 59880,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 59880,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "metadata_pins": [
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/INDEX.json",
+      "bytes": 12796,
+      "sha256": "d23d4744ee421e47767118a88f4038c6eedf3a36bfcdbd46fb1c558cabf655c5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-1-plan.json",
+      "bytes": 9394,
+      "sha256": "26ec758b2df729a08c44f4caa992efdd1116cb857f36e57221331014556af1a3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-1-request.json",
+      "bytes": 9786,
+      "sha256": "2b7529ab82adb6bd9f60bb5ae3d61d404962f615b995f3dd526f407d01f6ef3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-2-plan.json",
+      "bytes": 9394,
+      "sha256": "083edf8a7ca544aaec69eaad13de5b042ed05434fb7da70af5bc6fae667a4589"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-2-request.json",
+      "bytes": 9786,
+      "sha256": "c9e09a39d68769fa517b80916b66a1dd38946b59f51db489a57319fd3edb83a4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-4-plan.json",
+      "bytes": 9474,
+      "sha256": "562488d9a19653e33bb081a0a5841eda86c50566bb61ae5aa4f14ac3bb253532"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-4-request.json",
+      "bytes": 9786,
+      "sha256": "3ff3c7e1d33d73d2a3ffb3c8b027c0ddb4f59513d602ca4fccf4e9243442a9d8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-8-plan.json",
+      "bytes": 9474,
+      "sha256": "e231f55a9779548f2e788fdfdfab7b2013f0dd664a44aa2b3fc3916026decd23"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-8-request.json",
+      "bytes": 9786,
+      "sha256": "82475ed060b82ad60552c9d4cf2f8525556bb58b4a5622fd67429d8299b3d7b3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-auto-plan.json",
+      "bytes": 9482,
+      "sha256": "f41990f441f225e58c5261122f46716b31424b57aea65ddbfa7244982012a151"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-auto-request.json",
+      "bytes": 9795,
+      "sha256": "41cab6a6cebfa8ebef0e1da0570f4ce1e9e916f2bf05e7569b8ce5fdd2494c87"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-1-plan.json",
+      "bytes": 9410,
+      "sha256": "0abbd80addfbc371c8d7f2c02aee095d573f36885802e7473e4994b3ff3fe8c5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-1-request.json",
+      "bytes": 9795,
+      "sha256": "0c987f56cdcee94fdcfcd706b1b8ce27e8c35bd7c46a685fb9d43efc91cedc28"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-2-plan.json",
+      "bytes": 9410,
+      "sha256": "4db5ed5045b0d14f5216a9537a087eaed4bc9d58f7efcf917e43a2237cef2e05"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-2-request.json",
+      "bytes": 9795,
+      "sha256": "e3fcfabd78c55b21d12a7f540544a83cd1b43f43476c50dcc2daa11b6d742146"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-4-plan.json",
+      "bytes": 9490,
+      "sha256": "dc831eb6fc9aa9a9cc17742cefbc0ad605465af5ed5657255c8c53e8d5a48238"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-4-request.json",
+      "bytes": 9795,
+      "sha256": "e1aa79dc35ca38b54bd2806bb568090fb95dca92f07626bedb0717e594d93b43"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-8-plan.json",
+      "bytes": 9490,
+      "sha256": "87b6f3a435d4c3bcbcf682043b0ac2dcbcf2dda21485452df9b3073c04129eb9"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-8-request.json",
+      "bytes": 9795,
+      "sha256": "ac26d54631e14e2252d661dd65e2916f880e10603304a356744b220ab2792324"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-auto-plan.json",
+      "bytes": 9498,
+      "sha256": "ab1e502e2eeab7080a58d15c998639bafb22025aa6a90fb554e4d80359d38ce9"
+    },
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-auto-request.json",
+      "bytes": 9804,
+      "sha256": "462f82e671d0b786d591bef3a15928af74e27fd270ba3cebff3358ba1825407a"
+    }
+  ],
+  "preparer_sha256": "ba12098dbbad75b3a981e1fe1e6d19d2358c96f8384711786d28768e42303f3d",
+  "all_ten_workspaces_absent_at_readback": true,
+  "readback_tool": "e1ef15",
+  "runtime_admitted": false,
+  "runtime_executed": false,
+  "scope": "53 current execution-source pins and authenticated prerequisite metadata; executable hashes copied from qualified receipts, no fresh executable payload read"
+}

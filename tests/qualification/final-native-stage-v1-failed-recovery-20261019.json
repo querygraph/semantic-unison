@@ -1,0 +1,53 @@
+{
+  "schema": "unison-native-stage-v1-partial-recovery/1",
+  "state": "SPARSE_GENERATOR_PREREQUISITE_HELD_INDEPENDENT_RECOVERY_CLOSED",
+  "actual_owner": {
+    "session": 24444,
+    "initial_chunk": "127c73",
+    "terminal_chunk": "83daa3",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 24029
+  },
+  "actual_recovery": {
+    "terminal_chunk": "875fa5",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "prefix": {
+    "direct_children": 24,
+    "expected_negative77": 2,
+    "stock_original_driver_calls": 14,
+    "stock_link_jobs": 2,
+    "stock_strict_status_calls": 6,
+    "stock_flag_metadata_calls": 2
+  },
+  "sparse_native_call_unstarted": true,
+  "ox_unstarted": true,
+  "full_pair_pass": false,
+  "all8_ex_freshly_acquired_closed_by_control465356": true,
+  "source": "tests/qualification/final-native-stage-v1-owner-source.py.txt",
+  "proof_pins": [
+    {
+      "path": "/private/tmp/u-stage-v1-recovery-c8e41d9c88b7423f/IDLE-STOP-PROOF.json",
+      "bytes": 4816,
+      "sha256": "1c0d2695d84c76b9ed926e243c57b9fd279e0e5e903f3cc6d73a9508b61d4eb6"
+    },
+    {
+      "path": "/private/tmp/u-stage-v1-recovery-c8e41d9c88b7423f/STOP-SUBMITTED.json",
+      "bytes": 149,
+      "sha256": "ca7547388d44f49b32af2daec85d188e5a021c61db4098c65c4b153535e1727a"
+    },
+    {
+      "path": "/private/tmp/u-stage-v1-recovery-c8e41d9c88b7423f/census.json",
+      "bytes": 145511,
+      "sha256": "604986bf59927b16f82dedd440a7b5468d6a56f71ea3bda2401ed61375a79562"
+    },
+    {
+      "path": "/private/tmp/u-stage-v1-recovery-c8e41d9c88b7423f/owner-fds.json",
+      "bytes": 2646,
+      "sha256": "88bcc988219852b497a95e30d2d1ca059a721c1901cd04628a7ef78421b73669"
+    }
+  ],
+  "stop_scope": "exact source/census-proven idle Python retainer only; no native/group signal; no original worker normal exit claimed"
+}

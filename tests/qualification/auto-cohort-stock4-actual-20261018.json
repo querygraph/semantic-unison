@@ -1,0 +1,251 @@
+{
+  "schema": "unison-auto-cohort-actual/1",
+  "state": "PASS_CLOSED",
+  "label": "stock",
+  "selection": 4,
+  "actual_owner": {
+    "schema": "unison-actual-owning-tool-terminal/1",
+    "state": "ACTUAL_TERMINAL",
+    "session_id": 37134,
+    "initial_chunk": "3045ce",
+    "terminal_chunk": "0e82ac",
+    "exit_code": 0,
+    "no_running_session": true,
+    "owner_pid": 76082,
+    "worker_pid": 76100,
+    "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+    "unix": 1792388279.147417
+  },
+  "workspace": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88",
+  "plan": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-4-plan.json",
+    "sha256": "dc831eb6fc9aa9a9cc17742cefbc0ad605465af5ed5657255c8c53e8d5a48238"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-auto-cohort-stock4-admission-5956e4d18f9c4f3a9cf53fa99c52aed5.json",
+    "sha256": "3e586f24e470355f2f23303778d09d1fe98bfcd92e3473a8ecc9bb6cba207ccf"
+  },
+  "coordination": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-TEMPORARY18-SIX-COHORTS-ACTIVE-20261019.json",
+    "sha256": "84ced3064bf8f1f66025f6a3a6511118272d332306f64be845f49406c91e3f58"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/SHARED-START.json",
+      "bytes": 8214,
+      "sha256": "4111c7e44c2fcac768f631f8b422b37927135f3c518e4163ffd25daac360ff57"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "8cb5dda1f9825844c701024ea98e14424d6e2d110e53d9100b7fc7ca58ea18e5"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/SHARED-SERVER-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/COHORT-BINDING.json",
+      "bytes": 1597,
+      "sha256": "b574401678d9a4a4cb59af59a2eb0488465fc9ee6052fd544f8f53383d71aa75"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/WORKER-COHORT-AUDIT.json",
+      "bytes": 419,
+      "sha256": "b4210e8f0aefbe243338d56da22e4548a6680c021ce48523c412a9a1e5c3e345"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/RESULT.json",
+      "bytes": 1988120,
+      "sha256": "9d50bdbb4a5dfc9dd9faa614193c184c654e8c4188fb943942cff4ad6e3ec6a6"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/SHARED-STDOUT.txt",
+      "bytes": 1290,
+      "sha256": "c26372c6f80f169d5833b250ce5f3a962424eb95c5189bfa3353048a0a05bc16"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/OWNER-TERMINAL.json",
+      "bytes": 398,
+      "sha256": "1953cfcc916ac5dc062ad9e5350e328fbb2dd3a55a1c793e8093501a83a67e39"
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88/POST-CLOSE-WHOLE-BUNDLE.json",
+      "bytes": 1983,
+      "sha256": "0b2a90e22cc669411d24c35fca6f0c3cba647383600777d8e071f894e22a5701"
+    }
+  ],
+  "closed": {
+    "child": {
+      "pid": 76100,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 76100,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "saved_metadata_reaudit": {
+    "attempted_cli_invocations": 54,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": true,
+    "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+    "rows": 18,
+    "cli_invocations": 54,
+    "parent_terminal_proved": false,
+    "token_release_authorized": false,
+    "functional_status": "PASSED"
+  },
+  "post_close_reacquisition": {
+    "actual_tool_chunk": "2359a6",
+    "exit_code": 0,
+    "no_running_session": true,
+    "proof": {
+      "state": "REACQUIRED_AND_CLOSED_NO_CHILDREN",
+      "token_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "observations": [
+        {
+          "fd": 5,
+          "device": 16777223,
+          "inode": 307122463
+        },
+        {
+          "fd": 6,
+          "device": 16777223,
+          "inode": 307122464
+        },
+        {
+          "fd": 7,
+          "device": 16777223,
+          "inode": 307122465
+        },
+        {
+          "fd": 8,
+          "device": 16777223,
+          "inode": 307122466
+        },
+        {
+          "fd": 9,
+          "device": 16777223,
+          "inode": 307122467
+        },
+        {
+          "fd": 10,
+          "device": 16777223,
+          "inode": 307122468
+        },
+        {
+          "fd": 11,
+          "device": 16777223,
+          "inode": 307122469
+        },
+        {
+          "fd": 12,
+          "device": 16777223,
+          "inode": 307122470
+        },
+        {
+          "fd": 13,
+          "device": 16777223,
+          "inode": 307122471
+        },
+        {
+          "fd": 14,
+          "device": 16777223,
+          "inode": 307122472
+        },
+        {
+          "fd": 15,
+          "device": 16777223,
+          "inode": 307122473
+        },
+        {
+          "fd": 16,
+          "device": 16777223,
+          "inode": 307122474
+        },
+        {
+          "fd": 17,
+          "device": 16777223,
+          "inode": 307122475
+        },
+        {
+          "fd": 18,
+          "device": 16777223,
+          "inode": 307122476
+        },
+        {
+          "fd": 19,
+          "device": 16777223,
+          "inode": 307122477
+        },
+        {
+          "fd": 20,
+          "device": 16777223,
+          "inode": 307122478
+        },
+        {
+          "fd": 21,
+          "device": 16777223,
+          "inode": 307122479
+        },
+        {
+          "fd": 22,
+          "device": 16777223,
+          "inode": 307122480
+        },
+        {
+          "fd": 4,
+          "device": 16777223,
+          "inode": 307225493
+        }
+      ],
+      "cpu_closed": true,
+      "io_closed": true,
+      "scope": "One nonblocking post-close EXglobal thenCPU18 acquisition; no workload/child execution or invented child-settlement proof; free at this instant only",
+      "unix": 1792388232.761742
+    }
+  },
+  "timing_disclosure": [
+    "Project quiet coordination holds other project jobs; OS/background activity remains uncontrolled.",
+    "Routine metadata coordination occurred; no absolute quiet timing, physical storage, hard-cap, SDK/camera/pixel or production claim."
+  ],
+  "scope": "One generated32MiB\u00d78files stock4 cohort under explicittemporary18; 18rows54CLI, actualparent/group/FDsettlement plus no-child wholebundle reacquire/close. Firstof6; no replay/automatic successor."
+}

@@ -1,0 +1,3503 @@
+{
+  "rows": 36,
+  "measured_rows": 30,
+  "warmup_rows": 6,
+  "raw_peer_pairs_reaudited": 108,
+  "summary": [
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 7.013344259,
+        "minimum": 6.93855872,
+        "maximum": 7.188431817,
+        "raw": [
+          7.188431817,
+          6.948385947,
+          7.041318728,
+          6.93855872,
+          7.013344259
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 7.211372793,
+        "minimum": 7.131684479,
+        "maximum": 7.379894519,
+        "raw": [
+          7.379894519,
+          7.15683967,
+          7.241169017,
+          7.131684479,
+          7.211372793
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.105635,
+        "raw": [
+          1.1050959999999999,
+          1.106632,
+          1.105835,
+          1.105635,
+          1.099336
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 24485888,
+        "raw": [
+          24485888,
+          24383488,
+          24002560,
+          23945216,
+          24027136
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 6.078199,
+        "raw": [
+          6.078199,
+          6.084072,
+          6.0835170000000005,
+          6.056585,
+          6.047549
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 21708800,
+        "raw": [
+          20967424,
+          21536768,
+          21065728,
+          21544960,
+          21708800
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2638437,
+          2638437,
+          2638437,
+          2638437,
+          2638437
+        ],
+        "server_to_client_bytes": [
+          995447,
+          995447,
+          995447,
+          995447,
+          995447
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.480858468,
+        "minimum": 8.453740569,
+        "maximum": 8.5944954,
+        "raw": [
+          8.479021029,
+          8.5944954,
+          8.564603992,
+          8.453740569,
+          8.480858468
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.677612827,
+        "minimum": 8.646063555,
+        "maximum": 8.785461245,
+        "raw": [
+          8.663048296,
+          8.785461245,
+          8.750384239,
+          8.646063555,
+          8.677612827
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.11632,
+        "raw": [
+          1.12129,
+          1.124125,
+          1.110948,
+          1.11632,
+          1.1079599999999998
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 24031232,
+        "raw": [
+          23941120,
+          23863296,
+          23457792,
+          24031232,
+          23764992
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.249149,
+        "raw": [
+          7.245393999999999,
+          7.291696,
+          7.273747999999999,
+          7.240654,
+          7.249149
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 21528576,
+        "raw": [
+          21340160,
+          20701184,
+          21008384,
+          21528576,
+          21229568
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2638438,
+          2638438,
+          2638438,
+          2638438,
+          2638438
+        ],
+        "server_to_client_bytes": [
+          995447,
+          995447,
+          995447,
+          995447,
+          995447
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.517127788,
+        "minimum": 8.497875591,
+        "maximum": 8.681604267,
+        "raw": [
+          8.517127788,
+          8.497875591,
+          8.681604267,
+          8.510080182,
+          8.585066135
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.710528937,
+        "minimum": 8.687431259,
+        "maximum": 8.874256093,
+        "raw": [
+          8.710528937,
+          8.687431259,
+          8.874256093,
+          8.705511873,
+          8.779823577
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.35556,
+        "raw": [
+          1.350373,
+          1.35556,
+          1.393646,
+          1.3694979999999999,
+          1.354149
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 38072320,
+        "raw": [
+          37523456,
+          38072320,
+          37543936,
+          36655104,
+          37212160
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.528262999999999,
+        "raw": [
+          7.483944999999999,
+          7.579838,
+          7.620476999999999,
+          7.528262999999999,
+          7.506106
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 50274304,
+        "raw": [
+          48226304,
+          46452736,
+          50274304,
+          45842432,
+          47403008
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2179784,
+          2179784,
+          2179784,
+          2179784,
+          2179784
+        ],
+        "server_to_client_bytes": [
+          889143,
+          889143,
+          889143,
+          889143,
+          889143
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 6.905722362,
+        "minimum": 6.886110686,
+        "maximum": 6.993692564,
+        "raw": [
+          6.894296456,
+          6.905722362,
+          6.962786868,
+          6.993692564,
+          6.886110686
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 7.094139416,
+        "minimum": 7.08021534,
+        "maximum": 7.17992145,
+        "raw": [
+          7.082732574,
+          7.094139416,
+          7.155951496,
+          7.17992145,
+          7.08021534
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.0997499999999998,
+        "raw": [
+          1.101817,
+          1.1056529999999998,
+          1.092271,
+          1.0997499999999998,
+          1.091034
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 19320832,
+        "raw": [
+          19226624,
+          19128320,
+          19128320,
+          19320832,
+          19165184
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 6.028017999999999,
+        "raw": [
+          6.028756,
+          6.033013,
+          5.997617,
+          6.024091,
+          6.028017999999999
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 18620416,
+        "raw": [
+          18444288,
+          18620416,
+          18501632,
+          18579456,
+          18513920
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2638437,
+          2638437,
+          2638437,
+          2638437,
+          2638437
+        ],
+        "server_to_client_bytes": [
+          995447,
+          995447,
+          995447,
+          995447,
+          995447
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.597257047,
+        "minimum": 8.459300831,
+        "maximum": 8.689357301,
+        "raw": [
+          8.615264285,
+          8.565330405,
+          8.459300831,
+          8.689357301,
+          8.597257047
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.787341145,
+        "minimum": 8.655737462,
+        "maximum": 8.87613496,
+        "raw": [
+          8.8042943,
+          8.756278838,
+          8.655737462,
+          8.87613496,
+          8.787341145
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.113092,
+        "raw": [
+          1.113092,
+          1.121345,
+          1.108394,
+          1.149899,
+          1.111017
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 19447808,
+        "raw": [
+          18735104,
+          19021824,
+          18632704,
+          19447808,
+          19107840
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.251867000000001,
+        "raw": [
+          7.271414999999999,
+          7.251867000000001,
+          7.248455999999999,
+          7.289617,
+          7.232538999999999
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 18604032,
+        "raw": [
+          18464768,
+          18604032,
+          18575360,
+          18538496,
+          18472960
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2638438,
+          2638438,
+          2638438,
+          2638438,
+          2638438
+        ],
+        "server_to_client_bytes": [
+          995447,
+          995447,
+          995447,
+          995447,
+          995447
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.57389478,
+        "minimum": 8.525169608,
+        "maximum": 8.68957245,
+        "raw": [
+          8.548301492,
+          8.68957245,
+          8.686456781,
+          8.57389478,
+          8.525169608
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.76347059,
+        "minimum": 8.712949835,
+        "maximum": 8.88289707,
+        "raw": [
+          8.73882203,
+          8.88289707,
+          8.876228368,
+          8.76347059,
+          8.712949835
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.3893449999999998,
+        "raw": [
+          1.3893449999999998,
+          1.3936439999999999,
+          1.4072149999999999,
+          1.388221,
+          1.384889
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 29126656,
+        "raw": [
+          26189824,
+          28045312,
+          28368896,
+          29126656,
+          27688960
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.648859,
+        "raw": [
+          7.642041,
+          7.664268,
+          7.648859,
+          7.653219,
+          7.616118999999999
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 37146624,
+        "raw": [
+          36352000,
+          36052992,
+          35954688,
+          37146624,
+          34779136
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2179784,
+          2179784,
+          2179784,
+          2179784,
+          2179784
+        ],
+        "server_to_client_bytes": [
+          889143,
+          889143,
+          889143,
+          889143,
+          889143
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        }
+      ]
+    }
+  ],
+  "sample_pins": [
+    {
+      "bytes": 7733,
+      "name": "SAMPLE-000.json",
+      "sha256": "5e0ea6aa4b4fca666bc98a2196f32d9777605df38ae4651ebc00b093ab432e13"
+    },
+    {
+      "bytes": 7751,
+      "name": "SAMPLE-001.json",
+      "sha256": "0688e3f446513183817328cbf0d4ba8490e62a64d1404e73e129904ffe4b7219"
+    },
+    {
+      "bytes": 7793,
+      "name": "SAMPLE-002.json",
+      "sha256": "2246c3241d3faaa6244b517af7b26b8be892d756c214bb1d8f9e425d0826e1a2"
+    },
+    {
+      "bytes": 7697,
+      "name": "SAMPLE-003.json",
+      "sha256": "8464278016abefe6304ffa4b4026af3037d90dc66edf6da38d22ba3bdb5fed50"
+    },
+    {
+      "bytes": 7726,
+      "name": "SAMPLE-004.json",
+      "sha256": "0b248d5b0e66ca937d0736e546e85dd970dcd8d8efeee9de26c5716bd9006c8d"
+    },
+    {
+      "bytes": 7793,
+      "name": "SAMPLE-005.json",
+      "sha256": "8749c6a4a0e2081cd50e311ad081a0b5ed20cb81cd20df1acfbc3d62182857eb"
+    },
+    {
+      "bytes": 7723,
+      "name": "SAMPLE-006.json",
+      "sha256": "7d8e0383742e7666fd4bd2330b7f095d2cf6b82ab9292218652715be771a5025"
+    },
+    {
+      "bytes": 7774,
+      "name": "SAMPLE-007.json",
+      "sha256": "41c017f962706a9a0fb588a9d2193a776ece99981222b4ca011bf5a7bc895b5a"
+    },
+    {
+      "bytes": 7815,
+      "name": "SAMPLE-008.json",
+      "sha256": "2e2a00efe975490c7cab24d76ed26ca516f9c399db453f3addd920b19b612128"
+    },
+    {
+      "bytes": 7730,
+      "name": "SAMPLE-009.json",
+      "sha256": "0e3beddeaa2ae59bc2afa4ddb6d306135b7ee76f7661fbfb33450e9a90ad12d4"
+    },
+    {
+      "bytes": 7772,
+      "name": "SAMPLE-010.json",
+      "sha256": "d1f75c573dc3ec4b776ccaf0b9fe7cb93d2cdfb0719ac1b4d67a12ada9de92ce"
+    },
+    {
+      "bytes": 7784,
+      "name": "SAMPLE-011.json",
+      "sha256": "a21f11e506923dadec83135a40c46f6c045e40b76d9fc9087766bf7d824d3cd3"
+    },
+    {
+      "bytes": 7760,
+      "name": "SAMPLE-012.json",
+      "sha256": "b4f4f46085f012e90a319618a1ed29144419ef9a1331581c1567b3d90c2963ee"
+    },
+    {
+      "bytes": 7753,
+      "name": "SAMPLE-013.json",
+      "sha256": "56d45dd5f1f62c0d098863500a7664350594a48e3f35814fa288a36725e67cc6"
+    },
+    {
+      "bytes": 7710,
+      "name": "SAMPLE-014.json",
+      "sha256": "4f21a1e80fc6e406f8de58ed861e73b9570b87bb90c363ffd126940554c092b8"
+    },
+    {
+      "bytes": 7786,
+      "name": "SAMPLE-015.json",
+      "sha256": "cef27fe4d1f955fe050384db7accd23699f97ac070ca91a57ddca47922bd14bb"
+    },
+    {
+      "bytes": 7767,
+      "name": "SAMPLE-016.json",
+      "sha256": "37d7b3ffcbf910dcb6c575c9e11545bff225ec75a3a2058ee487cbbfa549d816"
+    },
+    {
+      "bytes": 7743,
+      "name": "SAMPLE-017.json",
+      "sha256": "1a2ce2cc37d2b688d1578ec562cd3335f8560c6e02decce0cf478d5148237556"
+    },
+    {
+      "bytes": 7726,
+      "name": "SAMPLE-018.json",
+      "sha256": "bb9a11009ceb95cc8f6616fe753a5c23235b35ed34278a2733208b34db93097c"
+    },
+    {
+      "bytes": 7765,
+      "name": "SAMPLE-019.json",
+      "sha256": "e3e140ae1b8f41e0e4e033f0fe096d42bcf15e5118ce824c6e404168004ef4a7"
+    },
+    {
+      "bytes": 7774,
+      "name": "SAMPLE-020.json",
+      "sha256": "864fc288fede1e99ec0fc856c5d3bc1fad5936e790b024669f0282dede6af04e"
+    },
+    {
+      "bytes": 7721,
+      "name": "SAMPLE-021.json",
+      "sha256": "1d993368d44059070ea89bce482201d9ff4eab502fdfb667ae525210c03c3547"
+    },
+    {
+      "bytes": 7772,
+      "name": "SAMPLE-022.json",
+      "sha256": "d153d0bf4a672a359bad1356fa135f136765c1dfdfb2db108d132e0328291257"
+    },
+    {
+      "bytes": 7773,
+      "name": "SAMPLE-023.json",
+      "sha256": "a00ea8adeb85a84f66418fc95cbae51702b8136030c1726faedaec9fb8f6ba1e"
+    },
+    {
+      "bytes": 7782,
+      "name": "SAMPLE-024.json",
+      "sha256": "ebb3b6f87cc9619470ee5b8e2786eae799ebd2a493e497fa898a8128b752492a"
+    },
+    {
+      "bytes": 7758,
+      "name": "SAMPLE-025.json",
+      "sha256": "3a6aee36cee837c0423f40a57485393913e1755472d7d6d584030d91ba7e818d"
+    },
+    {
+      "bytes": 7763,
+      "name": "SAMPLE-026.json",
+      "sha256": "cf4083e0f0a16f4f2d883d6e9fb35add69df15217b535ea6c51e85c5379654c5"
+    },
+    {
+      "bytes": 7806,
+      "name": "SAMPLE-027.json",
+      "sha256": "fc379069e63ff43fbcb0aabb761e498f77475f3225e708bfda4f93e54e2c474a"
+    },
+    {
+      "bytes": 7756,
+      "name": "SAMPLE-028.json",
+      "sha256": "69ac37996c50c2ec7795e833182c11e6b88363aee1d5420ccda716af83b71164"
+    },
+    {
+      "bytes": 7744,
+      "name": "SAMPLE-029.json",
+      "sha256": "d96c27b7405c01211069e4e79cda84905182fca3fbcd1baa8d86ca6531bed84a"
+    },
+    {
+      "bytes": 7755,
+      "name": "SAMPLE-030.json",
+      "sha256": "544097d05b8533a24d55fbf1263636603de74200c44853f34abbe3f097ef7634"
+    },
+    {
+      "bytes": 7752,
+      "name": "SAMPLE-031.json",
+      "sha256": "3c7ecbe39ed64f2b3b4c859240ba2dcfd0dbac3ca7f1faaa4d1bcc981fb02acf"
+    },
+    {
+      "bytes": 7808,
+      "name": "SAMPLE-032.json",
+      "sha256": "95ea46ad53d84c1ec02f49cd20ce9c8319ca73b32079f9841e5bfb80ba34ccfe"
+    },
+    {
+      "bytes": 7735,
+      "name": "SAMPLE-033.json",
+      "sha256": "7bf6d6203d1e695582c97216befe157518d1c78e9090205fc824750fb3aa0b5a"
+    },
+    {
+      "bytes": 7764,
+      "name": "SAMPLE-034.json",
+      "sha256": "e50827a9295e026f2e25073490dfb17d3d83db7465254637c95fa2976d9ed73b"
+    },
+    {
+      "bytes": 7762,
+      "name": "SAMPLE-035.json",
+      "sha256": "1ca3b342648a4211c5667b4e412ddc283320b832e970b99151c1bed869ee1753"
+    }
+  ],
+  "scope": "retained raw proof re-audit; payloads already verified before deliberate generated cleanup; no new runtime/terminal proof",
+  "schema": "unison-many-small-measured-report/1",
+  "state": "PASS_CLOSED",
+  "cohort_plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-many-small-measured-worker1-plan-v1-20261019.json",
+    "bytes": 33515,
+    "sha256": "813a221e52061da3ce27e235149c25457d6028bc9507f9925fb6fd1ec60fb786"
+  },
+  "actual_owner": {
+    "session": 81175,
+    "initial_chunk": "fa97ab",
+    "terminal_chunk": "1385dc",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 6561,
+    "evidence": "faithful transcription of actual owning tool terminal; not inferred by metadata re-audit"
+  },
+  "retained_result": {
+    "path": "/private/tmp/u-cohort-e35e154c0b304e46/RESULT.json",
+    "bytes": 76958,
+    "sha256": "ffa2822007c3f8d54f9c1362a0f7643a44a71936756f2d7e4bc1ec349f14d055"
+  },
+  "rows_raw": [
+    {
+      "case_plan": {
+        "bytes": 19021,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-000.json",
+        "sha256": "057ee747d72881167700eac966057bc9d85b87bcad8d69146458f6addac264e6"
+      },
+      "complete": true,
+      "identity": {
+        "index": 0,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 6583,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-0a3f0dfe15a0405b/OWNER-RESULT.json",
+        "sha256": "66bfa16a19857a86ec11edc84711a361635d0b1df4842bb7f2a2ef6fe58b205a"
+      },
+      "update": {
+        "client_elapsed_ns": 7432698063,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10786,
+          "wait4_maxrss_native_units": 20254720,
+          "wait4_system_seconds": 0.413008,
+          "wait4_user_seconds": 0.732135
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7631627384,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12718,
+          "wait4_maxrss_native_units": 18571264,
+          "wait4_system_seconds": 3.909699,
+          "wait4_user_seconds": 2.405509
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19033,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-001.json",
+        "sha256": "7212daf319fe459336c2db7d57cb1dadc2ed67653ba6fc4d59508b32c21b897e"
+      },
+      "complete": true,
+      "identity": {
+        "index": 1,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 6736,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-696d7e7c798e42dc/OWNER-RESULT.json",
+        "sha256": "0e64b1036c647106d27521014a3a8253f79cc67671ea00231bc05c9344b5465f"
+      },
+      "update": {
+        "client_elapsed_ns": 8822027344,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10469,
+          "wait4_maxrss_native_units": 19144704,
+          "wait4_system_seconds": 0.409476,
+          "wait4_user_seconds": 0.733147
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 9022040650,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12438,
+          "wait4_maxrss_native_units": 18522112,
+          "wait4_system_seconds": 4.852342,
+          "wait4_user_seconds": 2.461947
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19021,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-002.json",
+        "sha256": "de2711c95f72ff51a59c3f12c93e9d1a51803b13aa0b6515cd6b2d2f9aed7440"
+      },
+      "complete": true,
+      "identity": {
+        "index": 2,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 6810,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-87b8ce6a614548cb/OWNER-RESULT.json",
+        "sha256": "c7f480a8b02a37a3dee3f54db2a485b52c8aaed085047a6a16d43f64bab75ee4"
+      },
+      "update": {
+        "client_elapsed_ns": 8770648455,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12252,
+          "wait4_maxrss_native_units": 26206208,
+          "wait4_system_seconds": 0.47523499999999996,
+          "wait4_user_seconds": 0.9016879999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8968182333,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16947,
+          "wait4_maxrss_native_units": 36007936,
+          "wait4_system_seconds": 4.572922,
+          "wait4_user_seconds": 3.080011
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19012,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-003.json",
+        "sha256": "9be892fe218227323f367951f367543ad15e61efd0761c5e25f817b7b298c899"
+      },
+      "complete": true,
+      "identity": {
+        "index": 3,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 6896,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-21fe079418c74f68/OWNER-RESULT.json",
+        "sha256": "fdc06fec0ab1635517abe21eed64609399634456a6d1bb142860836a3884c6ea"
+      },
+      "update": {
+        "client_elapsed_ns": 7632709323,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11513,
+          "wait4_maxrss_native_units": 24285184,
+          "wait4_system_seconds": 0.405541,
+          "wait4_user_seconds": 0.717495
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7827802821,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13188,
+          "wait4_maxrss_native_units": 21389312,
+          "wait4_system_seconds": 3.772783,
+          "wait4_user_seconds": 2.353189
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-004.json",
+        "sha256": "27a2058d2c6ee64db8beba9298e48d43adf544ce2b7405f58f28363d48c53486"
+      },
+      "complete": true,
+      "identity": {
+        "index": 4,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 6964,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-039cc748030b456d/OWNER-RESULT.json",
+        "sha256": "64c52ebc6d635dd2afa28ae9d3cc7e14a828aad9d07f820fbd5f7b01498f730c"
+      },
+      "update": {
+        "client_elapsed_ns": 8477347310,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11380,
+          "wait4_maxrss_native_units": 23683072,
+          "wait4_system_seconds": 0.384621,
+          "wait4_user_seconds": 0.728587
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8669033834,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13109,
+          "wait4_maxrss_native_units": 20975616,
+          "wait4_system_seconds": 4.792438,
+          "wait4_user_seconds": 2.440957
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19012,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-005.json",
+        "sha256": "85deaa5db28ab9a881b671b8620f8e0b8c17cc7c1e7ee229a2fc909fdb8d7be8"
+      },
+      "complete": true,
+      "identity": {
+        "index": 5,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7028,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-5315073cfb5b4a92/OWNER-RESULT.json",
+        "sha256": "aa57052dae00de678e91fce4ba7c78d5e12dca38d3c210006c4ffe4ad536926f"
+      },
+      "update": {
+        "client_elapsed_ns": 8577209647,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14497,
+          "wait4_maxrss_native_units": 36478976,
+          "wait4_system_seconds": 0.493569,
+          "wait4_user_seconds": 0.880351
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8771487377,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 19311,
+          "wait4_maxrss_native_units": 46489600,
+          "wait4_system_seconds": 4.576699,
+          "wait4_user_seconds": 2.989438
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19023,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-006.json",
+        "sha256": "ce082abf4fe21cc1c3c7799ff04fd8717ca912814c9de99d681a08530b4cdc6c"
+      },
+      "complete": true,
+      "identity": {
+        "index": 6,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7092,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-e8dd9f8adca3422f/OWNER-RESULT.json",
+        "sha256": "3a058701f1d1d2c531ecedf8d6a6dc96903a26a8e85127e3f10678bc74bc5548"
+      },
+      "update": {
+        "client_elapsed_ns": 6894296456,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10558,
+          "wait4_maxrss_native_units": 19226624,
+          "wait4_system_seconds": 0.394991,
+          "wait4_user_seconds": 0.706826
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7082732574,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12448,
+          "wait4_maxrss_native_units": 18444288,
+          "wait4_system_seconds": 3.729816,
+          "wait4_user_seconds": 2.29894
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19035,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-007.json",
+        "sha256": "5dc20c3bfe11f95fa6bc544ae7c56bf22ba5950d3d3b99939bf7b0eb6de2a978"
+      },
+      "complete": true,
+      "identity": {
+        "index": 7,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7153,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-b75d0ad9f3bb4c6d/OWNER-RESULT.json",
+        "sha256": "912f05d0b9b5c3fbcfc2e0386ed7e166a9002138d046382e23feac3b730d3823"
+      },
+      "update": {
+        "client_elapsed_ns": 8615264285,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10454,
+          "wait4_maxrss_native_units": 18735104,
+          "wait4_system_seconds": 0.384307,
+          "wait4_user_seconds": 0.728785
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8804294300,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12381,
+          "wait4_maxrss_native_units": 18464768,
+          "wait4_system_seconds": 4.8080929999999995,
+          "wait4_user_seconds": 2.463322
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19023,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-008.json",
+        "sha256": "c1c1a439045bc13aba247db7030c59d11e0ac5d6e519034b84e4c6215eea6371"
+      },
+      "complete": true,
+      "identity": {
+        "index": 8,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7217,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-1af00876903b4578/OWNER-RESULT.json",
+        "sha256": "8b41c842c4871a0b43d719d6b8c2d325e07213caf09ea1d8229148b22a9d15da"
+      },
+      "update": {
+        "client_elapsed_ns": 8548301492,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12200,
+          "wait4_maxrss_native_units": 26189824,
+          "wait4_system_seconds": 0.48136399999999996,
+          "wait4_user_seconds": 0.9079809999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8738822030,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17008,
+          "wait4_maxrss_native_units": 36352000,
+          "wait4_system_seconds": 4.561471,
+          "wait4_user_seconds": 3.08057
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19014,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-009.json",
+        "sha256": "667a05106f543362a4fb0df0a9739b75aa934ec4bba9eb9b265f677ed10a3543"
+      },
+      "complete": true,
+      "identity": {
+        "index": 9,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7278,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-c5010abc3cdd482d/OWNER-RESULT.json",
+        "sha256": "438eb4b17304e0a009012a555aab03a7d44bbdacbfbeefe7ab296f4295f61b85"
+      },
+      "update": {
+        "client_elapsed_ns": 7188431817,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11628,
+          "wait4_maxrss_native_units": 24485888,
+          "wait4_system_seconds": 0.394692,
+          "wait4_user_seconds": 0.7104039999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7379894519,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13087,
+          "wait4_maxrss_native_units": 20967424,
+          "wait4_system_seconds": 3.741995,
+          "wait4_user_seconds": 2.336204
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19027,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-010.json",
+        "sha256": "1e85fa690cab4e3360f68edd097c13655d9f8bfc33bcfa961a3fc820ed43916b"
+      },
+      "complete": true,
+      "identity": {
+        "index": 10,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7342,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-511a9a5858194ee8/OWNER-RESULT.json",
+        "sha256": "aac65eadd1fb8ce66c395ffb982a2079847a1ce28b4b79691c9a9f5fdf5e89fe"
+      },
+      "update": {
+        "client_elapsed_ns": 8479021029,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11477,
+          "wait4_maxrss_native_units": 23941120,
+          "wait4_system_seconds": 0.389655,
+          "wait4_user_seconds": 0.7316349999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8663048296,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13152,
+          "wait4_maxrss_native_units": 21340160,
+          "wait4_system_seconds": 4.796447,
+          "wait4_user_seconds": 2.448947
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-011.json",
+        "sha256": "d4d600d4e84c4191430f4663dcee95fefdf690bafc6cda0f62184c8f3723eb74"
+      },
+      "complete": true,
+      "identity": {
+        "index": 11,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7406,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-11c7b18be1bd4e7f/OWNER-RESULT.json",
+        "sha256": "33ff3ccf71af3d1f04d0876e4074a285e9ebbee519345fd519fe4f23e9ee923e"
+      },
+      "update": {
+        "client_elapsed_ns": 8517127788,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14796,
+          "wait4_maxrss_native_units": 37523456,
+          "wait4_system_seconds": 0.474721,
+          "wait4_user_seconds": 0.875652
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8710528937,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 19734,
+          "wait4_maxrss_native_units": 48226304,
+          "wait4_system_seconds": 4.527911,
+          "wait4_user_seconds": 2.956034
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-012.json",
+        "sha256": "667578bc239d185ea481481aa8f7ef57dfeaa475ef910ba4cea420b36112282c"
+      },
+      "complete": true,
+      "identity": {
+        "index": 12,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7474,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-b27278843ba04ff9/OWNER-RESULT.json",
+        "sha256": "d5fbd4eef976ba520d6b00da4ad709be4a79be3413a0a505e170878819f77996"
+      },
+      "update": {
+        "client_elapsed_ns": 8497875591,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14861,
+          "wait4_maxrss_native_units": 38072320,
+          "wait4_system_seconds": 0.476661,
+          "wait4_user_seconds": 0.878899
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8687431259,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 19271,
+          "wait4_maxrss_native_units": 46452736,
+          "wait4_system_seconds": 4.575944,
+          "wait4_user_seconds": 3.003894
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19027,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-013.json",
+        "sha256": "b0068d4d8da00e870d3af4679720579d318fa263c625507360b8c1a99f5291c8"
+      },
+      "complete": true,
+      "identity": {
+        "index": 13,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7541,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-8f94ebf24aaa45c4/OWNER-RESULT.json",
+        "sha256": "7ab67b164155bf6e39d5fad7a80a65b1af779dbe0dc2171fbf10eda77bc0f516"
+      },
+      "update": {
+        "client_elapsed_ns": 8594495400,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11404,
+          "wait4_maxrss_native_units": 23863296,
+          "wait4_system_seconds": 0.396098,
+          "wait4_user_seconds": 0.728027
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8785461245,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13003,
+          "wait4_maxrss_native_units": 20701184,
+          "wait4_system_seconds": 4.816235,
+          "wait4_user_seconds": 2.475461
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-014.json",
+        "sha256": "5004bdc25e5c9d3241ce392e3a3c83e1dfaa84b153d808f8159b643e54b95dcd"
+      },
+      "complete": true,
+      "identity": {
+        "index": 14,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7610,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-29a7bf567ef647f3/OWNER-RESULT.json",
+        "sha256": "9c16e4121c6553533ead2e83fbce0b3245fbcda1b59a5a4447fbac9a0ad9eb67"
+      },
+      "update": {
+        "client_elapsed_ns": 6948385947,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11538,
+          "wait4_maxrss_native_units": 24383488,
+          "wait4_system_seconds": 0.395754,
+          "wait4_user_seconds": 0.710878
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7156839670,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13152,
+          "wait4_maxrss_native_units": 21536768,
+          "wait4_system_seconds": 3.746277,
+          "wait4_user_seconds": 2.337795
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-015.json",
+        "sha256": "c409a410be8129badaff2bab5e8cb1833e936aa0c0c3d0d951873443814852f3"
+      },
+      "complete": true,
+      "identity": {
+        "index": 15,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7676,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-07e6d636f5dc4740/OWNER-RESULT.json",
+        "sha256": "dc85d0647c9a822d0c4a2c0147d6dffa8b11b1effd0ba436a65fa30000f871ee"
+      },
+      "update": {
+        "client_elapsed_ns": 8689572450,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12640,
+          "wait4_maxrss_native_units": 28045312,
+          "wait4_system_seconds": 0.48630599999999996,
+          "wait4_user_seconds": 0.907338
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8882897070,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16946,
+          "wait4_maxrss_native_units": 36052992,
+          "wait4_system_seconds": 4.583734,
+          "wait4_user_seconds": 3.080534
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19036,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-016.json",
+        "sha256": "1841d3cb179018aed0d03d492d750f2c7dc7544e88af21227c77d44bab0df0aa"
+      },
+      "complete": true,
+      "identity": {
+        "index": 16,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7749,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-fb63c0a7717d495d/OWNER-RESULT.json",
+        "sha256": "8ed71901ae821eaad969ed7c66c70d2dac66887d1e990da6679e3eb0e3f8e5c4"
+      },
+      "update": {
+        "client_elapsed_ns": 8565330405,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10535,
+          "wait4_maxrss_native_units": 19021824,
+          "wait4_system_seconds": 0.395476,
+          "wait4_user_seconds": 0.725869
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8756278838,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12480,
+          "wait4_maxrss_native_units": 18604032,
+          "wait4_system_seconds": 4.803416,
+          "wait4_user_seconds": 2.448451
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-017.json",
+        "sha256": "d664b94ef89f45fee2e548827bcea52e82df18db5f5358690c505e8fab5083c3"
+      },
+      "complete": true,
+      "identity": {
+        "index": 17,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7813,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-b25d2df778f04a86/OWNER-RESULT.json",
+        "sha256": "c481db9e33fc9ce8657d9efc431ad84b75df6b5beb1eeb6d9f52a180cf7f538a"
+      },
+      "update": {
+        "client_elapsed_ns": 6905722362,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10501,
+          "wait4_maxrss_native_units": 19128320,
+          "wait4_system_seconds": 0.39855799999999997,
+          "wait4_user_seconds": 0.7070949999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7094139416,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12555,
+          "wait4_maxrss_native_units": 18620416,
+          "wait4_system_seconds": 3.730737,
+          "wait4_user_seconds": 2.302276
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-018.json",
+        "sha256": "aad7f06a5e72494d75c16018c59f214cc9070bab3b8fd212f3517892981a8a41"
+      },
+      "complete": true,
+      "identity": {
+        "index": 18,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7875,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-f02bad2cb48346d4/OWNER-RESULT.json",
+        "sha256": "d165c5f1b1d84438c7465e0c24b2395a501f2c372bc6843e3f8b378658265ea7"
+      },
+      "update": {
+        "client_elapsed_ns": 6962786868,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10562,
+          "wait4_maxrss_native_units": 19128320,
+          "wait4_system_seconds": 0.389136,
+          "wait4_user_seconds": 0.703135
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7155951496,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12482,
+          "wait4_maxrss_native_units": 18501632,
+          "wait4_system_seconds": 3.706134,
+          "wait4_user_seconds": 2.291483
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19036,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-019.json",
+        "sha256": "8aa008d6e121768abd5fff1cfa0a327b4933820984bbf428198aac07ab31bdd4"
+      },
+      "complete": true,
+      "identity": {
+        "index": 19,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 7969,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-9d1c4694876a4ca2/OWNER-RESULT.json",
+        "sha256": "133f469034266c7f20a32f248567d7d615a9ce8e61c7b40629fea1cc43c0be15"
+      },
+      "update": {
+        "client_elapsed_ns": 8459300831,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10390,
+          "wait4_maxrss_native_units": 18632704,
+          "wait4_system_seconds": 0.383602,
+          "wait4_user_seconds": 0.724792
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8655737462,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12490,
+          "wait4_maxrss_native_units": 18575360,
+          "wait4_system_seconds": 4.8168109999999995,
+          "wait4_user_seconds": 2.431645
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-020.json",
+        "sha256": "2079d4d4936555a8f29da3235075c2119e88536baf1c28e454e73e9d4b56aa28"
+      },
+      "complete": true,
+      "identity": {
+        "index": 20,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8058,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-f4d647819d954505/OWNER-RESULT.json",
+        "sha256": "644bba313f05c43404dfbd940d337fd54c4da08a97717d7755dc284bc0595fc9"
+      },
+      "update": {
+        "client_elapsed_ns": 8686456781,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12772,
+          "wait4_maxrss_native_units": 28368896,
+          "wait4_system_seconds": 0.497364,
+          "wait4_user_seconds": 0.909851
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8876228368,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16973,
+          "wait4_maxrss_native_units": 35954688,
+          "wait4_system_seconds": 4.568982,
+          "wait4_user_seconds": 3.079877
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-021.json",
+        "sha256": "585d6f692497057a1ff61e8b3fd4f0f616db5818772c145c8103159141d96979"
+      },
+      "complete": true,
+      "identity": {
+        "index": 21,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8118,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-b85e954f5e7e4e59/OWNER-RESULT.json",
+        "sha256": "5393de71831c22f325f2bdfe408eddb6e4b21b937b93833b5d42613be40b1b4c"
+      },
+      "update": {
+        "client_elapsed_ns": 7041318728,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11476,
+          "wait4_maxrss_native_units": 24002560,
+          "wait4_system_seconds": 0.392573,
+          "wait4_user_seconds": 0.713262
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7241169017,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13058,
+          "wait4_maxrss_native_units": 21065728,
+          "wait4_system_seconds": 3.742505,
+          "wait4_user_seconds": 2.341012
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19027,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-022.json",
+        "sha256": "24a5570eca2690d58188a4c1138b0b6138210fed89ae509321a3f718af9ff80c"
+      },
+      "complete": true,
+      "identity": {
+        "index": 22,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8186,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-db9cdb94350b4a5a/OWNER-RESULT.json",
+        "sha256": "73738d80391904eceb230162d93db9f4893445b6a3a4b8229039a295b6bd4077"
+      },
+      "update": {
+        "client_elapsed_ns": 8564603992,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11341,
+          "wait4_maxrss_native_units": 23457792,
+          "wait4_system_seconds": 0.38203699999999996,
+          "wait4_user_seconds": 0.728911
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8750384239,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13061,
+          "wait4_maxrss_native_units": 21008384,
+          "wait4_system_seconds": 4.80061,
+          "wait4_user_seconds": 2.473138
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-023.json",
+        "sha256": "b5be4f1e71dfc5b9d2c957187ca7b969bfc6ca0197d93d5398f3ec64faf528d1"
+      },
+      "complete": true,
+      "identity": {
+        "index": 23,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8244,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-b8cdc2183c874605/OWNER-RESULT.json",
+        "sha256": "cb8c9f0d8582d4abcec9448cc69adc072abcea35ff2b102b71d2011f00e4d560"
+      },
+      "update": {
+        "client_elapsed_ns": 8681604267,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14780,
+          "wait4_maxrss_native_units": 37543936,
+          "wait4_system_seconds": 0.499187,
+          "wait4_user_seconds": 0.894459
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8874256093,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 20255,
+          "wait4_maxrss_native_units": 50274304,
+          "wait4_system_seconds": 4.609806,
+          "wait4_user_seconds": 3.010671
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-024.json",
+        "sha256": "7f4b69909819eaa708716252067425de673e0a8c56ee63c02b436001021c4266"
+      },
+      "complete": true,
+      "identity": {
+        "index": 24,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8320,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-c5912097b5e540e7/OWNER-RESULT.json",
+        "sha256": "aea5cd28ce2815dec60e0f7517aede513e160d386438a90b6f78d2bfc66c73ee"
+      },
+      "update": {
+        "client_elapsed_ns": 8510080182,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14509,
+          "wait4_maxrss_native_units": 36655104,
+          "wait4_system_seconds": 0.483381,
+          "wait4_user_seconds": 0.8861169999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8705511873,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 19113,
+          "wait4_maxrss_native_units": 45842432,
+          "wait4_system_seconds": 4.554567,
+          "wait4_user_seconds": 2.973696
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19027,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-025.json",
+        "sha256": "e94b1e5b59b8ed33090327179751d6155938c3bf7df6319025cd9c64bf09d8aa"
+      },
+      "complete": true,
+      "identity": {
+        "index": 25,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8406,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-cf2e38137650453b/OWNER-RESULT.json",
+        "sha256": "15dbf7d160cfe1a56511a4839c95a7aa3e95a70a3e7bb238fa593799e2a883b5"
+      },
+      "update": {
+        "client_elapsed_ns": 8453740569,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11477,
+          "wait4_maxrss_native_units": 24031232,
+          "wait4_system_seconds": 0.38691899999999996,
+          "wait4_user_seconds": 0.729401
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8646063555,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13214,
+          "wait4_maxrss_native_units": 21528576,
+          "wait4_system_seconds": 4.789384,
+          "wait4_user_seconds": 2.45127
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-026.json",
+        "sha256": "b21d84e4d163282907c674cd48a1846225ff1bb2cba9133ff07784e0d91e91af"
+      },
+      "complete": true,
+      "identity": {
+        "index": 26,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8475,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-6a85caf4265d4445/OWNER-RESULT.json",
+        "sha256": "af4cc9c48090a11b6408267d6e4a1ca1a866107dcaf5efe805f4eb305a524866"
+      },
+      "update": {
+        "client_elapsed_ns": 6938558720,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11453,
+          "wait4_maxrss_native_units": 23945216,
+          "wait4_system_seconds": 0.39466999999999997,
+          "wait4_user_seconds": 0.710965
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7131684479,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13219,
+          "wait4_maxrss_native_units": 21544960,
+          "wait4_system_seconds": 3.7413980000000002,
+          "wait4_user_seconds": 2.315187
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-027.json",
+        "sha256": "3a20e387f5f6b499144ee086357de688f639316565b3bd90ebc5f459021a3062"
+      },
+      "complete": true,
+      "identity": {
+        "index": 27,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8535,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-0f880a446ea54982/OWNER-RESULT.json",
+        "sha256": "bd23c19cdae5887ed7f65fd4f3209ec6b5bc584cee8291e15c96019f1c485eec"
+      },
+      "update": {
+        "client_elapsed_ns": 8573894780,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12932,
+          "wait4_maxrss_native_units": 29126656,
+          "wait4_system_seconds": 0.486318,
+          "wait4_user_seconds": 0.901903
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8763470590,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17168,
+          "wait4_maxrss_native_units": 37146624,
+          "wait4_system_seconds": 4.5855049999999995,
+          "wait4_user_seconds": 3.067714
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19036,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-028.json",
+        "sha256": "4a8d53c6c84884ee6f6c3623b0d1dc6d954062bc6b6ee4ec391a56cf3a48b015"
+      },
+      "complete": true,
+      "identity": {
+        "index": 28,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8634,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-d6c09d4debfc4633/OWNER-RESULT.json",
+        "sha256": "569e5cd3ad48b9cb23d2766315572999c71883c97f83a47786f17449b7e15c20"
+      },
+      "update": {
+        "client_elapsed_ns": 8689357301,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10612,
+          "wait4_maxrss_native_units": 19447808,
+          "wait4_system_seconds": 0.414892,
+          "wait4_user_seconds": 0.735007
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8876134960,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12520,
+          "wait4_maxrss_native_units": 18538496,
+          "wait4_system_seconds": 4.842008,
+          "wait4_user_seconds": 2.447609
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-029.json",
+        "sha256": "c648d72a67871c43b68e5e9b1588a434355fd83438b55c32a50ef149d14cf05d"
+      },
+      "complete": true,
+      "identity": {
+        "index": 29,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8754,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-6004b83ab4b64ad2/OWNER-RESULT.json",
+        "sha256": "ffa51abdc1f87150c86a17d3797b944b5d61ea3445c3aa1d13dd4fa1f736c022"
+      },
+      "update": {
+        "client_elapsed_ns": 6993692564,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10633,
+          "wait4_maxrss_native_units": 19320832,
+          "wait4_system_seconds": 0.39252699999999996,
+          "wait4_user_seconds": 0.7072229999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7179921450,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12530,
+          "wait4_maxrss_native_units": 18579456,
+          "wait4_system_seconds": 3.730434,
+          "wait4_user_seconds": 2.293657
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-030.json",
+        "sha256": "f605b1dac61214a1ed90caeac65ec605116bacbdbc4bce2ac162dd05f7cd0f03"
+      },
+      "complete": true,
+      "identity": {
+        "index": 30,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8829,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-836859efa0014ecb/OWNER-RESULT.json",
+        "sha256": "d6cd0760aa70cf7b68c8741b093bfa9746197c5aa3e25e956f413ff12bb90ac5"
+      },
+      "update": {
+        "client_elapsed_ns": 6886110686,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10532,
+          "wait4_maxrss_native_units": 19165184,
+          "wait4_system_seconds": 0.388162,
+          "wait4_user_seconds": 0.7028719999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7080215340,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12448,
+          "wait4_maxrss_native_units": 18513920,
+          "wait4_system_seconds": 3.726438,
+          "wait4_user_seconds": 2.30158
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19036,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-031.json",
+        "sha256": "751b08e7506075b3fa9e089a6e60ad48c230c0ba9a0a337df937f36383b5b111"
+      },
+      "complete": true,
+      "identity": {
+        "index": 31,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8888,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-450ca9c8e1294013/OWNER-RESULT.json",
+        "sha256": "fd4937216b7e0946b848bb01ac84702337cba07202ddda27047ae02d1154f3ee"
+      },
+      "update": {
+        "client_elapsed_ns": 8597257047,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10521,
+          "wait4_maxrss_native_units": 19107840,
+          "wait4_system_seconds": 0.38496199999999997,
+          "wait4_user_seconds": 0.726055
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8787341145,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12392,
+          "wait4_maxrss_native_units": 18472960,
+          "wait4_system_seconds": 4.786249,
+          "wait4_user_seconds": 2.44629
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19024,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-032.json",
+        "sha256": "5ba27da1634475e29511ff9ea157b338572620ab74a4ecaed36ba5b8d792c2d7"
+      },
+      "complete": true,
+      "identity": {
+        "index": 32,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 8954,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-95a2a0e5f4dd4149/OWNER-RESULT.json",
+        "sha256": "4df215ca2bdf6fcdab0b91af7071c2f5a53a15198863a68c586b38a9dad942d2"
+      },
+      "update": {
+        "client_elapsed_ns": 8525169608,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12567,
+          "wait4_maxrss_native_units": 27688960,
+          "wait4_system_seconds": 0.48090499999999997,
+          "wait4_user_seconds": 0.903984
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8712949835,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16596,
+          "wait4_maxrss_native_units": 34779136,
+          "wait4_system_seconds": 4.555425,
+          "wait4_user_seconds": 3.060694
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-033.json",
+        "sha256": "0a1133c0987a05cfead2905c41b32263fade9d62c121806192e63de9f48bbe50"
+      },
+      "complete": true,
+      "identity": {
+        "index": 33,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 9017,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-a99fa1fa5c6143e5/OWNER-RESULT.json",
+        "sha256": "635d817e08c6310c7b10eb7fe5e246402b0993fd7ebdcfdefc6a6bee858a34c1"
+      },
+      "update": {
+        "client_elapsed_ns": 7013344259,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11482,
+          "wait4_maxrss_native_units": 24027136,
+          "wait4_system_seconds": 0.39131099999999996,
+          "wait4_user_seconds": 0.708025
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7211372793,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638437,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13313,
+          "wait4_maxrss_native_units": 21708800,
+          "wait4_system_seconds": 3.726296,
+          "wait4_user_seconds": 2.321253
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19027,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-034.json",
+        "sha256": "1255928cb70996212a1b8b0b3d629c40801bbcc15fde94cc765c438b9d99d117"
+      },
+      "complete": true,
+      "identity": {
+        "index": 34,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 9081,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-7aa74b9d6ed94bc4/OWNER-RESULT.json",
+        "sha256": "41c0435286c9ca58ff5fd4a6140c5ae648001aff4422b11767630b050d9c00dd"
+      },
+      "update": {
+        "client_elapsed_ns": 8480858468,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11390,
+          "wait4_maxrss_native_units": 23764992,
+          "wait4_system_seconds": 0.379019,
+          "wait4_user_seconds": 0.728941
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8677612827,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2638438,
+          "server_to_client_bytes": 995447
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13186,
+          "wait4_maxrss_native_units": 21229568,
+          "wait4_system_seconds": 4.799333,
+          "wait4_user_seconds": 2.449816
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 19015,
+        "path": "/private/tmp/u-measured-plans-cfcad4278afc423a/CASE-035.json",
+        "sha256": "d8a466d32ead469f8a46793cb8b17c6edd4877a7a43ee37b7efde60356076277"
+      },
+      "complete": true,
+      "identity": {
+        "index": 35,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 1
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 9141,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-e52fd4990e1f4326/OWNER-RESULT.json",
+        "sha256": "17aae07e4cd7c8fd6182cd01303bbef906ac2a0e9aeb47a62eb02852cd5b478f"
+      },
+      "update": {
+        "client_elapsed_ns": 8585066135,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 14708,
+          "wait4_maxrss_native_units": 37212160,
+          "wait4_system_seconds": 0.477012,
+          "wait4_user_seconds": 0.877137
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 8779823577,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2179784,
+          "server_to_client_bytes": 889143
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 19539,
+          "wait4_maxrss_native_units": 47403008,
+          "wait4_system_seconds": 4.550358,
+          "wait4_user_seconds": 2.955748
+        }
+      }
+    }
+  ],
+  "start": {
+    "background": "Photo source/CPU8 and other host activity uncontrolled; not quiet timing",
+    "cache_state": "warm by generation/seed/hash per row; no cacheflush",
+    "cpu_scope": "each case independently reserves Unison00..07; coordinator metadata overhead included in reserved owner budget",
+    "host": {
+      "available_bytes": 567183208448,
+      "device": 16777223,
+      "logical_cpus": 36,
+      "machine": "x86_64",
+      "release": "24.6.0",
+      "system": "Darwin"
+    },
+    "owner_pid": 6561,
+    "plan_sha256": "813a221e52061da3ce27e235149c25457d6028bc9507f9925fb6fd1ec60fb786",
+    "samples": 36
+  },
+  "code_pins": {
+    "bench/sync/batch_series_report.py": "982cec50eb605d272333508cdb179492b72309deb529ace7dcb40e824494b2ff",
+    "bench/sync/batch_series.py": "6ebefd20046cb26c83295638936b5592826f6a8435d93d0fe5025094f69d5ddf"
+  },
+  "no_sdk_or_photo_payload": true,
+  "no_new_transfer_or_payload_hash": true,
+  "payload_verification_scope": "exact left/right hashes and no-op eight-field fences were independently verified before deliberate generated cleanup; not repeated here"
+}

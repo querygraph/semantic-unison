@@ -1,0 +1,280 @@
+{
+  "schema": "unison-current-range-components/1",
+  "status": "PASS_CLOSED",
+  "actual_controller": {
+    "session": 6994,
+    "initial_chunk": "404879",
+    "terminal_chunk": "96a5a8",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "jobs": [
+    {
+      "compiler": "stock",
+      "kind": "native",
+      "source_sha256": {
+        "src/cloneRange.ml": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+        "src/cloneRange.mli": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+        "src/copyRange.ml": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+        "src/copyRange.mli": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+        "src/nativeCopyRange_stubs.c": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+        "src/system/system_intf.ml": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_range/run.py": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+        "tests/clone_range/test.ml": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+        "tests/native_copy_range/run.py": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+        "tests/native_copy_range/test.ml": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+        "tests/native_copy_range/native.ml": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5"
+      },
+      "closure": {
+        "child": {
+          "pid": 36989,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 36989,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e6ddbbcac17cbcd9220d42aa45143d3e5df9dfff26aba9707e8c38cc57346e8a"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3773,
+          "sha256": "c71b6752cc89d91b7d1a7a298471b1427da05d7578f76e4552142252d9138d75"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 328,
+          "sha256": "e4f51e8097490d4b7299f9e417b05fd48c6029b4cc864ec48951a53af5958f97"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/RESULT.json",
+          "bytes": 31219,
+          "sha256": "0b988e6708c077affb23afeb764000c0a986c41a255b01cc664551c47dfdb9e3"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "kind": "constrained",
+      "source_sha256": {
+        "src/cloneRange.ml": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+        "src/cloneRange.mli": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+        "src/copyRange.ml": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+        "src/copyRange.mli": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+        "src/nativeCopyRange_stubs.c": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+        "src/system/system_intf.ml": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_range/run.py": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+        "tests/clone_range/test.ml": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+        "tests/native_copy_range/run.py": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+        "tests/native_copy_range/test.ml": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+        "tests/native_copy_range/native.ml": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5"
+      },
+      "closure": {
+        "child": {
+          "pid": 37083,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37083,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d82b844f0f633828fe7e32b5ec23a4603d192971c01f444a6be28e881fc86cbf"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3678,
+          "sha256": "3d136573075bb625e563a9c006c3223135c932a01c59dbf6f89dd68abe42e099"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "kind": "native",
+      "source_sha256": {
+        "src/cloneRange.ml": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+        "src/cloneRange.mli": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+        "src/copyRange.ml": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+        "src/copyRange.mli": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+        "src/nativeCopyRange_stubs.c": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+        "src/system/system_intf.ml": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_range/run.py": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+        "tests/clone_range/test.ml": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+        "tests/native_copy_range/run.py": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+        "tests/native_copy_range/test.ml": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+        "tests/native_copy_range/native.ml": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5"
+      },
+      "closure": {
+        "child": {
+          "pid": 37102,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37102,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cea6e6c9e5df17fac6596d2bd96c49a4fbed043f1c1cc14565e8f62d82b5eb2b"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3774,
+          "sha256": "28574806bff01b30e243245eae2247face32438c283a6c1f9ba37b3b8185d3c5"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 328,
+          "sha256": "e4f51e8097490d4b7299f9e417b05fd48c6029b4cc864ec48951a53af5958f97"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/RESULT.json",
+          "bytes": 31250,
+          "sha256": "c3502f23e663440c48002ff07b45876e132aa1a521dea4b5305497e2f839ab80"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "kind": "constrained",
+      "source_sha256": {
+        "src/cloneRange.ml": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+        "src/cloneRange.mli": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+        "src/copyRange.ml": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+        "src/copyRange.mli": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+        "src/nativeCopyRange_stubs.c": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+        "src/copy_stubs.c": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+        "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+        "src/system/system_intf.ml": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+        "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+        "src/fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+        "tests/clone_range/run.py": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+        "tests/clone_range/test.ml": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+        "tests/native_copy_range/run.py": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+        "tests/native_copy_range/test.ml": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+        "tests/native_copy_range/native.ml": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5"
+      },
+      "closure": {
+        "child": {
+          "pid": 37193,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37193,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "de19d6e4de01cf9fcca821d6064f2c10debf6d101a8361aa7fe4f3f32e3e2b4b"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3681,
+          "sha256": "6132d1d6866764d9d600a7ea05aaec649bcad1bb82bb2ed30dc44358f63dcb4c"
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "scope": "Existing native typed results, two private negative controls, macOS no-effect/preflight ABI and constrained planner. 48 constrained named cases/compiler include 960-combination matrix. No other-platform runtime, physical sharing, end-to-end transfer, Photo/SDK/Adobe/EXglobal/performance qualification."
+}

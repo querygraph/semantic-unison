@@ -1,7 +1,7 @@
 """Canonical manifest metadata plus injected fstat frames; no pool acquisition."""
 import copy,os,stat,unittest
 from types import SimpleNamespace
-from shared_binding import inventory,verify,TARGET
+from shared_binding import inventory,verify,descriptors,TARGET
 class Binding(unittest.TestCase):
     def fixture(self):
         self.identities=inventory();self.command=['/inert','--worker']
@@ -20,6 +20,21 @@ class Binding(unittest.TestCase):
         value=verify(s,self.command,parent_pid=11,worker_pid=22,observe=self.observe,target='sdk-multifile-receive')
         self.assertTrue(value['canonical_metadata_bound'])
         with self.assertRaises(ValueError):verify(s,self.command,parent_pid=11,worker_pid=22,observe=self.observe,target='arbitrary')
+    def test_current_merge_requires_exact_parent_binding_without_borrow(self):
+        s=self.fixture();s['target']='current-sdk-merge'
+        with self.assertRaises(ValueError):self.call(s)
+        proof=verify(s,self.command,parent_pid=11,worker_pid=22,observe=self.observe,target='current-sdk-merge')
+        self.assertEqual(proof['inherited_fds'],tuple(range(100,109)))
+        self.assertFalse(proof['lock_ownership_independently_proved'])
+        with self.assertRaises(ValueError):verify(s,self.command,parent_pid=11,worker_pid=22,
+            observe=self.observe,target='current-sdk-merge',credits=18)
+
+    def test_proxy_descriptor_observation_does_not_invent_parent_or_lock_proof(self):
+        s=self.fixture();proof=descriptors(s['inherited_resource_fds'],observe=self.observe)
+        self.assertEqual(proof['inherited_fds'],tuple(range(100,109)))
+        self.assertFalse(proof['resource_release_authorized'])
+        self.assertFalse(proof['lock_ownership_independently_proved'])
+
     def test_parent_target_command_or_grant_refused(self):
         for k,v in [('owner_pid',12),('child_pid',23),('target','old'),('command',['other']),('cpu_credits',True),('token_indexes',list(range(8,16))),('io_mode','none')]:
             s=self.fixture();s[k]=v

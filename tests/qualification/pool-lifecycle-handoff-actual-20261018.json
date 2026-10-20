@@ -1,0 +1,51 @@
+{
+  "scope": "14 actual stock/Ox creation/shutdown stop+join/publication faults; four designated old-runtime/no-latch regression rejections. Actual unresolved domains settle at process exit, not proven normal domain joins. No arbitrary OOM/internal Domain.spawn or aggregate FD/RSS claim.",
+  "build_parent": {
+    "session": 59376,
+    "terminal_chunk": "4b61bd",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_parent": {
+    "session": 9432,
+    "terminal_chunk": "2b6748",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 325,
+    "ox-check": 325
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-pool-handoff-stock-check-20261018-001/RESULT.json",
+      "bytes": 55322,
+      "sha256": "3e0b8b14463b201cdce8a21f690e942774793c5f21f5bb2be082210ef0ccca7d"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pool-handoff-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "5db0bf12840c37f29db8b8550d585a16e6e257fbc0b0ff8d59dfe723437f32f0"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-pool-handoff-ox-check-20261018-001/RESULT.json",
+      "bytes": 55328,
+      "sha256": "d11b26c587006d8ca30e55780e2ba145e1748553eb976bc88b4c866970a85509"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pool-handoff-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "8c3209577f5ea595fbf9b9f71ce211ae3985297e57afe929cf35fffdf1d170c3"
+    },
+    "faults/RESULT.json": {
+      "path": "/private/tmp/unison-pool-lifecycle-20261018-001/RESULT.json",
+      "bytes": 202481,
+      "sha256": "e2ff2c1b334ecbe91af245e361f4e998f5558798393be22b34954d5837dbe5c7"
+    },
+    "faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-pool-lifecycle-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "727ceeb432be2477cf1ffbc253baf364db2e106617a5bd149b673451dad1a858"
+    }
+  }
+}

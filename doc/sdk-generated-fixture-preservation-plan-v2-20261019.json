@@ -1,0 +1,90 @@
+{
+  "schema": "unison-generated-fixture-preservation-plan/2",
+  "state": "PREPARED_ONE_PERSISTENT_NATIVE_CLONE_PAIR",
+  "repository": "/Users/alexy/src/unison-final-adobe-20261019",
+  "source_head": "61cf04f2 plus exact preservation source/test pins",
+  "sources": [
+    {
+      "codec": "uncompressed",
+      "path": "/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng",
+      "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313015767,
+        "st_mode": 33024,
+        "st_size": 48005534,
+        "st_mtime_ns": 1792009572313897555,
+        "st_ctime_ns": 1792390551413124852,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "path": "/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng",
+      "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313014722,
+        "st_mode": 33152,
+        "st_size": 39016722,
+        "st_mtime_ns": 1792009572689127300,
+        "st_ctime_ns": 1792390338098514475,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    }
+  ],
+  "destination": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19",
+  "source_pins": {
+    "tests/sdk_fixture_preservation.py": "566881367b0dabdf64a106f458a9efa634046db5de4d0fbd7116ad3a1caf2d34",
+    "tests/sdk_fixture_preservation_test.py": "1d1127dfd12c52920e646cb7daffa171b314d6e859ee1d56a5ddf7ce07093785",
+    "tests/sdk_multifile/clone.py": "b21ab8124fbb3abb6f84f76e6ae8dc49fd1efd0cd8f205e4603f8cf243d48c8b",
+    "tests/sdk_merge_receiving/data.py": "0f2f02491a605efb17f93317d413f9030c0619aff71655f11e13c44b83fd98a9",
+    "tests/sdk_merge_receiving/inputs.py": "c5af07c6ab9ebf5cb7fd8b6bf3088fca607984231e660ead8308983b4d6bde29",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/shared_dispatch.py": "05f413d7d29adb2ab9fc4255d1479c7190d173ba1817c7af7ff9d3f9af85c231",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3"
+  },
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-generated-fixture-preservation-plan-v1-20261019.json",
+    "bytes": 2034,
+    "sha256": "c69109adab156bc270dd0f079c6737dca3771f5a0216a8a991040b4394f3ef28",
+    "state": "SOURCE_ONLY_NEVER_EXECUTED"
+  },
+  "resources": {
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "io_mode": "EX_GLOBAL",
+    "clone_hash_bytes": 87022256,
+    "source_payload_hash_bytes": 0,
+    "declared_io_bytes": 268435456,
+    "physical_io_enforced": false,
+    "observation_seconds": 60,
+    "child_processes": 0,
+    "SDK_calls": 0
+  },
+  "original_controls": {
+    "terminal_chunk": "12401d",
+    "exit_code": 0,
+    "checks": 4,
+    "cpu00_closed": true
+  },
+  "authority": "user direct Unison work during Photo IO handover; own historical generated sources only, native clone only, no original Photo input or old admission reuse",
+  "unknown": "retain source/clone/parent/canonicalFDs, no copy fallback/cleanup/automaticretry",
+  "interpretation": "clone-byte integrity plus source epoch preservation only; JXL/12scalarstates/finalSDKmerge still missing and persistent-root input integration outstanding"
+}

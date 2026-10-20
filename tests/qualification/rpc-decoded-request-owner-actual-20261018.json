@@ -1,0 +1,423 @@
+{
+  "state": "BOUNDED_REQUEST_DECODED_OWNER_CURRENT_FOUR_BUILDS_AND_FIXED_RPC_FAULTS_PASS",
+  "scope": "Aggregate selected builtin bounded-server argument charges through actual scope/handler/queued output; not legacy/client-result/global conversion/metadata/outbound/full heap/RSS ownership.",
+  "policies": {
+    "rpcdecodedrequestbudget": {
+      "default": 256,
+      "unit": "MiB"
+    },
+    "rpcdecodedrequestelements": {
+      "default": 1048576
+    },
+    "rpcdecodedrequestslots": {
+      "default": 256,
+      "maximum": 65536
+    }
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 115861,
+      "sha256": "46b7c38e462d00b72bfab2b142ccd4e6a2885efbcb54c244ebbc55db0118b605"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 10293,
+      "sha256": "d799c7f9155b45691099e5206b4f34363b6dfea22076ba5538e5eacc91b3bb4d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/remote_decoded_input.ml",
+      "bytes": 8644,
+      "sha256": "a31f87b61809c4dcef0b6528184759c442339fc76b2369af603e8262b4e8fdea"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/test_remote_bounds.py",
+      "bytes": 19000,
+      "sha256": "a7fb8d9cc39e07cf99fd39358ba2b563601a5b9e3df610ceaa78a0f3a3628d66"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/runtime_settlement/run.py",
+      "bytes": 28731,
+      "sha256": "b0b551da4498d6a2bdbad05362477813b9921f20afd27af900ee45f651061c56"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/runtime_settlement/rpc_test.ml",
+      "bytes": 5211,
+      "sha256": "d518d55de721013d02f44b0a9c7c6050cd5a820973f346cb1da234d7940b84b7"
+    }
+  ],
+  "control_parent": {
+    "process_id": 55497,
+    "chunk_id": "0b5c22",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": [
+    {
+      "compiler": "stock",
+      "negative_participants": 13,
+      "decoded_owner_negatives": {
+        "decoded-bypass": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "0c8f776dd025d5c4b53a909be2429305cc47f0a310c617b7af5d43b0e82c0076",
+          "binary_sha256": "daae1137325484f2741a2a9bd224038927a74df52a4fbb6b492799e4bd280e0e"
+        },
+        "decoded-early-release": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "ebe9d768b748884eca2bcec31b8a53633b1f3b54c58207789e931b37c72e3971",
+          "binary_sha256": "5c49390466f06dd0055a425ede751987fc62d9708cadfb3259ee6c31655c55de"
+        },
+        "decoded-uncertainty": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC decoded arguments: preallocation slot/byte/element admission, partial refusal, queued reply and disconnect lifetimes PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded uncertainty escaped its owner\")\n",
+          "source_sha256": "b75f8de737448f7d6159c2c6430b82768e5dcef678988ece3cbdab4a37682162",
+          "binary_sha256": "27bdd888303a4ca327b57a04c0320ac52ec82460e0e534645f71535e2cae92c6"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-20261018-004/CONTROL.json",
+          "bytes": 157106,
+          "sha256": "bbc35ab028f88325d9cbbc1d741d145205371463f421f781aa4ab89d121a7280"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-20261018-004/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "787ce67f6d11e0b9d0ddbcfba971289d6f9f8636b2d66bc10231b79db5dc0898"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-20261018-004/SHARED-STDOUT.txt",
+          "bytes": 1059,
+          "sha256": "c5dfe0bf2db51a4049ae9938c78a00069dcb2944da46c7a812d8a17179e1b129"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-20261018-004/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "negative_participants": 13,
+      "decoded_owner_negatives": {
+        "decoded-bypass": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "0c8f776dd025d5c4b53a909be2429305cc47f0a310c617b7af5d43b0e82c0076",
+          "binary_sha256": "f8c0588782026c07028911bea536749f9ac6c10f19cf0f6b9a37625720307d54"
+        },
+        "decoded-early-release": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "ebe9d768b748884eca2bcec31b8a53633b1f3b54c58207789e931b37c72e3971",
+          "binary_sha256": "146dccee7942334c38748e1e0599784f9bed865732dc7b35bd2317c2f16da2cf"
+        },
+        "decoded-uncertainty": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC decoded arguments: preallocation slot/byte/element admission, partial refusal, queued reply and disconnect lifetimes PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded uncertainty escaped its owner\")\n",
+          "source_sha256": "b75f8de737448f7d6159c2c6430b82768e5dcef678988ece3cbdab4a37682162",
+          "binary_sha256": "72a9b995b90fa992011caf4d2616263fd371c1e65a54a7cc9c0b85cb3e6750f2"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-20261018-004/CONTROL.json",
+          "bytes": 160088,
+          "sha256": "de9b37c3d4e49f42459ef9c6274d35831dfdc63f5b7e58def37d40ffd298826e"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-20261018-004/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "4dea240b990818bba87fda8e4de8c42b15a48c88e1d69b40fb86adbe9aaff766"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-20261018-004/SHARED-STDOUT.txt",
+          "bytes": 1059,
+          "sha256": "c5dfe0bf2db51a4049ae9938c78a00069dcb2944da46c7a812d8a17179e1b129"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-20261018-004/SHARED-STDERR.txt",
+          "bytes": 220,
+          "sha256": "77f52fd0a49e75bbb23c3e9cf8060b143510f114afcfcd32c1bf922732ad14b4"
+        }
+      ]
+    }
+  ],
+  "preserved_fixture_failure": {
+    "parent": "24596/b5f938/exit1/no session",
+    "workspace": "/private/tmp/unison-rpc-decoded-owner-stock-20261018-003",
+    "cause": "Production positive suite passed; new classifier fixture preceded old registered-classifier mutation and intercepted its intended witness. Reordered fixtures without changing production code or weakening assertions."
+  },
+  "remaining": [
+    "Client result leases and ordinary legacy/streaming decoded inputs",
+    "Conversion/global escapes and recursive depth",
+    "Owner metadata, outbound/baseline charges",
+    "Whole-tree FD and actual supported hard RSS capability",
+    "Fresh combined transport qualification on final source"
+  ],
+  "build_parent": {
+    "process_id": 95366,
+    "chunk_id": "5e1525",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "recorded_source_inputs": 575,
+      "all_recorded_sources_match": true,
+      "source_note": "The later original tests/runtime_settlement/rpc_test.ml is independently compiled by the fixed RPC fault fixture; it is not a production CLI input.",
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-8gj3wi3_/src/unison",
+        "bytes": 6282696,
+        "sha256": "c9d1ac06293068654c5452d2b712db26b47d3f0bdb3e8ec398ddbea8f3708dba"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-check-20261018-001/RESULT.json",
+          "bytes": 60056,
+          "sha256": "f5343f81ff7fbee094fa95c2049d8a50073aff06786545398d321b0ad0841daa"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "f75ff6aafa45ea008b441f044695eefad17d68ed6bac0def1942346a4e52fd42"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "recorded_source_inputs": 575,
+      "all_recorded_sources_match": true,
+      "source_note": "The later original tests/runtime_settlement/rpc_test.ml is independently compiled by the fixed RPC fault fixture; it is not a production CLI input.",
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-m17ym39p/_build/default/src/linktext.exe",
+        "bytes": 6338736,
+        "sha256": "7eb96ae5830ec4f7af13d3662949825f6ec0be3498a86ea45b9b87f154533e51"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-dune-check-20261018-001/RESULT.json",
+          "bytes": 59883,
+          "sha256": "03497ecfb2d9d1ebc7fda1cdc7e650fb0f1529e1615351220900a9cf263778af"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "50ffe1b3439e0134bee87fb54dcd14a7ba0ae71a01d62c94cccdde1033e3723c"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "recorded_source_inputs": 575,
+      "all_recorded_sources_match": true,
+      "source_note": "The later original tests/runtime_settlement/rpc_test.ml is independently compiled by the fixed RPC fault fixture; it is not a production CLI input.",
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-6wgx7tng/src/unison",
+        "bytes": 8369920,
+        "sha256": "a7046561e8d79634b22716e3990c29fae3873cc72f852f96ca8738509e25b254"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-check-20261018-001/RESULT.json",
+          "bytes": 60062,
+          "sha256": "cfdd1d8c3e8413929e7c93fc53a47a6aa51451ca33a8f7f601418042e1bc476e"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "828aee9a869b15d3e7df184222c56dc887b2beb43757f36e31ad80c7a8682212"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "recorded_source_inputs": 575,
+      "all_recorded_sources_match": true,
+      "source_note": "The later original tests/runtime_settlement/rpc_test.ml is independently compiled by the fixed RPC fault fixture; it is not a production CLI input.",
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-m3zp6290/_build/default/src/linktext.exe",
+        "bytes": 8007088,
+        "sha256": "6a932012aea01852e80352996cff5511a10d83959b94ad9108265e097ee8afb1"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-dune-check-20261018-001/RESULT.json",
+          "bytes": 59887,
+          "sha256": "4f0f391865f4f21b1fc3b5dd87face65a027fd9674c80ff51e05960135bae8c1"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "4676cc9b939f6c8f37a514899367f6925bd5cf534f6b7f24dabf24fc8976af67"
+        }
+      ]
+    }
+  ],
+  "runtime_fault_parent": {
+    "process_id": 84801,
+    "chunk_id": "fbfbbe",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "runtime_faults": [
+    {
+      "compiler": "stock",
+      "scope": "Actual Remote argument string/returned promises/queued socket output with waiter/timer injections; no semantic report/native/SDK operation.",
+      "cases": [
+        {
+          "phase": "normal",
+          "faults": 0,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-server-map",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-dispatch",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-scope",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 2,
+          "timer_faults": 2
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 1,
+          "timer_faults": 0
+        }
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-004/CONTROL.json",
+          "bytes": 472773,
+          "sha256": "0523144fea70d10c5d6c9080acb8ab78d620dc7d57184d9290080d5369613853"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-004/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "24263eba334d10fa980851e51c6a9f9493f0e7c9f51d67849adb7fb03f4296d7"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-004/SHARED-STDOUT.txt",
+          "bytes": 766,
+          "sha256": "bf109ffe5611fde71c841489297b2bf40b88c5c6bc80ba9e6f2ed9ff4bea5399"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-004/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "scope": "Actual Remote argument string/returned promises/queued socket output with waiter/timer injections; no semantic report/native/SDK operation.",
+      "cases": [
+        {
+          "phase": "normal",
+          "faults": 0,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-server-map",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-dispatch",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-scope",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 2,
+          "timer_faults": 0
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 2,
+          "timer_faults": 2
+        },
+        {
+          "phase": "rpc-output-action",
+          "faults": 1,
+          "timer_faults": 0
+        }
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-ox-20261018-004/CONTROL.json",
+          "bytes": 473053,
+          "sha256": "2622a82100a8be8026a2ec9c39ff2fa646cff6f878db14abd0fd14c4839d527b"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-ox-20261018-004/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "13d79a1c86fe1005ccc6b56b5cf7272db19e420a6db0fe353b18ba91e697dd38"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-ox-20261018-004/SHARED-STDOUT.txt",
+          "bytes": 858,
+          "sha256": "35a6cc7aea42ebe35144ccbce85be826806627376fadac37ac1137924a5f5d78"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-decoded-owner-runtime-ox-20261018-004/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "preserved_runtime_fixture_failures": [
+    {
+      "workspace": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-001",
+      "parent": "ac03d7/exit1/no session",
+      "scope": "Stale unrelated Runtime IO fixture anchor refused before controlled compilation/run"
+    },
+    {
+      "workspace": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-002",
+      "parent": "300c27/exit1/no session",
+      "scope": "Stale report-owner fixture anchor refused before controlled compilation/run"
+    },
+    {
+      "workspace": "/private/tmp/unison-rpc-decoded-owner-runtime-stock-20261018-003",
+      "parent": "10664/840160/exit1/no session",
+      "scope": "Normal RPC passed; post-gate assertion checked waiter outcome before actual recovery poll settled. No normal resource teardown claimed for the failed assertion. Corrected by bounded actual promise settlement, no production edit."
+    }
+  ],
+  "runtime_scope_note": "--fixed-only --family rpc selects seven original controls and excludes stale unrelated full report/IO instrumentation. No current full-family Runtime qualification claimed."
+}

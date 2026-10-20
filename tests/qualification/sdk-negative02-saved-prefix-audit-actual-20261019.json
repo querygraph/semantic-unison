@@ -1,0 +1,87 @@
+{
+  "schema": "unison-corrected-negative02-saved-prefix-audit/1",
+  "actual_failed_owner": {
+    "kind": "faithful_owning_tool_terminal_transcription",
+    "session_id": 39507,
+    "initial_chunk": "49b9bf",
+    "terminal_chunk": "e243f6",
+    "exit_code": 137,
+    "running_session_returned": false,
+    "owner_pid": 14150,
+    "worker_pid": 14166,
+    "scope": "Failed contract mismatch independently recovered; not normal exit, no original worker wait4 claim"
+  },
+  "old_frozen_contract_still_failed": true,
+  "old_run_not_replayed": true,
+  "production_pins_verified": 329,
+  "corrected_execution_paths": [
+    "tests/sdk_negative_receiving/parent_test.py",
+    "tests/sdk_negative_receiving/plan.py",
+    "tests/sdk_negative_receiving/plan_test.py",
+    "tests/sdk_negative_receiving/runtime_test.py",
+    "tests/sdk_negative_receiving/transport_audit.py",
+    "tests/sdk_negative_receiving/transport_audit_test.py",
+    "tests/sdk_negative_receiving/worker_test.py"
+  ],
+  "seed_transport_reparsed": true,
+  "negative_transport": {
+    "policy": "require",
+    "expected_client_exit": 2,
+    "client_pid": 14193,
+    "proxy_pid": 14192,
+    "server_pid": 14195,
+    "finding": {
+      "report": {
+        "candidate-sha256": "09717f7a0260dbb4c60a6e7aba00998e83c7ec0000d312f66a758500226e4754",
+        "candidate-size": "48005534",
+        "driver-build": "unison-sdk171-2724-v1-single",
+        "structure": "valid",
+        "decode": "success",
+        "raw-digest": "mismatch",
+        "errors": "1",
+        "warnings": "4",
+        "expected_negative_finding": true,
+        "validation_passed": false,
+        "receiving_publication_proved": false,
+        "resource_release_authorized": false
+      },
+      "settlement": {
+        "helper_pid": 14203,
+        "endpoint": "server",
+        "candidate_sha256": "09717f7a0260dbb4c60a6e7aba00998e83c7ec0000d312f66a758500226e4754",
+        "candidate_bytes": 48005534,
+        "wait_status": [
+          "exit",
+          0
+        ],
+        "outcome": "completed",
+        "observed_other_group_members_before_reap": 0,
+        "settlement_only": true
+      },
+      "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620303937313766376130323630646262346336306136653761626130303939386538336337656330303030643331326636366137353835303032323665343735340a63616e6469646174652d73697a652034383030353533340a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d646967657374206d69736d617463680a6572726f727320310a7761726e696e677320340a454e440a",
+      "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303932207365630a2a2a2a204572726f723a204e6577526177496d61676544696765737420646f6573206e6f74206d617463682072617720696d616765202a2a2a0a",
+      "parent_cli_audit_required": true,
+      "destination_fence_required": true,
+      "resource_release_authorized": false
+    },
+    "raw_proxy_sha256": "a3a3f3e91aec69aa09f78b4f0737f48110ba3f03676a07d72170e440c4d5b073",
+    "destination_fence_required": true,
+    "worker_settlement_required": true,
+    "parent_terminal_proved": false,
+    "resource_release_authorized": false
+  },
+  "saved_require_destination_hash_and_epoch_unchanged": true,
+  "current_input_epochs_unchanged": 12,
+  "fresh_payload_or_executable_opened": false,
+  "new_SDK_or_CLI_calls": 0,
+  "EX_acquired": false,
+  "original_worker_wait4_claimed": false,
+  "scope": "One authentic SDK mismatch/errors1/exit2 require rejection from failed02; not warn or full three-codec matrix pass",
+  "CPU00_closed": true,
+  "actual_audit_tool": {
+    "terminal_chunk": "95bc13",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "auditor_sha256": "77d782087f04b322069cf7bb194172be3f778e6e7d6a5c28de0314acdcedc39a"
+}

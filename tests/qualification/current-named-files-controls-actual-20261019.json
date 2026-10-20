@@ -1,0 +1,27 @@
+{
+  "schema": "unison-named-private-file-adapter-controls/1",
+  "tests_run": 6,
+  "success": true,
+  "source_sha256": {
+    "tests/current_validation_paths/files.py": "c3e5fab2136cfaf72293169edb7a4e11b3e861b05c38797acbfa2d7f5cccfd58",
+    "tests/current_validation_paths/files_test.py": "11f6eb53c6806f45f687a88a407b077f8542d2af003a9774845c2ec48b52d2b8",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+  },
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "retained_payload_opened": false,
+  "unknown_OS_close_actually_occurred": false,
+  "scope": "Tiny own temporary files and injected carriers after test-known close; root/target uncertainty refusal and no numeric retry; not native receiving/SDK/runtime qualification",
+  "CPU00_closed": true,
+  "actual_tool": {
+    "terminal_chunk": "590d8a",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "prior_actual": {
+    "terminal_chunk": "c74939",
+    "exit_code": 0,
+    "change_after": "Moved Path class setup before root FD acquisition; reran six controls once"
+  }
+}

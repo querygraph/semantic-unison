@@ -1,0 +1,80 @@
+import copy,json,os,signal,socket,tempfile,unittest
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+import clone_interruption_transport as T
+from final_clone_interruption_owner import audit_interruption,generated_bytes,can_close_failed_prefix,receiver_clone_observed
+from private_camera_receiving.close import close_descriptors
+
+
+def child(argv,code,pid):
+ return dict(command=argv,returncode=code,timed_out=False,capture_truncated=False,stdout='Lost connection with the server' if code else '',stderr='',client_cleanup=dict(pid=pid,returncode=code,reaped=True,hard_kill_required=False,other_group_members_absent_before_reap=True,group_cleanup_before_leader_reap=True),aggregate_or_parent_terminal_proved=False,io_cpu_release_authorized=False)
+def fixture():
+ signal=dict(pid=33,signal=9,owned_unreaped_before_signal=True,group=22,reason='observed private clone stage; original generated-file failure control')
+ transport=dict(event=dict(stage=dict(path='/private/tmp/test/right/clone-1.unison.tmp',device=1,inode=2,size=8000),signal=signal),counts=dict(client_to_server_bytes=4096,server_to_client_bytes=12,discarded_client_bytes=7),client_eof_observed=True,server_eof_observed=True,input_eof_forwarded=False,discard_permitted_only_after_owned_signal=True)
+ frame=dict(schema='unison-generated-clone-interruption/1',server_command=['server'],server_pid=33,server_returncode=-9,server_reaped=True,server_group=22,transport=transport,resource_release_authorized=False)
+ return dict(client=child(['client'],3,11),proxy=child(['proxy'],0,22),raw_proxy=json.dumps(frame),external_sdk_audit_required=True,resource_release_authorized=False)
+def audit(value):return audit_interruption(value,client_command=['client'],proxy_command=['proxy'],server_command=['server'],right=Path('/private/tmp/test/right'))
+
+class Controls(unittest.TestCase):
+ def test_signal_only_after_nonreaping_ownership_and_group_check(self):
+  events=[]
+  def wait(*args):events.append(('wait',args));return None
+  result=T.interrupt_owned(SimpleNamespace(pid=33),22,waitid=wait,kill=lambda *a:events.append(('kill',a)),getpgid=lambda pid:22)
+  self.assertEqual(events,[('wait',(os.P_PID,33,os.WEXITED|os.WNOHANG|os.WNOWAIT)),('kill',(33,signal.SIGKILL))]);self.assertTrue(result['owned_unreaped_before_signal'])
+ def test_no_signal_for_terminal_or_wrong_group(self):
+  for group,terminal in [(99,None),(22,object())]:
+   calls=[]
+   with self.assertRaises(ValueError):T.interrupt_owned(SimpleNamespace(pid=33),22,waitid=lambda *a:terminal,kill=lambda *a:calls.append(a),getpgid=lambda pid:group)
+   self.assertEqual(calls,[])
+ def test_observed_stage_is_single_owned_regular_file(self):
+  with tempfile.TemporaryDirectory() as directory:
+   p=Path(directory)/'clone-1.unison.tmp';self.assertIsNone(T.stage(directory));p.write_bytes(b'original')
+   self.assertEqual(T.stage(directory)['size'],8)
+   os.link(p,Path(directory)/'alias')
+   with self.assertRaises(ValueError):T.stage(directory)
+   (Path(directory)/'alias').unlink();p.unlink();p.symlink_to('/dev/null')
+   with self.assertRaises(ValueError):T.stage(directory)
+ def test_actual_pump_eof_after_injected_owned_signal(self):
+  with tempfile.TemporaryDirectory() as directory:
+   (Path(directory)/'clone-1.unison.tmp').write_bytes(b'x')
+   server,peer=socket.socketpair();ri,wi=os.pipe();ro,wo=os.pipe();known=[ri,wi,ro,wo]
+   peer.shutdown(socket.SHUT_WR)
+   def interrupt(native,pid):known.remove(wo);close_descriptors([wo]);return dict(pid=33,signal=9)
+   try:
+    with patch.object(T,'interrupt_owned',interrupt):result=T.pump(server,ro,wi,__import__('time').monotonic()+2,known,SimpleNamespace(pid=33),directory)
+    self.assertTrue(result['server_eof_observed']);self.assertTrue(result['client_eof_observed']);self.assertFalse(result['input_eof_forwarded']);self.assertNotIn(wi,known)
+   finally:
+    T.close_socket(server);T.close_socket(peer);close_descriptors(known)
+ def test_generated_hardlink_reader_requires_exact_explicit_count(self):
+  with tempfile.TemporaryDirectory() as directory:
+   p=Path(directory)/'original';alias=Path(directory)/'alias';p.write_bytes(b'original bytes')
+   self.assertEqual(generated_bytes(p,links=1),b'original bytes');os.link(p,alias)
+   with self.assertRaises(ValueError):generated_bytes(p,links=1)
+   self.assertEqual(generated_bytes(alias,links=2),b'original bytes')
+   with self.assertRaises(ValueError):generated_bytes(alias,links=2,maximum=1)
+   alias.unlink();alias.symlink_to(p)
+   with self.assertRaises(OSError):generated_bytes(alias,links=1)
+ def test_recovery_marker_can_be_in_either_actual_peer_capture(self):
+  blank=dict(stdout='',stderr='');server=dict(stdout='',stderr='[server: copy] Using immutable receiver clone basis')
+  self.assertTrue(receiver_clone_observed(blank,server));self.assertTrue(receiver_clone_observed(server,blank));self.assertFalse(receiver_clone_observed(blank,blank))
+ def test_only_settled_plain_failure_can_close_known_prefix(self):
+  from shared_cpu_pool import UnresolvedOwnership
+  self.assertTrue(can_close_failed_prefix(active=False,error=ValueError('known failed fixture assertion')))
+  self.assertFalse(can_close_failed_prefix(active=True,error=ValueError('live child')))
+  self.assertFalse(can_close_failed_prefix(active=False,error=UnresolvedOwnership('unknown FD')))
+ def test_audit_accepts_only_designated_interruption(self):
+  self.assertEqual(audit(fixture())['server_exit'],-9)
+  for code in (0,1,-9):
+   value=fixture();value['client']['returncode']=value['client']['client_cleanup']['returncode']=code
+   with self.assertRaises(ValueError):audit(value)
+  value=fixture();value['client']['stdout']='another error'
+  with self.assertRaises(ValueError):audit(value)
+ def test_audit_rejects_missing_reap_wrong_command_or_signal(self):
+  for key in ('reaped','other_group_members_absent_before_reap','group_cleanup_before_leader_reap'):
+   value=fixture();value['proxy']['client_cleanup'][key]=False
+   with self.assertRaises(ValueError):audit(value)
+  for key,val in [('server_returncode',0),('server_reaped',False),('server_command',['other']),('server_group',99),('resource_release_authorized',True)]:
+   value=fixture();frame=json.loads(value['raw_proxy']);frame[key]=val;value['raw_proxy']=json.dumps(frame)
+   with self.assertRaises(ValueError):audit(value)
+if __name__=='__main__':unittest.main()

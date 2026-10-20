@@ -1,0 +1,30 @@
+import stat,unittest,zipfile
+from sdk_source_unpack import members,ROOT,MAX_TOTAL,MAX_FILE
+
+
+def entry(name,size=0,mode=stat.S_IFREG|0o644):
+    z=zipfile.ZipInfo(name);z.file_size=size;z.compress_size=size;z.external_attr=mode<<16;return z
+
+class ZipPreflight(unittest.TestCase):
+    def test_original_source_tree_has_exact_bounded_inventory(self):
+        result=members([entry(ROOT+'/',mode=stat.S_IFDIR|0o755),entry(ROOT+'/source/',mode=stat.S_IFDIR|0o755),entry(ROOT+'/source/original.cpp',17)])
+        self.assertEqual((result['files'],result['directories'],result['declared_bytes']),(1,2,17));self.assertFalse(result['archive_links_allowed'])
+    def test_absolute_parent_otherroot_ambiguous_or_control_paths_refuse(self):
+        for name in ('/tmp/escape',ROOT+'/../escape',ROOT+'//x',ROOT+'/./x','other/source.cpp',ROOT+'/a\\b',ROOT+'/bad\nname',ROOT+'/C:drive',ROOT+'/x'+'a'*256):
+            with self.subTest(name=name),self.assertRaises(ValueError):members([entry(name)])
+    def test_links_and_special_files_refuse_before_extract(self):
+        for mode in (stat.S_IFLNK|0o777,stat.S_IFIFO|0o600,stat.S_IFCHR|0o600,stat.S_IFSOCK|0o600):
+            with self.assertRaises(ValueError):members([entry(ROOT+'/original',5,mode)])
+    def test_duplicate_or_prefix_collision_refuses(self):
+        for values in ([entry(ROOT+'/x'),entry(ROOT+'/x')],[entry(ROOT+'/x'),entry(ROOT+'/x/child')],[entry(ROOT+'/x'),entry(ROOT+'/x/',mode=stat.S_IFDIR|0o700)]):
+            with self.assertRaises(ValueError):members(values)
+    def test_encryption_size_and_aggregate_limits_refuse(self):
+        e=entry(ROOT+'/x');e.flag_bits=1
+        for values in ([e],[entry(ROOT+'/big',MAX_FILE+1)],[entry(ROOT+'/f'+str(i),MAX_FILE) for i in range(3)]):
+            with self.assertRaises(ValueError):members(values)
+        with self.assertRaises(ValueError):members([])
+    def test_directory_disagreement_and_unknown_compression_refuse(self):
+        e=entry(ROOT+'/x');e.compress_type=zipfile.ZIP_BZIP2
+        for values in ([e],[entry(ROOT+'/folder/',1,stat.S_IFDIR|0o700)],[entry(ROOT+'/x/',0,stat.S_IFREG|0o600)]):
+            with self.assertRaises(ValueError):members(values)
+if __name__=='__main__':unittest.main()

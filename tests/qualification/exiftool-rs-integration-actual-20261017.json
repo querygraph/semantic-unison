@@ -1,0 +1,224 @@
+{
+  "complete": true,
+  "scope": "Read-only pinned exiftool-rs library integrated into optional DNG inspector; actual original1KiB Canon fixtures only",
+  "engine": {
+    "repository": "/Users/alexy/src/exiftool-rs",
+    "revision": "3cd699a2e6633fcf28e39c260c71709b6a6049a7",
+    "exiftool_version": "13.59",
+    "binary": "/private/tmp/unison-exiftool-bridge-build-20261017-001/target/debug/unison-exiftool-bridge",
+    "binary_sha256": "1b3f84518a651ce10de4e6ce2aa5001949859268242be7c43c7ca5b886fc4bc0",
+    "lock_sha256": "83f072cf2660ccffe841a40271ef3324551b9679c854b08e6e5ce7ee2663d80d"
+  },
+  "actual_tool_terminals": [
+    {
+      "session": 12692,
+      "chunk": "e7506a",
+      "exit": 0,
+      "no_session": true,
+      "scope": "Rust offline2job build under generic existing stock-build CPUowner; not OCaml qualification"
+    },
+    {
+      "chunk": "16aaf1",
+      "exit": 0,
+      "no_session": true,
+      "scope": "initial actual API controls"
+    },
+    {
+      "session": 47639,
+      "chunk": "491ce5",
+      "exit": 0,
+      "no_session": true,
+      "scope": "actual inspector integration/default CLI controls"
+    },
+    {
+      "session": 75387,
+      "chunk": "eea42b",
+      "exit": 0,
+      "no_session": true,
+      "scope": "final actual API/CLI/default+composable field observations"
+    },
+    {
+      "chunk": "7f5341",
+      "exit": 0,
+      "no_session": true,
+      "scope": "initial5fake descriptor/call fault controls"
+    },
+    {
+      "chunk": "ab0ced",
+      "exit": 0,
+      "no_session": true,
+      "scope": "final5fake descriptor/call fault controls"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-build-owner-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "688406f181eb404d64c4474936477a03fffeb38a91af7963e6dce5af1c54be69"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-build-owner-20261017-001/SHARED-START.json",
+      "bytes": 1231,
+      "sha256": "c7bdc5d7b75a0d3688c4e1482154a883a44b558caa2e990eae37011a902c885c"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-build-owner-20261017-001/SHARED-STDERR.txt",
+      "bytes": 1235,
+      "sha256": "81a0356acb5be3eb1880e30b78df835404c2585c44baf01018779683e55cd0ee"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-build-owner-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-001/RESULT.json",
+      "bytes": 12774,
+      "sha256": "de5fcc5cfc5b0bb6c06a068c7e859f7c4604d1e11cf85465aaf7920ea03cfb80"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "98f8bd1e5b1ab3de85d51665e3f218244fd917e24b8705a13818157a88223012"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-001/SHARED-START.json",
+      "bytes": 1408,
+      "sha256": "1d394ccb817a1ddbb37a6ea7290df081a17d1cdd7188c1084e4e38d7acf3afde"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 118,
+      "sha256": "fa477ea10e6618b14932435ddd4a5263a2f69960dcf6c85d1b5f84086a08650b"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-002/RESULT.json",
+      "bytes": 22566,
+      "sha256": "2cdb80342b2b7a7f3061625a0595fdea3cfa09105a29e7900e6992b8538f47d3"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "98e4679cd74953a285b46dd76887ed6ebb0b6b2d2a49b947ee87e1b5f26bf7fe"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-002/SHARED-START.json",
+      "bytes": 1408,
+      "sha256": "15988bab9c881cae217395f3756570b81c94e9d1f52df167d4fbe8d10e514a53"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 118,
+      "sha256": "fa477ea10e6618b14932435ddd4a5263a2f69960dcf6c85d1b5f84086a08650b"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-003/RESULT.json",
+      "bytes": 24691,
+      "sha256": "3505edeb83f486be7597e47454d57c9640b1dbf2e723b8691782c55b4c1b78b2"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-003/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "08547598fc79ed5893f5f74f02754f3e46d80c9cba10cf216464b096dddfea86"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-003/SHARED-START.json",
+      "bytes": 1408,
+      "sha256": "03e6ab9db71f92a7f89b3707aa890be9261e77489f08e63f3022fe7a3ebcf191"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-003/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-controls-20261017-003/SHARED-STDOUT.txt",
+      "bytes": 118,
+      "sha256": "fa477ea10e6618b14932435ddd4a5263a2f69960dcf6c85d1b5f84086a08650b"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "a52175a984e26fa61446fc859063300267c13087bddf83507d79a7bcc74c2094"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-001/SHARED-START.json",
+      "bytes": 1119,
+      "sha256": "83865e0b595747b3007e98e3c3f04ac648e6b97d05be926f3098a3a1118b1939"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "1f11b6e880045ee35de832b81b45d06257342e13b5c79bbf0034379d4ca220b9"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e357bffff7be619f5481a5c728b41b0f078d564130947b24a4e429abc2ea1acf"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-002/SHARED-START.json",
+      "bytes": 1119,
+      "sha256": "b19d2865d075f53c7c0c0a54cad9d93bf348ae3e579d31091c55725659c05a3a"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "1f11b6e880045ee35de832b81b45d06257342e13b5c79bbf0034379d4ca220b9"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-fault-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-exiftool-bridge-build-20261017-001/BUILD.json",
+      "bytes": 25186,
+      "sha256": "ffd70f61217f550a512c1fe002dd662d1cad86cb0785ef28a14bc5066a6ca1ea"
+    }
+  ],
+  "current_source_sha256": {
+    "tools/exiftool-bridge/build.py": "7c9b5514cbf3cf9a9aedcf56b95cd3224787547ca159797bfe8aa37dc076239d",
+    "tools/exiftool-bridge/controls.py": "791818594eb8c17a57b5a67b53d3233716b92770c78358b4796dc88a9fafbbbc",
+    "tools/exiftool-bridge/fault_controls.py": "400b0dd99b8394e37799f19f541336f33c03ade07f4ac24c95810caf7901f513",
+    "tools/exiftool-bridge/observe.py": "04253e70452e6d13f2f274b29f1cc72d67ad8146f7a1cad5758e6c777bc5860f",
+    "tools/exiftool-bridge/main.rs": "ca7d77dd4f242300b898f3c775f1cc2a9ac8fa78d6b2d5866af6a29d2560605e",
+    "tools/semantic-inspect/run.py": "4880e922cf2e2ee96008f4b43aced1aaa79a992108050140360d7f662ad27c01"
+  },
+  "verified": [
+    "actual Canon SerialNumber123456/654321 decoded by Rust library",
+    "changed private knowledge/bytes, unchanged encoded pixels",
+    "new inspector flag and original default entrypoint",
+    "duplicate typed records retained",
+    "new field preserves unaffected field observation hashes within engine domain",
+    "engine-domain change invalidates interpretation hash",
+    "original source identities/bytes unchanged",
+    "unknown helper retains source FD and original carrier; no close retry"
+  ],
+  "camera_payload_opened": false,
+  "SDK_or_Adobe": false,
+  "semantic_transfer_authority": false,
+  "full_exiftool_parity_claim": false,
+  "limitations": [
+    "No source byte spans in upstream Tag API: observation annotations only",
+    "One original Canon fixture family, no real camera/corpus coverage",
+    "No hard RSS/OS-thread/physicalIO claim",
+    "Perl parity not freshly rerun by this integration",
+    "POSIX bridge qualified on this macOS host only"
+  ]
+}

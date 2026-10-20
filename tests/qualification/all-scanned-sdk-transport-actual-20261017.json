@@ -1,0 +1,196 @@
+{
+  "schema": "unison-all-scanned-sdk-transport-controls/1",
+  "cases": [
+    {
+      "actual_terminal": {
+        "chunk_id": "c03fdf",
+        "exit_code": 1,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 93530,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 93530,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-001/SHARED-START.json",
+          "bytes": 1088,
+          "sha256": "730e817256dc6080b19b999e90a3d23c3ea8860ba3cef0df0a4351b4447f2078"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "078aaaa5f4e50485dbe0133495a1340d9618f012ad841677efbddc69d1a987e6"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-001/SHARED-STDERR.txt",
+          "bytes": 2516,
+          "sha256": "702ba43d5c6e08cb2cbc52f6f9301457be7da0a919e8f2f0f1d8f80c1e6282ce"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "ec8cf4",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 93554,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 93554,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-002/SHARED-START.json",
+          "bytes": 1087,
+          "sha256": "40dc815480969536787ca3dcf9489ba9e0caedde950ec0fe051b50a14dbaa1c9"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-002/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "49d6b78bf8d1d171e0c7402e249abe00fe14a05e773d587d046571477517138f"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-002/SHARED-STDERR.txt",
+          "bytes": 1885,
+          "sha256": "2172d1a8ae29418b0586d8fb233e33d69240facfaa69277d5fd8be5c27082bf4"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "8cea50",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 93588,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 93588,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-003/SHARED-START.json",
+          "bytes": 1087,
+          "sha256": "04f4b7df009bb49a19342385fd73435b376ad116c64eb99f0ba11731730858c5"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-003/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ecea18d79d04d5d88df2468eaebf9b084080379c613b5f46ca208384bba85536"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-transport-controls-20261017-003/SHARED-STDERR.txt",
+          "bytes": 2057,
+          "sha256": "26180a63adcfeddb5219f071753f1cb21af085ed6f281b23069cac2a201b6e94"
+        }
+      ]
+    }
+  ],
+  "current_control_groups": 12,
+  "source_pins": [
+    {
+      "path": "tests/all_scanned_sdk_plan.py",
+      "bytes": 3833,
+      "sha256": "e4851bedeb86cb88200d3f2692f5c0667969368f893154909ced594edf2b56ae"
+    },
+    {
+      "path": "tests/all_scanned_sdk_plan_test.py",
+      "bytes": 2034,
+      "sha256": "6a564fbed89c539e1f9f7e6f7c5880f71e0f6c2cf853ca7dfa08dfde1025e4b8"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport.py",
+      "bytes": 3388,
+      "sha256": "3da2b67628f5ae8f0d7869b44e8d0751ec21b3f8143940940e10a31345822037"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport_test.py",
+      "bytes": 4071,
+      "sha256": "e35a5c844aa488278dff1b918a3f5cac4a216b1726513be3ed3ebc3a74f7b446"
+    },
+    {
+      "path": "tests/all_scanned_sdk_audit.py",
+      "bytes": 3033,
+      "sha256": "87b8c9215937532322dfa5073c04a9de2989be9f66b2b9c22bedf013cef5d329"
+    },
+    {
+      "path": "tests/all_scanned_sdk_audit_test.py",
+      "bytes": 3624,
+      "sha256": "36a9a1be9c35737a02314cd6d955e38b325ef7cf261f8a9935aeb94bc615dae1"
+    },
+    {
+      "path": "tests/all_scanned_sdk_controls.py",
+      "bytes": 429,
+      "sha256": "b09ab24de05358b242cb877509c813ba78a8303e1d38a2f0da5231797287e96a"
+    },
+    {
+      "path": "tests/camera_sdk_concurrency/invocation.py",
+      "bytes": 3236,
+      "sha256": "b3b1463647c598c71b0a4151fbf74c31c073e8015c393098a360bcbd949d660f"
+    },
+    {
+      "path": "tests/camera_sdk_receiving/sdk_audit.py",
+      "bytes": 4771,
+      "sha256": "cdfea583ad0e43548ce7463336c8025ff90fbdd50e9c3f66f0a964882340dca2"
+    },
+    {
+      "path": "tests/validation_process/records.py",
+      "bytes": 5765,
+      "sha256": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+    }
+  ],
+  "SDK_invoked": false,
+  "CLI_invoked": false,
+  "EXglobal_acquired": false,
+  "media_payload_opened": false,
+  "aggregate_executor_qualified": false,
+  "scope": "Pure original fake outcomes/protocol frames and mocked invocation only. Current success003; earlier import-path failure001 and success002 preserved."
+}

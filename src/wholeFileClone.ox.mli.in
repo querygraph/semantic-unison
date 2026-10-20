@@ -1,0 +1,54 @@
+@@ portable
+(** Endpoint-local strict whole-file clone receipts. This module is pure and
+    does not own descriptors, call Fs, or infer filesystem-wide capabilities. *)
+
+type backend = Platform | Linux_ficlone | Macos_fclonefileat
+type phase = Unavailable | Arguments | Source_descriptor | Destination_descriptor
+  | Source_eof | Destination_eof | Source_position | Destination_position
+  | Destination_parent | Native_clone | Source_verification
+  | Destination_verification | Cursor_verification | Property_profile | Cleanup
+type mutation = No_effect | Known_prefix | Indeterminate
+type decline_scope = Platform_unavailable | Kernel_unavailable
+  | Filesystem_unsupported | Cross_device | Source_constraints | Empty_source
+
+type receipt = {
+  requested : int64;
+  completed : int64;
+  backend : backend;
+  phase : phase;
+  errno : Unix.error option;
+  native_code : int64;
+  mutation : mutation;
+}
+(** [native_code] is separate from its mapped Unix error. Native clone backends
+    retain bounded POSIX errno; platform-only Windows preflight may retain
+    unsigned DWORD/NTSTATUS bits through [Int64], without classifying them. *)
+
+type result =
+  | Native_shared of receipt
+  | No_work of receipt
+  | Declined of decline_scope * receipt
+  | Failed of receipt
+
+type native_raw = int * int64 * int * int * Unix.error option * int * int * int64
+exception Invalid_native_status of string
+
+val decode_native : expected_length:int64 -> native_raw -> result
+(** Reject unknown tags, inconsistent backend/phase/error/decline combinations,
+    negative or partial completion, and effects contradicting the result.
+    Only a scoped [Declined] with zero completion and [No_effect] permits an
+    ordinary-copy fallback. A [Failed], including [Failed/No_effect], never does.
+
+    Positive success reports the entire request and native sharing's documented
+    operation contract, not measured physical allocation or frozen source bytes.
+    Zero FD work performs no clone and makes no sharing assertion. Named empty
+    creation instead declines so ordinary copying still creates the name. *)
+
+val validate_result : expected_length:int64 -> result -> result
+(** Apply the same checks to an already typed receipt. *)
+val platform_decline : expected_length:int64 -> result
+val describe_native : receipt -> string
+val scope_name : decline_scope -> string
+val raise_failed : ?argument:string -> receipt -> 'a
+(** Raise the saved mapped Unix error with backend/phase/native-code context.
+    Does not classify that error as a fallback. *)

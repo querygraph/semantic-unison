@@ -1,0 +1,13 @@
+{
+  "schema": "unison-final-native-stage-independent-audit-terminal/1",
+  "actual_tool": {
+    "terminal_chunk": "2a4ba1",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "direct_children": 50,
+  "expected_negative77": 4,
+  "independently_read_payload_bytes": 2146342,
+  "whole8_ex_closed": true,
+  "referenced_receipt": "tests/qualification/final-native-stage-v2-actual-20261019.json"
+}

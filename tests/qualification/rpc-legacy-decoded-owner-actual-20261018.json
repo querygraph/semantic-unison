@@ -1,0 +1,268 @@
+{
+  "state": "REGULAR_LEGACY_AND_BOUNDED_ARGUMENT_OWNER_CURRENT_BUILDS_CONTROLS_PASS",
+  "scope": "Ordinary registered server argument selected costs share the bounded-command lane, with finite policy-local caps and no encoded expansion heuristic. Client results/custom streams/global escapes/metadata/RSS excluded.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 116717,
+      "sha256": "a2f5fc9f3b93246bb7989dbd455a564662e788656a8d98310c2f299d304d3669"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 10910,
+      "sha256": "67ff38d807b3ca970f6758a27a73a658e0dee6855ce1fdf8449c142877cbe038"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/remote_decoded_input.ml",
+      "bytes": 11108,
+      "sha256": "6708b1c4163149e5fafdc27b5a4779c45a179aaf1263c3c2722fb04a60be1038"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/test_remote_bounds.py",
+      "bytes": 19192,
+      "sha256": "b7f330a14f4c229ac496cfaf169144d2f13ac27dd01bb5ce36874cf970afce0b"
+    }
+  ],
+  "control_parent": {
+    "process_id": 63763,
+    "chunk_id": "67aa61",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": [
+    {
+      "compiler": "stock",
+      "negative_participants": 14,
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-20261018-001/CONTROL.json",
+          "bytes": 168385,
+          "sha256": "b3aeadb4ccc5ab44f218865616f758dfb508b06d18fd1ba22ff67cc8d8417653"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "12ad19b3143952944404de9ce0dc62d66247b8c1cb787ad6bd2ecd43c98056d0"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 1175,
+          "sha256": "a1aa0f1ed912204f54dc8061c3e0ff32d0a2c565a94a5f84d67386bde0e525a3"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "legacy_bypass_negative": {
+        "exit_code": 2,
+        "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+        "stderr": "Fatal error: exception Failure(\"DESIGNATED legacy decoded owner missing\")\n",
+        "source_sha256": "dbdd89bd47ab34073a8934c46256ade15d9d5dc58f89771ecb95c7b701aef2d1",
+        "binary_sha256": "036d6fe1ff1342bf54b14488dad91e76abca0f4fe038340db16f53ecc44dde62"
+      }
+    },
+    {
+      "compiler": "ox",
+      "negative_participants": 14,
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-20261018-001/CONTROL.json",
+          "bytes": 171598,
+          "sha256": "bf2f660fa847ad8c88d16aedecd6132ca194a9f9a206678e61cc114d9164ea47"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e0f9ecfe1680d7c2c96649e398353b49b1fba73d48f2f368c76786893b646eee"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 1175,
+          "sha256": "a1aa0f1ed912204f54dc8061c3e0ff32d0a2c565a94a5f84d67386bde0e525a3"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 220,
+          "sha256": "77f52fd0a49e75bbb23c3e9cf8060b143510f114afcfcd32c1bf922732ad14b4"
+        }
+      ],
+      "legacy_bypass_negative": {
+        "exit_code": 2,
+        "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+        "stderr": "Fatal error: exception Failure(\"DESIGNATED legacy decoded owner missing\")\n",
+        "source_sha256": "dbdd89bd47ab34073a8934c46256ade15d9d5dc58f89771ecb95c7b701aef2d1",
+        "binary_sha256": "61da236a621ff0c74db935aff84baa4b03ae25d2c439291d28f371f8bd651e80"
+      }
+    }
+  ],
+  "build_parent": {
+    "process_id": 74223,
+    "chunk_id": "5de746",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "recorded_source_inputs": 576,
+      "all_recorded_sources_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-m2beumql/src/unison",
+        "bytes": 6286992,
+        "sha256": "c9bf1c320983c6cc45b5a3cad1230bdd5480d9a86b967e7170f642ef750112fe"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-check-20261018-001/RESULT.json",
+          "bytes": 60168,
+          "sha256": "e5e62ef0b95add46149fc51854bb97ce16cf166318422e384b3f15aef413cf57"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "602c04d8da99aebd369b58a579df712da59e636bd706ea34e99ac6cf9cf61baa"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "recorded_source_inputs": 576,
+      "all_recorded_sources_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dc1z1pwk/_build/default/src/linktext.exe",
+        "bytes": 6338952,
+        "sha256": "a88d5eb170fcfa8e8d616cd672b44e646d898f2ae8bf7b44016e6c8bb4597369"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-dune-check-20261018-001/RESULT.json",
+          "bytes": 59995,
+          "sha256": "5759ba3a4cb8da7c312f6c31648520136b99a97cf65d33d92c1e69c59723fc35"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b50ab3e9950293d379038cb7da4693054252f1a9112779260bd78b6de784503a"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "recorded_source_inputs": 576,
+      "all_recorded_sources_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-6ntcze2o/src/unison",
+        "bytes": 8370672,
+        "sha256": "d77451cfada35baf3632b33a7bc66c8b7a85b546f8f923e267a23b2f5d9a40fc"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-check-20261018-001/RESULT.json",
+          "bytes": 60174,
+          "sha256": "d633f441fabb9bc493c47e6d4c5c3017187cdc515f5865c7627595302c49231f"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5bb947f204daa5be17954ea5a16035724b89756c0c88551ddf2b38b451a1a67b"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "recorded_source_inputs": 576,
+      "all_recorded_sources_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_1c5q6yy/_build/default/src/linktext.exe",
+        "bytes": 8011728,
+        "sha256": "fd4fdaf38a2bfeed769584e67418d899b7bf4270b71eed38a36f71bf9b7de0f1"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-dune-check-20261018-001/RESULT.json",
+          "bytes": 59999,
+          "sha256": "e9fda208dcb15e103f911cb9d67fa92dcb2f5c4e64be309c67c41e303101505b"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "de76fe2bd723220218cbbea4f7f112476e3524e004e55e398093aff643d8802e"
+        }
+      ]
+    }
+  ],
+  "fixed_rpc_fault_parent": {
+    "process_id": 16224,
+    "chunk_id": "ee868b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fixed_rpc_faults": [
+    {
+      "compiler": "stock",
+      "cases": 7,
+      "scope": "Current shared owner through bounded-registration handler/dispatch/scope/output waiter faults; legacy-specific admission/lifetime/compact-codec path independently covered by direct suites. Not a legacy peer transport or full report/native run.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-stock-20261018-001/CONTROL.json",
+          "bytes": 472774,
+          "sha256": "893d131877d819d85f3bc1ee09767f9a2f8211e0a5526d9ab54ddabded545520"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "7feec0b126c3f2b3a7c23f68025f28877a8faa70a173c58b6ffcc8ec69aea772"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 767,
+          "sha256": "1dc5bb7539a5aa91931904f3a9a5332912260542f330a4a20c3283571e048aeb"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "cases": 7,
+      "scope": "Current shared owner through bounded-registration handler/dispatch/scope/output waiter faults; legacy-specific admission/lifetime/compact-codec path independently covered by direct suites. Not a legacy peer transport or full report/native run.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-ox-20261018-001/CONTROL.json",
+          "bytes": 473054,
+          "sha256": "ceeed8e0aa9fbe400a97ac2319cc7e6cb0566874fbd02deee285601c4eaa57e4"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d7aa91655bf13b117b89d137035ff062f7e0750957642768265002f06019ad8a"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 859,
+          "sha256": "fc63c611ae842e993c08f4ae5f8425c42b5176fc5b78a9699561c9908bed29b3"
+        },
+        {
+          "path": "/private/tmp/unison-rpc-legacy-decoded-runtime-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Local legacy decode limits are finite owner policy limits, not a guessed frame expansion ratio",
+    "Policies may explicitly refuse large valid requests; no unbounded fallback",
+    "Client-result leases, custom stream decoder metadata, conversion/global escapes, outbound/baseline/full heap/RSS remain open",
+    "No original photos, SDK/Adobe/native renderer, EXglobal payload or actual transport qualification in this checkpoint"
+  ]
+}

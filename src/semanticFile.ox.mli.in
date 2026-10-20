@@ -1,6 +1,17 @@
 @@ portable
 type t
 exception Invalid of string
+type close_issue : value mod portable contended
+exception Close_uncertain of close_issue
+val close_issue_descriptor : close_issue -> Unix.file_descr
+(** Historical number only: never authority to retry a close or touch a reused FD. *)
+val close_issue_identity : close_issue -> Unix.LargeFile.stats
+(** Borrowed file identity captured before the reader duplicate; not a fresh
+    post-close identity or evidence that the historical number remains owned. *)
+val close_issue_cause : close_issue -> exn
+val close_issue_operation_error : close_issue -> exn option
+(** Original callback/check failure, possibly another retained reader carrier.
+    A close carrier is unresolved ownership, not an ordinary operation failure. *)
 type writer
 val prepare_writer : ?check_cancel:(unit -> unit) -> Unix.file_descr -> writer
 (** Borrow a private, singly linked regular output. Does not duplicate, close
@@ -23,8 +34,24 @@ val with_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 'a) -> 'a
     the duplicate shares its file position with the original descriptor.
     The optional worker-local cancellation check runs before opening, reading,
     each 64 KiB iteration, and final stability checks. *)
-type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
-val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
+val with_borrowed_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 'a) -> 'a
+(** POSIX bounded positional reader borrowing the caller's descriptor. No opens,
+    duplicates, closes or shared-position changes, including error/cancellation.
+    Caller keeps the regular readable FD alive, immutable and unreassigned until
+    callback retirement; reader operations expire afterwards. Native reads use
+    at most64KiB per attempt with checked offsets, short-read/EINTR cancellation
+    loops and final stability checks. Windows explicitly refuses, no hidden
+    descriptor-owning fallback. Not hostile-writer exclusion or mount proof. *)
+type stage = Hash | Parse | Verify | Write
+type stage_sample = { stage : stage; calls : int; inclusive_seconds : float }
+type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool;
+                    stages : stage_sample list option }
+val measure : t -> stage -> (unit -> 'a) -> 'a
+(** Worker-local inclusive interval when stage measurement is enabled on this
+    reader. Nested intervals overlap; never sum phases as operation wall time.
+    A failed callback propagates unchanged and records no successful interval.
+    Disabled readers call the callback without clock reads or counter updates. *)
+val with_read_stats : ?measure_stages:bool -> ?check_cancel:(unit -> unit) -> Unix.file_descr ->
   (t -> 'a) -> 'a * read_stats
 (** Opt-in accounting for a successfully completed, stability-checked reader.
     Counts bytes delivered by nonempty [read] and 64 KiB [iter] chunks, including
@@ -32,7 +59,12 @@ val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
     seeks/stats, writes, other readers and physical I/O. Callback/read/stability
     failure returns no report. Counters saturate rather than fail the operation;
     [saturated] makes an exact-total claim unavailable. Ordinary [with_fd] does
-    not allocate/update counters. Worker-local state, no shared/global metrics. *)
+    not allocate/update counters. Worker-local state, no shared/global metrics.
+    Optional [measure_stages] defaults false. [stages=None] means disabled or
+    unavailable/invalid clock/counter; [Some []] means enabled, no measured
+    phases. CLOCK_MONOTONIC on POSIX, unavailable on Windows. Only successful
+    intervals are retained; reader/callback/stability failure returns no report.
+    Includes scheduling and I/O, not isolated CPU or a hard resource bound. *)
 val size : t -> int64
 val check : t -> unit
 val same_inode : t -> Unix.file_descr -> bool

@@ -1,0 +1,64 @@
+{
+  "schema": "unison-sync-phase-preparation-qualification-v1",
+  "state": "PREPARED_SOURCE_ONLY_NO_RUNTIME_ADMISSION",
+  "owner_terminal": {
+    "session": 92772,
+    "chunk": "7a6cab",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "closure": {
+    "child": {
+      "pid": 48429,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 48429,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-sync-phase-preparation-20261018-001/RESULT.json",
+      "bytes": 974,
+      "sha256": "82dd94614d01bd728047edc0e4e0a7632896e6a89e6bd498d30a95eef5da8b6f"
+    },
+    {
+      "path": "/private/tmp/unison-sync-phase-preparation-20261018-001/SHARED-START.json",
+      "bytes": 1405,
+      "sha256": "88962486fe5a8df4544bcce501360abe77f769816955207b01f342159140e2e5"
+    },
+    {
+      "path": "/private/tmp/unison-sync-phase-preparation-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "541f934ff340a3d86483a391c8d04c8f7ca6203e2a3d6b28ee0c0458cbc570de"
+    }
+  ],
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-request-v1.json",
+    "bytes": 42417,
+    "sha256": "7df330109d3a8bb62de396a3b98d4c65ee2521042fa7949592e16296b5785455"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-plan-v1.json",
+    "bytes": 2698,
+    "sha256": "ea06b4ec8b485fac93ff6c769ad95239cce722168e4ece6d529087c8df5b277e"
+  },
+  "source_preparer": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_phase_prepare.py",
+    "bytes": 6094,
+    "sha256": "818dda77ff758217468bebf5e9867ecab8f23166da51ddc71260b9d3d8f14d97"
+  },
+  "scope": "Checked current build artifacts/production sources and exact manual argv; prospective guard used in-memory fake manifest, no canonical IO acquisition, Unison/compiler/SDK/Photo payload invocation or runtime workspace/admission creation."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "unison-final-dng-component-audit-terminal/1",
+  "actual_tool": {
+    "chunk_id": "cbcdaf",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_script": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-dng-component-audit-20261019.py.txt",
+    "bytes": 7006,
+    "sha256": "d92cf49e4e896627c22b0a13293b4489b16094e26e93b3cb7593185909c58ffb"
+  },
+  "receipt": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-dng-component-actual-20261019.json",
+    "sha256": "ff4935f0efeadb26b5e454e1df4e67cc3fa0be9d267a34f7e5717ddedb9ca180"
+  },
+  "CPU8_EX_closed": true
+}

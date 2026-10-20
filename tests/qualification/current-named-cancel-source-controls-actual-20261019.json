@@ -1,0 +1,35 @@
+{
+  "schema": "unison-current-named-cancel-source-controls/1",
+  "actual_tools": [
+    {
+      "terminal_chunk": "fc76a1",
+      "exit_code": 0,
+      "running_session": false,
+      "original_methods": 7
+    },
+    {
+      "terminal_chunk": "0cd6c2",
+      "exit_code": 0,
+      "running_session": false,
+      "original_methods": 8
+    }
+  ],
+  "source_sha256": {
+    "tests/current_validation_paths/signal_transport.py": "8718ba8ac3bb9a5247c8d9f493f71e1222ed2dec4716305b6d67381a757eb356",
+    "tests/current_validation_paths/signal_transport_test.py": "812f4fe2edceef83760d909741ff13f845cb354403cf1d2360e288b7f9734d64",
+    "tests/current_validation_paths/cancel_observation.py": "3c59335e457574c5c3f7c005f1c8377f73f728be8ff44ca7e0a7e6034fad3753",
+    "tests/current_validation_paths/cancel_observation_test.py": "c8f672952f8e8a6835018204bd6283652aad957e2fa76c71cd14c7cbc0a730b1"
+  },
+  "CPU00_closed_after_each": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "scope": "Inert handles/signals plus tiny private candidate/source/destination bytes and fabricated counters; not actual cancellation or receiving qualification",
+  "remaining": [
+    "bind cancellation transport into global call budget and durable actor",
+    "independent raw cancellation audit",
+    "producer-interruption actor",
+    "full parent/plan/entry binding and actual 21-case stock/Ox runs"
+  ]
+}

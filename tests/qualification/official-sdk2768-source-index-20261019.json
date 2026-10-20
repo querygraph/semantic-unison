@@ -1,0 +1,169 @@
+{
+  "schema": "unison-official-sdk-source-index/1",
+  "archive_sha256": "c1d3a545ed45b150e59af2e6aa0695c1551f0e2bed34ad87436898a05194d2b1",
+  "archive_bytes": 80509918,
+  "entries": 4215,
+  "declared_uncompressed_bytes": 133855079,
+  "key_sources": [
+    "dng_sdk_1_7_1/dng_sdk/source/dng_validate.cpp",
+    "dng_sdk_1_7_1/dng_sdk/source/dng_host.h",
+    "dng_sdk_1_7_1/dng_sdk/source/dng_image_writer.cpp",
+    "dng_sdk_1_7_1/libjxl/libjxl/CMakeLists.txt",
+    "dng_sdk_1_7_1/libjxl/libjxl/third_party/CMakeLists.txt",
+    "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/CMakeLists.txt",
+    "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/CMakeLists.txt",
+    "dng_sdk_1_7_1/libjxl/libjxl/lib/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPExtensions/XMPMarker/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPExtensions/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPCompareAndMerge/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/MP4OEM_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/ARRI_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/PluginTemplate/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/RED_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/MOVOEM_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/PDF_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/MXF_Handler/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPCore/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPFiles/build/CMakeLists.txt",
+    "dng_sdk_1_7_1/xmp/toolkit/XMPScript/build/CMakeLists.txt"
+  ],
+  "license_readme_candidates": [
+    {
+      "path": "dng_sdk_1_7_1/DNG_ReadMe.txt",
+      "bytes": 3128,
+      "compressed_bytes": 1194
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjpeg/README",
+      "bytes": 18970,
+      "compressed_bytes": 7784
+    },
+    {
+      "path": "dng_sdk_1_7_1/XMP_ReadMe.txt",
+      "bytes": 1610,
+      "compressed_bytes": 604
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/LICENSE",
+      "bytes": 1508,
+      "compressed_bytes": 789
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/skcms/LICENSE",
+      "bytes": 1635,
+      "compressed_bytes": 798
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/skcms/README.chromium",
+      "bytes": 88,
+      "compressed_bytes": 85
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/hwy/contrib/unroller/README.md",
+      "bytes": 1695,
+      "compressed_bytes": 833
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/hwy/contrib/sort/README.md",
+      "bytes": 19300,
+      "compressed_bytes": 8371
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/LICENSE",
+      "bytes": 11356,
+      "compressed_bytes": 3947
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/LICENSE-BSD3",
+      "bytes": 1515,
+      "compressed_bytes": 790
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/highway/README.md",
+      "bytes": 21236,
+      "compressed_bytes": 9275
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/LICENSE",
+      "bytes": 1084,
+      "compressed_bytes": 639
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/python/README.md",
+      "bytes": 1556,
+      "compressed_bytes": 696
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/README",
+      "bytes": 652,
+      "compressed_bytes": 393
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/README.md",
+      "bytes": 4610,
+      "compressed_bytes": 2131
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/third_party/brotli/scripts/dictionary/README.md",
+      "bytes": 176,
+      "compressed_bytes": 129
+    },
+    {
+      "path": "dng_sdk_1_7_1/libjxl/libjxl/lib/jpegli/README.md",
+      "bytes": 2211,
+      "compressed_bytes": 997
+    },
+    {
+      "path": "dng_sdk_1_7_1/xmp/toolkit/XMPFilesPlugins/RED_Handler/README.txt",
+      "bytes": 3993,
+      "compressed_bytes": 1224
+    },
+    {
+      "path": "dng_sdk_1_7_1/xmp/toolkit/third-party/zlib/README",
+      "bytes": 5187,
+      "compressed_bytes": 2449
+    },
+    {
+      "path": "dng_sdk_1_7_1/xmp/toolkit/third-party/zlib/ReadMe.txt",
+      "bytes": 239,
+      "compressed_bytes": 178
+    },
+    {
+      "path": "dng_sdk_1_7_1/xmp/toolkit/third-party/zuid/documentation/Read_Me.txt",
+      "bytes": 106,
+      "compressed_bytes": 89
+    },
+    {
+      "path": "dng_sdk_1_7_1/xmp/toolkit/XMPCore/third-party/expat/ReadMe.txt",
+      "bytes": 439,
+      "compressed_bytes": 271
+    },
+    {
+      "path": "dng_sdk_1_7_1/JPEG_ReadMe.txt",
+      "bytes": 473,
+      "compressed_bytes": 300
+    },
+    {
+      "path": "dng_sdk_1_7_1/JXL_ReadMe.txt",
+      "bytes": 416,
+      "compressed_bytes": 255
+    },
+    {
+      "path": "dng_sdk_1_7_1/LICENSE.txt",
+      "bytes": 5283,
+      "compressed_bytes": 2337
+    }
+  ],
+  "selected_texts": {
+    "dng_sdk_1_7_1/DNG_ReadMe.txt": "Welcome to the Digital Negative Software Development Kit (DNG SDK)\n\nThis package comes with C++ source code for the DNG SDK (see\ndng_sdk/source). This code has been tested using C++14 and C++17\nlanguage versions with various compilers on x64, arm32, and arm64\narchitectures.\n\nThis package also includes some project files for building a\ncommand-line utility named \"dng_validate\" on macOS and Windows (see\ndng_sdk/projects). These project files have been tested using the\nfollowing compilers:\n\n  macOS: Xcode 12.4 thru Xcode 26\n\n  Windows: Visual Studio 2022 (17.3.5) + clang\n\n    The clang tools are available as an optional component in the\n    Visual Studio installer.\n\n----------------------------------------------------------------------\n\nInstructions to build dng_validate:\n\n  macOS:\n\n    - Open dng_sdk/projects/mac/dng_validate.xcodeproj\n    \n    - Select either \"dng_validate debug\" or \"dng_validate release\" \n      from the Scheme dropdown menu\n      \n    - Build\n\n  Windows:\n\n    - Open dng_sdk/projects/win/dng_validate.sln\n\n    - Select \"Validate Debug\" or \"Validate Release\" from the\n      Configuration dropdown menu\n\n    - Build\n\n----------------------------------------------------------------------\n\nDependencies:\n\nThis distribution of the SDK includes the following libraries and\nadditional dependencies:\n\n  libjpeg for JPEG support\n    - see JPEG_ReadMe.txt for details\n\n  libjxl for JPEG XL support\n    - see JXL_ReadMe.txt for details\n    - includes brotli and highway dependencies\n\n  XMP SDK for XMP support\n    - see XMP_ReadMe.txt for details\n    - includes boost, expat, and zlib dependencies\n\n----------------------------------------------------------------------\n\nRelease Notes / Changelog:\n\n1.7.1 2768 October 13, 2026\n\n    - Exif Lens Vignette Info support.\n\n    - XMP_NS_CRCO namespace.\n\n    - Big table enhancements for oversized XMP.\n\n    - Preserve date-only metadata.\n\n    - Preserve Canon M-RAW predictor narrowing.\n\n    - Vulnerability issue fixes.\n\n1.7.1 2724 September 8, 2026\n\n    - RGB Table fixes.\n\n    - Fix for crash on exit.\n\n    - Big table namespace work.\n\n    - EncodeDelta fixes.\n\n    - AVIF/HEIC/HEIF c2pa fallback logic.\n\n    - Vulnerability issue fixes.\n\n1.7.1 2652 July 14, 2026\n\n    - Padded XMP packet fixes.\n\n    - Vulnerability issue fixes.\n\n1.7.1 2611 June 9, 2026\n\n    - TIFF and ARW read fixes.\n\n    - EXR support items.\n\n    - JXL c2pa manifest detection fixes.\n\n    - Vulnerability issue fixes.\n\n1.7.1 2573 May 12, 2026\n\n    - Hasselblad FFF format fixes.\n\n    - TIFF c2pa tag parsing fixes.\n\n    - Vulnerability issue fixes.\n\n1.7.1 2536 April 14, 2026\n\n    - Vulnerability issue fixes.\n\n    - Low-temperature White Balance work.\n\n    - Minor fixes and cleanups.\n\n1.7.1 2502 March 3, 2026\n\n    - Vulnerability issue fixes.\n\n    - JXL library updates.\n\n    - Minor fixes and cleanups.\n\n1.7.1 2471 January 29, 2026\n\n    - Vulnerability issue fixes.\n\n1.7.1 2410 November 17, 2025\n\n    - Vulnerability issue fixes.\n\n    - Other minor bug fixes.\n\n    - Add version and build numbers to dng_flags.h.\n\n----------------------------------------------------------------------\n",
+    "dng_sdk_1_7_1/libjpeg/README": "The Independent JPEG Group's JPEG software\n==========================================\n\nREADME for release 9c of 14-Jan-2018\n====================================\n\nThis distribution contains the ninth public release of the Independent JPEG\nGroup's free JPEG software.  You are welcome to redistribute this software and\nto use it for any purpose, subject to the conditions under LEGAL ISSUES, below.\n\nThis software is the work of Tom Lane, Guido Vollbeding, Philip Gladstone,\nBill Allombert, Jim Boucher, Lee Crocker, Bob Friesenhahn, Ben Jackson,\nJulian Minguillon, Luis Ortiz, George Phillips, Davide Rossi, Ge' Weijers,\nand other members of the Independent JPEG Group.\n\nIJG is not affiliated with the ISO/IEC JTC1/SC29/WG1 standards committee\n(previously known as JPEG, together with ITU-T SG16).\n\n\nDOCUMENTATION ROADMAP\n=====================\n\nThis file contains the following sections:\n\nOVERVIEW            General description of JPEG and the IJG software.\nLEGAL ISSUES        Copyright, lack of warranty, terms of distribution.\nREFERENCES          Where to learn more about JPEG.\nARCHIVE LOCATIONS   Where to find newer versions of this software.\nACKNOWLEDGMENTS     Special thanks.\nFILE FORMAT WARS    Software *not* to get.\nTO DO               Plans for future IJG releases.\n\nOther documentation files in the distribution are:\n\nUser documentation:\n  install.txt       How to configure and install the IJG software.\n  usage.txt         Usage instructions for cjpeg, djpeg, jpegtran,\n                    rdjpgcom, and wrjpgcom.\n  *.1               Unix-style man pages for programs (same info as usage.txt).\n  wizard.txt        Advanced usage instructions for JPEG wizards only.\n  change.log        Version-to-version change highlights.\nProgrammer and internal documentation:\n  libjpeg.txt       How to use the JPEG library in your own programs.\n  example.c         Sample code for calling the JPEG library.\n  structure.txt     Overview of the JPEG library's internal structure.\n  filelist.txt      Road map of IJG files.\n  coderules.txt     Coding style rules --- please read if you contribute code.\n\nPlease read at least the files install.txt and usage.txt.  Some information\ncan also be found in the JPEG FAQ (Frequently Asked Questions) article.  See\nARCHIVE LOCATIONS below to find out where to obtain the FAQ article.\n\nIf you want to understand how the JPEG code works, we suggest reading one or\nmore of the REFERENCES, then looking at the documentation files (in roughly\nthe order listed) before diving into the code.\n\n\nOVERVIEW\n========\n\nThis package contains C software to implement JPEG image encoding, decoding,\nand transcoding.  JPEG (pronounced \"jay-peg\") is a standardized compression\nmethod for full-color and grayscale images.\n\nThis software implements JPEG baseline, extended-sequential, and progressive\ncompression processes.  Provision is made for supporting all variants of these\nprocesses, although some uncommon parameter settings aren't implemented yet.\nWe have made no provision for supporting the hierarchical or lossless\nprocesses defined in the standard.\n\nWe provide a set of library routines for reading and writing JPEG image files,\nplus two sample applications \"cjpeg\" and \"djpeg\", which use the library to\nperform conversion between JPEG and some other popular image file formats.\nThe library is intended to be reused in other applications.\n\nIn order to support file conversion and viewing software, we have included\nconsiderable functionality beyond the bare JPEG coding/decoding capability;\nfor example, the color quantization modules are not strictly part of JPEG\ndecoding, but they are essential for output to colormapped file formats or\ncolormapped displays.  These extra functions can be compiled out of the\nlibrary if not required for a particular application.\n\nWe have also included \"jpegtran\", a utility for lossless transcoding between\ndifferent JPEG processes, and \"rdjpgcom\" and \"wrjpgcom\", two simple\napplications for inserting and extracting textual comments in JFIF files.\n\nThe emphasis in designing this software has been on achieving portability and\nflexibility, while also making it fast enough to be useful.  In particular,\nthe software is not intended to be read as a tutorial on JPEG.  (See the\nREFERENCES section for introductory material.)  Rather, it is intended to\nbe reliable, portable, industrial-strength code.  We do not claim to have\nachieved that goal in every aspect of the software, but we strive for it.\n\nWe welcome the use of this software as a component of commercial products.\nNo royalty is required, but we do ask for an acknowledgement in product\ndocumentation, as described under LEGAL ISSUES.\n\n\nLEGAL ISSUES\n============\n\nIn plain English:\n\n1. We don't promise that this software works.  (But if you find any bugs,\n   please let us know!)\n2. You can use this software for whatever you want.  You don't have to pay us.\n3. You may not pretend that you wrote this software.  If you use it in a\n   program, you must acknowledge somewhere in your documentation that\n   you've used the IJG code.\n\nIn legalese:\n\nThe authors make NO WARRANTY or representation, either express or implied,\nwith respect to this software, its quality, accuracy, merchantability, or\nfitness for a particular purpose.  This software is provided \"AS IS\", and you,\nits user, assume the entire risk as to its quality and accuracy.\n\nThis software is copyright (C) 1991-2018, Thomas G. Lane, Guido Vollbeding.\nAll Rights Reserved except as specified below.\n\nPermission is hereby granted to use, copy, modify, and distribute this\nsoftware (or portions thereof) for any purpose, without fee, subject to these\nconditions:\n(1) If any part of the source code for this software is distributed, then this\nREADME file must be included, with this copyright and no-warranty notice\nunaltered; and any additions, deletions, or changes to the original files\nmust be clearly indicated in accompanying documentation.\n(2) If only executable code is distributed, then the accompanying\ndocumentation must state that \"this software is based in part on the work of\nthe Independent JPEG Group\".\n(3) Permission for use of this software is granted only if the user accepts\nfull responsibility for any undesirable consequences; the authors accept\nNO LIABILITY for damages of any kind.\n\nThese conditions apply to any software derived from or based on the IJG code,\nnot just to the unmodified library.  If you use our work, you ought to\nacknowledge us.\n\nPermission is NOT granted for the use of any IJG author's name or company name\nin advertising or publicity relating to this software or products derived from\nit.  This software may be referred to only as \"the Independent JPEG Group's\nsoftware\".\n\nWe specifically permit and encourage the use of this software as the basis of\ncommercial products, provided that all warranty or liability claims are\nassumed by the product vendor.\n\n\nThe Unix configuration script \"configure\" was produced with GNU Autoconf.\nIt is copyright by the Free Software Foundation but is freely distributable.\nThe same holds for its supporting scripts (config.guess, config.sub,\nltmain.sh).  Another support script, install-sh, is copyright by X Consortium\nbut is also freely distributable.\n\nThe IJG distribution formerly included code to read and write GIF files.\nTo avoid entanglement with the Unisys LZW patent (now expired), GIF reading\nsupport has been removed altogether, and the GIF writer has been simplified\nto produce \"uncompressed GIFs\".  This technique does not use the LZW\nalgorithm; the resulting GIF files are larger than usual, but are readable\nby all standard GIF decoders.\n\n\nREFERENCES\n==========\n\nWe recommend reading one or more of these references before trying to\nunderstand the innards of the JPEG software.\n\nThe best short technical introduction to the JPEG compression algorithm is\n\tWallace, Gregory K.  \"The JPEG Still Picture Compression Standard\",\n\tCommunications of the ACM, April 1991 (vol. 34 no. 4), pp. 30-44.\n(Adjacent articles in that issue discuss MPEG motion picture compression,\napplications of JPEG, and related topics.)  If you don't have the CACM issue\nhandy, a PDF file containing a revised version of Wallace's article is\navailable at http://www.ijg.org/files/Wallace.JPEG.pdf.  The file (actually\na preprint for an article that appeared in IEEE Trans. Consumer Electronics)\nomits the sample images that appeared in CACM, but it includes corrections\nand some added material.  Note: the Wallace article is copyright ACM and IEEE,\nand it may not be used for commercial purposes.\n\nA somewhat less technical, more leisurely introduction to JPEG can be found in\n\"The Data Compression Book\" by Mark Nelson and Jean-loup Gailly, published by\nM&T Books (New York), 2nd ed. 1996, ISBN 1-55851-434-1.  This book provides\ngood explanations and example C code for a multitude of compression methods\nincluding JPEG.  It is an excellent source if you are comfortable reading C\ncode but don't know much about data compression in general.  The book's JPEG\nsample code is far from industrial-strength, but when you are ready to look\nat a full implementation, you've got one here...\n\nThe best currently available description of JPEG is the textbook \"JPEG Still\nImage Data Compression Standard\" by William B. Pennebaker and Joan L.\nMitchell, published by Van Nostrand Reinhold, 1993, ISBN 0-442-01272-1.\nPrice US$59.95, 638 pp.  The book includes the complete text of the ISO JPEG\nstandards (DIS 10918-1 and draft DIS 10918-2).\nAlthough this is by far the most detailed and comprehensive exposition of\nJPEG publicly available, we point out that it is still missing an explanation\nof the most essential properties and algorithms of the underlying DCT\ntechnology.\nIf you think that you know about DCT-based JPEG after reading this book,\nthen you are in delusion.  The real fundamentals and corresponding potential\nof DCT-based JPEG are not publicly known so far, and that is the reason for\nall the mistaken developments taking place in the image coding domain.\n\nThe original JPEG standard is divided into two parts, Part 1 being the actual\nspecification, while Part 2 covers compliance testing methods.  Part 1 is\ntitled \"Digital Compression and Coding of Continuous-tone Still Images,\nPart 1: Requirements and guidelines\" and has document numbers ISO/IEC IS\n10918-1, ITU-T T.81.  Part 2 is titled \"Digital Compression and Coding of\nContinuous-tone Still Images, Part 2: Compliance testing\" and has document\nnumbers ISO/IEC IS 10918-2, ITU-T T.83.\nIJG JPEG 8 introduced an implementation of the JPEG SmartScale extension\nwhich is specified in two documents:  A contributed document at ITU and ISO\nwith title \"ITU-T JPEG-Plus Proposal for Extending ITU-T T.81 for Advanced\nImage Coding\", April 2006, Geneva, Switzerland.  The latest version of this\ndocument is Revision 3.  And a contributed document ISO/IEC JTC1/SC29/WG1 N\n5799 with title \"Evolution of JPEG\", June/July 2011, Berlin, Germany.\nIJG JPEG 9 introduces a reversible color transform for improved lossless\ncompression which is described in a contributed document ISO/IEC JTC1/SC29/\nWG1 N 6080 with title \"JPEG 9 Lossless Coding\", June/July 2012, Paris,\nFrance.\n\nThe JPEG standard does not specify all details of an interchangeable file\nformat.  For the omitted details we follow the \"JFIF\" conventions, version 2.\nJFIF version 1 has been adopted as Recommendation ITU-T T.871 (05/2011) :\nInformation technology - Digital compression and coding of continuous-tone\nstill images: JPEG File Interchange Format (JFIF).  It is available as a\nfree download in PDF file format from http://www.itu.int/rec/T-REC-T.871.\nA PDF file of the older JFIF document is available at\nhttp://www.w3.org/Graphics/JPEG/jfif3.pdf.\n\nThe TIFF 6.0 file format specification can be obtained by FTP from\nftp://ftp.sgi.com/graphics/tiff/TIFF6.ps.gz.  The JPEG incorporation scheme\nfound in the TIFF 6.0 spec of 3-June-92 has a number of serious problems.\nIJG does not recommend use of the TIFF 6.0 design (TIFF Compression tag 6).\nInstead, we recommend the JPEG design proposed by TIFF Technical Note #2\n(Compression tag 7).  Copies of this Note can be obtained from\nhttp://www.ijg.org/files/.  It is expected that the next revision\nof the TIFF spec will replace the 6.0 JPEG design with the Note's design.\nAlthough IJG's own code does not support TIFF/JPEG, the free libtiff library\nuses our library to implement TIFF/JPEG per the Note.\n\n\nARCHIVE LOCATIONS\n=================\n\nThe \"official\" archive site for this software is www.ijg.org.\nThe most recent released version can always be found there in\ndirectory \"files\".  This particular version will be archived as\nhttp://www.ijg.org/files/jpegsrc.v9c.tar.gz, and in Windows-compatible\n\"zip\" archive format as http://www.ijg.org/files/jpegsr9c.zip.\n\nThe JPEG FAQ (Frequently Asked Questions) article is a source of some\ngeneral information about JPEG.\nIt is available on the World Wide Web at http://www.faqs.org/faqs/jpeg-faq/\nand other news.answers archive sites, including the official news.answers\narchive at rtfm.mit.edu: ftp://rtfm.mit.edu/pub/usenet/news.answers/jpeg-faq/.\nIf you don't have Web or FTP access, send e-mail to mail-server@rtfm.mit.edu\nwith body\n\tsend usenet/news.answers/jpeg-faq/part1\n\tsend usenet/news.answers/jpeg-faq/part2\n\n\nACKNOWLEDGMENTS\n===============\n\nThank to Juergen Bruder for providing me with a copy of the common DCT\nalgorithm article, only to find out that I had come to the same result\nin a more direct and comprehensible way with a more generative approach.\n\nThank to Istvan Sebestyen and Joan L. Mitchell for inviting me to the\nITU JPEG (Study Group 16) meeting in Geneva, Switzerland.\n\nThank to Thomas Wiegand and Gary Sullivan for inviting me to the\nJoint Video Team (MPEG & ITU) meeting in Geneva, Switzerland.\n\nThank to Thomas Richter and Daniel Lee for inviting me to the\nISO/IEC JTC1/SC29/WG1 (previously known as JPEG, together with ITU-T SG16)\nmeeting in Berlin, Germany.\n\nThank to John Korejwa and Massimo Ballerini for inviting me to\nfruitful consultations in Boston, MA and Milan, Italy.\n\nThank to Hendrik Elstner, Roland Fassauer, Simone Zuck, Guenther\nMaier-Gerber, Walter Stoeber, Fred Schmitz, and Norbert Braunagel\nfor corresponding business development.\n\nThank to Nico Zschach and Dirk Stelling of the technical support team\nat the Digital Images company in Halle for providing me with extra\nequipment for configuration tests.\n\nThank to Richard F. Lyon (then of Foveon Inc.) for fruitful\ncommunication about JPEG configuration in Sigma Photo Pro software.\n\nThank to Andrew Finkenstadt for hosting the ijg.org site.\n\nThank to Thomas G. Lane for the original design and development of\nthis singular software package.\n\nThank to Lars Goehler, Andreas Heinecke, Sebastian Fuss, Yvonne Roebert,\nAndrej Werner, and Ulf-Dietrich Braumann for support and public relations.\n\n\nFILE FORMAT WARS\n================\n\nThe ISO/IEC JTC1/SC29/WG1 standards committee (previously known as JPEG,\ntogether with ITU-T SG16) currently promotes different formats containing\nthe name \"JPEG\" which is misleading because these formats are incompatible\nwith original DCT-based JPEG and are based on faulty technologies.\nIJG therefore does not and will not support such momentary mistakes\n(see REFERENCES).\nThere exist also distributions under the name \"OpenJPEG\" promoting such\nkind of formats which is misleading because they don't support original\nJPEG images.\nWe have no sympathy for the promotion of inferior formats.  Indeed, one of\nthe original reasons for developing this free software was to help force\nconvergence on common, interoperable format standards for JPEG files.\nDon't use an incompatible file format!\n(In any case, our decoder will remain capable of reading existing JPEG\nimage files indefinitely.)\n\nThe ISO committee pretends to be \"responsible for the popular JPEG\" in their\npublic reports which is not true because they don't respond to actual\nrequirements for the maintenance of the original JPEG specification.\nFurthermore, the ISO committee pretends to \"ensure interoperability\" with\ntheir standards which is not true because their \"standards\" support only\napplication-specific and proprietary use cases and contain mathematically\nincorrect code.\n\nThere are currently different distributions in circulation containing the\nname \"libjpeg\" which is misleading because they don't have the features and\nare incompatible with formats supported by actual IJG libjpeg distributions.\nOne of those fakes is released by members of the ISO committee and just uses\nthe name of libjpeg for misdirection of people, similar to the abuse of the\nname JPEG as described above, while having nothing in common with actual IJG\nlibjpeg distributions and containing mathematically incorrect code.\nThe other one claims to be a \"derivative\" or \"fork\" of the original libjpeg,\nbut violates the license conditions as described under LEGAL ISSUES above\nand violates basic C programming properties.\nWe have no sympathy for the release of misleading, incorrect and illegal\ndistributions derived from obsolete code bases.\nDon't use an obsolete code base!\n\nAccording to the UCC (Uniform Commercial Code) law, IJG has the lawful and\nlegal right to foreclose on certain standardization bodies and other\ninstitutions or corporations that knowingly perform substantial and\nsystematic deceptive acts and practices, fraud, theft, and damaging of the\nvalue of the people of this planet without their knowing, willing and\nintentional consent.\nThe titles, ownership, and rights of these institutions and all their assets\nare now duly secured and held in trust for the free people of this planet.\nPeople of the planet, on every country, may have a financial interest in\nthe assets of these former principals, agents, and beneficiaries of the\nforeclosed institutions and corporations.\nIJG asserts what is: that each man, woman, and child has unalienable value\nand rights granted and deposited in them by the Creator and not any one of\nthe people is subordinate to any artificial principality, corporate fiction\nor the special interest of another without their appropriate knowing,\nwilling and intentional consent made by contract or accommodation agreement.\nIJG expresses that which already was.\nThe people have already determined and demanded that public administration\nentities, national governments, and their supporting judicial systems must\nbe fully transparent, accountable, and liable.\nIJG has secured the value for all concerned free people of the planet.\n\nA partial list of foreclosed institutions and corporations (\"Hall of Shame\")\nis currently prepared and will be published later.\n\n\nTO DO\n=====\n\nVersion 9 is the second release of a new generation JPEG standard\nto overcome the limitations of the original JPEG specification,\nand is the first true source reference JPEG codec.\nMore features are being prepared for coming releases...\n\nPlease send bug reports, offers of help, etc. to jpeg-info@jpegclub.org.\n",
+    "dng_sdk_1_7_1/XMP_ReadMe.txt": "The DNG SDK requires Adobe XMP SDK.\n\nFor your convenience, this distribution includes a source code version of the Adobe XMP SDK.\n\nYou may also obtain the Adobe XMP SDK from:\n\nhttps://www.adobe.com/devnet/xmp.html\n\nXMP also uses additional public source code for the expat and zlib libraries.\n\nFor expat, see this document: xmp/toolkit/XMPCore/third-party/expat/ReadMe.txt\n\nFor zlib, see this document: xmp/toolkit/third-party/zlib/ReadMe.txt\n\n----------------------------------------------------------------------\n\nTo build XMPCore and XMPFiles manually using the included XMP SDK:\n\nThe following steps have been tested with Xcode 12 thru 14 on macOS and Visual Studio 2019 and 2022 on Windows.\n\nmacOS:\n\n    1. Install the expat and zlib prerequisites.\n\n    2. Open this project:\n\n    xmp/toolkit/XMPCore/build/CMake64_libcpp_Static/XMPCore64.xcodeproj\n\n    3. Select the XMPCoreStatic scheme.\n\n    4. Choose either Debug or Release in the scheme options.\n\n    5. Build.\n\n    6. Open this project:\n\n    xmp/toolkit/XMPFiles/build/CMake64_libcpp_Static/XMPFiles64.xcodeproj\n\n    7. Select the XMPFilesStatic scheme.\n\n    8. Choose either Debug or Release in the scheme options.\n\n    9. Build.\n\nWindows:\n\n    1. Install the expat and zlib prerequisites.\n\n    2. Open this solution:\n\n    xmp/toolkit/XMPCore/build/CMake64Static_VC16/XMPCore64.sln\n\n    3. Select the desired Debug/Release and ARM64/x64 configuration.\n\n    4. Build.\n\n    5. Open this solution:\n\n    xmp/toolkit/XMPFiles/build/CMake64Static_VC16/XMPFiles64.sln\n\n    6. Select the desired Debug/Release and ARM64/x64 configuration.\n\n    7. Build.\n\n",
+    "dng_sdk_1_7_1/libjxl/libjxl/LICENSE": "Copyright (c) the JPEG XL Project Authors.\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this\n   list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice,\n   this list of conditions and the following disclaimer in the documentation\n   and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its\n   contributors may be used to endorse or promote products derived from\n   this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n",
+    "dng_sdk_1_7_1/libjxl/libjxl/third_party/skcms/LICENSE": "// Copyright (c) 2018 Google Inc. All rights reserved.\n//\n// Redistribution and use in source and binary forms, with or without\n// modification, are permitted provided that the following conditions are\n// met:\n//\n//    * Redistributions of source code must retain the above copyright\n// notice, this list of conditions and the following disclaimer.\n//    * Redistributions in binary form must reproduce the above\n// copyright notice, this list of conditions and the following disclaimer\n// in the documentation and/or other materials provided with the\n// distribution.\n//    * Neither the name of Google Inc. nor the names of its\n// contributors may be used to endorse or promote products derived from\n// this software without specific prior written permission.\n//\n// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS\n// \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT\n// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR\n// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT\n// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,\n// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT\n// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,\n// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY\n// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT\n// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n--------------------------------------------------------------------------------\n",
+    "dng_sdk_1_7_1/libjxl/libjxl/third_party/skcms/README.chromium": "Name: skcms\nURL: https://skia.org/\nVersion: unknown\nSecurity Critical: yes\nLicense: BSD\n"
+  },
+  "extracted_files": 0,
+  "SDK_executions": 0,
+  "archive_payload_full_rehash_bytes": 0
+}

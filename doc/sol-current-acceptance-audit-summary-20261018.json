@@ -1,0 +1,91 @@
+{
+  "state": "CURRENT_ACCEPTANCE_SOURCE_AUDIT_PARTIAL_NOT_COMPLETE",
+  "scope": "Metadata only. Explicit source bindings are not full dependency closure; zero bindings is unbound, not current. No historical run/consumed admission repeated.",
+  "actual_audit_tool": {
+    "chunk_id": "8d6c0c",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "audit": {
+    "path": "/Users/alexy/src/unison-stream-classifier-20261018/doc/sol-acceptance-source-bindings-current-20261018.json",
+    "bytes": 408944,
+    "sha256": "7df7769e3e463b8b4f3744af1c14b98927247c8bdbc9c6f6a107a97f6cb8ba47"
+  },
+  "audit_owner_closure": {
+    "child": {
+      "pid": 29950,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 29950,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "receipts_checked": 23,
+  "status_counts": {
+    "ALL_DIRECT_BINDINGS_MATCH": 1,
+    "HISTORICAL_OR_MIXED_SOURCE_BINDINGS": 10,
+    "NO_DIRECT_BINDINGS": 12
+  },
+  "worker_results": {
+    "explicit_pinned_step_results_checked": 4,
+    "bindings_each": 53,
+    "matches_each": 38,
+    "changed_each": 15,
+    "changed_files": [
+      "src/componentHash.ml",
+      "src/componentHash.mli",
+      "src/dngComponents.ml",
+      "src/dngComponents.mli",
+      "src/dngSemantic.ml",
+      "src/dngSemantic.mli",
+      "src/semanticAdmission.ml",
+      "src/semanticAdmission.mli",
+      "src/semanticDelta.ml",
+      "src/semanticFile.ml",
+      "src/semanticFile.mli",
+      "src/semanticFile_stubs.c",
+      "src/semanticWorkers.ml",
+      "src/semanticWorkers.mli",
+      "src/xmpObservation.ml"
+    ],
+    "next": "Renew configured1/2/4/8 parity and seeded apply/cancel controls with actual current production objects, max6 active execution credits+2 owner inside Unison8. Original64-byte fixtures only; no Photo/native/SDK/bulk transport."
+  },
+  "merge_cache": {
+    "unchanged_files": [
+      "src/directoryOwner.ml",
+      "src/notificationPipe.ml",
+      "src/semanticMergeCache.ml",
+      "src/semanticMergeCache.mli",
+      "src/semanticSync.ml"
+    ],
+    "changed": "src/semanticRuntime.ml",
+    "next": "Review changed dependency and renew current-object cache composition controls if required; matching cache files alone do not adopt the whole old runtime closure."
+  },
+  "current_source_release_checks": [
+    "V6 genuine-upstream4cases12CLI under separate fresh admission",
+    "V6 retained-fork4cases12CLI under separate fresh admission",
+    "V6 current transfer/property18rows54CLI under separate fresh admission",
+    "Current worker parity/apply controls and selected failure/runtime dependency qualification",
+    "Reconcile remaining12area requirements to scoped current evidence; do not substitute universal cleanup or more speculative migrations for end-to-end checks."
+  ],
+  "not_concluded": [
+    "Goal complete",
+    "Current camera or SDK qualification from summaries with no direct bindings",
+    "Whole-tree validity from some matching source pins",
+    "Permission to reuse any consumed grant",
+    "Hard RSS/OSthread/physical IO savings/quiet timing/corpus or pixel claims"
+  ],
+  "resources": "Metadata audit child reaped0/groupabsent/Unison4closed, no EXIO/SDK/Photo payload/nativeUI."
+}

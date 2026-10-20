@@ -1,0 +1,322 @@
+{
+  "state": "KNOWN_STREAM_PAYLOAD_CAP_CURRENT_FOUR_BUILDS_CONTROLS_PASS",
+  "scope": "Declared custom payload caps on both stream and ordinary fallback before raw body allocation. No actual transport/native/SDK/Photo/physicalIO/heap/RSS or fullgoal claim.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 117798,
+      "sha256": "4a072990d03e5768088faee48c5d9c8e3eccff077879be93b4ccac9a71fb68f5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 11570,
+      "sha256": "50d60f0619bdb6c781006db24d30d6376a77483d03066d1fa467e546670e4d16"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/copy.ml",
+      "bytes": 114049,
+      "sha256": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/transfer.ml",
+      "bytes": 35508,
+      "sha256": "a128b305cd0b874c8bfc5a0873bd36fa495764ec162b2f4ca3c7dab21c696448"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/transfer.mli",
+      "bytes": 7285,
+      "sha256": "e4b8ac496e0aba764adb6971b9ee7b4ace7dfae0a2c8d16bff68006a1b0f1c6d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/remote_stream_limits.ml",
+      "bytes": 3041,
+      "sha256": "c4bb1366a9af96aeba7dbf840da6475a3dfeaff29bf1cf9ec3760ac9012e96d5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/test_remote_bounds.py",
+      "bytes": 21162,
+      "sha256": "3cc125f1630b1541df0ad3e2bf2e17689782e49bf83dd5834b88c8cda9e24771"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/transfer_instruction_bounds/run.py",
+      "bytes": 8256,
+      "sha256": "e2e558eda3f95796c6a105fcbf84fc6e1955560c1b7c6154b770200780513e59"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/transfer_instruction_bounds/probe.ml",
+      "bytes": 16384,
+      "sha256": "4acc2ff6ba0d46f528b2f7047ac7f5d2529c1778998d31c5b5e53d1db0acfc17"
+    }
+  ],
+  "producer_policy": {
+    "token_queue_bytes": 65500,
+    "file_identifier_bytes": 5,
+    "stream_body_bytes": 65535,
+    "fallback_body_bytes": 65536,
+    "outer_framing_excluded": true,
+    "custom_no_declaration_preserves_previous_behavior": true
+  },
+  "control_parent": {
+    "process_id": 83415,
+    "chunk_id": "633315",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": [
+    {
+      "compiler": "stock",
+      "family": "rpc",
+      "negative_participants": 16,
+      "stream_cap_negatives": {
+        "stream-cap-negative": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "389cabc5aa88a1252004cb157bd46ff43dea41fde9c5817e9c7614224a89d7fc",
+          "binary_sha256": "cc4aa25fbe28e0466f17ba07dd47e14141f4adf65ff5e39e4fa292fdc9c94a35"
+        },
+        "fallback-cap-negative": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "ca6837c1f535c5f71ede26666070b63ca296ef2d1c6bbcc6570e72ce6c58af91",
+          "binary_sha256": "cd2cd77c21fd9e5807dca4c975b9c1d8411ba04f736214e9f8b61155e4d4685f"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-rpc-20261018-002/CONTROL.json",
+          "bytes": 191005,
+          "sha256": "319b8954605238b7f6b0ce7f889c83a783a070212b347063ab934e42e8e3da81"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-rpc-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b0f27740f74291c7e7438cf4956f5b0a36f9861a823590df77d31985b89e3374"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-rpc-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 1301,
+          "sha256": "4b404f2a9966f310cd73d3dcc836717286d0f755c4bc038d36b4765f12c07f67"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-rpc-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "family": "transfer",
+      "checks": 167,
+      "negative_participants": 9,
+      "scope": "Actual generic/rsync multi-frame encoders checked against declared producer queue maximum; complete original transfer limit/framing suite.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-tokens-20261018-002/CONTROL.json",
+          "bytes": 149695,
+          "sha256": "953631b30e3a2525646ce10e6b0dd8a8a7da4595ce5476349e3ce6259524496a"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-tokens-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "4b595510e65ccca0cbe11f51dd729d7e046dadd4a17d57cade718bf3fb845b41"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-tokens-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 106,
+          "sha256": "66bee72a750cd3d0c23ac3f65007275095fe337a77be2b7295fa40da71962ce9"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-stock-tokens-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "family": "rpc",
+      "negative_participants": 16,
+      "stream_cap_negatives": {
+        "stream-cap-negative": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "389cabc5aa88a1252004cb157bd46ff43dea41fde9c5817e9c7614224a89d7fc",
+          "binary_sha256": "876d4f0e4c443292297fd3621c4b322e380404a904c461328080b0b56033d782"
+        },
+        "fallback-cap-negative": {
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "ca6837c1f535c5f71ede26666070b63ca296ef2d1c6bbcc6570e72ce6c58af91",
+          "binary_sha256": "7fbcf8b9ab5c635559cfc5c657db8314aaba9ead8e592b6412aa0ad46676ac43"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-rpc-20261018-002/CONTROL.json",
+          "bytes": 194676,
+          "sha256": "3b9379eb4addb47352b28ce1293f144133283ecdd46fd72577cb6cd4248f71a2"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-rpc-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "7c6f401e56e8b103e6698166588c3f77376f14798db733e90b5b6ae140463b41"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-rpc-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 1301,
+          "sha256": "4b404f2a9966f310cd73d3dcc836717286d0f755c4bc038d36b4765f12c07f67"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-rpc-20261018-002/SHARED-STDERR.txt",
+          "bytes": 220,
+          "sha256": "77f52fd0a49e75bbb23c3e9cf8060b143510f114afcfcd32c1bf922732ad14b4"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "family": "transfer",
+      "checks": 167,
+      "negative_participants": 9,
+      "scope": "Actual generic/rsync multi-frame encoders checked against declared producer queue maximum; complete original transfer limit/framing suite.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-tokens-20261018-002/CONTROL.json",
+          "bytes": 149746,
+          "sha256": "d1ea142b66010f8def6256047124e11cbe93ad440ba591c734ad0a11ab070592"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-tokens-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e89c9d1d0cc6d12454d277e77c7321d4d71fd871733506bc3679236968003bc1"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-tokens-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 106,
+          "sha256": "66bee72a750cd3d0c23ac3f65007275095fe337a77be2b7295fa40da71962ce9"
+        },
+        {
+          "path": "/private/tmp/unison-stream-command-cap-ox-tokens-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "build_parent": {
+    "process_id": 20985,
+    "chunk_id": "b37653",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "recorded_source_inputs": 578,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rcwzaikw/src/unison",
+        "bytes": 6296536,
+        "sha256": "da8147c32978250396723907d7e01b86078a09c681a2414b0e68c4eb54252892"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-cap-stock-check-20261018-001/RESULT.json",
+          "bytes": 60391,
+          "sha256": "fb3103fd324814e703652f30b2de92ca454a1d2c1c2e78c525245a0d7206f860"
+        },
+        {
+          "path": "/private/tmp/unison-stream-cap-stock-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "41c5872b520c15409105d8b58f8e443b907a7c61aee1b2c40511ac8dc1e6123f"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "recorded_source_inputs": 578,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-c48e035z/_build/default/src/linktext.exe",
+        "bytes": 6352592,
+        "sha256": "23ff5245d6f7053806d399ab67fb6c1767fa2f5536462bfc196309f7da4d367b"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-cap-stock-dune-check-20261018-001/RESULT.json",
+          "bytes": 60218,
+          "sha256": "d2d91618540fbe3739c819a895de7732c828a6bb949401623f3b080a635ea08d"
+        },
+        {
+          "path": "/private/tmp/unison-stream-cap-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "1e7a5a3dc32a6488a0e1f06c631b1a32465ff753ece975fbacce86b350af0fde"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "recorded_source_inputs": 578,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-xp7iy_rk/src/unison",
+        "bytes": 8380784,
+        "sha256": "b68e4d19efb94d57ca1c9721e9512fea590aefb886978679fea51931a0407864"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-cap-ox-check-20261018-001/RESULT.json",
+          "bytes": 60397,
+          "sha256": "259784227fd9ded04976e62dbac0486e7b32cc86afe9f48543fd30b8b0bb21fb"
+        },
+        {
+          "path": "/private/tmp/unison-stream-cap-ox-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a41b14739ad59d5e4ea784f4d6851b34fdc7e8ca21593715e64d5748f71d8a54"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "recorded_source_inputs": 578,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-xz78e4rb/_build/default/src/linktext.exe",
+        "bytes": 8017520,
+        "sha256": "560e6d6fce410b00d66ddaf6668006457dc6f1b91ff10a38b5b988007e5b4de8"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-stream-cap-ox-dune-check-20261018-001/RESULT.json",
+          "bytes": 60222,
+          "sha256": "4852baa34fd8d9e57eb479d7a6316b88243026aaf4b9637fb0b992097ee58a48"
+        },
+        {
+          "path": "/private/tmp/unison-stream-cap-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5cfb56d66f22eef290bd4b43c8f1d0658b2a31f72c849adc41f0f95b89bfbae1"
+        }
+      ]
+    }
+  ],
+  "preserved_fixture_failure": {
+    "parent": "20219/1e7491/exit1/no session",
+    "workspace": "/private/tmp/unison-stream-command-cap-stock-20261018-001",
+    "cause": "Test guard was below the preceding RPC header length; production unchanged. Corrected exact string payload distinguishes header/body allocation. Failed and closed receipts preserved."
+  },
+  "remaining": [
+    "Current final-candidate mixed-peer/property/transport compatibility",
+    "Custom workspace/baseline and client-result lifetime",
+    "Bounded metadata registries including receiver and retained streamError values",
+    "Whole-tree FD/RSS and full benchmark/platform/acceptance scope"
+  ]
+}

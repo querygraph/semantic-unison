@@ -1,0 +1,106 @@
+{
+  "schema": "unison-sdk-fixture-generation-source-readiness/1",
+  "state": "TEN_ORIGINAL_CONTROLS_AND_METADATA_PASS_NATIVE_UNSTARTED",
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-fixture-generation-plan-v2-20261019.json",
+    "bytes": 63218,
+    "sha256": "048d0ae7aac95e89d3bae5aaf74e9d5bd2842df38ffd3ec42eefe7101d3b424c"
+  },
+  "source_pins": {
+    "tests/sdk_fixture_generation.py": "57f30bc0dc5e27e8a00ed7137c345fb3dc3e6f6cb6acbad34204c269ed23a1d5",
+    "tests/sdk_fixture_generation_owner.py": "ab0e2929a76868b84e930821c4b36da8eae7cf8a7f3f408600b5bc7239ee97af",
+    "tests/sdk_fixture_generation_test.py": "80df39ccbd4b0126b6e96cd8d228670b17ebe2bf7c2a5048895f17d977553973"
+  },
+  "controls": {
+    "actual_tool_terminal": "8e452f/exit0/NOsession",
+    "result": {
+      "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-004/RESULT.json",
+      "bytes": 752,
+      "sha256": "13b493fcdc3667a151aca6a0cfc3eb9526eaab838c79817f5403049efbc0fd3e"
+    },
+    "child": {
+      "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-004/CHILD.json",
+      "bytes": 599,
+      "sha256": "9abcfe30aa0c940d38eb4c37fa4234e4de126111895a229748089b3ff3ff434d"
+    },
+    "methods": 10,
+    "SDK_or_native_child_calls": 0
+  },
+  "metadata": {
+    "actual_tool_terminal": "f46a7b/exit0/NOsession",
+    "result": {
+      "path": "/private/tmp/unison-sdk-fixture-generation-metadata-20261019-001/RESULT.json",
+      "bytes": 770,
+      "sha256": "bd2867847b783227f8e9efb167a50439cbd96f1caacc051f48d97b97f57188ee"
+    },
+    "child": {
+      "path": "/private/tmp/unison-sdk-fixture-generation-metadata-20261019-001/CHILD.json",
+      "bytes": 980,
+      "sha256": "5476513e6fbe7bcf77e9b0369cc0e8f0e2493517f2292051cf47720d84a01942"
+    },
+    "observation": {
+      "metadata_ready": true,
+      "source_pins": 571,
+      "prerequisites": 6,
+      "retained_epoch_fences": 2,
+      "input_payload_opened": false,
+      "execution_artifact_opened": false,
+      "IO_CPU_acquired": false,
+      "workspace_created": false,
+      "SDK_invoked": false
+    }
+  },
+  "preserved_predecessors": [
+    {
+      "terminal": "e3ce2c/0/NOsession",
+      "result": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-001/RESULT.json",
+        "bytes": 751,
+        "sha256": "26602f6715a6a0a71d706a58d5d1b8e7e074b32d9b0a34fdb930985667808509"
+      },
+      "child": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-001/CHILD.json",
+        "bytes": 594,
+        "sha256": "b163a9a6f0d9af253e7fb0026c74765267a24eb5a7f7ff8d657c3dec9dc8c415"
+      }
+    },
+    {
+      "terminal": "b43609/1/NOsession",
+      "result": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-002/RESULT.json",
+        "bytes": 753,
+        "sha256": "a9edeb108ae21f782fc440b19ac11d86ef32f15020980f267731ec30f70ced54"
+      },
+      "child": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-002/CHILD.json",
+        "bytes": 2405,
+        "sha256": "119a49476a81ec6be39c407970db2a7c76d9473ac7ed9587d9903b21a616f594"
+      }
+    },
+    {
+      "terminal": "1aa036/0/NOsession",
+      "result": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-003/RESULT.json",
+        "bytes": 752,
+        "sha256": "8db9f11e891e2a2eb3d2c0b03397c6d997fc04d6c116a852154e7d51b71023f7"
+      },
+      "child": {
+        "path": "/private/tmp/unison-sdk-fixture-generation-controls-20261019-003/CHILD.json",
+        "bytes": 599,
+        "sha256": "b8fd5e25120b6f3f06cd001effe98b01a922080e558206f8436847c35897b0d5"
+      }
+    }
+  ],
+  "original_v1_plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-fixture-generation-plan-v1-20261019.json",
+    "bytes": 63218,
+    "sha256": "27636b4787c28f3ae6b89924039ca575620b830311559d64f1a3464749c80d05",
+    "state": "SUPERSEDED_UNSTARTED_BY_SOURCE_METADATA_PREFLIGHT_SUCCESSOR"
+  },
+  "resources": {
+    "CPU00_closed": true,
+    "EXglobal_acquired": false,
+    "Photo_or_Capitola_hold": false
+  },
+  "scope": "Source/metadata and original Python doubles only; one actual JXL transcode+12realSDK findings are still unexecuted"
+}

@@ -1,0 +1,36 @@
+{
+  "scope": "Six pure diagnostic parser groups plus reparse four saved actual stock/Ox lines; zero new SDK/ExifTool/Photo/EXIO/compiler",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/supervised_external/external_records_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.030s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 94391,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu8_closed": true,
+  "source_pins": {
+    "tests/supervised_external/external_records.py": "51adff9042921e95c22e726b8f12d8198ba30ea0cff60cc331e30e0f94628335",
+    "tests/supervised_external/external_records_test.py": "8692a3f316c901205537bf7f23069129f9223c195e3e83f61731d24f9ca0865f"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "0ba874",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Faithful actual exec_command terminal transcription"
+  }
+}

@@ -19,7 +19,7 @@ let () =
  let supervisor=HelperSupervisor.create ~cpu_permits:2 ~max_children:2 ~max_pending:4 in
  let cancellation=HelperSupervisor.cancellation () in
  let expected=Lwt_unix.run(inspect candidate) in
- let context={CandidateValidator.supervisor;cancellation;cpu_budget=2;candidate;expected;
+ let context={CandidateValidator.supervisor;cancellation;cpu_budget=2;candidate;destination=candidate;expected;
    resources=BackendResources.none;inspect;execute=(fun run->run())} in
  let verdict=try (match DngCandidateValidation.select() with
    | None -> () | Some validate ->

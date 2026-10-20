@@ -35,7 +35,6 @@ type raw_attribute = { qname : qname; first : int; last : int }
 type attribute = {
   attribute_uri : string;
   attribute_local : string;
-  attribute_name : string;
   value_first : int;
   value_last : int;
 }
@@ -43,7 +42,6 @@ type namespaces = (string * string) list
 type element = {
   element_uri : string;
   element_local : string;
-  element_name : string;
   element_attributes : attribute list;
   namespaces : namespaces;
   first : int;
@@ -261,9 +259,12 @@ let read_attributes r declaration =
     end
   in loop [] 0
 
-let expanded uri local =
+let check_expanded uri local =
   let length = String.length local + if uri = "" then 0 else String.length uri + 2 in
-  if length > max_expanded_name then fail "expanded XML name limit exceeded";
+  if length > max_expanded_name then fail "expanded XML name limit exceeded"
+
+let expanded uri local =
+  check_expanded uri local;
   if uri = "" then local else "{" ^ uri ^ "}" ^ local
 
 let lookup namespaces prefix =
@@ -276,7 +277,10 @@ let resolve namespaces attribute qname =
     | Some prefix -> lookup namespaces prefix
     | None when attribute -> ""
     | None -> (match List.assoc_opt "" namespaces with Some uri -> uri | None -> "") in
-  uri, expanded uri qname.local
+  (* Keep the shared URI and local token separately throughout the AST. Eager
+     concatenation repeats a long ancestor URI for every nested attribute. *)
+  check_expanded uri qname.local;
+  uri
 
 let namespace_declaration attribute = match attribute.qname.prefix, attribute.qname.local with
   | None, "xmlns" -> Some ""
@@ -326,12 +330,13 @@ let resolve_attributes namespaces attributes =
     | attribute :: rest ->
         if namespace_declaration attribute <> None then loop resolved rest
         else begin
-          let uri, name = resolve namespaces true attribute.qname in
-          if List.exists (fun other -> other.attribute_name = name) resolved then
+          let uri = resolve namespaces true attribute.qname in
+          if List.exists (fun other -> other.attribute_uri = uri &&
+              other.attribute_local = attribute.qname.local) resolved then
             fail "duplicate expanded XML attribute";
           let resolved_attribute = {
             attribute_uri = uri; attribute_local = attribute.qname.local;
-            attribute_name = name; value_first = attribute.first;
+            value_first = attribute.first;
             value_last = attribute.last } in
           loop (resolved_attribute :: resolved) rest
         end
@@ -376,7 +381,7 @@ let rec read_element r inherited depth =
   let qname = read_qname r in
   let raw_attributes, ending = read_attributes r false in
   let namespaces = namespaces_for r inherited raw_attributes in
-  let element_uri, element_name = resolve namespaces false qname in
+  let element_uri = resolve namespaces false qname in
   let element_attributes = resolve_attributes namespaces raw_attributes in
   let self_closing = match ending with Tag value -> value | Declaration -> assert false in
   let rec content children =
@@ -396,7 +401,7 @@ let rec read_element r inherited depth =
     else content (read_text r :: children)
   in
   let children = if self_closing then [] else content [] in
-  { element_uri; element_local = qname.local; element_name; element_attributes;
+  { element_uri; element_local = qname.local; element_attributes;
     namespaces; first; last = r.at; children }
 
 let read_xml_declaration r =
@@ -526,7 +531,8 @@ let collect r rdf =
   let properties = ref [] in
   let names = Hashtbl.create max_properties in
   let subject = ref None in
-  let add uri local name namespaces kind first last =
+  let add uri local namespaces kind first last =
+    let name = expanded uri local in
     if Hashtbl.mem names name then fail "duplicate expanded XMP property";
     if Hashtbl.length names = max_properties then fail "XMP property limit exceeded";
     Hashtbl.add names name ();
@@ -553,13 +559,13 @@ let collect r rdf =
       end else begin
         if attribute.attribute_uri = xml_uri then fail "unsupported RDF structural XML attribute";
         if attribute.attribute_uri = "" then fail "unqualified XMP property attribute";
-        add attribute.attribute_uri attribute.attribute_local attribute.attribute_name
+        add attribute.attribute_uri attribute.attribute_local
           description.namespaces 'A' attribute.value_first attribute.value_last
       end) description.element_attributes;
     List.iter (fun property ->
       if property.element_uri = "" || property.element_uri = rdf_uri then
         fail "unsupported RDF property element";
-      add property.element_uri property.element_local property.element_name
+      add property.element_uri property.element_local
         property.namespaces 'E' property.first property.last)
       (structural_children r description)) (structural_children r rdf);
   { properties = List.rev !properties }
@@ -592,7 +598,7 @@ let scalar_view input =
             if not(List.mem value ["-1";"0";"1";"2";"3";"4";"5"])
             then fail "unsupported scalar rating"
           end else if String.length value>256 then fail "scalar label limit";
-          selected:={scalar_name=attribute.attribute_name;first;last;value;
+          selected:={scalar_name=expanded attribute.attribute_uri attribute.attribute_local;first;last;value;
             encoded=String.sub input first (last-first)} :: !selected
         end) description.element_attributes;
       List.iter(fun property ->

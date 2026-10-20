@@ -1,0 +1,33 @@
+{
+  "schema": "unison-retained-merge-transport-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['sdk_merge_receiving.proxy_test','sdk_merge_receiving.transport_test']));sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_expiry_keeps_all_known_pipe_owners (sdk_merge_receiving.proxy_test.Pump.test_expiry_keeps_all_known_pipe_owners) ... ok\ntest_original_six_bytes_forward_and_stdin_eof_close_once (sdk_merge_receiving.proxy_test.Pump.test_original_six_bytes_forward_and_stdin_eof_close_once) ... ok\ntest_live_native_after_eof_retains_sockets_and_pipe_no_reap (sdk_merge_receiving.proxy_test.Server.test_live_native_after_eof_retains_sockets_and_pipe_no_reap) ... ok\ntest_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles (sdk_merge_receiving.proxy_test.Server.test_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles) ... ok\ntest_normal_native_reap_and_all_handles_close_without_release_claim (sdk_merge_receiving.proxy_test.Server.test_normal_native_reap_and_all_handles_close_without_release_claim) ... ok\ntest_both_peers_started_before_any_finish_and_same_inherited_grant (sdk_merge_receiving.transport_test.Pair.test_both_peers_started_before_any_finish_and_same_inherited_grant) ... ok\ntest_capture_or_raw_frame_failure_is_not_failed_prefix_release (sdk_merge_receiving.transport_test.Pair.test_capture_or_raw_frame_failure_is_not_failed_prefix_release) ... ok\ntest_failed_client_start_keeps_proxy_and_nested_failed_start (sdk_merge_receiving.transport_test.Pair.test_failed_client_start_keeps_proxy_and_nested_failed_start) ... ok\ntest_failure_of_each_live_peer_retains_both_without_replacing_carrier (sdk_merge_receiving.transport_test.Pair.test_failure_of_each_live_peer_retains_both_without_replacing_carrier) ... ok\ntest_readiness_failure_keeps_proxy_without_starting_client (sdk_merge_receiving.transport_test.Pair.test_readiness_failure_keeps_proxy_without_starting_client) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.010s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 27330,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/proxy.py": "6c534451486f7cfe698736f76464771dc54b38ec5643a89c784a340b9ba0707b",
+    "tests/sdk_merge_receiving/proxy_test.py": "a2d22aa263ccf542d3fb5c5d7a8cb22ca9f3468f2efad49dc2c803d0b378dcb1",
+    "tests/sdk_merge_receiving/transport.py": "9e672a89d9fa6ac42748d3c7f462e5bdf5d6973de5a6c802b69b6fc942eac4b9",
+    "tests/sdk_merge_receiving/transport_test.py": "962b9d8030db8cd7f94f5603441c7e4aa438e5dde8412a7e667077fd07dd8d86"
+  },
+  "scope": "Original six-byte socketpair/pipe forwarding plus inert paired child/native controls. No SDK/media/Unison/compiler/canonical IO. Native paired run remains unqualified."
+}

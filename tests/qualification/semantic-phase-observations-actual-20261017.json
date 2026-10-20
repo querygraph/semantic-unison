@@ -1,0 +1,751 @@
+{
+  "schema": "unison-semantic-phase-observations-qualification-v1",
+  "state": "DIRECTED_PRODUCTION_AND_PRIVATE_CLOCK_CONTROLS_PASS_CLOSED",
+  "owning_terminals": [
+    {
+      "session": 49814,
+      "chunk": "684368",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Two full Make/selftests plus four production-object worker tests"
+    },
+    {
+      "session": 19921,
+      "chunk": "b1afe6",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Two SDE conformance participants"
+    },
+    {
+      "session": 77696,
+      "chunk": "649d02",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Two private clock-fault participants"
+    },
+    {
+      "session": 40003,
+      "chunk": "1b07b2",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Both current Dune builds and selftests"
+    },
+    {
+      "session": 76027,
+      "chunk": "9133f5",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Benchmark current-interface compatibility"
+    }
+  ],
+  "initial_stock_controls": {
+    "session": 72827,
+    "chunk": "390dcf",
+    "exit_code": 0,
+    "no_session": true,
+    "artifact": {
+      "path": "/private/tmp/unison-stage-stats-stock-20261017-001/RESULT.json",
+      "bytes": 6115,
+      "sha256": "ef0f92abc337fa6e772706bfd784722712dbe45dcbcfaccd574ddf39814795d2"
+    }
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticDelta.ml",
+      "bytes": 21795,
+      "sha256": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.ml",
+      "bytes": 10243,
+      "sha256": "2a3cd57872d2bafa4b5653a4972eb6c49b6c819e6cf5a8fbfefd297d75e0ca9e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.mli",
+      "bytes": 4275,
+      "sha256": "7ffee1974ed9690134d0391cd096423afe76f6c92d80d55b7a7940cd3f632d81"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.ox.mli.in",
+      "bytes": 4287,
+      "sha256": "44d1b9f551dcc9160089c24d1cd0df9798915bc9a511935a94cf7f2b7ac38715"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile_stubs.c",
+      "bytes": 40331,
+      "sha256": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRuntime.ml",
+      "bytes": 12827,
+      "sha256": "e9dbf74b8a6609c9678f0e1fa8ba9945f25d8cb2a051aa05f11765c64fab8262"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticWorkers.ml",
+      "bytes": 32287,
+      "sha256": "487860c84a1872808d68f2bc50ab998f6d6737de0ae2e12efae2855d716f1da1"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticWorkers.mli",
+      "bytes": 14221,
+      "sha256": "d1032a70f93b571a40768e51fee095c283b6c2070b73cec9ec36bfb23aaf5caa"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semantic_mode_filter.ml",
+      "bytes": 12263,
+      "sha256": "9ad46b6acaef18fb3ad4af6eadf00642a47effa752e22268f73e453be0bf6f8c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/workers/run.py",
+      "bytes": 9941,
+      "sha256": "1f2a7df13c77052aabc89cf43b6860e0379331ab501d7977b5d0a33edc185ab2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/workers/test.ml",
+      "bytes": 60331,
+      "sha256": "c9fc6d7356de35643ada95586bf3435021d3eced8807f3acc7e90ee7097289ef"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/clock_fault.py",
+      "bytes": 2917,
+      "sha256": "f0e4fbd44a909dbe89820334b8780784071f8b32b03d60617fe73eabf67afebb"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/clock_fault.ml",
+      "bytes": 1068,
+      "sha256": "3c4a7fad96eb2a88a6357f0d6a60781e7cae0ed003b33b8529a5ac40499688c3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/semantic-phase-observations-v1.md",
+      "bytes": 4632,
+      "sha256": "f078a4973e215ccb06f796323b94bf36f19ddfa8fdd0838dc816a38efef43c22"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/semantic/hash_bench.ml",
+      "bytes": 3796,
+      "sha256": "996c6fb87b17ec4dba0bacc6172046780dce9a2037df78087ae3fff279827c37"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/semantic/clock_stubs.c",
+      "bytes": 1762,
+      "sha256": "51cee58cd59a3bba561fafe091d5afd468a26cffbe54fd39cf50c232c94a8884"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/semantic/run.py",
+      "bytes": 12953,
+      "sha256": "979b6841ad8bbb440a95b07671f17b7c486d6f0995095afd679edc8346895806"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/cached_benchmark/build_controls.py",
+      "bytes": 2993,
+      "sha256": "694dee59373fce60a2647c29b2be619a23694c2043a067c43147a948aa1bb8eb"
+    }
+  ],
+  "participants": [
+    {
+      "compiler": "stock",
+      "kind": "full-stock",
+      "closure": {
+        "child": {
+          "pid": 23806,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 23806,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-full-stock-20261017-001/RESULT.json",
+          "bytes": 52597,
+          "sha256": "a8327bd237f08342fb9fa838b1dc9b666a6c0b2b3768fa9607aa5d79b14fafab"
+        },
+        {
+          "path": "/private/tmp/unison-stage-full-stock-20261017-001/SHARED-START.json",
+          "bytes": 1312,
+          "sha256": "d2fc5427197e2dd2d2d4c1e5281c05e775759c6a6fc6f59d866c4157df319ee4"
+        },
+        {
+          "path": "/private/tmp/unison-stage-full-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "c38c2e7651d82759da9983d88efdda913e2ce623cb5a4f12f89dc1e9482a753a"
+        }
+      ],
+      "production_source_pairs_current": 318,
+      "binary_sha256": "2af8b934c4aa834610368665a0677c831cc7718307818f6e0ced1ad4c97a3f5c",
+      "compiler_version": "5.2.0"
+    },
+    {
+      "compiler": "stock",
+      "kind": "stock-stage-stats",
+      "closure": {
+        "child": {
+          "pid": 25197,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 25197,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-stock-stage-stats-20261017-001/RESULT.json",
+          "bytes": 19456,
+          "sha256": "45504e7c510896694a18e5ad9b367668d3e796f2f465cdbe0a13178b866f64ce"
+        },
+        {
+          "path": "/private/tmp/unison-stage-stock-stage-stats-20261017-001/SHARED-START.json",
+          "bytes": 1381,
+          "sha256": "693b7af1cd4e84ac692dd92ecb743327c9b5f9819cfbf1cf14d9e3855c042587"
+        },
+        {
+          "path": "/private/tmp/unison-stage-stock-stage-stats-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b0c2ffd4b27a95f0be0d82821ffc74050925268c840fcca8242334d01f1576ed"
+        }
+      ],
+      "log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-chedckcz/test.log",
+        "bytes": 297,
+        "sha256": "09927e337da6e80b758b03f4e3e92f131789cee42f23888ffdba50eac3ba5778"
+      }
+    },
+    {
+      "compiler": "stock",
+      "kind": "stock-read-stats",
+      "closure": {
+        "child": {
+          "pid": 25221,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 25221,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-stock-read-stats-20261017-001/RESULT.json",
+          "bytes": 19456,
+          "sha256": "ad20ddad9013e024b4c6789e91aa1d2a7d954c56273c6f09cd5211d6cf30a4f6"
+        },
+        {
+          "path": "/private/tmp/unison-stage-stock-read-stats-20261017-001/SHARED-START.json",
+          "bytes": 1379,
+          "sha256": "14a52283f931273ff8ddc497de540188f040e2c6e2896434fb81078b41eba87f"
+        },
+        {
+          "path": "/private/tmp/unison-stage-stock-read-stats-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "005906129433b0a8f9a3e336d85e491364d5b540636850881371f1d4a75c658a"
+        }
+      ],
+      "log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-3i75jabo/test.log",
+        "bytes": 448,
+        "sha256": "ae6a5f8a320ba8ec201a87788630de48ecc739cd9c29bd22a0faee2a35b96a6b"
+      }
+    },
+    {
+      "compiler": "stock",
+      "kind": "conformance-stock",
+      "closure": {
+        "child": {
+          "pid": 26664,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26664,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-conformance-stock-20261017-001/RESULT.json",
+          "bytes": 24452,
+          "sha256": "5163b43c05790746e5f49075bfed16a7b1b216e753d5381251f7afa09e8c5393"
+        },
+        {
+          "path": "/private/tmp/unison-stage-conformance-stock-20261017-001/SHARED-START.json",
+          "bytes": 1265,
+          "sha256": "fddcb8f2cf6d7e2c3c3f4155d3e3dfd1a241c4f8277fe457371061c11744eab6"
+        },
+        {
+          "path": "/private/tmp/unison-stage-conformance-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "652d5a7e497cc17a0e280698524cdc66080b9d3ad6de12bc4e70992d4f744754"
+        }
+      ],
+      "commands_passed": 127,
+      "assertions_passed": 2224,
+      "wire_case_count": 83
+    },
+    {
+      "compiler": "stock",
+      "kind": "clock-faults-stock",
+      "closure": {
+        "child": {
+          "pid": 27120,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27120,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-stock-20261017-001/RESULT.json",
+          "bytes": 2017,
+          "sha256": "a8d6428947f365562f55c24a14f99e94bf379f1fe1f0df3c2fce7bc41321d22e"
+        },
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-stock-20261017-001/SHARED-START.json",
+          "bytes": 1270,
+          "sha256": "89b26cbf52429ccfb9667f33de6a80f9be817153222256974a35d1916e29618a"
+        },
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d60bfb7e3179717f1b48f5bdf8c6a596978a992728e356c6bc617cdb5549f22d"
+        }
+      ],
+      "private_faults": [
+        "unavailable",
+        "backwards"
+      ]
+    },
+    {
+      "compiler": "ox",
+      "kind": "full-ox",
+      "closure": {
+        "child": {
+          "pid": 25247,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 25247,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-full-ox-20261017-001/RESULT.json",
+          "bytes": 52603,
+          "sha256": "198d14422fba8e9327d720425d822cc741f5b462ef335635a648b5ecc7bfe29f"
+        },
+        {
+          "path": "/private/tmp/unison-stage-full-ox-20261017-001/SHARED-START.json",
+          "bytes": 1306,
+          "sha256": "4bafcd690fb999843cce504dda0285b9c379c45a87448c7bd0d8f0a0f2ae3a5a"
+        },
+        {
+          "path": "/private/tmp/unison-stage-full-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b947f2b41125e119eefe0229c24038e042a0c0dbbae972ddbd77564f08b1fc0c"
+        }
+      ],
+      "production_source_pairs_current": 318,
+      "binary_sha256": "868dcb951a9d0e066ce620cf7c1daa22d1ccaeb0a9600324a2b87ed87a563de4",
+      "compiler_version": "5.2.0+ox"
+    },
+    {
+      "compiler": "ox",
+      "kind": "ox-stage-stats",
+      "closure": {
+        "child": {
+          "pid": 26522,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26522,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-ox-stage-stats-20261017-001/RESULT.json",
+          "bytes": 19460,
+          "sha256": "17dc7761caee60ae994c0c638a1a250f070c80a97e2abdc2e6227e37224e7e99"
+        },
+        {
+          "path": "/private/tmp/unison-stage-ox-stage-stats-20261017-001/SHARED-START.json",
+          "bytes": 1380,
+          "sha256": "63a459c5a1184c4d878bf72ab15a8b384c756a9b38a78040c319198c3a1019c9"
+        },
+        {
+          "path": "/private/tmp/unison-stage-ox-stage-stats-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "1da354ff3f07f4011a34adceb80ba65e9aa05d8d7d49433276e8c861a3066306"
+        }
+      ],
+      "log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-iu71xf_i/test.log",
+        "bytes": 297,
+        "sha256": "09927e337da6e80b758b03f4e3e92f131789cee42f23888ffdba50eac3ba5778"
+      }
+    },
+    {
+      "compiler": "ox",
+      "kind": "ox-read-stats",
+      "closure": {
+        "child": {
+          "pid": 26564,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26564,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-ox-read-stats-20261017-001/RESULT.json",
+          "bytes": 19460,
+          "sha256": "4ce761f2be593299b5f2783257ba66144c0ed8a2ed41cb22fb733a207c91ecc6"
+        },
+        {
+          "path": "/private/tmp/unison-stage-ox-read-stats-20261017-001/SHARED-START.json",
+          "bytes": 1377,
+          "sha256": "e9c88da062764603069f83b61908115069326135c79940caa9e0a938c8536d8f"
+        },
+        {
+          "path": "/private/tmp/unison-stage-ox-read-stats-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5e421bb5c5866dfff0dd8626ffb6f6b2dd7de91e27844bdef68b9a9000290570"
+        }
+      ],
+      "log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-xyr6_7rk/test.log",
+        "bytes": 448,
+        "sha256": "ae6a5f8a320ba8ec201a87788630de48ecc739cd9c29bd22a0faee2a35b96a6b"
+      }
+    },
+    {
+      "compiler": "ox",
+      "kind": "conformance-ox",
+      "closure": {
+        "child": {
+          "pid": 26713,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26713,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-conformance-ox-20261017-001/RESULT.json",
+          "bytes": 24456,
+          "sha256": "911b9a23b512db96f6e00dfdb6efc1173d796c0500a5d37a232da5f9c562f5d9"
+        },
+        {
+          "path": "/private/tmp/unison-stage-conformance-ox-20261017-001/SHARED-START.json",
+          "bytes": 1262,
+          "sha256": "8bf3f2564239ff664ade4d20d45b41912beb5b462af72fce33261f1e7433f3a4"
+        },
+        {
+          "path": "/private/tmp/unison-stage-conformance-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "54daa2d424aea3bc5d74a4694abcff043fcc67124cc8bd03cafbcd29b2bb06b0"
+        }
+      ],
+      "commands_passed": 127,
+      "assertions_passed": 2224,
+      "wire_case_count": 83
+    },
+    {
+      "compiler": "ox",
+      "kind": "clock-faults-ox",
+      "closure": {
+        "child": {
+          "pid": 27177,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27177,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-ox-20261017-001/RESULT.json",
+          "bytes": 2017,
+          "sha256": "849d07fcd3ef44661f442cbb2c445e522ff6c677c71f3cc9012aa3173f2c14e5"
+        },
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-ox-20261017-001/SHARED-START.json",
+          "bytes": 1267,
+          "sha256": "89ca9fbc8cd968ad6e1b84e12a5f160bd8dabf95b9f7ecacf44323368f82d0fd"
+        },
+        {
+          "path": "/private/tmp/unison-stage-clock-faults-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "19a6a030daedb685e715a34661109fef7a9ee1bccf87356ccdcf732014606eea"
+        }
+      ],
+      "private_faults": [
+        "unavailable",
+        "backwards"
+      ]
+    },
+    {
+      "compiler": "stock",
+      "kind": "dune-stock",
+      "closure": {
+        "child": {
+          "pid": 27580,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27580,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-dune-stock-20261017-001/RESULT.json",
+          "bytes": 52535,
+          "sha256": "dcdb0f9a046bfde403acf069ffe5ad35f0f844ff8691a922c0ad89749b58c265"
+        },
+        {
+          "path": "/private/tmp/unison-stage-dune-stock-20261017-001/SHARED-START.json",
+          "bytes": 1349,
+          "sha256": "7d3ea142c7aa96d8325328391924b7b106322279c31dd080d4badf6f7e168120"
+        },
+        {
+          "path": "/private/tmp/unison-stage-dune-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "738296301c97c1455da3a03b737857404d5296538e398575de4a4d2658e8ae81"
+        }
+      ],
+      "production_source_pairs_current": 318,
+      "binary_sha256": "5bd392047e95b49c5ff25791fa40a552e44eae52d3cd6beda81c42b5a4f59765",
+      "compiler_version": "5.2.0"
+    },
+    {
+      "compiler": "ox",
+      "kind": "dune-ox",
+      "closure": {
+        "child": {
+          "pid": 28683,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 28683,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-dune-ox-20261017-001/RESULT.json",
+          "bytes": 52539,
+          "sha256": "e19195d022f825a82a9dee2aacd480bde4a78dc0d04c1c9a42648eba85120e2c"
+        },
+        {
+          "path": "/private/tmp/unison-stage-dune-ox-20261017-001/SHARED-START.json",
+          "bytes": 1346,
+          "sha256": "f5efe3db86dc913d77e354957f06b43e5f727c35d1c12c9d6c9c0bb9d94a49ae"
+        },
+        {
+          "path": "/private/tmp/unison-stage-dune-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "fd89a221c5d2703dbaf867f8669a9dcaa5d50163bd3043f801bd76ce622f936e"
+        }
+      ],
+      "production_source_pairs_current": 318,
+      "binary_sha256": "9c1be583bed244372e55ea56f51b85db6e8b18e4905a973d7e0f2336b38de43d",
+      "compiler_version": "5.2.0+ox"
+    },
+    {
+      "kind": "benchmark-compatibility",
+      "closure": {
+        "child": {
+          "pid": 30261,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 30261,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-stage-benchmark-compatibility-20261017-001/RESULT.json",
+          "bytes": 44212,
+          "sha256": "fa99dca2e3c92a9a7b105ad6706c1eec332ed38f468f82f387719fc98ffb4a08"
+        },
+        {
+          "path": "/private/tmp/unison-stage-benchmark-compatibility-20261017-001/BUILD.json",
+          "bytes": 36304,
+          "sha256": "3d6c6998ab7a01b7291ef5fbdccbb54388d9c5022b77985eb05aeac449b5b78b"
+        },
+        {
+          "path": "/private/tmp/unison-stage-benchmark-compatibility-20261017-001/SHARED-START.json",
+          "bytes": 1369,
+          "sha256": "9934b0e5cf35fa8f5e4a3472ecb9f685c4380a516307322ea13698cc5398457d"
+        },
+        {
+          "path": "/private/tmp/unison-stage-benchmark-compatibility-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "2b8295f5e52071f8a6e4868118769e69b94d636f3a0b453f17529ba0761f2f03"
+        }
+      ],
+      "scope": "Six original64B controls rebuilt against current production objects; not bulk benchmarking."
+    }
+  ],
+  "scope": "Original synthetic fixtures and source builds inside standing Unison00..07 only; no EXglobal, Photo/SDK/retained-camera reads, actual sync matrix, fuzz or sanitizer campaign.",
+  "limitations": [
+    "Opt-in inclusive phases overlap; not summed wall or isolated CPU time.",
+    "Atomic commit, legacy and whole-application timing coverage remain open.",
+    "Windows unavailable clock source branch is not a native Windows qualification.",
+    "Private unavailable/backwards backends are deterministic copied-source controls, not production changes.",
+    "Build/source scope only; no new physical I/O, hard RSS, aggregate FD or performance claim."
+  ]
+}

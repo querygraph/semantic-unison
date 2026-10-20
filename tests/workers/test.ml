@@ -74,7 +74,7 @@ let identify_tests () =
       (fun result -> ignore(Unix.LargeFile.fstat file);Unix.close file;return result)
       (fun error -> Unix.close file;fail error) in
   let selected formats = function
-    | Some result ->
+    | Some (result:W.identification) ->
       check (result.W.formats=formats) "wrong selected formats";
       (match result.W.fingerprint with
        | Some fingerprint ->
@@ -269,6 +269,71 @@ let apply_scheduling_stress () =
   verify (!cancelled>0) "no cancellation exercised";
   Printf.printf "PASS seeded apply stress seeds=6 jobs=%d completed=%d cancelled=%d late_cancel=%d checks=%d\n%!"
     (!completed+ !cancelled) !completed !cancelled !late !checks
+let stage_stats_tests () =
+  let original=String.init 4096 (fun i -> Char.chr ((i*31+7) land 255)) in
+  let target=Bytes.of_string original in Bytes.blit_string "NEXT" 0 target 8 4;
+  let target=Bytes.to_string target in
+  let save path data = let ch=open_out_bin path in output_string ch data;close_out ch in
+  save "stage-basis" original;save "stage-target" target;save "stage-output" original;
+  let with_input path f = let file=fd path in
+    Fun.protect ~finally:(fun () -> Unix.close file) (fun () -> f file) in
+  let phases stats expected = match stats.SemanticFile.stages with
+    | None -> failwith "monotonic stage report unavailable on qualified POSIX host"
+    | Some samples ->
+      check(List.map(fun sample -> sample.SemanticFile.stage,sample.calls) samples=expected)
+        "stage calls/order differs";
+      List.iter(fun sample -> check(Float.is_finite sample.SemanticFile.inclusive_seconds &&
+        sample.inclusive_seconds>=0.) "invalid stage duration") samples in
+  let module Extension = struct
+    let profile="test/stage-v1"
+    let inspect file = ignore(SemanticFile.read file 0L 8);
+      Ok {FormatExtension.regions=[{FormatExtension.offset=8L;length=4}]}
+  end in
+  let inspect file=match SemanticDelta.inspect (module Extension) file with
+    | Ok p -> p | Error why -> failwith why in
+  test "disabled and enabled-empty stage observations distinguish unavailable work" (fun () ->
+    with_input "stage-basis" (fun file ->
+      let _,disabled=SemanticFile.with_read_stats file SemanticFile.digest in
+      check(disabled.stages=None) "default reader unexpectedly timed";
+      let _,empty=SemanticFile.with_read_stats ~measure_stages:true file (fun input ->
+        check(try SemanticFile.measure input SemanticFile.Write (fun () -> raise Exit);false
+          with Exit -> true) "measurement changed callback error") in
+      phases empty []));
+  test "reader hash and SDE parser/hash phases preserve exact results" (fun () ->
+    with_input "stage-basis" (fun file ->
+      let digest,stats=SemanticFile.with_read_stats ~measure_stages:true file SemanticFile.digest in
+      check(digest=SemanticHash.string original && stats.logical_bytes=4096L) "timed digest differs";
+      phases stats [SemanticFile.Hash,1];
+      let proof,stats=SemanticFile.with_read_stats ~measure_stages:true file inspect in
+      check((SemanticDelta.describe proof).digest=digest) "timed SDE digest differs";
+      phases stats [SemanticFile.Hash,1;SemanticFile.Parse,1]));
+  test "SDE apply reports inclusive verify/write phases and exact changed bytes" (fun () ->
+    let base=with_input "stage-basis" (fun f -> SemanticFile.with_fd f inspect) in
+    let next=with_input "stage-target" (fun f -> SemanticFile.with_fd f inspect) in
+    let plan=match SemanticDelta.plan ~nonce:(String.make 32 'n') ~base ~target:next with
+      | Ok plan -> plan | Error why -> failwith why in
+    let output=Unix.openfile "stage-output" [Unix.O_RDWR;Unix.O_CLOEXEC] 0 in
+    Fun.protect ~finally:(fun () -> Unix.close output) (fun () ->
+      with_input "stage-basis" (fun file ->
+        let report,stats=SemanticFile.with_read_stats ~measure_stages:true file (fun basis ->
+          SemanticDelta.apply_report_with_extension (module Extension) plan ~basis ~output) in
+        check(report.logical_bytes_written=4) "timed apply wrote wrong amount";
+        phases stats [SemanticFile.Hash,1;SemanticFile.Parse,1;SemanticFile.Verify,3;SemanticFile.Write,1]));
+    with_input "stage-output" (fun file ->
+      check(SemanticFile.with_fd file SemanticFile.digest=SemanticHash.string target) "timed apply bytes differ"));
+  test "parallel stage samples stay immutable and callbacks stay owner-only" (fun () ->
+    let b=budget 2 in let pool=W.create ~workers:2 ~max_pending:4 ~budget:b in
+    let owner=Domain.self() and reports=ref [] in
+    W.set_read_observer ~measure_stages:true pool (Some(fun id stats ->
+      check(Domain.self()=owner) "timing callback on worker";
+      reports:=(id,stats)::!reports));
+    let jobs=List.init 4(fun _ -> hash pool (H.cancellation()) "stage-basis") in
+    List.iter (function Some result -> check(result.W.digest=SemanticHash.string original) "timed worker differs"
+      | None -> failwith "timed worker cancelled") (Lwt_unix.run(await jobs));
+    check(List.length !reports=4) "timing observer lost reports";
+    List.iter(fun (_,stats) -> phases stats [SemanticFile.Hash,1]) !reports;
+    W.set_read_observer pool None;finish pool b)
+
 let read_stats_tests () =
   let expected = write_fixture () in
   test "reader reports exact repeated reads/iteration/hash and ignores empty requests" (fun () ->
@@ -409,7 +474,19 @@ let shared_worker_parity () =
       "configured-worker descriptor leak";
     Printf.printf "PASS shared parity workers=%d admitted_cpu=%d jobs=16 cancelled=4 completed=12\n%!"
       workers cpu) [1;2;4;8]
-let shared_mixed_tests () =
+let cpu_hash_helper width =
+  check (width>=1 && width<=2) "bounded helper width required";
+  let payload=String.make 65536 'h' in
+  let domains=List.init width(fun _ -> Domain.spawn (* TEST_HASH_SPAWN *) (fun () ->
+    let result=ref "" in
+    for _=1 to 32 do result:=SemanticHash.string payload done;
+    !result)) in
+  let values=List.map Domain.join domains in
+  check(List.for_all((=)(SemanticHash.reference_string payload)) values)
+    "child native hash differs from portable SHA reference";
+  print_endline(SemanticHash.hex(List.hd values))
+
+let shared_mixed_tests ?(cpu_helpers=false) () =
   let before = Array.length (Sys.readdir "/dev/fd") in
   let channel = open_out_bin "sample" in
   output_string channel (String.make 64 'm'); close_out channel;
@@ -423,8 +500,14 @@ let shared_mixed_tests () =
       let group = ref None in
       H.run ~observe_group:(fun value -> group:=Some value) b ~weight (H.cancellation ())
         ~limits:{H.timeout=5.;terminate_grace=0.1;stdout_bytes=128;stderr_bytes=128}
-        ~executable:"/bin/sleep" ~arguments:[|"0.05"|] ~environment:[||]
-      >>= fun result -> return (result,!group) in
+        ~executable:(if cpu_helpers then Sys.executable_name else "/bin/sleep")
+        ~arguments:(if cpu_helpers then [|"--cpu-hash-helper";string_of_int weight|] else [|"0.05"|])
+        ~environment:[||]
+      >>= fun result ->
+        if cpu_helpers then check(result.H.stdout=
+          SemanticHash.hex(SemanticHash.reference_string(String.make 65536 'h'))^"\n")
+          "weighted child hash transcript differs";
+        return (result,!group) in
     let first = helper 1 in
     let second = helper (min 2 permits) in
     let jobs = List.init 16 (fun _ -> hash pool (H.cancellation ()) "sample") in
@@ -446,8 +529,13 @@ let shared_mixed_tests () =
   ) [1;2;4;6]
 
 let () =
+  if Array.length Sys.argv=3 && Sys.argv.(1)="--cpu-hash-helper" then
+    (cpu_hash_helper(int_of_string Sys.argv.(2));exit 0);
+  if Array.exists ((=) "--shared-mixed-hash-only") Sys.argv then
+    (shared_mixed_tests ~cpu_helpers:true ();exit 0);
   if Array.exists ((=) "--shared-mixed-only") Sys.argv then (shared_mixed_tests ();exit 0);
   if Array.exists ((=) "--shared-parity-only") Sys.argv then (shared_worker_parity ();exit 0);
+  if Array.exists ((=) "--stage-stats-only") Sys.argv then (stage_stats_tests ();exit 0);
   if Array.exists ((=) "--read-stats-only") Sys.argv then (read_stats_tests ();exit 0);
   if Array.exists ((=) "--apply-stress-only") Sys.argv then (apply_scheduling_stress ();exit 0);
   if Array.exists ((=) "--stress-only") Sys.argv then (scheduling_stress ();exit 0);

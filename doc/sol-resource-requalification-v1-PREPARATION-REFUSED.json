@@ -1,0 +1,27 @@
+{
+  "state": "SUPERSEDED_UNSTARTED_PREPARATION_ONLY",
+  "cause": "Retained-fork plan67794B exceeds generic65536B reader cap. Upstream plan64021B and request were prepared first; bundle failed before retained request/properties/index. No owner/worker/admission/CPU/IO acquisition or transport invoked.",
+  "actual_preparation_terminal": {
+    "chunk": "6761ab",
+    "exit_code": 1,
+    "no_session": true
+  },
+  "preserved": [
+    {
+      "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-upstream-plan-v1.json",
+      "bytes": 64021,
+      "sha256": "b2336df035d9807c740b92c4493594943acc9c68965ff8f01d6c4b14db1661cd"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-upstream-request-v1.json",
+      "bytes": 2163,
+      "sha256": "4e826ff97faf488d89b40e7a9b5b04afe7631d9d779371b9b389e2d402a716f2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-retained-fork-plan-v1.json",
+      "bytes": 67794,
+      "sha256": "cba8fbee025a85037edd2fa4742666f0e4641d5b319b1bc33b1c288395b8474b"
+    }
+  ],
+  "old_paths_do_not_authorize_replay": true
+}

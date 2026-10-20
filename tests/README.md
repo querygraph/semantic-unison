@@ -263,7 +263,7 @@ transaction resource budgets; pending I/O settlement and descriptor reuse; file
 cloning and normal Unison lifecycle; negotiated peer compatibility; and
 precommit validation. Correctness tests do not establish throughput, physical
 write amplification, crash durability, Lightroom UI parity or full DNG corpus
-coverage. Current evidence and remaining work are recorded in [SOL.md](../SOL.md).
+coverage. Current evidence and remaining work are recorded in [SEMANTIC-UNISON-DESIGN.md](../SEMANTIC-UNISON-DESIGN.md).
 
 The semantic runner now includes independent SDE/SDR conformance by default:
 `tests/semantic/conformance/` contains pinned binary goldens, an independent

@@ -30,6 +30,131 @@ let request_body name codec value =
 let request_id n = let b,_,_ = R.encodeInt n in b
 let pause_output conn = conn.R.outputQueue.R.canWrite <- false
 
+let test_input_budget () =
+  let old_mib=Prefs.read R.boundedInputMiB and old_slots=Prefs.read R.boundedInputSlots in
+  Prefs.set R.boundedInputMiB 1;Prefs.set R.boundedInputSlots 2;
+  let usage bytes count =
+    require (!(R.bounded_input_bytes)=bytes && !(R.bounded_input_count)=count)
+      "bounded input ledger mismatch" in
+  let exhausted f =
+    try f ();failwith "bounded input quota ignored"
+    with Util.Fatal message -> require (message="RPC bounded input budget exhausted")
+      "wrong input quota refusal" in
+  usage 0 0;
+  (* Only the length is sent: quota refusal must precede body allocation/read. *)
+  with_connection (fun conn fd ->
+    send fd [R.encodeInt (1048576+1)];
+    exhausted (fun () -> Lwt_unix.run
+      (R.start_bounded_request conn 2097152 (fun _ -> failwith "oversized dispatched"))));
+  usage 0 0;
+  let held=ref [] in
+  let accept conn fd text =
+    send fd [R.encodeInt (String.length text);Bytearray.of_string text,0,String.length text];
+    let pending=Lwt.wait () in
+    Lwt_unix.run (R.start_bounded_request conn 64 (fun bytes ->
+      require (Bytearray.to_string bytes=text) "bounded input changed";
+      held:=pending :: !held;pending)) in
+  with_connection (fun conn fd ->
+    accept conn fd "abc";accept conn fd "";usage 3 2;
+    send fd [R.encodeInt 1];
+    exhausted (fun () -> Lwt_unix.run
+      (R.start_bounded_request conn 64 (fun _ -> failwith "third request dispatched")));
+    usage 3 2);
+  (* Connection close cannot revoke credits from still-borrowed raw buffers. *)
+  usage 3 2;
+  List.iter (fun pending -> Lwt.wakeup pending ()) !held;usage 0 0;
+  (* An observed worker failure still retires exactly one reservation. *)
+  with_connection (fun conn fd ->
+    send fd [R.encodeInt 0];
+    (try Lwt_unix.run (R.start_bounded_request conn 64
+       (fun _ -> Lwt.fail (Failure "input-dispatch-failed")));
+       failwith "dispatch error swallowed"
+     with Failure s -> require (s="input-dispatch-failed") "wrong dispatch failure"));
+  usage 0 0;
+  (* A short body fails after reserving but must retire its raw-buffer charge. *)
+  let input,writer=Lwt_unix.pipe_in () in
+  let output=Lwt_unix.of_unix_file_descr (Unix.openfile "/dev/null" [Unix.O_WRONLY] 0) in
+  let conn=R.makeConnection false input output in
+  send writer [R.encodeInt 4;Bytearray.of_string "ab",0,2];Unix.close writer;
+  (try Lwt_unix.run (R.start_bounded_request conn 64
+     (fun _ -> failwith "truncated body dispatched"));failwith "truncation accepted"
+   with Util.Fatal _ -> ());
+  R.closeConnection conn;usage 0 0;
+  let ticket={R.input_bytes=0;input_active=false} in
+  R.reserve_bounded_input ticket 1048576;usage 1048576 1;
+  exhausted (fun () -> R.reserve_bounded_input {R.input_bytes=0;input_active=false} 1);
+  R.release_bounded_input ticket;R.release_bounded_input ticket;usage 0 0;
+  Prefs.set R.boundedInputMiB old_mib;Prefs.set R.boundedInputSlots old_slots
+
+let test_decoded_budget () =
+  let called=ref 0 in
+  List.iter(fun scoped->
+    let name=if scoped then "decoded-scope" else "decoded-plain" in
+    let withScope=if scoped then Some(fun _ _ f->f()) else None in
+    let _client=R.registerBoundedServerCmd ?withScope name ~maxArgs:64 ~maxResult:64
+      (Umarshal.list Umarshal.unit) Umarshal.unit (fun _ _->incr called;Lwt.return ()) in
+    with_connection(fun conn fd->
+      pause_output conn;
+      let body=request_body name (Umarshal.list Umarshal.unit)(List.init 2000(fun _->())) in
+      require(Bytearray.length body<=64) "decode fixture exceeds raw cap";
+      send fd [R.encodeInt(Bytearray.length body);body,0,Bytearray.length body];
+      Lwt_unix.run(R.start_bounded_request conn 64(fun buf->R.processRequest conn(request_id 901)name buf));
+      require(!called=0) "DESIGNATED decoded collection reached server";
+      require(!(R.bounded_input_count)=1 && Queue.length conn.R.outputQueue.R.writes=1)
+        "decode refusal dropped ticket before exception output";
+      R.allowWrites conn.R.outputQueue;
+      Lwt_unix.run(Lwt_unix.yield());
+      require(!(R.bounded_input_count)=0 && !(R.bounded_input_bytes)=0) "decode refusal input ticket leaked")) [false;true];
+  let result_client=R.registerBoundedServerCmd "decoded-result" ~maxArgs:64 ~maxResult:64
+    Umarshal.unit (Umarshal.list Umarshal.unit) (fun _ ()->Lwt.return []) in
+  with_connection(fun conn fd->
+    let reply=result_client conn () in
+    let id= !(R.ids) in
+    let body=Bytearray.of_string("decoded-result-res"^Umarshal.to_string(Umarshal.list Umarshal.unit)(List.init 2000(fun _->()))) in
+    send fd(R.encodeInt id::R.marshalHeader conn R.NormalResult
+      [R.encodeInt(Bytearray.length body);body,0,Bytearray.length body]);
+    let receiving=R.receive conn in
+    (try ignore(Lwt_unix.run reply);failwith "bounded result decoded without limits"
+     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong result budget refusal");
+    R.closeConnection conn;disconnected receiving);
+  with_connection(fun conn _->
+    let malformed=Umarshal.(to_string(sum6 unit string string int string unit id id)(I64(1048576))) in
+    (try ignore(R.unmarshalHeader conn(Bytearray.of_string("rsp"^malformed)));failwith "header inner allocation unbounded"
+     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong header allocation refusal"));
+  require((try ignore(R.boundedMarshalingFunctions max_int Umarshal.unit);false with Invalid_argument _->true))
+    "decoded budget overflow accepted"
+
+let test_single_argument_decode () =
+  let decodes=ref 0 and seen=ref None and calls=ref 0 and reject=ref false in
+  let codec=Umarshal.prod2 Umarshal.int Umarshal.unit
+    (fun value->(!value,()))
+    (fun (value,())->incr decodes;ref value) in
+  let scope _ value dispatch =
+    seen:=Some value;
+    require(!decodes=1) "DESIGNATED scoped arguments decoded twice";
+    value:=8;
+    if !reject then Lwt.fail(Util.Transient "single decode refusal")
+    else dispatch () in
+  let _command=R.registerBoundedServerCmd ~withScope:scope "single-decode-test"
+    ~maxArgs:64 ~maxResult:64 codec Umarshal.unit (fun _ value->
+      incr calls;
+      require(!decodes=1 && !value=8 &&
+        (match !seen with Some first->first==value | None->false))
+        "DESIGNATED scope and handler received distinct decoded values";
+      Lwt.return ()) in
+  List.iter(fun refusal->
+    reject:=refusal;decodes:=0;calls:=0;seen:=None;
+    with_connection(fun conn _->
+      pause_output conn;
+      let work=R.processRequest conn(request_id 993)"single-decode-test"
+        (request_body "single-decode-test" codec(ref 7)) in
+      require(!decodes=1)
+        "DESIGNATED scope and handler received distinct decoded values";
+      require(!calls=(if refusal then 0 else 1))
+        "single decode admission did not control dispatch";
+      require(Lwt.poll work=None) "single decode did not await output";
+      R.allowWrites conn.R.outputQueue;Lwt_unix.run work)) [false;true]
+
 let test_reply_scopes () =
   let active = ref 0 and calls = ref 0 and mode = ref `Success in
   let delayed = ref (Lwt.wait ()) in
@@ -189,7 +314,10 @@ let () =
     send fd (R.encodeInt 888 :: R.marshalHeader conn R.NormalResult [R.encodeInt (1 lsl 30)]);
     exceeds (fun () -> Lwt_unix.run (R.receive conn)));
   R.resetReceivers ();
+  test_decoded_budget ();
+  test_single_argument_decode ();
   test_reply_scopes ();
+  test_input_budget ();
   test_dynamic_reply_bounds ();
   test_output_failure ();
   print_endline "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup"

@@ -1,0 +1,13 @@
+{
+  "schema": "unison-final-default-upstream-independent-audit-terminal/1",
+  "actual_tool": {
+    "terminal_chunk": "07dc8d",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "calls": 12,
+  "primary_roles": 36,
+  "independently_hashed_payload_bytes": 65536,
+  "whole8_ex_closed": true,
+  "referenced_receipt": "tests/qualification/final-default-upstream-peer-actual-20261019.json"
+}

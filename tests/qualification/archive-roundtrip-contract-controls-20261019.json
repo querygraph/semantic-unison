@@ -1,0 +1,31 @@
+{
+  "schema": "unison-archive-roundtrip-contract-controls/1",
+  "actual_tool_terminal": {
+    "chunk_id": "2251ca",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "result": {
+    "path": "/private/tmp/unison-archive-contract-controls-20261019-001/RESULT.json",
+    "bytes": 453,
+    "sha256": "58269a4685817c0db0eafb84b197ee1118438aa531a79618301fc6adcb8e1f71"
+  },
+  "controls": {
+    "child": {
+      "group_cleanup_before_leader_reap": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "pid": 37544,
+      "reaped": true,
+      "returncode": 0
+    },
+    "methods": 6,
+    "no_sync_SDK_or_payload": true,
+    "passed": true,
+    "source_pins": {
+      "tests/archive_roundtrip_contract.py": "05ffa51c753877ad40c069d7e4468da88f71b10d51fc82f7af8c81330df7599b",
+      "tests/archive_roundtrip_contract_test.py": "2549d2ff47f17c14eaa5535156eaaf44887cef16ad581646b147846740bde4cb"
+    }
+  },
+  "scope": "Six original contract control methods, not actual current/installed-peer archive execution; no archive compatibility/SDK/Photo payload claim."
+}

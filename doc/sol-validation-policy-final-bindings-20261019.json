@@ -1,0 +1,279 @@
+{
+  "schema": "unison-final-validation-policy-case-audit/1",
+  "scope": "Saved current production/test source and case-log binding audit only; no new helper/native execution or complete transitive-runtime certification",
+  "receipt": {
+    "path": "tests/qualification/cpu-ceiling-dependent-composition-actual-20261018.json",
+    "sha256": "67dcabd88c41707d016775c53a6218b977872edcbd22e0bed1858d1dd5560e0f"
+  },
+  "actual_original_tool": {
+    "session": 59806,
+    "initial_chunk": "1cf31b",
+    "terminal_chunk": "68e562",
+    "exit": 0,
+    "no_session": true
+  },
+  "rows": [
+    {
+      "compiler": "stock",
+      "production_bindings_matched": 329,
+      "linked_source_bindings_matched": 212,
+      "test_bindings_matched": 5,
+      "test_pins": {
+        "README.md": "4aaa4ddbf0355e71294d213b7817cbd8492d897c5c992fc47e4c21d4a0f2fed9",
+        "helper.ml": "4faa426bc937acbc89e92712659111bf649b95745ba35942f2326b78f9445c80",
+        "probe.ml": "4f382d4d82d51eec6990587ae71dd2c75746c1bfbf659f607af182405ac3dcb5",
+        "run.py": "6af62c94876ac7f225b2be2fba4a799a79e75afa55cebff68ffd872be306ed5e",
+        "test.ml": "1a6fba7a0a5a67c4a08cc357a170d0adbd47ca7a7388fc8adf0d04c4ba3b9364"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-stock-20261018-001/RESULT.json",
+          "bytes": 267055,
+          "sha256": "6b19a451ccd8f4fe671d29560b9adbd47a0be8a140434cf801ec0ffc38405a21"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "264f02214b3510447c2789da6e131d33381304652f8c5fbdcb0865ef8c67a872"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 1179,
+          "sha256": "cbe056d1c0aab5dbf7cae70e4d372092512426ef6b905eff54de5db727f746d0"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        {
+          "case": "warn-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-error/test.log",
+          "log_sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+        },
+        {
+          "case": "warn-pass",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-pass/test.log",
+          "log_sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+        },
+        {
+          "case": "require-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/require-error/test.log",
+          "log_sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+        },
+        {
+          "case": "off",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/off/test.log",
+          "log_sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+        },
+        {
+          "case": "warn-inspection-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-inspection-error/test.log",
+          "log_sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+        },
+        {
+          "case": "warn-mutation",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-mutation/test.log",
+          "log_sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+        },
+        {
+          "case": "warn-active-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-active-cancel/test.log",
+          "log_sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+        },
+        {
+          "case": "warn-before-delivery-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-before-delivery-cancel/test.log",
+          "log_sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+        },
+        {
+          "case": "warn-delivery-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-delivery-cancel/test.log",
+          "log_sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+        },
+        {
+          "case": "warn-delivery-abort",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-delivery-abort/test.log",
+          "log_sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+        },
+        {
+          "case": "warn-printer-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-1pxbx9ko/fixed/warn-printer-error/test.log",
+          "log_sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 62594,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62594,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "scope": "Actual DngCandidateValidation.select and full compiler-matched legacy-Lwt/core graph; synthetic helper and files; private worker-dispatch observations.",
+      "limits": [
+        "Synthetic protocol receipts do not establish Adobe structural/decode/digest fidelity.",
+        "Standalone controls invoke the actual selected DNG handler directly; receiving selection/publication is exercised separately by complete loopback CLI controls.",
+        "Remote warning behavior is established for actual local exec transport, not SSH networking or native GTK/Cocoa UI.",
+        "Resource ledger settlement is checked; no whole-process FD/RSS ceiling is claimed."
+      ]
+    },
+    {
+      "compiler": "ox",
+      "production_bindings_matched": 329,
+      "linked_source_bindings_matched": 212,
+      "test_bindings_matched": 5,
+      "test_pins": {
+        "README.md": "4aaa4ddbf0355e71294d213b7817cbd8492d897c5c992fc47e4c21d4a0f2fed9",
+        "helper.ml": "4faa426bc937acbc89e92712659111bf649b95745ba35942f2326b78f9445c80",
+        "probe.ml": "4f382d4d82d51eec6990587ae71dd2c75746c1bfbf659f607af182405ac3dcb5",
+        "run.py": "6af62c94876ac7f225b2be2fba4a799a79e75afa55cebff68ffd872be306ed5e",
+        "test.ml": "1a6fba7a0a5a67c4a08cc357a170d0adbd47ca7a7388fc8adf0d04c4ba3b9364"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-ox-20261018-001/RESULT.json",
+          "bytes": 267196,
+          "sha256": "a7c284de011f2a2410dc5ca6f42b66b6ef770501d37cb418d12fd2941d699a02"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "335958a49c64802c2d3976e4e1d0e5ef08c14f8e69685ac9660e76395e09de67"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 1176,
+          "sha256": "36880d90210e0d51ecdf666a25e1e2f97f361a0a34a42f1510f2fcf670831611"
+        },
+        {
+          "path": "/private/tmp/unison-cpu-ceiling-validation-warning-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "cases": [
+        {
+          "case": "warn-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-error/test.log",
+          "log_sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+        },
+        {
+          "case": "warn-pass",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-pass/test.log",
+          "log_sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+        },
+        {
+          "case": "require-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/require-error/test.log",
+          "log_sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+        },
+        {
+          "case": "off",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/off/test.log",
+          "log_sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+        },
+        {
+          "case": "warn-inspection-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-inspection-error/test.log",
+          "log_sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+        },
+        {
+          "case": "warn-mutation",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-mutation/test.log",
+          "log_sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+        },
+        {
+          "case": "warn-active-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-active-cancel/test.log",
+          "log_sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+        },
+        {
+          "case": "warn-before-delivery-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-before-delivery-cancel/test.log",
+          "log_sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+        },
+        {
+          "case": "warn-delivery-cancel",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-delivery-cancel/test.log",
+          "log_sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+        },
+        {
+          "case": "warn-delivery-abort",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-delivery-abort/test.log",
+          "log_sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+        },
+        {
+          "case": "warn-printer-error",
+          "exit": 0,
+          "log": "/private/tmp/unison-validation-warning-cp0mpik9/fixed/warn-printer-error/test.log",
+          "log_sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 63299,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 63299,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "scope": "Actual DngCandidateValidation.select and full compiler-matched legacy-Lwt/core graph; synthetic helper and files; private worker-dispatch observations.",
+      "limits": [
+        "Synthetic protocol receipts do not establish Adobe structural/decode/digest fidelity.",
+        "Standalone controls invoke the actual selected DNG handler directly; receiving selection/publication is exercised separately by complete loopback CLI controls.",
+        "Remote warning behavior is established for actual local exec transport, not SSH networking or native GTK/Cocoa UI.",
+        "Resource ledger settlement is checked; no whole-process FD/RSS ceiling is claimed."
+      ]
+    }
+  ]
+}

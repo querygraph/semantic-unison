@@ -1,0 +1,251 @@
+{
+  "state": "SELECTED_PREALLOCATION_HOOKS_QUALIFIED_NOT_RPC_LIFETIME_INTEGRATION",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/ubase/umarshal.ml",
+      "bytes": 21652,
+      "sha256": "440160b481e90571f35383047b5fb1c78d59eef950774375234983309e42542e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/ubase/umarshal.mli",
+      "bytes": 7066,
+      "sha256": "0ff24924e01d4fc2a430e4fc54d77ae3d5194959bc1122eb78cdf664bf987eba"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/umarshal_accounting/run.py",
+      "bytes": 3849,
+      "sha256": "8df92417706f0abfc93b05b011f82da576cd1b0734f55781bcff2578d5a7265b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/umarshal_accounting/probe.ml",
+      "bytes": 5565,
+      "sha256": "2e9f8845b6600829b88d4ca84cbb1d7bd3d93ef1ebcd97006833173a9e928f65"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/umarshal_accounting/allocation_witness.ml",
+      "bytes": 445,
+      "sha256": "4bae7ff5933da5b67a68424c0ec5d10f095210308a1b4c9705711cb48b5541ed"
+    }
+  ],
+  "accounted_controls": [
+    {
+      "compiler": "stock",
+      "checks": 78,
+      "negative_participants": {
+        "negative": {
+          "source_sha256": "4c787cee41c64b44907f517578a03386297d7e588ba073b485619d8333770cb0",
+          "binary_sha256": "9a43702cef255c18ee0d4adb709ea86a880f26e3b96612d86afc65bbeb06bb00",
+          "exit_code": 2,
+          "witness": "DESIGNATED external decode reservation missing"
+        },
+        "ordering-negative": {
+          "source_sha256": "6b5ecf54276f60b2c41893d406090e1ed8c6838ed9c91209fca899e0df29231b",
+          "binary_sha256": "1dae5e6029c186d9e7ca142a3cac714e6e4ba554f75e9e5b289e57abcb6c01c0",
+          "exit_code": 2,
+          "witness": "DESIGNATED payload allocation preceded owner reservation"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-stock-20261018-003/CONTROL.json",
+          "bytes": 5948,
+          "sha256": "f5413a026496254d850ab7806acec6ac6e49ae317cec5e2b248d6284dae831b0"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-stock-20261018-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "770eb81745d411ee88aaeedc78d44f8238d48f8d2593a33e87dfb282e7724862"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-stock-20261018-003/SHARED-STDOUT.txt",
+          "bytes": 370,
+          "sha256": "37354fac1af5c0ec3d23135745928da2fa1b325712b2fc401faa9cf3380aec7f"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "checks": 78,
+      "negative_participants": {
+        "negative": {
+          "source_sha256": "4c787cee41c64b44907f517578a03386297d7e588ba073b485619d8333770cb0",
+          "binary_sha256": "06341b201d722ac8769a65c6388e881f1c1254496b9d8a15790adc1dd509d63b",
+          "exit_code": 2,
+          "witness": "DESIGNATED external decode reservation missing"
+        },
+        "ordering-negative": {
+          "source_sha256": "6b5ecf54276f60b2c41893d406090e1ed8c6838ed9c91209fca899e0df29231b",
+          "binary_sha256": "6e10947be316a28a4f8169bdb8b3ff7db8d8ba41f12bcaafe2bee0bf9627a69e",
+          "exit_code": 2,
+          "witness": "DESIGNATED payload allocation preceded owner reservation"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-ox-20261018-003/CONTROL.json",
+          "bytes": 5962,
+          "sha256": "87c187d0411981df9618e8052f957163721e9e69b12dc369b9b3860e918c6915"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-ox-20261018-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d64c5c81b29eee7fc2fa2079ec76a6ad7d61cdbeec542c8538455a50a1ad11e4"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-accounting-ox-20261018-003/SHARED-STDOUT.txt",
+          "bytes": 370,
+          "sha256": "37354fac1af5c0ec3d23135745928da2fa1b325712b2fc401faa9cf3380aec7f"
+        }
+      ]
+    }
+  ],
+  "existing_bounds_controls": [
+    {
+      "compiler": "stock",
+      "checks": 233,
+      "pins": [
+        {
+          "path": "/private/tmp/unison-umarshal-bounds-stock-20261018-002/CONTROL.json",
+          "bytes": 2158,
+          "sha256": "e32c38e5e29d7ad78dfc3c784f4023895ad569fbf9636421f611991da0bc3339"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-bounds-stock-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "7e9a211e7c61cf12e9f7ee72c873f586a89c02f5bd3fee21a66b4a9b8ca3c471"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "checks": 233,
+      "pins": [
+        {
+          "path": "/private/tmp/unison-umarshal-bounds-ox-20261018-002/CONTROL.json",
+          "bytes": 2164,
+          "sha256": "2d83b15e1ac4b7710b8fc3dc4d19b13e04a924c8a47b6c49bf13017efbff277a"
+        },
+        {
+          "path": "/private/tmp/unison-umarshal-bounds-ox-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "946a8168b33370a8958ab0a3c4eced39ad0617277b98a81b8b5caf36dd33d0c3"
+        }
+      ]
+    }
+  ],
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "complete": true,
+      "selftest_requested": true,
+      "all_recorded_production_inputs_unchanged": true,
+      "test_only_post_build_delta": [
+        "tests/umarshal_accounting/probe.ml"
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-accounted-decoder-stock-check-20261018-001/RESULT.json",
+          "bytes": 59828,
+          "sha256": "fe80e1b04678c3ff3e2b8d1cb9155bc1881133f7e6271ee6a109b6507100d2ad"
+        },
+        {
+          "path": "/private/tmp/unison-accounted-decoder-stock-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "fef8ce4a9451e6598398a1c4642cd4e10a0abfcf75c1919ab1b09b5a1d83b3ba"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "complete": true,
+      "selftest_requested": true,
+      "all_recorded_production_inputs_unchanged": true,
+      "test_only_post_build_delta": [
+        "tests/umarshal_accounting/probe.ml"
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-accounted-decoder-stock-dune-check-20261018-001/RESULT.json",
+          "bytes": 59655,
+          "sha256": "b6cece504ac7239e5d7a06621b07b12399d314f4bd6b334251a0320d290cba1a"
+        },
+        {
+          "path": "/private/tmp/unison-accounted-decoder-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "793be42673ba3339b73b015ed90ee518079de16d8ac901255584670f2c420056"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "complete": true,
+      "selftest_requested": true,
+      "all_recorded_production_inputs_unchanged": true,
+      "test_only_post_build_delta": [
+        "tests/umarshal_accounting/probe.ml"
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-accounted-decoder-ox-check-20261018-001/RESULT.json",
+          "bytes": 59834,
+          "sha256": "36a2f72b7b5a8dc68c310031a2ea569d94a4ccd7a3bded45be2982eb6d954d36"
+        },
+        {
+          "path": "/private/tmp/unison-accounted-decoder-ox-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e861b21ae375ac27643918cac4bc9f5f8e81da27d804ad4ec378a93e3fbfbb98"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "complete": true,
+      "selftest_requested": true,
+      "all_recorded_production_inputs_unchanged": true,
+      "test_only_post_build_delta": [
+        "tests/umarshal_accounting/probe.ml"
+      ],
+      "pins": [
+        {
+          "path": "/private/tmp/unison-accounted-decoder-ox-dune-check-20261018-001/RESULT.json",
+          "bytes": 59659,
+          "sha256": "7f35571024643e266da75a4ae280f90d522ed1201ee10b9c97d1076e24125553"
+        },
+        {
+          "path": "/private/tmp/unison-accounted-decoder-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a6b084ba954f29efcabaf7fd3f1a48cb0d63b4b75c4105668b288798ba4717fa"
+        }
+      ]
+    }
+  ],
+  "parent_terminals": {
+    "accounted_witness": {
+      "process_id": "61031",
+      "status": "completed",
+      "exit_code": 0,
+      "source": "authentic retained rollout item_completed event"
+    },
+    "four_builds": {
+      "process_id": "17390",
+      "chunk_id": "db16d4",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "limits": [
+    "Selected builtin logical byte/element charges only, not whole heap/RSS",
+    "Caller retains successful and partial debit; no automatic refund or finalizer",
+    "RPC global decoded-result lifetime not integrated",
+    "Test-only private source guards and mutation participants do not modify compiled production source"
+  ],
+  "preserved_failure": {
+    "workspace": "/private/tmp/unison-umarshal-accounting-stock-20261018-001",
+    "parent": "21992/c7b291/exit1",
+    "cause": "Original fixture opened accounted-stream before creating it; corrected separate policy-stream fixture, no production weakening"
+  }
+}

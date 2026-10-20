@@ -1,0 +1,57 @@
+{
+  "scope": "Preallocated typed domain owner slots integrated into pool construction/cleanup/shutdown; current stock/Ox Make+selftests. 18 lifecycle modes plus two slot participants (allocation/adoption/known repeat controls), four designated runtime regressions. No arbitrary OOM inside Domain.spawn/aggregate FD/RSS claim.",
+  "build_parent": {
+    "session": 54479,
+    "terminal_chunk": "0e5fc3",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_parent": {
+    "session": 11410,
+    "terminal_chunk": "db8868",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-domain-slots-stock-check-20261018-001/RESULT.json",
+      "bytes": 55750,
+      "sha256": "df95257ded01820cbb116d0ffeafe3f85892ccd4ca2ab71f4705922dce03e5bc"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-domain-slots-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "2274905e3ab1b42b7aa7ed944bc22c19b448f95826127e4a10f9d8335bb7dde7"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-domain-slots-ox-check-20261018-001/RESULT.json",
+      "bytes": 55756,
+      "sha256": "543bcd61118f9b81f81ea1e009ff4224678aa421dcb0a8170f1ae85d3b25171d"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-domain-slots-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "b7cf06670914a47b3235285063b8c71511a7a74e6c5281cb498327b0eb191ce1"
+    },
+    "faults/RESULT.json": {
+      "path": "/private/tmp/unison-domain-slots-lifecycle-20261018-002/RESULT.json",
+      "bytes": 234086,
+      "sha256": "7bd8b6defdeea5bbe9f06c120dfd7851ca44805b426f1d551a58397d80b4e35c"
+    },
+    "faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-domain-slots-lifecycle-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "675c8f56714fd2a66b14bb1334f5485081b8325a2e7738929c4fca57a1788369"
+    }
+  },
+  "preserved_failed_harness": {
+    "workspace": "/private/tmp/unison-domain-slots-lifecycle-20261018-001",
+    "terminal": "56751/bb6728/exit1/no session",
+    "reason": "production mode filter refused unregistered test basename; private test rewrite fixed without changing production gate",
+    "closed": true
+  }
+}

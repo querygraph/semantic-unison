@@ -1,0 +1,22 @@
+{
+  "scope": "Seven fixed owner-scope retention scenarios per stock/Ox compiler; actual Lwt, BorrowedWork, guard and extracted admission bodies; injected waiter setup failure; fake reservation gate and timer stub. Not full Runtime/pool/FD/RSS qualification.",
+  "actual_parent": {
+    "session": 12854,
+    "terminal_chunk": "face4b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "artifacts": {
+    "RESULT.json": {
+      "path": "/private/tmp/unison-retained-guard-20261018-001/RESULT.json",
+      "bytes": 10782,
+      "sha256": "4f5b9753d275934cafacadb5776818595e9c239f1b436dbe0666959db5c7dd9d"
+    },
+    "SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-retained-guard-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "e02fcca11882b2699002746e2be8a53014614872aa9c5eea959c52aab3f99cb8"
+    }
+  },
+  "full_production_builds": "pending"
+}

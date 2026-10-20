@@ -1,0 +1,262 @@
+{
+  "state": "RETIRED_READER_CALLBACK_FENCING_CURRENT_PASS_CLOSED",
+  "scope": "Check reader lifetime before caller cancellation code for read/iter/digest; prior borrowed-reader source/capability guarantees unchanged, no managed namespace/automatic cache selection/media/SDK/transport",
+  "actual_terminals": {
+    "focused": {
+      "session": 99430,
+      "chunk": "44f833",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "full": {
+      "session": 44086,
+      "chunk": "b80c8b",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "checks_per_compiler": {
+    "component": 56,
+    "checkpoint": 1005,
+    "publication_fault": 27,
+    "reader_fault": 13,
+    "dng": 1051,
+    "worker": 110
+  },
+  "current_build_source_checks": 1272,
+  "runs": [
+    {
+      "case": "controls",
+      "closure": {
+        "child": {
+          "pid": 88525,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88525,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "dng",
+      "closure": {
+        "child": {
+          "pid": 88810,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88810,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-make",
+      "closure": {
+        "child": {
+          "pid": 89324,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 89324,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-make",
+      "closure": {
+        "child": {
+          "pid": 90389,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 90389,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-dune",
+      "closure": {
+        "child": {
+          "pid": 91524,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 91524,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-dune",
+      "closure": {
+        "child": {
+          "pid": 92506,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 92506,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "workers",
+      "closure": {
+        "child": {
+          "pid": 93527,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 93527,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-reader-retirement-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3f48473046e75458b75c575152846b02dcbc76425aa3e6c70091340804154716"
+    },
+    {
+      "path": "/private/tmp/unison-component-controls-5dz2dlne/RESULT.json",
+      "bytes": 155942,
+      "sha256": "4da9567541673fe2c30f587ac193bdfc5b922441983da85ecb51b253d2c16e03"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-dng-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "31fbfde635052bc337608755951a562e67e73ae9b41c702f92cfe1ab6c1b051f"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-vwj7g3gq/RESULT.json",
+      "bytes": 439312,
+      "sha256": "4470c1dbf78399823c4b5422c0f2b5f75dc768a5ad3f858042f00c574b64609c"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "c070b374f172484d6a306a7e90b397a40fd55f2404b7309d2ad397305dd93c48"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-stock-make-20261017-001/RESULT.json",
+      "bytes": 49826,
+      "sha256": "1a204da76d0ff320c8dc2f41b148957985e11bdd0416059a257d002844062c8c"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fb5f44d5db1d6dd3072a8c10e286279f869c307c0f961d6639223567d349333c"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-ox-make-20261017-001/RESULT.json",
+      "bytes": 49832,
+      "sha256": "4d08e08046dbe0c967b161993ced086fe838d52a1f01be01fef819b6d2a13bed"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "89db7efd4e08d99cdee5a4976f2546e9fe3bdfe5a71cb06ba3698612793ab808"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-stock-dune-20261017-001/RESULT.json",
+      "bytes": 49270,
+      "sha256": "455996b4c319c2692c5e359148cfb0b40237541c93c0d293f4ecb4ad01fa0929"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "676fc3c75f6be332b2cb47a89f1a8e82e8b40db61d952d740b63d0f555d78343"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-ox-dune-20261017-001/RESULT.json",
+      "bytes": 49274,
+      "sha256": "e5764631bbeb511439a2649cfc9c866b9dc7a63732d19180a0c3ec114da33a95"
+    },
+    {
+      "path": "/private/tmp/unison-reader-retirement-workers-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "ea97e77b9e8843855ab75e06f4b0fc1bfdd3408b121aa33ba3418ccc3252e28f"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-bo56a3m9/RESULT.json",
+      "bytes": 125273,
+      "sha256": "47c162918a319bbe99bda0ec9d7c88eb04c4787cdd904004b8100977bf87b9fd"
+    }
+  ]
+}

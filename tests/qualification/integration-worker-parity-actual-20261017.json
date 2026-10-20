@@ -1,0 +1,54 @@
+{
+  "complete": true,
+  "owner": {
+    "session": 75221,
+    "terminal_chunk": "88a8e1",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-current-worker-parity-stock-20261017-001/RESULT.json",
+        "bytes": 19427,
+        "sha256": "3597f3467333611e0d44b7d07a60eb370d967de477cdea63dc60f158d2830932"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-parity-stock-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "23f547652cad6ff466825b37a8e1f425fb7f05f5c2b5552632f9a72db5ba6bda"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-worker-parity-stock-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 308,
+        "sha256": "1f425076660674fa862530da56f8d8e62cc2177c3be97cd53562d90b91d53399"
+      }
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-current-worker-parity-ox-20261017-001/RESULT.json",
+        "bytes": 19431,
+        "sha256": "9b164c90de52512dc48264527a3d2b0e573a7e97b0ca78583893b0b47a104151"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-parity-ox-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "82ee7aeb3a127c70a031239b242be942912c414bf69016e10c114d8da2747b91"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-worker-parity-ox-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 308,
+        "sha256": "1f425076660674fa862530da56f8d8e62cc2177c3be97cd53562d90b91d53399"
+      }
+    }
+  ],
+  "scope": "Current actual production objects; configured pools1/2/4/8,64 original64-byte fixture jobs/compiler; queued cancellation and exact hash/proof parity",
+  "execution_credit_max": 6,
+  "owner_credits": 2,
+  "limitations": [
+    "Configured8 does not mean8 simultaneously executing jobs",
+    "No hard OSthread/RSS or throughput/SDK/media/transport/physical IO claim"
+  ]
+}

@@ -320,6 +320,47 @@ let mpaths = PathMap.m Proplist.m
 let propPathKey : Proplist.t PathMap.t Proplist.key =
   Proplist.register "paths" mpaths
 
+(* Optional endpoint-local cache hints, never shared reconciliation authority.
+   Keep their key out of the legacy property payload: unknown keys are fatal to
+   older readers. The optional tail follows the already optional paths map. *)
+let componentOwnerCache = Prefs.createBool "componentownercache" false ~local:true
+  ~send_value:(fun _ -> false) ~category:(`Advanced `Syncprocess)
+  "retain explicitly adopted local component-manifest references"
+  "Opt-in archive hints for already published and settled component manifests. \
+   Does not capture automatically or replace full-input verification."
+let componentOwnerKey : (string * string) Proplist.key =
+  Proplist.register "component owner manifest local"
+    Umarshal.(prod2 (bounded_string 32) (bounded_string 32) id id)
+let componentCacheParent = Prefs.createString "componentcacheparent" "" ~local:true
+  ~send:(fun () -> false) ~category:(`Advanced `Syncprocess)
+  "explicit existing private parent for local component report cache"
+  "Endpoint-local absolute private0700 directory. %ROOT% expands to the root identity SHA256. \
+   Provision one existing parent per root; this option never creates it. Empty disables report caching."
+let componentNamespaceKey : (int * int) Proplist.key =
+  Proplist.register "component owner namespace local" Umarshal.(prod2 int int id id)
+let componentArchiveBinding thisRoot magic =
+  let values=["unison-component-archive-context/0";thisRoot;Prefs.read rootsName;
+    string_of_int archiveFormat;magic] in
+  SemanticHash.string(String.concat "" (List.map(fun value ->
+    Printf.sprintf "%d:" (String.length value)^value) values))
+let loadComponentOwnerReference channel thisRoot magic properties =
+  if not(Prefs.read componentOwnerCache) then properties else
+  let encoded=try Some(really_input_string channel DngComponents.owner_archive_reference_size)
+    with End_of_file -> None in
+  match encoded with
+  | None -> properties
+  | Some encoded -> match DngComponents.decode_owner_archive_reference
+      ~archive_binding:(componentArchiveBinding thisRoot magic) encoded with
+    | None -> properties
+    | Some ((binding,manifest_sha256) as value) ->
+      let properties=Proplist.add componentOwnerKey value properties in
+      let identity=try Some(really_input_string channel DngComponents.owner_namespace_reference_size)
+        with End_of_file -> None in
+      match identity with None -> properties | Some encoded ->
+        match DngComponents.decode_owner_namespace_reference
+          ~archive_binding:(componentArchiveBinding thisRoot magic) ~binding ~manifest_sha256 encoded with
+        | None -> properties | Some identity -> Proplist.add componentNamespaceKey identity properties
+
 let mpayload = Umarshal.prod4
                  marchive Umarshal.int Umarshal.string Proplist.m
                  Umarshal.id Umarshal.id
@@ -394,6 +435,7 @@ let loadArchiveLocal fspath (thisRoot: string) :
               Proplist.add propPathKey paths properties
             with End_of_file -> properties
           in
+          let properties=loadComponentOwnerReference c thisRoot magic properties in
           close_in c;
           (* Restore to the negotiated features *)
           let () = Features.setEnabled negotiatedFts in
@@ -440,9 +482,21 @@ let storeArchiveLocal fspath thisRoot archive hash magic properties =
       with a fatal error "Property lists: paths not yet registered!" *)
    let paths =
      try Proplist.find propPathKey properties with Not_found -> PathMap.empty in
-   let properties = Proplist.remove propPathKey properties in
+   let reference=if Prefs.read componentOwnerCache then
+     (try Some(Proplist.find componentOwnerKey properties) with Not_found -> None) else None in
+   let namespace=try Some(Proplist.find componentNamespaceKey properties) with Not_found -> None in
+   let properties = Proplist.remove componentNamespaceKey
+     (Proplist.remove componentOwnerKey (Proplist.remove propPathKey properties)) in
    Umarshal.to_channel mpayload c (archive, hash, magic, properties);
-   if not (PathMap.is_empty paths) then Umarshal.to_channel mpaths c paths;
+   (* Older readers consume at most the paths map and ignore the following hint.
+      They may discard it when rewriting; absence remains an ordinary cache miss. *)
+   if not (PathMap.is_empty paths) || reference<>None then Umarshal.to_channel mpaths c paths;
+   (match reference with None -> () | Some(binding,manifest_sha256) ->
+     output_string c (DngComponents.encode_owner_archive_reference
+       ~archive_binding:(componentArchiveBinding thisRoot magic) ~binding ~manifest_sha256);
+     match namespace with None -> () | Some identity ->
+       output_string c (DngComponents.encode_owner_namespace_reference
+         ~archive_binding:(componentArchiveBinding thisRoot magic) ~binding ~manifest_sha256 identity));
    close_out c))
 
 (* Remove the archive under the root path [fspath] with archiveVersion [v] *)
@@ -563,6 +617,150 @@ let getArchiveProps (thisRoot: string): Proplist.t =
 (* Update the property list cache. *)
 let setArchivePropsLocal (thisRoot: string) (props: Proplist.t) =
   Hashtbl.replace archivePropCache thisRoot props
+
+let component_owner_reference fspath =
+  if not(Prefs.read componentOwnerCache) then None else
+  let root=thisRootsGlobalName fspath in
+  try Some(Proplist.find componentOwnerKey (getArchiveProps root)) with Not_found -> None
+let component_owner_namespace fspath =
+  match component_owner_reference fspath with None -> None | Some _ ->
+  try Some(Proplist.find componentNamespaceKey (getArchiveProps (thisRootsGlobalName fspath)))
+    with Not_found -> None
+let load_component_owner_index ?(check_cancel=fun () -> ()) fspath
+    ~directory ~max_entries ~max_bytes () =
+  match component_owner_reference fspath with
+  | None -> None
+  | Some (binding,expected_manifest_sha256) ->
+      DngComponents.load_owner_index ~check_cancel ~directory ~expected_manifest_sha256
+        ~binding ~max_entries ~max_bytes ()
+let set_component_owner_reference fspath publication =
+  if not(Prefs.read componentOwnerCache) then
+    raise(Util.Transient "Component owner cache is disabled");
+  let reference=DngComponents.owner_index_reference publication in
+  let root=thisRootsGlobalName fspath in
+  let properties=try getArchiveProps root with Not_found ->
+    raise(Util.Transient "Component owner archive is not loaded") in
+  setArchivePropsLocal root (Proplist.remove componentNamespaceKey (Proplist.add componentOwnerKey reference properties))
+let adopt_component_cache_store fspath ~expected_reference store =
+  if not(Prefs.read componentOwnerCache) then
+    raise(Util.Transient "Component owner cache is disabled");
+  let root=thisRootsGlobalName fspath in
+  let properties=try getArchiveProps root with Not_found ->
+    raise(Util.Transient "Component owner archive is not loaded") in
+  let current=try Some(Proplist.find componentOwnerKey properties) with Not_found -> None in
+  if current<>expected_reference then
+    raise(Util.Transient "Component owner archive reference changed during capture");
+  let reference=DngComponents.managed_cache_store_reference store in
+  let identity=DngComponents.managed_cache_store_namespace store in
+  setArchivePropsLocal root (Proplist.add componentNamespaceKey identity
+    (Proplist.add componentOwnerKey reference properties))
+(* Endpoint-owner orchestration: no borrowed namespace scope spans worker await. *)
+let inspect_cached_components ?(check_parent=fun () -> ())
+    ?(index_max_entries=1024) ?(index_max_bytes=8388608) fspath ~parent ~path ~generation_sha256 ~pool ~cancellation
+    ~decoders ~max_read_bytes source =
+  if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
+  if not(Prefs.read componentOwnerCache) then
+    SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
+  else begin
+    let empty_index=DngComponents.empty_owner_index
+      ~max_entries:index_max_entries ~max_bytes:index_max_bytes in
+    let root_identity=thisRootsGlobalName fspath in
+    ignore(try getArchiveProps root_identity with Not_found ->
+      raise(Util.Transient "Component owner archive is not loaded"));
+    let reference=component_owner_reference fspath in
+    let identity=component_owner_namespace fspath in
+    (* Legacy hints lacking namespace provenance remain cold, without touching
+       the supplied parent or trusting a directory discovered there. *)
+    match reference,identity with
+    | Some _,None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
+    | _ ->
+    check_parent ();
+    let key=Fspath.toString path in
+    let index,record=match reference,identity with
+      | None,None -> empty_index,None
+      | Some(binding,expected_manifest_sha256),Some expected ->
+        let namespace=DngComponents.prepare_cache_namespace ~expected ~parent () in
+        DngComponents.provision_cache_namespace namespace ~parent;
+        DngComponents.with_cache_namespace namespace ~parent(fun directory ->
+          let index=match DngComponents.load_owner_index ~directory ~expected_manifest_sha256 ~binding
+            ~max_entries:index_max_entries ~max_bytes:index_max_bytes () with
+            | Some index -> index
+            | None -> raise(Util.Transient "Selected component manifest is missing") in
+          let record=match DngComponents.select_owner_entry index ~root_identity ~path:key ~generation_sha256 with
+            | None -> None | Some entry -> DngComponents.load_owner_record ~directory ~entry () in
+          index,record)
+      | _ -> raise(Util.Transient "Component manifest/namespace authority is incomplete") in
+    let binding=match reference with Some(binding,_) -> binding
+      | None -> SemanticHash.string("unison-component-report-owner/0:"^root_identity) in
+    BorrowedWork.bind (fun () -> SemanticWorkers.components_indexed pool cancellation ~index
+      ~root_identity ~path:key ~generation_sha256 ~record ~decoders ~capture_checkpoint:true
+      ~max_read_bytes source) (fun result ->
+      if HelperSupervisor.is_cancelled cancellation then Lwt.return None else begin
+      (match result with
+       | Some inspection ->
+         check_parent ();
+         (match inspection.SemanticWorkers.components with
+          | Error _ -> ()
+          | Ok summary ->
+            let same a b=a.Unix.LargeFile.st_dev=b.Unix.LargeFile.st_dev && a.st_ino=b.st_ino &&
+              a.st_kind=b.st_kind && a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime in
+            if not(same inspection.stats (Unix.LargeFile.fstat source) && same inspection.stats (Fs.stat path)) then
+              raise(Util.Transient "Component source changed before cache publication");
+            if component_owner_reference fspath<>reference || component_owner_namespace fspath<>identity then
+              raise(Util.Transient "Component archive head changed during inspection");
+            (match summary.checkpoint with
+             | None when summary.checkpoint_capacity_exhausted -> ()
+             | None -> raise(Util.Transient "Component capture checkpoint missing")
+             | Some checkpoint ->
+               let entry=DngComponents.make_owner_entry ~root_identity ~path:key ~generation_sha256
+                 ~checkpoint ~outcomes:summary.refinements in
+               let previous=DngComponents.owner_entry_reference index ~root_identity ~path:key in
+               if previous<>Some(DngComponents.owner_entry_sha256 entry) &&
+                  DngComponents.owner_index_has_capacity_for index entry then begin
+                 let store=DngComponents.prepare_managed_cache_store ~entry ~checkpoint ~index
+                   ~expected_entry_sha256:previous ~binding ~max_bytes:8589934592L ~max_entries:4096 in
+                 let namespace=DngComponents.prepare_cache_namespace ?expected:identity ~parent () in
+                 DngComponents.provision_cache_namespace namespace ~parent;
+                 if DngComponents.execute_managed_cache_store store ~namespace ~parent then begin
+                   check_parent ();
+                   adopt_component_cache_store fspath ~expected_reference:reference store
+                 end
+               end))
+       | None -> ());
+      Lwt.return result end)
+  end
+let inspect_configured_components fspath path ~pool ~cancellation ~decoders ~max_read_bytes source =
+  let configured=Prefs.read componentCacheParent in
+  if not(Prefs.read componentOwnerCache) || configured="" || HelperSupervisor.is_cancelled cancellation ||
+     (component_owner_reference fspath<>None && component_owner_namespace fspath=None) then
+    (if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
+     SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source)
+  else begin
+    let root=thisRootsGlobalName fspath in
+    let parent_path=Str.global_replace (Str.regexp_string "%ROOT%")
+      (SemanticHash.hex(SemanticHash.string root)) configured in
+    let parent=DngComponents.open_cache_parent parent_path in
+    let settled=ref false in
+    let finish cause =
+      settled:=true;
+      try DngComponents.settle_cache_parent parent cause;None with error -> Some error in
+    BorrowedWork.try_bind (fun () ->
+      let fd=DngComponents.cache_parent_descriptor parent in
+      let stats=Unix.LargeFile.fstat source in
+      let generation_sha256=SemanticHash.string(Printf.sprintf
+        "unison-component-source-epoch/0:%d:%d:%Ld:%.17g:%.17g"
+        stats.st_dev stats.st_ino stats.st_size stats.st_mtime stats.st_ctime) in
+      inspect_cached_components ~check_parent:(fun () -> DngComponents.check_cache_parent parent) fspath ~parent:fd ~path ~generation_sha256
+        ~pool ~cancellation ~decoders ~max_read_bytes source)
+      (fun result -> match finish None with None -> Lwt.return result | Some error -> Lwt.fail error)
+      (fun error ->
+        if !settled then Lwt.fail error else
+        match finish (Some error) with Some error -> Lwt.fail error | None -> assert false)
+  end
+let clear_component_owner_reference fspath =
+  let root=thisRootsGlobalName fspath in
+  try setArchivePropsLocal root (Proplist.remove componentNamespaceKey (Proplist.remove componentOwnerKey (getArchiveProps root)))
+  with Not_found -> ()
 
 let fileUnchanged oldInfo newInfo =
   match oldInfo, newInfo with
@@ -1395,7 +1593,8 @@ type scanInfo =
       dirStamp : Props.dirChangedStamp;
       rescanProps : bool;
       archHash : string;
-      showStatus : bool }
+      showStatus : bool;
+      validationPaths : ValidationPaths.t option }
 
 (** Status display **)
 
@@ -1686,6 +1885,24 @@ let getChildren fspath path =
   in
   findDuplicates children
 
+(* Immutable update detection deliberately skips existing children. Collect
+   validation coverage separately there, using the scanner's own filename,
+   ignore and followed-link rules, without changing the immutable archive/UI. *)
+let rec collectImmutableValidation fspath path paths =
+  if not (Globals.shouldIgnore path) then
+    let info=Fileinfo.get true fspath path in
+    match info.Fileinfo.typ with
+    | `FILE -> ValidationPaths.add paths path
+    | `DIRECTORY ->
+        List.iter (fun (name,status) ->
+          let child=Path.child path name in
+          if not (Globals.shouldIgnore child) then
+            match status with
+            | `Ok -> collectImmutableValidation fspath child paths
+            | _ -> raise (Util.Fatal ("Cannot collect validation path with invalid or conflicting name: "^
+                                      Path.toDebugString child))) (getChildren fspath path)
+    | _ -> ()
+
 (* from a list of (name, archive) pairs {usually the items in the same
    directory}, build two lists: the first a named list of the _old_
    archives, with their timestamps updated for the files whose contents
@@ -1762,6 +1979,9 @@ let rec buildUpdateChildren
       match status with
         `Ok | `Abs ->
           if skip && archive <> NoArchive && status <> `Abs then begin
+            (match scanInfo.validationPaths with
+             | None -> ()
+             | Some paths -> collectImmutableValidation fspath path' paths);
             begin match archive with
               ArchiveFile (_, archFp, _, _) ->
                 Xferhint.insertEntry fspath path' archFp
@@ -1846,6 +2066,9 @@ and buildUpdateRec archive currfspath path scanInfo =
       | _ -> None
     in
     let info = Fileinfo.get ?archProps true currfspath path in
+    (match info.Fileinfo.typ,scanInfo.validationPaths with
+     | `FILE,Some paths -> ValidationPaths.add paths path
+     | _ -> ());
     match (info.Fileinfo.typ, archive) with
       (`ABSENT, NoArchive) ->
         debug (fun() -> Util.msg "  buildUpdate -> Absent and no archive\n");
@@ -2389,7 +2612,7 @@ let previousFindOptions = Hashtbl.create 7
 (* for the given path, find the archive and compute the list of update
    items; as a side effect, update the local archive w.r.t. time-stamps for
    unchanged files *)
-let findLocal wantWatcher fspath pathList subpaths :
+let findLocal ?validationPaths wantWatcher fspath pathList subpaths :
       (Path.local * Common.updateItem * Props.t list) list =
   debug (fun() -> Util.msg
     "findLocal %s (%s)\n" (Fspath.toDebugString fspath)
@@ -2412,9 +2635,9 @@ let t1 = Unix.gettimeofday () in
       (* Directory optimization is disabled under Windows,
          as Windows does not update directory modification times
          on FAT filesystems. *)
-      dirFastCheck = useFastChecking () && Sys.unix;
+      dirFastCheck = validationPaths=None && useFastChecking () && Sys.unix;
       dirStamp; rescanProps; archHash = archiveHash fspath;
-      showStatus = not !Trace.runningasserver }
+      showStatus = not !Trace.runningasserver; validationPaths }
   in
   let (cacheFilename, _) = archiveName fspath FPCache in
   let cacheFile = Util.fileInUnisonDir cacheFilename in
@@ -2426,6 +2649,7 @@ let t1 = Unix.gettimeofday () in
     with Not_found ->
       false
   in
+  let subpaths=if validationPaths=None then subpaths else None in
   let paths =
     match subpaths with
       Some (unsynchronizedPaths, blacklistedPaths) when unchangedOptions
@@ -2497,13 +2721,46 @@ Format.eprintf "Update detection: %f@." (t2 -. t1);
   abortIfAnyMountpointsAreMissing fspath;
   updates
 
+let findLocalWithValidation ~max_files ~max_path_bytes wantWatcher fspath pathList subpaths =
+  let validationPaths=ValidationPaths.create ~max_files ~max_path_bytes in
+  let finish ()=Fun.protect ~finally:Fpcache.finish Fswatch.stopScanning in
+  let updates=Fun.protect ~finally:finish (fun () ->
+    findLocal ~validationPaths wantWatcher fspath pathList subpaths) in
+  updates,ValidationPaths.paths validationPaths
+
 let findOnRoot =
   Remote.registerRootCmd
     "find"
     Umarshal.(prod3 bool (list Path.m) (option (prod2 (list Path.m) (list Path.m) id id)) id id)
     Umarshal.(list (prod3 Path.mlocal Common.mupdateItem (list Props.m) id id))
     (fun (fspath, (wantWatcher, pathList, subpaths)) ->
-       Lwt.return (findLocal wantWatcher fspath pathList subpaths))
+       if not (DngCandidateValidation.all_scanned ()) then
+         Lwt.return (findLocal wantWatcher fspath pathList subpaths)
+       else BorrowedWork.catch (fun () ->
+         let max_files,max_path_bytes,max_bytes=DngCandidateValidation.scan_limits () in
+         let validators=CandidateValidators.selected () in
+         let updates,paths=findLocalWithValidation ~max_files ~max_path_bytes
+           wantWatcher fspath pathList subpaths in
+         let rec errors = function
+           | Error _ -> true
+           | Updates (Dir (_,children,_,_),_) -> List.exists (fun (_,ui) -> errors ui) children
+           | _ -> false in
+         if List.exists (fun (_,ui,_) -> errors ui) updates then
+           raise (Util.Transient "All-scanned validation cannot complete because update detection reported errors");
+         let roots=List.filter_map (function Local,path -> Some path | _ -> None)
+           (Globals.rootsList ()) in
+         BorrowedWork.bind (fun () -> ValidationScanWork.run_with_validators ~validators
+           ~staging_base:(Fspath.resolve_existing Util.unisonDir) ~roots ~root:fspath ~paths ~max_bytes)
+           (fun () -> Lwt.return updates))
+         (function
+          | ValidationPaths.Limit_exceeded reason -> Lwt.fail (Util.Transient reason)
+          | ValidationScanWork.Cleanup_failed (original,cleanup) ->
+              Lwt.fail (Util.Transient ("All-scanned validation cleanup failed: "^
+                (match original with None -> "" | Some error -> Printexc.to_string error^"; ")^
+                Printexc.to_string cleanup))
+          | Unix.Unix_error _ as error ->
+              Lwt.fail (Util.Transient ("All-scanned validation: "^Printexc.to_string error))
+          | error -> Lwt.fail error))
 
 let mergePropsdataOnRoot =
   Remote.registerRootCmd "propsdata" Props.Data.m Props.Data.m
@@ -2532,7 +2789,12 @@ let findUpdatesOnPaths ?(wantWatcher=false) pathList subpaths =
        Lwt.return ()
      end >>= fun () ->
      let t = Trace.startTimer "Collecting changes" in
-     Globals.allRootsMapWithWaitingAction (fun r ->
+     (if DngCandidateValidation.all_scanned () then
+        (* One failed endpoint must not let another endpoint's private staging
+           borrowers escape their owner. Preserve the user's root order. *)
+        BorrowedWork.all (List.map (fun root () ->
+          findOnRoot root (wantWatcher,pathList,subpaths)) (Globals.rootsList ()))
+      else Globals.allRootsMapWithWaitingAction (fun r ->
        debug (fun() -> Util.msg "findOnRoot %s\n" (root2string r));
        findOnRoot r (wantWatcher, pathList, subpaths))
        (fun (host, _) ->
@@ -2540,7 +2802,7 @@ let findUpdatesOnPaths ?(wantWatcher=false) pathList subpaths =
            Remote _ -> Uutil.showUpdateStatus "";
                        Trace.statusDetail "Waiting for changes from server"
          | _        -> ()
-         end)
+         end))
        >>= (fun updates ->
      begin Globals.allRootsIter (fun r ->
        match r with
@@ -2981,7 +3243,7 @@ let checkNoUpdates ?(fastCheck=false) fspath pathInArchive ui =
   let scanInfo =
     { fastCheck; dirFastCheck = false;
       dirStamp = Props.changedDirStamp; rescanProps = true;
-      archHash = "" (* Not used *); showStatus = false } in
+      archHash = "" (* Not used *); showStatus = false; validationPaths=None } in
   let (_, uiNew) = buildUpdateRec archive fspath localPath scanInfo in
   markPossiblyUpdatedRec fspath pathInArchive uiNew;
   explainUpdate pathInArchive uiNew;

@@ -1,0 +1,40 @@
+{
+  "scope": "Seven independent pure audit groups over eight saved original fake cases; no new SDK/ExifTool/helpers/Photo/EXIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/audit_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.014s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 96346,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu8_closed": true,
+  "source_pins": {
+    "tests/mixed_validation/audit.py": "d00537202896b1530132fd7a2e2bb6fc0b1509b9dc588c514a41c063d7fff0b2",
+    "tests/mixed_validation/audit_test.py": "86b97d10a18e89f793d936d2d4b4fc19dafda96041f4f9db858df3bdc23ca0bc"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "e04faf",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "limits": [
+    "Saved/model verdicts and new original fake helpers only; no actual SDK/ExifTool/camera/Photo/EXglobal.",
+    "Auditor has no process/descriptor ownership or release authority; actual parent/worker/tool/input/inherited-FD bindings remain separate.",
+    "Current probe has CPU accounting, not declared backend-memory admission; add admission envelope before any native request."
+  ]
+}

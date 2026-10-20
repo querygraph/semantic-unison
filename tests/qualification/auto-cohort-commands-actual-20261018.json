@@ -1,0 +1,71 @@
+{
+  "schema": "unison-auto-cohort-command-controls/1",
+  "actual_tools": [
+    {
+      "chunk": "516ab2",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "268326",
+      "exit": 0,
+      "no_session": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "bench/sync/auto_cohort.py",
+      "sha256": "c47079d048f73693275c6c0497a938fd37557c70c6c2b8b53ceacb6a5e6f4fd1"
+    },
+    {
+      "path": "tests/auto_cohort_test.py",
+      "sha256": "c909f4cff54fc3dee1bfa9f3c00cb1540b2bc3534a23c315a32e262f27415764"
+    }
+  ],
+  "closures": [
+    {
+      "child": {
+        "pid": 54390,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 54390,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    {
+      "child": {
+        "pid": 54431,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 54431,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  ],
+  "runtime_qualified": false,
+  "scope": "directed fabricated full client/server command and lexical fixture namespace binding; no transport/artifact authentication/parent inference"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "unison-split-child-idle-controller-recovery/1",
+  "pid": 25899,
+  "identity": "25899 41199 25899 Mon Oct 19 00:39:14 2026     /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+  "observations": [
+    [
+      [
+        25899,
+        41199,
+        25899,
+        "Ss"
+      ]
+    ],
+    [
+      [
+        25899,
+        41199,
+        25899,
+        "Ss"
+      ]
+    ]
+  ],
+  "original_test_result": "failed; outer captured outcome was not persisted before retention",
+  "diagnostic_reproduction": "e5908d: seven inert faults, one stale assertion on enriched upstream descriptor record; diagnostic child26085 reaped1/group-empty, CPU04..07 closed",
+  "successor": "6a2907: 30 tests passed, child26236 reaped0/group-empty, CPU04..07 closed",
+  "scope": "Only idle retained Python controller; no SDK/media/Unison transport. Original worker wait4 is not reconstructed or claimed.",
+  "signal": "SIGKILL to exact verified idle owner only",
+  "source_pins": {
+    "tests/sdk_host_matrix/shared_child_test.py": "aaf64fd79ff3ec6eb4c834384fb888e8d8413110c61148f16ad08c11bed77cae",
+    "tests/sdk_host_matrix/shared_child_fault_test.py": "e138a938117fdc13b117a3bba734ad4e0e5dc48b41acb0111b0dddf6f12e5f84",
+    "tests/sdk_host_matrix/shared_child.py": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da"
+  }
+}

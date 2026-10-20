@@ -1,0 +1,22 @@
+{
+  "schema": "unison-negative-sdk-private-fault-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "b30d36",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_test_methods": 3,
+  "source_sha256": {
+    "tests/sdk_negative_receiving/data.py": "ef2fef339db2722750e0578edd1124f5c8f94f4a68131a0fd05ba834bce6f518",
+    "tests/sdk_negative_receiving/data_test.py": "dcd5c207a1dd58cc53d429a64c1ab006d7e003d6c2db9cd49e7a0a742cb04784",
+    "tests/sdk_fixture_digest_fault.py": "32de1200c2e65df2834f46626f54045eec77953e3a1f12cecbad2f4a9ae9bc70",
+    "tests/sdk_merge_receiving/data.py": "0f2f02491a605efb17f93317d413f9030c0619aff71655f11e13c44b83fd98a9",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+  },
+  "CPU00_closed": true,
+  "child_processes": 0,
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "retained_payload_opened": false,
+  "scope": "Private 4096-byte original synthetic TIFF fixtures; exact one-byte write/readback and wrong hash/identity/hardlink/malformed refusal. No authentic DNG/SDK/publication result."
+}

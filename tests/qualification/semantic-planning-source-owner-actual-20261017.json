@@ -1,0 +1,168 @@
+{
+  "complete": true,
+  "scope": "Shared read-source owner used by ordinary reports and make_plan; production-linked helper control via local report, not actual remote transport",
+  "actual_tool_terminal": {
+    "session": 10491,
+    "chunk": "286e38",
+    "exit": 0,
+    "running_session": false
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-planning-source-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1321,
+      "sha256": "1855634df80f9723cc45417ee9a415945a5dae44cd071a7cfd45e4ad9348e97e"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "9c9a5688cf55f338329a3b9bf6ea0d7869b6fe3c328874b9195779a8dc0a2549"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-stock-make-20261017-001/RESULT.json",
+      "bytes": 51539,
+      "sha256": "1356274d005257bc88d055e4a314406a9010f4360acb394fe780fa99a3c1b881"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "22c086dd293797f21fda530736e0529cd9a17b2e603898dd57b5d58c44e2c758"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "c7d91c871ea83a342e56a5fc5fe5c49d5313764651b6df2e518008fc7170cd8f"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "2765ad0821654124dd2fd94e74375aeb61cc60f45e646e33a9ee0d33a693e6fa"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-ox-make-20261017-001/RESULT.json",
+      "bytes": 51545,
+      "sha256": "80b23317787887325d44f94bd50818f9b0656668625cc0dbe2ff2fe36ec8952f"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "668581af37dc745d115df1b54f82e79a50d9adba02979e86bf983cff2b6acdaf"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-source-20261017-001/SHARED-START.json",
+      "bytes": 1337,
+      "sha256": "c07f93790df5ba0f5839233e10bdde9d0ed837560cc63b5ba8496d45d12a96f2"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-source-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b401c8e094be88e0d7f8caeb149f242669c83d9a786dc9bd7606a52389927f74"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-source-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "b84ee49960180e30e31c2e9456fa0aee1f84a7640249d653ef3d60bdbd8aff2c"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-source-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-xm9c6i4b/RESULT.json",
+      "bytes": 153641,
+      "sha256": "b83d32c83f192c5be1086c1b760eca953cbb0d265619c9a99431dccd5011d9ad"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-report-20261017-001/SHARED-START.json",
+      "bytes": 1319,
+      "sha256": "ea5dacaa8ad0c0f3ee79b620973963c8312f05438816282e209ee966dcee77d1"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-report-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "de541e371899a4bb9c771a0568f7400a48270b47e26bcc78237c6149e582f3cd"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-report-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "6c89bbd5036c847b015149cd1bab77318b0bea9396925ba660ec40410940bb56"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-report-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-tmrrwzm4/RESULT.json",
+      "bytes": 148254,
+      "sha256": "9fcd1aa21c2b032552245b946d5e41f49aff5bac310b8b638f40fb72f7f528cf"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-retention-20261017-001/SHARED-START.json",
+      "bytes": 1325,
+      "sha256": "f69aa0abc5b61f9edc0271e61aa76da068142ce9887f50822815e6bcffe1e9a2"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-retention-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "c0b085aa01a14f614edec9634b2ab8befdd6d8efad45d47a70c9e22b12e39558"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-retention-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "083a5029de58cb64e393189285029fc62021000d2e2eb8444cf0eb9387e02fbc"
+    },
+    {
+      "path": "/private/tmp/unison-planning-source-both-retention-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-fqdqagi1/RESULT.json",
+      "bytes": 147457,
+      "sha256": "e71496db131dfbecb94fb93cea3f29734cb3abbb9f3eed4218722efa0a1207d8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.ml",
+      "bytes": 32427,
+      "sha256": "815e267632f5aa93a8818aa8a49afab52f291d37df464847812b41b856a2ef16"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.mli",
+      "bytes": 3755,
+      "sha256": "44a319d2136560691eeb0bd59e1085ef4c7c62c3187d38309411e4a190e36f00"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/semantic_source_probe.ml",
+      "bytes": 4375,
+      "sha256": "1dfd1cb2fdb61436739d0330238c08d61e656e96184eda30a323372ed8a72d30"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/semantic_source_controls.py",
+      "bytes": 4615,
+      "sha256": "aec0c26622a275c423c6cbd28a818e79c6440422d175f09ab8027da615f05e3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/transfer-source-ownership-review-20261017.md",
+      "bytes": 2847,
+      "sha256": "0a253ef69d88d08fe3a9d752dcf181b99eb546c4c070c26ac6ffe74a73eb11bb"
+    }
+  ],
+  "limitations": [
+    "No actual RPC/transport/failure execution",
+    "Receiver-stage/native publication cleanup remains separate",
+    "Disposable injected-close test retains application ownership until process exit; external group closure is separately verified",
+    "No SDK/camera/bulk IO grant"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "state": "ROOT_INDEPENDENT_RPC_FAILED_CLOSED_RELEASE_ADOPTED",
+  "root_receipt": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-COMPONENT-RPC-V1-FAILED-CLOSED-ADOPTION-20261017.json",
+    "bytes": 1914,
+    "sha256": "f01c0b941f451d9438ddf1f39b82efa4b1e9d23aee810cddb3047bfd1a5ce44f"
+  },
+  "root_independent_prefix_count": 8,
+  "root_fresh_EXIO_then_Photo8_reacquired_and_closed": true,
+  "original_functional_pass": false,
+  "photo_scheduling_hold_released": true,
+  "no_replay": true,
+  "saved_audit_functional_adoption": "separate; not claimed by this Root resource-only receipt"
+}

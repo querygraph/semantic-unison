@@ -1,0 +1,68 @@
+{
+  "complete": true,
+  "scope": "Original tiny composed store close/open/sync failures and normal readback; stock and OxCaml",
+  "actual_owner": {
+    "session": 35661,
+    "terminal_chunk": "d0009b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "raw": {
+    "path": "/private/tmp/unison-cache-loader-controls-wdlxbfja/RESULT.json",
+    "bytes": 447832,
+    "sha256": "e785a7c229c61cbb15aa8edfc3d48c07f60be4f09b18821100fec050d434ebba"
+  },
+  "shared_closed": {
+    "path": "/private/tmp/unison-managed-store-fault-controls-20261017-002/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "aa39dd7a440ac64d3dbee6e6cb6d1308885812f1ac0dd3f0e3a4adf19967cd87"
+  },
+  "source_pins": {
+    "/Users/alexy/src/unison-component-store-20261017/src/componentHash.ml": "27bd0f7cf43ce69bd126056bd905c896ee111f7618e1fcda88b664830b2c4dc6",
+    "/Users/alexy/src/unison-component-store-20261017/src/componentHash.mli": "721784138894bb012f3873ac46ad5c932341fe231d3e7165f5afd27da56bcb83",
+    "/Users/alexy/src/unison-component-store-20261017/src/componentHash.ox.mli.in": "4cb7ab2376a385020d863dde818301c7ea821075980c3d0526893fb3aae62abe",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngComponents.ml": "8175c378a64067414ffde835b51f757bbde715c715f632466d6791c5960ded62",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngComponents.mli": "7469cba622f490a13dd09d40c8412911e7c7a38652665c6295eda05f64727f7d",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngComponents.ox.mli.in": "64397a3c1076b2a6f7b751f7c6ead074408862d2a8220f81899fb35d82b61506",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngExtended.ox.mli.in": "435f1161e5c6d6e34c4b87272fe258232cb53b3de9805ccaf562359f79395504",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngLayout.ml": "b937b560f9f8a6200e886cf29bb7823a630755a68136331aeb6502c01a103aed",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngLayout.mli": "b2b849f4f0c58a277de7202b6f038a6b6e43f6dff6cfedf2b0d416a879829226",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngLayout.ox.mli.in": "632a8dd3e66167be390dfbb9332d322cd751941d708e6403fe97cb43ca2526c3",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngSemantic.ml": "13b89e566ed973140b5d7779176da7b80ff49c52dfc59066d35bafa3d648e4af",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngSemantic.mli": "5761ac03853af939f91aab66ea34941d79893fbea8acd1c0abb39c1762884b3e",
+    "/Users/alexy/src/unison-component-store-20261017/src/dngSemantic.ox.mli.in": "385ce5e6c0c263210bf3828642412d2b6d692f73d0efd2f3c8dc3ef36dfd3b77",
+    "/Users/alexy/src/unison-component-store-20261017/src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "/Users/alexy/src/unison-component-store-20261017/src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+    "/Users/alexy/src/unison-component-store-20261017/src/formatExtension.ox.mli.in": "6f023de54ff0386a594bb6f4a9bb00390ac4445270cb2f11f1ca8a5202e85199",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticFile.ml": "90b2e698dd43ce4df82d5669aacda0db348b35dd2b275eefeab89042cef62b55",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticFile.mli": "c5a4ceeb6a261f06c79b2209cc836108363b88bd5f3fdac1a4eaa51d502413c2",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticFile.ox.mli.in": "cf0a99f866e391ac019d2a575648bb84a865f605aaac853264ffb6563a543ff3",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticFile_stubs.c": "ddacc3d15845e8302a7eaeb8a3f4c07b0aefde784f34b12236b9114f2557c22c",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "/Users/alexy/src/unison-component-store-20261017/src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "/Users/alexy/src/unison-component-store-20261017/src/semantic_mode_filter.ml": "8cf945eb9e1a7ee5b3cecd78f50a913d45151552e1b0351f469da30c6a707586",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "/Users/alexy/src/unison-component-store-20261017/src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_loader.ml": "731b3b1be65eb326d7a1f6bc1d9de3891dbe519ef72a0ec246ab672714804198",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_loader_controls.py": "938661314dd47d9bf0e918a5cc94154ccea3613b8bf15b555db157d498f04e5c",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_loader_fault_stubs.c": "7c5a80223964dd431a0569c914b6bde64afc30eafbb27b4556ed528e40d8616c",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_loader_native.ml": "85fbf879ac88e980b9bcf0773b4fcbe07ab12a05eaaa3d47d18c862a9e80bf99",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_namespace.ml": "11205d277b361c73879d0ec6d6c8b46ef95e2c0a69e3ca61e8e15665ac86f8e7",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_namespace_native.ml": "dea3dde8b5dc5480a4d786262b3f342c55d50f35c57abc6563510e331d10d7ec",
+    "/Users/alexy/src/unison-component-store-20261017/tests/semantic/cache_store.ml": "de90c2d14c4f98bdf917bb52803da63f8d5617776d14ea4bb6008226a8d64248"
+  },
+  "limitations": [
+    "Update archive adoption source not linked/tested yet",
+    "Full builds and automatic report routing pending",
+    "No SDK/media/transport/production activation"
+  ]
+}

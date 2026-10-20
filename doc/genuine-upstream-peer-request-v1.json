@@ -1,0 +1,40 @@
+{
+  "state": "PREPARED_NOT_ADMITTED",
+  "scope": "Four current-stock/Ox versus genuine unmodified pinned upstream8772d26a cases, both directions; seed/update/noop12CLI/generated8KiBDNG only. Upstream lacks fork semantic modules/capability and receives only maxthreads2. Current endpoints explicitly enable semanticdng=true and cloneauto with validationoff. Exact received bytes/noop identities/independent client-supervisor-server-pump/worker/group/FD closure. No SDK/Adobe/camera/Photo/original/pixels/performance claim. SharedUnison00..07+EXglobal only; no reservation from preparation. Unknown retains; no replay/retry/successor.",
+  "plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/genuine-upstream-peer-plan-v1.json",
+    "sha256": "9072f6a9769fbb1a82b3545a4097b934eaa0e6f733b9877ea8bab76e4ab35d60"
+  },
+  "proposed_admission": "/private/tmp/unison-upstream-peer-admission-b31e7c09.json",
+  "workspace": "/private/tmp/u-mp-b31e7c09",
+  "limits": {
+    "cases": 4,
+    "calls": 12,
+    "endpoint_workers": 2,
+    "owner_credits": 2,
+    "total_credits": 8,
+    "call_observation_seconds": 30,
+    "owner_observation_seconds": 300,
+    "sdk_calls": 0
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/mixed_peer_compatibility/entry.py",
+    "--plan",
+    "/Users/alexy/src/unison-sol-review-20261017/doc/genuine-upstream-peer-plan-v1.json",
+    "--plan-sha256",
+    "9072f6a9769fbb1a82b3545a4097b934eaa0e6f733b9877ea8bab76e4ab35d60",
+    "--admission",
+    "/private/tmp/unison-upstream-peer-admission-b31e7c09.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "prerequisites": {
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/genuine-upstream-source-actual-20261017.json": "40c10739ecdd76d0b3b4bdf85c1e639480aa3bfb35a36b107db0191e31061327"
+  },
+  "source_review": "Schema2 selects exact upstream contract; schema1 retained-fork default stays unchanged. Independent parent audit receives the authorized contract and rejects reinterpretation of upstream frames as old-fork frames. Upstream actual exporter/build/selftest/commit+archive/source/compiler/binary pins checked after IO acquisition before any calls.",
+  "declared_logical_io_budget_bytes": 2147483648,
+  "io_budget_instrumented": false,
+  "declared_log_budget_bytes": 16777216,
+  "log_budget_enforced": false
+}

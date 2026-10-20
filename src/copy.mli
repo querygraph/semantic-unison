@@ -57,3 +57,13 @@ val readPropsExtDataG :
  -> Props.t              (* props of source *)
  -> (Path.local option * Props.x) Lwt.t (* props with all ext data included
                                            and path translated to local path *)
+
+
+type retained_clone
+val retained_clones : unit -> retained_clone list
+val retained_clone_cause : retained_clone -> exn
+val retained_clone_native : retained_clone -> StagePublication.owned option
+val retained_clone_descriptors : retained_clone -> Unix.file_descr list
+(** Owner-loop diagnostics for bound local clone publication uncertainty.
+    Its producer reservation and remaining raw/channel resources stay held.
+    This is not retry, cleanup, or settlement authority. *)

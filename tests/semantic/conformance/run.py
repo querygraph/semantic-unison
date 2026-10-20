@@ -44,7 +44,7 @@ def main():
     for name in MODULES:
         for suffix in (".mli", ".ml"):
             copied.append("src/" + name + suffix)
-    copied += ["src/semanticHash_stubs.c", "src/semanticFile_stubs.c",
+    copied += ["src/semanticHash_stubs.c", "src/semanticHash_evp.h", "src/semanticFile_stubs.c",
                "doc/semantic-delta-v0.md", "doc/dng-profile-v0.md"]
     copied += [str(path.relative_to(root)) for path in sorted(here.rglob("*"))
                if path.is_file() and "__pycache__" not in path.parts and not path.name.startswith("qualification-")]

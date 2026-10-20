@@ -1,0 +1,397 @@
+{
+  "scope": "Mixed package/dispatcher source integration regression; inert and tiny authored fixtures only, no SDK/camera/canonicalIO",
+  "rows": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/plan_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.017s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2940,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/worker_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.007s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2942,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/artifacts_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2944,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/boundary_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.007s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2950,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/execute_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.008s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2953,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/inventory_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.129s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2962,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/parent_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2964,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/dispatch_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.105s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 2966,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "cpu_closed": true,
+  "prior_import_failure": {
+    "scope": "Mixed package/dispatcher source integration regression; inert and tiny authored fixtures only, no SDK/camera/canonicalIO",
+    "rows": [
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/plan_test.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.019s\n\nOK\n",
+        "client_cleanup": {
+          "pid": 2536,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/worker_test.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.008s\n\nOK\n",
+        "client_cleanup": {
+          "pid": 2538,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/artifacts_test.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n",
+        "client_cleanup": {
+          "pid": 2547,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/boundary_test.py"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/boundary_test.py\", line 9, in <module>\n    from plan import TARGET\nImportError: cannot import name 'TARGET' from 'plan' (/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py)\n",
+        "client_cleanup": {
+          "pid": 2549,
+          "returncode": 1,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/execute_test.py"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/execute_test.py\", line 12, in <module>\n    from plan_test import fixture\n  File \"/Users/alexy/src/unison/tests/mixed_validation/plan_test.py\", line 4, in <module>\n    from plan import commands,LIMITS,SCHEMA,TARGET\nImportError: cannot import name 'commands' from 'plan' (/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py)\n",
+        "client_cleanup": {
+          "pid": 2551,
+          "returncode": 1,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/inventory_test.py"
+        ],
+        "returncode": 1,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "EEEEE\n======================================================================\nERROR: test_omitted_extra_duplicate_and_hash_failure_refuse (__main__.Inventory.test_omitted_extra_duplicate_and_hash_failure_refuse) (mode='omit')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory_test.py\", line 23, in test_omitted_extra_duplicate_and_hash_failure_refuse\n    with self.subTest(mode=mode),self.assertRaises(ValueError):verify(plan,checker=lambda x:None)\n                                                               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory.py\", line 25, in verify\n    from mixed_validation.artifacts import verified_hash\nModuleNotFoundError: No module named 'mixed_validation'\n\n======================================================================\nERROR: test_omitted_extra_duplicate_and_hash_failure_refuse (__main__.Inventory.test_omitted_extra_duplicate_and_hash_failure_refuse) (mode='extra')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory_test.py\", line 23, in test_omitted_extra_duplicate_and_hash_failure_refuse\n    with self.subTest(mode=mode),self.assertRaises(ValueError):verify(plan,checker=lambda x:None)\n                                                               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory.py\", line 25, in verify\n    from mixed_validation.artifacts import verified_hash\nModuleNotFoundError: No module named 'mixed_validation'\n\n======================================================================\nERROR: test_omitted_extra_duplicate_and_hash_failure_refuse (__main__.Inventory.test_omitted_extra_duplicate_and_hash_failure_refuse) (mode='duplicate')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory_test.py\", line 23, in test_omitted_extra_duplicate_and_hash_failure_refuse\n    with self.subTest(mode=mode),self.assertRaises(ValueError):verify(plan,checker=lambda x:None)\n                                                               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory.py\", line 25, in verify\n    from mixed_validation.artifacts import verified_hash\nModuleNotFoundError: No module named 'mixed_validation'\n\n======================================================================\nERROR: test_omitted_extra_duplicate_and_hash_failure_refuse (__main__.Inventory.test_omitted_extra_duplicate_and_hash_failure_refuse)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory_test.py\", line 25, in test_omitted_extra_duplicate_and_hash_failure_refuse\n    with self.assertRaisesRegex(ValueError,'hash differs'):verify(self.fixture(),checker=refuse)\n                                                           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory.py\", line 25, in verify\n    from mixed_validation.artifacts import verified_hash\nModuleNotFoundError: No module named 'mixed_validation'\n\n======================================================================\nERROR: test_required_current_paths_and_all_checks (__main__.Inventory.test_required_current_paths_and_all_checks)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory_test.py\", line 15, in test_required_current_paths_and_all_checks\n    checked=[];verify(self.fixture(),checker=checked.append)\n               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/mixed_validation/inventory.py\", line 25, in verify\n    from mixed_validation.artifacts import verified_hash\nModuleNotFoundError: No module named 'mixed_validation'\n\n----------------------------------------------------------------------\nRan 2 tests in 0.052s\n\nFAILED (errors=5)\n",
+        "client_cleanup": {
+          "pid": 2553,
+          "returncode": 1,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/mixed_validation/parent_test.py"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n",
+        "client_cleanup": {
+          "pid": 2555,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      }
+    ],
+    "cpu_closed": true,
+    "sources": {
+      "tests/mixed_validation/worker.py": "dc7a3c084aa924d89288eb6d29f143840e6ddc33796cd200c43530807ce66c56",
+      "tests/mixed_validation/audit_test.py": "534b6673a4ab787ffcaab43b56e59724da5df23ca3ab1cc724c3098af3b82d6c",
+      "tests/mixed_validation/parent_test.py": "87065bf6e508b0909b21718c062b9818eff2100593032f9d173d28071ae6144a",
+      "tests/mixed_validation/plan.py": "647ee8faeb04c308afae0a91c7b0e869a3ea85bd03fe3fbb52517948a707e5b8",
+      "tests/mixed_validation/boundary.py": "b6b60968889ea4b2cf7f05bc078405346fed93f65338ed5f1ec8ae619c3471f3",
+      "tests/mixed_validation/run_controls.py": "b66b5c4636d6f9dd34d86db0ff8ea0edd480004535a3443617da8e4dc66b3382",
+      "tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+      "tests/mixed_validation/inventory_test.py": "d8a9396f88e4859a3e8ffac4ccd205e9a2c4f280b22a52a28d66d5f2f92238ee",
+      "tests/mixed_validation/boundary_test.py": "4ab8677a741d3dfb5b5522163b6d3e330bd7e1ab5dbf60937af9c9c61ad7f029",
+      "tests/mixed_validation/execute.py": "9c8019295b79cb0e330eda1409ff015c3fc0de976e69be2c83e4eb734e86df47",
+      "tests/mixed_validation/parent.py": "385bb6f483767e04fbf5b11f610dd82c4105b65b0dc1ebe7ea46a8ba95a759c4",
+      "tests/mixed_validation/artifacts_test.py": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980",
+      "tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+      "tests/mixed_validation/worker_test.py": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb",
+      "tests/mixed_validation/plan_test.py": "6ecc4114651ad484a9a5668ad135920d7159b1e9538428436fb28592c9cef450",
+      "tests/mixed_validation/artifacts.py": "1c069e138565eb668a46ccddbd7c6343285b1ddaeec5c8be376e510542a742a5",
+      "tests/mixed_validation/execute_test.py": "d744d57401b6dd8ecf717de5515e4985876d8646555d5548236d1f1288178a3e",
+      "tests/mixed_validation/inventory.py": "d8a890803eff7ec44b0646b57d7a40a9d84cd2ad8039f5ba2a84e6a6f78f3f2b",
+      "tests/shared_dispatch.py": "53613481e82de31dfe33f1f01f29e9c8251e8b2d975ab9a7299b5f1b22bab02f"
+    },
+    "owning_tool_terminal": {
+      "session_id": 84066,
+      "chunk_id": "3b1452",
+      "exit_code": 1,
+      "no_running_session": true
+    }
+  },
+  "sources": {
+    "tests/mixed_validation/worker.py": "dc7a3c084aa924d89288eb6d29f143840e6ddc33796cd200c43530807ce66c56",
+    "tests/mixed_validation/audit_test.py": "534b6673a4ab787ffcaab43b56e59724da5df23ca3ab1cc724c3098af3b82d6c",
+    "tests/mixed_validation/parent_test.py": "87065bf6e508b0909b21718c062b9818eff2100593032f9d173d28071ae6144a",
+    "tests/mixed_validation/plan.py": "647ee8faeb04c308afae0a91c7b0e869a3ea85bd03fe3fbb52517948a707e5b8",
+    "tests/mixed_validation/boundary.py": "b6b60968889ea4b2cf7f05bc078405346fed93f65338ed5f1ec8ae619c3471f3",
+    "tests/mixed_validation/run_controls.py": "b66b5c4636d6f9dd34d86db0ff8ea0edd480004535a3443617da8e4dc66b3382",
+    "tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+    "tests/mixed_validation/inventory_test.py": "d8a9396f88e4859a3e8ffac4ccd205e9a2c4f280b22a52a28d66d5f2f92238ee",
+    "tests/mixed_validation/dispatch_test.py": "a121c069c7ac3c81e0ab4414591a4a7da9c239e63a7f7df8696a4f150357c4bd",
+    "tests/mixed_validation/boundary_test.py": "0b46bf3b20914eb4fd5f52f8e9ac30089839400b5212c894ca6f8c7965dd9afd",
+    "tests/mixed_validation/execute.py": "9c8019295b79cb0e330eda1409ff015c3fc0de976e69be2c83e4eb734e86df47",
+    "tests/mixed_validation/parent.py": "385bb6f483767e04fbf5b11f610dd82c4105b65b0dc1ebe7ea46a8ba95a759c4",
+    "tests/mixed_validation/artifacts_test.py": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980",
+    "tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+    "tests/mixed_validation/worker_test.py": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb",
+    "tests/mixed_validation/plan_test.py": "58bca3b9a0239b00d71d1cdeb2601f6042964ab1c50366534dda1039f5317ced",
+    "tests/mixed_validation/artifacts.py": "1c069e138565eb668a46ccddbd7c6343285b1ddaeec5c8be376e510542a742a5",
+    "tests/mixed_validation/execute_test.py": "d744d57401b6dd8ecf717de5515e4985876d8646555d5548236d1f1288178a3e",
+    "tests/mixed_validation/inventory.py": "1eb8e22917653fcc4fe7ea36e9c64d45fc5b11128857b6291b64eb71c99e6cdc",
+    "tests/shared_dispatch.py": "53613481e82de31dfe33f1f01f29e9c8251e8b2d975ab9a7299b5f1b22bab02f"
+  },
+  "owning_tool_terminal": {
+    "session_id": 53500,
+    "chunk_id": "8f6368",
+    "exit_code": 0,
+    "no_running_session": true
+  }
+}

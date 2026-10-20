@@ -1,0 +1,161 @@
+{
+  "schema": "unison-current-sdk-merge-saved-audit/1",
+  "actual_terminal": {
+    "kind": "faithful_owning_tool_terminal_transcription",
+    "session_id": 61260,
+    "initial_chunk_id": "2d7fab",
+    "terminal_chunk_id": "3d8747",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "owner_pid": 5665,
+    "worker_pid": 5681,
+    "source": "Actual write_stdin result observed by owning agent; not process absence"
+  },
+  "source_pins_verified": {
+    "execution_sha256": 139,
+    "production_sha256": 329
+  },
+  "prerequisites_verified": 10,
+  "retained_input_epochs_unchanged": 12,
+  "calls": [
+    {
+      "codec": "uncompressed",
+      "stage": "seed",
+      "helpers": 0,
+      "transport_sha256": "af429ff88758798708d3410ab8784a6312290aa92629b9ea3d8dec438a37e731"
+    },
+    {
+      "codec": "uncompressed",
+      "stage": "update",
+      "helpers": 2,
+      "transport_sha256": "b9696ca6501cb38231c895db7628627ee502f71e91b1c92821eddba032a61c28"
+    },
+    {
+      "codec": "uncompressed",
+      "stage": "noop",
+      "helpers": 0,
+      "transport_sha256": "9f23508c4e8d84d13e915541a1b16c569389f7ad2caa81e463f1351d7f0e6833"
+    },
+    {
+      "codec": "jpeg",
+      "stage": "seed",
+      "helpers": 0,
+      "transport_sha256": "80df92cc57ad012971e794843897fcfaaf111f407f09e46879c08784f3957cb5"
+    },
+    {
+      "codec": "jpeg",
+      "stage": "update",
+      "helpers": 2,
+      "transport_sha256": "0f640b1cd482697aa9acfcfe3fd0b179b9a1f42f41a172f735449efb68a9073a"
+    },
+    {
+      "codec": "jpeg",
+      "stage": "noop",
+      "helpers": 0,
+      "transport_sha256": "868ae0006de7985554a16558c317a1013a34cb216cc9bb6ee0d9754fdfa64b35"
+    },
+    {
+      "codec": "jxl",
+      "stage": "seed",
+      "helpers": 0,
+      "transport_sha256": "1833a38554824b70c37fcea823ee58e4306b909243458a81ec71528553c1f3d4"
+    },
+    {
+      "codec": "jxl",
+      "stage": "update",
+      "helpers": 2,
+      "transport_sha256": "9393d87bca7aae67cd3c9dd77fe1b49af45b7257e3b35d326def225abd784a30"
+    },
+    {
+      "codec": "jxl",
+      "stage": "noop",
+      "helpers": 0,
+      "transport_sha256": "44b8d61d6f6b74e98cde74cee4947f002c4198ce50f264d6d20249557aaea4f3"
+    }
+  ],
+  "reports": [
+    {
+      "candidate-sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+      "candidate-size": "48005534",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    },
+    {
+      "candidate-sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+      "candidate-size": "48005534",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    },
+    {
+      "candidate-sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+      "candidate-size": "39016722",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    },
+    {
+      "candidate-sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+      "candidate-size": "39016722",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    },
+    {
+      "candidate-sha256": "a8271b171913e61d56aeeb67ca1e8baeee0932574c0c6d71cdb0bee3d25f0305",
+      "candidate-size": "38237658",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    },
+    {
+      "candidate-sha256": "a8271b171913e61d56aeeb67ca1e8baeee0932574c0c6d71cdb0bee3d25f0305",
+      "candidate-size": "38237658",
+      "driver-build": "unison-sdk171-2724-v1-single",
+      "structure": "valid",
+      "decode": "success",
+      "raw-digest": "valid",
+      "errors": "0",
+      "warnings": "4",
+      "raw_digest_verified": true
+    }
+  ],
+  "input_or_output_payload_opened": false,
+  "execution_artifact_opened": false,
+  "EX_acquired": false,
+  "actual_parent_output_hashes_adopted": true,
+  "scope": "Generated three-codec scalar merge/off-seed/require-update/noop; no pixels/corpus/performance/production claim",
+  "audit_CPU00_closed": true,
+  "audit_actual_tool": {
+    "terminal_chunk": "8b4b5c",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "initial_audit_failure": {
+    "terminal_chunk": "eb4bef",
+    "exit_code": 1,
+    "cause": "Auditor used older source_pins key instead of frozen execution_sha256/production_sha256; CPU00 closed in finally; no native rerun"
+  },
+  "auditor_sha256": "dd5fb150cdd8c5e6511b806d5b352ff74f049e57aacf61743aa0c04bdc775145"
+}

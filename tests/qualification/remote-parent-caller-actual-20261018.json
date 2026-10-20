@@ -1,0 +1,200 @@
+{
+  "scope": "SemanticRemote prepared parent ownership consumes actual tracked native acknowledgement;16positive caller controls+2wrong-consumer designated rejections+24pair+8native publication regressions; stock/Ox Make and Dune selftests. In-process planner and generated8192B DNGs, no actual transport/SDK/camera/Photo payload.",
+  "build_parent": {
+    "session": 30786,
+    "terminal_chunk": "2147c2",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_and_regression_parent": {
+    "session": 29653,
+    "terminal_chunk": "4a1407",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "preserved_failed_dune_parent": {
+    "session": 70546,
+    "terminal_chunk": "1c8f75",
+    "exit_code": 1,
+    "no_session": true,
+    "cause": "Duplicate files record label warning30; fixed by internal publication.staging_files rename, no warning suppression."
+  },
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327,
+    "stock-dune-check": 327,
+    "ox-dune-check": 327
+  },
+  "sources": {
+    "src/notificationPipe.ml": "1567344b9ea1a8945725807b91f448835e1b65c5be6e2bc32ea451304df2b938",
+    "src/notificationPipe.mli": "0abb7012db00eb4fae38a631fce653bcf3b53b868132b530e2245aad2d51ae8f",
+    "src/semanticRemote.ml": "d088cbf072364e71fe70a0d650bef491683a901d4bc5fe95427dbde9a682527b",
+    "src/semanticRemote.mli": "16c845d3f8fc45e0c183ac0aa2f380583bc6dc497e9da48ceb5ba2a5d40f38b8",
+    "src/stagePublication.ml": "40e028f6cb322ae1be22be472c21b995118de0dc69f898c1de58086db5adb2e5",
+    "src/stagePublication.mli": "980750ce86f45b49da2ec121825659358c742e70980b865e468a4ac4c69055e6",
+    "src/stagePublication_stubs.c": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896",
+    "tests/resource_close/remote_parent_run.py": "f062c7e06a28a37884d89c5a8aeb5cb39396e25a9efce8867d024c9f2d5add21",
+    "tests/resource_close/remote_parent_fault.ml": "93bb6b70c0a6c01499397c0395a2a50044bad5e68d72f789ef66c2ca195db34c",
+    "tests/resource_close/remote_parent_test.ml": "ba95d358f250e4a3ae3f63a7b0a16ff5c17710d1906aef9963af673fda0bafa7",
+    "tests/stage_publication_owned/fixture.c": "a6b0c3ad2bd0977fcdfb1e626ef2c8b67e9385d341dfba7b145ad56184cd1850",
+    "tests/resource_close/remote_pair_run.py": "ab07f87690e9b6452092fbb9aa578875ed82d1f7838453258df770ec95e2ae09",
+    "tests/resource_close/remote_pair_test.ml": "e67cd9173f62e828cdebb0270f2860af6fae053facf5d48ce1b682be1a358528",
+    "tests/resource_close/remote_pair_fault.ml": "2317973cee3cfb2e91498e52fcf4deeee3d01d522c7d4447edee7e7b68df1225",
+    "tests/remote_publication_owned/controls.py": "3e78060c340c574ded4d7b7224d193d5b596500c18d8e8105afb53d94333eae3",
+    "tests/remote_publication_owned/probe.ml": "6526dffc47cdff4f6693c4adfa6cb610728241f8f423c35c8e845afb7ea123cd"
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-check-20261018-002/RESULT.json",
+      "bytes": 57248,
+      "sha256": "bbfba0bb8858097f321fcf1c2a9945e921a026b12f123af14b85da25785e1a84"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "1a02a2c2940486d64366e49ed2cb097b3dfe8619bf5485260e2cd93274a0007f"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-ox-check-20261018-002/RESULT.json",
+      "bytes": 57254,
+      "sha256": "4bee082338a68850c259de6d3928cf9836fd4607c541f910be95a98f6fe98867"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-ox-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "3e5ab880d7cf68c79bdbd77033c6fa72d470f79adebd73136f0c49f0b6479e35"
+    },
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-dune-check-20261018-002/RESULT.json",
+      "bytes": 57075,
+      "sha256": "fde41bf6f1ac15395fdd27187d311c441f5c42b8e82afb6f2e31d32b82ad01c1"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-dune-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "9053a9b0414de0afb68b5cb2a2c209eabe6931ba2d2b906c95c7b5c24cbd39ad"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-ox-dune-check-20261018-002/RESULT.json",
+      "bytes": 57079,
+      "sha256": "281267f5bc7553d48084cd90392b7f53cd4daeb23f53087e83edeea29f01f7b6"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-ox-dune-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "26168439e7667c6b56662eb6b0dd31e88c827a6902b6b08b7d9cd20d6a50c6ac"
+    },
+    "caller/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-parent-final-caller-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6837e6cc4363a1c4519174d2c6766188adbb5d42c3de4676c925446da65d5c7c"
+    },
+    "caller/RESULT": {
+      "path": "/private/tmp/unison-parent-final-caller-20261018-001/FAULT-RESULT.json",
+      "bytes": 280913,
+      "sha256": "913f5a1a7a41025b5d17bf10b5e8a389e1e4986f1198901aa2be5e8459342ef0"
+    },
+    "caller/private-0/fixture.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-fq04s8iz/fixture.c",
+      "bytes": 1230,
+      "sha256": "54eb7388054a6a33717406d0c0117f327a409b390895cb25e201def113db9d78"
+    },
+    "caller/private-0/stagePublication_stubs.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-fq04s8iz/stagePublication_stubs.c",
+      "bytes": 28864,
+      "sha256": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896"
+    },
+    "caller/private-0/semanticRemoteForParent.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-fq04s8iz/semanticRemoteForParent.ml",
+      "bytes": 41645,
+      "sha256": "1c3666c468b4fc5a9d05474451fea9b565a4c9985e50d169899cc7ebcf9e0f8c"
+    },
+    "caller/private-0/notificationPipe.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-fq04s8iz/notificationPipe.ml",
+      "bytes": 4650,
+      "sha256": "8a0099094bccd5d895598bdb399167f0ee25a0766cfe700a27510945ef13a33b"
+    },
+    "caller/private-1/fixture.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-ji_4q1pu/fixture.c",
+      "bytes": 1230,
+      "sha256": "54eb7388054a6a33717406d0c0117f327a409b390895cb25e201def113db9d78"
+    },
+    "caller/private-1/stagePublication_stubs.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-ji_4q1pu/stagePublication_stubs.c",
+      "bytes": 28864,
+      "sha256": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896"
+    },
+    "caller/private-1/semanticRemoteForParent.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-ji_4q1pu/semanticRemoteForParent.ml",
+      "bytes": 41645,
+      "sha256": "1c3666c468b4fc5a9d05474451fea9b565a4c9985e50d169899cc7ebcf9e0f8c"
+    },
+    "caller/private-1/notificationPipe.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-parent-ji_4q1pu/notificationPipe.ml",
+      "bytes": 4650,
+      "sha256": "8a0099094bccd5d895598bdb399167f0ee25a0766cfe700a27510945ef13a33b"
+    },
+    "pair/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-parent-final-pair-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "984b7acc80f85e45711223b0d955e7ff52f97cc5d76e013ec498311bedb0538f"
+    },
+    "pair/RESULT": {
+      "path": "/private/tmp/unison-parent-final-pair-20261018-001/FAULT-RESULT.json",
+      "bytes": 157989,
+      "sha256": "d8fcd090a96900c5cd6877379af41633e660b2b465e7fb15b00ac2d8b49aeabd"
+    },
+    "native/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-parent-final-native-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "431dcd14732268ed10e8978c9de96b64b0517505b1af2a6d9bc3665cd5bfd337"
+    },
+    "native/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-tvk39g7l/RESULT.json",
+      "bytes": 150890,
+      "sha256": "985d08e7316d94869cc412f31a8ef1e0c2a058140aa5c1508700f5a8247a2434"
+    },
+    "historical-caller001/FAULT-RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-fault-20261018-001/FAULT-RESULT.json",
+      "bytes": 156871,
+      "sha256": "f28369670d6b385817ba834ed7b1296a1ad83e56a3b270550998425243eb090a"
+    },
+    "historical-caller001/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-fault-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "a8fe2ef96ff5e25dbac0f9e223b4306dbd7c131709eb23a3f964710686a57988"
+    },
+    "historical-caller002/FAULT-RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-fault-20261018-002/FAULT-RESULT.json",
+      "bytes": 280913,
+      "sha256": "a0dc92f19c55bf24b3bd01536cd2598b7c57ae9d7a2d0d7a1e43c97219aed80b"
+    },
+    "historical-caller002/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-fault-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "df2ca20a97ea91b2c38c5a8622c85a7bcfed3701fc8fb28a6e8e647b4947e5b0"
+    },
+    "preserved-dune-duplicate-label-failure/RESULT.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-dune-check-20261018-001/RESULT.json",
+      "bytes": 56397,
+      "sha256": "ce879567956f03c5a997543538e0e2f3d26ccd657297b2cb2d78351b68c260f8"
+    },
+    "preserved-dune-duplicate-label-failure/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-parent-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "8ae6d12426740daf972cfccf09e22469689a8d524bff7a97d993c1bf9c3208a8"
+    },
+    "preserved-dune-duplicate-label-failure/SHARED-STDOUT.txt": {
+      "path": "/private/tmp/unison-remote-parent-stock-dune-check-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 1676,
+      "sha256": "99cf6aa73732ee0cc5216c4f659bf10f186dea64cd1d502cf1ac2b1b09d5ea69"
+    }
+  },
+  "limits": [
+    "Native acknowledgement is ownership transfer, not OS closure.",
+    "Unknown fault scopes remain charged and private stages remain unchanged until actual process exit; no normal native teardown claim for those cases.",
+    "Before-call known-failure case may leave its unadopted private stage recoverable; not a general name-cleanup proof.",
+    "Opaque directory ownership, aggregate descendant FD/RSS, broader benchmark and final integration remain open."
+  ],
+  "resources": "All actual build/test controller children reaped0/groups absent and CPU token scopes closed; synthetic controls use at most4 credits, builds8 with2 compiler jobs, no EXglobal/SDK/Photo grant used."
+}

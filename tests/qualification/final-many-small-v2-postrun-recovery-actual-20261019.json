@@ -1,0 +1,44 @@
+{
+  "state": "THREE_CLI_EXACT_POSTRUN_COUNTER_IMPORT_FAILURE_RECOVERY_CLOSED",
+  "owner": {
+    "pid": 93139,
+    "session": 25005,
+    "initial": "e9f56b",
+    "terminal": "eeea41",
+    "exit_code": 137,
+    "running_session": null
+  },
+  "proof": {
+    "path": "/private/tmp/unison-many-small-v2-postrun-recovery-proof.json",
+    "sha256": "7e035ae3a93e179206050bdfe78766ddb9571095d8a1d614952502e105d54b76"
+  },
+  "peer_reports": [
+    {
+      "client_pid": 93156,
+      "proxy_pid": 93155,
+      "server_pid": 93165,
+      "external_children_source_audit_required": true,
+      "resource_release_authorized": false
+    },
+    {
+      "client_pid": 93169,
+      "proxy_pid": 93168,
+      "server_pid": 93171,
+      "external_children_source_audit_required": true,
+      "resource_release_authorized": false
+    },
+    {
+      "client_pid": 93234,
+      "proxy_pid": 93217,
+      "server_pid": 93236,
+      "external_children_source_audit_required": true,
+      "resource_release_authorized": false
+    }
+  ],
+  "files": 1024,
+  "both_fresh_target_hashes_exact": true,
+  "receiver_noop_identity_exact": true,
+  "fresh_cpu8_ex_acquired_closed": true,
+  "counter_audit_complete": false,
+  "scope": "allthree rawcalls independently reaped/exact; idleowner recovery notnormalexit; counters pendingofflinefix"
+}

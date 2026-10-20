@@ -1,0 +1,103 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 45168,
+      "chunk": "dc7a41",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 7405,
+      "chunk": "d32134",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "parent-replacement-stock-make",
+      "result": {
+        "path": "/private/tmp/unison-parent-replacement-stock-make-20261017-001/RESULT.json",
+        "bytes": 51060,
+        "sha256": "5c7e3ed3855ea6b3411c0e5c3b160b8bcaeeb12b2b54ff3ef88c9e6958997857"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-parent-replacement-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "be88c87159e968179339845453ebd6a27c4bd85671a893ed4286d7b4c4395dd9"
+      }
+    },
+    {
+      "name": "parent-replacement-stock-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-74nb_jqp/RESULT.json",
+        "bytes": 98328,
+        "sha256": "cdae702a5f9956a951e924ca1bf806e7fb31f5d7d770085766b3ec39384ba5c9"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-parent-replacement-stock-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "1d09c1dee0a1f3333b24f84d4abbd6c20affaf3ea62d64fb6126073d85366ea4"
+      }
+    },
+    {
+      "name": "parent-replacement-ox-make",
+      "result": {
+        "path": "/private/tmp/unison-parent-replacement-ox-make-20261017-001/RESULT.json",
+        "bytes": 51066,
+        "sha256": "aa10050b1d0d22fc06ad4cd2d41b715d9be72742d7478c57cad03bc61996c2ba"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-parent-replacement-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "16b3e007f890a0f644ace2953648b5576aafc29446a0bf5e1579bf9e6412bad6"
+      }
+    },
+    {
+      "name": "parent-replacement-both-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-ljhygapi/RESULT.json",
+        "bytes": 149848,
+        "sha256": "e46c8ce0dedb2a37a4d68a0ca8e471727d159046efd79d7eca5c21e32b92b5b0"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-parent-replacement-both-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "48bee35bb162e31acd1d242a188f575abafb7647d9be3a4ab462b58988a919f5"
+      }
+    },
+    {
+      "name": "local-report-final-stock-dune",
+      "result": {
+        "path": "/private/tmp/unison-local-report-final-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50505,
+        "sha256": "a10afafa1adc4ec35e9aabcdd052ea66491769ac4f03411db259462a8db196a1"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-report-final-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "0f4bb5aa8ace6cd67346f1db69a182f51f42e0b48dc111c2ca76b7406e1e073c"
+      }
+    },
+    {
+      "name": "local-report-final-ox-dune",
+      "result": {
+        "path": "/private/tmp/unison-local-report-final-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50509,
+        "sha256": "cc2bd6d098c9740e2992cf8dbd962b76a2ac53e90f6d48ea6140d9292aa7d720"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-report-final-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "2fa6c3805771d3841a1a9df801862e0732e2dc60dc38098c88579d73357bb58b"
+      }
+    }
+  ],
+  "scope": "Stock/Ox Make+selftests/Dune and original configured-parent replacement/permission-change report refusal controls",
+  "limitations": [
+    "Outer SemanticAdmission retention on cache uncertainty newly found and not qualified",
+    "No SDK/media/transport or production activation",
+    "Remote cache routing not implemented"
+  ]
+}

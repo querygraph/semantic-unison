@@ -1,0 +1,41 @@
+{
+  "schema": "unison-auto-cohort-plan-controls/1",
+  "actual_tool": {
+    "chunk": "bb514c",
+    "exit": 0,
+    "no_session": true
+  },
+  "closure": {
+    "child": {
+      "pid": 54716,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 54716,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "sources": [
+    {
+      "path": "bench/sync/cohort_plan.py",
+      "sha256": "185ece515ccf5cf6c22303fbf1a816c55da334b4392fdde1316f8192f5b0d6f7"
+    },
+    {
+      "path": "tests/cohort_plan_test.py",
+      "sha256": "0206198ee7347bc1d1f329d0e6cd9685e006bcf15e9209e3d0a20dec7e155db7"
+    }
+  ],
+  "scope": "pure structural plan and fixed refusal controls; not current file authentication, admission or owner integration",
+  "runtime_qualified": false
+}

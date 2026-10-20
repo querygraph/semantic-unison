@@ -1,0 +1,94 @@
+{
+  "schema": "unison-generated-fixture-preservation-actual/1",
+  "state": "TWO_READONLY_PERSISTENT_CLONES_HASHED_CLOSED",
+  "actual_owner": {
+    "terminal_chunk": "961bfc",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 35377
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-generated-fixture-preservation-plan-v2-20261019.json",
+    "bytes": 4102,
+    "sha256": "736594b06de4524026d0e829fd6645ccc8afb96d647f302ae12c4b1c8e37dc1f"
+  },
+  "manifest": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19/MANIFEST.json",
+    "bytes": 2062,
+    "sha256": "3f690df1fead5d1a4dc4d47084bf454dbd5aaf2bd8c0aabc9493dc617a3c571d"
+  },
+  "preserved": [
+    {
+      "backend": "native-fclonefileat-only",
+      "bytes": 48005534,
+      "clone_hash_bytes": 48005534,
+      "codec": "uncompressed",
+      "identity": {
+        "st_ctime_ns": 1792415642460223911,
+        "st_dev": 16777223,
+        "st_ino": 313630759,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792009572313897555,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      },
+      "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19/uncompressed.dng",
+      "readonly": true,
+      "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+      "source": "/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng",
+      "source_identity": {
+        "st_ctime_ns": 1792390551413124852,
+        "st_dev": 16777223,
+        "st_ino": 313015767,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792009572313897555,
+        "st_nlink": 1,
+        "st_size": 48005534,
+        "st_uid": 501
+      },
+      "source_payload_hash_bytes": 0
+    },
+    {
+      "backend": "native-fclonefileat-only",
+      "bytes": 39016722,
+      "clone_hash_bytes": 39016722,
+      "codec": "jpeg",
+      "identity": {
+        "st_ctime_ns": 1792415642567158269,
+        "st_dev": 16777223,
+        "st_ino": 313630761,
+        "st_mode": 33024,
+        "st_mtime_ns": 1792009572689127300,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      },
+      "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19/jpeg.dng",
+      "readonly": true,
+      "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+      "source": "/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng",
+      "source_identity": {
+        "st_ctime_ns": 1792390338098514475,
+        "st_dev": 16777223,
+        "st_ino": 313014722,
+        "st_mode": 33152,
+        "st_mtime_ns": 1792009572689127300,
+        "st_nlink": 1,
+        "st_size": 39016722,
+        "st_uid": 501
+      },
+      "source_payload_hash_bytes": 0
+    }
+  ],
+  "source_epochs_unchanged": true,
+  "source_payload_hash_bytes": 0,
+  "clone_hash_bytes": 87022256,
+  "independent_metadata_audit_payload_bytes": 0,
+  "whole8_ex_freshly_acquired_and_closed": true,
+  "no_child_processes": true,
+  "SDK_calls": 0,
+  "original_controls": "12401d/0 four original disposable tests; no native clone qualification inferred from doubles",
+  "scope": "nativeclone+historicalSHA integrity only; no new SDK decode/semantic/pixel/receiving/JXL/12state/production proof; no sourcephotos/Main/cache access",
+  "future_use": "preserve these readonly files/epochs; clone to independently disposable inputs before mutation, extend trusted persistent-root integration separately"
+}

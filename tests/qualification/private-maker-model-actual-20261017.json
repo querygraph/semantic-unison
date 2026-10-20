@@ -1,0 +1,68 @@
+{
+  "schema": "unison-private-maker-model-actual/1",
+  "state": "CONSUMED_ACTUAL_PASS_CLOSED",
+  "owner_terminal": {
+    "schema": "unison-owning-tool-terminal/1",
+    "tool": "exec_command",
+    "chunk_id": "a6a4ce",
+    "exit_code": 0,
+    "session_id": null,
+    "owner_pid": 15830,
+    "worker_pid": 15831,
+    "evidence": "Faithful transcription of actual initial tool completion; not ps or contained closure",
+    "observed_output": "FRESH_GUARDS_PASS_ONE_MODEL_PROBE 1792202424.744002"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/private-maker-model-request-v1.json",
+    "bytes": 5848,
+    "sha256": "c95723a648a0dc87a47dd4c6c61b37afb4a6fc83f15a6f62a1b6c6969ebdd803"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-maker-model-plan-v1.json",
+    "bytes": 951,
+    "sha256": "1fcacc02e95cf4e97f029392b9b5b62c796b9998c53383bf31527a8fb9e36411"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-private-maker-model-admission-v1.json",
+    "bytes": 2900,
+    "sha256": "dc44e5ec4ebc845e506707fb7e1670aa4ef383f3593fd0069ed9aeec1b65917f"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/OWNER-TERMINAL.json",
+      "bytes": 362,
+      "sha256": "f1ad52f6de0f6df2274791cc71569878db86b410bef0ea0b6c1f0e2e87a76fd9"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/RESULT.json",
+      "bytes": 844,
+      "sha256": "a5abb04a4d3217726abd01ef9608da4de4861503848676e29a85facbaa7525d9"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/SHARED-START.json",
+      "bytes": 3325,
+      "sha256": "7095d83b19ec51a8a0efde606b968837f4738c4a408866b786ea2604f35aa21c"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "1667f9e1fad2008f30b0af55b1c64703aad6db45dea18de442d615f02e4b3faf"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/SHARED-SERVER-AUDIT.json",
+      "bytes": 177,
+      "sha256": "ab719b452becc51636d2bbcd71f3714439d0f1457d83d9c43c240c6e347fa3e2"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f/INDEPENDENT-PURE-AUDIT.json",
+      "bytes": 177,
+      "sha256": "ab719b452becc51636d2bbcd71f3714439d0f1457d83d9c43c240c6e347fa3e2"
+    }
+  ],
+  "candidate_text": "X2D 100C",
+  "media_requested_bytes": 9,
+  "media_pread_calls": 1,
+  "source_epoch_unchanged": true,
+  "execution16postpins_match": true,
+  "scope": "One model-like candidate text field only. No complete vendor/header recognition/privategrammar/referenceclosure/semanticeligibility; no serialfields, sourcehash/copy/SDK/pixels/originalaccess."
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "Focused base-partition validation; not full builds or DNG adapter integration",
+  "complete": true,
+  "calls": 23,
+  "actual_terminal": {
+    "session": 94856,
+    "chunk": "6f91b4",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-controls-0l9b3qwd/RESULT.json",
+      "bytes": 105307,
+      "sha256": "a68c15d3a1842b08e3c27bfd39e921805808cdea9861eebd0fb6a83cc37e8b30"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-base-controls-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "92ee902148339bdad7f7edd7644d7577c961c1b36fa923ec4e8ff393e12e3cf3"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-base-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "960fde2bc63bdb593135dd8d68fa912ed6b924f610b9f9dd6a6b8cbe14f56f42"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-base-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-base-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "681d8aba7dea8233d7760ffb1a8cad7469a5a1014a3d50dc3c41e118aee75bbc"
+    }
+  ]
+}

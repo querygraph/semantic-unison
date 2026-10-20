@@ -1,0 +1,38 @@
+{
+  "complete": true,
+  "owner": {
+    "session": 69606,
+    "terminal_chunk": "f7728c",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-owner-report-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50505,
+        "sha256": "8439698ab2c1c33c7b84d3527422a82dadbc871d1ce3c4f87f0143fbec1663ff"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-owner-report-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "3964200fbe6f1e689ad439dcc2e31c103191225f5063a02b306d7b08c26e70f9"
+      }
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-owner-report-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50509,
+        "sha256": "8e73de99b4256760839685a4de8db59527bf1a28af562b184a85923a14a57112"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-owner-report-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "36b32dbdf216cc502cd54ad00d6247ac6da4409ea14b4cb8360dc6f135b172f4"
+      }
+    }
+  ],
+  "scope": "Current archive namespace identity, owner report routing API and cancellation source compiled by stock and OxCaml Dune; no runtime/media/SDK"
+}

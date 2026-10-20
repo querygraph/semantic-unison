@@ -205,6 +205,10 @@ let render ~left_label ~right_label left right =
     | Metadata_only -> "Classification: editable metadata differs; all bytes outside those regions match."
     | Other_bytes -> "Classification: other bytes or the editable-region layout differ."
     | Unknown -> "Classification: unavailable; the two files cannot be equated by this observation.");
+  (match FormatExtension.resolve (profile left) with
+   | Some handle when FormatExtension.span_semantics handle = FormatExtension.Opaque_spans ->
+       add "Knowledge: layout-only byte regions; private meaning and references may remain unknown."
+   | _ -> ());
   add "This compares the observed current files, without an archived base. Metadata can affect presentation; no rendering equivalence or conflict resolution is inferred.";
   (match left,right with
    | Supported {meaning=Some (Ok a);_},Supported {meaning=Some (Ok b);_} when a.schema=b.schema ->
@@ -251,3 +255,114 @@ let render ~left_label ~right_label left right =
   describe left_label left; describe right_label right;
   let result=String.concat "\n" (List.rev !lines) ^ "\n" in
   if String.length result<=65536 then result else String.sub result 0 65480 ^ "\n[display truncated]\n"
+
+type component_observation = {
+  schema : string;
+  full_sha256 : string;
+  layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+}
+
+let component_roles = ComponentHash.[Encoded_pixels; Standard_metadata; Private_metadata;
+                                   Structural; Opaque]
+let valid_components value =
+    String.length value.schema > 0 && String.length value.schema <= 256 &&
+    not (String.contains value.schema '\000') &&
+    String.length value.full_sha256 = 32 && String.length value.layout_sha256 = 32 &&
+    List.length value.projections <= 5 &&
+    List.for_all (fun role ->
+      List.length (List.filter (fun (r,_) -> r=role) value.projections) <= 1) component_roles &&
+    List.for_all (function _,None -> true | _,Some (p:ComponentHash.projection) ->
+      String.length p.sha256=32 && p.components>0 && p.components<=1024 && p.bytes>0L)
+      value.projections
+
+let render_components ~left ~right =
+  if not (valid_components left && valid_components right) then Error "Invalid component observation"
+  else begin
+    let state equal = if equal then "equal" else "different" in
+    let lines = ref ["Component observation (advisory; no rendering or transfer authority).";
+      "Exact full-file bytes: " ^ state (left.full_sha256=right.full_sha256) ^ "."] in
+    let add line = lines := !lines @ [line] in
+    if left.schema<>right.schema then
+      add "Component views incomparable: projection contract versions differ."
+    else begin
+      add ("Projection contract: " ^ display_reason left.schema);
+      add ("Layout view: " ^ state (left.layout_sha256=right.layout_sha256) ^
+        " (includes knowledge refinement; not a physical-layout change proof).");
+      List.iter (fun role ->
+        let name = match role with
+          | ComponentHash.Encoded_pixels -> "Encoded pixels"
+          | ComponentHash.Standard_metadata -> "Standard metadata"
+          | ComponentHash.Private_metadata -> "Private metadata"
+          | ComponentHash.Structural -> "Structural bytes"
+          | ComponentHash.Opaque -> "Opaque bytes" in
+        let lane value = match List.assoc_opt role value.projections with
+          | Some (Some p) -> Some p | _ -> None in
+        let comparison = match lane left,lane right with
+          | Some a,Some b -> state (a=b)
+          | _ -> "unknown (one or both views unavailable)" in
+        add (name ^ ": " ^ comparison ^ ".")) component_roles
+    end;
+    add "Unmapped bytes remain hash-covered; equal encoded pixels do not prove equal rendering.";
+    Ok (String.concat "\n" !lines ^ "\n")
+  end
+
+let max_component_size = 2048
+let component_magic = "SIC\000\000\000\000\000"
+let valid_component_binding ~nonce ~schema =
+  String.length nonce=32 && schema<>"" && String.length schema<=256 &&
+  not (String.contains schema '\000')
+let encode_components ~nonce ~schema observation =
+  if not (valid_component_binding ~nonce ~schema) then invalid_arg "component request binding";
+  let buffer=Buffer.create 1024 in
+  let put value=Buffer.add_string buffer value in
+  let integer n=put (u64 n) in
+  let string value=integer (Int64.of_int (String.length value));put value in
+  put component_magic;put nonce;string schema;
+  (match observation with
+   | Error why -> if String.length why>1024 then invalid_arg "component reason limit";
+       put "\001";string why
+   | Ok value ->
+       if not (valid_components value) || value.schema<>schema then invalid_arg "component observation";
+       put "\000";put value.full_sha256;put value.layout_sha256;
+       List.iter (fun role -> match List.assoc_opt role value.projections with
+         | None | Some None -> put "\000"
+         | Some (Some p) -> put "\001";put p.ComponentHash.sha256;
+             integer (Int64.of_int p.components);integer p.bytes) component_roles);
+  let encoded=Buffer.contents buffer in
+  if String.length encoded>max_component_size then invalid_arg "component report size";
+  encoded
+
+let decode_components ~nonce ~schema encoded =
+  try
+    if not (valid_component_binding ~nonce ~schema) then raise (Bad "invalid component request binding");
+    if String.length encoded>max_component_size then raise (Bad "component report too large");
+    let position=ref 0 in
+    let take n=if n<0 || n>String.length encoded - !position then raise (Bad "truncated component report");
+      let value=String.sub encoded !position n in position:= !position+n;value in
+    let integer () =
+      let value=ref 0L in
+      String.iter (fun c -> value:=Int64.logor (Int64.shift_left !value 8)
+        (Int64.of_int (Char.code c))) (take 8);
+      if !value<0L then raise (Bad "component integer overflow");!value in
+    let small limit=let value=integer () in
+      if value>Int64.of_int limit then raise (Bad "component field limit");Int64.to_int value in
+    let string limit=take (small limit) in
+    if take 8<>component_magic then raise (Bad "unknown component report version");
+    if take 32<>nonce || string 256<>schema then raise (Bad "component request mismatch");
+    let result=match take 1 with
+      | "\001" -> Error (string 1024)
+      | "\000" ->
+          let full_sha256=take 32 in let layout_sha256=take 32 in
+          let projections=List.map (fun role ->
+            let value=match take 1 with
+              | "\000" -> None
+              | "\001" -> let sha256=take 32 in let components=small 1024 in
+                  let bytes=integer () in Some {ComponentHash.sha256;components;bytes}
+              | _ -> raise (Bad "invalid component presence flag") in role,value) component_roles in
+          let value={schema;full_sha256;layout_sha256;projections} in
+          if not (valid_components value) then raise (Bad "invalid component observation");Ok value
+      | _ -> raise (Bad "unknown component report status") in
+    if !position<>String.length encoded then raise (Bad "trailing component report bytes");
+    Ok result
+  with Bad why -> Error why

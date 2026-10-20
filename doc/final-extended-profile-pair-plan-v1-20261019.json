@@ -1,0 +1,134 @@
+{
+  "schema": "unison-final-extended-profile-pair-plan/1",
+  "state": "PREPARED_UNADMITTED_NO_IO_DISPATCH",
+  "workspace": "/private/tmp/unison-final-profile-pair-7ef7c098ec3042e3bcc9bd321e885985",
+  "repository": "/Users/alexy/src/unison-final-adobe-20261019",
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "source_sha256": {
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+    "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+    "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+    "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+    "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+    "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+    "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+    "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+    "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+    "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+    "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+    "tests/semantic/conformance/reference.py": "0cd110501807de0a299209ec1b0210c13ad9623d8dc14611cfcd95a2fb1800c1",
+    "doc/semantic-delta-v0.md": "aafd875341ca418a29c8ffe06a2c08e218977120c314918d673a111e75d95513",
+    "tests/dng_profile_v1/fixtures.py": "8f668289b24e652162dc9ea1b8617bcefd3c5257d85d09645ccf3345a12215b7",
+    "tests/dng_profile_v1/test.ml": "e3b0b348beaa15ad73182f0698e570ba99a2777abdec19f5990e80ef0776d13d",
+    "tests/dng_profile_v1/fs.c": "29ed6c66a6ab9b53c06ca57fe7066af78a5f79395b0e869d19f6617d6abbc475",
+    "tests/dng_profile_v1/run.py": "98a6b3fdb1879ba95a35b18ba3d1e043fdd6363132c01544842f5af10e44a1ac",
+    "tests/dng_profile_v1/owned_call.py": "db2c03e8c7293601314bf8df119e35c0ed18598e9c122a77ae87c75c8f946158",
+    "tests/sdk_host_matrix/shared_child.py": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "tests/dng_profile_v1/README.md": "d9041649518d30bb61f45cc61a7a95de315f6e205ffb3b1396452cc7dccf683d",
+    "tests/dng_profile_v1/SDK-SOURCE-NOTES.md": "8c0ec0df64d902684d9d1cb73aaa6cb1d15aff3338617f1fd8cac28a8cbb082e"
+  },
+  "control_prerequisite": {
+    "path": "tests/qualification/extended-profile-owned-controls-actual-20261019.json",
+    "sha256": "d6a8b64d02252b3df57b10a16d0e9ed1cbade0ecaf15aea50de44deeb73de6f1"
+  },
+  "jobs": [
+    {
+      "compiler": "stock",
+      "compiler_path": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+      "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "argv": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "/Users/alexy/src/unison-final-adobe-20261019/tests/dng_profile_v1/run.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+        "--receipt",
+        "/private/tmp/unison-final-profile-pair-7ef7c098ec3042e3bcc9bd321e885985/stock-RESULT.json",
+        "--keep-work"
+      ],
+      "modes": [
+        "fixed",
+        "wrong-CR-base",
+        "missing-CR-protection",
+        "widened-CR-pointer"
+      ],
+      "fixed_case_count_from_fixture_source": 1253,
+      "designated_negative_cases": [
+        "classic-le-crL",
+        "big-le-cr-value-alias-XMP",
+        "big-le-cr-exif-pointer-unsupported"
+      ]
+    },
+    {
+      "compiler": "ox",
+      "compiler_path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "argv": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "/Users/alexy/src/unison-final-adobe-20261019/tests/dng_profile_v1/run.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "--receipt",
+        "/private/tmp/unison-final-profile-pair-7ef7c098ec3042e3bcc9bd321e885985/ox-RESULT.json",
+        "--keep-work"
+      ],
+      "modes": [
+        "fixed",
+        "wrong-CR-base",
+        "missing-CR-protection",
+        "widened-CR-pointer"
+      ],
+      "fixed_case_count_from_fixture_source": 1253,
+      "designated_negative_cases": [
+        "classic-le-crL",
+        "big-le-cr-value-alias-XMP",
+        "big-le-cr-exif-pointer-unsupported"
+      ]
+    }
+  ],
+  "resources": {
+    "CPU_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "EXglobal_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+    "acquisition_order": [
+      "EXglobal",
+      "Unison00..07"
+    ],
+    "compiler_jobs_max": 1,
+    "child_observation_seconds": 120,
+    "pair_observation_seconds": 900,
+    "unknown_retains_no_signals": true
+  },
+  "scope": {
+    "SDK_Adobe_Photo_originals_Main_cache": false,
+    "generated_synthetic_only": true,
+    "sparse_cases": 4,
+    "sparse_min_offset": 4294967808,
+    "sparse_full_hash_transfer": false,
+    "no_fuzz_or_sanitizers": true
+  },
+  "dispatch_gate": "Photo bulk owner49291 must reach actual terminal and independently closed groups/FDs; fresh coordinated IO window and fresh source checks before any execution. This plan creates no reservation or admission.",
+  "settlement": "Actual outer owning tool terminal, both runner groups and every compiler/metadata/test child normal reap or exact designated negative exit, full artifacts/source postpins, qualified Store/log/CPU/EXclose; unknown retains and no successor."
+}

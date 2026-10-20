@@ -1,0 +1,68 @@
+"""Original tiny build doubles exercise actual builder; no compiler/SDK child."""
+import contextlib,io,json,runpy,sys,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+from types import SimpleNamespace
+R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'tools/adobe-validator'))
+import object_cache
+
+
+class FixtureBuilder(unittest.TestCase):
+    def fixture(self,root,version=2768):
+        root=root.resolve();sdk=root/'sdk';sdk.mkdir();(sdk/'DNG_ReadMe.txt').write_text('Original source notes\nRelease Notes / Changelog:\n\n1.7.1 '+str(version)+' October 13, 2026\n\n1.7.1 2724 September 8, 2026\n')
+        (sdk/'LICENSE.txt').write_text('Original synthetic license marker, no Adobe source.')
+        for name in ('original-dng.cpp','original-xmp.cpp'):(sdk/name).write_text('int original_fixture_symbol;\n')
+        return sdk,root/'build'
+    def invoke(self,sdk,build,extra=(),fakes=False):
+        argv=[str(R/'tools/adobe-validator/build.py'),'--sdk-root',str(sdk),'--build-dir',str(build),'--jobs','2','--fixture-writer-build-only',*extra]
+        commands=[];compiled=[]
+        def run(command,**kwargs):
+            command=list(map(str,command));commands.append(command)
+            if command[0]=='plutil':
+                dng='dng_sdk/projects' in command[-1];target='dng_validate release' if dng else 'XMPCoreStaticRelease'
+                project={'rootObject':'project','objects':{'project':{'projectDirPath':str(sdk)},'target':{'isa':'PBXNativeTarget','name':target,'buildPhases':['phase']},'phase':{'isa':'PBXSourcesBuildPhase','files':['build']},'build':{'fileRef':'ref'},'ref':{'path':'original-dng.cpp' if dng else 'original-xmp.cpp'}}}
+                output=json.dumps(project)
+            elif command[:2]==['cmake','--build']:
+                paths=['lib/libjxl.a','lib/libjxl_cms.a','lib/libjxl_threads.a','third_party/highway/libhwy.a','third_party/brotli/libbrotlienc.a','third_party/brotli/libbrotlidec.a','third_party/brotli/libbrotlicommon.a']
+                for name in paths:
+                    p=build/'jxl'/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b'original fake library')
+                output='original fake CMake build'
+            elif command[0]=='cmake':output='original fake CMake configure'
+            elif command[0]=='clang++':
+                Path(command[command.index('-o')+1]).write_bytes(b'original non-executable fake linked artifact');output='original fake link'
+            else:raise AssertionError('unexpected external command '+repr(command))
+            return SimpleNamespace(returncode=0,stdout=output)
+        def compile_object(compiler,options,source,output,runner):
+            compiled.append(Path(source).name);output.write_bytes(b'original fake object '+Path(source).name.encode());return output,False
+        output=io.StringIO()
+        with patch.object(sys,'argv',argv),contextlib.redirect_stdout(output),contextlib.redirect_stderr(output):
+            with patch('subprocess.run',side_effect=run if fakes else AssertionError('preflight must not start commands')),patch.object(object_cache,'compile_object',side_effect=compile_object):
+                with self.assertRaises(SystemExit) as got:runpy.run_path(argv[0],run_name='__main__')
+        return got.exception.code,commands,compiled,output.getvalue()
+    @unittest.skipUnless(sys.platform=='darwin','actual SDK builder supports Darwin')
+    def test_actual_entire_new_path_links_only_fixture_and_distinct_manifest(self):
+        with tempfile.TemporaryDirectory(prefix='unison-original-fixture-build-') as name:
+            sdk,build=self.fixture(Path(name));code,commands,compiled,out=self.invoke(sdk,build,fakes=True)
+            self.assertEqual(code,0);self.assertCountEqual(compiled,['original-dng.cpp','original-xmp.cpp','fixture_writer.cpp']);self.assertNotIn('driver.cpp',compiled)
+            links=[c for c in commands if c[0]=='clang++'];self.assertEqual(len(links),1);self.assertEqual(links[0][-1],str(build/'fixture-writer'))
+            m=json.loads((build/'fixture-writer-build-manifest.json').read_text());self.assertEqual(m['reviewed_release']['build'],2768);self.assertFalse(m['runtime_qualified']);self.assertFalse(m['validator_written']);self.assertEqual(m['SDK_fixture_generation_calls'],0)
+            self.assertFalse((build/'build-manifest.json').exists());self.assertFalse((build/'unison-adobe-validator').exists())
+            self.assertTrue(all(c[0] in ('cmake','plutil','clang++') for c in commands));self.assertEqual(len(m['linked_objects']),10)
+    @unittest.skipUnless(sys.platform=='darwin','actual SDK builder supports Darwin')
+    def test_incompatible_modes_refuse_before_any_command_or_build_directory(self):
+        for flags in (['--fixture-only'],['--experimental-area-task-host'],['--experimental-memory-budget'],['--jobs','3']):
+            with tempfile.TemporaryDirectory() as name:
+                sdk,build=self.fixture(Path(name));code,commands,_,_=self.invoke(sdk,build,flags)
+                self.assertEqual(code,2);self.assertEqual(commands,[]);self.assertFalse(build.exists())
+    @unittest.skipUnless(sys.platform=='darwin','actual SDK builder supports Darwin')
+    def test_existing_build_and_source_overlap_never_overwritten(self):
+        with tempfile.TemporaryDirectory() as name:
+            sdk,build=self.fixture(Path(name));build.mkdir();sentinel=build/'build-manifest.json';sentinel.write_bytes(b'preserved existing driver metadata')
+            code,commands,_,_=self.invoke(sdk,build);self.assertEqual(code,2);self.assertEqual(commands,[]);self.assertEqual(sentinel.read_bytes(),b'preserved existing driver metadata')
+            code,commands,_,_=self.invoke(sdk,sdk/'bad-build');self.assertEqual(code,2);self.assertEqual(commands,[]);self.assertFalse((sdk/'bad-build').exists())
+    @unittest.skipUnless(sys.platform=='darwin','actual SDK builder supports Darwin')
+    def test_2724_cannot_be_labeled_new_fixture_build(self):
+        with tempfile.TemporaryDirectory() as name:
+            sdk,build=self.fixture(Path(name),2724);code,commands,_,text=self.invoke(sdk,build);self.assertEqual(code,2);self.assertIn('observed 1.7.1 2724',text);self.assertEqual(commands,[]);self.assertFalse(build.exists())
+
+if __name__=='__main__':unittest.main()

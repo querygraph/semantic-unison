@@ -1,0 +1,32 @@
+{
+  "schema": "unison-sync-phase-source-supersession/1",
+  "state": "V1_SOURCE_PACKET_SUPERSEDED_UNSTARTED_BY_THIS_OWNER",
+  "created_utc": "2026-10-18T07:24:32.611600+00:00",
+  "old_request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-request-v1.json",
+    "bytes": 42417,
+    "sha256": "7df330109d3a8bb62de396a3b98d4c65ee2521042fa7949592e16296b5785455"
+  },
+  "old_plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-plan-v1.json",
+    "bytes": 2698,
+    "sha256": "ea06b4ec8b485fac93ff6c769ad95239cce722168e4ece6d529087c8df5b277e"
+  },
+  "successor_request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-request-v2.json",
+    "bytes": 42813,
+    "sha256": "1301e937f8cb2c0f0f4c60d03ae7deeb776cdba9a60907fb4963b7b06ec44329"
+  },
+  "successor_plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-plan-v2.json",
+    "bytes": 3030,
+    "sha256": "0f9c293ebbeaa47e014314baab488c14f79570c850eeed71f21af8ce1fde28ae"
+  },
+  "reason": "Explicitly declare two binary version queries, four compiler metadata queries, sysctl/diskutil/git metadata beyond54 journaled sync clients. No compilation. Source/runtime parameters otherwise retain finite smoke scope with a fresh namespace.",
+  "owner_attestation": "This owner ran metadata preparation only; no V1 runtime dispatch or Root admission request sent. Original bytes preserved.",
+  "fresh_observation": {
+    "v1_admission_exists": false,
+    "v1_workspace_exists": false
+  },
+  "no_terminal_or_global_history_inferred_from_absence": true
+}

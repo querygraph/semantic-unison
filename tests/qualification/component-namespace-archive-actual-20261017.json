@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 65040,
+      "terminal_chunk": "e91a13",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 67113,
+      "terminal_chunk": "1fa76a",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "controls",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-controls-ej98eyb7/RESULT.json",
+        "bytes": 452783,
+        "sha256": "79184c4c72ea0b7094cd5ae438175b0d14f11fc5c02c1c243814006751e7f889"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-namespace-archive-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "3370cd1048b6dadc15c799b74f015efb18442a42a3bfcf4fb616190061a176cc"
+      }
+    },
+    {
+      "name": "stock-make",
+      "result": {
+        "path": "/private/tmp/unison-namespace-archive-stock-make-20261017-001/RESULT.json",
+        "bytes": 50946,
+        "sha256": "fbceed1541b7ddd85bd3880d922e5ab55ce0ca2c477196672584d224ad092902"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-namespace-archive-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "3c0bacadbe9794882cee0d2a6a5157b14e36e80d768b6d001b616848dc5c5aa2"
+      }
+    },
+    {
+      "name": "ox-make",
+      "result": {
+        "path": "/private/tmp/unison-namespace-archive-ox-make-20261017-001/RESULT.json",
+        "bytes": 50952,
+        "sha256": "1664fcee81d63c760acb85c548e67553ea92fc6b31efd2c3d1db07261460522c"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-namespace-archive-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "2edc7cb0f8d8504481fe361505f9954282e9196e3de651842b06a5ec39cacc1a"
+      }
+    },
+    {
+      "name": "persistence",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-zm34hd3_/RESULT.json",
+        "bytes": 149844,
+        "sha256": "e37b80fcf79c19fe5a89d0bf174e50f0596a7d40ef6fbd82738e0964dd828c9a"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-namespace-archive-persistence-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "17d5263fb5864da77288d8464693a2e4a271ecb11a96752a92de3d5738ceacac"
+      }
+    }
+  ],
+  "scope": "Optional manifest-bound namespace identity framing, production stock/Ox builds/selftests, normal archive commit and fresh-process identity-bound reopen",
+  "limitations": [
+    "Retained old-code new-tail compatibility pending",
+    "Dune not rerun for identity successor",
+    "Automatic report cache routing still incomplete",
+    "No media/SDK/transport/production activation"
+  ]
+}

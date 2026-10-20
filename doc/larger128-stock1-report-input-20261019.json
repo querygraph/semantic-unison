@@ -1,0 +1,15 @@
+{
+  "schema": "unison-auto-cohort-report-input/1",
+  "records": [
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-1-plan.json",
+        "sha256": "944176b8387a4ab9b8d0f1807e8f0a2149b111cbb3f68934849b8501f9d49490"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/RESULT.json",
+        "sha256": "c40b4e6a729b4fa366d5dfbf18e2e3747f74f38de43dc122eb02dd03f85b5363"
+      }
+    }
+  ]
+}

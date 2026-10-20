@@ -1,9 +1,203 @@
-# Implementation status, 2026-10-15
+<!-- Genuine upstream update: actual55677/7728f5/0 closed4cases12CLI currentstock/Ox↔unmodified8772d26a, exactbytes/noop/allgroups/CPU8EXclosed. tests/qualification/genuine-upstream-peer-actual-20261017.json. CameraV6 also passed; no currentIOreservation. Finalacceptancereconciliation remains. -->
+<!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
+# Implementation status, updated 2026-10-17
 
-The full SOL.md goal is active. This is a current evidence index and remaining-work
+## Current review entry point
+
+Active review is [draft PR13](https://github.com/querygraph/unison/pull/13), branch
+`integration/sol-consolidated-review`, against `querygraph/unison:master`.
+The separate `integration/sol-release-candidate` checkpoint below is historical;
+its frozen property request remains separate. See
+[the twelve-area acceptance map](sol-release-readiness-20261017.md) for current
+remaining requirements and [OPUS-HANDOFF.md](../OPUS-HANDOFF.md) for continuation.
+
+Current-source directed evidence now includes explicit native owned publication,
+modern bound local/remote semantic producers, ordinary local Copy and guarded
+rsync borrower/cancellation cleanup. Stock/Ox Make/selftests/Dune and composed
+fault controls have scoped receipts. In-process receiver delivery does not prove
+current-candidate transport/server settlement. Legacy named/unbound/older-peer
+and raw/channel cleanup remain separately limited.
+
+The explicit larger-forest successor passes1590checks/compiler, six current
+Make/selftest/Dune/inspector builds, and actual production Update checkpoint
+capacity controls. Default generic1024 remains; the DNG adapter opts into2048,
+large partitions use/3, and large checkpoint metadata uses UCH1 under the same
+1MiB byte cap. [Qualification](../tests/qualification/dng-large-forest-actual-20261017.json).
+The real retained-clone V6 run then PASSED/CLOSED: all193851848B represented
+exactly, fullSHA historicalmatch,30MakerNotes/0warnings, input8fields unchanged.
+Actual94968/138880/0, bothhelpers0/reaped/groupsabsent/CPU8EXclosed.
+[Actual receipt](../tests/qualification/camera-large-forest-v6-actual-20261017.json).
+This is one complete physical component partition plus independent typed-value
+views, not full camera meaning or decoded rendering equivalence. No pending
+camera window or resourcehold. The prior1747-vs1024 refusal remains historical.
+
+Current inspector stock/Ox builds and16tiny TIFF calls pass. Latest gradual
+refinement rerun passed1391component checks/compiler plus layout/private/archive
+fault controls,35stock+38Ox contained calls. See
+[current refinement evidence](../tests/qualification/current-gradual-refinement-actual-20261017.json).
+The combined60s wrapper attempt timed out and is preserved as incomplete; split
+compiler runs completed normally. No camera payload was used in these tests.
+
+Current-candidate mixed-peer transport now PASSED/CLOSED: four stock/Ox versus
+exact retained older-fork directions, seed/update/noop,12CLI and all separate
+client/server/supervisor/pump settlements. Actual owner38627/33bfbc/0/no session;
+[sealed evidence](../tests/qualification/mixed-peer-actual-20261017.json). This
+older fork already has producer binding, so arbitrary upstream/capability-absent
+compatibility is not inferred. Three earlier failed attempts remain preserved.
+
+The retained-camera observation completed under a fresh rescheduled admission:
+actual owner26078/09b602/0, two readonly helpers0 and all source metadata unchanged.
+Exiftool-rs observed30 MakerNote tags without warnings; component coverage safely
+refused the480-region limit. [Actual scope](../tests/qualification/camera-knowledge-actual-20261017.json)
+does not claim a complete component forest or semantic eligibility. Private tag
+values remain outside the repository; source bytes were not changed.
+
+The current PR13 transfer/property regression also PASSED/CLOSED:18rows54CLI,
+stock/Ox workers1/2/3, ordinary/clone/semantic, exact donor/basis/noop and source-
+selected property removal/retained-reader witnesses. Actual41218/6e1b75/0;
+[sealed evidence](../tests/qualification/pr13-properties-actual-20261017.json).
+All groups and CPU/IO closed. These admissions are consumed, not pending. Full
+camera coverage, all-platform qualification and full-goal completion remain
+unproved; incomplete private meanings do not block exact opaque preservation.
+
+
+Latest consolidated PR13 source additionally fixes cold report cancellation and
+unsupported input creating an unadopted namespace. The reproduced pre-fix failure
+and fresh stock/Ox Make+selftests/Dune successes are recorded in
+../tests/qualification/component-cold-cache-first-failure-actual-20261017.json.
+Only a successful fenced capture creates the first namespace; no automatic
+publication-orphan recovery is inferred. Prior source-rebind checkpoints below
+remain historical. Pending IO request stays in its separate frozen checkout.
+
+
+## Current local integration candidate — 2026-10-17
+
+`integration/sol-release-candidate`, merge f5b496f5, combines local cache/report
+source6b4d5204 (draft PR11) and the independent producer-schema RPC auditor
+sourcea3725eb5/current5f350db6 (draft PR10). No GitHub PR was merged. All390 tracked
+production paths remain byte-identical to PR11; four stock/Ox Make+selftest/Dune
+reports were rebound to every current production source pin. Auditor22+8+6groups
+passed in this tree, actual76033/d65499/0/no session; allworkers/groups/tokensclosed.
+Exact evidence: ../tests/qualification/sol-integration-source-actual-20261017.json.
+
+Local UI component details now supports explicit opt-in private-parent cache
+capture/reuse/restart, archive-owned namespace identity, expected-head adoption,
+parent replacement/permission/cancellation fences and retained cache-carrier
+outer report admission. See component-managed-store.md. Parent provisioning is
+explicit; remote endpoint cache routing is absent. Generated fixture reuse does
+not establish physical IO savings or complete camera understanding.
+
+The single frozen RPC admission53a52254 is CONSUMED/CLOSED: all8commands0, original
+parent91491/7ec39a/1 because the old auditor looked up an absent field. Saved-only
+corrected audit and independent Root narrow adoption are separate later evidence;
+original exit1 and all sealed bytes remain. All46 direct/embedded sealed metadata
+references rechecked. No waiting admission, live hold, retry or new RPC run exists.
+
+Remaining full-goal work: review the twelve SOL acceptance rows against their
+actual scoped evidence, execute only the necessary fresh current-source checks,
+resolve material gaps rather than treating every hypothetical platform/corpus
+claim as supported, and present a consolidated reviewable release candidate.
+Unknown MakerNotes remain exact opaque coverage and are not a deployment gate.
+No exhaustive fuzz/sanitizer campaign is authorized. Performance caveats and
+failed part3 are retained; no quiet/full-matrix/physical-savings claim follows.
+
+Everything below preserves earlier checkpoint scopes. “Pending” scheduling and
+missing integration statements there are historical where superseded above.
+
+
+The full SEMANTIC-UNISON-DESIGN.md goal is active. This is a current evidence index and remaining-work
 list, not a completion certificate. Historical qualifications retain their pinned
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
+
+Current isolated integration is reviewed in [draft PR4](https://github.com/querygraph/unison/pull/4),
+code08b4be45, metadata merge10ace908. `with_cache_capture` now authenticates a
+complete trusted capture and derives its previous inventory/digests from the
+owner entry before full-current-input/current-parser verification and scoped
+refresh. Orphans and changed inputs cannot invoke the callback. Current focused
+1047DNGchecks/compiler, fresh stock/Ox Make/fullselftests/Dune compilation and
+110production-linked workerchecks/compiler pass;1272current source pins match.
+All six observed workers/groups/tokens closed under focused44609/428946/0 and
+full93249/2fc314/0. Exact isolated evidence:
+`tests/qualification/dng-cache-reuse-actual-20261017.json`. These changes remain
+separate from main; automatic namespace discovery/selection is still open.
+
+Latest [transport readiness](component-remote-ready-after-cache-reuse-20261017.json)
+rechecked all342frozen main source pins and absent workspace/admission, after all
+owned builds/tests closed. Requestd0f80794/pland7a9f46d remain unchanged. Root
+scheduling request01a148b7-6db0 sent; it is not a grant, current Photo liveness
+proof or actual transport qualification. Runtime artifact checks remain inside
+the admitted guard. Do not replay or dispatch from readiness/resource release.
+
+Historical cache milestones below retain their original source/count scopes.
+PR3 was automatically marked merged by a temporary mistaken base-ref push;
+the base was restored using an exact lease and PR4 replaces that review.
+No cache implementation was intentionally merged into the main feature branch.
+
+Known trusted-entry recovery lookup is now qualified in isolated PR3,5513b04b:
+complete/record-only/entry-only/missing classifications after actual no-follow
+presence, privateFD/name binding and exact metadata authentication. Foreign
+index, wrongreader and equalbyte symlinkredirect refuse, without cleanup. This
+is not a producerterminal/resourceclosure or current-input eligibility proof.
+Currentstock/Ox all4builds/fullselftests plus1041DNG/1005checkpoint/27fault/110worker
+checks/compiler passed; allgroups/tokensclosed. Isolated evidence:
+`tests/qualification/dng-cache-recovery-actual-20261017.json`. Namespace opening,
+automatic selection and recovery scanning remain open; main342RPCpins unchanged.
+
+Latest isolated capture write path is qualified in draft PR3, codee64ffc4b:
+quota-bound distinct empty stage admission, bounded producer sealing, independent
+readback and one-use record-before-entry publication. A forced entry collision
+preserves the record-only orphan, foreign target, entry stage and consumed quota;
+it does not advance an index or silently retry/refund. Current stock/Ox all4builds,
+full Make selftests,1031DNG/1005checkpoint/27nativefault/110workerchecks/compiler
+passed; all groups/tokens closed. Exact isolated evidence:
+`tests/qualification/dng-cache-capture-actual-20261017.json`. Managed lookup,
+recovery scanning and automatic activation remain open; main RPC pins unchanged.
+
+Historical isolated cache follow-up was recorded in [PR3](https://github.com/querygraph/unison/pull/3),
+stacked against `feat/semantic-dng-oxcaml`; quota code6e7c82bd is now qualified.
+Current stock/Ox Make/fullselftests and Dune compile passed with1272production
+source checks; focused41component+1005checkpoint/quota+26nativefault controls and
+110workerchecks/compiler passed. Two actual processes raced one final slot:
+exactlyone grant, both waited0; postmkdir sync failure preserved consumed capacity.
+All actual owners/groups/tokens closed. This is bounded cache-payload admission,
+not physicaldisk/RSS enforcement. Managedlookup/recovery/automaticrouting remains
+absent; the main342RPC sources and separately scheduled transport remain unchanged.
+Exact evidence is on the isolated branch in
+`tests/qualification/component-metadata-quota-actual-20261017.json`.
+
+Root has accepted the342-source component RPC plan with no findings, then explicitly
+deferred its runtime for operator-authorized Photo Smart Preview EXglobal work.
+[Adoption](../tests/qualification/component-remote-source-review-adoption-20261017.json)
+does not establish present Photo liveness, an admission or RPC success. Independent
+cache work on separate `feat/component-cache-input-binding`569395d9 now passes
+stock/Ox checkpoint/refinement controls and four builds. It requires prior trusted
+metadata+full current-input SHA; no automatic store/epoch-only shortcut or merge
+into main. Main's342 reviewed runtime pins are preserved; see OPUS-HANDOFF.md.
+
+Latest component checkpoint (2026-10-17): the off-default explicit details path
+now has a separately negotiated [SIC/0 remote protocol](component-report-v0.md).
+[Source/codec qualification](../tests/qualification/component-remote-source-actual-20261017.json)
+records current stock/Ox Make+selftests+Dune compile builds,1272 source checks,
+25 report controls per compiler and linked local/refusal/cache controls. Initial
+Ox closure-mode failures were preserved and fixed without weakening annotations.
+All groups/CPU grants closed; no EXglobal/media/SDK used. Actual new-RPC transport,
+mixed-version/failure trials and persistent input/dependency binding remain open.
+This is not production camera or cached cross-session reuse qualification.
+
+The [production-linked remote probe](component-remote-probe.md) is now built on
+both compilers; [build/control evidence](../tests/qualification/component-remote-probe-build-actual-20261017.json)
+records ten contained calls,320 source pins and474 linked artifacts. Only compile,
+preentry refusal and offline preference branches ran. The proposed eight-case
+transport matrix now has its review-frozen coordinator/auditor and still needs
+source acceptance plus a fresh IO grant;
+no runtime component RPC or old-peer proof follows from these build controls.
+
+[Coordinator controls](../tests/qualification/component-remote-coordinator-controls-actual-20261017.json)
+passed18 original disposable/fabricated methods and343 before/after source pins.
+The [frozen plan](component-remote-plan-v1.json)/[request](component-remote-request-v1.json)
+are SOURCE REVIEW ONLY:342 runtime sources, eight fixed cases, Unison8+EXglobal,
+observation/unknown retention, no current admission or Photo scheduling hold.
 
 Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inherited locks](../tests/qualification/shared-entrypoints-actual-20261016.json) passed, followed by [actual shared sync](../tests/qualification/shared-functional-actual-20261016.json): stock/Ox workers1/2/3,18rows54CLI with independent strict client/supervisor/server/pump proofs, exact results and all tokens released. Physical IO lanes, aggregate memory and shared throughput remain unqualified. No Photo tokens or Adobe work used.
 

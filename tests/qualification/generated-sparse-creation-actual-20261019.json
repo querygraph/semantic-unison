@@ -1,0 +1,75 @@
+{
+  "schema": "unison-generated-sparse-creation-actual/1",
+  "state": "EXPLICIT_PUNCHHOLE_QUALIFIED_OTHERS_NOT_SPARSE",
+  "actual_tool": {
+    "terminal_chunk": "465356",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "result": {
+    "path": "/private/tmp/u-sparse-creation-23d7de92d07b4fba/RESULT.json",
+    "bytes": 1576,
+    "sha256": "fb250da43b2ac96fdf95aa5af7720ce4faaf7b218671524589a8969204b7ea20"
+  },
+  "rows": [
+    {
+      "block_unit": 512,
+      "blocks": 2048,
+      "blocks_before_punch": 2048,
+      "exact_bytes": true,
+      "logical_size": 1048576,
+      "mode": "ftruncate",
+      "punchhole": null,
+      "reported_blocks_below_logical_size": false,
+      "sha256": "d6198c1f2ec35534bae2f0be7b97e9d0c32b48aef72cb3e35e9d5fdd40351aad"
+    },
+    {
+      "block_unit": 512,
+      "blocks": 2048,
+      "blocks_before_punch": 2048,
+      "exact_bytes": true,
+      "logical_size": 1048576,
+      "mode": "pwrite-extend",
+      "punchhole": null,
+      "reported_blocks_below_logical_size": false,
+      "sha256": "d6198c1f2ec35534bae2f0be7b97e9d0c32b48aef72cb3e35e9d5fdd40351aad"
+    },
+    {
+      "block_unit": 512,
+      "blocks": 2048,
+      "blocks_before_punch": 2048,
+      "exact_bytes": true,
+      "logical_size": 1048576,
+      "mode": "seek-extend",
+      "punchhole": null,
+      "reported_blocks_below_logical_size": false,
+      "sha256": "d6198c1f2ec35534bae2f0be7b97e9d0c32b48aef72cb3e35e9d5fdd40351aad"
+    },
+    {
+      "block_unit": 512,
+      "blocks": 32768,
+      "blocks_before_punch": 32768,
+      "exact_bytes": true,
+      "logical_size": 16777216,
+      "mode": "pwrite-extend16",
+      "punchhole": null,
+      "reported_blocks_below_logical_size": false,
+      "sha256": "91e35c2a323a5e719b087fca1e8d7585ef261a190f4e32e233e46a3576df2d9f"
+    },
+    {
+      "block_unit": 512,
+      "blocks": 16,
+      "blocks_before_punch": 2048,
+      "exact_bytes": true,
+      "logical_size": 1048576,
+      "mode": "punchhole",
+      "punchhole": "returned_success",
+      "reported_blocks_below_logical_size": true,
+      "sha256": "d6198c1f2ec35534bae2f0be7b97e9d0c32b48aef72cb3e35e9d5fdd40351aad"
+    }
+  ],
+  "all8_ex_closed": true,
+  "no_child_processes": true,
+  "no_originals_sdk_or_photo": true,
+  "scope": "generated file exact-byte and filesystem block observations; no physical write/shared extent or native-clone success inferred"
+}

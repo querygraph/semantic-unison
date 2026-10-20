@@ -1,0 +1,110 @@
+{
+  "scope": "Actual disposable inherited locks/refusal workers and persisted exit audit; canonical outer Unison8 only, no SDK/probe/camera/canonicalIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/lifecycle.py",
+      "--controls"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-dj3_stla\", \"cases\": [{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-dj3_stla/case-8\", \"descriptors\": 9, \"boundary_reached\": true, \"child\": {\"pid\": 3552, \"returncode\": 7, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 3552, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"parent_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": false}, \"exit_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": true}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true}, {\"workspace\": \"/private/tmp/unison-mixed-lifecycle-dj3_stla/case-7\", \"descriptors\": 8, \"boundary_reached\": false, \"child\": {\"pid\": 3554, \"returncode\": 7, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 3554, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"parent_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": false}, \"exit_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": true}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true}], \"scope\": \"Two actual Python workers/disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/probe/helper/SDK/Photo\"}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 3551,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "prior_without_separate_exit_receipt": {
+    "scope": "Actual disposable inner locks/worker refusals with canonical outer Unison8 only; no SDK/probe/camera/canonicalIO",
+    "outcome": {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/lifecycle.py",
+        "--controls"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-8io2nrus\", \"cases\": [{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-8io2nrus/case-8\", \"descriptors\": 9, \"boundary_reached\": true, \"child\": {\"pid\": 3445, \"returncode\": 7, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 3445, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"parent_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": false}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true}, {\"workspace\": \"/private/tmp/unison-mixed-lifecycle-8io2nrus/case-7\", \"descriptors\": 8, \"boundary_reached\": false, \"child\": {\"pid\": 3447, \"returncode\": 7, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 3447, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"parent_audit\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"sdk_helpers_settled\": 0, \"metadata_helpers_settled\": 0, \"case_audits\": [], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": false}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true}], \"scope\": \"Two actual Python workers/disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/probe/helper/SDK/Photo\"}\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 3444,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    "cpu_closed": true,
+    "sources": {
+      "tests/mixed_validation/worker.py": "dc7a3c084aa924d89288eb6d29f143840e6ddc33796cd200c43530807ce66c56",
+      "tests/mixed_validation/audit_test.py": "534b6673a4ab787ffcaab43b56e59724da5df23ca3ab1cc724c3098af3b82d6c",
+      "tests/mixed_validation/parent_test.py": "87065bf6e508b0909b21718c062b9818eff2100593032f9d173d28071ae6144a",
+      "tests/mixed_validation/plan.py": "647ee8faeb04c308afae0a91c7b0e869a3ea85bd03fe3fbb52517948a707e5b8",
+      "tests/mixed_validation/boundary.py": "b6b60968889ea4b2cf7f05bc078405346fed93f65338ed5f1ec8ae619c3471f3",
+      "tests/mixed_validation/run_controls.py": "b66b5c4636d6f9dd34d86db0ff8ea0edd480004535a3443617da8e4dc66b3382",
+      "tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+      "tests/mixed_validation/inventory_test.py": "d8a9396f88e4859a3e8ffac4ccd205e9a2c4f280b22a52a28d66d5f2f92238ee",
+      "tests/mixed_validation/dispatch_test.py": "a121c069c7ac3c81e0ab4414591a4a7da9c239e63a7f7df8696a4f150357c4bd",
+      "tests/mixed_validation/boundary_test.py": "0b46bf3b20914eb4fd5f52f8e9ac30089839400b5212c894ca6f8c7965dd9afd",
+      "tests/mixed_validation/execute.py": "9c8019295b79cb0e330eda1409ff015c3fc0de976e69be2c83e4eb734e86df47",
+      "tests/mixed_validation/parent.py": "385bb6f483767e04fbf5b11f610dd82c4105b65b0dc1ebe7ea46a8ba95a759c4",
+      "tests/mixed_validation/artifacts_test.py": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980",
+      "tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+      "tests/mixed_validation/worker_test.py": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb",
+      "tests/mixed_validation/plan_test.py": "58bca3b9a0239b00d71d1cdeb2601f6042964ab1c50366534dda1039f5317ced",
+      "tests/mixed_validation/lifecycle.py": "d77ffa29f28c86e352f7ade1fca8539a6f9eb679cc25ae4a1b18a665085d0c4c",
+      "tests/mixed_validation/artifacts.py": "1c069e138565eb668a46ccddbd7c6343285b1ddaeec5c8be376e510542a742a5",
+      "tests/mixed_validation/execute_test.py": "d744d57401b6dd8ecf717de5515e4985876d8646555d5548236d1f1288178a3e",
+      "tests/mixed_validation/inventory.py": "1eb8e22917653fcc4fe7ea36e9c64d45fc5b11128857b6291b64eb71c99e6cdc",
+      "tests/shared_dispatch.py": "53613481e82de31dfe33f1f01f29e9c8251e8b2d975ab9a7299b5f1b22bab02f"
+    },
+    "owning_tool_terminal": {
+      "chunk_id": "817a17",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "sources": {
+    "tests/mixed_validation/worker.py": "dc7a3c084aa924d89288eb6d29f143840e6ddc33796cd200c43530807ce66c56",
+    "tests/mixed_validation/audit_test.py": "534b6673a4ab787ffcaab43b56e59724da5df23ca3ab1cc724c3098af3b82d6c",
+    "tests/mixed_validation/parent_test.py": "87065bf6e508b0909b21718c062b9818eff2100593032f9d173d28071ae6144a",
+    "tests/mixed_validation/plan.py": "647ee8faeb04c308afae0a91c7b0e869a3ea85bd03fe3fbb52517948a707e5b8",
+    "tests/mixed_validation/boundary.py": "b6b60968889ea4b2cf7f05bc078405346fed93f65338ed5f1ec8ae619c3471f3",
+    "tests/mixed_validation/run_controls.py": "b66b5c4636d6f9dd34d86db0ff8ea0edd480004535a3443617da8e4dc66b3382",
+    "tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+    "tests/mixed_validation/inventory_test.py": "d8a9396f88e4859a3e8ffac4ccd205e9a2c4f280b22a52a28d66d5f2f92238ee",
+    "tests/mixed_validation/dispatch_test.py": "a121c069c7ac3c81e0ab4414591a4a7da9c239e63a7f7df8696a4f150357c4bd",
+    "tests/mixed_validation/boundary_test.py": "0b46bf3b20914eb4fd5f52f8e9ac30089839400b5212c894ca6f8c7965dd9afd",
+    "tests/mixed_validation/execute.py": "9c8019295b79cb0e330eda1409ff015c3fc0de976e69be2c83e4eb734e86df47",
+    "tests/mixed_validation/parent.py": "385bb6f483767e04fbf5b11f610dd82c4105b65b0dc1ebe7ea46a8ba95a759c4",
+    "tests/mixed_validation/artifacts_test.py": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980",
+    "tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+    "tests/mixed_validation/worker_test.py": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb",
+    "tests/mixed_validation/plan_test.py": "58bca3b9a0239b00d71d1cdeb2601f6042964ab1c50366534dda1039f5317ced",
+    "tests/mixed_validation/lifecycle.py": "8b0bc0a285749ffaab2811bb857527f071393f17c97fabc94f3e837833d854cd",
+    "tests/mixed_validation/artifacts.py": "1c069e138565eb668a46ccddbd7c6343285b1ddaeec5c8be376e510542a742a5",
+    "tests/mixed_validation/execute_test.py": "d744d57401b6dd8ecf717de5515e4985876d8646555d5548236d1f1288178a3e",
+    "tests/mixed_validation/inventory.py": "1eb8e22917653fcc4fe7ea36e9c64d45fc5b11128857b6291b64eb71c99e6cdc",
+    "tests/shared_dispatch.py": "d4fc209c1861aab52805acedbf597618930f37ab63f5016b1f9ba63e6f6e439e"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "06bb6e",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "schema": "unison-final-volume-v1-recovery/1",
+  "state": "FAILED_PREFIX_INDEPENDENT_RECOVERY_CLOSED_NOT_MATRIX_PASS",
+  "original_owner": {
+    "session": 64540,
+    "initial_chunk": "cb1930",
+    "terminal_chunk": "7903aa",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 16799
+  },
+  "recovery_final": {
+    "terminal_chunk": "b97967",
+    "exit_code": 0,
+    "running_session": null,
+    "exact_owned_image_normally_detached": true
+  },
+  "preceding_metadata_helpers": [
+    {
+      "session": 66785,
+      "pid": 17526,
+      "terminal_chunk": "417217",
+      "exit_code": 137,
+      "failure": "overbroad textual FD predicate before image-info/detach"
+    },
+    {
+      "session": 16639,
+      "pid": 17726,
+      "terminal_chunk": "1cce56",
+      "exit_code": 137,
+      "failure": "JSON parser applied to saved plist stdout before image-info/detach"
+    },
+    {
+      "session": 78577,
+      "pid": 17926,
+      "terminal_chunk": "e9f567",
+      "exit_code": 137,
+      "failure": "attach-only volume-kind field assumed in image-info schema; before detach"
+    }
+  ],
+  "source_bound_cause": "seed argv contains nonexistent -semanticmaxthreads option; old owner did not persist this failed raw child outcome before rejecting it",
+  "completed_matrix_cases": 0,
+  "first_seed_success": false,
+  "original_failed_cli_exit_code": null,
+  "original_failed_cli_wait4_record_not_retained": true,
+  "no_sdk_photo_original_or_device_format": true,
+  "only_own_128MiB_image_created": true,
+  "normal_owned_detach": true,
+  "fresh_whole_io_cpu_bundle_acquired_closed": true,
+  "recovery_root": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9",
+  "prior_roots": [
+    "/private/tmp/u-volume-recovery-c52a65ccd3d849d9",
+    "/private/tmp/u-volume-recovery-v2-c52a65ccd3d849d9",
+    "/private/tmp/u-volume-recovery-v3-c52a65ccd3d849d9"
+  ],
+  "executed_source_snapshot": "tests/qualification/final-volume-v1-owner-source.py.txt",
+  "stop_scope": "only exact source/census-proven idle Python retainers killed after normal owned detach; no native/Classic/daemon/group signal",
+  "proof_pins": [
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/DETACHED-IDLE-OWNER-STOP-PROOF.json",
+      "bytes": 1079,
+      "sha256": "c228b1534f5895d87527c521a229e4be5636a103d403150360c62b143a002b90"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/PRE-DETACH-PROOF.json",
+      "bytes": 1035,
+      "sha256": "b20d272e9419e42e91aa323b365a7d56fa856c373040d7e5523d8d59f30d851e"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/PRIOR-METADATA-HELPER-STOP-PROOF.json",
+      "bytes": 264,
+      "sha256": "b5860815cff727d5a09b32e403a234e0f5ec56be9c63d0a48fa5fedd0faa6d38"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/SECOND-METADATA-HELPER-STOP-PROOF.json",
+      "bytes": 289,
+      "sha256": "248b767cebe0eff86d689c15e8b7734a2254705afb8cbdd930a015b4119ab7d5"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/STOP-SUBMITTED.json",
+      "bytes": 221,
+      "sha256": "7bf1a1a936c4f27c6df4f03992ca25946b9cb00138f6f7ea06e179e1c4038728"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/THIRD-METADATA-HELPER-STOP-PROOF.json",
+      "bytes": 314,
+      "sha256": "204259378580dcc1b584a5b36989ab86be057d709f6920847026bb80c15286ea"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/after-image-info.json",
+      "bytes": 786,
+      "sha256": "c14d3a3b649e23b0d2567e0e9223e1a094aa06707b8926e5f88d6fd73292132a"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/before-census.json",
+      "bytes": 146092,
+      "sha256": "c8014eeb958e00c636adfbcd16e76330c21697e6052146212f5d052a13af16a8"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/before-image-info.json",
+      "bytes": 2158,
+      "sha256": "f057e7ed85f8755636b298bd859c1e9934e3bffb3deb5ce53b1bf1b531b304e9"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/final-owner-census.json",
+      "bytes": 145326,
+      "sha256": "f7b02ad7f6add13942dace6fcb1816c1e68bc9bf98920f3643c64ae5fdd3d700"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/normal-owned-detach.json",
+      "bytes": 444,
+      "sha256": "2a76d462774bfea11c05229d5831545b75dc1ac2ea2db67f231ecd66700e5b18"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v4-c52a65ccd3d849d9/owner-fds.json",
+      "bytes": 2647,
+      "sha256": "12b054f495e151bc12188e041d5ece448fc0caad0d05ebde30c1fb5bae8e8d29"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-c52a65ccd3d849d9/before-census.json",
+      "bytes": 145809,
+      "sha256": "f09439d0e29071bf60b515ed0a2c772ceb8166f65a34714edd9cc0b901f8e15f"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-c52a65ccd3d849d9/owner-fds.json",
+      "bytes": 2647,
+      "sha256": "465f3c8b25c39582aedb2d7ebcc3c064dd6cdb2d29631bb27609029c996afe23"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v2-c52a65ccd3d849d9/before-census.json",
+      "bytes": 146172,
+      "sha256": "abdf3d22dd8ac8869f89ef4ee44c994219cc83007c8aa4e13ff95e39c89dab7b"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v2-c52a65ccd3d849d9/owner-fds.json",
+      "bytes": 2647,
+      "sha256": "d0a1ba1cc2a65eebf57701e0069abcf26f69a1947a5e6bce3e89be83aca60c85"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v3-c52a65ccd3d849d9/before-census.json",
+      "bytes": 145931,
+      "sha256": "6ec550b0cc229124cc7db4499e95f86af8f8e74057a15916fc6eac62ff4e4489"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v3-c52a65ccd3d849d9/before-image-info.json",
+      "bytes": 2158,
+      "sha256": "e29ca84307021298f524e7d0ab60b6ba247fab7cdcf89b77e8cef3ccb34d18ba"
+    },
+    {
+      "path": "/private/tmp/u-volume-recovery-v3-c52a65ccd3d849d9/owner-fds.json",
+      "bytes": 2647,
+      "sha256": "a9b3840dd60e0ee9e848fbe31d4d97f6a412d703ee5e9da6bc689b71c43febc4"
+    }
+  ]
+}

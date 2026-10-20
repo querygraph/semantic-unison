@@ -1,0 +1,98 @@
+{
+  "scope": "Prepared remote clone-stage basis/output owner, actual generated8192B DNG unit receiver with in-process planner/no transport;24pair-fault+8native publication controls; not native parent/nonce/directory/RSS/aggregate FD completion",
+  "build_parent": {
+    "session": 52020,
+    "terminal_chunk": "e7605f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pair_parent": {
+    "session": 74145,
+    "terminal_chunk": "339939",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "native_parent": {
+    "session": 58535,
+    "terminal_chunk": "fb245a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-pair-stock-check-20261018-003/RESULT.json",
+      "bytes": 56671,
+      "sha256": "f36f66ab88c816ee4d0eb55c6980d50e5b5b87f15e262649e809797580b79f5d"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-pair-stock-check-20261018-003/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "3a5e0f7551d5f8695131995c523140cea6e7f05b8fee175a8e2d15df1be92fdc"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-pair-ox-check-20261018-003/RESULT.json",
+      "bytes": 56677,
+      "sha256": "7e5a88acdbf025ca276f85c68675478adbda03264663b87e90a9287a71f54fb7"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-pair-ox-check-20261018-003/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "5a72b632a2df6890ea6b393ccbe4cb58eec6e848f0992431b0f8781f052b907d"
+    },
+    "pair-faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-pair-faults-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "ab1243c478b9ee46dfe3ffe22d096832d4038e6c02d6d0a83088cf5849fe16c4"
+    },
+    "pair-faults/RESULT.json": {
+      "path": "/private/tmp/unison-remote-pair-faults-20261018-001/RESULT.json",
+      "bytes": 157989,
+      "sha256": "7883b138db07b40793b0237a92b96c57f7688601f2169ce7ba870a8e420ace5c"
+    },
+    "pair-faults/stdout": {
+      "path": "/private/tmp/unison-remote-pair-faults-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 42,
+      "sha256": "22e9d122ed8fd4b2d12e5c3df5fde59686273e9fd67745cc436486c6dc098879"
+    },
+    "native-regression/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-pair-native-regression-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e5be1caee2ea914ab11e71f7737f61dbb91a121332ae6d48972d3312083c3bbf"
+    },
+    "native-regression/stdout": {
+      "path": "/private/tmp/unison-remote-pair-native-regression-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "b7deb532638ad815ca3f750f8f4a5c34e9d20e9860f5ba7814167b5650002456"
+    },
+    "native-regression/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-2jfmv6qk/RESULT.json",
+      "bytes": 150890,
+      "sha256": "73103ad3fad24f3fe94824586b4b82251b9705c079b54332e0a749a79ff683f6"
+    }
+  },
+  "preserved_failed_builds": [
+    {
+      "workspace": "/private/tmp/unison-remote-pair-stock-check-20261018-001",
+      "terminal": "34962/c4123a/exit1/no session",
+      "reason": "candidate/publication record-label ambiguity",
+      "child_returncode": 2,
+      "closed": true
+    },
+    {
+      "workspace": "/private/tmp/unison-remote-pair-stock-check-20261018-002",
+      "terminal": "30322/56e92f/exit1/no session",
+      "reason": "scope/publication record-label ambiguity",
+      "child_returncode": 2,
+      "closed": true
+    }
+  ],
+  "intermediate_typecheck": {
+    "workspace": "/private/tmp/unison-remote-pair-typecheck-20261018-001",
+    "actual_terminal": "ebcc53/exit0/no session",
+    "scope": "stock current module against coherent failed-build dependency snapshot, not full build"
+  }
+}

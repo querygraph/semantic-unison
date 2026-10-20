@@ -1,0 +1,173 @@
+{
+  "schema": "unison-dng-layout-exact-source-qualification/1",
+  "state": "SOURCE_BUILD_KERNEL_PASS_NOT_REMOTE_CAMERA_QUALIFICATION",
+  "profile": "org.firstpair.dng-layout/0",
+  "capability": "dng-layout-exact-v0",
+  "focused_owner_terminal": {
+    "session": 93568,
+    "chunk_id": "7dddd6",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "focused": {
+    "path": "/private/tmp/unison-layout-controls-rrakhndu/RESULT.json",
+    "bytes": 247655,
+    "sha256": "af9ac53fe8af11970768fecc6d35fc14387fcbcb8a3f93a6a6ec00b028307517"
+  },
+  "focused_artifacts": [
+    {
+      "path": "/private/tmp/unison-layout-only-controls-20261017-001/SHARED-START.json",
+      "bytes": 1088,
+      "sha256": "ee2a4d546ed1b4f69d985343b8a6fbd2f29235a30db9ee06fe21cc4906fd820d"
+    },
+    {
+      "path": "/private/tmp/unison-layout-only-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "0ebcb42883e3aaae4f99cc16c9aa4ed9921ecd52b744245eb6663329e7d911ae"
+    },
+    {
+      "path": "/private/tmp/unison-layout-only-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 45,
+      "sha256": "2aae35bab87048796948d6bf526ba7b3c6a6a65e2a07b8af810840ed4bcc5dc1"
+    },
+    {
+      "path": "/private/tmp/unison-layout-only-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "build_owner_terminal": {
+    "session": 74559,
+    "chunk_id": "0d2fc9",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "system": "make",
+      "report": {
+        "path": "/private/tmp/unison-layout-stock-make-001-20261017/RESULT.json",
+        "bytes": 47449,
+        "sha256": "b0682aed0cecd9a1566303ab6cf251328c050778846c175b15c63ae974fb5177"
+      },
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-cy3tfzbq/src/unison",
+        "bytes": 5763704,
+        "sha256": "b8bedd944573d6c9181c1c7e553e1b75f18f12e573c29a1c02a4e4f2ca2a07e9"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-layout-stock-make-001-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "4cdcd7dd0978994e19f5cdc1a02bada884b7b33e73b9b2182941152191b4c43e"
+      },
+      "start": {
+        "path": "/private/tmp/unison-layout-stock-make-001-20261017/SHARED-START.json",
+        "bytes": 1273,
+        "sha256": "507df14aa4973c0ac272368f71a5fc830b526bf3433960cdf429b2dfa55d325d"
+      }
+    },
+    {
+      "label": "stock",
+      "system": "dune",
+      "report": {
+        "path": "/private/tmp/unison-layout-stock-dune-001-20261017/RESULT.json",
+        "bytes": 47255,
+        "sha256": "c702a4e3b306ade9ae6c6944b8b507bfe3a6392a786a8c6c4442c29dd3f2736d"
+      },
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uqykvm1t/_build/default/src/linktext.exe",
+        "bytes": 5811880,
+        "sha256": "4f1eb4a5ce8058881dcf53fa58cffccabbe0e09b00738ebad068defe2c80ecf8"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-layout-stock-dune-001-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "068a2fa3438aa335a58fa1712baf5de9e7a2ac5c1767b6efda2951230e156272"
+      },
+      "start": {
+        "path": "/private/tmp/unison-layout-stock-dune-001-20261017/SHARED-START.json",
+        "bytes": 1273,
+        "sha256": "b2f459ef91ee978283c83b6f7ae39367a8d9508b677fc8808084f0017f69bf05"
+      }
+    },
+    {
+      "label": "ox",
+      "system": "make",
+      "report": {
+        "path": "/private/tmp/unison-layout-ox-make-001-20261017/RESULT.json",
+        "bytes": 47455,
+        "sha256": "18fb23083b79a1c43c23956bea51e5bacc02f8ecf447714f9f3d5fb705736f9e"
+      },
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tb3760r6/src/unison",
+        "bytes": 7718352,
+        "sha256": "7e32537dc163acedfc6d7c18399294be0eefba7b1b3351aa3fa912e946f3cf39"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-layout-ox-make-001-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "a18dd0c86ea35c7c85ddac6afe05c69f22ab0e51df6cf67f8ab8a88b30853737"
+      },
+      "start": {
+        "path": "/private/tmp/unison-layout-ox-make-001-20261017/SHARED-START.json",
+        "bytes": 1268,
+        "sha256": "d301436a103d639f81b183ce91826dda9f7e5e05ccad269e1f067e7826fa8c70"
+      }
+    },
+    {
+      "label": "ox",
+      "system": "dune",
+      "report": {
+        "path": "/private/tmp/unison-layout-ox-dune-001-20261017/RESULT.json",
+        "bytes": 47259,
+        "sha256": "c74dc576528d87c9cda514b7baaf57ac748a9f19404a0a33cde9250f36db9478"
+      },
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uozi9tw3/_build/default/src/linktext.exe",
+        "bytes": 7416224,
+        "sha256": "01da40306d5f97f2e034321f258ca4f1d78a1121f7b4035576d5759890d18a7f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-layout-ox-dune-001-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f5821290687b9f0669853b2a1423e35e1ceb12ded4d5d628a439127814d37e51"
+      },
+      "start": {
+        "path": "/private/tmp/unison-layout-ox-dune-001-20261017/SHARED-START.json",
+        "bytes": 1268,
+        "sha256": "ed52777af80aa56d6cbc6439b156a1d7ee628afdd79bf67b3ddb4022b31c09af"
+      }
+    }
+  ],
+  "source_hash_checks": 1864,
+  "legacy_kernel_terminal": {
+    "session": 52614,
+    "chunk_id": "ebaacf",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "legacy_artifacts": [
+    {
+      "path": "/private/tmp/unison-layout-legacy-kernel-20261017-001/SHARED-START.json",
+      "bytes": 1154,
+      "sha256": "ddaf4038626e34857b49ecd732a1eca8aa71ebf043e800823042862f289461f4"
+    },
+    {
+      "path": "/private/tmp/unison-layout-legacy-kernel-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "1526308b4bf3f917c8457095c86fac772d036ec130235dbf2bc8bdbe5a2ddfa9"
+    },
+    {
+      "path": "/private/tmp/unison-layout-legacy-kernel-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 418,
+      "sha256": "9de27e19268c88816d4db5da346ddc517c2ca7bbda38a8656284c45617e98085"
+    },
+    {
+      "path": "/private/tmp/unison-layout-legacy-kernel-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Stock/Ox each49 original layout checks and old strict4scalar/8private safety controls;43 actual modefilter/compiler/runtime calls. Four Make/Dune builds and stock legacy kernel/inspector passed. Generated classic/BigTIFF bothorders, hidden references preserved through exact donor SHA, opaque changes refuse, wrong target SHA refuses, noop0writes, no new merge authority. All owner groups/CPU8 closed. No SDK/camera/remote receiving/physical-savings/pixel-semantic/incremental-cache/full hierarchy/full-goal claim."
+}

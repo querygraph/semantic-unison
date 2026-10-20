@@ -1,0 +1,104 @@
+{
+  "state": "PREPARED_NOT_ADMITTED",
+  "target": "inspect-file",
+  "workspace": "/private/tmp/unison-camera-components-20261017-a31d9f70",
+  "proposed_admission": "/private/tmp/unison-camera-components-admission-20261017-a31d9f70.json",
+  "cpu_credits": 8,
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/run.py",
+    "--use-build",
+    "/private/tmp/unison-current-components-stock-inspector-20261017-001/RESULT.json",
+    "--",
+    "--components",
+    "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG"
+  ],
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/manual.py",
+    "inspect-file"
+  ],
+  "environment": {
+    "SHARED_CPU_CREDITS": "8",
+    "OUTPUT_DIR": "/private/tmp/unison-camera-components-20261017-a31d9f70",
+    "INSPECTOR_RECEIPT": "/private/tmp/unison-current-components-stock-inspector-20261017-001/RESULT.json",
+    "INSPECT_INPUT": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "INSPECT_COMPONENTS": "1",
+    "SHARED_IO_ADMISSION": "/private/tmp/unison-camera-components-admission-20261017-a31d9f70.json",
+    "SHARED_IO_ADMISSION_SHA256": "ROOT_PUBLISHED_SHA_REQUIRED"
+  },
+  "inspector_contract": {
+    "mode": "components",
+    "build_receipt": "/private/tmp/unison-current-components-stock-inspector-20261017-001/RESULT.json",
+    "build_receipt_sha256": "2403e7dd5a2338ed8658da44ad09af4d03e6f2b8d0ca90c5e17bab66df21d37c",
+    "binary_sha256": "82fc9fd8ecd003467526c2b550ec4b6a4f38cbfc68e359ad9fad604103637756",
+    "input": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "input_identity": {
+      "st_dev": 16777223,
+      "st_ino": 307228717,
+      "st_mode": 33024,
+      "st_nlink": 1,
+      "st_uid": 501,
+      "st_size": 193851848,
+      "st_mtime_ns": 1792099229810540469,
+      "st_ctime_ns": 1792113844382073309
+    }
+  },
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison-sol-review-20261017/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/componentHash.ml": "27bd0f7cf43ce69bd126056bd905c896ee111f7618e1fcda88b664830b2c4dc6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/componentHash.mli": "721784138894bb012f3873ac46ad5c932341fe231d3e7165f5afd27da56bcb83",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ml": "1f5617278716135f9f3bdb2fe3f3cde84a4e1972499d221bea0a6ab9b77cfeb8",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.mli": "807aba1477b1bfbb2ca12a56de821b37ab37330b2fee556f8c933657e6d6e109",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngLayout.ml": "b937b560f9f8a6200e886cf29bb7823a630755a68136331aeb6502c01a103aed",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngLayout.mli": "b2b849f4f0c58a277de7202b6f038a6b6e43f6dff6cfedf2b0d416a879829226",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.ml": "13b89e566ed973140b5d7779176da7b80ff49c52dfc59066d35bafa3d648e4af",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.mli": "5761ac03853af939f91aab66ea34941d79893fbea8acd1c0abb39c1762884b3e",
+    "/Users/alexy/src/unison-sol-review-20261017/src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "/Users/alexy/src/unison-sol-review-20261017/src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticDelta.ml": "616af4155579d3ad6b91893eaccdcab22d54f6dc05054e07ce7410cfa3eabcf3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.ml": "90b2e698dd43ce4df82d5669aacda0db348b35dd2b275eefeab89042cef62b55",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.mli": "c5a4ceeb6a261f06c79b2209cc836108363b88bd5f3fdac1a4eaa51d502413c2",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile_stubs.c": "eaa2cce51e0c053fdd184c1d70409dfec755a224a720610e67400f4f1130fa72",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_io_contract.py": "ef31329b5377643df1812ae81906ac4d5ba493f9e30b80c25d68c7c9b2a860a6",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/manual.py": "225b3a7e7bf643ebe32afeba97da277c556c13d93ac6aa5cad9622caaee7621d",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_dispatch.py": "e5362db68589d2080c09575617d4bdda517accf559f957abb3905acea0dcdcf0",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_io_pool.py": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/inspect.ml": "9e5735169ab6353ee9d547542beb6dbd10c6a2ba85ae672544ecac894511f25c",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/run.py": "7c4da8035bdeccc5505aa0df4ba73fb1c285d228be43a0cf63ad4e4e7b02df3f"
+  },
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "limits": {
+    "worker_seconds": 300,
+    "declared_logical_read_budget_bytes": 2147483648,
+    "read_budget_instrumented": false,
+    "declared_log_budget_bytes": 16777216,
+    "log_budget_enforced": false,
+    "calls": 1
+  },
+  "scope": "One advisory component observation of retained Unison clone; no originals/Photo payload/SDK/receiving/writes/clone/full-source prehash. Inspector computes full and role hashes during admitted observation. Unknown process/FD ownership retains; actual tool terminal separate.",
+  "historical_input_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+  "prerequisites": {
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/current-inspector-components-actual-20261017.json": "2b54a0ec0da39e02e96792aeba2b9ce788b277caf9354bf90b5fb14040e274d1",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-io-contract-controls-20261017.json": "45aad00089ca8de8e221dd632b7b8a1f037112c1a50d743dbb02735a892018a1",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-postcheck-controls-20261017.json": "594681d97ac654d6b8605ab5a60362ee29f92b263f6f351b87c5ab0ff61dfac4",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-dispatch-lifecycle-20261017.json": "4730832b13fbdb4e232818ffacc8fc57614a3ce8bda6243933409ae336e3ff48"
+  }
+}

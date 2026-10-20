@@ -1,0 +1,19 @@
+{
+  "schema": "unison-final-xmp-binding-audit-terminal/1",
+  "actual_tool": {
+    "chunk_id": "9cb39c",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "receipt": {
+    "path": "tests/qualification/final-xmp-case-binding-20261019.json",
+    "sha256": "0c60c1a1d029572481d81881483fd9c2fe3cbabb9932047e734e9fb55d260ef4"
+  },
+  "script": {
+    "path": "tests/qualification/final-xmp-case-binding-audit-20261019.py.txt",
+    "sha256": "3ae3c91748a5850dd4f0061a10615e7fd976b6c263979e09bf82ab410fb6005c"
+  },
+  "native_rerun": false,
+  "CPU00_closed": true,
+  "EXglobal_acquired": false
+}

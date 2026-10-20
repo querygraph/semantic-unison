@@ -1,0 +1,14 @@
+{
+  "schema": "unison-directed-native-audit-terminal/1",
+  "actual_tool": {
+    "chunk_id": "748b45",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_source": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-native-publication-audit-20261019.py.txt",
+    "sha256": "e84251bbfd227332b863b620df718000bd6e482cab49c71c935c2879c97ca810"
+  },
+  "receipt_sha256": "1f7afb0e784399a9650e61b1a4c35775c52b86511bc94684eb975f87836cc73f",
+  "CPU8_EX_closed": true
+}

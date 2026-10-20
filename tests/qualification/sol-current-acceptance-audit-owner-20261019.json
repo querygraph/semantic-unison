@@ -1,0 +1,53 @@
+{
+  "schema": "unison-acceptance-metadata-audit-owner/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/acceptance_pin_audit.py",
+      "--output",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sol-current-acceptance-bindings-20261019-v1.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/sol-stream-v6-actual-adoption-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/endpoint-cpu-budget-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-worker-parity-apply-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-cache-runtime-composition-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-xmp-kernel-observation-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-sde-conformance-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-range-components-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-dng-reconciliation-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-validation-warning-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/camera-large-forest-v6-actual-20261017.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/mixed-validation-v2-actual-20261017.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/endpoint-fd-enforcement-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/self-footprint-capability-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/cpu-ceiling-dependent-composition-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-mixed-adobe-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-sdk-multifile-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-all-scanned-adobe-actual-20261018.json",
+      "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/larger128-stock1-actual-20261019.json",
+      "/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json",
+      "/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/sol-stream-v6-actual-adoption-20261018.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/endpoint-cpu-budget-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 2, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-worker-parity-apply-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 62, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-cache-runtime-composition-actual-20261018.json HISTORICAL_OR_MIXED_SOURCE_BINDINGS {'MATCH': 5, 'CHANGED': 1, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-xmp-kernel-observation-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 12, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-sde-conformance-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 17, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-range-components-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 10, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-dng-reconciliation-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 25, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-validation-warning-actual-20261018.json HISTORICAL_OR_MIXED_SOURCE_BINDINGS {'MATCH': 211, 'CHANGED': 1, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/camera-large-forest-v6-actual-20261017.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/mixed-validation-v2-actual-20261017.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/endpoint-fd-enforcement-actual-20261018.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/self-footprint-capability-actual-20261018.json HISTORICAL_OR_MIXED_SOURCE_BINDINGS {'MATCH': 1, 'CHANGED': 4, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/cpu-ceiling-dependent-composition-actual-20261018.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 329, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-mixed-adobe-actual-20261018.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-sdk-multifile-actual-20261018.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/current-all-scanned-adobe-actual-20261018.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/larger128-stock1-actual-20261019.json NO_DIRECT_BINDINGS {'MATCH': 0, 'CHANGED': 0, 'MISSING': 0}\n/private/tmp/unison-endpoint-cpu-budget-stock-check-20261018-001/RESULT.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 329, 'CHANGED': 0, 'MISSING': 0}\n/private/tmp/unison-endpoint-cpu-budget-ox-check-20261018-001/RESULT.json ALL_DIRECT_BINDINGS_MATCH {'MATCH': 329, 'CHANGED': 0, 'MISSING': 0}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 5068,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "audit": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sol-current-acceptance-bindings-20261019-v1.json",
+    "sha256": "a15f59824c91b0ee9ba7a66f0d44a4d2b615e9a0b5ef37727b941b2b0079d401"
+  },
+  "scope": "One Python source/receipt metadata child, no helpers/media/EXIO/native/SDK/benchmark/runtime requalification. Direct bindings only; no fullgoal proof."
+}

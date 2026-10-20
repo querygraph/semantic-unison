@@ -1,0 +1,179 @@
+{
+  "schema": "unison-layout-only-receiving-request/1",
+  "state": "SOURCE_READY_REQUESTED_NOT_ADMITTED_NOT_DISPATCHED",
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/layout-receiving-plan-v1.json",
+    "bytes": 8889,
+    "sha256": "77f87fab838911aa98aa3543cd9b9506c6360d4f73177ebdc959cc61e67d57a1"
+  },
+  "admission_path": "/private/tmp/unison-layout-receiving-admission-v1.json",
+  "admission_fields": {
+    "state": "ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB",
+    "target": "sync-functional",
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison/bench/sync/run.py",
+      "--binary",
+      "stock=/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-6o61fbdz/src/unison",
+      "--compiler",
+      "stock=/Users/alexy/.opam/default/bin/ocamlopt",
+      "--expected-binary-sha256",
+      "stock=27a8895f046a01494db4c3b03e12a020a4ff33df47c2bb09964fced2032a5d5a",
+      "--expected-compiler-sha256",
+      "stock=f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "--binary",
+      "ox=/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-s7yfmp96/src/unison",
+      "--compiler",
+      "ox=/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "--expected-binary-sha256",
+      "ox=e902f550b245a581296689f9066adafc3680cb5794696e064fc0ec8463da9f0f",
+      "--expected-compiler-sha256",
+      "ox=e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "--layout-only-controls",
+      "--shared-qualification",
+      "--measure-primary-reads",
+      "--loopback-cpu-credits",
+      "8",
+      "--orchestration-cpu-credits",
+      "2",
+      "--timeout",
+      "30",
+      "--background-note",
+      "user-run finite functional checks; not a throughput comparison",
+      "--output",
+      "/private/tmp/unison-layout-receiving-2a6cbd4b84be4d9c900b92271b38a530/RESULT.json"
+    ],
+    "workspace": "/private/tmp/unison-layout-receiving-2a6cbd4b84be4d9c900b92271b38a530",
+    "cpu_credits": 8,
+    "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+    "execution_source_sha256": {
+      "/Users/alexy/src/unison/bench/sync/aggregate_successor_lifecycle_test.py": "fac56ca371715f3640fcdc68afe3c5f34c155f082c9846ce62bc7d5b1712aa58",
+      "/Users/alexy/src/unison/bench/sync/artifact_pins.py": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd",
+      "/Users/alexy/src/unison/bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304",
+      "/Users/alexy/src/unison/bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0",
+      "/Users/alexy/src/unison/bench/sync/bounded_source_test.py": "7360073a4ccc0257d295d5768b8a71a920e4ecafae2e0cdd0b5e8dcadbd5cc2b",
+      "/Users/alexy/src/unison/bench/sync/check.py": "5f64df8d2a54e35d60ecff04fb68737522773334f0cca9661c844e80c92c5a50",
+      "/Users/alexy/src/unison/bench/sync/fixtures.py": "cd81f38c03d2e556726c3bb7752d0e72ae78ae36e71d362aea635b35dcb50335",
+      "/Users/alexy/src/unison/bench/sync/interrupted_receipt_lifecycle_test.py": "6eb2f4a04c3049ff5571f2021112991db049cad84166f245fc8e9e471b7cd479",
+      "/Users/alexy/src/unison/bench/sync/interrupted_receipt_test.py": "abfb87ac6f5262e2daab8e58fc9ecba0fb1c3aa8cb361966e72f763f10f79557",
+      "/Users/alexy/src/unison/bench/sync/invocation_journal.py": "1e99ff956720471480c201a6fafb6bd96679c20832c7089bcee3b44269931eb1",
+      "/Users/alexy/src/unison/bench/sync/invocation_journal_test.py": "dad2b764eba3401edce959368957af0c3770e15b0e3252ab961b2726a690fae7",
+      "/Users/alexy/src/unison/bench/sync/journal_lifecycle_test.py": "53e007d6f3b32db8fcbeaaaeb94838f93a5360c9a4b7e8d7315528ab8d399b46",
+      "/Users/alexy/src/unison/bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+      "/Users/alexy/src/unison/bench/sync/layout_fixture_test.py": "13a3e5931626ee6edb25fd50b5539de8432dae6d41911359634391ff459b6c5d",
+      "/Users/alexy/src/unison/bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+      "/Users/alexy/src/unison/bench/sync/merge_partitions.py": "5824deac54ab0a55f7709a7b3665de2a2a3df38c1f9b9ae0f4cd8dd5e92b241a",
+      "/Users/alexy/src/unison/bench/sync/merge_partitions_test.py": "689874ee37ef9e7d8d9d05245e5c96fe33ecf0c751bce05650a8bee90b39eac7",
+      "/Users/alexy/src/unison/bench/sync/native_settlement_lifecycle_test.py": "d710aa65d8e56de9da31eff5a1e6fbd787a96c95254811b660f040b7845ff79a",
+      "/Users/alexy/src/unison/bench/sync/native_settlement_policy_test.py": "482dcd52c451b4caf4746bfd23c2bd32202dd9ec24d84ee52b9dd47adcc2aa44",
+      "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+      "/Users/alexy/src/unison/bench/sync/partition_dispatch_test.py": "fedafa5f138df38ed1ff43fa2f08c3acdb2355cd9a90156dbe274282bd80ff45",
+      "/Users/alexy/src/unison/bench/sync/partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+      "/Users/alexy/src/unison/bench/sync/partitions_test.py": "f61b2bb7c6c3781932de75430fc57b139893e19339b5311781ac868a14c75925",
+      "/Users/alexy/src/unison/bench/sync/prepare_plan.py": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864",
+      "/Users/alexy/src/unison/bench/sync/prepare_plan_test.py": "dc61c903a25c133ef2a3746b3dc67f2187aa0a400947207895b7efadb7d93bd2",
+      "/Users/alexy/src/unison/bench/sync/properties.py": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889",
+      "/Users/alexy/src/unison/bench/sync/properties_test.py": "9f4ee7ce9e8d12ac7cae7a9d4eb03374b52d7ac765f5c8af5986ea6975868ac8",
+      "/Users/alexy/src/unison/bench/sync/proxy.py": "996760a6dee2641247d07c1cc5eecc742fb0e57c89ba16c7529bc37857135546",
+      "/Users/alexy/src/unison/bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+      "/Users/alexy/src/unison/bench/sync/run.py": "959b7f83d992bbee7f0a884c8527c08e4f6fc254009d58322500e5728c49d001",
+      "/Users/alexy/src/unison/bench/sync/run_bounded.py": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508",
+      "/Users/alexy/src/unison/bench/sync/shared_audit.py": "cf3f56bff9e40cf9b9cf2158c7c96c9f1fdda630b30c910a26c954640d1b0148",
+      "/Users/alexy/src/unison/bench/sync/shared_budget_test.py": "1611f23f923a11627a6e191cc5464f4c77ce7e7dfbec9ed1d97f70a6bcf115bf",
+      "/Users/alexy/src/unison/tests/manual.py": "a698886b21d39ef24ed9639a219ee8f4206b5fabfbad086680abb306dc4e3b2b",
+      "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+      "/Users/alexy/src/unison/tests/shared_dispatch.py": "6a3021d83dcbb75c0b6f9532f124bfcd1c85bdbcafcb2d3a03a2872414f2e38b",
+      "/Users/alexy/src/unison/tests/shared_io_pool.py": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488",
+      "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    }
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/manual.py",
+    "sync-functional"
+  ],
+  "launch_environment": {
+    "SHARED_CPU_CREDITS": "8",
+    "OUTPUT_DIR": "/private/tmp/unison-layout-receiving-2a6cbd4b84be4d9c900b92271b38a530",
+    "STOCK_RECEIPT": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/RESULT.json",
+    "OX_RECEIPT": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/RESULT.json",
+    "SYNC_LAYOUT_ONLY_CONTROLS": "1",
+    "SHARED_IO_ADMISSION": "/private/tmp/unison-layout-receiving-admission-v1.json",
+    "SHARED_IO_ADMISSION_SHA256": "ROOT_PUBLISHED_SHA_REQUIRED"
+  },
+  "prerequisites": [
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/layout-receiving-source-controls-actual-20261017.json",
+      "bytes": 4359,
+      "sha256": "7db703c799b2df265cf9a665a13d5e184c7dd7ff33b63babbbe50868f9d4981f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/layout-receiving-build-selftests-actual-20261017.json",
+      "bytes": 3961,
+      "sha256": "72a1d4221d3b1fd6bbe784fb92556317cf32f635d3ea3e23914d7d65d189f7e6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/dng-layout-exact-source-actual-20261017.json",
+      "bytes": 6984,
+      "sha256": "f44cbccabc3dde2357051b71559789f6d6697a0592746416657eae64c05b1e35"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/frozen-dng-decoders-actual-20261017.json",
+      "bytes": 16665,
+      "sha256": "392edbe4ecb8dff563c116a0943d1befe8c8a160efd559ff4fd282f4a70d09aa"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-stock-selftest-20261017-001/RESULT.json",
+      "bytes": 48726,
+      "sha256": "f8ca84c821b9b7e7580e7eb49e9746d237f0083213e66a9ee4e9776e94118308"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-ox-selftest-20261017-001/RESULT.json",
+      "bytes": 48732,
+      "sha256": "4db543c280106745d11abad5ca94772119032d631cf8b51df122750409bc9e64"
+    }
+  ],
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "bytes": 18749552,
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "limits": {
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "endpoint_workers_max": [
+      3,
+      3
+    ],
+    "orchestration_credits": 2,
+    "observation_seconds": 300,
+    "per_cli_seconds": 30,
+    "declared_conservative_logical_IO_budget_bytes": 8589934592,
+    "IO_budget_not_instrumented_or_hard_physical_limit": true,
+    "max_cli_calls": 54,
+    "maximum_retained_property_readers": 0,
+    "compiler_jobs": 0,
+    "physical_mode": "Existing EXglobal barrier only; acquire IO then CPU; no physical device-lane isolation claim",
+    "unknown": "Retain actual owner/IOCPU beyond observation on unresolved worker/client/server/pump/group/FD settlement; no broad aggregate kill or numeric FD retry",
+    "metadata_calls": "2binary-version+4compiler-version/config and bounded hostmetadata; source/artifact SHA checks before calls",
+    "fresh_start_deadline_requested_seconds": 600,
+    "retries": 0,
+    "sdk_adobe_camera_original_Main_cache": false
+  },
+  "readiness": {
+    "workspace_absent": true,
+    "admission_absent": true,
+    "checked_builds_and_manual_exact_command": true,
+    "mock_only_checked_io_request": true,
+    "canonical_locks_acquired": false,
+    "actual_receiving_run_started": false
+  }
+}

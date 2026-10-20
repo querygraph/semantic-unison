@@ -1,0 +1,51 @@
+{
+  "schema": "unison-sdk-merge-durable-evidence-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromNames(['sdk_merge_receiving.store_test', 'sdk_merge_receiving.journal_test']));sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_combined_write_close_failure_retains_cause_directory_and_uncertain_file (sdk_merge_receiving.store_test.Metadata.test_combined_write_close_failure_retains_cause_directory_and_uncertain_file) ... ok\ntest_directory_close_uncertainty_is_consumed_once_without_numeric_retry (sdk_merge_receiving.store_test.Metadata.test_directory_close_uncertainty_is_consumed_once_without_numeric_retry) ... ok\ntest_durable_record_is_one_use_and_independently_read_by_hash (sdk_merge_receiving.store_test.Metadata.test_durable_record_is_one_use_and_independently_read_by_hash) ... ok\ntest_links_modes_and_nonregular_inputs_are_not_metadata (sdk_merge_receiving.store_test.Metadata.test_links_modes_and_nonregular_inputs_are_not_metadata) ... ok\ntest_nonfinite_or_oversized_data_never_creates_a_record (sdk_merge_receiving.store_test.Metadata.test_nonfinite_or_oversized_data_never_creates_a_record) ... ok\ntest_path_escape_and_replaced_directory_refuse_before_creation (sdk_merge_receiving.store_test.Metadata.test_path_escape_and_replaced_directory_refuse_before_creation) ... ok\ntest_all_nine_calls_reaudit_saved_pair_bytes_before_worker_finishes (sdk_merge_receiving.journal_test.Durable.test_all_nine_calls_reaudit_saved_pair_bytes_before_worker_finishes) ... ok\ntest_substituted_worker_outcome_is_not_accepted_by_saved_audit (sdk_merge_receiving.journal_test.Durable.test_substituted_worker_outcome_is_not_accepted_by_saved_audit) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.051s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 29875,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/bound_call.py": "f5d67582e0fbbc1c6017fcf0f73e7e9b28f1a4499030673f85e7b902386142fe",
+    "tests/sdk_merge_receiving/bound_call_test.py": "cdbee505648b30e5785ec9936526dffe1f6c22629a51d671fdb1f82f19bd6b15",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "tests/sdk_merge_receiving/evidence_test.py": "38caac866f542fdd3f15ccb4e94bdffcd206de8540615345ff33b78a358efcc7",
+    "tests/sdk_merge_receiving/helpers.py": "699cc339f52303892a0cfad3f77c8762f39f1adadde39fda00af3bb991197bf7",
+    "tests/sdk_merge_receiving/helpers_test.py": "4f1cc9322a67b684dd750a2ee726be29a496360fe93854d84c40435bd505acfe",
+    "tests/sdk_merge_receiving/inputs.py": "c5af07c6ab9ebf5cb7fd8b6bf3088fca607984231e660ead8308983b4d6bde29",
+    "tests/sdk_merge_receiving/inputs_test.py": "9d48e0be058b095f489f9485daa37be39bb7647bbf0dc505561bfdf13eb9a53e",
+    "tests/sdk_merge_receiving/journal.py": "7b3baa59ab5b1de891f4ce33db74427f6443cee2c779a19be3bac3192dd913d6",
+    "tests/sdk_merge_receiving/journal_test.py": "3138a27ed5e9f3db4c2a1ca53a1fdf07b7cc25f1bdc9c0ca161cfefb2731828a",
+    "tests/sdk_merge_receiving/ledger.py": "d0ca4fc1112f8286a4d0dcc5660a32126f1544832e94b49d0727f8752eeafa7a",
+    "tests/sdk_merge_receiving/ledger_test.py": "626f2b71b3984f95a21f4dbbf724ca7a83b67f7d810069e2ff99c50b733b6757",
+    "tests/sdk_merge_receiving/plan.py": "645353de1dbc2461df501d4690182762265c84c0e1f47a7642fc6bcfb0b489e6",
+    "tests/sdk_merge_receiving/plan_test.py": "de74fc28c8549ebe95000f79b5e97ebd647b3c0986a9c601b0822f4a6f053038",
+    "tests/sdk_merge_receiving/proxy.py": "7402ba6e8fcb0d0a6f626a66493aac8fbd91fe0e203e26bd802a53bca5dcb6aa",
+    "tests/sdk_merge_receiving/proxy_test.py": "f0b010d7ba2177d10d8c52a27a9cf63d4bfdeb716b4dd34dcc15a26399e3e1c2",
+    "tests/sdk_merge_receiving/store.py": "2d384694fcd6ea7407752e8d7c59c9929b4c85639824b5afc0d0b886e7935dcf",
+    "tests/sdk_merge_receiving/store_test.py": "2221f20249ac25fda763b1f47862191a7bf649de8ff06f0d0b7b57b233d385f5",
+    "tests/sdk_merge_receiving/transport.py": "9e672a89d9fa6ac42748d3c7f462e5bdf5d6973de5a6c802b69b6fc942eac4b9",
+    "tests/sdk_merge_receiving/transport_test.py": "962b9d8030db8cd7f94f5603441c7e4aa438e5dde8412a7e667077fd07dd8d86",
+    "tests/sdk_merge_receiving/worker.py": "b98c50069ced2d04a3e3cb00143b0659d70be7462b33346e298781b00a54b653",
+    "tests/sdk_merge_receiving/worker_test.py": "61c4e3adfcefcf51e467c1f1924ce53b1c43308f05e94aad1743bfdf5046ee1d"
+  },
+  "scope": "Original private disposable JSON metadata, injected before-syscall close failures, and nine fabricated transport/SDK calls. No actual native/SDK/media/Unison/compiler/canonicalIO."
+}

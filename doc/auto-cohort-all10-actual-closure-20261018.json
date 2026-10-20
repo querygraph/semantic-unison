@@ -1,0 +1,249 @@
+{
+  "schema": "unison-ten-cohort-actual-closure/1",
+  "state": "ALL_TEN_PASS_CLOSED",
+  "rows": 180,
+  "cli_calls": 540,
+  "cohorts": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-stock1-actual-20261018.json",
+        "sha256": "ebc9c0106842b136ac12156d0ad9ff8e44b15b7b59ed024b8cea977a27fc7668"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 22685,
+        "initial_chunk": "f83404",
+        "terminal_chunk": "a005f2",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 66497,
+        "worker_pid": 66520,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792386602.812802
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6",
+      "owner_return_sha256": "ebc9c0106842b136ac12156d0ad9ff8e44b15b7b59ed024b8cea977a27fc7668"
+    },
+    {
+      "label": "ox",
+      "selection": 1,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-ox1-actual-20261018.json",
+        "sha256": "15ee828d57c2f08763bad00329608a2521db491aad0f5130a406910998a6cebb"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 29564,
+        "initial_chunk": "ed00c9",
+        "terminal_chunk": "058ffe",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 69144,
+        "worker_pid": 69160,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387003.0603719
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595",
+      "owner_return_sha256": "15ee828d57c2f08763bad00329608a2521db491aad0f5130a406910998a6cebb"
+    },
+    {
+      "label": "stock",
+      "selection": 2,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-stock2-actual-20261018.json",
+        "sha256": "170e70df01254de9cfc0faf1adf37be1639dc398570139e984ebceb7311bd34f"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 26570,
+        "initial_chunk": "5a6b6b",
+        "terminal_chunk": "c6f903",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 71776,
+        "worker_pid": 71792,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387390.3465831
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-b0a530ff550c4631953011ba6cec06aa",
+      "owner_return_sha256": "170e70df01254de9cfc0faf1adf37be1639dc398570139e984ebceb7311bd34f"
+    },
+    {
+      "label": "ox",
+      "selection": 2,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-ox2-actual-20261018.json",
+        "sha256": "9f6c592448e30f7b38e28ebe457067d143c3b8ec1b485f389be22db518ffc488"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 43971,
+        "initial_chunk": "661920",
+        "terminal_chunk": "70c1b8",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 73527,
+        "worker_pid": 73544,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792387750.498842
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-79fc7acaad9e4035a261ca8423fc2b68",
+      "owner_return_sha256": "9f6c592448e30f7b38e28ebe457067d143c3b8ec1b485f389be22db518ffc488"
+    },
+    {
+      "label": "stock",
+      "selection": 4,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-stock4-actual-20261018.json",
+        "sha256": "13b8a5f00312ca2b4629514418c9de2626c3fd06627252f639c3482e0d213a5d"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 37134,
+        "initial_chunk": "3045ce",
+        "terminal_chunk": "0e82ac",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 76082,
+        "worker_pid": 76100,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792388279.147417
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-85e328936afa4f16b400115248b99c88",
+      "owner_return_sha256": "13b8a5f00312ca2b4629514418c9de2626c3fd06627252f639c3482e0d213a5d"
+    },
+    {
+      "label": "ox",
+      "selection": 4,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-ox4-actual-20261018.json",
+        "sha256": "754cff65973d420cd6e344c05d60b7d934488ee48baef17d5e70e0e3fd6effd5"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 54329,
+        "initial_chunk": "923568",
+        "terminal_chunk": "e08bd5",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 78745,
+        "worker_pid": 78761,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792388732.059434
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-e4ba98011a8d4909a52b1246579e51de",
+      "owner_return_sha256": "754cff65973d420cd6e344c05d60b7d934488ee48baef17d5e70e0e3fd6effd5"
+    },
+    {
+      "label": "stock",
+      "selection": 8,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-stock8-actual-20261018.json",
+        "sha256": "4fbb0f1498e7fe2833947e4a93a3fd44f3e0af7e4e4b592096c1d1c8c5b53970"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 16900,
+        "initial_chunk": "5d127d",
+        "terminal_chunk": "dc6d60",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 80746,
+        "worker_pid": 80762,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792389062.640343
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-16fdad99a19b4ae0a280559ace5563ec",
+      "owner_return_sha256": "4fbb0f1498e7fe2833947e4a93a3fd44f3e0af7e4e4b592096c1d1c8c5b53970"
+    },
+    {
+      "label": "ox",
+      "selection": 8,
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-ox8-actual-20261018.json",
+        "sha256": "670cbdaf314b82b5789a604cb48a67cd728225bf41a6fc27bf03ccbdd86f3490"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 22458,
+        "initial_chunk": "b0ce77",
+        "terminal_chunk": "d16f39",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 82759,
+        "worker_pid": 82782,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792389385.183271
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-02f27a5d1e7f43d59f7f1fddbc5378ec",
+      "owner_return_sha256": "670cbdaf314b82b5789a604cb48a67cd728225bf41a6fc27bf03ccbdd86f3490"
+    },
+    {
+      "label": "stock",
+      "selection": "auto",
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-stockauto-actual-20261018.json",
+        "sha256": "f7f9006e4cf638b40e06cca4a0bc7d94207d06952da8a120caed9baf009a18e2"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 49709,
+        "initial_chunk": "f0118e",
+        "terminal_chunk": "336e2d",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 84404,
+        "worker_pid": 84420,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792389691.051884
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-9e8c29a61f17489bb375fa6b4f3e4a13",
+      "owner_return_sha256": "f7f9006e4cf638b40e06cca4a0bc7d94207d06952da8a120caed9baf009a18e2"
+    },
+    {
+      "label": "ox",
+      "selection": "auto",
+      "evidence": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/tests/qualification/auto-cohort-oxauto-actual-20261018.json",
+        "sha256": "30b22a74a16e03dccf20ae588c74818c878621f0977934161334a42ae3cf204c"
+      },
+      "owner": {
+        "schema": "unison-actual-owning-tool-terminal/1",
+        "state": "ACTUAL_TERMINAL",
+        "session_id": 48415,
+        "initial_chunk": "0a7bbd",
+        "terminal_chunk": "ca24cc",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 86053,
+        "worker_pid": 86072,
+        "source": "Direct owning write_stdin result personally observed in this session, not ps/marker inference",
+        "unix": 1792389997.841263
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1",
+      "owner_return_sha256": "30b22a74a16e03dccf20ae588c74818c878621f0977934161334a42ae3cf204c"
+    }
+  ],
+  "temporary18_ended": true,
+  "standing_policy_restored": "Unison00..07/Photo08..15/system16..17idle",
+  "policy_file_rewritten": false,
+  "final_postclose_bundle": {
+    "path": "/private/tmp/unison-auto-cohort-84ccdb3c55b44e449562dd51821e5fe1/POST-CLOSE-WHOLE-BUNDLE.json",
+    "sha256": "e61fc1934a6270bf3f9a75c5a3a4f247a63f5ecef003ffcb733faf7627c01e1b",
+    "actual_tool_chunk": "26284d",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "scope": "Actual owning-tool terminals plus authenticated saved nested audits/group/FD closure. Generated32MiBx8files warm samehost loopback only; no SDK/camera/pixels/fullSOL/performance/physicalIO claim."
+}

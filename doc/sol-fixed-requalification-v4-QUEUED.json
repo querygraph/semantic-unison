@@ -1,0 +1,15 @@
+{
+  "state": "QUEUED_SOURCE_REQUEST_NO_RUNTIME_GRANT",
+  "queue_id": "01a15045-55f3-7762-9e16-57271a54d029",
+  "receiver_thread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "actual_queue_tool": {
+    "chunk_id": "9f063d",
+    "exit_code": 0
+  },
+  "index": {
+    "path": "/Users/alexy/src/unison-outbound-accounting-20261018/doc/sol-fixed-requalification-requests-v4.json",
+    "bytes": 2983,
+    "sha256": "bf54dd3e064d0a27bbc0a31df50d2c5b18223cec9f17e43a76571c79f230171c"
+  },
+  "scope": "Requested fresh review and separate serial upstream first. No admission, lock, payload, SDK/Photo operation or dispatch. V3 remains source deferred; no replay/extension/automatic successor."
+}

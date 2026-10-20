@@ -1,0 +1,360 @@
+{
+  "state": "KNOWN_ENTRY_RECOVERY_CURRENT_CONTROLS_BUILDS_PASS_CLOSED",
+  "scope": "Known trusted-entry no-follow borrowed lookup/classification; complete/record-only/entry-only/missing and foreign/FD/symlink refusal, no directory scan/cleanup/automatic activation or producer/resource-closure proof",
+  "focused_actual_terminal": {
+    "session": 48730,
+    "chunk": "287b5e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "full_actual_terminal": {
+    "session": 53905,
+    "chunk": "09f4fb",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "runs": [
+    {
+      "case": "dng",
+      "closure": {
+        "child": {
+          "pid": 67181,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 67181,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "core",
+      "closure": {
+        "child": {
+          "pid": 67546,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 67546,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-make",
+      "closure": {
+        "child": {
+          "pid": 67894,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 67894,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "current_src_checked": 318
+    },
+    {
+      "case": "ox-make",
+      "closure": {
+        "child": {
+          "pid": 68948,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 68948,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "current_src_checked": 318
+    },
+    {
+      "case": "stock-dune",
+      "closure": {
+        "child": {
+          "pid": 70055,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 70055,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "current_src_checked": 318
+    },
+    {
+      "case": "ox-dune",
+      "closure": {
+        "child": {
+          "pid": 71043,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 71043,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "current_src_checked": 318
+    },
+    {
+      "case": "workers",
+      "closure": {
+        "child": {
+          "pid": 72062,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 72062,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-y7i5zeuj/RESULT.json",
+      "bytes": 423432,
+      "sha256": "78fad9c17d7889a4944789f110d61d3decbae5aed4b58c59695b993553a7e72f"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-dng-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "d84b04f96adc5acb4ce95e010bbac9358fb58558df915faa2afb9b4abf21cb42"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-dng-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "c7c4d91e5fe75f5419b31655b27a3d01f9b1d250c6502d7cfe00763f9bbaff92"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-dng-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-dng-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "3bb9c56b53016880db054f04b42bf07eb4d7748cbf8dfaf2f3051cda1e8a7d5e"
+    },
+    {
+      "path": "/private/tmp/unison-component-controls-_50lkeso/RESULT.json",
+      "bytes": 142811,
+      "sha256": "c63e2740953c0c3c18defa4cf0bcc2ec74a1b97ade49cff8f143e65af9cd5967"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-core-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "c4a197e65202576b6ed0e1243fc4e6e19eefb6d5ceb294bc9135ca711f52935a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-core-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b7127d3a90a1be8f6bbe362286315561703bd27626072b2e4121f45a024ba17d"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-core-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-core-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "5a3c280f5bd2b0f68920a3bf7a510ca1cc1263a15db70975afcb841ba3e85e2c"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/RESULT.json",
+      "bytes": 49609,
+      "sha256": "d3b801c0b26c2d0cb55668184adb7d3a97a94d21ae8e38bc541b7c3dcf311e6a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1359,
+      "sha256": "b4e9e863b48957faee20d0ed982023386b96c78b5f8cd786f284db88ee273991"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "adac127e46de66a36d47c4757df2c875ff54994b641043dfa0afbd162689dddf"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "704cd98df28babbbfe6732fb20ca0be8d8948376670602fa6c593e0fad31b5f5"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/RESULT.json",
+      "bytes": 49615,
+      "sha256": "81588474f6910102670e1a7841d026aef6f3916d5803d7a9a6a97f8dee441d18"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1354,
+      "sha256": "adfec199f278ec2ac86cbc534d5d7d3ed7dc2f82dd1270a41e55aadef92a18d8"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "368fe86e7ec5266a4f4f10ab8b8d23e774e06d83e97803bec78a38c5ce278c63"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "fa196d7cfffc29d6f684e53daf1a9e0911ca837df9ed8d733b8efd1b585e14ba"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/RESULT.json",
+      "bytes": 49053,
+      "sha256": "2851896957c91dbd36a1a0ad2556918afadfcfee2a809698c255a34703968999"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/SHARED-START.json",
+      "bytes": 1312,
+      "sha256": "2f091d0e2c75bfbe3a8bfee8c8b1faa05b4ea726195931a59c2309b7ebb6783d"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "688db96f492d690fe5c3554d184272283faeaeea61ae7cae1f619803694a9bc9"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "b8722ba488bfa4cc1f2037bbd24d04c8f2a3ff86a3b564dc1674ce121a8036fd"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/RESULT.json",
+      "bytes": 49057,
+      "sha256": "1c465461a3b5fcdd36b6bf7edc981ce78cc60d68d89faa1f3e950d31eac0841a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/SHARED-START.json",
+      "bytes": 1306,
+      "sha256": "f1d1834322bce88bb0ff9b10cb6afce8ea5d990e4265972b156a218c2ed65f35"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "0ef17999585987e89878c954157d67aaec3ffaf539c21769a9927cf850be4c9d"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "ff124edf8dfe807c61fe77eb4114dde7ddf61db9d481b2a2ca2c4c98833ba15c"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-rhqzpk_z/RESULT.json",
+      "bytes": 125273,
+      "sha256": "0a3d4ba2d76058bcd5b06683b8ca20a7adb8247acb9af0011a95e0a0b6f15e19"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-workers-20261017-001/SHARED-START.json",
+      "bytes": 1307,
+      "sha256": "9450e789db7d9eddbea369b5b006c951fb1a0dfea1183967836f434b6c12366a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-workers-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "ebe68a28b2ff64591a6c6a7c149aa5ad3552deb041c64f7e2f41c5f0d5ea3eba"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-workers-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-workers-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "d2691e4216e239d609167099fa6c03bd563873fbe2182800c32dbf5d65e1fae6"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "scope": "Current standalone stock/Ox inspector build and sixteen original tiny TIFF calls; eight pure manual argv controls",
+  "actual_build_integration_terminal": {
+    "session": 49827,
+    "chunk": "a6d1a4",
+    "exit": 0,
+    "no_session": true
+  },
+  "command_controls": {
+    "tests": 8,
+    "child_reaped": true,
+    "tokens_closed": true,
+    "owning_tool_terminal": "Unavailable in compacted/truncated tool output; not inferred from child receipt"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-current-components-stock-inspector-20261017-001/RESULT.json",
+      "bytes": 4044,
+      "sha256": "2403e7dd5a2338ed8658da44ad09af4d03e6f2b8d0ca90c5e17bab66df21d37c"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-stock-inspector-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e3c06d31288c509b9684aafbbc1dcec3bf0dac008931f8a58f590a863529ffab"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-stock-inspector-20261017-001/SHARED-START.json",
+      "bytes": 1290,
+      "sha256": "e3865f8c0db6cdebe07e33dc09effd1ceded3bbec714e766f68ec4dd4dcb90ff"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-stock-inspector-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-stock-inspector-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 206,
+      "sha256": "7f55123c23568ef2e6ec5940a3c87588032b7e3e9d15c5dc02fcc2d206abdfe2"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-ox-inspector-20261017-001/RESULT.json",
+      "bytes": 4046,
+      "sha256": "f3567cd8c1b5838b0479838dd5527df0ad494a076f763fa8d14382bd472ec194"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-ox-inspector-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e7837593086df985e6d1d3f9169362a327dade6f9302ac7383c4733517b5af67"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-ox-inspector-20261017-001/SHARED-START.json",
+      "bytes": 1283,
+      "sha256": "69c12f0df14a2701868cb8b8143223ef99c6485401c1140f4e9967fe30ffa993"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-ox-inspector-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-ox-inspector-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 203,
+      "sha256": "d68aa5513a73f734f886f015d028ee015cb8164d890da1437fadee8aa1459266"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-inspector-integration-20261017-001/RESULT.json",
+      "bytes": 8231,
+      "sha256": "5165a0659a71589bcae74ed775bf49816820cea04acd7be72b04ec18f64a88ac"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-inspector-integration-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e4a5745208d5ab02850d09d8a46ae5c76a3c9837ce3aa046eb5ca5d698bea1f7"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-inspector-integration-20261017-001/SHARED-START.json",
+      "bytes": 1451,
+      "sha256": "efece1c203822645ea68dbc2ad7d76aa94825ff8a208b8b8b104b4dedb0a1791"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-inspector-integration-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-components-inspector-integration-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 62,
+      "sha256": "ca596e474001e6d959ac4ff04679b5940e547885bb5a014291b67d4ee6450a92"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-component-command-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "1ce029a476f46016c89f11a3ffeb3196360ff9b20bd447d6772f1982a4a66f56"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-component-command-controls-20261017-001/SHARED-START.json",
+      "bytes": 1123,
+      "sha256": "31aa53ba3b5ad6b7f0b539ba7db2203040466881b531f52664749884f753b998"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-component-command-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 106,
+      "sha256": "60bb849356ffbc091f601e17fc6ae0b2eb5e26d734d433da020c6e775efbf97f"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-component-command-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_sha256": {
+    "tests/manual.py": "225b3a7e7bf643ebe32afeba97da277c556c13d93ac6aa5cad9622caaee7621d",
+    "tests/inspector_component_command_test.py": "595eac80e6c3768ebe76b329d8cb922d4319d8c4fd1fb671dfa5c7656101a4b1",
+    "tools/semantic-inspect/run.py": "7c4da8035bdeccc5505aa0df4ba73fb1c285d228be43a0cf63ad4e4e7b02df3f",
+    "tools/semantic-inspect/integration_test.py": "e477d198e4939bcf30814c1e94d089b54236c28adbcd65675879549ab81393e5"
+  },
+  "camera_payload_opened": false,
+  "receiving_or_semantic_eligibility_claim": false
+}

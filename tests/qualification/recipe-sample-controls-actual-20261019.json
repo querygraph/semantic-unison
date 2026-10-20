@@ -1,0 +1,30 @@
+{
+  "state": "SUCCESSOR20_CONTROLS_PASS_CLOSED",
+  "actual_tool": {
+    "chunk": "8fe415",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "tests": 20,
+  "cpu00_ex_closed": true,
+  "no_actual_children_or_unison": true,
+  "earlier_failure": {
+    "session": 85692,
+    "terminal": "70972a",
+    "exit_code": 137,
+    "no_session": true,
+    "proof_sha256": "06c7188a1230513404f87f6993d0bb816266082ce12b764d40d21bca398db7b1",
+    "proof_path": "/private/tmp/unison-recipe-control-first-failure-proof.json",
+    "scope": "mock binding failure, generatedfiles only, exactidleownerrecoverystop; no numeric operation on fake fds100..108/999"
+  },
+  "source_sha256": {
+    "bench/sync/recipe_sample.py": "d8b8f5c594119442f1d5d159a3cc5b8f1aba9119e35be93d52a7da346379d0ba",
+    "bench/sync/recipe_sample_test.py": "abbcde19e54644d7c290ed647916127cbded2b5caf31a7eaceeca1910d9ae93e",
+    "bench/sync/batch_inventory.py": "57b96b9febd167c1a9459e947b6c5098e57d8490fe8e3a9f3091338084dd3e24",
+    "bench/sync/batch_verify.py": "3b4c45e817a3a7944ce0de2c8547585e554c811f9eeb7229f09aa7fe57835a5a",
+    "bench/sync/batch_parent.py": "4be1d6aae5cae01a96c9a5ae09e52a2aafa1b5865b78b5d4ca3dcdcc63d600c8",
+    "bench/sync/batch_runtime.py": "12dbb8aa13a6c6c6f044bd3181bc3382077c20f5db2655a9fd6fbe8271bf51b5",
+    "bench/sync/batch_runtime_test.py": "605a066671d9b129e432e132ce24697ee5c186506c4f271f85200852eab84beb",
+    "tests/final_batch_owner.py": "e16788ec06f0c2f1f87e375e1f63bba0f53c6244ff244b04c5b385c78aefbfae"
+  }
+}

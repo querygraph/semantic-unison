@@ -1,5 +1,7 @@
-/* Separate posix_spawn'ed process: never modify the multithreaded parent's
- * limits and never fork an OCaml runtime. Exec retains PID/process group. */
+/* Separate fresh process: never modify a multithreaded parent's limits or
+ * fork an OCaml runtime. Helper mode is posix_spawn'ed; endpoint mode is an
+ * explicitly selected launcher for the whole Unison endpoint. Exec retains
+ * PID/process group. No process-tree or hard RSS implementation is implied. */
 #include <sys/resource.h>
 #include <unistd.h>
 #include <errno.h>
@@ -51,7 +53,11 @@ static int close_inherited(void) {
   if(!fds)return -1;
   int count=proc_pidinfo(getpid(),PROC_PIDLISTFDS,0,fds,capacity);
   if(count<=0 || count>=capacity || count%(int)sizeof(*fds)) {free(fds);errno=EOVERFLOW;return -1;}
-  for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3)close(fds[i].proc_fd);
+  for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3) {
+    /* Never retry a numeric descriptor after an uncertain close. This fresh
+     * launcher exits on failure, so no target can inherit uncertain ownership. */
+    if(close(fds[i].proc_fd)) {int saved=errno;free(fds);errno=saved;return -1;}
+  }
   count=proc_pidinfo(getpid(),PROC_PIDLISTFDS,0,fds,capacity);
   if(count<0 || count>=capacity || count%(int)sizeof(*fds)) {free(fds);errno=EOVERFLOW;return -1;}
   for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3) {free(fds);errno=EBUSY;return -1;}
@@ -65,19 +71,28 @@ static int close_inherited(void) {
 #if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__NetBSD__)
   struct rlimit before;
   if(getrlimit(RLIMIT_NOFILE,&before))return -1;
-  if(before.rlim_max==RLIM_INFINITY || before.rlim_max>INT_MAX) {errno=ENOTSUP;return -1;}
-  for(int fd=3;fd<(int)before.rlim_max;fd++)close(fd);
+  /* Without a kernel close-range API, refuse an unbounded/very large scan.
+   * A configured optional launcher must fail closed, never skip high FDs. */
+  if(before.rlim_max==RLIM_INFINITY || before.rlim_max>65536) {errno=ENOTSUP;return -1;}
+  for(int fd=3;fd<(int)before.rlim_max;fd++)
+    if(close(fd) && errno!=EBADF)return -1;
   return 0;
 #endif
 }
 int main(int argc,char **argv) {
   rlim_t descriptors,address;
-  if(argc<7 || strcmp(argv[1],"--unison-helper-limits-v1") ||
+  int endpoint=argc>=2 && !strcmp(argv[1],"--unison-endpoint-limits-v1");
+  if(argc<7 || (!endpoint && strcmp(argv[1],"--unison-helper-limits-v1")) ||
      !decimal(argv[2],&descriptors) || !decimal(argv[3],&address) ||
      (descriptors && descriptors<3) || (!descriptors && !address) ||
      strcmp(argv[4],"--") || argv[5][0]!='/') {
     errno=EINVAL;return error("invalid invocation");
   }
+  /* The endpoint's second budget denotes requested hard RSS, not virtual
+   * address space. There is no qualified cross-platform containment backend
+   * here. Refuse before target entry and never silently substitute estimates
+   * or helper RLIMIT_AS. Zero explicitly leaves RSS unenforced. */
+  if(endpoint && address) {errno=ENOTSUP;return error("hard endpoint RSS containment unavailable");}
   if(close_inherited())return error("close inherited descriptors");
   if(lower(RLIMIT_NOFILE,descriptors))return error("descriptor limit");
 #ifdef RLIMIT_AS

@@ -1,0 +1,38 @@
+{
+  "schema": "semantic-unison-repository-rename/1",
+  "requested_by": "User: maintain a public QueryGraph semantic-unison fork",
+  "before": "querygraph/unison",
+  "after": "querygraph/semantic-unison",
+  "repository_id_before": 1417214876,
+  "repository_id_after": 1417214876,
+  "visibility": "PUBLIC",
+  "is_fork": true,
+  "parent": "bcpierce00/unison",
+  "rename_tool": {
+    "session": 55135,
+    "initial_chunk": "6227d2",
+    "terminal_chunk": "79a30d",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "verification_tool": {
+    "chunk": "dfb9cf",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "review": {
+    "number": 13,
+    "url": "https://github.com/querygraph/semantic-unison/pull/13",
+    "state": "OPEN",
+    "draft": true,
+    "base": "master",
+    "head": "integration/sol-consolidated-review"
+  },
+  "local_config": {
+    "fork": "git@github.com:querygraph/semantic-unison.git",
+    "origin": "https://github.com/bcpierce00/unison.git",
+    "default_push_remote": "fork"
+  },
+  "upstream_repository_modified": false,
+  "code_pushed": false
+}

@@ -51,7 +51,7 @@ assertions per compiler; native publication and producer matrices with 177 cases
 per compiler in both ordinary and timed modes; and 21 native clone-lease cases
 per compiler. Those numbers describe particular tests. They do not certify every
 camera, operating system, storage device, or possible failure. The
-[acceptance map](https://github.com/querygraph/semantic-unison/blob/d031eb056193052fe60948500901afc457043385/doc/sol-final-acceptance-map-20261019.md) links the scoped evidence.
+[acceptance map](doc/sol-final-acceptance-map-20261019.md) links the scoped evidence.
 
 I have made mistakes, too. Harness assumptions have failed. Pins have gone stale.
 Observations have needed narrower interpretations. Corrections belong beside the
@@ -114,7 +114,7 @@ thread cap, a sample into a peak-memory measurement, or one successful camera
 case into universal compatibility. I cannot claim that this goal is finished:
 final generated Adobe fixtures and receiving qualification, portions of the
 prescribed measurement matrix, and final acceptance work remain open at this
-writing. The current [handoff](https://github.com/querygraph/semantic-unison/blob/d031eb056193052fe60948500901afc457043385/OPUS-HANDOFF.md) records the changing state.
+writing. The current [handoff](OPUS-HANDOFF.md) records the changing state.
 
 I can make the work easier to challenge. That means readable changes, explicit
 assumptions, reproducible commands, conservative fallbacks, useful negative tests,

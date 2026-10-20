@@ -1,0 +1,210 @@
+{
+  "schema": "unison-three-baseline-artifact-binding/1",
+  "original_stock": {
+    "workspace": "/private/tmp/u-original-stock-a7bd5af941",
+    "result_sha256": "dd1c7b54ce984190e940b6edde88aaffc4b06cbe7b2bc008d2437e5a7aa3a2d9",
+    "binary": "/private/tmp/u-original-stock-a7bd5af941/source/src/unison",
+    "binary_sha256": "1713490bee5f70c0df28069e81654b829080c21dc7ad1aad13d54b354ecf00de",
+    "compiler": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+    "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+    "calls": [
+      {
+        "path": "/private/tmp/u-original-stock-a7bd5af941/call-00.json",
+        "sha256": "db502755fd0d7b0a785bcc432ab99bb7e6237aabbc66e2d64db39c31f3b11830",
+        "pid": 88292,
+        "command": [
+          "/usr/bin/git",
+          "archive",
+          "--format=tar",
+          "--output=/private/tmp/u-original-stock-a7bd5af941/SOURCE.tar",
+          "375ea3ad2cace8584c508ef463332066d85e1d4e"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-original-stock-a7bd5af941/call-01.json",
+        "sha256": "78ad34792531b9775bbaaea3ad26148e41797acd5b912f498502eb57068d26d1",
+        "pid": 88294,
+        "command": [
+          "/usr/bin/tar",
+          "-xf",
+          "/private/tmp/u-original-stock-a7bd5af941/SOURCE.tar",
+          "-C",
+          "/private/tmp/u-original-stock-a7bd5af941/source"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-original-stock-a7bd5af941/call-02.json",
+        "sha256": "6f8d8cfe34304a9f59a707b029c63d0972b7d17686c5d261ebad06fd591c49f8",
+        "pid": 88296,
+        "command": [
+          "/usr/bin/make",
+          "-s",
+          "-C",
+          "src",
+          "depend",
+          "-j1",
+          "NATIVE=true",
+          "TOOL_PREFIX=/Users/alexy/.opam/default/bin/"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-original-stock-a7bd5af941/call-03.json",
+        "sha256": "61d710842b82ecc97ec9ebacf673bb54b802d0bc51f5748fa26f9806edd1b6b4",
+        "pid": 88308,
+        "command": [
+          "/usr/bin/make",
+          "-s",
+          "-C",
+          "src",
+          "tui",
+          "-j1",
+          "NATIVE=true",
+          "TOOL_PREFIX=/Users/alexy/.opam/default/bin/"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-original-stock-a7bd5af941/call-04.json",
+        "sha256": "3662b13a6b69629120d13c38a5d88944caa7454e5e2abc7c0fe92f9290d65354",
+        "pid": 89000,
+        "command": [
+          "/private/tmp/u-original-stock-a7bd5af941/source/src/unison",
+          "-ui",
+          "text",
+          "-selftest"
+        ]
+      }
+    ],
+    "archive_sha256": "dfac55277cf1749d820f4cc8961069e2dc0576952b4af65fe8be9db0b02f891d",
+    "archive_source_files": 182,
+    "owning_tool": {
+      "session_id": 12764,
+      "terminal_chunk": "8177fa",
+      "exit_code": 0,
+      "running_session": false
+    }
+  },
+  "upstream_stock": {
+    "receipt": "/private/tmp/unison-genuine-upstream-stock-build-20261017-001/RESULT.json",
+    "receipt_sha256": "68b8321b344409f4e6011588a616de6a3a96119c08fd9dba50a33bd6d32c4c2e",
+    "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ldvnn5yz/src/unison",
+    "binary_sha256": "5886a3b15e15b23bc16173e88d7b37d171855777e9fd56ee8d95568b3c8aae8c",
+    "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+    "scope": "retained historical build/selftest; new direct-child ledger NOT claimed",
+    "archive_sha256": "81ac0626b3dbe7323ceca907d9f6fd35b57c9fc8335a3970a6765f4259a9d570",
+    "archive_source_files": 187
+  },
+  "minimal_upstream_ox": {
+    "workspace": "/private/tmp/u-upstream-ox-67ff102c3b",
+    "result_sha256": "08e721015497c44bbfa7334946318915937558dc6ef5e12be4293014f7c08482",
+    "binary": "/private/tmp/u-upstream-ox-67ff102c3b/source/src/unison",
+    "binary_sha256": "481c640cba954d9267d00e202a3323d5a2dca411b43d0c82e32fe9d231bb76c5",
+    "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+    "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+    "calls": [
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-00.json",
+        "sha256": "560dfdc8f304a196ac136b4e76b5a55e5b60d4b5ba00b9b0203967b59fd2297b",
+        "pid": 87237,
+        "command": [
+          "/usr/bin/git",
+          "archive",
+          "--format=tar",
+          "--output=/private/tmp/u-upstream-ox-67ff102c3b/SOURCE.tar",
+          "8772d26a2eb77cfd0cb6da81807e81f24f51044c"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-01.json",
+        "sha256": "93230f7d48e66fcbd71517045995443bd5353825214d841d53cc53272402d0f1",
+        "pid": 87240,
+        "command": [
+          "/usr/bin/tar",
+          "-xf",
+          "/private/tmp/u-upstream-ox-67ff102c3b/SOURCE.tar",
+          "-C",
+          "/private/tmp/u-upstream-ox-67ff102c3b/source"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-02.json",
+        "sha256": "ae16195cd67176e9d1e815528071b917f53d4ff1f89e7d4f6c4842794f2305d8",
+        "pid": 87248,
+        "command": [
+          "/usr/bin/git",
+          "apply",
+          "--check",
+          "/Users/alexy/src/unison-final-adobe-20261019/doc/upstream-8772-minimal-oxcaml-v2.patch"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-03.json",
+        "sha256": "ce8184c1724b5fe77abdc6ec816eaf77a30f8c835c65d468812ff96b073d9272",
+        "pid": 87250,
+        "command": [
+          "/usr/bin/git",
+          "apply",
+          "/Users/alexy/src/unison-final-adobe-20261019/doc/upstream-8772-minimal-oxcaml-v2.patch"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-04.json",
+        "sha256": "fac8716ace2c53f2653036d322c371aa5bdcb799f5cba11e2993c39d98772f6e",
+        "pid": 87252,
+        "command": [
+          "/usr/bin/make",
+          "-s",
+          "-C",
+          "src",
+          "depend",
+          "-j1",
+          "NATIVE=true",
+          "TOOL_PREFIX=/Users/alexy/.opam/5.2.0+ox/bin/"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-05.json",
+        "sha256": "1a7d481d01fd9335d8a47434453f09989082df881484b6bbc5d02ea6583056bd",
+        "pid": 87285,
+        "command": [
+          "/usr/bin/make",
+          "-s",
+          "-C",
+          "src",
+          "tui",
+          "-j1",
+          "NATIVE=true",
+          "TOOL_PREFIX=/Users/alexy/.opam/5.2.0+ox/bin/"
+        ]
+      },
+      {
+        "path": "/private/tmp/u-upstream-ox-67ff102c3b/call-06.json",
+        "sha256": "c04802fb3ee086c22b14a94b04d2435ffff8aeaffd9a8b5e67d5cbe51b20180a",
+        "pid": 87900,
+        "command": [
+          "/private/tmp/u-upstream-ox-67ff102c3b/source/src/unison",
+          "-ui",
+          "text",
+          "-selftest"
+        ]
+      }
+    ],
+    "archive_sha256": "81ac0626b3dbe7323ceca907d9f6fd35b57c9fc8335a3970a6765f4259a9d570",
+    "archive_source_files": 187,
+    "owning_tool": {
+      "session_id": 97618,
+      "terminal_chunk": "60b3b0",
+      "exit_code": 0,
+      "running_session": false
+    }
+  },
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "performance_claim": false,
+  "audit_CPU00_07_closed": true,
+  "independent_audit_tool": {
+    "terminal_chunk": "089fef",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit_source_sha256": "27c8d2c435676a7a6f3487c221c169f6f872b0bcfcba3e558266cc775cb8ffba"
+}

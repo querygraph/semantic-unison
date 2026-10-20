@@ -55,10 +55,10 @@ let report extension path = function
       "preserved_sha256",quote (SemanticHash.hex d.preserved_digest);
       "editable_regions",array (List.map (fun (r:FormatExtension.region) ->
         object_ ["offset",Int64.to_string r.offset; "length",string_of_int r.length]) d.regions)] @ meanings extension proof)
-let inspect extension path =
+let inspect ~span_semantics extension path =
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
   Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
-    SemanticFile.with_fd fd (SemanticDelta.inspect extension))
+    SemanticFile.with_fd fd (SemanticDelta.inspect ~span_semantics extension))
 let compare base target = match base,target with
   | Error reason,_ -> ["classification",quote "unavailable"; "fallback_reason",quote ("basis: " ^ reason)]
   | _,Error reason -> ["classification",quote "unavailable"; "fallback_reason",quote ("target: " ^ reason)]
@@ -66,6 +66,7 @@ let compare base target = match base,target with
     let classification = match SemanticDelta.classify ~base ~target with
       | FormatExtension.Exact_bytes -> "exact_bytes"
       | FormatExtension.Editable_metadata -> "editable_metadata"
+      | FormatExtension.Uninterpreted_regions -> "uninterpreted_regions"
       | FormatExtension.Other_bytes -> "other_bytes" in
     let fields = ["classification",quote classification] in
     (* This nonce is only for measuring the encoded plan. No envelope is emitted
@@ -77,25 +78,60 @@ let compare base target = match base,target with
         "envelope_bytes",string_of_int (String.length (SemanticDelta.encode plan));
         "request_bytes",string_of_int (String.length (SemanticDelta.encode_request
           ~nonce:(String.make 32 '\000') base))]
+let component_report path =
+  let fd=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+  Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
+    SemanticFile.with_fd fd (fun file ->
+      match DngComponents.describe file with
+      | Error reason -> object_ (path_fields path @ ["status",quote "unsupported";"reason",quote reason])
+      | Ok spec -> ComponentHash.with_snapshot_budgeted ~max_nodes:DngComponents.node_budget ~max_read_bytes:(SemanticFile.size file) file spec
+          (fun session snapshot ->
+            let lanes=List.map (fun (name,role) ->
+              let observation=match ComponentHash.projection snapshot role with
+                | None -> "null"
+                | Some value -> object_ ["sha256",quote (SemanticHash.hex value.sha256);
+                    "components",string_of_int value.components;"bytes",Int64.to_string value.bytes] in
+              name,observation)
+              ["encoded_pixels",ComponentHash.Encoded_pixels;
+               "standard_metadata",ComponentHash.Standard_metadata;
+               "private_metadata",ComponentHash.Private_metadata;
+               "structural",ComponentHash.Structural;"opaque",ComponentHash.Opaque] in
+            object_ (path_fields path @ ["status",quote "observed";
+              "partition_schema",quote (ComponentHash.root snapshot).schema;
+              "size",Int64.to_string (SemanticFile.size file);
+              "sha256",quote (SemanticHash.hex (ComponentHash.full_sha256 snapshot));
+              "layout_view_sha256",quote (SemanticHash.hex (ComponentHash.layout_sha256 snapshot));
+              "hash_bytes_requested",Int64.to_string (ComponentHash.bytes_requested session);
+              "projections",object_ lanes]))))
 let main () =
-  FormatExtension.register ~observer:DngSemantic.observer (module DngSemantic);
-  FormatExtension.register ~observer:DngExtended.observer (module DngExtended);
-  let selected = ref DngSemantic.profile and base = ref None and target = ref None in
-  Arg.parse ["--profile",Arg.Set_string selected,"ID Compiled format profile";
+  FormatExtension.register ~span_semantics:FormatExtension.Known_metadata ~observer:DngSemantic.observer (module DngSemantic);
+  FormatExtension.register ~span_semantics:FormatExtension.Known_metadata ~observer:DngExtended.observer (module DngExtended);
+  FormatExtension.register (module DngLayout);
+  let selected = ref DngSemantic.profile and base = ref None and target = ref None and components = ref false in
+  Arg.parse ["--components",Arg.Set components," Report advisory DNG component hashes";
+             "--profile",Arg.Set_string selected,"ID Compiled format profile";
              "--base",Arg.String (fun p -> base := Some p),"FILE Compare against a basis"]
     (fun p -> match !target with None -> target := Some p
       | Some _ -> raise (Arg.Bad "exactly one target file is required"))
     "semantic-inspect [--profile ID] [--base FILE] TARGET";
   let path = match !target with Some p -> p | None -> failwith "a target file is required" in
+  if !components then begin
+    if !selected<>DngSemantic.profile then failwith "--components does not select a transfer profile";
+    let fields=["schema",quote "unison-dng-components/0";"target",component_report path] in
+    let fields=match !base with None -> fields | Some basis -> fields@["basis",component_report basis] in
+    print_endline (object_ (fields@["verification",quote
+      "Advisory encoded byte-unit projections only; null means unavailable. Equal partial projections do not prove complete image or rendering equivalence. No transformation, persistent-cache or publication authority."]))
+  end else begin
   let handle = match FormatExtension.resolve !selected with Some e -> e
     | None -> failwith ("unknown compiled profile: " ^ !selected) in
   let extension = FormatExtension.implementation handle in
-  let target = inspect extension path in
+  let target = inspect ~span_semantics:(FormatExtension.span_semantics handle) extension path in
   let fields = ["schema",quote "unison-semantic-inspect/1"; "target",report handle path target] in
   let fields = match !base with None -> fields | Some path ->
-    let base = inspect extension path in
+    let base = inspect ~span_semantics:(FormatExtension.span_semantics handle) extension path in
     fields @ ["basis",report handle path base] @ compare base target in
   print_endline (object_ (fields @ ["verification",quote
     "Supported inputs were fully read and SHA-256 hashed. This is a read-only observation, not a commit authorization or Adobe validation."]))
+  end
 let () = try main () with error ->
   prerr_endline (object_ ["error",quote (Printexc.to_string error)]); exit 2

@@ -1,0 +1,33 @@
+{
+  "schema": "unison-final-archive-audit-terminal/1",
+  "actual_terminal": {
+    "chunk_id": "9841ff",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "audit_source": {
+    "path": "/private/tmp/unison-final-archive-independent-audit-20261019.py",
+    "bytes": 7841,
+    "sha256": "aa84fe15c51e7dc7d5c511c2de6e462f498cd83717de57a6eca763ff3ed9e72b"
+  },
+  "actual_result": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-archive-roundtrip-actual-20261019.json",
+    "bytes": 1484,
+    "sha256": "ee86820c6c0fcd427921c225a92ba0b971bbf6af79c1629527664fffe69f6585"
+  },
+  "prior_audit_failure": {
+    "actual_terminal": "89306/915a05/137/NOsession",
+    "source": {
+      "path": "/private/tmp/unison-final-archive-independent-audit-20261019.failed.py.txt",
+      "bytes": 7062,
+      "sha256": "3aa092b7daabde56062af5ebe8b9bb5a791b20dd600845816a80dd22e2283aef"
+    },
+    "recovery": {
+      "path": "/private/tmp/unison-archive-audit-first-reader-recovery-20261019.json",
+      "bytes": 622,
+      "sha256": "686420968f48db606b0a156e05b2fcf0499bf51fd229ccabc3a1b6076c331fbe"
+    },
+    "scope": "First metadata reader omitted required expectedSHA argument; no child created; independently scoped idlePython38810only stopped after source+census; no native replay/normalauditexit claim."
+  },
+  "all8_ex_reacquired_closed": true
+}

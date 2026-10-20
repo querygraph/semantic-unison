@@ -1,0 +1,233 @@
+{
+  "schema": "unison-shared-build-documentation-check/1",
+  "state": "METADATA_DRY_RUN_PASS",
+  "actual_tool": {
+    "chunk": "6e9f3e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "commands": [
+    {
+      "target": "ox-check",
+      "stdout": {
+        "target": "ox-check",
+        "argv": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/Users/alexy/src/unison-stream-classifier-20261018/tests/build_snapshot.py",
+          "--compiler-prefix",
+          "/Users/alexy/.opam/5.2.0+ox/bin",
+          "--jobs",
+          "2",
+          "--build-system",
+          "make",
+          "--selftest",
+          "--selftest-workers",
+          "3",
+          "--report",
+          "/private/tmp/unison-doc-dry-run-ox-check-20261018-001/RESULT.json"
+        ],
+        "executes": false,
+        "shared_resource_plan": {
+          "project": "unison",
+          "cpu_credits": 8,
+          "declared_peak_credits": 8,
+          "selftest_endpoint_workers": [
+            3,
+            3
+          ],
+          "build_and_selftest_are_serial": true,
+          "retained_property_reader_limit": 0,
+          "inspector_workers": 0,
+          "compiler_jobs": 2,
+          "endpoint_workers": [],
+          "orchestration_credits": 2,
+          "cpu_token_indexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "canonical_pool_manifest": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+          "memory_reservation_gib": 32,
+          "runtime_grant": false,
+          "token_acquisition_implemented": true,
+          "memory_enforced": false,
+          "physical_io_lane_resolved": false,
+          "scope": "standing Unison tokens; finite sync server proofs; IO/memory qualification pending"
+        }
+      }
+    },
+    {
+      "target": "stock-check",
+      "stdout": {
+        "target": "stock-check",
+        "argv": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/Users/alexy/src/unison-stream-classifier-20261018/tests/build_snapshot.py",
+          "--compiler-prefix",
+          "/Users/alexy/.opam/default/bin",
+          "--jobs",
+          "2",
+          "--build-system",
+          "make",
+          "--selftest",
+          "--selftest-workers",
+          "3",
+          "--report",
+          "/private/tmp/unison-doc-dry-run-stock-check-20261018-001/RESULT.json"
+        ],
+        "executes": false,
+        "shared_resource_plan": {
+          "project": "unison",
+          "cpu_credits": 8,
+          "declared_peak_credits": 8,
+          "selftest_endpoint_workers": [
+            3,
+            3
+          ],
+          "build_and_selftest_are_serial": true,
+          "retained_property_reader_limit": 0,
+          "inspector_workers": 0,
+          "compiler_jobs": 2,
+          "endpoint_workers": [],
+          "orchestration_credits": 2,
+          "cpu_token_indexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "canonical_pool_manifest": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+          "memory_reservation_gib": 32,
+          "runtime_grant": false,
+          "token_acquisition_implemented": true,
+          "memory_enforced": false,
+          "physical_io_lane_resolved": false,
+          "scope": "standing Unison tokens; finite sync server proofs; IO/memory qualification pending"
+        }
+      }
+    },
+    {
+      "target": "ox-dune-check",
+      "stdout": {
+        "target": "ox-dune-check",
+        "argv": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/Users/alexy/src/unison-stream-classifier-20261018/tests/build_snapshot.py",
+          "--compiler-prefix",
+          "/Users/alexy/.opam/5.2.0+ox/bin",
+          "--jobs",
+          "2",
+          "--build-system",
+          "dune",
+          "--selftest",
+          "--selftest-workers",
+          "3",
+          "--report",
+          "/private/tmp/unison-doc-dry-run-ox-dune-check-20261018-001/RESULT.json"
+        ],
+        "executes": false,
+        "shared_resource_plan": {
+          "project": "unison",
+          "cpu_credits": 8,
+          "declared_peak_credits": 8,
+          "selftest_endpoint_workers": [
+            3,
+            3
+          ],
+          "build_and_selftest_are_serial": true,
+          "retained_property_reader_limit": 0,
+          "inspector_workers": 0,
+          "compiler_jobs": 2,
+          "endpoint_workers": [],
+          "orchestration_credits": 2,
+          "cpu_token_indexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "canonical_pool_manifest": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+          "memory_reservation_gib": 32,
+          "runtime_grant": false,
+          "token_acquisition_implemented": true,
+          "memory_enforced": false,
+          "physical_io_lane_resolved": false,
+          "scope": "standing Unison tokens; finite sync server proofs; IO/memory qualification pending"
+        }
+      }
+    },
+    {
+      "target": "stock-dune-check",
+      "stdout": {
+        "target": "stock-dune-check",
+        "argv": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/Users/alexy/src/unison-stream-classifier-20261018/tests/build_snapshot.py",
+          "--compiler-prefix",
+          "/Users/alexy/.opam/default/bin",
+          "--jobs",
+          "2",
+          "--build-system",
+          "dune",
+          "--selftest",
+          "--selftest-workers",
+          "3",
+          "--report",
+          "/private/tmp/unison-doc-dry-run-stock-dune-check-20261018-001/RESULT.json"
+        ],
+        "executes": false,
+        "shared_resource_plan": {
+          "project": "unison",
+          "cpu_credits": 8,
+          "declared_peak_credits": 8,
+          "selftest_endpoint_workers": [
+            3,
+            3
+          ],
+          "build_and_selftest_are_serial": true,
+          "retained_property_reader_limit": 0,
+          "inspector_workers": 0,
+          "compiler_jobs": 2,
+          "endpoint_workers": [],
+          "orchestration_credits": 2,
+          "cpu_token_indexes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "canonical_pool_manifest": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+          "memory_reservation_gib": 32,
+          "runtime_grant": false,
+          "token_acquisition_implemented": true,
+          "memory_enforced": false,
+          "physical_io_lane_resolved": false,
+          "scope": "standing Unison tokens; finite sync server proofs; IO/memory qualification pending"
+        }
+      }
+    }
+  ],
+  "sources": {
+    "doc/local-build-and-tests.md": "f597ccefc3f8fb3adc662b86e9d50d029c7e3db0a884e7526f2d2cfa3a65a7d0",
+    "tests/manual.py": "0e0d1731149e1ccd83c1b0be140577663ab37fa90c7d0f16fa7b8f1b84bc869c",
+    "tests/shared_dispatch.py": "27dd7065107b71fc28e3746125542f368ceebc2d3f250b246699fe02a7444d9f"
+  },
+  "scope": "Four command derivations only. No build/test children, token acquisition, output workspace, IO, SDK or Photo operation. All requested output directories remained absent."
+}

@@ -24,6 +24,7 @@ external check_candidate : t -> unit = "unison_final_publication_check_candidate
 external observe_target : t -> unit = "unison_final_publication_observe_target"
 external check : t -> unit = "unison_final_publication_check"
 external publish : t -> unit = "unison_final_publication_publish"
+external publish_timed : t -> float = "unison_final_publication_publish_timed"
 external check_published : t -> unit = "unison_final_publication_check_published"
 external published : t -> bool = "unison_final_publication_published"
 external release : t -> unit = "unison_final_publication_release"

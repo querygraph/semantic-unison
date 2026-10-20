@@ -1,0 +1,91 @@
+{
+  "scope": "Original resource-admission suite plus integer-limit controls, serial stock/Ox, zero SDK/Photo/EXIO; declared ledger bounds not measured RSS/FD process caps",
+  "rows": [
+    {
+      "label": "stock",
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+      "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/admission/run.py",
+          "--ocamlopt",
+          "/Users/alexy/.opam/default/bin/ocamlopt"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "PASS machine-integer budget edges never wrap or debit rejected owners\nPASS maximal source headroom retains exact consumer/source partition\nPASS transaction, payload and descriptor limits independently block\nPASS consumer FIFO prevents small requests bypassing the waiting head\nPASS queued cancellation removes admission immediately\nPASS group cancellation starts no late borrowers during connection cleanup\nPASS throwing cancelled observer cannot strand an admissible sibling\nPASS active cancellation retains resources until borrower settles\nPASS synchronous and asynchronous failures release exactly once\nPASS pending queue and oversized reservations fail before work\nPASS two saturated endpoints retain source headroom for bidirectional progress\nPASS too-small source headroom configuration fails clearly\nPASS resource admission does not recursively hold CPU permits\nPASS durable owners are allocated without debit and Fresh retirement is idempotent\nPASS durable owner rejects impossible costs before any debit or queue publication\nPASS source owners cannot exceed the declared service headroom\nPASS durable admission remains charged between sequential workspaces and after producer return\nPASS overlapping, nested and oversized workspaces leave their durable owner intact\nPASS retirement while borrowing revokes future loans but retains credits until settlement\nPASS retired durable workspaces preserve synchronous OOM and failure identity exactly once\nPASS retired durable asynchronous failure keeps credits until failed promise settles\nPASS failed workspace without retirement permits reuse of the same retained owner\nPASS queued retirement and cancellation remove durable waiters synchronously\nPASS already-cancelled acquire and acquire replays cannot debit retained capacity twice\nPASS queue-full rejection preserves other durable owners and can retire its ungranted handle\nPASS durable grant observer sees a held owner and may retire it without stranding its sibling\nPASS durable consumers and source owners progress at the selected 24 plus 8 descriptor minimum\nPASS cancelling acquisition token after grant cannot release an active durable workspace\nAll owner-loop semantic admission tests passed.\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 85752,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      }
+    },
+    {
+      "label": "ox",
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/admission/run.py",
+          "--ocamlopt",
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "PASS machine-integer budget edges never wrap or debit rejected owners\nPASS maximal source headroom retains exact consumer/source partition\nPASS transaction, payload and descriptor limits independently block\nPASS consumer FIFO prevents small requests bypassing the waiting head\nPASS queued cancellation removes admission immediately\nPASS group cancellation starts no late borrowers during connection cleanup\nPASS throwing cancelled observer cannot strand an admissible sibling\nPASS active cancellation retains resources until borrower settles\nPASS synchronous and asynchronous failures release exactly once\nPASS pending queue and oversized reservations fail before work\nPASS two saturated endpoints retain source headroom for bidirectional progress\nPASS too-small source headroom configuration fails clearly\nPASS resource admission does not recursively hold CPU permits\nPASS durable owners are allocated without debit and Fresh retirement is idempotent\nPASS durable owner rejects impossible costs before any debit or queue publication\nPASS source owners cannot exceed the declared service headroom\nPASS durable admission remains charged between sequential workspaces and after producer return\nPASS overlapping, nested and oversized workspaces leave their durable owner intact\nPASS retirement while borrowing revokes future loans but retains credits until settlement\nPASS retired durable workspaces preserve synchronous OOM and failure identity exactly once\nPASS retired durable asynchronous failure keeps credits until failed promise settles\nPASS failed workspace without retirement permits reuse of the same retained owner\nPASS queued retirement and cancellation remove durable waiters synchronously\nPASS already-cancelled acquire and acquire replays cannot debit retained capacity twice\nPASS queue-full rejection preserves other durable owners and can retire its ungranted handle\nPASS durable grant observer sees a held owner and may retire it without stranding its sibling\nPASS durable consumers and source owners progress at the selected 24 plus 8 descriptor minimum\nPASS cancelling acquisition token after grant cannot release an active durable workspace\nAll owner-loop semantic admission tests passed.\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 85812,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "sources": {
+    "tests/admission/test.ml": "15781c6a28cb02723b16bf6a44a29563d2475dbd5055aec363e508131d1bf11f",
+    "tests/admission/run.py": "0947cf73eb55b632a1705d15b896b3850686da215666eb621600f96f2c85c67e",
+    "src/semanticAdmission.ml": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e",
+    "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+    "src/helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+    "src/helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+    "src/helperSupervisor_stubs.c": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239",
+    "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+    "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+    "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+    "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+    "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+    "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+    "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+    "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+    "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679"
+  },
+  "owning_tool_terminal": {
+    "session_id": 88672,
+    "initial_chunk": "a7c599",
+    "terminal_chunk": "1adabb",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Faithful actual write_stdin terminal transcription, not inferred from child/group status"
+  },
+  "groups_per_compiler": 28
+}

@@ -20,7 +20,7 @@ def main():
     work=Path(tempfile.mkdtemp(prefix='unison-io-source-controls-'))
     sources=(*SCRIPTS, 'tests/shared_dispatch.py', 'tests/shared_io_pool.py',
              'tests/shared_cpu_pool.py','tests/shared_process_owner.py','tests/manual.py',
-             'tests/shared_io_plan.py','bench/sync/artifact_pins.py','bench/sync/run.py',
+             'tests/shared_io_plan.py','bench/sync/artifact_pins.py','bench/sync/run.py','bench/sync/phase_stats.py',
              'tests/shared_io_controls.py','bench/sync/properties.py','bench/sync/shared_audit.py',
              'bench/sync/invocation_journal.py','bench/sync/proxy.py',
              'bench/sync/measure.py','bench/sync/ownership.py')

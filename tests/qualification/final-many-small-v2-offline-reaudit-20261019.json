@@ -1,0 +1,62 @@
+{
+  "state": "OFFLINE_REAUDIT_PASS",
+  "runtime_owner_exit": 137,
+  "no_rerender": true,
+  "no_new_children": true,
+  "report": {
+    "files": 1024,
+    "calls": 3,
+    "peer_reports": [
+      {
+        "client_pid": 93156,
+        "proxy_pid": 93155,
+        "server_pid": 93165,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      {
+        "client_pid": 93169,
+        "proxy_pid": 93168,
+        "server_pid": 93171,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      {
+        "client_pid": 93234,
+        "proxy_pid": 93217,
+        "server_pid": 93236,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      }
+    ],
+    "counters": {
+      "semantic_updates": 1024,
+      "receiver_clone_started": 0,
+      "receiver_clone_completed": 0,
+      "same_offset_inherited_bytes": 0,
+      "semantic_returned_logical_write_bytes": 524288,
+      "semantic_profiles": [
+        "org.firstpair.dng-xmp/1"
+      ],
+      "modeled_non_inherited_logical_bytes": 524288,
+      "physical_write_bytes": null,
+      "mixed_per_file_path_attribution_proved": false
+    },
+    "fresh_exact_left_right": true,
+    "unchanged_receiver_noop": true,
+    "external_children_settled": true,
+    "source_bound_validation_off": true,
+    "no_sdk_invoked": true,
+    "parent_tool_terminal_proved": false,
+    "resource_release_authorized": false
+  },
+  "failure": null,
+  "source_change": {
+    "old_parent_sha256": "26d070da6e7936c7e2a2345a004eb86391c2cbf5a814588006c3c0daafb9aa4d",
+    "new_parent_sha256": "5be1519facdb1eddc8e5a7d45c414b1b873e7985747887b2fd91bd621c3800c2",
+    "counter_sha256": "2c7a6d5787e264ab82ea0511aa4503b3cc5a375520216290c91cab0845906420"
+  },
+  "cpu8_closed": true,
+  "exglobal_closed": true,
+  "store_closed": true
+}

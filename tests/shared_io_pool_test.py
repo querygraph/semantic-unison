@@ -242,5 +242,48 @@ class Controls(unittest.TestCase):
         original_close(seen['directory'])
 
 
+class ManifestBounds(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory(prefix='unison-owned-json-bounds-')
+        self.addCleanup(self.temp.cleanup)
+        self.path=Path(self.temp.name)/'original-metadata.json'
+
+    def payload(self,size):
+        prefix=b'{"original":true}'
+        raw=prefix+b' '*(size-len(prefix))
+        self.path.write_bytes(raw)
+        return hashlib.sha256(raw).hexdigest()
+
+    def test_default_and_explicit_boundaries(self):
+        digest=self.payload(65536)
+        self.assertEqual(io.read_manifest(self.path,digest),{'original':True})
+        digest=self.payload(65537)
+        with patch.object(io.os,'read',side_effect=AssertionError('oversize read')):
+            with self.assertRaisesRegex(ValueError,'bounded owned IO manifest'):
+                io.read_manifest(self.path,digest)
+        self.assertEqual(io.read_manifest(self.path,digest,maximum_bytes=262144),{'original':True})
+        digest=self.payload(262144)
+        self.assertEqual(io.read_manifest(self.path,digest,maximum_bytes=262144),{'original':True})
+        digest=self.payload(262145)
+        with patch.object(io.os,'read',side_effect=AssertionError('oversize read')):
+            with self.assertRaisesRegex(ValueError,'bounded owned IO manifest'):
+                io.read_manifest(self.path,digest,maximum_bytes=262144)
+
+    def test_invalid_limit_before_open(self):
+        for limit in (True,0,-1,262145,'262144'):
+            with self.subTest(limit=limit),patch.object(io.os,'open') as opening:
+                with self.assertRaisesRegex(ValueError,'reader limit'):
+                    io.read_manifest(self.path,'0'*64,maximum_bytes=limit)
+                opening.assert_not_called()
+
+    def test_large_reader_still_enforces_digest_and_nlink(self):
+        digest=self.payload(65537)
+        with self.assertRaisesRegex(ValueError,'SHA differs'):
+            io.read_manifest(self.path,'0'*64,maximum_bytes=262144)
+        os.link(self.path,self.path.with_name('disposable-link'))
+        with self.assertRaisesRegex(ValueError,'bounded owned IO manifest'):
+            io.read_manifest(self.path,digest,maximum_bytes=262144)
+
+
 if __name__ == '__main__':
     unittest.main()

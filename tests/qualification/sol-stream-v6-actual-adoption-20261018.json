@@ -1,0 +1,359 @@
+{
+  "state": "ALL_THREE_ACTUAL_RUNS_ADOPTED_METADATA_ONLY",
+  "rows": [
+    {
+      "label": "upstream",
+      "terminal": {
+        "state": "ACTUAL_OWNING_TOOL_TERMINAL",
+        "session_id": 67161,
+        "initial_chunk": "db4d26",
+        "terminal_chunk": "cf10d6",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 97061,
+        "worker_pid": 97077,
+        "source": "direct write_stdin result personally collected by Photo root",
+        "unix": 1792374708.800579
+      },
+      "owner_return_sha256": "ad0197f1eb266da1448a63b0fc06923ca9c2a11c4e978c7ccdddcac25746a88d",
+      "pinned_references_verified": 19,
+      "independent_audit": {
+        "attempted_calls": 12,
+        "rows": [
+          {
+            "index": 0,
+            "server_created": true
+          },
+          {
+            "index": 1,
+            "server_created": true
+          },
+          {
+            "index": 2,
+            "server_created": true
+          },
+          {
+            "index": 3,
+            "server_created": true
+          },
+          {
+            "index": 4,
+            "server_created": true
+          },
+          {
+            "index": 5,
+            "server_created": true
+          },
+          {
+            "index": 6,
+            "server_created": true
+          },
+          {
+            "index": 7,
+            "server_created": true
+          },
+          {
+            "index": 8,
+            "server_created": true
+          },
+          {
+            "index": 9,
+            "server_created": true
+          },
+          {
+            "index": 10,
+            "server_created": true
+          },
+          {
+            "index": 11,
+            "server_created": true
+          }
+        ],
+        "all_attempted_groups_settled": true,
+        "functional_success_inferred": false,
+        "aggregate_or_parent_terminal_inferred": false
+      },
+      "closure": {
+        "worker": {
+          "pid": 97077,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 97077,
+              "state": "Z"
+            }
+          ]
+        },
+        "independent_audit": {
+          "attempted_calls": 12,
+          "rows": [
+            {
+              "index": 0,
+              "server_created": true
+            },
+            {
+              "index": 1,
+              "server_created": true
+            },
+            {
+              "index": 2,
+              "server_created": true
+            },
+            {
+              "index": 3,
+              "server_created": true
+            },
+            {
+              "index": 4,
+              "server_created": true
+            },
+            {
+              "index": 5,
+              "server_created": true
+            },
+            {
+              "index": 6,
+              "server_created": true
+            },
+            {
+              "index": 7,
+              "server_created": true
+            },
+            {
+              "index": 8,
+              "server_created": true
+            },
+            {
+              "index": 9,
+              "server_created": true
+            },
+            {
+              "index": 10,
+              "server_created": true
+            },
+            {
+              "index": 11,
+              "server_created": true
+            }
+          ],
+          "all_attempted_groups_settled": true,
+          "functional_success_inferred": false,
+          "aggregate_or_parent_terminal_inferred": false,
+          "functional": "PASS",
+          "bytes_verified": true,
+          "scope": "four generated mixed-peer cases only; no physical IO or semantic equivalence claim"
+        },
+        "functional_pass": true,
+        "io_cpu_closed": true,
+        "parent_tool_terminal": "collect separately"
+      }
+    },
+    {
+      "label": "retained-fork",
+      "terminal": {
+        "state": "ACTUAL_OWNING_TOOL_TERMINAL",
+        "session_id": 90976,
+        "initial_chunk": "2142ec",
+        "terminal_chunk": "15836f",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 97287,
+        "worker_pid": 97288,
+        "source": "direct write_stdin personally collected",
+        "unix": 1792374758.863623
+      },
+      "owner_return_sha256": "2a40d541fd0f9a1d69e01166893a21227d37a1b5c6a83722c024002ff20fbddd",
+      "pinned_references_verified": 19,
+      "independent_audit": {
+        "attempted_calls": 12,
+        "rows": [
+          {
+            "index": 0,
+            "server_created": true
+          },
+          {
+            "index": 1,
+            "server_created": true
+          },
+          {
+            "index": 2,
+            "server_created": true
+          },
+          {
+            "index": 3,
+            "server_created": true
+          },
+          {
+            "index": 4,
+            "server_created": true
+          },
+          {
+            "index": 5,
+            "server_created": true
+          },
+          {
+            "index": 6,
+            "server_created": true
+          },
+          {
+            "index": 7,
+            "server_created": true
+          },
+          {
+            "index": 8,
+            "server_created": true
+          },
+          {
+            "index": 9,
+            "server_created": true
+          },
+          {
+            "index": 10,
+            "server_created": true
+          },
+          {
+            "index": 11,
+            "server_created": true
+          }
+        ],
+        "all_attempted_groups_settled": true,
+        "functional_success_inferred": false,
+        "aggregate_or_parent_terminal_inferred": false
+      },
+      "closure": {
+        "worker": {
+          "pid": 97288,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 97288,
+              "state": "Z"
+            }
+          ]
+        },
+        "independent_audit": {
+          "attempted_calls": 12,
+          "rows": [
+            {
+              "index": 0,
+              "server_created": true
+            },
+            {
+              "index": 1,
+              "server_created": true
+            },
+            {
+              "index": 2,
+              "server_created": true
+            },
+            {
+              "index": 3,
+              "server_created": true
+            },
+            {
+              "index": 4,
+              "server_created": true
+            },
+            {
+              "index": 5,
+              "server_created": true
+            },
+            {
+              "index": 6,
+              "server_created": true
+            },
+            {
+              "index": 7,
+              "server_created": true
+            },
+            {
+              "index": 8,
+              "server_created": true
+            },
+            {
+              "index": 9,
+              "server_created": true
+            },
+            {
+              "index": 10,
+              "server_created": true
+            },
+            {
+              "index": 11,
+              "server_created": true
+            }
+          ],
+          "all_attempted_groups_settled": true,
+          "functional_success_inferred": false,
+          "aggregate_or_parent_terminal_inferred": false,
+          "functional": "PASS",
+          "bytes_verified": true,
+          "scope": "four generated mixed-peer cases only; no physical IO or semantic equivalence claim"
+        },
+        "functional_pass": true,
+        "io_cpu_closed": true,
+        "parent_tool_terminal": "collect separately"
+      }
+    },
+    {
+      "label": "properties",
+      "terminal": {
+        "state": "ACTUAL_OWNING_TOOL_TERMINAL",
+        "session_id": 21124,
+        "initial_chunk": "243026",
+        "terminal_chunk": "88509b",
+        "exit_code": 0,
+        "no_running_session": true,
+        "owner_pid": 97612,
+        "worker_pid": 97613,
+        "source": "direct write_stdin personally collected by Photo root",
+        "unix": 1792374827.424427
+      },
+      "owner_return_sha256": "21731db61d547c6cf6b98fa41c387dbee6034fd5c48575e396d7e4f24e44bda5",
+      "pinned_references_verified": 7,
+      "independent_audit": {
+        "rows": 18,
+        "cli_invocations": 54,
+        "all_client_server_supervisor_settled": true,
+        "scope": "finite functional output/ownership only; no quiet timing, hard CPU/RSS or physical IO proof"
+      },
+      "closure": {
+        "child": {
+          "pid": 97613,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 97613,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": true,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "no_runtime_repeated": true,
+  "parent_terminal_provenance": "Photo root retained owning-tool transcriptions, not a new tool poll by this adopter",
+  "actual_metadata_audit_tool": {
+    "chunk": "7db183",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "frozen_index": {
+    "path": "/Users/alexy/src/unison-stream-qualified-20261018/doc/sol-stream-requalification-requests-v6.json",
+    "sha256": "3fa0df6e7be8ffefe66939a1d55d19b9857edf29d496b8b2d8013d6a09e35085"
+  },
+  "scope": "Four generated upstream cases12CLI, four generated retained-fork cases12CLI, eighteen generated property rows54CLI. Parent terminals adopted from Photo root transcriptions; no rerun/SDK/camera/performance/new resources."
+}

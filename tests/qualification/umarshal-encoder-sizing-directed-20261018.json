@@ -1,0 +1,114 @@
+{
+  "scope": "Builtin sizing avoids byte payload buffers; selected tiny parity/malformed-slice controls and existing decode accounting regressions only. Not producer ownership, all allocations, full build or transport qualification.",
+  "sources": {
+    "src/ubase/umarshal.ml": "0f5849f51721c75787b8b885fd8d2b54e95d14dabe437b6aaa882175e2b79540",
+    "src/ubase/umarshal.mli": "0ff24924e01d4fc2a430e4fc54d77ae3d5194959bc1122eb78cdf664bf987eba",
+    "tests/umarshal_accounting/encoder_slices.py": "73819e02cefafd6ae5e214dab98cb1e4c0498a7bec56c3bf20ca6ce22547b576"
+  },
+  "actual_terminals": [
+    "72412/3685ad/0/no session",
+    "62353/d08ecc/0/no session"
+  ],
+  "closures": [
+    {
+      "path": "/private/tmp/unison-encoder-sizing-stock-20261018-004/SHARED-CLOSED.json",
+      "sha256": "08b8ef1f089f39258a4d76033145a5ec1d7a103deffb9926ff20f2a7a5ea9cd7",
+      "receipt": {
+        "child": {
+          "pid": 88764,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88764,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "path": "/private/tmp/unison-encoder-sizing-ox-20261018-004/SHARED-CLOSED.json",
+      "sha256": "c7927fd6fbed20156a8c8667c712239fc4f90ea6d49a72c82050d6afb41dcbd5",
+      "receipt": {
+        "child": {
+          "pid": 88794,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88794,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "path": "/private/tmp/unison-encoder-sizing-decode-stock-20261018-001/SHARED-CLOSED.json",
+      "sha256": "cf9910e17e578ee5eafacbef30c5c6416b9ce820ba438328e0169a7dba0d584f",
+      "receipt": {
+        "child": {
+          "pid": 88889,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88889,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "path": "/private/tmp/unison-encoder-sizing-decode-ox-20261018-001/SHARED-CLOSED.json",
+      "sha256": "567c51ef33f881ff4087fbf61af8ba4f151c0f02fa4d5450671a0d7ce8ca8fd8",
+      "receipt": {
+        "child": {
+          "pid": 88958,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88958,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ]
+}

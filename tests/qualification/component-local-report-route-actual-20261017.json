@@ -1,0 +1,98 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 75816,
+      "chunk": "bd9a22",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 64824,
+      "chunk": "d9b260",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 99167,
+      "chunk": "236a7c",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "unison-async-cache-parent-controls-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-controls-3p1219k8/RESULT.json",
+        "bytes": 460557,
+        "sha256": "ca2e57eb862d6cdd09b4c3b3fc961f2b10ecb069b833ba08eb99e0cccfca97a7"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-async-cache-parent-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "0fd07fa8c84d5aa0a705c590ee00ed98061dd9a1f2d0086c7e0cc5f7a6a54d73"
+      }
+    },
+    {
+      "name": "unison-local-cache-route-stock-make-20261017-002",
+      "result": {
+        "path": "/private/tmp/unison-local-cache-route-stock-make-20261017-002/RESULT.json",
+        "bytes": 51060,
+        "sha256": "58db0cb3a07acb1cc1ed89f1727082c29193c4f4059fd0d8e631d4c7415966d5"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-cache-route-stock-make-20261017-002/SHARED-CLOSED.json",
+        "bytes": 496,
+        "sha256": "1d227f8386f8ecd0b5c60f5294653963fe5f15ae2b1a1299f484ef660a900ebc"
+      }
+    },
+    {
+      "name": "unison-local-cache-route-stock-controls-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-yjqs84u3/RESULT.json",
+        "bytes": 98328,
+        "sha256": "ec736bb2a1e0c0aceb1a92dc7f3a517bc0a5b7386151501e7d6b486bc928f0f0"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-cache-route-stock-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "7e01fe21a8731e4f9b71dcbe05bbd2d8730fd3a4d2dbcd1549b909e108659951"
+      }
+    },
+    {
+      "name": "unison-local-cache-route-ox-make-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-local-cache-route-ox-make-20261017-001/RESULT.json",
+        "bytes": 51066,
+        "sha256": "b5d9d91eaee551c9daef048ee9ccbc566f44e0b265ef70f637d02b1937253c46"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-cache-route-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "ac7acf17cb45ddd60be3ea746fb0ed02e0269a46605362f261670fc5590ffa64"
+      }
+    },
+    {
+      "name": "unison-local-cache-route-both-controls-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-s8ljaae6/RESULT.json",
+        "bytes": 149848,
+        "sha256": "35885f72f6b0255213aa1edadbc00d41928069ca22a6e475db83b1ef52a85c22"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-local-cache-route-both-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "8be51dae6122b7a012c4d964cb252c7b301503b8c03c3df90ef804c1d837ecbb"
+      }
+    }
+  ],
+  "scope": "Async owned parent close/retained uncertainty; current stock/Ox full builds/selftests; configured owner and direct SemanticRemote local report entry capture/reuse/restart/cancellation controls",
+  "limitations": [
+    "No manual GUI session; production-linked same entry callback tested",
+    "Dune not rerun for local route successor",
+    "Remote endpoint cache routing not implemented",
+    "Existing private parent per root requires explicit configuration; no automatic provisioning",
+    "No media/SDK/transport/physical IO savings/production deployment"
+  ]
+}

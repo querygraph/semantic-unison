@@ -1,0 +1,63 @@
+{
+  "state": "STRICT_GROUP_SELECTION_SOURCE_CONTROLS_PASS_NOT_SYNC_RERUN",
+  "actual_owner": {
+    "terminal_chunk": "5b2916",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "children": [
+    84587,
+    84590
+  ],
+  "both_reaped_group_absent": true,
+  "cpu3_closed_after_each": true,
+  "io_acquired": false,
+  "production_unison_sources_changed": false,
+  "benchmark_invoked": false,
+  "git_metadata_queries": 1,
+  "scope": "Actual run.py dispatch AST selection plus retained baseline reproduction and existing shared-sync pure lifecycle controls; no new native groups or benchmark",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/sync/run.py",
+      "bytes": 37948,
+      "sha256": "5ae75ea12f066f2b150992ddbe248f542fb5396796bd00752658e88bc8162751"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_strict_groups_test.py",
+      "bytes": 2235,
+      "sha256": "d94970c1887a54bbfaca9918bb28706a3515b789c37816bf742e253d8c2c54cd"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-strict-groups-sync_strict_groups_test-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "7a4bd5e028c7a202ad27d965727109ba046180f0556f738a5c8921ab69ecf0e0"
+    },
+    {
+      "path": "/private/tmp/unison-strict-groups-sync_strict_groups_test-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-strict-groups-sync_strict_groups_test-20261018-001/SHARED-STDERR.txt",
+      "bytes": 100,
+      "sha256": "3e39a271b4e22ba476b007c78d7a0ca7986f7c0b700745f6b0d3afbe53c72c35"
+    },
+    {
+      "path": "/private/tmp/unison-strict-groups-shared_sync_controls-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "8cd28a53405a9d338b8797c947b16db014c2e129408496af4880006e87633ede"
+    },
+    {
+      "path": "/private/tmp/unison-strict-groups-shared_sync_controls-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 342,
+      "sha256": "6abaa201dd834ebfa428a59cd5281d2fb09bd6ed151cb6a739b86b6f61f0185e"
+    },
+    {
+      "path": "/private/tmp/unison-strict-groups-shared_sync_controls-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

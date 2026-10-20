@@ -1,6 +1,7 @@
 type region = { offset : int64; length : int }
 type manifest = { regions : region list }
-type change = Exact_bytes | Editable_metadata | Other_bytes
+type change = Exact_bytes | Editable_metadata | Uninterpreted_regions | Other_bytes
+type span_semantics = Known_metadata | Opaque_spans
 type category = Descriptive | Rendering | Identity | Workflow | Opaque
 type property = { name : string; category : category; digest : string }
 type observation = { schema : string; properties : property list }
@@ -12,9 +13,10 @@ end
 let max_region = 1048576
 let max_payload = 16 * 1048576
 type handle = { name : string; capability : string; extension : (module S) (* ox-portable-field *);
-                payload_limit : int; suffixes : string list; observer : observer option }
+                payload_limit : int; suffixes : string list; observer : observer option;
+                span_semantics : span_semantics }
 let valid_id limit value = value <> "" && String.length value <= limit && not (String.contains value '\000')
-let trusted ?capability ?(max_payload=max_payload) ?(suffixes=[]) ?observer
+let trusted ?capability ?(max_payload=max_payload) ?(suffixes=[]) ?observer ?(span_semantics=Opaque_spans)
     ((module E : S) as extension) =
   if max_payload <= 0 || max_payload > 16 * 1048576 then
     invalid_arg "invalid format payload limit";
@@ -31,11 +33,12 @@ let trusted ?capability ?(max_payload=max_payload) ?(suffixes=[]) ?observer
   let suffixes = List.sort_uniq String.compare (List.map String.lowercase_ascii suffixes) in
   (match observer with Some observer when not (valid_id 128 observer.schema) ->
      invalid_arg "invalid semantic observation schema" | _ -> ());
-  {name=E.profile;capability;extension;payload_limit=max_payload;suffixes;observer}
+  {name=E.profile;capability;extension;payload_limit=max_payload;suffixes;observer;span_semantics}
 let profile handle = handle.name
 let capability handle = handle.capability
 let implementation handle = handle.extension
 let payload_limit handle = handle.payload_limit
+let span_semantics handle = handle.span_semantics
 let suffixes handle = handle.suffixes
 let matches_filename handle filename =
   let filename = String.lowercase_ascii filename in
@@ -45,8 +48,8 @@ let matches_filename handle filename =
 (* Registration and lookup belong to the owner loop. Workers receive modules
    directly and never modify this table. Native modules are locally trusted. *)
 let registry = ref []
-let register ?capability ?max_payload ?suffixes ?observer extension =
-  let handle = trusted ?capability ?max_payload ?suffixes ?observer extension in
+let register ?capability ?max_payload ?suffixes ?observer ?span_semantics extension =
+  let handle = trusted ?capability ?max_payload ?suffixes ?observer ?span_semantics extension in
   if List.mem_assoc handle.name !registry ||
      List.exists (fun (_,h) -> h.capability = handle.capability) !registry then
     invalid_arg "duplicate or invalid format profile";

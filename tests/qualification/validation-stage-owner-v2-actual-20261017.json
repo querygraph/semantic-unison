@@ -1,0 +1,37 @@
+{
+  "schema": "unison-validation-stage-owner/2",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/semantic/stage_controls.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"source_pins\": {\"/Users/alexy/src/unison/src/fileObservation.mli\": \"37fb46e4a6462e640f03f2cc4be1396a8c491081869593ae3a798cfe36e6ff13\", \"/Users/alexy/src/unison/src/fileObservation.ml\": \"d0d13d872654304d543a367ffa57dc01a31f87dad50e631c0e2f4f302e752a8d\", \"/Users/alexy/src/unison/src/semanticHash.mli\": \"77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0\", \"/Users/alexy/src/unison/src/semanticHash.ml\": \"919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33\", \"/Users/alexy/src/unison/src/semanticFile.mli\": \"967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444\", \"/Users/alexy/src/unison/src/semanticFile.ml\": \"d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f\", \"/Users/alexy/src/unison/src/wholeFileClone.mli\": \"21baffedf72b244bb0a867d3eb9b8748b8358ea09f4f06bbeec7b5fe2b9b838a\", \"/Users/alexy/src/unison/src/wholeFileClone.ml\": \"57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca\", \"/Users/alexy/src/unison/src/validationSnapshot.mli\": \"3241c2aad0a6dcc09d98430af8ae357862ab808d7851fb9fb1a7db3aa8d9ff95\", \"/Users/alexy/src/unison/src/validationSnapshot.ml\": \"c876943e429ed9efe75db4f3b41256736c5373b456a5adbce3642d6ca193e3ff\", \"/Users/alexy/src/unison/src/validationStage.mli\": \"eb605bb7a88292cfe579f4a97aae600d41bd687d55671a7f6ef31629f97bc2b6\", \"/Users/alexy/src/unison/src/validationStage.ml\": \"327a544244bf0744aab5984016c66b032981a209675f3c52899ebdd64b42fc2c\", \"/Users/alexy/src/unison/src/fileObservation_stubs.c\": \"a0abe080d4607a73a629c19b49b1389014a6453a168149806050575c1a687dc6\", \"/Users/alexy/src/unison/src/semanticHash_stubs.c\": \"8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0\", \"/Users/alexy/src/unison/src/semanticFile_stubs.c\": \"5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70\", \"/Users/alexy/src/unison/src/wholeFileClone_stubs.c\": \"e99d7e9fbc71937d44919c498b2ef9392e73cb7944598821bf58d06a2afdcb75\", \"/Users/alexy/src/unison/tests/semantic/stage.ml\": \"2642b292bb575f23d0b476b0fd890d268aeaac2edd4fc7cb39cdab6ff3bc5601\", \"/Users/alexy/src/unison/tests/semantic/stage_controls.py\": \"46ece842e74c362581535e843fc6085bf7df3a09430a1587919de4359c20c558\"}, \"calls\": [{\"label\": \"stock\", \"compiler_sha256\": \"f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf\", \"outcome\": {\"command\": [\"/Users/alexy/.opam/default/bin/ocamlopt\", \"-I\", \"+unix\", \"unix.cmxa\", \"fileObservation_stubs.c\", \"semanticHash_stubs.c\", \"semanticFile_stubs.c\", \"wholeFileClone_stubs.c\", \"fileObservation.mli\", \"fileObservation.ml\", \"semanticHash.mli\", \"semanticHash.ml\", \"semanticFile.mli\", \"semanticFile.ml\", \"wholeFileClone.mli\", \"wholeFileClone.ml\", \"validationSnapshot.mli\", \"validationSnapshot.ml\", \"validationStage.mli\", \"validationStage.ml\", \"stage.ml\", \"-o\", \"stage-test\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 30367, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}}, {\"label\": \"stock\", \"compiler_sha256\": \"f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf\", \"outcome\": {\"command\": [\"/private/tmp/unison-validation-stage-4xlo1hmv/stock/stage-test\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"PASS private stage normal/source-rebind/stage-rebind/preentry/collision/source-edit/uncertain-close-no-retry\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 30411, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}}, {\"label\": \"ox\", \"compiler_sha256\": \"e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166\", \"outcome\": {\"command\": [\"/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt\", \"-I\", \"+unix\", \"unix.cmxa\", \"fileObservation_stubs.c\", \"semanticHash_stubs.c\", \"semanticFile_stubs.c\", \"wholeFileClone_stubs.c\", \"fileObservation.mli\", \"fileObservation.ml\", \"semanticHash.mli\", \"semanticHash.ml\", \"semanticFile.mli\", \"semanticFile.ml\", \"wholeFileClone.mli\", \"wholeFileClone.ml\", \"validationSnapshot.mli\", \"validationSnapshot.ml\", \"validationStage.mli\", \"validationStage.ml\", \"stage.ml\", \"-o\", \"stage-test\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 30420, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}}, {\"label\": \"ox\", \"compiler_sha256\": \"e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166\", \"outcome\": {\"command\": [\"/private/tmp/unison-validation-stage-4xlo1hmv/ox/stage-test\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"PASS private stage normal/source-rebind/stage-rebind/preentry/collision/source-edit/uncertain-close-no-retry\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 30460, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}}], \"workspace\": \"/private/tmp/unison-validation-stage-4xlo1hmv\", \"photo_payload_opened\": false, \"SDK_invoked\": false, \"scope\": \"Original generated files; owner namespace/epoch/cleanup controls; close fault is an intentional borrow precondition violation, not real ambiguous OS-close qualification; no SDK/photos/native clone/scan integration.\"}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 30366,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "all_scanned_enabled": false,
+  "owning_tool_terminal": {
+    "initial_chunk_id": "62ae8e",
+    "session_id": 18118,
+    "terminal_chunk_id": "5cfea1",
+    "exit_code": 0,
+    "running_session_id": null,
+    "evidence": "Actual write_stdin completion observed; faithful later transcription."
+  }
+}

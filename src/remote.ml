@@ -65,6 +65,8 @@ let encodeInt m =
   (int_buf, 0, intSize)
 
 let decodeInt int_buf i =
+  if i<0 || i>Bytearray.length int_buf-intSize then
+    raise(Util.Fatal "Protocol error: incomplete integer field");
   let b0 = Char.code (int_buf.{i + 0}) in
   let b1 = Char.code (int_buf.{i + 1}) in
   let b2 = Char.code (int_buf.{i + 2}) in
@@ -233,30 +235,46 @@ let rec sendOutput conn =
            conn.buffer len conn.buffer 0 conn.length;
        Lwt.return ()))
 
-let rec fillBuffer2 conn s pos len =
+let output_slice_end s pos len =
+  let available=Bytearray.length s in
+  if pos<0 || len<0 || pos>available || len>available-pos then
+    invalid_arg "RPC output slice";
+  pos+len
+let output_length_add total len =
+  if total<0 || len<0 || len>max_int-total then
+    invalid_arg "RPC output byte count";
+  total+len
+let output_slices_length parts =
+  List.fold_left(fun total(s,pos,len)->
+    ignore(output_slice_end s pos len);output_length_add total len)0 parts
+
+(* This helper receives an absolute end, while public slices carry a count. *)
+let rec fillBuffer2 conn s pos endpos =
+  if pos=endpos then Lwt.return () else
   if conn.length = bufferSize then
     BorrowedWork.bind (fun () -> sendOutput conn) (fun () ->
-      fillBuffer2 conn s pos len)
+      fillBuffer2 conn s pos endpos)
   else begin
-    let l = min (len - pos) (bufferSize - conn.length) in
+    let l = min (endpos - pos) (bufferSize - conn.length) in
     Bytearray.blit_to_bytes s pos conn.buffer conn.length l;
     conn.length <- conn.length + l;
-    if pos + l < len then
-      fillBuffer2 conn s (pos + l) len
+    if pos + l < endpos then
+      fillBuffer2 conn s (pos + l) endpos
     else
       Lwt.return ()
   end
 
-let rec fillBuffer conn l =
-  match l with
-    (s, pos, len) :: rem ->
-      assert (pos >= 0);
-      assert (len >= 0);
-      assert (pos <= Bytearray.length s - len);
-      BorrowedWork.bind (fun () -> fillBuffer2 conn s pos len) (fun () ->
-        fillBuffer conn rem)
-  | [] ->
-      Lwt.return ()
+let rec fillBufferRec conn parts =
+  match parts with
+    (s,pos,len)::rest ->
+      BorrowedWork.bind(fun()->fillBuffer2 conn s pos (pos+len))(fun()->
+        fillBufferRec conn rest)
+  | [] -> Lwt.return ()
+let fillBuffer conn parts =
+  (* Check the entire list before copying even its first byte. Subtraction
+     checks make the subsequent end conversion safe without integer wrap. *)
+  ignore(output_slices_length parts);
+  fillBufferRec conn parts
 
 let rec flushBuffer conn =
   if conn.length > 0 then
@@ -269,7 +287,85 @@ let rec flushBuffer conn =
 
 (* Output scheduling *)
 
+let body_ownership_classifiers : (exn -> bool) list ref=ref []
+let register_body_ownership_classifier classify =
+  body_ownership_classifiers:=classify:: !body_ownership_classifiers
+let body_unresolved error = match error with
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _
+  | DomainOwner.Join_uncertain _ | StagePublication.Ownership_uncertain _ -> true
+  | _ -> List.exists (fun classify->classify error) !body_ownership_classifiers
+let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f
+
 type kind = Normal | Idle | Last | Urgent
+
+(* Selected queued slices, not pre-serialization allocation or backing/RSS. *)
+let outputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputbudget" 512 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle selected output MiB"
+  "Nonwaiting aggregate logical slice bytes through actual output consumption, not backing/heap/RSS.")
+let outputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle output owners"
+  "Positive aggregate queued/active output count, maximum65536.")
+let outputParts=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputparts" 65536 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle output slice count"
+  "Positive aggregate slice-element allowance; includes empty slices.")
+let urgentOutputBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputbytes" 65536 ~local:true
+  ~category:(`Advanced `Remote) "urgent selected output bytes"
+  "Independent nonwaiting control-message allowance; does not guarantee socket progress.")
+let urgentOutputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "urgent output owners"
+  "Positive independent queued/active control-message count, maximum65536.")
+let urgentOutputParts=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputparts" 2048 ~local:true
+  ~category:(`Advanced `Remote) "urgent output slice count"
+  "Positive independent control-message slice-element allowance.")
+type output_lane={out_budget:int Prefs.t;out_scale:int;out_slots:int Prefs.t;
+                  out_part_limit:int Prefs.t;out_bytes:int ref;out_count:int ref;out_parts:int ref}
+let normalOutputLane={out_budget=outputMiB;out_scale=1048576;out_slots=outputSlots;
+  out_part_limit=outputParts;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let urgentOutputLane={out_budget=urgentOutputBytes;out_scale=1;out_slots=urgentOutputSlots;
+  out_part_limit=urgentOutputParts;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let output_limits lane =
+  let amount=Prefs.read lane.out_budget and slots=Prefs.read lane.out_slots
+  and parts=Prefs.read lane.out_part_limit in
+  if amount<=0 || amount>max_int/lane.out_scale || slots<=0 || slots>65536 || parts<=0 then
+    raise(Util.Fatal "Invalid RPC output budget");
+  amount*lane.out_scale,slots,parts
+let measure_output lane parts =
+  let budget,slots,part_limit=output_limits lane in
+  if !(lane.out_count)>=slots || !(lane.out_bytes)>budget || !(lane.out_parts)>part_limit then
+    raise(Util.Transient "RPC output budget exhausted");
+  let remaining_bytes=budget- !(lane.out_bytes)and remaining_parts=part_limit- !(lane.out_parts)in
+  let rec scan bytes count =function
+    | []->bytes,count
+    | (buffer,pos,len)::rest->
+        ignore(output_slice_end buffer pos len);
+        if count>=remaining_parts || len>remaining_bytes-bytes then
+          raise(Util.Transient "RPC output budget exhausted");
+        scan(bytes+len)(count+1)rest in
+  scan 0 0 parts
+
+type output_owner={out_lane:output_lane;out_size:int;out_elements:int;
+  mutable out_active:bool;mutable out_payload:(Bytearray.t*int*int)list;
+  mutable out_linked:bool;mutable out_previous:output_owner option}
+let retained_output_owners=ref None
+let reserve_output_owner owner =
+  if owner.out_active then invalid_arg "RPC output owner already active";
+  let lane=owner.out_lane in
+  let budget,slots,part_limit=output_limits lane in
+  if !(lane.out_count)>=slots ||
+     !(lane.out_bytes)>budget || owner.out_size>budget- !(lane.out_bytes) ||
+     !(lane.out_parts)>part_limit || owner.out_elements>part_limit- !(lane.out_parts) then
+    raise(Util.Transient "RPC output budget exhausted");
+  owner.out_active<-true;lane.out_bytes:= !(lane.out_bytes)+owner.out_size;
+  lane.out_parts:= !(lane.out_parts)+owner.out_elements;incr lane.out_count
+let release_output_owner owner =
+  let active=owner.out_active in
+  owner.out_active<-false;owner.out_payload<-[];
+  if active then begin
+    let lane=owner.out_lane in
+    lane.out_bytes:= !(lane.out_bytes)-owner.out_size;
+    lane.out_parts:= !(lane.out_parts)-owner.out_elements;
+    decr lane.out_count
+  end
 
 type outputQueue =
   { mutable available : bool;
@@ -343,6 +439,44 @@ let performOutput q kind action =
        | Last   -> assert false);
     res
   end
+
+let perform_owned_output q kind parts consume =
+  let lane=match kind with Normal|Idle->normalOutputLane|Urgent->urgentOutputLane
+    | Last->invalid_arg "RPC owned output kind" in
+  let bytes,elements=measure_output lane parts in
+  (* This owner is the only payload root in queued action closures. Clear its
+     field after its own actual action, even if performOutput then drains an
+     unrelated later action. Caller aliases/backing allocation are separate. *)
+  let owner={out_lane=lane;out_size=bytes;out_elements=elements;out_active=false;
+    out_payload=parts;out_linked=false;out_previous=None} in
+  let cell=Some owner and started=ref false and scheduled=ref false in
+  let retain_output _=
+    if not owner.out_linked then begin
+      owner.out_linked<-true;owner.out_previous<- !retained_output_owners;
+      retained_output_owners:=cell
+    end in
+  let finish ()=release_output_owner owner in
+  let write ()=
+    BorrowedWork.try_bind
+      (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_output
+        (fun()->started:=true;consume owner.out_payload))
+      (fun ()->finish();Lwt.return())
+      (fun error->finish();Lwt.fail error)in
+  let enqueue ()=
+    (* Recheck after all preparation allocations; no allocation/yield occurs
+       between this authoritative successful check and its counter stores. *)
+    reserve_output_owner owner;
+    scheduled:=true;
+    performOutput q kind write in
+  BorrowedWork.try_bind enqueue
+    (fun ()->finish();Lwt.return())
+    (fun error->
+      if not !started then begin
+        (* A scheduler/setup refusal must not leave available=false with no
+           running action. Cancel only queued work; active work settles itself. *)
+        if !scheduled then failOutputQueue q error;finish()
+      end;
+      Lwt.fail error)
 
 let allowWrites q =
   if q.failure = None then begin
@@ -475,25 +609,17 @@ let connEq conn conn' =
 
 let connNeq conn conn' = not (connEq conn conn')
 
-(* Send message [l] *)
+(* The consume closures capture only the connection, not the raw slice list. *)
 let dump conn l =
-  performOutput
-    conn.outputQueue Normal (fun () -> fillBuffer conn.outputBuffer l)
-
-(* Send message [l] when idle *)
+  perform_owned_output conn.outputQueue Normal l
+    (fun parts->fillBuffer conn.outputBuffer parts)
 let dumpIdle conn l =
-  performOutput
-    conn.outputQueue Idle (fun () -> fillBuffer conn.outputBuffer l)
-
-(* Send message [l], even if write are disabled.  This is used for
-   aborting rapidly a stream.  This works as long as only one small
-   message is written at a time (the write will succeed as the pipe
-   will not be full) *)
+  perform_owned_output conn.outputQueue Idle l
+    (fun parts->fillBuffer conn.outputBuffer parts)
 let dumpUrgent conn l =
-  performOutput conn.outputQueue Urgent
-    (fun () ->
-       BorrowedWork.bind (fun () -> fillBuffer conn.outputBuffer l) (fun () ->
-         flushBuffer conn.outputBuffer))
+  perform_owned_output conn.outputQueue Urgent l
+    (fun parts->BorrowedWork.bind(fun()->fillBuffer conn.outputBuffer parts)
+      (fun()->flushBuffer conn.outputBuffer))
 
 let enableFlowControl conn isServer =
   let rec waitDrain () =
@@ -806,8 +932,110 @@ let registerTag string =
     registeredSet := Util.StringSet.add string !registeredSet;
   Bytearray.of_string string
 
+(* Producer allocation ownership is separate from queued logical slices.
+   Only synchronous builtin serialization runs under encoder_context. *)
+let encoder_pref name value summary =
+  Prefs.makeEndpointLocal(Prefs.createInt name value ~local:true
+    ~category:(`Advanced `Remote) summary
+    "Selected builtin encoder bytes/buffers/owners; not all heap or RSS.")
+let encoderMiB=encoder_pref "rpcencodebudget" 512 "encoder allocation budget (MiB)"
+let encoderSlots=encoder_pref "rpcencodeslots" 256 "encoder owner count"
+let encoderBuffers=encoder_pref "rpcencodebuffers" 65536 "encoder result buffer count"
+let urgentEncoderBytes=encoder_pref "rpcurgentencodebytes" 65536 "urgent encoder allocation bytes"
+let urgentEncoderSlots=encoder_pref "rpcurgentencodeslots" 256 "urgent encoder owner count"
+let urgentEncoderBuffers=encoder_pref "rpcurgentencodebuffers" 2048 "urgent encoder result buffer count"
+let encoderLane={out_budget=encoderMiB;out_scale=1048576;out_slots=encoderSlots;
+  out_part_limit=encoderBuffers;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let urgentEncoderLane={out_budget=urgentEncoderBytes;out_scale=1;out_slots=urgentEncoderSlots;
+  out_part_limit=urgentEncoderBuffers;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let encoder_empty=Bytearray.create 0
+ type encoder_buffer={mutable enc_buffer:Bytearray.t;
+                      mutable enc_next:encoder_buffer option}
+type encoder_owner={enc_lane:output_lane;mutable enc_active:bool;
+  mutable enc_size:int;mutable enc_buffers:int;mutable enc_roots:encoder_buffer option;
+  mutable enc_linked:bool;mutable enc_previous:encoder_owner option}
+let encoder_context : encoder_owner option ref=ref None
+let retained_encoder_owners : encoder_owner option ref=ref None
+let encoder_refuse ()=raise(Util.Transient "RPC encoder budget exhausted")
+let reserve_encoder_owner owner =
+  if owner.enc_active then invalid_arg "RPC encoder owner already active";
+  let _,slots,_=output_limits owner.enc_lane in
+  if !(owner.enc_lane.out_count)>=slots then encoder_refuse();
+  owner.enc_active<-true;incr owner.enc_lane.out_count
+let reserve_encoder_bytes owner ~bytes =
+  if not owner.enc_active || bytes<0 then invalid_arg "RPC inactive encoder reservation";
+  let lane=owner.enc_lane in
+  let budget,_,_=output_limits lane in
+  if !(lane.out_bytes)>budget || bytes>budget- !(lane.out_bytes) then encoder_refuse();
+  lane.out_bytes:= !(lane.out_bytes)+bytes;owner.enc_size<-owner.enc_size+bytes
+let prepare_encoder_buffer owner =
+  (* Prepare the root and its link before admission; publishing the actual
+     result is then a nonallocating store before codec pass two. *)
+  let node={enc_buffer=encoder_empty;enc_next=None}in
+  let cell=Some node in
+  if not owner.enc_active then invalid_arg "RPC inactive encoder buffer";
+  let _,_,buffers=output_limits owner.enc_lane in
+  if !(owner.enc_lane.out_parts)>=buffers then encoder_refuse();
+  incr owner.enc_lane.out_parts;owner.enc_buffers<-owner.enc_buffers+1;
+  node.enc_next<-owner.enc_roots;owner.enc_roots<-cell;
+  node
+let release_encoder_owner owner =
+  let active=owner.enc_active in owner.enc_active<-false;
+  let rec clear=function None->()|Some node->
+    let next=node.enc_next in node.enc_buffer<-encoder_empty;node.enc_next<-None;clear next in
+  clear owner.enc_roots;owner.enc_roots<-None;
+  if active then begin
+    let lane=owner.enc_lane in
+    lane.out_bytes:= !(lane.out_bytes)-owner.enc_size;
+    lane.out_parts:= !(lane.out_parts)-owner.enc_buffers;decr lane.out_count
+  end;
+  owner.enc_size<-0;owner.enc_buffers<-0
+let with_encoder_context cell build =
+  let previous= !encoder_context in encoder_context:=cell;
+  match build()with
+  | value->encoder_context:=previous;value
+  | exception error->encoder_context:=previous;raise error
+let with_produced_output kind build consume =
+  let lane=match kind with Normal|Idle->encoderLane|Urgent->urgentEncoderLane
+    |Last->invalid_arg "RPC encoder output kind" in
+  let owner={enc_lane=lane;enc_active=false;enc_size=0;enc_buffers=0;
+    enc_roots=None;enc_linked=false;enc_previous=None}in
+  let cell=Some owner in
+  let retain _=if owner.enc_active && not owner.enc_linked then begin
+    owner.enc_linked<-true;owner.enc_previous<- !retained_encoder_owners;
+    retained_encoder_owners:=cell
+  end in
+  let finish()=release_encoder_owner owner in
+  let settle work=BorrowedWork.try_bind
+    (* Before admission, or after this actual consumer has settled, there is
+       no producer resource for a classifier failure to retain. *)
+    (fun()->RetainedOwnership.guard
+      ~is_uncertain:(fun error->owner.enc_active && body_unresolved error)
+      ~on_retained:retain work)
+    (fun()->finish();Lwt.return())(fun error->finish();Lwt.fail error)in
+  settle(fun()->
+    reserve_encoder_owner owner;
+    let parts=with_encoder_context cell build in
+    consume parts settle)
+let send_encoded conn kind build =
+  with_produced_output kind build(fun parts settle->
+    perform_owned_output conn.outputQueue kind parts(fun slices->
+      (* Release at this actual consumer, not after an unrelated queue drain.
+         The outer scope handles known queued cancellation before entry. *)
+      settle(fun()->match kind with
+        |Urgent->BorrowedWork.bind(fun()->fillBuffer conn.outputBuffer slices)
+                   (fun()->flushBuffer conn.outputBuffer)
+        |Normal|Idle->fillBuffer conn.outputBuffer slices
+        |Last->assert false)))
+
 let marshalV1 m data rem =
-  let s = Umarshal.marshal_to_bytearray m data in
+  let s = match !encoder_context with
+    |None->Umarshal.marshal_to_bytearray m data
+    |Some owner->
+        let node=prepare_encoder_buffer owner in
+        Umarshal.marshal_to_bytearray_accounted ~max_alloc_bytes:max_int
+          ~reserve:(reserve_encoder_bytes owner)
+          ~publish:(fun result->node.enc_buffer<-result) m data in
   let l = Bytearray.length s in
   ((s, 0, l) :: rem, l)
 
@@ -823,6 +1051,19 @@ let errRPCVersion conn  =
 let defaultMarshalingFunctions m =
   (fun conn -> if conn.version = 1 then marshalV1 m else errRPCVersion conn),
   (fun conn -> if conn.version = 1 then unmarshalV1 m else errRPCVersion conn)
+
+let boundedMarshalingFunctions ?reserve bound m =
+  if bound<0 || bound>(max_int-65536)/8 then invalid_arg "bounded RPC decoded budget overflow";
+  let max_alloc_bytes=65536+8*bound and max_elements=1024+4*bound in
+  (fun conn -> if conn.version=1 then marshalV1 m else errRPCVersion conn),
+  (fun conn -> if conn.version<>1 then errRPCVersion conn else
+    fun buf pos ->
+      try (match reserve with
+        | None -> Umarshal.unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m buf pos
+        | Some reserve -> Umarshal.unmarshal_from_bytearray_accounted
+            ~max_alloc_bytes ~max_elements ~reserve m buf pos)
+      with Failure s | Umarshal.Error s -> raise(Util.Fatal(Printf.sprintf
+        "Fatal error during unmarshaling (%s)" s)))
 
 let makeMarshalingFunctions payloadMarshalingFunctions string =
   let (marshalPayload, unmarshalPayload) = payloadMarshalingFunctions in
@@ -920,16 +1161,34 @@ packet to invoke a function remotely on the client.  In this case, the
 two switch roles.)
 *)
 
-let receivePacket ?maxBytes conn =
+(* This outer policy applies even when a legacy command has no registration
+   bound. Endpoint settings never change the wire framing. *)
+let packetMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcpacketmaxbytes" 268435456 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC packet payload bytes"
+  "Positive endpoint-local outer frame limit, including legacy request, reply \
+   and stream packets. Stricter command/header/startup limits still apply. \
+   Raise locally for deliberately larger archive frames. Not aggregate heap/RSS.")
+let packet_limit () =
+  let maximum=Prefs.read packetMaxBytes in
+  (* The payload is a bigarray, not a single OCaml string. Do not impose
+     Sys.max_string_length here: that would invalidate the default on32bit. *)
+  if maximum<=0 then
+    raise(Util.Fatal "Invalid RPC packet input limit");
+  maximum
+
+let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
+  let maximum=packet_limit () in
+  let maximum=match maxBytes with None->maximum | Some n->min maximum n in
   (* Get the length of the packet *)
   let int_buf = Bytearray.create intSize in
   grab conn.inputBuffer int_buf intSize >>= (fun () ->
   let length = decodeInt int_buf 0 in
-  if length < 0 || (match maxBytes with Some n -> length > n | None -> false) then
+  if length < 0 || length>maximum then
     raise (Util.Fatal "RPC packet length exceeds command limit");
+  reserve length;
   (* Get packet *)
   let buf = Bytearray.create length in
-  grab conn.inputBuffer buf length >>= (fun () ->
+  (if length=0 then Lwt.return () else grab conn.inputBuffer buf length) >>= (fun () ->
   (debugE (fun () ->
              let start =
                if length > 10 then (Bytearray.sub buf 0 10) ^ "..."
@@ -938,17 +1197,312 @@ let receivePacket ?maxBytes conn =
              Util.msg "receive '%s' %d bytes\n" start length);
    Lwt.return buf)))
 
+(* Separate service lanes: retained requests cannot spend reply/header credits.
+   These cover raw body payloads, not decoded values or heap/transport overhead. *)
+let requestInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcrequestinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw request/stream MiB"
+  "Nonwaiting process-wide raw body allowance across legacy and bounded \
+   requests and streams; retained through actual processing/reply settlement.")
+let replyInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcreplyinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw reply MiB"
+  "Separate nonwaiting raw reply allowance; includes arrived but unconsumed \
+   reply promises and synchronous decoding. Not decoded-object or RSS limits.")
+let bodyInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcbodyinputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "raw body slots in each request/reply lane"
+  "Positive per-lane count, including incomplete prefixes and empty bodies; \
+   maximum65536. Exhaustion refuses before input, without waiting for credits.")
+type body_lane={body_budget:int Prefs.t;body_bytes:int ref;body_count:int ref}
+let requestInputLane={body_budget=requestInputMiB;body_bytes=ref 0;body_count=ref 0}
+let replyInputLane={body_budget=replyInputMiB;body_bytes=ref 0;body_count=ref 0}
+let empty_body_payload=Bytearray.create 0
+type body_input={body_lane:body_lane;mutable body_reserved:int;
+                mutable body_active:bool;mutable body_sized:bool;
+                mutable body_payload:Bytearray.t}
+let body_limits lane =
+  let mib=Prefs.read lane.body_budget and slots=Prefs.read bodyInputSlots in
+  if mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC body input budget");
+  mib*1048576,slots
+let reserve_body_slot ticket =
+  if ticket.body_active then invalid_arg "RPC body slot reservation";
+  let _,slots=body_limits ticket.body_lane in
+  if !(ticket.body_lane.body_count)>=slots then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_active<-true;incr ticket.body_lane.body_count
+let reserve_body_bytes ticket length =
+  if not ticket.body_active || ticket.body_sized || length<0 then
+    invalid_arg "RPC body byte reservation";
+  let budget,_=body_limits ticket.body_lane in
+  let used= !(ticket.body_lane.body_bytes) in
+  if used>budget || length>budget-used then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_reserved<-length;ticket.body_sized<-true;
+  ticket.body_lane.body_bytes:=used+length
+let release_body_input ticket =
+  if ticket.body_active then begin
+    ticket.body_active<-false;ticket.body_payload<-empty_body_payload;
+    ticket.body_lane.body_bytes:= !(ticket.body_lane.body_bytes)-ticket.body_reserved;
+    decr ticket.body_lane.body_count
+  end
+let release_body_packet (_,ticket) = release_body_input ticket
+
+let with_body_packet (buffer,ticket) f =
+  try BorrowedWork.try_bind (fun()->guard_body_borrower(fun()->f buffer))
+    (fun result->release_body_input ticket;Lwt.return result)
+    (fun error->release_body_input ticket;Lwt.fail error)
+  with error->release_body_input ticket;raise error
+(* Regular RPC decoded-argument charges have their own nonwaiting lane. They
+   survive decoding, handler completion and queued reply output; this is not
+   complete heap/RSS or client-result lifetime accounting. *)
+let decodedRequestMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded request charges in MiB"
+  "Aggregate selected builtin argument allocation charges for regular RPC \
+   requests, retained through scope/handler/reply settlement; not heap/RSS.")
+let decodedRequestElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestelements" 1048576 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded request element allowance"
+  "Independent positive aggregate collection count for regular RPC arguments; \
+   nonwaiting admission, not user conversion allocation or recursion depth.")
+let decodedRequestSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "decoded scoped result owners"
+  "Positive aggregate owner count reserved before decoding, maximum65536; \
+   ownership uncertainty retains the owner and its selected charges.")
+let decoded_request_bytes=ref 0 and decoded_request_elements=ref 0
+and decoded_request_count=ref 0
+let decoded_limits () =
+  let mib=Prefs.read decodedRequestMiB and elements=Prefs.read decodedRequestElements
+  and slots=Prefs.read decodedRequestSlots in
+  if mib<=0 || mib>max_int/1048576 || elements<=0 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC decoded request budget");
+  mib*1048576,elements,slots
+type decoded_input={mutable decoded_bytes:int;mutable decoded_elements:int;
+                    mutable decoded_active:bool}
+let reserve_decoded_slot ticket =
+  if ticket.decoded_active then invalid_arg "RPC decoded owner already active";
+  let _,_,slots=decoded_limits () in
+  if !decoded_request_count>=slots then
+    raise(Util.Fatal "RPC decoded request budget exhausted");
+  ticket.decoded_active<-true;incr decoded_request_count
+let reserve_decoded_input ticket ~bytes ~elements =
+  if not ticket.decoded_active || bytes<0 || elements<0 then
+    invalid_arg "RPC decoded reservation";
+  let byte_limit,element_limit,_=decoded_limits () in
+  if !decoded_request_bytes>byte_limit || bytes>byte_limit- !decoded_request_bytes ||
+     !decoded_request_elements>element_limit || elements>element_limit- !decoded_request_elements then
+    raise(Util.Fatal "RPC decoded request budget exhausted");
+  ticket.decoded_bytes<-ticket.decoded_bytes+bytes;
+  ticket.decoded_elements<-ticket.decoded_elements+elements;
+  decoded_request_bytes:= !decoded_request_bytes+bytes;
+  decoded_request_elements:= !decoded_request_elements+elements
+let release_decoded_input ticket =
+  if ticket.decoded_active then begin
+    ticket.decoded_active<-false;
+    decoded_request_bytes:= !decoded_request_bytes-ticket.decoded_bytes;
+    decoded_request_elements:= !decoded_request_elements-ticket.decoded_elements;
+    decr decoded_request_count
+  end
+type decoded_retained={mutable decoded_previous:decoded_retained option;
+                       decoded_keepalive:unit -> unit}
+let decoded_retained_roots=ref None
+let with_decoded_args bound codec tag conn buffer use =
+  (* Allocate the ticket, value root, retention link and guard callbacks before
+     admission/decoding. An uncertain failed promise need not itself keep its
+     argument alive, so root the explicit value owner as well as the borrower. *)
+  let ticket={decoded_bytes=0;decoded_elements=0;decoded_active=false}
+  and value=ref None in
+  let keepalive ()=ignore(Sys.opaque_identity !value) in
+  let entry={decoded_previous=None;decoded_keepalive=keepalive} in
+  let cell=Some entry in
+  let retain _=entry.decoded_previous<- !decoded_retained_roots;
+    decoded_retained_roots:=cell in
+  let finish ()=value:=None;release_decoded_input ticket in
+  let work ()=
+    reserve_decoded_slot ticket;
+    let reserve=reserve_decoded_input ticket in
+    let decode=match bound with
+      | Some bound -> snd(boundedMarshalingFunctions ~reserve bound codec)
+      | None ->
+          (* Legacy codecs do not have a declared frame-expansion ratio. Apply
+             the finite owner policy directly, not a guessed ratio that would
+             reject compact valid collections such as lists of unit values. *)
+          let max_alloc_bytes,max_elements,_=decoded_limits () in
+          fun conn -> if conn.version<>1 then errRPCVersion conn else
+            fun buf pos ->
+              try Umarshal.unmarshal_from_bytearray_accounted
+                ~max_alloc_bytes ~max_elements ~reserve codec buf pos
+              with Failure text | Umarshal.Error text ->
+                raise(Util.Fatal(Printf.sprintf "Fatal error during unmarshaling (%s)" text)) in
+    let args=safeUnmarshal (decode conn) tag buffer in
+    value:=Some args;
+    use args in
+  BorrowedWork.try_bind
+    (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain work)
+    (fun result->finish ();Lwt.return result)
+    (fun error->finish ();Lwt.fail error)
+
+(* Scoped client results have an independent lane. The callback must consume
+   the value without escaping it; user conversion allocations remain excluded. *)
+let decodedResultMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded result charges in MiB"
+  "Aggregate selected builtin result allocation charges for scoped RPC \
+   results, retained through the client consumer; not heap/RSS.")
+let decodedResultElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultelements" 1048576 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded result element allowance"
+  "Independent positive aggregate collection count for scoped RPC results; \
+   nonwaiting admission, not user conversion allocation or recursion depth.")
+let decodedResultSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "decoded scoped result owners"
+  "Positive aggregate owner count reserved before decoding, maximum65536; \
+   ownership uncertainty retains the owner and its selected charges.")
+let decoded_result_bytes=ref 0 and decoded_result_elements=ref 0
+and decoded_result_count=ref 0
+let result_limits () =
+  let mib=Prefs.read decodedResultMiB and elements=Prefs.read decodedResultElements
+  and slots=Prefs.read decodedResultSlots in
+  if mib<=0 || mib>max_int/1048576 || elements<=0 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC decoded result budget");
+  mib*1048576,elements,slots
+type result_input={mutable result_bytes:int;mutable result_elements:int;
+                    mutable result_active:bool}
+let reserve_result_slot ticket =
+  if ticket.result_active then invalid_arg "RPC decoded owner already active";
+  let _,_,slots=result_limits () in
+  if !decoded_result_count>=slots then
+    raise(Util.Fatal "RPC decoded result budget exhausted");
+  ticket.result_active<-true;incr decoded_result_count
+let reserve_result_input ticket ~bytes ~elements =
+  if not ticket.result_active || bytes<0 || elements<0 then
+    invalid_arg "RPC decoded reservation";
+  let byte_limit,element_limit,_=result_limits () in
+  if !decoded_result_bytes>byte_limit || bytes>byte_limit- !decoded_result_bytes ||
+     !decoded_result_elements>element_limit || elements>element_limit- !decoded_result_elements then
+    raise(Util.Fatal "RPC decoded result budget exhausted");
+  ticket.result_bytes<-ticket.result_bytes+bytes;
+  ticket.result_elements<-ticket.result_elements+elements;
+  decoded_result_bytes:= !decoded_result_bytes+bytes;
+  decoded_result_elements:= !decoded_result_elements+elements
+let release_result_input ticket =
+  if ticket.result_active then begin
+    ticket.result_active<-false;
+    decoded_result_bytes:= !decoded_result_bytes-ticket.result_bytes;
+    decoded_result_elements:= !decoded_result_elements-ticket.result_elements;
+    decr decoded_result_count
+  end
+type result_retained={mutable result_previous:result_retained option;
+                       result_keepalive:unit -> unit}
+let result_retained_roots=ref None
+let with_decoded_result bound codec tag conn buffer use =
+  (* Allocate the ticket, value root, retention link and guard callbacks before
+     admission/decoding. An uncertain failed promise need not itself keep its
+     result alive, so root the explicit value owner as well as the borrower. *)
+  let ticket={result_bytes=0;result_elements=0;result_active=false}
+  and value=ref None in
+  let keepalive ()=ignore(Sys.opaque_identity !value) in
+  let entry={result_previous=None;result_keepalive=keepalive} in
+  let cell=Some entry in
+  let retain_result _=entry.result_previous<- !result_retained_roots;
+    result_retained_roots:=cell in
+  let finish ()=value:=None;release_result_input ticket in
+  let work ()=
+    reserve_result_slot ticket;
+    let reserve=reserve_result_input ticket in
+    let decode=match bound with
+      | Some bound -> snd(boundedMarshalingFunctions ~reserve bound codec)
+      | None ->
+          (* Legacy codecs do not have a declared frame-expansion ratio. Apply
+             the finite owner policy directly, not a guessed ratio that would
+             reject compact valid collections such as lists of unit values. *)
+          let max_alloc_bytes,max_elements,_=result_limits () in
+          fun conn -> if conn.version<>1 then errRPCVersion conn else
+            fun buf pos ->
+              try Umarshal.unmarshal_from_bytearray_accounted
+                ~max_alloc_bytes ~max_elements ~reserve codec buf pos
+              with Failure text | Umarshal.Error text ->
+                raise(Util.Fatal(Printf.sprintf "Fatal error during unmarshaling (%s)" text)) in
+    let result=safeUnmarshal (decode conn) tag buffer in
+    value:=Some result;
+    use result in
+  BorrowedWork.try_bind
+    (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_result work)
+    (fun result->finish ();Lwt.return result)
+    (fun error->finish ();Lwt.fail error)
+
+let receive_body_packet ?maxBytes ?(reserve=(fun _->())) lane conn =
+  let ticket={body_lane=lane;body_reserved=0;body_active=false;body_sized=false;
+              body_payload=empty_body_payload} in
+  let failed error=release_body_input ticket;Lwt.fail error in
+  try
+    reserve_body_slot ticket;
+    BorrowedWork.try_bind
+      (fun()->receivePacket ?maxBytes
+        ~reserve:(fun length->reserve_body_bytes ticket length;reserve length) conn)
+      (fun buffer->ticket.body_payload<-buffer;Lwt.return(buffer,ticket)) failed
+  with error->release_body_input ticket;raise error
+let start_body_request ?maxBytes ?reserve conn launch =
+  BorrowedWork.bind
+    (fun()->receive_body_packet ?maxBytes ?reserve requestInputLane conn)
+    (fun packet->
+      let work=with_body_packet packet launch in
+      Lwt.ignore_result work;Lwt.return ())
+
 type servercmd =
   connection -> Bytearray.t ->
-  ((Bytearray.t * int * int) list -> (Bytearray.t * int * int) list) Lwt.t
+  ((unit -> ((Bytearray.t * int * int) list ->
+             (Bytearray.t * int * int) list) Lwt.t) -> unit Lwt.t) -> unit Lwt.t
 let serverCmds = ref (Util.StringMap.empty : servercmd Util.StringMap.t)
 let serverArgLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
-type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
-let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
+(* Only explicitly bounded commands participate. Never wait for credits in the
+ * receiving loop: that would stop replies needed by already admitted work. *)
+let boundedInputMiB = Prefs.makeEndpointLocal (Prefs.createInt "rpcboundedinputbudget" 64 ~local:true
+  ~category:(`Advanced `General) "retained bounded RPC request bytes in MiB"
+  "Process-wide raw request-buffer budget for explicitly bounded RPC commands. \
+   Reserved before allocation and retained through request/reply settlement. \
+   Excess input fails the connection; this is not an RSS or decoded-object cap.")
+let boundedInputSlots = Prefs.makeEndpointLocal (Prefs.createInt "rpcboundedinputslots" 4096 ~local:true
+  ~category:(`Advanced `General) "retained bounded RPC request slots"
+  "Process-wide bounded request count, including empty requests. Excess input \
+   fails before buffer allocation without waiting for transaction or CPU credits.")
+type bounded_input = {mutable input_bytes:int;mutable input_active:bool}
+let bounded_input_bytes = ref 0
+let bounded_input_count = ref 0
+let reserve_bounded_input ticket length =
+  if ticket.input_active || length < 0 then invalid_arg "bounded RPC input reservation";
+  let mib=Prefs.read boundedInputMiB and slots=Prefs.read boundedInputSlots in
+  if mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise (Util.Fatal "Invalid bounded RPC input budget");
+  let bytes=mib*1048576 in
+  if !bounded_input_count>=slots || !bounded_input_bytes>bytes ||
+     length>bytes- !bounded_input_bytes then
+    raise (Util.Fatal "RPC bounded input budget exhausted");
+  ticket.input_bytes<-length;ticket.input_active<-true;
+  bounded_input_bytes:= !bounded_input_bytes+length;
+  incr bounded_input_count
+let release_bounded_input ticket =
+  if ticket.input_active then begin
+    ticket.input_active<-false;
+    bounded_input_bytes:= !bounded_input_bytes-ticket.input_bytes;
+    decr bounded_input_count
+  end
+let with_bounded_request ticket f =
+  try BorrowedWork.try_bind (fun()->guard_body_borrower f)
+    (fun value -> release_bounded_input ticket;Lwt.return value)
+    (fun error -> release_bounded_input ticket;Lwt.fail error)
+  with error -> release_bounded_input ticket;raise error
+let start_bounded_request conn limit launch =
+  let ticket={input_bytes=0;input_active=false} and transferred=ref false in
+  let failed error =
+    if not !transferred then release_bounded_input ticket;
+    Lwt.fail error in
+  try BorrowedWork.catch
+    (fun()->start_body_request ~maxBytes:limit
+      ~reserve:(reserve_bounded_input ticket) conn (fun buffer->
+        transferred:=true;
+        with_bounded_request ticket (fun()->launch buffer))) failed
+  with error -> if not !transferred then release_bounded_input ticket;raise error
 
 type serverstream =
   connection -> Bytearray.t -> unit
 let serverStreams = ref (Util.StringMap.empty : serverstream Util.StringMap.t)
+let serverStreamLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
 
 type header =
     NormalResult
@@ -977,6 +1531,62 @@ let mheader = Umarshal.(sum6 unit string string string string unit
 let ((marshalHeader, unmarshalHeader) : header marshalingFunctions) =
   makeMarshalingFunctions (defaultMarshalingFunctions mheader) "rsp"
 
+(* Headers precede command selection, so their allowance is separate from
+   bounded request bodies and cannot be consumed by work awaiting a reply. *)
+let headerMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcheadermaxbytes" 8388608 ~local:true
+  ~category:(`Advanced `General) "maximum incoming RPC header frame bytes"
+  "Positive endpoint-local limit checked before allocation. Large diagnostic \
+   headers may require raising this and rpcheaderinputbudget together. Does not limit body frames.")
+let headerInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputbudget" 16 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight raw RPC header/startup MiB"
+  "Separate nonwaiting raw header/startup allowance across this process's connections. \
+   Held through body receipt and header decode; not a decoded-object or RSS cap.")
+let headerInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputslots" 256 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight RPC header/startup slots"
+  "Positive bounded header/startup count, including empty frames; maximum65536. \
+   Exhaustion fails the connection instead of blocking replies behind body admission.")
+type header_input={mutable header_bytes:int;mutable header_active:bool;mutable header_sized:bool}
+type header_limits={header_max:int;header_budget:int;header_slots:int}
+let header_input_bytes=ref 0 and header_input_count=ref 0
+let header_limits () =
+  let maximum=Prefs.read headerMaxBytes and mib=Prefs.read headerInputMiB and slots=Prefs.read headerInputSlots in
+  if maximum<=0 || mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC header input budgets");
+  let bytes=mib*1048576 in
+  if maximum>bytes then raise(Util.Fatal "Invalid RPC header input budgets");
+  {header_max=maximum;header_budget=bytes;header_slots=slots}
+let reserve_header_slot limits ticket =
+  if ticket.header_active then invalid_arg "RPC header slot reservation";
+  if !header_input_count>=limits.header_slots then raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_active<-true;incr header_input_count
+let reserve_header_input limits ticket length =
+  if not ticket.header_active || ticket.header_sized || length<0 then invalid_arg "RPC header reservation";
+  if length>limits.header_max then raise(Util.Fatal "RPC packet length exceeds command limit");
+  if !header_input_bytes>limits.header_budget || length>limits.header_budget- !header_input_bytes then
+    raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_bytes<-length;ticket.header_sized<-true;
+  header_input_bytes:= !header_input_bytes+length
+let release_header_input ticket =
+  if ticket.header_active then begin
+    ticket.header_active<-false;
+    header_input_bytes:= !header_input_bytes-ticket.header_bytes;decr header_input_count
+  end
+let receiveHeader conn =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    BorrowedWork.try_bind
+    (fun()->receivePacket ~maxBytes:limits.header_max
+      ~reserve:(fun length->reserve_header_input (header_limits ()) ticket length) conn)
+    (fun buffer->
+      try let header=unmarshalHeader conn buffer in
+        release_header_input ticket;Lwt.return header
+      with error->failed error)
+    failed
+  with error->release_header_input ticket;raise error
+
 let processRequest conn id cmdName buf =
   if not conn.outputBuffer.opened then
     Lwt.fail (Util.Fatal "Lost connection with the server") else
@@ -988,32 +1598,29 @@ let processRequest conn id cmdName buf =
        Util.Transient s ->
          debugE (fun () ->
            Util.msg "Sending transient exception (id: %d)\n" (decodeInt id 0));
-         dump conn ((id, 0, intSize) :: marshalHeader conn (TransientExn s) [])
+         send_encoded conn Normal(fun()->(id, 0, intSize) :: marshalHeader conn (TransientExn s) [])
      | Util.Fatal s ->
          debugE (fun () ->
            Util.msg "Sending fatal exception (id: %d)\n" (decodeInt id 0));
-         dump conn ((id, 0, intSize) :: marshalHeader conn (FatalExn s) [])
+         send_encoded conn Normal(fun()->(id, 0, intSize) :: marshalHeader conn (FatalExn s) [])
      | e ->
          Lwt.fail e
   in
   let started = ref false in
   let reply_started = ref false in
-  let dispatch () =
+  let dispatch run =
     if !started then invalid_arg "RPC server scope invoked its callback twice";
     started := true;
-    BorrowedWork.try_bind (fun () -> cmd conn buf)
+    BorrowedWork.try_bind run
       (fun marshal ->
          debugE (fun () -> Util.msg "Sending result (id: %d)\n" (decodeInt id 0));
-         let reply = (id, 0, intSize) :: marshalHeader conn NormalResult (marshal []) in
-         reply_started := true;
-         dump conn reply)
+         send_encoded conn Normal(fun()->
+           let reply=(id,0,intSize)::marshalHeader conn NormalResult(marshal[])in
+           reply_started:=true;reply))
       (fun error -> if !reply_started then Lwt.fail error else sendException error)
   in
-  match Util.StringMap.find_opt cmdName !serverScopes with
-  | None -> dispatch ()
-  | Some scope ->
-      BorrowedWork.catch (fun () -> scope conn buf dispatch)
-        (fun e -> if !started then Lwt.fail e else sendException e)
+  BorrowedWork.catch (fun () -> cmd conn buf dispatch)
+    (fun e -> if !started then Lwt.fail e else sendException e)
   (* With the current RPC protocol it is not possible to recover from situations
      where an RPC packet is not completely transmitted (due to an interrupted
      write syscall). The other side will hang forever, waiting for the complete
@@ -1039,11 +1646,81 @@ let processDetachedRequest conn id cmdName buf =
 let streamAbortedSrc = ref 0
 let streamAbortedDst = ref false
 
+let streamErrorSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcstreamerrorslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained stream error owners"
+  "Positive process-wide count of stored stream errors and borrowed ping replies; maximum65536.")
+let streamErrorMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcstreamerrorbudget" 8 ~local:true
+  ~category:(`Advanced `Remote) "retained stream diagnostic message MiB"
+  "Selected known exception string bytes through ping reply settlement, not exception allocation or heap/RSS.")
+type stream_error={stream_cause:exn;stream_bytes:int;mutable stream_active:bool;
+                   mutable stream_borrowed:bool;mutable stream_previous:stream_error option}
 let streamError = Hashtbl.create 7
-
+let stream_error_count=ref 0 and stream_error_bytes=ref 0
+let retained_stream_errors=ref None
+let stream_error_limits () =
+  let slots=Prefs.read streamErrorSlots and mib=Prefs.read streamErrorMiB in
+  if slots<=0 || slots>65536 || mib<=0 || mib>max_int/1048576 then
+    raise(Util.Fatal "Invalid RPC stream error budget");
+  slots,mib*1048576
+let check_stream_error_capacity () =
+  let slots,bytes=stream_error_limits () in
+  if !stream_error_count>=slots || !stream_error_bytes>bytes then
+    raise(Util.Fatal "RPC stream error budget exhausted")
+let release_stream_error entry =
+  if entry.stream_active then begin
+    entry.stream_active<-false;decr stream_error_count;
+    stream_error_bytes:= !stream_error_bytes-entry.stream_bytes
+  end
+let record_stream_error id error =
+  if Hashtbl.mem streamError id then invalid_arg "RPC duplicate stream error";
+  (* Preserve exact standard exception values and their existing abort/ping
+     behavior while accounting known string fields. Custom exception payloads
+     may retain arbitrary objects: propagate the exact original exception
+     instead of silently storing an unaccounted value. *)
+  let bytes=match error with
+    | Util.Transient message | Util.Fatal message | Failure message
+    | Invalid_argument message | Sys_error message -> String.length message
+    | Unix.Unix_error(_,operation,path) ->
+        let a=String.length operation and b=String.length path in
+        if a>max_int-b then raise(Util.Fatal "RPC stream error budget exhausted");
+        a+b
+    | Match_failure(file,_,_) | Assert_failure(file,_,_) -> String.length file
+    | End_of_file | Not_found | Exit | Division_by_zero | Out_of_memory
+    | Stack_overflow | Sys.Break -> 0
+    | _ -> raise error in
+  let slots,limit=stream_error_limits () in
+  if !stream_error_count>=slots || !stream_error_bytes>limit ||
+     bytes>limit- !stream_error_bytes then
+    raise(Util.Fatal "RPC stream error budget exhausted");
+  let entry={stream_cause=error;stream_bytes=bytes;stream_active=false;
+             stream_borrowed=false;stream_previous=None} in
+  Hashtbl.add streamError id entry;
+  entry.stream_active<-true;incr stream_error_count;
+  stream_error_bytes:= !stream_error_bytes+bytes
+let with_stream_error_scope id use =
+  match Hashtbl.find_opt streamError id with
+  | None -> use ()
+  | Some entry ->
+      if entry.stream_borrowed then raise(Util.Fatal "RPC stream error already borrowed");
+      (* Prepare retention before borrowing from the table. Disconnect may clear
+         that table, but cannot revoke a queued ping reply's actual ownership. *)
+      let cell=Some entry in
+      let retain_stream _=entry.stream_previous<- !retained_stream_errors;
+        retained_stream_errors:=cell in
+      let finish ()=
+        (match Hashtbl.find_opt streamError id with
+         | Some current when current==entry -> Hashtbl.remove streamError id
+         | _ -> ());
+        release_stream_error entry in
+      let work ()=entry.stream_borrowed<-true;use () in
+      BorrowedWork.try_bind
+        (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_stream work)
+        (fun result->finish ();Lwt.return result)
+        (fun error->finish ();Lwt.fail error)
 let resetStreamErroState () =
   streamAbortedSrc := 0;
   streamAbortedDst := false;
+  Hashtbl.iter(fun _ entry->if not entry.stream_borrowed then release_stream_error entry)streamError;
   Hashtbl.reset streamError
 let () = at_conn_close resetStreamErroState
 
@@ -1060,17 +1737,20 @@ let processStream conn id cmdName buf =
   if Hashtbl.mem streamError id then
    abortStream conn id
   else begin
-    begin try
+    check_stream_error_capacity ();
+    let invoke_stream () =
       let cmd =
         try Util.StringMap.find cmdName !serverStreams
         with Not_found -> raise (Util.Fatal (cmdName ^ " not registered!"))
       in
       cmd conn buf;
-      Lwt.return ()
-    with e ->
-      Hashtbl.add streamError id e;
-      abortStream conn id
-    end
+      Lwt.return () in
+    (* Classify inside the prepared carrier, before ordinary error caching.
+       An exception filter can replace the original with a classifier failure,
+       allowing the outer raw owner to mistake uncertainty for known failure. *)
+    BorrowedWork.catch
+      (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved invoke_stream)
+      (fun e->record_stream_error id e;abortStream conn id)
   end
 
 (* Message ids *)
@@ -1085,6 +1765,16 @@ let newMsgId () = incr ids; if !ids = hugeint then ids := 2; !ids
 (* Threads waiting for a response from the other side *)
 let receivers = ref MsgIdMap.empty
 let receiverLimits = ref MsgIdMap.empty
+let pendingReplySlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcpendingreplyslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "maximum pending RPC reply entries"
+  "Positive owner-loop process-wide waiter limit, maximum65536. Nonwaiting \
+   refusal before new request marshaling, rechecked before registry insertion; \
+   not returned-value, outgoing payload or full heap/RSS accounting.")
+let check_receiver_capacity () =
+  let slots=Prefs.read pendingReplySlots in
+  if slots<=0 || slots>65536 then raise(Util.Fatal "Invalid RPC pending reply budget");
+  if MsgIdMap.cardinal !receivers>=slots then
+    raise(Util.Transient "RPC pending reply budget exhausted")
 let resetReceivers () =
   let pending = !receivers in
   receivers := MsgIdMap.empty;
@@ -1116,23 +1806,37 @@ let rec receive conn =
       debugE
         (fun () -> Util.msg "Message received (id: %d)\n" num_id);
       (* Read the header *)
-      receivePacket conn >>= (fun buf ->
-      let req = unmarshalHeader conn buf in
+      receiveHeader conn >>= (fun req ->
       begin match req with
         Request cmdName ->
-          receivePacket ?maxBytes:(try Some (Util.StringMap.find cmdName !serverArgLimits)
-            with Not_found -> None) conn >>= (fun buf ->
           (* We yield before starting processing the request.
              This way, the request may call [Lwt_unix.run] and this will
              not block the receiving thread. *)
-          Lwt.ignore_result
-            (Lwt_unix.yield () >>= (fun () ->
-             processDetachedRequest conn id cmdName buf));
-          receive conn)
+          let dispatch buf=Lwt_unix.yield () >>= (fun () ->
+            processDetachedRequest conn id cmdName buf) in
+          let started=match Util.StringMap.find_opt cmdName !serverArgLimits with
+            | None -> start_body_request conn dispatch
+            | Some limit -> start_bounded_request conn limit dispatch in
+          started >>= (fun () -> receive conn)
       | NormalResult ->
-          receivePacket ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits) conn >>= (fun buf ->
-          Lwt.wakeup (find_receiver num_id) buf;
-          receive conn)
+          let pending=MsgIdMap.find num_id !receivers in
+          let handed_off=ref false in
+          receive_body_packet ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits)
+            replyInputLane conn >>= (fun packet ->
+          let delivered =
+            try
+              let ready=Lwt.return packet in
+              ignore(find_receiver num_id);
+              (* The prepared Return is installed before observers run. An
+                 exception at/after this transfer cannot release a borrower. *)
+              handed_off:=true;
+              Lwt.wakeup_from pending ready;Lwt.return ()
+            with error->
+              if not !handed_off then begin
+                release_body_packet packet;failPending pending error
+              end;
+              Lwt.fail error
+          in delivered >>= fun ()->receive conn)
       | TransientExn s ->
           debugV (fun() -> Util.msg "receive: Transient remote error '%s']" s);
           Lwt.wakeup_exn (find_receiver num_id) (Util.Transient s);
@@ -1142,8 +1846,10 @@ let rec receive conn =
           Lwt.wakeup_exn (find_receiver num_id) (Util.Fatal ("Server: " ^ s));
           receive conn
       | Stream cmdName ->
-          receivePacket conn >>= fun buf ->
-          processStream conn id cmdName buf >>= fun () ->
+          BorrowedWork.bind (fun()->receive_body_packet
+              ?maxBytes:(Util.StringMap.find_opt cmdName !serverStreamLimits)
+              requestInputLane conn)
+            (fun packet->with_body_packet packet (fun buf->processStream conn id cmdName buf)) >>= fun () ->
           receive conn
       | StreamAbort ->
           streamAbortedSrc := num_id;
@@ -1153,6 +1859,9 @@ let rec receive conn =
   end
 
 let wait_for_reply ?maxBytes id =
+  (match maxBytes with Some n when n<0->invalid_arg "RPC reply frame limit" | _->());
+  if MsgIdMap.mem id !receivers then raise(Util.Fatal "RPC reply id already pending");
+  check_receiver_capacity ();
   let res = Lwt.wait () in
   try
   receivers := MsgIdMap.add id res !receivers;
@@ -1163,19 +1872,28 @@ let wait_for_reply ?maxBytes id =
      receiving thread. *)
   BorrowedWork.catch
     (fun () ->
-       BorrowedWork.bind (fun () -> res) (fun v ->
-         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return v)))
-    (fun e -> BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
+       BorrowedWork.bind (fun () -> res) (fun packet ->
+         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return packet)))
+    (fun e ->
+       (* A post-arrival yield/setup failure has not published this result to
+          its decoder. Do not strand its raw allowance in the failed promise. *)
+       (match Lwt.poll res with
+        | Some packet->release_body_packet packet
+        | None->()
+        | exception _->());
+       BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
   with error ->
     (match MsgIdMap.find_opt id !receivers with
      | None -> ()
      | Some pending -> ignore (find_receiver id); failPending pending error);
     raise error
 
-let registerSpecialServerCmd
+let registerSpecialServerCmdWithConsumer
     ?maxResult
     ?maxResultForArgs
     ?withScope
+    ?decodeArgs
+    ?decodeResult
     (cmdName : string)
     marshalingFunctionsArgs
     marshalingFunctionsResult
@@ -1190,22 +1908,28 @@ let registerSpecialServerCmd
   let ((marshalResult,unmarshalResult) : 'b marshalingFunctions) =
     makeMarshalingFunctions marshalingFunctionsResult (cmdName ^ "-res") in
   (* Create a server function and remember it *)
-  let server conn buf =
-    let args = unmarshalArgs conn buf in
-    BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
-    Lwt.return (marshalResult conn answer))
+  let server conn buf dispatch =
+    (* Decode once: the scope and actual handler share this same value. The
+       dispatch continuation includes marshaling and queued output consumption,
+       so a scope can retain ownership through the entire reply lifetime. *)
+    let use args =
+      let run () =
+        BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
+          Lwt.return (marshalResult conn answer)) in
+      match withScope with
+      | None -> dispatch run
+      | Some scope -> scope conn args (fun () -> dispatch run) in
+    match decodeArgs with
+    | None -> use (unmarshalArgs conn buf)
+    | Some decode -> decode conn buf use
   in
   serverCmds := Util.StringMap.add cmdName server !serverCmds;
-  (match withScope with
-   | None -> ()
-   | Some scope ->
-       serverScopes := Util.StringMap.add cmdName
-         (fun conn buf f -> scope conn (unmarshalArgs conn buf) f) !serverScopes);
   (* Create a client function and return it *)
-  let client conn serverArgs =
+  let client conn serverArgs consume =
     match conn.outputQueue.failure with
     | Some e -> Lwt.fail e
     | None ->
+    check_receiver_capacity ();
     let maxBytes = match maxResultForArgs with
       | None -> maxResult
       | Some limit ->
@@ -1215,34 +1939,68 @@ let registerSpecialServerCmd
     in
     let id = newMsgId () in (* Message ID *)
     assert (id >= 0); (* tracking down an assert failure in receivePacket... *)
-    let request =
-      encodeInt id ::
-      marshalHeader conn (Request cmdName) (marshalArgs conn serverArgs [])
-    in
-    let reply = wait_for_reply ?maxBytes id in
-    debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
-    BorrowedWork.try_bind (fun () -> dump conn request)
-      (fun () -> BorrowedWork.bind (fun () -> reply) (fun buf -> Lwt.return (unmarshalResult conn buf)))
+    let reply=ref(Lwt.wait())and registered=ref false in
+    let sending ()=send_encoded conn Normal(fun()->
+      let request=encodeInt id::
+        marshalHeader conn(Request cmdName)(marshalArgs conn serverArgs[])in
+      let pending=wait_for_reply ?maxBytes id in
+      reply:=pending;registered:=true;
+      debugE(fun()->Util.msg "Sending request (id: %d)\n" id);
+      request)in
+    BorrowedWork.try_bind sending
+      (fun () -> BorrowedWork.bind (fun () -> !reply) (fun packet ->
+         with_body_packet packet (fun buf ->
+           match decodeResult with
+           | None -> consume (unmarshalResult conn buf)
+           | Some decode -> decode conn buf consume)))
       (fun e ->
+         if not !registered then Lwt.fail e else begin
          (match MsgIdMap.find_opt id !receivers with
           | None -> ()
           | Some pending -> ignore (find_receiver id); failPending pending e);
-         Lwt.fail e)
+         (* A reply may already have arrived while output was pending. Await
+            the actual waiter/yield, then abandon that unconsumed packet. *)
+         BorrowedWork.try_bind (fun()-> !reply)
+           (fun packet->release_body_packet packet;Lwt.fail e)
+           (fun _->Lwt.fail e) end)
   in
   client
 
+let registerSpecialServerCmd ?maxResult ?maxResultForArgs ?withScope ?decodeArgs
+    name mArg mRet server =
+  let client = registerSpecialServerCmdWithConsumer ?maxResult ?maxResultForArgs
+    ?withScope ?decodeArgs name mArg mRet server in
+  fun connection args -> client connection args Lwt.return
+
 let registerServerCmd name mArg mRet f =
-  registerSpecialServerCmd
+  let tag=Bytearray.of_string(name ^ "-args") in
+  registerSpecialServerCmd ~decodeArgs:(with_decoded_args None mArg tag)
     name (defaultMarshalingFunctions mArg)
          (defaultMarshalingFunctions mRet) f
 
 let registerBoundedServerCmd ?withScope ?maxResultForArgs
     name ~maxArgs ~maxResult mArg mRet f =
   if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
-  let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult name
-    (defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in
+  let tag=Bytearray.of_string(name ^ "-args") in
+  let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult
+    ~decodeArgs:(with_decoded_args (Some maxArgs) mArg tag) name
+    (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command
+
+let registerBoundedServerCmdWithResultScope ?withScope ?maxResultForArgs
+    name ~maxArgs ~maxResult mArg mRet server =
+  if maxArgs < 0 || maxResult < 0 then
+    invalid_arg "registerBoundedServerCmdWithResultScope";
+  let argument_tag=Bytearray.of_string(name ^ "-args")
+  and result_tag=Bytearray.of_string(name ^ "-res") in
+  let client=registerSpecialServerCmdWithConsumer ?withScope ?maxResultForArgs ~maxResult
+    ~decodeArgs:(with_decoded_args (Some maxArgs) mArg argument_tag)
+    ~decodeResult:(with_decoded_result (Some maxResult) mRet result_tag)
+    name (boundedMarshalingFunctions maxArgs mArg)
+    (boundedMarshalingFunctions maxResult mRet) server in
+  serverArgLimits:=Util.StringMap.add name maxArgs !serverArgLimits;
+  client
 
 (* RegisterHostCmd is a simpler version of registerClientServer [registerServerCmd?].
    It is used to create remote procedure calls: the only communication
@@ -1299,25 +2057,41 @@ let streamingActivated =
      streaming protocol for transferring file contents more efficiently. \
      The default value is \\texttt{true}."
 
-let registerStreamCmd
+let registerStreamCmd ?maxPayload
     (cmdName : string)
     marshalingFunctionsArgs
     (serverSide : connection -> 'a -> unit)
     =
+  (* The custom payload includes any codec-specific fields, but excludes the
+     role-specific RPC tag. Bound both stream and nonstream fallback bodies. *)
+  let request_limit,stream_limit=match maxPayload with
+    | None -> None,None
+    | Some payload ->
+        let name_length=String.length cmdName in
+        if payload<0 || name_length>max_int-5 || payload>max_int-name_length-5 then
+          invalid_arg "registerStreamCmd payload limit";
+        Some(payload+name_length+5),Some(payload+name_length+4) in
   let cmd =
     registerSpecialServerCmd
       cmdName marshalingFunctionsArgs
       (defaultMarshalingFunctions Umarshal.unit)
       (fun conn v -> serverSide conn v; Lwt.return ())
   in
+  (match request_limit with
+   | None -> ()
+   | Some limit -> serverArgLimits:=Util.StringMap.add cmdName limit !serverArgLimits);
   let ping =
-    registerServerCmd (cmdName ^ "Ping") Umarshal.int Umarshal.unit
+    let name=cmdName ^ "Ping" in
+    registerSpecialServerCmd
+      ~decodeArgs:(with_decoded_args None Umarshal.int(Bytearray.of_string(name ^ "-args")))
+      ~withScope:(fun _ id use->with_stream_error_scope id use)
+      name (defaultMarshalingFunctions Umarshal.int)(defaultMarshalingFunctions Umarshal.unit)
       (fun conn (id : int) ->
          try
-           let e = Hashtbl.find streamError id in
+           let entry = Hashtbl.find streamError id in
            Hashtbl.remove streamError id;
            streamAbortedDst := false;
-           Lwt.fail e
+           Lwt.fail entry.stream_cause
          with Not_found ->
            Lwt.return ())
   in
@@ -1333,15 +2107,15 @@ let registerStreamCmd
     serverSide conn args
   in
   serverStreams := Util.StringMap.add cmdName server !serverStreams;
+  (match stream_limit with
+   | None -> ()
+   | Some limit -> serverStreamLimits:=Util.StringMap.add cmdName limit !serverStreamLimits);
   (* Create a client function and return it *)
   let client conn id serverArgs =
     debugE (fun () -> Util.msg "Sending stream chunk (id: %d)\n" id);
     if !streamAbortedSrc = id then raise (Util.Transient "Streaming aborted");
-    let request =
-      encodeInt id ::
-      marshalHeader conn (Stream cmdName) (marshalArgs conn serverArgs [])
-    in
-    dumpIdle conn request
+    send_encoded conn Idle(fun()->encodeInt id::
+      marshalHeader conn(Stream cmdName)(marshalArgs conn serverArgs[]))
   in
   fun conn sender ->
     if not (Prefs.read streamingActivated) then
@@ -1371,23 +2145,49 @@ let commandAvailable =
                      BUILDING CONNECTIONS TO THE SERVER
  ****************************************************************************)
 
+(* Startup is read before command selection. Reserve its maximum buffer and
+   returned-string payload in the shared input lane, independently of bodies. *)
+let startupMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcstartupmaxbytes" 65536 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC startup field bytes"
+  "Positive endpoint-local limit for each startup field, including separators \
+   and ignored carriage returns. Shared header input credits cover twice this \
+   allowance during delimiter reads. Not a wall-clock or whole-heap limit.")
+let startup_limit () =
+  let maximum=Prefs.read startupMaxBytes in
+  if maximum<=0 || maximum>Sys.max_string_length || maximum>max_int/2 then
+    raise(Util.Fatal "Invalid RPC startup input limit");
+  maximum
+let startup_exceeds () = raise(Util.Fatal "RPC startup input limit exceeded")
+let with_startup_input length f =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    (* A startup field has its own size policy, not the message-header cap. *)
+    reserve_header_input {limits with header_max=max_int} ticket (2*length);
+    BorrowedWork.try_bind f
+      (fun value->release_header_input ticket;Lwt.return value) failed
+  with error->release_header_input ticket;raise error
+
 let receiveUntilSep ?(space=false) ?(nl=true) ?(includesep=false) conn =
   assert (space || nl);
-  let inp = Buffer.create 32
-  and buf = Bytearray.create 1 in
-  let add () = Buffer.add_char inp buf.{0} in
-  let rec aux () =
-    grab conn.inputBuffer buf 1 >>= fun () ->
-    match buf.{0} with
-    | ' ' | '\t' when space ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\n' when nl ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\r' ->
-        aux () (* ignore *)
-    | _ ->
-        add (); aux ()
-  in aux ()
+  let maximum=startup_limit () in
+  with_startup_input maximum (fun ()->
+    let inp=Bytearray.create maximum and buf=Bytearray.create 1 in
+    let used=ref 0 and consumed=ref 0 in
+    let add ()=inp.{!used}<-buf.{0};incr used in
+    let finish ()=Lwt.return(Bytearray.sub inp 0 !used) in
+    let rec aux () =
+      if !consumed=maximum then startup_exceeds ();
+      grab conn.inputBuffer buf 1 >>= fun () ->
+      incr consumed;
+      match buf.{0} with
+      | ' ' | '\t' when space -> if includesep then add ();finish ()
+      | '\n' when nl -> if includesep then add ();finish ()
+      | '\r' -> aux () (* ignored, but charged to the wire-byte limit *)
+      | _ -> add ();aux ()
+    in aux ())
 
 (* Get input until newline (excluded), blocking *)
 let receiveUntilNewline conn =
@@ -1399,9 +2199,12 @@ let receiveUntilSpaceOrNl ?(includesep=true) conn =
 
 (* Get input of fixed length, blocking *)
 let receiveString conn len =
-  let buf = Bytearray.create len in
-  grab conn.inputBuffer buf len >>= fun () ->
-  Lwt.return (Bytearray.to_string buf)
+  let maximum=startup_limit () in
+  if len<0 || len>maximum then startup_exceeds ();
+  with_startup_input len (fun ()->
+    let buf = Bytearray.create len in
+    (if len=0 then Lwt.return () else grab conn.inputBuffer buf len) >>= fun () ->
+    Lwt.return (Bytearray.to_string buf))
 
 (* Get input until newline (excluded), non-blocking *)
 let receiveUntilNewlineNb conn =
@@ -1675,7 +2478,9 @@ let checkForMagicString conn =
       (* Consume magic id from buffer *)
       grab conn.inputBuffer id intSize >>= fun () ->
       (* Consume magic packet from buffer *)
-      receivePacket conn >>= fun _ -> Lwt.return true
+      let maximum=startup_limit () in
+      with_startup_input maximum (fun ()->
+        receivePacket ~maxBytes:maximum conn >>= fun _ -> Lwt.return true)
       (* We rely solely on the magic id and don't check the contents of the
          packet. Should it become necessary for some reason then it is
          possible to verify the magic packet byte by byte here. *)

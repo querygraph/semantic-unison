@@ -1,0 +1,154 @@
+{
+  "state": "NESTED_READER_CLOSE_CARRIER_AND_WORKER_RETENTION_QUALIFIED",
+  "build_owner": {
+    "session_id": 98636,
+    "terminal_chunk": "5c4ea0",
+    "exit_code": 0,
+    "no_session": true,
+    "stock_child": 90990,
+    "ox_child": 92223,
+    "both_reaped_group_absent": true,
+    "cpu8_closed_after_each": true,
+    "io_acquired": false
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "source_count": 321,
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-reader-retention-check-stock-20261018-001/RESULT.json",
+          "bytes": 53891,
+          "sha256": "bad289cff8c468e439c8642616ca48c4786966da5aba692ba384981f746a3af2"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "aec246d897b330e43202e11962dd2edcb7a540218406609e7b791bf994b8e620"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "45f221a64fe60e0e1ea00501572fea2e0acc8d80f0ccbcb78efb1ab06ccb6866"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "source_count": 321,
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-reader-retention-check-ox-20261018-001/RESULT.json",
+          "bytes": 53897,
+          "sha256": "9020d622edad34153ef9760bf91ea32be9dc178150c9432e744f0721dbd2d1a9"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "4a6933554a9de5dfe47ba27c99c645810f998833a9dd9c03af6f809372523284"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "dd48b5553b0688ad3399be286da5aafb50c64c4ec0bc38cf89628002fd1e5af1"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-check-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "fault_owner": {
+    "session_id": 7709,
+    "terminal_chunk": "8df346",
+    "exit_code": 0,
+    "no_session": true,
+    "controller": 94461,
+    "reaped": true,
+    "group_absent": true,
+    "cpu3_closed": true,
+    "io_acquired": false
+  },
+  "fault_evidence": [
+    {
+      "path": "/private/tmp/unison-reader-worker-faults-20261018-001/RESULT.json",
+      "bytes": 213806,
+      "sha256": "31503b89bd0e95e3f8e593785595b7756858fd6b2775da36c1ac963fc17b0726"
+    },
+    {
+      "path": "/private/tmp/unison-reader-worker-faults-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "2fd3f52f6d4003209a2ea7d0c8ea03125559c2adf87bc38cdb05cf373d49a0e4"
+    },
+    {
+      "path": "/private/tmp/unison-reader-worker-faults-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 70,
+      "sha256": "a270e1df0408620481c46d581e3f0bee3d745bc68fb477d4d82128fa3761548d"
+    },
+    {
+      "path": "/private/tmp/unison-reader-worker-faults-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "current_cases": 16,
+  "old_behavior_regressions": 4,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/semanticFile.ml",
+      "bytes": 11704,
+      "sha256": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/semanticFile.mli",
+      "bytes": 4965,
+      "sha256": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/semanticFile.ox.mli.in",
+      "bytes": 5008,
+      "sha256": "1625907727d0ca4292afd30735b412e4b3354c73a5882247accad0be66be5782"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/semanticWorkers.ml",
+      "bytes": 34220,
+      "sha256": "25287a54faae121b0bc4b3d02afca4d12ec81f93fef7be83406884677a2788e7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/semantic_mode_filter.ml",
+      "bytes": 13130,
+      "sha256": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/reader_fault.ml",
+      "bytes": 994,
+      "sha256": "887aee8aad95530e1927eb96b803dc6871734b3dfb964df42fe06dfbd99ec07b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/reader_fault_test.ml",
+      "bytes": 3098,
+      "sha256": "e07cf1198116b0b2359f976a3287798435fac4fe9322de1d9d5da5a9ad234c9b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/reader_worker_test.ml",
+      "bytes": 1643,
+      "sha256": "2d4207b709821add64406c74878bd569fefabd9cb8ce2d07263b48b2d998b8ce"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/reader_fault_run.py",
+      "bytes": 6984,
+      "sha256": "b22538b858871db4aeb18834b2b1291f99a18397e9dd09b668be0c5d04e4b146"
+    }
+  ],
+  "scope": "Actual reader/channel/raw close and worker objects with private callback/channel-construction substitutions. 64B original fixtures; no SDK/Photo. Current callback/close/nested exception chain and file identities preserved; uncertain worker promise/admission stays sleeping through cancel/shutdown. Fault process OS closure proved by external controller exit/group; not normal pool shutdown.",
+  "native_contexts_or_pool_pipes_qualified": false,
+  "hard_process_FD_or_RSS_limits": false,
+  "Dune_requalification": false
+}

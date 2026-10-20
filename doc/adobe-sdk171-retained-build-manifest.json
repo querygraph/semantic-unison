@@ -1,0 +1,11 @@
+{
+  "sdk": "Adobe DNG SDK 1.7.1 build 2724",
+  "sdk_root": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1",
+  "sdk_license": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/LICENSE.txt",
+  "executable": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+  "executable_sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+  "build_id": "unison-sdk171-2724-v1-single",
+  "source_sha256": "15d505f4fedb931e14f0e5654fd5c3858cec7e03324dce66a79acd37fefdc957",
+  "qualification": "passed synthetic CFA uncompressed/lossless JPEG/JXL and XMP controls; see qualification.json",
+  "threads": 1
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "unison-final-clone-interruption-known-prefix-recovery/1",
+  "version": 1,
+  "actual_owner_terminal": {
+    "session_id": 71464,
+    "initial_chunk": "5ec489",
+    "terminal_chunk": "de1bb4",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 58937
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-clone-interruption-plan-v1-20261019.json",
+    "sha256": "84e32a055485d31b389ae18e9e54b1959c18c58b702058d53a41dc3ec5e72a14"
+  },
+  "prestop": {
+    "path": "/private/tmp/u-clone-interrupt-008da01aedea/RECOVERY-PRESTOP.json",
+    "bytes": 1311,
+    "sha256": "ca43515e72f3333e084f879681b9545a62c327c4d03f35b0b0ba5194d807cfd4"
+  },
+  "recovery_tool": {
+    "chunk_id": "99576a",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "recovery_source": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-clone-interruption-v1-recovery-20261019.py.txt",
+    "sha256": "baf3dccbc450c3f30ed6c55bdbb0bb5e96a00bcb06f97b310ca0921915a69a4a"
+  },
+  "state": "FAILED_HARNESS_KNOWN_PREFIX_INDEPENDENT_IDLE_CONTROLLER_RECOVERY_CLOSED",
+  "normal_parent_exit_claimed": false,
+  "peer_normal_and_designated_closures_independently_reparsed_before_stop": true,
+  "only_idle_controller_signaled": true,
+  "native_or_group_recovery_signal": false,
+  "original_cause": "strict artifact reader rejected explicit generated hardlink",
+  "canonical9_later_reacquired_closed_by": "final-clone-interruption-v3-actual-20261019.json",
+  "SDK_or_Photo_calls": 0
+}

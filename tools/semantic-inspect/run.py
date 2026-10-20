@@ -11,10 +11,10 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
-MODULES = ['semanticHash', 'semanticFile', 'formatExtension', 'xmpObservation', 'xmpMerge',
-           'dngSemantic', 'dngExtended', 'semanticDelta']
+MODULES = ['semanticHash', 'semanticFile', 'componentHash', 'formatExtension', 'xmpObservation', 'xmpMerge',
+           'dngSemantic', 'dngExtended', 'dngLayout', 'dngComponents', 'semanticDelta']
 SOURCES = [Path('src') / (name + suffix) for name in MODULES for suffix in ('.ml', '.mli')]
-SOURCES += [Path('src/semanticHash_stubs.c'), Path('src/semanticFile_stubs.c'),
+SOURCES += [Path('src/semanticHash_stubs.c'), Path('src/semanticHash_evp.h'), Path('src/semanticFile_stubs.c'),
             Path('tools/semantic-inspect/inspect.ml')]
 
 
@@ -86,9 +86,24 @@ def main():
     parser.add_argument('--build-only', action='store_true')
     parser.add_argument('--report', type=Path)
     parser.add_argument('--use-build', type=Path, help='reuse a pinned retained inspector; never rebuild')
+    parser.add_argument('--exiftool-build', type=Path, help='optional pinned read-only MakerNote interpretation bridge')
     args, forwarded = parser.parse_known_args()
     if forwarded[:1] == ['--']:
         forwarded = forwarded[1:]
+    if args.exiftool_build:
+        if not args.use_build or args.build_only or args.report or len(forwarded)!=2 or forwarded[0]!='--components':
+            parser.error('--exiftool-build requires --use-build and exactly --components FILE')
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('unison_exiftool_observation',ROOT/'tools/exiftool-bridge/observe.py')
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        from shared_cpu_pool import UnresolvedOwnership
+        from shared_process_owner import retain_after_record
+        try:
+            result=module.observe(Path(forwarded[1]),args.exiftool_build,components_build=args.use_build)
+        except UnresolvedOwnership as error:
+            retain_after_record(lambda:print(repr(error),file=__import__('sys').stderr,flush=True))
+        print(json.dumps(result,indent=2))
+        return 0
     if args.use_build:
         if args.build_only or args.report:
             parser.error('--use-build cannot be combined with build/report output')

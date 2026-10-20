@@ -1,0 +1,36 @@
+{
+  "schema": "unison-layout-receiving-expiry-qualification/1",
+  "state": "ISSUED_V1_EXPIRED_NOT_DISPATCHED_BY_THIS_OWNER",
+  "actual_guard_terminal": {
+    "kind": "exec_command",
+    "chunk_id": "00c0d2",
+    "exit_code": 2,
+    "remaining_session": null
+  },
+  "owner_refusal": {
+    "path": "/private/tmp/unison-layout-receiving-v1-EXPIRED-OWNER-20261017.json",
+    "bytes": 920,
+    "sha256": "9d1c46236475c675047869d5c760b11e4564d07e7b7308d2b8ba629bd12ecc59"
+  },
+  "original_admission": {
+    "path": "/private/tmp/unison-layout-receiving-admission-v1.json",
+    "bytes": 7342,
+    "sha256": "209266ba0d44d1e588bd1fd50ef1d8df2995f61ab024732e4bfd7de21af261c9"
+  },
+  "root_review": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-LAYOUT-RECEIVING-V1-ROOT-REVIEW.json",
+    "bytes": 2863,
+    "sha256": "d904404794fe3d520b3e353233961db1e3edc4f2540766e996d4bee178381fa1"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/layout-receiving-request-v1.json",
+    "bytes": 10738,
+    "sha256": "a1b0dc643605c7fcecbfe4952d25cf14df839fae45fbcc82086a9d8e33d1491b"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/layout-receiving-plan-v1.json",
+    "bytes": 8889,
+    "sha256": "77f87fab838911aa98aa3543cd9b9506c6360d4f73177ebdc959cc61e67d57a1"
+  },
+  "scope": "Actual local preexec refusal after discovery beyond deadline; original grant remains preserved. No executor/CLI/payload/native or CPU/IO acquisition by this owner. Workspace absence corroborates scheduling only, not invented runtime exit. Fresh separate successor required, never dispatch old209266ba."
+}

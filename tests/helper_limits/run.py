@@ -2,14 +2,32 @@
 import argparse,pathlib,subprocess,tempfile,shutil,json,hashlib,resource,os
 p=argparse.ArgumentParser();p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
 r=pathlib.Path(__file__).resolve().parents[2];w=pathlib.Path(tempfile.mkdtemp(prefix='unison-helper-limits-')).resolve();before=resource.getrlimit(resource.RLIMIT_NOFILE)
-sources=['src/lwt/lwt.mli','src/lwt/lwt.ml','src/lwt/pqueue.mli','src/lwt/pqueue.ml','src/lwt/generic/lwt_unix_impl.ml','src/lwt/lwt_unix.mli','src/lwt/lwt_unix.ml','src/borrowedWork.mli','src/borrowedWork.ml','src/helperSupervisor.mli','src/helperSupervisor.ml','src/helperSupervisor_stubs.c','tests/helper_limits/test.ml','tests/helper_limits/probe.c','tools/helper-limits/launcher.c']
+sources=['src/lwt/lwt.mli','src/lwt/lwt.ml','src/lwt/pqueue.mli','src/lwt/pqueue.ml','src/lwt/generic/lwt_unix_impl.ml','src/lwt/lwt_unix.mli','src/lwt/lwt_unix.ml','src/borrowedWork.mli','src/borrowedWork.ml','src/helperSupervisor.mli','src/helperSupervisor.ml','src/helperSupervisor_stubs.c','tests/helper_limits/test.ml','tests/helper_limits/probe.c','tools/helper-limits/launcher.c','tests/helper_limits/close_fixture.c','tests/helper_limits/darwin_close_fixture.c']
 for s in sources:shutil.copyfile(r/s,w/pathlib.Path(s).name)
 commands=[]
 def run(args,code=0,**kwargs):
  x=subprocess.run(args,cwd=w,capture_output=True,text=True,timeout=60,**kwargs);commands.append(dict(argv=args,exit=x.returncode,stdout=x.stdout,stderr=x.stderr));assert x.returncode==code,(args,x.stdout,x.stderr);return x
 j=dict(schema='unison-helper-limits/1',work=str(w),commands=commands,parentNoFileBefore=before)
 try:
- for n in ['launcher','probe']:run(['clang','-std=c11','-D_DEFAULT_SOURCE','-D_DARWIN_C_SOURCE','-Wall','-Wextra','-Werror','-O2',n+'.c','-o',n])
+ for n in ['launcher','probe','close_fixture','darwin_close_fixture']:run(['clang','-std=c11','-D_DEFAULT_SOURCE','-D_DARWIN_C_SOURCE','-Wall','-Wextra','-Werror','-O2',n+'.c','-o',n])
+ run([str(w/'close_fixture')])
+ run([str(w/'darwin_close_fixture'),str(w/'probe'),str(w/'close-error-target')])
+ assert not (w/'close-error-target').exists()
+ # Private old-behavior participant must fail each designated new oracle.
+ old=(w/'launcher.c').read_text().replace(
+  'if(close(fds[i].proc_fd)) {int saved=errno;free(fds);errno=saved;return -1;}',
+  '(void)close(fds[i].proc_fd);').replace(
+  'before.rlim_max>65536','before.rlim_max>INT_MAX').replace(
+  'if(close(fd) && errno!=EBADF)return -1;','(void)close(fd);')
+ assert old!=(w/'launcher.c').read_text()
+ regression=w/'old-behavior';regression.mkdir();(regression/'launcher.c').write_text(old)
+ j['oldBehaviorSourceSha256']=hashlib.sha256(old.encode()).hexdigest()
+ for name in ['close_fixture','darwin_close_fixture']:
+  shutil.copyfile(w/(name+'.c'),regression/(name+'.c'))
+  run(['clang','-std=c11','-D_DEFAULT_SOURCE','-D_DARWIN_C_SOURCE','-Wall','-Wextra','-Werror','-O2',str(regression/(name+'.c')),'-o',str(regression/name)])
+ run([str(regression/'close_fixture')],code=1)
+ run([str(regression/'darwin_close_fixture'),str(w/'probe'),str(w/'old-close-error-target')],code=2 if os.uname().sysname=='Darwin' else 0)
+ assert not (w/'old-close-error-target').exists()
  for s in sources:
   if s.startswith('src/'):run([a.compiler,'-I','+unix','-c',pathlib.Path(s).name])
  run([a.compiler,'-I','+unix','unix.cmxa','lwt.cmx','pqueue.cmx','lwt_unix_impl.cmx','lwt_unix.cmx','borrowedWork.cmx','helperSupervisor.cmx','helperSupervisor_stubs.o','test.ml','-o','test'])

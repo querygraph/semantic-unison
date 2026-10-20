@@ -1,0 +1,72 @@
+{
+  "scope": "Current stock/Ox Dune+selftests, eight queued/cancelled actual-worker controls restoring phase FD census, 30 original fixed close/reader regression controls including historical designated failures. No aggregate hard FD/RSS/quiet timing/SDK/Photo claim.",
+  "dune_parent": {
+    "session": 39017,
+    "terminal_chunk": "72025a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "queue_parent": {
+    "session": 44436,
+    "terminal_chunk": "a086b2",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "regression_parent": {
+    "session": 70470,
+    "terminal_chunk": "279fe5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-dune-check": 327,
+    "ox-dune-check": 327
+  },
+  "artifacts": {
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-domain-slots-stock-dune-check-20261018-001/RESULT.json",
+      "bytes": 55693,
+      "sha256": "d75a848e32524bf14ee982da976fda6d7dc189d1c20006305a37673a6243efac"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-domain-slots-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "41d23b36af2afbf4dffac9ee4f9f42fb27e723e8e911ff311c82bda6621be5d8"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-domain-slots-ox-dune-check-20261018-001/RESULT.json",
+      "bytes": 55697,
+      "sha256": "7b4473018c47f83ab9c8d775863d478286368a1f90d1f330a1fa747fa54bdeb9"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-domain-slots-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "909451ebf89459397e97d7a6fb27c3b849fc5516377b1413752e669df9547cd7"
+    },
+    "queued/RESULT.json": {
+      "path": "/private/tmp/unison-queued-pool-20261018-001/RESULT.json",
+      "bytes": 112569,
+      "sha256": "bec7d33ed72858e9e09f1050fbfe26edd7e7da2ada8868a859490d7147159eeb"
+    },
+    "queued/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-queued-pool-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "06075b1fef4d669c0848c7e4aebf54d94a15db92d3efac3da8288e10c80d4d67"
+    },
+    "close-regressions/RESULT.json": {
+      "path": "/private/tmp/unison-current-pool-close-regressions-20261018-002/RESULT.json",
+      "bytes": 711,
+      "sha256": "70f77f5c02a9178b1c91767577b1b51874e35f0248f9bb374fd21b2eade75d2c"
+    },
+    "close-regressions/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-current-pool-close-regressions-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "b71dd821b71285838a4fdc6724b5fe060c7babda906979b4e945dec44c6fa508"
+    }
+  },
+  "preexec_refusal": {
+    "workspace": "/private/tmp/unison-current-pool-close-regressions-20261018-001",
+    "terminal": "f857e9/exit1/no session",
+    "reason": "dispatcher correctly refused script outside repository before CPU acquisition (shared_dispatch.py validates script before pool.try_acquire); no worker dispatched"
+  }
+}

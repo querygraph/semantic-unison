@@ -1,0 +1,162 @@
+{
+  "state": "OBSERVATION_COMPONENT_FOREST_AND_MAKERNOTE_VIEWS_PASS_CLOSED",
+  "actual_tool": {
+    "owner_pid": 77441,
+    "session": 94968,
+    "initial_chunk": "f2331a",
+    "chunk": "138880",
+    "exit_code": 0,
+    "no_session": true,
+    "evidence": "Faithful transcription of actual owning write_stdin terminal; not inferred from markers or process absence"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-large-forest-request-v6.json",
+    "bytes": 12623,
+    "sha256": "1663093ec154b5bb437941ca7dc7af916578366062115f5c62722969f0b72f50"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-camera-large-forest-admission-20261017-41b8c72d.json",
+    "bytes": 9052,
+    "sha256": "cd3d2d21120084c08fb30ebe6db3c9cb2ca37f7c6bbb7c9aecad3f9af19b6cf4"
+  },
+  "closure": {
+    "child": {
+      "pid": 77464,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 77464,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": {
+      "unchanged": true,
+      "observed": {
+        "st_dev": 16777223,
+        "st_ino": 307228717,
+        "st_mode": 33024,
+        "st_nlink": 1,
+        "st_uid": 501,
+        "st_size": 193851848,
+        "st_mtime_ns": 1792099229810540469,
+        "st_ctime_ns": 1792113844382073309
+      },
+      "error": null
+    },
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "component_status": {
+    "path": "/dev/fd/3",
+    "path_bytes_hex": "2f6465762f66642f33",
+    "status": "observed",
+    "partition_schema": "dng-physical-partition/3",
+    "size": 193851848,
+    "sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+    "layout_view_sha256": "1ffa8e2ccd50d47e070130905ac879a028ceecfef1c490ecbceffabe7b52394c",
+    "hash_bytes_requested": 193851848,
+    "projections": {
+      "encoded_pixels": {
+        "sha256": "df7ab1294ee57a74779694919cffa7863d522783369fc949792289018070b6a5",
+        "components": 834,
+        "bytes": 193682116
+      },
+      "standard_metadata": {
+        "sha256": "6a3dfc2c924ca41fc30c2ce680b5b33869a80d1572c63fb1393ba6357ddbbcbc",
+        "components": 37,
+        "bytes": 152235
+      },
+      "private_metadata": {
+        "sha256": "b567ddb847759c8372da99b25e258da380f5b2a6415aae63fe11ab5820c78d92",
+        "components": 5,
+        "bytes": 6624
+      },
+      "structural": {
+        "sha256": "bbb69413e9924e5b681795dd0cdfb683a2c56683bb37e23ff61720e1afb59f99",
+        "components": 18,
+        "bytes": 70
+      },
+      "opaque": {
+        "sha256": "312300108fad9a87c67830f58267a6b0a5a3baddc23413a2fcefbfd4578542e4",
+        "components": 852,
+        "bytes": 10803
+      }
+    }
+  },
+  "makernote_tag_count": 30,
+  "makernote_warnings": 0,
+  "source_full_sha256_matches_historical": true,
+  "helpers": [
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 77465,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    },
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 77467,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    }
+  ],
+  "execution_source_pins_checked": 40,
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/OWNER-TERMINAL.json",
+      "bytes": 259,
+      "sha256": "40b7e15a190e9bb7ede9aa13a1482573f402ef18eeb60e30ab6dd3b98b88f1ae"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/SHARED-START.json",
+      "bytes": 4931,
+      "sha256": "bf1e887081716ffa624f0291d3a5015ba62f633795747f140d4fa9e30d4b4007"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/SHARED-CLOSED.json",
+      "bytes": 833,
+      "sha256": "eb5dd9895d1a936f9174d25c35b3763d3a721333bb2cfd36e3b9d9066f7bef41"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/SHARED-IO-ATTEMPT.json",
+      "bytes": 751,
+      "sha256": "6006e50dc4828d61ea46039f7a469151422c77a98767d83722ec89a6df8d562e"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/SHARED-STDOUT.txt",
+      "bytes": 52015,
+      "sha256": "ae1faf547d76e76880af9993b453f4646f4fa7a909cdbbe86e9a8bec1795ecc6"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-camera-large-forest-20261017-41b8c72d/OWNER-RETURN.json",
+      "bytes": 5449,
+      "sha256": "8759b6607055e4e446ebb983b865d054546b2b4bd4ae7bcdbc114942cfe7d899"
+    }
+  ],
+  "limits": "One retained Unison readonly clone only; exact input identity unchanged. Complete physical byte coverage for this one DNG; typed MakerNote views remain independent value observations without byte spans. No decoded pixels/rendering/SDK/semantic merge/corpus/performance authority. No retry/successor. Photo release sent before sealing queue01a14d4b-3022.",
+  "schema": "unison-camera-large-forest-actual/1"
+}

@@ -1,0 +1,139 @@
+{
+  "state": "PREPARED_NOT_ADMITTED",
+  "target": "inspect-file",
+  "workspace": "/private/tmp/unison-camera-role-runs-20261017-4edb027a",
+  "proposed_admission": "/private/tmp/unison-camera-role-runs-admission-20261017-4edb027a.json",
+  "cpu_credits": 8,
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/run.py",
+    "--use-build",
+    "/private/tmp/unison-many-unit-stock-inspector-20261017-002/RESULT.json",
+    "--exiftool-build",
+    "/private/tmp/unison-exiftool-bridge-build-20261017-001/BUILD.json",
+    "--",
+    "--components",
+    "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG"
+  ],
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_knowledge_entry.py"
+  ],
+  "environment": {
+    "SHARED_CPU_CREDITS": "8",
+    "OUTPUT_DIR": "/private/tmp/unison-camera-role-runs-20261017-4edb027a",
+    "INSPECTOR_RECEIPT": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/RESULT.json",
+    "INSPECT_INPUT": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "SHARED_IO_ADMISSION": "/private/tmp/unison-camera-role-runs-admission-20261017-4edb027a.json",
+    "SHARED_IO_ADMISSION_SHA256": "ROOT_PUBLISHED_SHA_REQUIRED",
+    "EXIFTOOL_BUILD": "/private/tmp/unison-exiftool-bridge-build-20261017-001/BUILD.json"
+  },
+  "inspector_contract": {
+    "mode": "components",
+    "build_receipt": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/RESULT.json",
+    "build_receipt_sha256": "eefe6b9eb70a4c7c5edb09fd09319dc24c9803c742a026eb6012064c3f5fafa8",
+    "binary_sha256": "ba0c9a5b9928d390ad4efa2f8e8de09864e4edeb20d2f2634aca383d285e7b76",
+    "input": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "input_identity": {
+      "st_dev": 16777223,
+      "st_ino": 307228717,
+      "st_mode": 33024,
+      "st_nlink": 1,
+      "st_uid": 501,
+      "st_size": 193851848,
+      "st_mtime_ns": 1792099229810540469,
+      "st_ctime_ns": 1792113844382073309
+    },
+    "exiftool_bridge": {
+      "build_receipt": "/private/tmp/unison-exiftool-bridge-build-20261017-001/BUILD.json",
+      "build_receipt_sha256": "ffd70f61217f550a512c1fe002dd662d1cad86cb0785ef28a14bc5066a6ca1ea",
+      "binary_sha256": "1b3f84518a651ce10de4e6ce2aa5001949859268242be7c43c7ca5b886fc4bc0",
+      "engine_revision": "3cd699a2e6633fcf28e39c260c71709b6a6049a7",
+      "wrapper_sha256": "ca7d77dd4f242300b898f3c775f1cc2a9ac8fa78d6b2d5866af6a29d2560605e"
+    }
+  },
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison-sol-review-20261017/bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "/Users/alexy/src/unison-sol-review-20261017/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/componentHash.ml": "27bd0f7cf43ce69bd126056bd905c896ee111f7618e1fcda88b664830b2c4dc6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/componentHash.mli": "721784138894bb012f3873ac46ad5c932341fe231d3e7165f5afd27da56bcb83",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ml": "299636a66ea96af30fec187949defb2053bd235fb405ed67edde91bbb25ef77c",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.mli": "381548b104650c1b04b84a7635ccfd07a2550168c19ae9e868dadae63461ae1a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngLayout.ml": "b937b560f9f8a6200e886cf29bb7823a630755a68136331aeb6502c01a103aed",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngLayout.mli": "b2b849f4f0c58a277de7202b6f038a6b6e43f6dff6cfedf2b0d416a879829226",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+    "/Users/alexy/src/unison-sol-review-20261017/src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "/Users/alexy/src/unison-sol-review-20261017/src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticDelta.ml": "616af4155579d3ad6b91893eaccdcab22d54f6dc05054e07ce7410cfa3eabcf3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.ml": "90b2e698dd43ce4df82d5669aacda0db348b35dd2b275eefeab89042cef62b55",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile.mli": "c5a4ceeb6a261f06c79b2209cc836108363b88bd5f3fdac1a4eaa51d502413c2",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticFile_stubs.c": "eaa2cce51e0c053fdd184c1d70409dfec755a224a720610e67400f4f1130fa72",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "/Users/alexy/src/unison-sol-review-20261017/src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+    "/Users/alexy/src/unison-sol-review-20261017/src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/component_remote/io.py": "1016d81338d177263dd85865cf9d34fb7931fd2749756bfa6007c1d41e5b9623",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_io_contract.py": "3c9d0665d36594343b74079f2cdabdcb5b62a451b9900bd2ef3bb27fed8bd2d0",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_knowledge_entry.py": "4f7fd0db9f71a1c13b170f482bad43b444f242d43bb3d33d3cd3d24b1cf9b2e3",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/manual.py": "225b3a7e7bf643ebe32afeba97da277c556c13d93ac6aa5cad9622caaee7621d",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/sdk_host_matrix/shared_child.py": "da0c26a3c79a22f3e20358bec99d87b5b8aa291855130b568de52a7489962b52",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_dispatch.py": "e5362db68589d2080c09575617d4bdda517accf559f957abb3905acea0dcdcf0",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_io_pool.py": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/exiftool-bridge/main.rs": "ca7d77dd4f242300b898f3c775f1cc2a9ac8fa78d6b2d5866af6a29d2560605e",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/exiftool-bridge/observe.py": "04253e70452e6d13f2f274b29f1cc72d67ad8146f7a1cad5758e6c777bc5860f",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/inspect.ml": "1efe74e90228347ea2d3564c7375dc48b33ff2965273b8635bd574b5a15793eb",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/run.py": "4880e922cf2e2ee96008f4b43aced1aaa79a992108050140360d7f662ad27c01"
+  },
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "limits": {
+    "worker_seconds": 300,
+    "declared_logical_read_budget_bytes": 2147483648,
+    "read_budget_instrumented": false,
+    "declared_log_budget_bytes": 16777216,
+    "log_budget_enforced": false,
+    "calls": 1,
+    "owned_helper_calls": 2,
+    "source_read_passes_declared": 3,
+    "bridge_seconds": 60,
+    "component_seconds": 60
+  },
+  "scope": "One readonly retained Unison clone observation using newly qualified bounded role-run component inspector plus unchanged exiftool-rs bridge. Prior actual region-limit result preserved. Three declared source passes/2GiB logical budget unchanged; no physical instrumentation/hardcap. No SDK/Adobe/original/Photo payload/receiving/writes/copy. Unknown ownership retained; no replay of prior admissions. Coalesced component schema/1 is advisory and coarser, no decoded-pixel/semantic merge authority.",
+  "historical_input_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+  "prerequisites": {
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/current-inspector-components-actual-20261017.json": "2b54a0ec0da39e02e96792aeba2b9ce788b277caf9354bf90b5fb14040e274d1",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-io-contract-controls-20261017.json": "45aad00089ca8de8e221dd632b7b8a1f037112c1a50d743dbb02735a892018a1",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-postcheck-controls-20261017.json": "594681d97ac654d6b8605ab5a60362ee29f92b263f6f351b87c5ab0ff61dfac4",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/inspector-dispatch-lifecycle-20261017.json": "4730832b13fbdb4e232818ffacc8fc57614a3ce8bda6243933409ae336e3ff48",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/knowledge-inspector-contract-controls-20261017.json": "afe7596f6e99c4551529e402682f1c9a238c9442f14325e1f3883330e6fab0cd",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/exiftool-rs-integration-actual-20261017.json": "ffe19962ffc40424a2a9f118720fa00bdbf6ba3d88add28a0f567276b1d5349e",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/knowledge-entry-directory-controls-20261017.json": "bfffec93d988132a338784c98d6b54611c313091c87da7a491fd7b590e74deca",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/dng-role-runs-actual-20261017.json": "496f208fe4af8264efacb001f2acff5de100bf4bc1c4cd5799bb0e595ebac12c"
+  },
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-knowledge-request-v3.json",
+    "sha256": "68fe3a83a04a7dab679739177375da5c761566072daf5802d9098003497061d4",
+    "actual_admission": "/private/tmp/unison-camera-knowledge-rescheduled-admission-3fb05f49a6d3.json",
+    "actual_admission_sha256": "260407a7dd5cb5e1f3550179140c1554db4365b749cfbc99acd804662b786905",
+    "actual_owner_terminal": {
+      "session": 26078,
+      "chunk": "09b602",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "outcome": "COMPLETED_CLOSED_30_MAKERNOTE_TAGS_COMPONENT_REGION_LIMIT_PRESERVED"
+  }
+}

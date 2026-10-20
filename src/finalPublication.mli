@@ -147,6 +147,16 @@ val publish : t -> unit
     if pending exception delivery prevents return. This guards cooperative
     namespace changes, not hostile writers racing lookup and rename. *)
 
+val publish_timed : t -> float
+(** Same publication checks, rename, ownership transition and errors as [publish].
+    Return inclusive CLOCK_MONOTONIC seconds for native locking/checks/rename/
+    result observation/unlocking, excluding runtime reacquisition, archive work,
+    resource closure and crash durability. NaN means clock unavailable/invalid;
+    clock errors do not replace an operation error. The result float is allocated
+    before publication, filled without allocation afterwards. Allocation failure
+    therefore occurs before any rename. Ordinary [publish] reads no clock and
+    allocates no diagnostic float. Neither path retries or replays publication. *)
+
 val check_published : t -> unit
 (** Before archive advancement, recheck directories and the published target
     against the retained candidate witness and post-rename fullstat baseline.

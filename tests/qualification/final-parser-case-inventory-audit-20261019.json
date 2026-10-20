@@ -1,0 +1,50 @@
+{
+  "schema": "unison-final-parser-case-inventory-audit/1",
+  "state": "EXISTING_CASE_MAPPING_VERIFIED_NO_NATIVE_RERUN",
+  "owning_tool": {
+    "terminal_chunk": "e9c8f2",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "result": {
+    "path": "/private/tmp/unison-parser-case-inventory-20261019-002/RESULT.json",
+    "bytes": 806,
+    "sha256": "2496730b36a9f285479dded5545f770bd257545d3add9cf283b72e0344925d21"
+  },
+  "child": {
+    "path": "/private/tmp/unison-parser-case-inventory-20261019-002/CHILD.json",
+    "bytes": 1568,
+    "sha256": "51a3f4e54ca169f671081a613c8aa097064592d65a65ce389fbbe53df5cd126f"
+  },
+  "inventory": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-parser-case-inventory-20261019.json",
+    "bytes": 286480,
+    "sha256": "92950e10faaf7ca8bcca4b0f67d5f08504816c2d50f9b393eef6f990c5d8033f"
+  },
+  "script": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/final_parser_case_inventory.py",
+    "bytes": 8787,
+    "sha256": "90eb02c2ae648a94f3a30f051d00065a9da0dce0d2ef2701964e1e9bca2f5451"
+  },
+  "original_native_owner": "88003/d7e7af/exit0/NOsession",
+  "initial_audit": {
+    "terminal": "fd400b/exit1/NOsession",
+    "result": {
+      "path": "/private/tmp/unison-parser-case-inventory-20261019-001/RESULT.json",
+      "bytes": 807,
+      "sha256": "c4e9c7f852865eb51a31e94a8e18adc76e36a4b132c7ae0e1c5643b911aef654"
+    },
+    "child": {
+      "path": "/private/tmp/unison-parser-case-inventory-20261019-001/CHILD.json",
+      "bytes": 1089,
+      "sha256": "362ed03b69154b37be60fa17d572edd0a592c3c009d938fdcff1c432eecb7dd4"
+    },
+    "reason": "Strict all-current source assertion correctly found historical shared_child.py; no compiler/fixture/native run attempted; CPU00 closed"
+  },
+  "resources": {
+    "CPU00_closed": true,
+    "EXglobal_acquired": false,
+    "Photo_or_Capitola_hold": false
+  },
+  "scope": "Metadata source/command/log mapping; exact one-helper inverse-observation comparison; no new native/SDK/pixel proof"
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "Nonce prepared owner and close uncertainty; current stock/Ox Make+selftests plus14 exact-body fixed controls and6 old-body designated rejections linked with actual Runtime/admission. Not parent/directory/transport/RSS/aggregate FD completion.",
+  "build_parent": {
+    "session": 64503,
+    "terminal_chunk": "d955a9",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_parent": {
+    "session": 45175,
+    "terminal_chunk": "c02452",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-nonce-owner-stock-check-20261018-001/RESULT.json",
+      "bytes": 56671,
+      "sha256": "2533c1617e36d51e79c1f5b82b6f3744ce5c3d8c24fbd913ffd4c4e8bfdbd774"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-nonce-owner-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "415f02c5da2cbfac931ab6a1fee73f16e5fd33ecd314be2dcfdc31637ec742e8"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-nonce-owner-ox-check-20261018-001/RESULT.json",
+      "bytes": 56677,
+      "sha256": "1713f9a02357ffcad61b3bcd1b5e13d39f5768e74443756532155e1210a3dd39"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-nonce-owner-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c314edc541cb4b9bb831932ec6bdbba90e765d3eaf8e9a5f3ca30a08df05f5f0"
+    },
+    "faults/RESULT.json": {
+      "path": "/private/tmp/unison-nonce-owner-faults-20261018-001/RESULT.json",
+      "bytes": 172171,
+      "sha256": "40046e9a688f8177ebb04bd167b8df7f56055d0f64350807d598ef0da61d5673"
+    },
+    "faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-nonce-owner-faults-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "3403135b14e2b3644eacf6cec0768771c7df007f9218fc178adedf453cee5723"
+    }
+  }
+}

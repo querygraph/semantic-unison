@@ -1,0 +1,29 @@
+{
+  "schema": "unison-private-maker-model-plan/1",
+  "target": "private-maker-model",
+  "workspace": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f",
+  "source": {
+    "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "identity": {
+      "st_dev": 16777223,
+      "st_ino": 307228717,
+      "st_size": 193851848,
+      "st_mtime_ns": 1792099229810540469,
+      "st_ctime_ns": 1792113844382073309,
+      "st_mode": 33024,
+      "st_nlink": 1,
+      "st_uid": 501
+    }
+  },
+  "saved_result": {
+    "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/RESULT.json",
+    "sha256": "ba6e1fa2a6a950f35b0478332c0a848a6e34d245d9600852b42bf92d3e0dd602"
+  },
+  "worker_seconds": 10,
+  "cpu_credits": 8,
+  "io_mode": "EX_GLOBAL",
+  "max_requested_read_bytes": 9,
+  "semantic_eligibility": false,
+  "sdk_validation": false,
+  "source_hash_requested": false
+}

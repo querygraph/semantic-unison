@@ -1,0 +1,75 @@
+{
+  "scope": "Tracked native parent API component only, not SemanticRemote integration.14currentcases+2early-markrejections+2generic-branch compile/link/refusal controls (generic simulated on Darwin, not other OS native qualification). Existing owned+legacy publication controls pass.",
+  "build_parent": {
+    "session": 19925,
+    "terminal_chunk": "7c0b10",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "component_parent": {
+    "session": 18834,
+    "terminal_chunk": "e77e8c",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "legacy_parent": {
+    "session": 75960,
+    "terminal_chunk": "2326ff",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-tracked-parent-stock-check-20261018-001/RESULT.json",
+      "bytes": 56892,
+      "sha256": "829ddf98f60b5d4c4c5e39dd4c83edd6d118b1cc27197b6ff9f43f1484990344"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-tracked-parent-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "473de207e755ce05ff0c1278bbf6bdfbad02d999721e952a9d186178e23ad4ac"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-tracked-parent-ox-check-20261018-001/RESULT.json",
+      "bytes": 56898,
+      "sha256": "40e201078fe68269aefa25ab41a0818c407e6bf3fd7a7432478de23d6b58e655"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-tracked-parent-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "d7a072fae3b0c6902b2ef11a4f6bd7cfe62cc238ee9c4886ce10d10e0fdcc414"
+    },
+    "component/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-tracked-parent-components-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "9675e9a0a03c02aa2c1c2d815fc515048fd7ce4d647218f75a620d970d5786d7"
+    },
+    "component/RESULT.json": {
+      "path": "/private/tmp/unison-tracked-parent-components-20261018-002/RESULT.json",
+      "bytes": 16522,
+      "sha256": "aa6e3a4446d408c3fc743d183c927bfaffdd17854007c68f5e3cc5c4ac5edb69"
+    },
+    "legacy/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-tracked-parent-legacy-regression-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "54b25fb0c59982059ec331ccfba5083126fede9c07feb5897636386876c5a48f"
+    },
+    "legacy/RESULT": {
+      "path": "/private/tmp/unison-owned-publication-0tezthil/RESULT.json",
+      "bytes": 20961,
+      "sha256": "7be373b83ebf0c828a3046b47145a255f07cc76e205e8591d95b093017a09419"
+    }
+  },
+  "prior_component_pass": {
+    "workspace": "/private/tmp/unison-tracked-parent-components-20261018-001",
+    "actual_parent": "31376/834f5d/exit0/no session",
+    "scope": "14current+2early-markrejections before adding generic branch compile coverage"
+  },
+  "remote_integration_qualified": false,
+  "arbitrary_allocation_failure_qualified": false,
+  "hard_RSS_or_aggregate_FD_qualified": false
+}

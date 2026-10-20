@@ -48,6 +48,27 @@ val from_bytes : 'a t -> bytes -> int -> 'a
 val from_string : 'a t -> string -> int -> 'a
 
 val from_channel : 'a t -> in_channel -> 'a
+val from_channel_bounded : max_alloc_bytes:int -> max_elements:int -> 'a t -> in_channel -> 'a
+(** Bounds selected builtin allocation charges and collection element counts.
+    Framing/header/context overhead, user conversion/map callbacks and complete
+    heap/RSS are excluded. Nonnegative budgets; zero permits values with no selected charges.
+    All decoders check declared strings/arrays against remaining framed bytes
+    before allocating. Stream input also needs a separately bounded outer frame. *)
+
+val from_bytes_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> bytes -> int -> 'a
+val from_channel_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> in_channel -> 'a
+(** Same bounded decoding with caller-owned aggregate admission. After local
+    byte/element checks and before each selected allocation, [reserve] receives
+    the incremental charges. Refusal/other exceptions propagate unchanged, with
+    no retry, implicit refund or automatic release at decode completion. The
+    caller must own any partial debit and its lifetime, including decoded values
+    retained beyond parsing. The callback must be appropriate for that caller's
+    thread/domain; this module does not schedule it or enforce owner access.
+    Header/context, user conversions/maps/recursion and whole heap/RSS remain
+    excluded, exactly as for the bounded decoder. Valid wire bytes unchanged. *)
+
 val to_channel : 'a t -> out_channel -> 'a -> unit
 
 val rec1 : ('a t -> 'a t) -> 'a t
@@ -70,6 +91,33 @@ type bytearray =
 val bytearray : bytearray t
 
 val marshal_to_bytearray : 'a t -> 'a -> bytearray
+
+(** Reserve before selected encoder buffer allocations: the framed result,
+    eight-byte header scratch, and builtin scalar/string/bytearray scratch.
+    Bytearray scratch is conservatively charged at its full payload length.
+    The local limit bounds cumulative selected bytes, not peak memory or RSS.
+    Sizing creates no builtin payload buffers, but conversions execute twice;
+    caller/conversion allocations, boxing, closures and collection traversal
+    are outside this bound. [reserve] runs after local checks and before each
+    selected allocation. Its exceptions propagate unchanged, without retry or
+    refund. [publish] receives the partial result immediately after allocation,
+    before copying or the second codec pass. The caller must retain that root
+    and all successful claims through actual use or uncertain failure, and
+    release only after independently established settlement. Neither callback
+    may mutate encoder inputs or start unowned asynchronous use. *)
+val marshal_to_bytearray_accounted :
+  max_alloc_bytes:int -> reserve:(bytes:int -> unit) ->
+  publish:(bytearray -> unit) -> 'a t -> 'a -> bytearray
+val unmarshal_from_bytearray_bounded : max_alloc_bytes:int -> max_elements:int ->
+  'a t -> bytearray -> int -> 'a
+(** Same encoding as the ordinary decoder, with the above per-decode limits.
+    String charges cover the bytes buffer and resulting string, bytearrays their
+    payload and temporary buffers, int32 arrays their payload, lists both spines;
+    primitive scratch buffers are charged too. Counts aggregate over nested
+    lists/arrays/property lists within this decode. This is not an RSS cap. *)
+val unmarshal_from_bytearray_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> bytearray -> int -> 'a
+(** Bigarray-input form of the caller-owned accounting hook above. *)
 val unmarshal_from_bytearray : 'a t -> bytearray -> int -> 'a
 
 type int32bigarray =

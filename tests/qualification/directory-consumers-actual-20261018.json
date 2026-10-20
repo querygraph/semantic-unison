@@ -1,0 +1,251 @@
+{
+  "scope": "Actual Os.childrenOf and Files.ls directory lifetime through Runtime admission plus I/O borrower;48current cases+4historical designated rejections on stock/Ox. Names/filtering/acquisition vs read ENOENT/original errors/close uncertainty/no repeated close and retained device/transaction; original tiny generated entry files only/no SDK/transport/Photo/EXIO.",
+  "build_parent": {
+    "session": 94684,
+    "chunk": "30aaac",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "stock_qualification_parent": {
+    "session": 54978,
+    "chunk": "004276",
+    "exit_code": 1,
+    "no_session": true,
+    "scope": "Stock child13328 passed0/closed; outer parent later exited1 because a separate Ox combined historical compile timed out. Whole parent is not relabelled success."
+  },
+  "split_ox_parent": {
+    "session": 1273,
+    "chunk": "2a2e9f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "preserved_initial_compile_parent": {
+    "session": 11306,
+    "chunk": "939a57",
+    "exit_code": 1,
+    "no_session": true,
+    "cause": "Qualified record label missing in test, failed before first case; child12563 reaped1/groupsabsent/tokensclosed."
+  },
+  "preserved_timeout": "Ox combined driver child14382 SIGTERM/reaped-15/groupsabsent/tokensclosed at unchanged60s. Split into current/old-os/old-files, each within same60s; no production changes or deadline extension. Stock pre-split driver source saved and exactly matches runtime pin.",
+  "source_counts": {
+    "stock-check": 329,
+    "ox-check": 329,
+    "stock-dune-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock/all": {
+      "pid": 13328,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 13328,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/current": {
+      "pid": 15835,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 15835,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/old-os": {
+      "pid": 16684,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 16684,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/old-files": {
+      "pid": 17690,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 17690,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    }
+  },
+  "sources": {
+    "src/os.ml": "faad2916cd93a1750beeab162c6c2127d7f8d9074a9fb85237f6991295033d87",
+    "src/files.ml": "0f2c6157c236a871cde0475fa0c73b40127e96c06abd88ddce031437505a59a6",
+    "src/directoryOwner.ml": "e0051a6e0349221a2318a899f4890b4cf1521968248dfbccd2a7d1c0b5fcbd43",
+    "src/directoryOwner.mli": "55d12e4bf55240d7b69ad69017e20889a1e7d9b40fe549128ff151084a246174",
+    "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+    "src/semanticRuntime.ml": "6ed5055e1fd50904fe0ffd2ffe83beb1088afa0ec704625e246addf0a1cacf4f",
+    "tests/resource_close/directory_consumer_run.py": "7d187fc813d81b76767adc4f73760c70cde5a3c213626fab1729ae9c51d93dc2",
+    "tests/resource_close/directory_consumer_test.ml": "d39c55070fa195e5de448cbdf43b5ec3979a71127ca3b3a5a08745ccf8e7b5f5",
+    "tests/resource_close/directory_consumer_fault.ml": "d8dfba016ada54c454d83d0eeb0ecacf294847a50a48fdeccd11da33d94a74de",
+    "doc/owned-resource-remaining-inventory-20261018.json": "1e057f44dc500d823678c1b35f034763348e3faa1304bc6ce0a3e72c104d3bca"
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumers-stock-check-20261018-001/RESULT.json",
+      "bytes": 57671,
+      "sha256": "8e07d1733ba4d548a6180445c72b956d9da4a767052df41fc82d2296078a95ce"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumers-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "3b4cde636715605318caae8be6ba69872d2c357a0b786392ebe697a032f78422"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumers-ox-check-20261018-001/RESULT.json",
+      "bytes": 57677,
+      "sha256": "fc037e7ad4abb412dc7557cc3e8dafdd2a5613fbd720ac97faea7d4c9c7a0db9"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumers-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "8c2a32e5975081d1ccb3ea357216f31f7653867237d2fb19859ab59dedbc3406"
+    },
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumers-stock-dune-check-20261018-001/RESULT.json",
+      "bytes": 57499,
+      "sha256": "77cc870c34b05d0ee9a52bcadc84182c7b7c4c014f59b82f986df5acfef1e5ee"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumers-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "12f775d0052fcc48f9e9d863b1d4c987e2ff050a532c8b39228532dce78a564a"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumers-ox-dune-check-20261018-001/RESULT.json",
+      "bytes": 57750,
+      "sha256": "329c710329814141d8a42da825189a3f95b8f997955d5cdc0897d4c01d2fa9d1"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumers-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e1fdf08d4be54a0db5fc0d2d4a5adef2a0f725409185e16d05cd1f4b839df49e"
+    },
+    "stock/all/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumer-fault-stock-20261018-002/CONTROL-RESULT.json",
+      "bytes": 369921,
+      "sha256": "a520fca6e2ec11ea45b8fcd2189be6f97e514a434351042a37c792c01d795733"
+    },
+    "stock/all/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-fault-stock-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e79a9b1f685a5f8fda8ac6aac619e4ec19d692c69bce472a63018ff3b229651d"
+    },
+    "stock/all/historical-os": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-consumers-b9kn1c2t/historical-os.ml",
+      "bytes": 14527,
+      "sha256": "293d509d92b204846bc11598b819da42fb1beed57a1c897d416a5da14c5a2707"
+    },
+    "stock/all/historical-files": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-consumers-b9kn1c2t/historical-files.ml",
+      "bytes": 82038,
+      "sha256": "48fd30478177fabc88823977fb85abaf283fcf974de430c8d63a4eb91ce3a277"
+    },
+    "ox/current/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-current-20261018-001/CONTROL-RESULT.json",
+      "bytes": 223402,
+      "sha256": "3b876369c09c80eb52a67685f42079862c1de207ade290ab952241507fb6f2f6"
+    },
+    "ox/current/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-current-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e9b694dab659a38967a1efcdb6ad647d44e740362ff77f15cb2e41f4a4e213e0"
+    },
+    "ox/old-os/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-old-os-20261018-001/CONTROL-RESULT.json",
+      "bytes": 215924,
+      "sha256": "d6b5fbff65d247af8912f71e4a9d1181c664d847032c5c7ff11340d4d6e90dde"
+    },
+    "ox/old-os/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-old-os-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "76c1165aade56eed0488f05d3fd9672e4eb4d45fd4f89e0d236bcb71001b69f5"
+    },
+    "ox/old-files/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-old-files-20261018-001/CONTROL-RESULT.json",
+      "bytes": 215933,
+      "sha256": "580db80ad85f0b0a71cc565f4a026f0def1d9599f048ef972b189e73978b30ed"
+    },
+    "ox/old-files/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-ox-old-files-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "07324bba4649e18738dc130bd57024c7aca78f9e02f4f76fa1b072f882e0d990"
+    },
+    "preserved-pre-split-driver": {
+      "path": "/private/tmp/unison-directory-consumer-driver-before-split-20261018.py",
+      "bytes": 6210,
+      "sha256": "65867571724ba4fec1b03768d759cb6add19b0d22804bed6152d7745767866d8"
+    },
+    "compile-failure/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-fault-stock-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "532305d88777b688acbc33b6518858510e484e17c3326ad06b82059220b53aee"
+    },
+    "compile-failure/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-consumer-fault-stock-20261018-001/SHARED-STDERR.txt",
+      "bytes": 159729,
+      "sha256": "9ebc6a38c1e2fe6dc53c836bff181ece18a53e550f6d09ca699850c412f2b51f"
+    },
+    "compile-failure/SHARED-STDOUT.txt": {
+      "path": "/private/tmp/unison-directory-consumer-fault-stock-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox-combined-timeout/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-consumer-fault-ox-20261018-002/SHARED-CLOSED.json",
+      "bytes": 538,
+      "sha256": "5d3b4696ea734d5b65e82b326d20a8a29f0b57257bc475ab34a67242c8b1e188"
+    },
+    "ox-combined-timeout/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-consumer-fault-ox-20261018-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox-combined-timeout/SHARED-STDOUT.txt": {
+      "path": "/private/tmp/unison-directory-consumer-fault-ox-20261018-002/SHARED-STDOUT.txt",
+      "bytes": 135,
+      "sha256": "32c37d2200e5036bd4cf879549f38aeed1193796fadd4a9f27f34a9004747a47"
+    },
+    "ox/old-os/historical-source": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-consumers-5dctgvwk/os.ml",
+      "bytes": 14527,
+      "sha256": "293d509d92b204846bc11598b819da42fb1beed57a1c897d416a5da14c5a2707"
+    },
+    "ox/old-files/historical-source": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-consumers-fqgc_tez/files.ml",
+      "bytes": 82038,
+      "sha256": "48fd30478177fabc88823977fb85abaf283fcf974de430c8d63a4eb91ce3a277"
+    }
+  },
+  "limits": [
+    "Unknown fixture ownership settles at actual process exit, not claimed ordinary closedir/native teardown.",
+    "Historical whole Os and Files source is exact4b9e7e67 on current prefix, not a complete old binary cohort.",
+    "Actual admitted borrowers qualified; not every upstream call site or platform.",
+    "Remaining SemanticSync local publication/descriptors and SemanticMergeCache nested quota/name/FD ownership need separate work; Solaris watcher is a separate legacy/platform finding.",
+    "Not aggregate FD/RSS enforcement, quiet timing, broader benchmark or full SOL completion."
+  ],
+  "resources": "All owned build/test groups and CPU scopes closed; build8/compilerjobs2, test4; no EXglobal/native SDK/Photo reservation."
+}

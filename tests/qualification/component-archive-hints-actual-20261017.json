@@ -1,0 +1,425 @@
+{
+  "state": "OPT_IN_LOCAL_ARCHIVE_COMPONENT_REFERENCES_PASS_CLOSED",
+  "scope": "UAX/0 bounded owner-context hint after legacy paths tail, normal publication required, existing archive transaction with private empty-root restart/rewrite/off-removal/malformed-hint controls on stock/Ox. No actual old-binary/remote transfer, automated capture/reuse, managed namespace, photos, SDK, physicalIO isolation or hardware powerloss/legacy close-fault guarantee.",
+  "actual_terminals": {
+    "focused": {
+      "session": 63243,
+      "chunk": "2ab595",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "initial_stock_and_failed_import": {
+      "session": 77348,
+      "chunk": "e17590",
+      "exit_code": 1,
+      "no_session": true,
+      "stock_build_passed": true
+    },
+    "stock_linked_compile_refusal": {
+      "chunk": "c79fcb",
+      "exit_code": 1,
+      "no_session": true
+    },
+    "stock_linked_pref_refusal": {
+      "chunk": "32308c",
+      "exit_code": 1,
+      "no_session": true
+    },
+    "stock_linked_current": {
+      "session": 58999,
+      "chunk": "8ec8ad",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "full_current": {
+      "session": 96641,
+      "chunk": "27b99d",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "checks_per_compiler": {
+    "component": 56,
+    "checkpoint": 1005,
+    "publication_fault": 27,
+    "reader_fault": 13,
+    "dng": 1391,
+    "archive_publication_fault": 29,
+    "worker": 110,
+    "archive_probe_phases": 6
+  },
+  "linked_archive_direct_calls": 14,
+  "current_production_source_checks": 1272,
+  "stock_build_reused_after_test_only_setup_fixes": true,
+  "archive_format_unchanged": 23,
+  "default_off": true,
+  "preserved_failures": [
+    {
+      "reason": "test-driver import before workspace/linking",
+      "closure": {
+        "child": {
+          "pid": 22971,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 22971,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "1d546d8d7bbf80254cfdf7004538bebe38a01a82756bd47f8da863e94c745fa8"
+      },
+      "stderr_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-001/SHARED-STDERR.txt",
+        "bytes": 369,
+        "sha256": "26563704126dd94bf727fd9ee378d6280cbc15aab8d0e687de3ae1497bef6d31"
+      }
+    },
+    {
+      "reason": "probe compiled with nonexported Util.isMacOSX",
+      "closure": {
+        "child": {
+          "pid": 23263,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 23263,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "a5b1cea4ca2e629f1eb0d4756586690a6b3eca01445a43f652bbc3ff61431016"
+      },
+      "stderr_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-002/SHARED-STDERR.txt",
+        "bytes": 881,
+        "sha256": "c929bc0b34d2be04feaec2ecd2f39c41089dacfe8a5233b26b2b9ccbc8bf63cc"
+      }
+    },
+    {
+      "reason": "probe preference maxthreads not registered in prefix",
+      "closure": {
+        "child": {
+          "pid": 23380,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 23380,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-003/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "2512f25990d94bd7efaca2e337dd130ec4aae8062f8d222080b3aa3ed68f8342"
+      },
+      "stderr_pin": {
+        "path": "/private/tmp/unison-archive-hint-linked-stock-20261017-003/SHARED-STDERR.txt",
+        "bytes": 894,
+        "sha256": "668b33a558e96a5980bbbbde5e0472b8697410f90b8d871807f5a80fae0fdb9b"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "case": "dng",
+      "closure": {
+        "child": {
+          "pid": 20191,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 20191,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "core",
+      "closure": {
+        "child": {
+          "pid": 23865,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 23865,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-make",
+      "closure": {
+        "child": {
+          "pid": 21894,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 21894,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-make",
+      "closure": {
+        "child": {
+          "pid": 24084,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 24084,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-dune",
+      "closure": {
+        "child": {
+          "pid": 25260,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 25260,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-dune",
+      "closure": {
+        "child": {
+          "pid": 26316,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26316,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "workers",
+      "closure": {
+        "child": {
+          "pid": 27419,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27419,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "archive",
+      "closure": {
+        "child": {
+          "pid": 27459,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27459,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-archive-hint-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3830aad0fd0efdc36466389a29f09d121d2178725a4dad590667f14be40f24ca"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-nd05x_ab/RESULT.json",
+      "bytes": 481292,
+      "sha256": "050e1b429b762b7fcc7ce13088f589167806326f64c0afdd54b98b5afa044de3"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-core-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "66234b7af16f0d2d768c4f1c4c3b9cfac40970340dc9264398c5a2f1fe2f4852"
+    },
+    {
+      "path": "/private/tmp/unison-component-controls-3cea92e9/RESULT.json",
+      "bytes": 156006,
+      "sha256": "3413045a7b4fa86eef6ddb07a92c55e301fa3cba47c428cbb5a301337524bb16"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "22eff46c4a0374ecaf79bd5dab13be831edc0cce81b4172d997e1ed1b55921f6"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-make-20261017-001/RESULT.json",
+      "bytes": 50051,
+      "sha256": "9d14c8baad1efdb75cebb9ae871859487d50f04ca1824bec095af59b99b6d1d1"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "36ad430ec4341a288760f4fc1fe9118a4e8254b493c792a6b4b7e7179c82615e"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-make-20261017-001/RESULT.json",
+      "bytes": 50057,
+      "sha256": "5f5ba5ebce65ac85ba55881236a17bce9915a5587a3b510c3e0f9c7693bc6705"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "7233f3aa0aba098ee6681c0e2f649f256f4deaa81ac280d9cb2e5103603f182e"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-dune-20261017-001/RESULT.json",
+      "bytes": 49495,
+      "sha256": "1815c49614f18536b51ad34cb8f393cdd592e7d71b639deb34f8186354a365d3"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d6e31f3a0f2fef3625265b181281e1132e7a27ed1f0b50789e018cff381d609c"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-dune-20261017-001/RESULT.json",
+      "bytes": 49499,
+      "sha256": "3c3ec2247fb433333c9afed0afec95ede23682a58cc440a5435033a134afccaa"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-workers-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "a52c2301fabadb505a5c1ce2f06d2b48175252d703f5b99715cef1c66b4ec2a2"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-an14na1j/RESULT.json",
+      "bytes": 125913,
+      "sha256": "75059120a501d17839d611dc39470e4bbeca7732458e70df7e599f2c0ec93506"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-linked-both-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5a51d31165e09d40f7b4438abfc8ed3d92c4fd7a2fcae9561dceec75df86e4a5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-4u_38me_/RESULT.json",
+      "bytes": 157308,
+      "sha256": "56f448f3c8f8b520fd60576ff0e43479096020b6f13fdbe10a7e17874e2ae8b1"
+    }
+  ]
+}

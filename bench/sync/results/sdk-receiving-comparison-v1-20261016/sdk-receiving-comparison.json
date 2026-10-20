@@ -1,0 +1,552 @@
+{
+  "schema": "unison-sdk-receiving-comparison-report/1",
+  "complete": true,
+  "functional_status": "PASSED",
+  "case_payload_bytes": 87022256,
+  "groups": [
+    {
+      "label": "stock",
+      "endpoint_workers": 1,
+      "verified_warmups": 1,
+      "measured_count": 5,
+      "measured_samples": [
+        {
+          "index": 7,
+          "label": "stock",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3731811730540358
+        },
+        {
+          "index": 10,
+          "label": "stock",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.380216088029556
+        },
+        {
+          "index": 13,
+          "label": "stock",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3840264069731347
+        },
+        {
+          "index": 16,
+          "label": "stock",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3977783019654453
+        },
+        {
+          "index": 23,
+          "label": "stock",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.4702421569963917
+        }
+      ],
+      "median_seconds": 3.3840264069731347,
+      "minimum_seconds": 3.3731811730540358,
+      "maximum_seconds": 3.4702421569963917,
+      "receiving_payload_mib_per_median_wall_second": 24.524303454582512,
+      "all_five_measured_present": true
+    },
+    {
+      "label": "stock",
+      "endpoint_workers": 3,
+      "verified_warmups": 1,
+      "measured_count": 5,
+      "measured_samples": [
+        {
+          "index": 5,
+          "label": "stock",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4942280179820955
+        },
+        {
+          "index": 8,
+          "label": "stock",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4982627970166504
+        },
+        {
+          "index": 15,
+          "label": "stock",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.5168527790228836
+        },
+        {
+          "index": 18,
+          "label": "stock",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.5127036470221356
+        },
+        {
+          "index": 21,
+          "label": "stock",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.5034008219954558
+        }
+      ],
+      "median_seconds": 2.5034008219954558,
+      "minimum_seconds": 2.4942280179820955,
+      "maximum_seconds": 2.5168527790228836,
+      "receiving_payload_mib_per_median_wall_second": 33.151259588058224,
+      "all_five_measured_present": true
+    },
+    {
+      "label": "ox",
+      "endpoint_workers": 1,
+      "verified_warmups": 1,
+      "measured_count": 5,
+      "measured_samples": [
+        {
+          "index": 4,
+          "label": "ox",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3613066379912198
+        },
+        {
+          "index": 11,
+          "label": "ox",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.372217162977904
+        },
+        {
+          "index": 14,
+          "label": "ox",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3644611320341937
+        },
+        {
+          "index": 17,
+          "label": "ox",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3735812840168364
+        },
+        {
+          "index": 20,
+          "label": "ox",
+          "endpoint_workers": 1,
+          "phase": "measured",
+          "wall_seconds": 3.3551032810355537
+        }
+      ],
+      "median_seconds": 3.3644611320341937,
+      "minimum_seconds": 3.3551032810355537,
+      "maximum_seconds": 3.3735812840168364,
+      "receiving_payload_mib_per_median_wall_second": 24.66691908333992,
+      "all_five_measured_present": true
+    },
+    {
+      "label": "ox",
+      "endpoint_workers": 3,
+      "verified_warmups": 1,
+      "measured_count": 5,
+      "measured_samples": [
+        {
+          "index": 6,
+          "label": "ox",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4717341989744455
+        },
+        {
+          "index": 9,
+          "label": "ox",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.5874538820353337
+        },
+        {
+          "index": 12,
+          "label": "ox",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4794259520131163
+        },
+        {
+          "index": 19,
+          "label": "ox",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4763747510151006
+        },
+        {
+          "index": 22,
+          "label": "ox",
+          "endpoint_workers": 3,
+          "phase": "measured",
+          "wall_seconds": 2.4605609379941598
+        }
+      ],
+      "median_seconds": 2.4763747510151006,
+      "minimum_seconds": 2.4605609379941598,
+      "maximum_seconds": 2.5874538820353337,
+      "receiving_payload_mib_per_median_wall_second": 33.5130579363687,
+      "all_five_measured_present": true
+    }
+  ],
+  "ratios": [
+    {
+      "label": "stock",
+      "observed_median_ratio_worker1_over_worker3": 1.3517717088051981,
+      "comparable_complete_cohorts": true
+    },
+    {
+      "label": "ox",
+      "observed_median_ratio_worker1_over_worker3": 1.3586235809644942,
+      "comparable_complete_cohorts": true
+    }
+  ],
+  "attempted_rows": [
+    {
+      "index": 0,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "warmup",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 1,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "warmup",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 2,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "warmup",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 3,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "warmup",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 4,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 5,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 6,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 7,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 8,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 9,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 10,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 11,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 12,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 13,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 14,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 15,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 16,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 17,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 18,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 19,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 20,
+      "label": "ox",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 21,
+      "label": "stock",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 22,
+      "label": "ox",
+      "endpoint_workers": 3,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    },
+    {
+      "index": 23,
+      "label": "stock",
+      "endpoint_workers": 1,
+      "phase": "measured",
+      "verified_complete_case": true,
+      "outcome_returncode": 0
+    }
+  ],
+  "attempted_cli_calls": 24,
+  "sdk_helpers_settled": 48,
+  "failed_result_reason": null,
+  "raw_failed_prefix_preserved": false,
+  "new_native_executions": 0,
+  "resource_release_authorized": false,
+  "caveats": [
+    "Warm generated-input end-to-end receiving validation includes hashing, transport, staging, helper startup and SDK; not isolated SDK decode throughput.",
+    "One warmup/five measured repetitions per configuration; observed median ratios are descriptive, not confidence bounds or causal SDK speedup.",
+    "All verified measured cases retain their exact row indexes and order. Failed calls remain in attempted rows and raw pinned input, never imputed as zero.",
+    "Incomplete results have no comparative ratio. CPU8 reservations and source limits are not whole-process RSS/OSthread/physical IO caps.",
+    "No coldcache, representative camera corpus, semantic eligibility, pixel equivalence or production qualification. Source activity and scheduling disclosures must accompany actual results.",
+    "This receipt audit does not prove owning-tool terminal, fresh payload hashes or global resource release; those require separate actual owner/parent acceptance."
+  ],
+  "inputs": [
+    {
+      "path": "/Users/alexy/src/unison/doc/sdk-receiving-comparison-plan-v1.json",
+      "bytes": 26961,
+      "sha256": "97b458b29efcab162672103393500e7d01b42c8ab4133971e433a568cb2a4854"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/RESULT.json",
+      "bytes": 845182,
+      "sha256": "c068e0763a69ec9eeca39e8673f5ee8161158bb8725170399e3a54a869f403d8"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r0/stock-w1/seed-proxy.json",
+      "bytes": 1611,
+      "sha256": "bd798ea908400ac91dd3e6cd3238b075be621c53310378fe9161797ca3eafde4"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r0/ox-w1/seed-proxy.json",
+      "bytes": 1610,
+      "sha256": "efdebf97393b8b07d5b78e2f207fc0c57ee18e1d98102321a5ed95914f4a31d2"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r0/stock-w3/seed-proxy.json",
+      "bytes": 1612,
+      "sha256": "a3a8148c8cdce31c748fb7745a112e637e43a5bbc80e243d7c48c31ff4848850"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r0/ox-w3/seed-proxy.json",
+      "bytes": 1613,
+      "sha256": "5d6bcf32a709497f81ea0279b6d2417b7d27c3976973fb3a07acd66892c94a05"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r1/ox-w1/seed-proxy.json",
+      "bytes": 1611,
+      "sha256": "6abf310744a92ca7dcf7e6567d1fa1ea36a0b12d5dfee81630b84432cafcc6ae"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r1/stock-w3/seed-proxy.json",
+      "bytes": 1612,
+      "sha256": "3d555671ab5df7141928bf76fbf5dabdced538347c2537a91c13a99cc1ae960b"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r1/ox-w3/seed-proxy.json",
+      "bytes": 1622,
+      "sha256": "53c53e7fd8aa6321a41a504a3587fc7003f30f9682507dc70132d9956bed6863"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r1/stock-w1/seed-proxy.json",
+      "bytes": 1609,
+      "sha256": "4c84a0ada4c7b4b8c82397427fa47ffd314f78cc2306eb98efbb2162b3efc9df"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r2/stock-w3/seed-proxy.json",
+      "bytes": 1621,
+      "sha256": "7e59a1ed029345ee678a8698d295c84fd7b1fe4778faaace92a2ac8700ad04a9"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r2/ox-w3/seed-proxy.json",
+      "bytes": 1612,
+      "sha256": "01a4e82870bf25b54d2b942fc2c2b90daa13f62b55dec1d326e1f3f79ce3544e"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r2/stock-w1/seed-proxy.json",
+      "bytes": 1611,
+      "sha256": "7dfbdcc7d7892901fffbcd4335e7a2faf2f89f3d233741c674b4b205fbc3bcd5"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r2/ox-w1/seed-proxy.json",
+      "bytes": 1623,
+      "sha256": "a2296f9c74fa1a71d00226e5f76cf103ec046ac13b8451937abd334f584a3bdb"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r3/ox-w3/seed-proxy.json",
+      "bytes": 1613,
+      "sha256": "4018d585c632442621e2e7849f0303f0ac13b6de68baab07b1fabd76a023ed76"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r3/stock-w1/seed-proxy.json",
+      "bytes": 1611,
+      "sha256": "554473185a073f11e3fc64e2359943fa12e19058cb4fd7d94a4f0c4d9fb809a2"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r3/ox-w1/seed-proxy.json",
+      "bytes": 1623,
+      "sha256": "2952ada6e0601cfacd4d78a9213090dd496975764a6223c3961ed9696ecb5786"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r3/stock-w3/seed-proxy.json",
+      "bytes": 1612,
+      "sha256": "3baddb02b64548c604de0c9f2a532ef74200c24a1967e4f4de574162aac6c446"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r4/stock-w1/seed-proxy.json",
+      "bytes": 1634,
+      "sha256": "5e950b3bc82aadb5da8396ed53e474b21f19fe25d8f48decba12f792329cecc9"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r4/ox-w1/seed-proxy.json",
+      "bytes": 1623,
+      "sha256": "5c8a9cd5bdaecb50a3bbae3f81ee8905b921f545bd505cd001f47706d20906d3"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r4/stock-w3/seed-proxy.json",
+      "bytes": 1613,
+      "sha256": "4c5385a19fa6f32650941c9a70c7269c9b486dd746f03887da4df0b517f460c8"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r4/ox-w3/seed-proxy.json",
+      "bytes": 1611,
+      "sha256": "f73870a498eb6cd7fd3e64175735d155ef309250f9b237b1ac6bdc04f0259a1e"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r5/ox-w1/seed-proxy.json",
+      "bytes": 1624,
+      "sha256": "d78a54fffab55687a69992acf083fb62124967f3c9674d604632970f88a2d141"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r5/stock-w3/seed-proxy.json",
+      "bytes": 1622,
+      "sha256": "d52c21d25c80151b7b259c0f2c6298edb7baf4e08f9251533dd5ba45103aac61"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r5/ox-w3/seed-proxy.json",
+      "bytes": 1610,
+      "sha256": "ffe3186b117f849ff77a9690384ba4379fdf927b849de21d36d9a1e61a8ea655"
+    },
+    {
+      "path": "/private/tmp/u-str-v1-c39d488994/r5/stock-w1/seed-proxy.json",
+      "bytes": 1613,
+      "sha256": "df07171da46face169ddf97d744d8a4b1b7fbce18853797e2aa56d24074c2860"
+    }
+  ]
+}

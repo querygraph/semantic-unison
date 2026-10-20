@@ -1,0 +1,39 @@
+{
+  "schema": "unison-generated-workload-nonnoop-controls/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "actual_tool": {
+    "chunk": "0dc2fc",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": 16,
+  "child": {
+    "pid": 73483,
+    "returncode": 0,
+    "reaped": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "group_cleanup_before_leader_reap": true
+  },
+  "source_pins": {
+    "bench/sync/run.py": "0d450ddb136f9ae6343740b29ef663c516e54f0c32ced0ef3b182f7b3669e594",
+    "bench/sync/workload_fixtures.py": "45a1638eb89b8a8b1228a7e89b4125c6509c145db4d7a5ca042e582fd6f2fbef",
+    "bench/sync/workload_fixtures_test.py": "1cf5f0fd692ea78a9ebb17f791298006cf0df37e59e4bd1d233df5dc1b9a40b9",
+    "bench/sync/workloads.py": "09f21ca1bbd9953a487a8a53ad6139c5f6ce271fa0d6cc1c870b9bdd64e1a9c0",
+    "bench/sync/workloads_test.py": "bf1c632ccef437e2a45e4816a4fd409c84794833b0eac9673f8309c8ace1ba0b"
+  },
+  "artifact": {
+    "path": "/private/tmp/unison-workload-nonnoop-controls-5zsuzffa/RESULT.json",
+    "bytes": 2958,
+    "sha256": "351dc20b1a13ecfae5b36a42a50e6941c011c711fb55d2e6cdd469210bcd38f3"
+  },
+  "scope": "Actual tiny recipe/consumer tests including injected empty mutation; source/AST check runner rejects unchanged mutation before update invocation. No actual Unison sync, benchmark, SDK or Photo payload.",
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false
+}

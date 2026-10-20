@@ -16,7 +16,7 @@ python3 bench/semantic/run.py \
 ```
 
 `--build-only` checks isolated compilation without measuring. Defaults are a
-64 MiB fixture, 72 independent digest jobs per batch, worker counts 1/6/18,
+64 MiB fixture, 72 independent digest jobs per batch, worker counts 1/2/4/6,
 one warmup per configuration and five measured repetitions. `--file-mib 32`
 selects the smaller fixture. Run while other builds and CPU-heavy jobs are idle.
 
@@ -164,3 +164,46 @@ Reproduce using the normal command plus --build stock=STOCK_SNAPSHOT/src and
 `--repetitions 3 --keep-work`.
 Native/resource ceilings and broader end-to-end M6 qualification remain open;
 no Adobe, Lightroom or source-photo operation occurred.
+
+## Current shared-budget preparation (2026-10-17)
+
+The current default worker counts1/2/4/6 leave two owner credits inside the
+standing Unison8 share; larger explicitly requested configurations need separate
+coordination. Historical measurements above keep their original configurations.
+The runner itself does not acquire cross-project CPU/IO locks.
+
+Current production-object builds include the component and owned-snapshot
+dependencies plus the native SHA adapter header. Build-only mode now writes
+`build_complete=true`, `measurement_complete=false`, source/runner/object hashes
+and retained binary paths to the requested JSON. It does not create a fixture.
+[Both current compiler preparations](../../tests/qualification/cached-worker-build-actual-20261017.json)
+passed and closed; this provides no new performance samples.
+
+The [measurement preparation](../../doc/cached-worker-measurement-preparation-v1.json)
+proposes32MiB, six jobs/batch, one warmup and five measured repetitions per
+compiler/configuration. Its9GiB requested logical reads are a planning quantity,
+not measured device IO. It is not admitted or execution-ready: a versioned shared
+owner/IO contract and fresh finite IO coordination must precede measurement.
+Do not infer whole-machine quiet, hard memory bounds or end-to-end sync scaling
+from this cached digest microbenchmark.
+
+## Current admitted matrix completed
+
+The separate one-use shared benchmark subsequently passed all48batches/288digests
+with actual primary-reader9GiB accounting and all CPU/IO resources closed.
+[Current results and limitations](results/shared-current-20261017.md) distinguish
+the cached workload, six-job scheduling geometry, sampled RSS/FD observations
+and shared-machine timing from end-to-end sync or physical IO. The earlier
+preparation above remains historical; its lack of admission is no longer the
+current state. Admission4c9d02f3 is consumed and must never be replayed.
+
+## Per-job completion observations
+
+New samples retain `job_completion_seconds` in submission order. Each monotonic
+interval starts before that job opens its input and ends after its digest promise
+resolves and the owner closes the input. It includes admission, queueing, hashing,
+notification and owner scheduling; it is not isolated hash CPU time or internal
+parse/verify/commit timing. Concurrent intervals overlap and must not be summed
+as batch wall time. Failed jobs produce no successful benchmark sample. The
+observer runs only in this benchmark; production worker APIs are unchanged.
+Historical saved samples do not gain these measurements retroactively.

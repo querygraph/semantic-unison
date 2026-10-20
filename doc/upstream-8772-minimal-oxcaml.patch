@@ -1,0 +1,62 @@
+--- a/src/ubase/safelist.ml
++++ b/src/ubase/safelist.ml
+@@ -161,7 +161,7 @@
+ let tl = List.tl
+ let nth = List.nth
+ let length = List.length
+-let mem = List.mem
++let mem x l = List.mem x l
+ let assoc = List.assoc
+ let for_all = List.for_all
+ let exists = List.exists
+--- a/src/ubase/prefs.ml
++++ b/src/ubase/prefs.ml
+@@ -552,7 +552,7 @@
+ 
+ let oneLineDocs ?(hpre="") ?(hpost="") u =
+   let buf = Buffer.create 1024 in
+-  let out = Buffer.add_string buf in
++  let out s = Buffer.add_string buf s in
+   let fmt = Format.formatter_of_buffer buf in
+   let () = Format.pp_set_margin fmt 81 in  (* cols + 1 *)
+ 
+--- a/src/system/system_generic.ml
++++ b/src/system/system_generic.ml
+@@ -26,7 +26,7 @@
+ (****)
+ 
+ let getenv = Sys.getenv
+-let putenv = Unix.putenv
++let putenv name value = Unix.putenv name value
+ let argv () = Sys.argv
+ 
+ (****)
+@@ -36,14 +36,14 @@
+ let stat = Unix.LargeFile.stat
+ let lstat = Unix.LargeFile.lstat
+ let rmdir = Unix.rmdir
+-let mkdir = Unix.mkdir
++let mkdir path mode = Unix.mkdir path mode
+ let unlink = Unix.unlink
+-let rename = Unix.rename
++let rename source target = Unix.rename source target
+ let open_in_gen = open_in_gen
+ let open_out_gen = open_out_gen
+-let chmod = Unix.chmod
+-let chown = Unix.chown
+-let utimes = Unix.utimes
++let chmod path mode = Unix.chmod path mode
++let chown path uid gid = Unix.chown path uid gid
++let utimes path atime mtime = Unix.utimes path atime mtime
+ let link s d = Unix.link s d
+ let openfile = Unix.openfile
+ let opendir f =
+@@ -74,7 +74,7 @@
+ 
+ (****)
+ 
+-let create_process = Unix.create_process
++let create_process prog args stdin stdout stderr = Unix.create_process prog args stdin stdout stderr
+ let open_process_in = Unix.open_process_in
+ let open_process_args_in = Unix.open_process_args_in
+ let open_process_out = Unix.open_process_out

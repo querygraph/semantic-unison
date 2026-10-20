@@ -1,0 +1,36 @@
+{
+  "scope": "Source/native cleanup audit plus bounded Mach self-task capability observation only; no production memory containment or new native/bulkIO grant",
+  "source_head": "ca64567121d80d2d0416ab2b507246bc57d757d4",
+  "sources": {
+    "src/validationDescriptor.ml": "73652a160d99b3837669ea04be120d9337fdd86c37c78cc54714acc982e8520b",
+    "src/candidateValidation.ml": "25455e2e23d9029ca9fd10df4660602c35e9d801bc8b80ac0ba93c64a57735da",
+    "src/semanticRemote.ml": "1778c17b2fec4ef55564328e246d19cefaa080d9622bfc31a5264636993494a4",
+    "src/system/system_generic.ml": "7cc582e54931abce12117a41a6526d3d632c97eb81d3e604be8c78e69735d24d",
+    "src/semanticRuntime.ml": "58006fd93da9212ac62663b63a64d690105260b0b6bb5fdc2cba9b21e5268305",
+    "doc/resource-followup-audit-20261018.md": "8e6e272ea1d443d0ed1ee3e9aa93ea53a1d620d31a7e945759b34cbe9e1d06cb"
+  },
+  "artifacts": {
+    "RESULT.json": {
+      "path": "/private/tmp/unison-self-footprint-observation-20261018-001/RESULT.json",
+      "bytes": 7836,
+      "sha256": "9db34cb8ef32507307862a38768396da62b2498904d33859f6b51a2129a124c7"
+    },
+    "SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-self-footprint-observation-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "f8550964face6c12552dd161dcb042f00c4e26d4961b5a05c9615c705453207b"
+    }
+  },
+  "actual_parent": {
+    "terminal_chunk": "74c74b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "mach_constant": {
+    "name": "KERN_NO_ACCESS",
+    "value": 8,
+    "header": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/kern_return.h",
+    "sha256": "4577d58f74dfbb8ef07ce460f82cb7a45999ad2a0479486df8d22658d4847f50"
+  },
+  "result": "self-task setter rejected8; baseline32MiB completed; no RSS enforcement proven; production refusal unchanged"
+}

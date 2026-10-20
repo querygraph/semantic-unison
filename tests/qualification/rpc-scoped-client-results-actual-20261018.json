@@ -1,0 +1,1168 @@
+{
+  "state": "SCOPED_DECODED_CLIENT_RESULTS_FOUR_BUILDS_REGRESSIONS_PASS",
+  "scope": "Scoped API selected builtin decode charges and explicit roots through actual consumer settlement. Four semantic bounded callers migrated; legacy returned values/conversion copies/global escapes/outbound/error/wholeheap/RSS/finaltransport/SOL acceptance remain separate.",
+  "build_parent": {
+    "process_id": 37362,
+    "chunk_id": "e35c53",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "control_parent": {
+    "process_id": 71721,
+    "chunk_id": "b151aa",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "policy": {
+    "default_mib": 256,
+    "default_elements": 1048576,
+    "default_slots": 256,
+    "maximum_slots": 65536,
+    "independent_request_lane": true,
+    "wire_unchanged": true
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 124908,
+      "sha256": "00229f1076da6abd7fa14698bdf817f5471488bf757918161ab722b41fc7e3a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 12995,
+      "sha256": "da06d72e4a06534a11e2dab5a8ead10dc36456c4e0c5b9b36edda6ad4bf8bf0c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/semanticRemote.ml",
+      "bytes": 41667,
+      "sha256": "1293a54a13df98e1a6712f7224322e512801c79d5dc279a77c57cf60bbb6fc16"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/remote_result_input.ml",
+      "bytes": 5225,
+      "sha256": "a0e8f209ad47d91947e6ee4c527c80fd6326f3ab383972d8ed1c8facfdea77b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/test_remote_bounds.py",
+      "bytes": 26924,
+      "sha256": "e977f1298c569470982417e2a2ab9def39419081060684d8378588fc32331c98"
+    }
+  ],
+  "builds": [
+    {
+      "flavor": "stock",
+      "system": "check",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-check-20261018-001/RESULT.json",
+        "bytes": 60601,
+        "sha256": "f489a6fca64296404ba6fe51da048301d8b1c86c91857b48bfeb019a6ef0210b"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "efc52e16568ad188a7c3ddf62499b52990e75335d7d14ac398979064d09ad622"
+      },
+      "child": {
+        "pid": 41633,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 41633,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "input_count": 580,
+      "all_recorded_inputs_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y2u75fk4/src/unison",
+        "bytes": 6306880,
+        "sha256": "5994eb2918b2c07d4e22c93f172e33b71290c483a5777cb51bbf4fa26b1379b4"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      }
+    },
+    {
+      "flavor": "stock",
+      "system": "dune-check",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-dune-check-20261018-001/RESULT.json",
+        "bytes": 60428,
+        "sha256": "375b00ae8946cc2bd0fb117ed2ab250c0edce1e9726288270ca2a1dcfb1aba5e"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "deba545ef8c4ecb8972aea11259f89b023b36fed2a698421793aa07e3a92fbcb"
+      },
+      "child": {
+        "pid": 42773,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 42773,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "input_count": 580,
+      "all_recorded_inputs_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-sy9r4qf5/_build/default/src/linktext.exe",
+        "bytes": 6362880,
+        "sha256": "f0fdad3977fd7a64a744617a0894b1fafe180da8a6ff86e625b364d0b0e526de"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      }
+    },
+    {
+      "flavor": "ox",
+      "system": "check",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-check-20261018-001/RESULT.json",
+        "bytes": 60607,
+        "sha256": "2211aec1e1ac05576f9e38bdc1fb45caf37fe214a5cba2c925561810a4bcd335"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "dac04ad41ec0cdd4c2615551d4d4dd4aa9dd0b89e623643d268e41c02322fcde"
+      },
+      "child": {
+        "pid": 43879,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 43879,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "input_count": 580,
+      "all_recorded_inputs_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-0s83lizr/src/unison",
+        "bytes": 8396576,
+        "sha256": "74d4fcdacaed4acdf5b9e4c1c9c74bb7adc4b40d762761258dc2c78ce67e855d"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      }
+    },
+    {
+      "flavor": "ox",
+      "system": "dune-check",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-dune-check-20261018-001/RESULT.json",
+        "bytes": 60432,
+        "sha256": "993e2fe591f4bf04249b7353f0dab22915cd72a3928e06da7e8b7f850db5435c"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "960cbb21d290f98c7d9180ebdf5b58cd30039b4ffbf118379bebfd3aa1686bc3"
+      },
+      "child": {
+        "pid": 45075,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 45075,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "input_count": 580,
+      "all_recorded_inputs_match_current": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9lk_vldq/_build/default/src/linktext.exe",
+        "bytes": 8036968,
+        "sha256": "7ce961840709ff778655e93cfc07ffeb45c50fc7982f7cc49acac5c9dee4c6ba"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      }
+    }
+  ],
+  "controls": [
+    {
+      "flavor": "stock",
+      "family": "framing",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-framing-20261018-004/CONTROL.json",
+        "bytes": 64179,
+        "sha256": "24822e132640f5138b3b04ca44abc6e881d1e37759cba611a531f2c8243607a1"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-framing-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "2d28d84017a74ea0b1b0302f1a24f89966d8c4357ac5bef2993c29045a5fe45b"
+      },
+      "child": {
+        "pid": 46665,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 46665,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "negative",
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded collection reached server\")\n",
+          "source_sha256": "934d2a8d84563f6d2d12aed615b33c9ab8e56ec57ea95ed87ab4426894327376",
+          "binary_sha256": "aabbd5f1d309533f1c4f65b5e106e065009a28e8df20f6278577c58522c36c30",
+          "scope": "Only bounded registrations use legacy decoder;2000zero-payload elements, no huge allocation"
+        },
+        {
+          "name": "header_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "6e57bdc1a14bcdebc83a5c07854473187a9e190abd065b19cfa68fd90d4941d0",
+          "binary_sha256": "9fc4f25ceabf06e309a487d53cc5002a4dcc53be62fb68c2d53c507daeea620a"
+        },
+        {
+          "name": "startup_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"startup limit ignored\")\n",
+          "source_sha256": "dfdc04583d701c8047aa93b0bbbaffb64fe7924b9f8f6cb5c8705266da111b69",
+          "binary_sha256": "22afed96d4d680296a77bf274c374a872b33418f40c26b1b28f8b13e779bfa1d",
+          "scope": "Only delimiter byte limit omitted; nine original bytes, existing fixed8byte destination, no large allocation"
+        },
+        {
+          "name": "packet_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "b0dfc7a6317b738c23209930dc6e73a89a5a4b174b4c07508de93986bb6a55c4",
+          "binary_sha256": "5a86ef54ed44f9a392a2730824da1243a6caaa680ea72c0261d600113e6c1607",
+          "scope": "Only global outer cap omitted; private guard prevents nine-byte allocation/body wait"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "stock",
+      "family": "body",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-body-20261018-004/CONTROL.json",
+        "bytes": 78882,
+        "sha256": "bc6212c9d033517a9fa4a6f97a052648121098367146db5185677c6698c1a6c7"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-body-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "f16fd90b679842724cab05207a4d07212927a3cd6510156b01f8021d9605e1fb"
+      },
+      "child": {
+        "pid": 46763,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 46763,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "body-decoder-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED raw body input retained\")\n",
+          "source_sha256": "f7e250e2581fd4bddc241e20e12c403c77bd06684021a09a03149fe275918213",
+          "binary_sha256": "3d10f2e5a384ac6cd542255be37ddac3d35c1afebc4823e838d828f801f0b7c5",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-handoff-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED handed-off reply released\")\n",
+          "source_sha256": "8865700e0ad940c6c062817234bd12b809bdfecd835ce306b81467a37ea94e13",
+          "binary_sha256": "e281148ea2c5acd0979adc42ed4866943b69281940e86c70c02b72be62f335c6",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED body uncertainty escaped\")\n",
+          "source_sha256": "3812c78c262e764c2ef5b84411cad4283f0db4d2d7e00bebdcb5d58c012b895d",
+          "binary_sha256": "1c77f8218aa9cddcfa661112f13a79efbcc5b2413e2a11d58ad7483ebac8f777",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-stream-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED stream uncertainty converted to abort\")\n",
+          "source_sha256": "33de175a86c5aadbde7f5f4184fb5e549ed3a8e75f93b245bfbb0b138fa60f6d",
+          "binary_sha256": "eaa63cf6b7299ec4926d62c979b4f2615dc8a5dcb6fe609072750bc9fb388f6e",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-registered-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED registered body uncertainty escaped\")\n",
+          "source_sha256": "94cf703048f2ad6fc0918f7ae44f5a1b790baf75ada3211e765aab4fb5e5dd26",
+          "binary_sha256": "e8fc85619f3ed6367a7c1957d29bdb048ef1d24c0b1280b518b89db782bcc09c",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "stock",
+      "family": "decoded",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-decoded-20261018-004/CONTROL.json",
+        "bytes": 79622,
+        "sha256": "1109da43a83be6c2e5105a2fd2420e91940aa4d4b2af8b416118555964392617"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-decoded-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "eeffa6f30565aea8d69f5e86efcfdbccb3edcffeafee56f9e63109c9fe590750"
+      },
+      "child": {
+        "pid": 46889,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 46889,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "double_decode_negative",
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED scope and handler received distinct decoded values\")\n",
+          "source_sha256": "671a60e9fc4923cc033b25bbd40f3f99a8e9eb912e9eeb989098d0745c449dec",
+          "binary_sha256": "9bb118dcf6d6f92b8400ee837f305f2590aac58bf7c63feda3a63110a69c38d0"
+        },
+        {
+          "name": "legacy-decoded-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED legacy decoded owner missing\")\n",
+          "source_sha256": "01f4e5eb7f965e359f3e44532477e56f5c879fc1e4fd0ef1619851f380cfad91",
+          "binary_sha256": "fc41401bbec0fc52767867924eafa9e082b5edb9a8981323baa96c4b2e497604"
+        },
+        {
+          "name": "decoded-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "5a3090921df665bb376873352a4b8bc5796dacc0e6ea20f75ada9ea9b1da7f41",
+          "binary_sha256": "5b958cfdb8cb28721013715b2f8b6d8da57927325cf1ddd8cd1ff3b544745aba"
+        },
+        {
+          "name": "decoded-early-release",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "1c5476a8c8d1e46aab5f4ece2ca498ab4235b4ef9c914e074783017ac6515200",
+          "binary_sha256": "63bd3024189322f8700073e38e2f404337fcbd34cc4555e0bc0b84436105aed7"
+        },
+        {
+          "name": "decoded-uncertainty",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\nRPC legacy arguments: shared aggregate lane, compact valid wire, malformed/element refusal and queued lifetime PASS\nRPC decoded arguments: preallocation slot/byte/element admission, partial refusal, queued reply and disconnect lifetimes PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded uncertainty escaped its owner\")\n",
+          "source_sha256": "e294a258ce9a27b5302adaeb276f16b73d49ad2e704e2c291002e6132ee24d46",
+          "binary_sha256": "edcee6439dd16ea3b80505c0d1ad7164cec5a5b63fefd5db12fb88ae28353783"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "stock",
+      "family": "stream",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-stream-20261018-004/CONTROL.json",
+        "bytes": 41518,
+        "sha256": "32598e1707df0f3454be436841a764fa2a184d85fe4b8d507903eae21b655c42"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-stream-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "3504aa5020830393ef8f88905483d72a781ef147b10765bdf1e0612b38c930d0"
+      },
+      "child": {
+        "pid": 47018,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47018,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "stream-cap-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "a97ff5825f64ca0472c0607348f1222549f3019f71be04f51289592b8f3fae48",
+          "binary_sha256": "dd3f259f3fef024bc40dc9b137408d0cb8b506a82b10b181d365d1f9f1b8255f"
+        },
+        {
+          "name": "fallback-cap-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "666de41867c33cf6a332545671971c367ca5ce291359a670394bcad7493af08a",
+          "binary_sha256": "d0be4b9fb32ee500afce07fe5cf49e7ede5546078a66a17e65cca081f8d81c09"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "stock",
+      "family": "pending",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-pending-20261018-004/CONTROL.json",
+        "bytes": 54141,
+        "sha256": "14d6077ef3f477c50874fd19daae532da8e8366a5e49bf8b0bf3265bc4593165"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-pending-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "bc67ffe6143fbdae307585cbd8eb04a0e63f4c09a804e96d3ef7d70341dde364"
+      },
+      "child": {
+        "pid": 47069,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47069,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "pending-quota-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED pending reply cap ignored\")\n",
+          "source_sha256": "50b95754fcea019d015b71df812d1dce76a235416d607d03a14fd8d20766276a",
+          "binary_sha256": "f00fc51901dc616d14407e8f4c9c7433cea842ffc1bc3bf8f91805b981735413"
+        },
+        {
+          "name": "pending-preflight-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED full registry marshaled new request\")\n",
+          "source_sha256": "80fde5c5b6c7ad9c05cb8b05631cc60a8ec4107c98c324f971675a16bce396b6",
+          "binary_sha256": "3a4c68ef01d2312bacd024ed19c89d4421e59f5d52c6de96c168891cdf408c17"
+        },
+        {
+          "name": "pending-duplicate-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED duplicate pending id replaced\")\n",
+          "source_sha256": "0443b13adba044c5b0661cc0404f288ccebb695f0ad6d1ff2c1035def478d745",
+          "binary_sha256": "f925cb47438602d26409179b58493102ef5d48b1a8466678a0adeb75cef1bd52"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "stock",
+      "family": "result",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-stock-result-20261018-004/CONTROL.json",
+        "bytes": 79929,
+        "sha256": "1e23017ef094e6aa0412ad766b131c5e6e7b6c584a98664003b8efdfe75cd04d"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-stock-result-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "b3d54426ddd26a9b6f3b6feb7d71b8e69847a58d61765bc05d7291d449a40140"
+      },
+      "child": {
+        "pid": 47144,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47144,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "result-decode-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded result missing during consumer\")\n",
+          "source_sha256": "6dab94b4fa8e3e39b9aa52bbf330d977f085b77b2d9d0a80a4a12ac439a32495",
+          "binary_sha256": "dde43dd923c410bc89b60081f38c068d9b3a61cca5ed9ba39cf7d41f45b36e13"
+        },
+        {
+          "name": "result-early-release",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded result missing during consumer\")\n",
+          "source_sha256": "49d1f3dc7c8417838873eeb50cf1901a113709fcbf3e2b119744a81c31691c18",
+          "binary_sha256": "ff76046d55ea69b18d8c6f66f63c9656a231e5f5f28a19e52d45e1842a6094c5"
+        },
+        {
+          "name": "result-uncertainty",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED uncertain result escaped\")\n",
+          "source_sha256": "00e587f4e99d8cb198994434a094627857a67549c2d4940b4bab7f1a370a6118",
+          "binary_sha256": "c88c8aa8297c9facece2cd02ced472460b3bee4e5450ac94b0522eed7f25de54"
+        },
+        {
+          "name": "result-root-omission",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED uncertain result lost value root\")\n",
+          "source_sha256": "a2f157d5d0efa29b3e49d82ed5245c2348a15b2ef2c549e24ebe9a643a37cf7b",
+          "binary_sha256": "7b31a76749643e1e233d0e88a95043a647294bf4e49309bdde3407d5a44de0ae"
+        },
+        {
+          "name": "result-bytes-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED result byte quota bypass\")\n",
+          "source_sha256": "550aacd6ce6134ebb80bfb2d8d5819ea8e9f21cfafe6d69a56f67b481dd1b479",
+          "binary_sha256": "307ec1ba6e964eedbe691b384487096f43b48005355acdd278fd7eaa11678bd6"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "framing",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-framing-20261018-004/CONTROL.json",
+        "bytes": 65100,
+        "sha256": "6b873cb9db63c9dbf69dde07ca297f2df2144bb4df6faa0593961a731a8e0db0"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-framing-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "b856295bf9f51fc1ffebedefb25f8bc70e803ccee6075f1f8a64f91f6b4f93f2"
+      },
+      "child": {
+        "pid": 47253,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47253,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "negative",
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded collection reached server\")\n",
+          "source_sha256": "934d2a8d84563f6d2d12aed615b33c9ab8e56ec57ea95ed87ab4426894327376",
+          "binary_sha256": "b54866f86e0eed3b07305051eacb5f94c495f31e29462f1cc7ad5a4e0e365b3a",
+          "scope": "Only bounded registrations use legacy decoder;2000zero-payload elements, no huge allocation"
+        },
+        {
+          "name": "header_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "6e57bdc1a14bcdebc83a5c07854473187a9e190abd065b19cfa68fd90d4941d0",
+          "binary_sha256": "d3448c11fdf1f55f84116ac980112594c699a4bd57b8bc702b653ed0f704f841"
+        },
+        {
+          "name": "startup_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"startup limit ignored\")\n",
+          "source_sha256": "dfdc04583d701c8047aa93b0bbbaffb64fe7924b9f8f6cb5c8705266da111b69",
+          "binary_sha256": "ffdc5e4c91f6f1739b5303774d689389dcf6d21e0ade5e72e40dd3cc0e80ceab",
+          "scope": "Only delimiter byte limit omitted; nine original bytes, existing fixed8byte destination, no large allocation"
+        },
+        {
+          "name": "packet_negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "b0dfc7a6317b738c23209930dc6e73a89a5a4b174b4c07508de93986bb6a55c4",
+          "binary_sha256": "9ec7f7cee8f9b5fde16f6c8fd2bcfe2a21e57e4a4170ae39ae1a775ce10ff8c5",
+          "scope": "Only global outer cap omitted; private guard prevents nine-byte allocation/body wait"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "body",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-body-20261018-004/CONTROL.json",
+        "bytes": 80030,
+        "sha256": "b9427aa42316682a8f966904363203386856e9b76ebb1ea77b67c98630472489"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-body-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "2765f2e54c98816dfb0e77048b0698bf8c29ae1325f62e294c2c25e332bc70cc"
+      },
+      "child": {
+        "pid": 47379,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47379,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "body-decoder-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED raw body input retained\")\n",
+          "source_sha256": "f7e250e2581fd4bddc241e20e12c403c77bd06684021a09a03149fe275918213",
+          "binary_sha256": "21400b5241427b58110d4629886e65625c06838a671f50ac1a771eeb921fcd54",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-handoff-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED handed-off reply released\")\n",
+          "source_sha256": "8865700e0ad940c6c062817234bd12b809bdfecd835ce306b81467a37ea94e13",
+          "binary_sha256": "8c24f3985c087bd52e271f9b3fc785c124f6309f495799d8fcce339334f9ec1d",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED body uncertainty escaped\")\n",
+          "source_sha256": "3812c78c262e764c2ef5b84411cad4283f0db4d2d7e00bebdcb5d58c012b895d",
+          "binary_sha256": "b08c99f866f0583267e40a3506dbcb7b168154182efef76f38201a8a2d10c6f9",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-stream-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED stream uncertainty converted to abort\")\n",
+          "source_sha256": "33de175a86c5aadbde7f5f4184fb5e549ed3a8e75f93b245bfbb0b138fa60f6d",
+          "binary_sha256": "fa8f66f8c1c627de3563374f4e7d469eb12c9c27f986c373ff4e4cadbd18dd68",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        },
+        {
+          "name": "body-registered-uncertainty-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED registered body uncertainty escaped\")\n",
+          "source_sha256": "94cf703048f2ad6fc0918f7ae44f5a1b790baf75ada3211e765aab4fb5e5dd26",
+          "binary_sha256": "22802b2ebb12de2f4336d5a49da9a4909996282f821ba0be712d2005e60515a7",
+          "scope": "Single ownership mutation; original tiny pipe inputs; expected assertion failure"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "decoded",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-decoded-20261018-004/CONTROL.json",
+        "bytes": 80772,
+        "sha256": "b4db358192c8a23e7b1cf5924751c2783d7072f7083c6a946bfe43c6442ed5ef"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-decoded-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "850c2995c5e53d8918e56b023d48f6b5131faf38943d1c2ee9a4a4708a5391e5"
+      },
+      "child": {
+        "pid": 47529,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47529,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "double_decode_negative",
+          "exit_code": 2,
+          "stdout": "",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED scope and handler received distinct decoded values\")\n",
+          "source_sha256": "671a60e9fc4923cc033b25bbd40f3f99a8e9eb912e9eeb989098d0745c449dec",
+          "binary_sha256": "ab7f9bd763fd0aad0c532b56cbf78147374aa9006ce5abe474c340ba83ddbb2e"
+        },
+        {
+          "name": "legacy-decoded-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED legacy decoded owner missing\")\n",
+          "source_sha256": "01f4e5eb7f965e359f3e44532477e56f5c879fc1e4fd0ef1619851f380cfad91",
+          "binary_sha256": "0c30b86631a4bee0ef4be8261901798cbcc8ff62fa75bb06e3b090b714479211"
+        },
+        {
+          "name": "decoded-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "5a3090921df665bb376873352a4b8bc5796dacc0e6ea20f75ada9ea9b1da7f41",
+          "binary_sha256": "7e7095862ff800db1685e49f1128ae1bca7760f402d29c5394c683e79c2275ae"
+        },
+        {
+          "name": "decoded-early-release",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded arguments released before output\")\n",
+          "source_sha256": "1c5476a8c8d1e46aab5f4ece2ca498ab4235b4ef9c914e074783017ac6515200",
+          "binary_sha256": "5d855e64af531fa0318cb88b068a16c83fb2475f41977bc48e4c7c475671d996"
+        },
+        {
+          "name": "decoded-uncertainty",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\nRPC scoped results: admission, actual consumer/disconnect lifetime, partial failure, endpoint policy and retained roots PASS\nRPC legacy arguments: shared aggregate lane, compact valid wire, malformed/element refusal and queued lifetime PASS\nRPC decoded arguments: preallocation slot/byte/element admission, partial refusal, queued reply and disconnect lifetimes PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded uncertainty escaped its owner\")\n",
+          "source_sha256": "e294a258ce9a27b5302adaeb276f16b73d49ad2e704e2c291002e6132ee24d46",
+          "binary_sha256": "d03248c6eaa0744fd7af74cefb8655bb05ce78764fc67c39d126e150a43f9f8f"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "stream",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-stream-20261018-004/CONTROL.json",
+        "bytes": 41979,
+        "sha256": "d891e2ddedf8e17b29a68cbf1d9bb8c27af58ee6a27df5a11f3dc6d3dbe7d765"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-stream-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "b0eeaf13b3ca1edd4c26a51ba8a14859e341a0782e2229f3f545f009f54b0b16"
+      },
+      "child": {
+        "pid": 47682,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47682,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "stream-cap-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "a97ff5825f64ca0472c0607348f1222549f3019f71be04f51289592b8f3fae48",
+          "binary_sha256": "afaf724b52b414efed4ad705b5ec5d9bfab7e8b930b86cf7d062117e00cec587"
+        },
+        {
+          "name": "fallback-cap-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED header payload allocation reached\")\n",
+          "source_sha256": "666de41867c33cf6a332545671971c367ca5ce291359a670394bcad7493af08a",
+          "binary_sha256": "201f21fce9aacf60deef73e7f8a69af7854be91fd58b1a8e9037ca03a460f166"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "pending",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-pending-20261018-004/CONTROL.json",
+        "bytes": 54831,
+        "sha256": "f3aaeaa8ec711818a8a23e40b717eab09367e6bcc8e4108fa8a9d678d42e897f"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-pending-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "566ab0e62e57f11f94744b6d69249cca977b9110e54a2abdd22b89d6c0cbbf51"
+      },
+      "child": {
+        "pid": 47765,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47765,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "pending-quota-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED pending reply cap ignored\")\n",
+          "source_sha256": "50b95754fcea019d015b71df812d1dce76a235416d607d03a14fd8d20766276a",
+          "binary_sha256": "13bf122ae44d5708b5d455bf13ffa9df50c22178223d3c985296f6d5fcb994ec"
+        },
+        {
+          "name": "pending-preflight-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED full registry marshaled new request\")\n",
+          "source_sha256": "80fde5c5b6c7ad9c05cb8b05631cc60a8ec4107c98c324f971675a16bce396b6",
+          "binary_sha256": "791d87aa03ea9061b0cfaac737dda42542d94edf7023b77afef2063dfe21bc0e"
+        },
+        {
+          "name": "pending-duplicate-negative",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED duplicate pending id replaced\")\n",
+          "source_sha256": "0443b13adba044c5b0661cc0404f288ccebb695f0ad6d1ff2c1035def478d745",
+          "binary_sha256": "a4fdbe4028ae6aed68a459c69d2158edd014743bc93269bc624649cda502e040"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    },
+    {
+      "flavor": "ox",
+      "family": "result",
+      "result": {
+        "path": "/private/tmp/unison-result-scope-ox-result-20261018-004/CONTROL.json",
+        "bytes": 81079,
+        "sha256": "c81010f4b8cd68828ea15a68b39180c508059acf49404b67a340e5d2baabc67a"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-result-scope-ox-result-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "ad29c993cf8649416dda5b56c3eb0a80038b5d06b06b533a5e4d7b2a5acdaf9c"
+      },
+      "child": {
+        "pid": 47860,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47860,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "all_tested_inputs_match_current": true,
+      "negative_participants": [
+        {
+          "name": "result-decode-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded result missing during consumer\")\n",
+          "source_sha256": "6dab94b4fa8e3e39b9aa52bbf330d977f085b77b2d9d0a80a4a12ac439a32495",
+          "binary_sha256": "c13cad3c15d3183b689adc87f2e781898ed038cba83f2431bbc708323438a027"
+        },
+        {
+          "name": "result-early-release",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED decoded result missing during consumer\")\n",
+          "source_sha256": "49d1f3dc7c8417838873eeb50cf1901a113709fcbf3e2b119744a81c31691c18",
+          "binary_sha256": "8f531e3ff442bbad54534796fbbbcd4a6ca85b56e89682ef0e5394d7c31ea4d1"
+        },
+        {
+          "name": "result-uncertainty",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED uncertain result escaped\")\n",
+          "source_sha256": "00e587f4e99d8cb198994434a094627857a67549c2d4940b4bab7f1a370a6118",
+          "binary_sha256": "5ef2a30826ebc3a1e97d7e62317152e1e5b706a36b917e1c421c9a9468a64a41"
+        },
+        {
+          "name": "result-root-omission",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED uncertain result lost value root\")\n",
+          "source_sha256": "a2f157d5d0efa29b3e49d82ed5245c2348a15b2ef2c549e24ebe9a643a37cf7b",
+          "binary_sha256": "4b13577a1200b8fcf496cab1fcce22c124ba6a6a69fee265285946ac68385205"
+        },
+        {
+          "name": "result-bytes-bypass",
+          "exit_code": 2,
+          "stdout": "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup\nRPC headers: exact cap, routing, malformed decode, independent byte/slot budgets, disconnect settlement and endpoint policy PASS\nRPC startup: exact wire limit, CR accounting, handshakes, legacy upgrade, slot/byte admission and disconnect settlement PASS\nRPC packets: global outer limit, stricter explicit limits, legacy request/reply/stream routes and endpoint isolation PASS\nRPC custom stream limits: exact cap, stream/fallback oversize before allocation, raw settlement and invalid registration PASS\nRPC raw bodies: independent request/reply lanes, detached borrowers, prefix/byte/empty admission, allocation rollback and observer handoff PASS\nRPC pending metadata: finite admission before marshaling, duplicate preservation, response/disconnect settlement and endpoint policy PASS\nRPC raw bodies: synthetic core/registered uncertainty retains request/stream payloads and raw/subset charges; no directory/FD acquired; fixtures end at process exit PASS\n",
+          "stderr": "Fatal error: exception Failure(\"DESIGNATED result byte quota bypass\")\n",
+          "source_sha256": "550aacd6ce6134ebb80bfb2d8d5819ea8e9f21cfafe6d69a56f67b481dd1b479",
+          "binary_sha256": "bc0c30be6e2dbf7f6c34661d76c24106104b1ff74830d1f7e1f931c377b58f29"
+        }
+      ],
+      "controlled_remote_sha256": "351bef33750b61e3c1362cb3cd06d62b7edc8ad89d0d3789b6c7d8fdf2698c5e",
+      "controlled_probe_sha256": "bbe7b2a8cb71a7458bb8313f69232129a3f21aec129f2d7f00dd965485bafda4"
+    }
+  ],
+  "preserved_attempts": [
+    {
+      "workspace": "/private/tmp/unison-result-scope-stock-20261018-001",
+      "description": "Initial stock positive control passed; prior help wording, no final-source unchanged claim.",
+      "files": [
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 1564,
+          "sha256": "b37e9e9cf0052ecdb3be307db16ba487c069c5448aaee3400455a3b71073288f"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b0dd086bc015b08ec2f4b087475146c354ca286e7d06f7a78625954ed04bfac1"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-001/SHARED-START.json",
+          "bytes": 1341,
+          "sha256": "aa1cd77ac998f139b8c31bb5b75c6220a5d7bb84b24c2b39e925e06a7cb7fe1c"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 1061,
+          "sha256": "565b001d73117bbea21953f9d2438c46207fddc7bd9f4bfef568bafafd111892"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-001/CONTROL.json",
+          "bytes": 17938,
+          "sha256": "4fd7e4a39d35091591e9f45d131c8742516f16bdd48dc36c1fab2daa22994657"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-result-scope-ox-20261018-002",
+      "description": "Focused five result mutants passed on both compilers before help-only wording correction.",
+      "files": [
+        {
+          "path": "/private/tmp/unison-result-scope-ox-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 1564,
+          "sha256": "b37e9e9cf0052ecdb3be307db16ba487c069c5448aaee3400455a3b71073288f"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-ox-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "bf789188e2bde17dba5a7b856d76c1935d939f94316c1b2c873d2fdcb2b6be14"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-ox-20261018-002/SHARED-START.json",
+          "bytes": 1338,
+          "sha256": "f1493b2839aa2986ae5a8613eae87397c3d01f2dbce5a39a0c1efd88413f67f8"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-ox-20261018-002/SHARED-STDERR.txt",
+          "bytes": 1294,
+          "sha256": "e0ea28e0ee743433445fcf5bea3096695b20d3a22496622da7b1bd97676ce922"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-ox-20261018-002/CONTROL.json",
+          "bytes": 80224,
+          "sha256": "3cf5978ac53fe3012d9f7eef86bc385a51568415ec150859009f3ab790e7c75f"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-result-scope-stock-20261018-002",
+      "description": "Focused five result mutants passed on both compilers before help-only wording correction.",
+      "files": [
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 1564,
+          "sha256": "b37e9e9cf0052ecdb3be307db16ba487c069c5448aaee3400455a3b71073288f"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "1cd21babb2decfb804aa4b3082221ca2e38b6c0c5d132aaab17da90edd4c1b5e"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-002/SHARED-START.json",
+          "bytes": 1340,
+          "sha256": "9ad23bc0c0f4792ebbe57dee721f774e9681aeb888610a04d96d177e7f7be637"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-002/SHARED-STDERR.txt",
+          "bytes": 1074,
+          "sha256": "f3653fea1fc922b67d3e82dceaa2fcc462f4741ae65099790f8083bd4ded3ad9"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-20261018-002/CONTROL.json",
+          "bytes": 79074,
+          "sha256": "e1c3e9e218a988792d35eb81b4c2b8a8ea7af44ee92459438c5d00cf9584d5c3"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-result-scope-stock-body-20261018-003",
+      "description": "Controller57811/384644/exit1 closed: stockframing passed; stockbody mutant caught new result witness before intended rawbody witness. Fixture order corrected only. No other003 groups dispatched.",
+      "files": [
+        {
+          "path": "/private/tmp/unison-result-scope-stock-body-20261018-003/SHARED-STDOUT.txt",
+          "bytes": 1564,
+          "sha256": "b37e9e9cf0052ecdb3be307db16ba487c069c5448aaee3400455a3b71073288f"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-body-20261018-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "dad3586175266554da5362262210ebac710ad08296d0783a27aa63aa270d2e43"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-body-20261018-003/SHARED-START.json",
+          "bytes": 1344,
+          "sha256": "3bf990db9f4c0253c62e673410e5a4b15331bfba1403be0f31fb129065c15a60"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-body-20261018-003/SHARED-STDERR.txt",
+          "bytes": 2438,
+          "sha256": "6b536dc6c3bbd4ab1c3db32cdc609d25494165d53ba2d673063bc6b186eb77ca"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-body-20261018-003/CONTROL.json",
+          "bytes": 77579,
+          "sha256": "5a9369a9924afa6a49c723c63e3581ada95d3dad4d313975b8e37e99084826db"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-result-scope-stock-framing-20261018-003",
+      "description": "Controller57811/384644/exit1 closed: stockframing passed; stockbody mutant caught new result witness before intended rawbody witness. Fixture order corrected only. No other003 groups dispatched.",
+      "files": [
+        {
+          "path": "/private/tmp/unison-result-scope-stock-framing-20261018-003/SHARED-STDOUT.txt",
+          "bytes": 1564,
+          "sha256": "b37e9e9cf0052ecdb3be307db16ba487c069c5448aaee3400455a3b71073288f"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-framing-20261018-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a04ab7a903759fed1d01999f0eb4f9dc5900dc4e2eccf86816e68cc0b916491a"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-framing-20261018-003/SHARED-START.json",
+          "bytes": 1350,
+          "sha256": "8b6779758fe2e07664bb9efeb21289aeda684284f51bbb854c3ef9b31d328780"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-framing-20261018-003/SHARED-STDERR.txt",
+          "bytes": 1074,
+          "sha256": "f3653fea1fc922b67d3e82dceaa2fcc462f4741ae65099790f8083bd4ded3ad9"
+        },
+        {
+          "path": "/private/tmp/unison-result-scope-stock-framing-20261018-003/CONTROL.json",
+          "bytes": 64179,
+          "sha256": "084f5599f2a06a95c9ffb121cc29103dac84a35ef85bbc76297cf2f7f59ebf77"
+        }
+      ]
+    }
+  ]
+}

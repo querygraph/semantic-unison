@@ -1,4 +1,9 @@
-module P = FinalPublication
+module P = struct
+  include FinalPublication
+  let publish context =
+    if Array.exists ((=) "--timed") Sys.argv then ignore(FinalPublication.publish_timed context)
+    else FinalPublication.publish context
+end
 open Test
 let with_async_exns f = f ()
 external duplicate_fault : int -> unit = "final_publication_fixture_duplicate_fault"

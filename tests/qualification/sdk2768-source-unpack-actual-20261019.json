@@ -1,0 +1,48 @@
+{
+  "schema": "unison-sdk2768-private-source-unpack-actual/1",
+  "actual_owner": {
+    "session": 7403,
+    "initial_chunk": "c7cb2d",
+    "terminal_chunk": "0feceb",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 46200
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk2768-source-unpack-plan-v2-20261019.json",
+    "sha256": "71463da32a4339fd3a85756b920ef2d54b80d39c359e53e14b0a3a7cea57e416"
+  },
+  "workspace": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278",
+  "manifest": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/MANIFEST.json",
+    "sha256": "98672df101e9c2e1526622391404fe138e330cca578ea90e93196c8c786466d4",
+    "bytes": 703248
+  },
+  "SDK_root": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278/extracted/dng_sdk_1_7_1",
+  "files": 3769,
+  "bytes": 133855079,
+  "independent_source_payload_hash_bytes": 133855079,
+  "unzip_child": {
+    "group_cleanup_before_leader_reap": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "pid": 46216,
+    "reaped": true,
+    "returncode": 0
+  },
+  "source_pins": 13,
+  "required_build_inputs": {
+    "LICENSE.txt": "89d75e1bfd65269c41ec57be67adacd48926af81554574d92742f96296ed9166",
+    "dng_sdk/source/dng_host.h": "8294580c4d42121d819ad9b317d9ccdd5fab732b4a4b59b13ae72bae2e085db3",
+    "dng_sdk/source/dng_image_writer.cpp": "2f627124740ea4dc7a6e9400c91d6772f077a00fb447577ecefe313ba4f6bd33",
+    "dng_sdk/projects/mac/dng_validate.xcodeproj/project.pbxproj": "82a3b3a95d5bc16efdbfc378412f4b4aa49f49c63f08cc919b6e58d61581549e",
+    "xmp/toolkit/XMPCore/build/CMake64_libcpp_Static/XMPCore64.xcodeproj/project.pbxproj": "34e4819a39d0139550859e29d77ee6a88c3095f6cbea008b4bb13ff94db0bfc0",
+    "libjxl/libjxl/CMakeLists.txt": "2bed98773e1da08ad349381c7dab9c5f3f20e2a84b080d78a380f28765e3b302"
+  },
+  "qualified2724validator_SHA256_unchanged": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+  "archive_epoch_unchanged": true,
+  "canonical9_reacquired_closed": true,
+  "SDK_executions": 0,
+  "compilers": 0,
+  "scope": "Official2768 source inventory+CRC-extractor/directnormalchild/fullsourceSHA readback; no old2724source restoration/build/SDK/fixture/native validation."
+}

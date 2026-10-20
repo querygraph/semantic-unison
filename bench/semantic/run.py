@@ -18,13 +18,21 @@ SOURCES = [
     "src/lwt/generic/lwt_unix_impl.ml", "src/lwt/lwt_unix.mli", "src/lwt/lwt_unix.ml",
     "src/borrowedWork.mli", "src/borrowedWork.ml",
     "src/helperSupervisor_stubs.c", "src/helperSupervisor.mli", "src/helperSupervisor.ml",
+    "src/semanticAdmission.mli", "src/semanticAdmission.ml",
     "src/ioAdmission.mli", "src/ioAdmission.ml",
-    "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
+    "src/semanticHash_evp.h", "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
     "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
+    "src/wholeFileClone_stubs.c", "src/wholeFileClone.mli", "src/wholeFileClone.ml",
+    "src/validationSnapshot.mli", "src/validationSnapshot.ml",
+    "src/componentHash.mli", "src/componentHash.ml",
     "src/formatRecognition.mli", "src/formatRecognition.ml",
+    "src/dngRecognition.mli", "src/dngRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
+    "src/dngExtended.mli", "src/dngExtended.ml",
+    "src/dngLayout.mli", "src/dngLayout.ml",
+    "src/dngComponents.mli", "src/dngComponents.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
     "src/semanticMailbox.mli", "src/semanticMailbox.ml",
     "src/semanticWorkers.mli", "src/semanticWorkers.ml",
@@ -35,7 +43,7 @@ SOURCES = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--compiler", action="append", required=True, metavar="LABEL=OCAMLOPT")
-    parser.add_argument("--workers", default="1,6,18")
+    parser.add_argument("--workers", default="1,2,4,6")
     parser.add_argument("--build",action="append",default=[],metavar="LABEL=SNAPSHOT_SRC",help="Link actual compiler-matched production objects")
     parser.add_argument("--keep-work",action="store_true")
     parser.add_argument("--file-mib", type=int, choices=(32, 64), default=64)
@@ -44,7 +52,18 @@ def main():
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--build-only", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--inherited-resource-fds", default="",
+                        help="internal admitted owner binding; exactly nine inherited descriptors")
+    parser.add_argument("--work-parent", type=Path)
+    parser.add_argument("--sample-timeout", type=int, default=600)
     args = parser.parse_args()
+    if not 1<=args.sample_timeout<=600:
+        parser.error("sample timeout must be between1 and600 seconds")
+    inherited = tuple(int(n) for n in args.inherited_resource_fds.split(',') if n)
+    if inherited and (len(inherited)!=9 or len(set(inherited))!=9 or min(inherited)<3):
+        parser.error("exact nine unique inherited resource descriptors required")
+    inherited_identity = [dict(fd=fd, device=os.fstat(fd).st_dev, inode=os.fstat(fd).st_ino)
+                          for fd in inherited]
     workers = [int(n) for n in args.workers.split(",")]
     if not workers or min(workers) < 1 or min(args.jobs, args.repetitions, args.warmups) < 1:
         parser.error("all counts must be positive")
@@ -69,6 +88,9 @@ def main():
     result = {
         "schema": "unison-cached-sha-workers-v1",
         "complete": False,
+        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "requested_build_only": args.build_only,
+        "inherited_resource_fds": inherited_identity,
         "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "host": {"system": platform.system(), "release": platform.release(),
                  "machine": platform.machine(), "logical_cpus": os.cpu_count()},
@@ -83,11 +105,12 @@ def main():
     }
     if platform.system() == "Darwin":
         for key in ("hw.physicalcpu", "hw.memsize"):
-            query = subprocess.run(["sysctl", "-n", key], text=True, capture_output=True)
+            query = subprocess.run(["sysctl", "-n", key], text=True, capture_output=True,
+                                   pass_fds=inherited)
             result["host"][key] = int(query.stdout) if query.returncode == 0 else None
-    temporary_workspace = (tempfile.mkdtemp(prefix="unison-sha-bench-") if args.keep_work else None)
+    temporary_workspace = (tempfile.mkdtemp(prefix="unison-sha-bench-",dir=args.work_parent) if args.keep_work else None)
     import contextlib
-    with (contextlib.nullcontext(temporary_workspace) if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-sha-bench-")) as temporary:
+    with (contextlib.nullcontext(temporary_workspace) if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-sha-bench-",dir=args.work_parent)) as temporary:
         tmp = Path(temporary)
         result["retained_workspace"]=str(tmp) if args.keep_work else None
         binaries = {}
@@ -97,7 +120,8 @@ def main():
             for name, data in source_bytes.items():
                 (build / Path(name).name).write_bytes(data)
             result["compilers"][label] = {
-                "version": subprocess.check_output([compiler, "-version"], env=env, text=True).strip(),
+                "version": subprocess.check_output([compiler, "-version"], env=env, text=True,
+                                                   pass_fds=inherited).strip(),
                 "executable_sha256": hashlib.sha256(Path(compiler).read_bytes()).hexdigest(),
             }
             with (build / "build.log").open("w+") as log:
@@ -107,13 +131,15 @@ def main():
                     for name in SOURCES[:-2]:
                         actual=builds[label]/name.removeprefix("src/")
                         if actual.read_bytes()!=source_bytes[name]:raise RuntimeError("production source mismatch: "+name)
+                        if name.endswith('.h'):continue
                         extensions=(".cmi",".cmx",".o") if name.endswith(".ml") else ((".cmi",) if name.endswith(".mli") else (".o",))
                         for ext in extensions:
                             artifact=actual.with_suffix(ext);shutil.copyfile(artifact,build/artifact.name)
                             linked[str(artifact)]=hashlib.sha256(artifact.read_bytes()).hexdigest()
                     commands=[[compiler,"-I","+unix","-c","clock_stubs.c"]]
                 else:
-                    commands = [[compiler, "-I", "+unix", "-c", Path(name).name] for name in SOURCES[:-1]]
+                    commands = [[compiler, "-I", "+unix", "-c", Path(name).name]
+                                for name in SOURCES[:-1] if not name.endswith('.h')]
                 result["compilers"][label]["linked_object_sha256"]=linked
                 objects = [Path(name).stem + (".o" if name.endswith(".c") else ".cmx")
                            for name in SOURCES[:-1] if name.endswith((".ml", ".c"))]
@@ -121,16 +147,21 @@ def main():
                                  "hash_bench.ml", "-o", "hash-bench"])
                 try:
                     for command in commands:
-                        subprocess.run(command, cwd=build, env=env, stdout=log, stderr=log, check=True)
+                        subprocess.run(command, cwd=build, env=env, stdout=log, stderr=log,
+                                       pass_fds=inherited, check=True)
                 except subprocess.CalledProcessError:
                     log.seek(0)
                     print(log.read())
                     raise
             binaries[label] = build / "hash-bench"
+            result["compilers"][label]["benchmark_binary_path"]=str(binaries[label])
             result["compilers"][label]["benchmark_binary_sha256"]=hashlib.sha256(binaries[label].read_bytes()).hexdigest()
             result["compilers"][label]["build_log_sha256"]=hashlib.sha256((build/"build.log").read_bytes()).hexdigest()
             print(f"Built {label} ({result['compilers'][label]['version']})", flush=True)
         if args.build_only:
+            result.update(build_complete=True, measurement_complete=False)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(json.dumps(result, indent=2)+"\n")
             print("Build-only check passed; no benchmark measurements taken.")
             return
         # One small file, independently checked by hashlib, reused for every job.
@@ -152,8 +183,9 @@ def main():
                     output = subprocess.check_output([
                         str(binaries[label]), str(fixture), digest.hexdigest(),
                         str(args.file_mib * 1048576), str(n), str(args.jobs)],
-                        cwd=tmp, env=env, text=True, timeout=600)
+                        cwd=tmp, env=env, text=True, timeout=args.sample_timeout, pass_fds=inherited)
                     sample = json.loads(output)
+                    sample['raw_stdout'] = output
                     sample.update(compiler=label, workers=n, phase=phase, repetition=repetition + 1)
                     sample["throughput_mib_per_second"] = args.file_mib * args.jobs / sample["wall_seconds"]
                     sample["effective_cpu_cores"] = sample["process_cpu_seconds"] / sample["wall_seconds"]

@@ -1,0 +1,69 @@
+{
+  "calls": [
+    {
+      "script": "tests/validation_endpoint_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 67835,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-case-1-actual-20261017.json",
+        "bytes": 215538,
+        "sha256": "673545765d24916e0b5b9414894aadbf3a2af4dcf55c8e189082a494f124e098"
+      }
+    },
+    {
+      "script": "tests/validation_unchanged_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 67868,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-case-2-actual-20261017.json",
+        "bytes": 181265,
+        "sha256": "45ed251ad120645e9a312c838587140baf995adbb18a0243b4b1871a29adde95"
+      }
+    },
+    {
+      "script": "tests/validation_scope_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 67901,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-case-3-actual-20261017.json",
+        "bytes": 215220,
+        "sha256": "91cf2d399f8663ae789cad0a97ae580ee0c8f09c2513c045e671fbbcb2d91ebf"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Generated private roots/current Make scanner objects; all-scanned scope exercised through actual local scan RPCs plus private endpoint/artifact ownership controls; no SDK/helper subprocess/Photo payload.",
+  "actual_owner_terminal": {
+    "initial_chunk": "6e47c4",
+    "session_id": 75501,
+    "terminal_chunk": "c41e76",
+    "exit_code": 0,
+    "session_present": false
+  }
+}

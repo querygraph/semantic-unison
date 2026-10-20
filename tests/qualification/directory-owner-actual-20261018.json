@@ -1,0 +1,622 @@
+{
+  "scope": "Prepared opaque directory ownership plus actual CandidateValidation complete borrowed tree; stock/Ox Make+Dune selftests,26positive directory cases+4designated broken variants, Windows wrapper/Core compile only on Darwin, fixed in-process tree regressions and Runtime IO/reader/pool regressions. No actual transport/SDK/Photo/camera input.",
+  "build_parent": {
+    "session": 24471,
+    "terminal_chunk": "1439af",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "stock_fault_parent": {
+    "session": 13332,
+    "terminal_chunk": "55d9ae",
+    "exit_code": 1,
+    "no_session": true,
+    "scope": "Stock fault child99165 passed0/knownclosed; this outer driver then failed a separate historical tree fixture. Do not relabel the whole parent as exit0."
+  },
+  "remaining_controls_parent": {
+    "session": 67451,
+    "terminal_chunk": "d4706b",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "ox-check": 329,
+    "stock-dune-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock/fault": {
+      "pid": 99165,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 99165,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "stock/tree": {
+      "pid": 2216,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 2216,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "stock/io": {
+      "pid": 2341,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 2341,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "stock/reader": {
+      "pid": 2684,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 2684,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "stock/pool": {
+      "pid": 2969,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 2969,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/fault": {
+      "pid": 3346,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 3346,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/tree": {
+      "pid": 4920,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 4920,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/io": {
+      "pid": 5029,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 5029,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/reader": {
+      "pid": 5313,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 5313,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/pool": {
+      "pid": 5610,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 5610,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    }
+  },
+  "sources": {
+    "src/directoryOwner.ml": "e0051a6e0349221a2318a899f4890b4cf1521968248dfbccd2a7d1c0b5fcbd43",
+    "src/directoryOwner.mli": "55d12e4bf55240d7b69ad69017e20889a1e7d9b40fe549128ff151084a246174",
+    "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+    "src/system/system_win.ml": "1d6d969b9d391b3389044cd3f855ab8a690e64b5bfcc47eb686c6dabdd11e48f",
+    "src/system/system_intf.ml": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+    "src/fs.ml": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+    "src/semanticRuntime.ml": "6ed5055e1fd50904fe0ffd2ffe83beb1088afa0ec704625e246addf0a1cacf4f",
+    "src/semanticRuntime.mli": "95291b12795ffba2d40fdef090baed5101c1cd44a7787d8591fd52caae8f101f",
+    "src/candidateValidation.ml": "325cb03f3a40e3e9f9556e93187f4d756cec60ada248d1d5d133fe20f6b39ab4",
+    "src/Makefile.OCaml": "bf108766342a49b81eb68d20b1a0ccda1e5da64168e152555d9c027326b74d5a",
+    "src/fsmonitor/windows/Makefile": "79010d86a546008a09b90c57130f03e940ee24a744991d98434e8eaa6ac2150f",
+    "tests/resource_close/directory_fault.ml": "2f124b9a66cbfe7d1c74117f0e066099c620a54f12d66c38d12fbae1cb342642",
+    "tests/resource_close/directory_test.ml": "00960c3aaa96cfe1c60baad2c4c4a1d4306990414fb3631d662d91104ae25e0e",
+    "tests/resource_close/directory_run.py": "716d1d07b27d87f14f668c6872aaa52e611ca6acd83775f9bbc2f22cc9d48f16",
+    "tests/validation_tree_limits/run.py": "816ee877e769b17e03d93a993ecc00777ada03337f79e3143385d40997157540",
+    "tests/resource_close/io_scope_run.py": "e8912ff0ccda095876a09c4382fd5f8aaa715bb3e887310d09b58d87fe631d70",
+    "tests/resource_close/runtime_retained_run.py": "66a5bc8066d54c98b5fec0b257b15ac49001b59d1e7fdf6013349a801a2e0b56",
+    "tests/resource_close/pool_lifecycle_run.py": "eff488846f535543b7e5e05d7a3b10b73e666f6dca5056204e84a04b266db44b"
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-owner-stock-check-20261018-002/RESULT.json",
+      "bytes": 57672,
+      "sha256": "d0a34675b6579fcbb123cc70df99fabe6f832d772fa7d2947aa4f69568fd4c2e"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-stock-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "65b812ae83282ae348c14f58172015174c874fd63748f6125f764c5cbe29fa95"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-owner-ox-check-20261018-002/RESULT.json",
+      "bytes": 57678,
+      "sha256": "8e5c8f97c79bb2bb689a84c37ecd73f923364985e33fe218a1b13edc158e4adb"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-ox-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "cf97072eb75fb5b3ed64b228e9b6c2e07eb9d5c00768c66020376c87ddf6c1a4"
+    },
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-owner-stock-dune-check-20261018-002/RESULT.json",
+      "bytes": 57499,
+      "sha256": "d2d7cd4fd7d1028d8d39bb3341741bf9e32db6388c2fb35d58911b461ee70f24"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-stock-dune-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "df1edc24a5962744ea377d6172d883159ffa0385ad9db21a45e3d56cf385a542"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-directory-owner-ox-dune-check-20261018-002/RESULT.json",
+      "bytes": 57503,
+      "sha256": "af1856f0c0967e52bf83215939dea302fdb4c8482bf848eecd951108d865af7b"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-ox-dune-check-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "7c2efef740426ac74c40d65c6bb83c8b363fa4aded99529fda4a27eb4e885919"
+    },
+    "stock/fault/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-fault-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "703e5a7802e6bd47e54ba06a4a01912ef52a7d25ebc0a02b4044c702422fd1d9"
+    },
+    "stock/fault/RESULT": {
+      "path": "/private/tmp/unison-directory-final-stock-fault-20261018-001/CONTROL-RESULT.json",
+      "bytes": 407802,
+      "sha256": "4099b138ab5a27dcad230bfd7b37c8c77060ba16d7641e64a5db6cf6214352fb"
+    },
+    "stock/fault/private/win_signature.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-owner-8mf79mon/win_signature.ml",
+      "bytes": 73,
+      "sha256": "0733adc721a3581f4c6b09b23406bfe9117a84e2c54aab86dbeace315430b1c8"
+    },
+    "stock/fault/private/system/system_win.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-owner-8mf79mon/system/system_win.ml",
+      "bytes": 10350,
+      "sha256": "1d6d969b9d391b3389044cd3f855ab8a690e64b5bfcc47eb686c6dabdd11e48f"
+    },
+    "stock/tree/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-003/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "f33e815a576e84445b685b88b314084397041561a926576d0b407d6ccec1c586"
+    },
+    "stock/tree/RESULT": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-003/CONTROL-RESULT.json",
+      "bytes": 7371,
+      "sha256": "ea633f908c42a042326bcfcc868ccc8e2d9b3cb121051124d19bada31e5c32e6"
+    },
+    "stock/tree/log/actual-object-kernel": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/kernel.log",
+      "bytes": 54,
+      "sha256": "ff28cf6e5cb92aea60cd41f2e568a7d49c4d512d85972c2d3cc7bc10fe48ea7f"
+    },
+    "stock/tree/log/settlement-link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/settlement/settlement-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/settlement": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/settlement/settlement.log",
+      "bytes": 317,
+      "sha256": "79215f47dbcfca7fbfe671fe1adf37d1c0e0ab3d77524bdb2af4c48ef317513b"
+    },
+    "stock/tree/log/nested-settlement": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/nested-settlement/nested-settlement.log",
+      "bytes": 317,
+      "sha256": "3927f75eb01ac0c80c4929c5f3fe05ece275a93defab639c5ea9940256d5eb80"
+    },
+    "stock/tree/log/previous-compile-mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/previous-compile-mli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/previous-compile-ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/previous-compile-ml.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/previous-link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/previous-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/previous-workspaces": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/previous-workspaces.log",
+      "bytes": 87,
+      "sha256": "dccb825e266aeb95d3ff2ba5f44ea17fe3107f1dd3b589d3bf6e66820db28caf"
+    },
+    "stock/tree/log/compile-mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/removed-check/compile-mli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/compile-ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/removed-check/compile-ml.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/removed-check/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stock/tree/log/enumeration": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/removed-check/enumeration.log",
+      "bytes": 88,
+      "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+    },
+    "stock/tree/historical/candidateValidation.ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/candidateValidation.ml",
+      "bytes": 12452,
+      "sha256": "0774ec2133b06575b2d9f1600c7c3699d8fbc0dc35e5731ca41bd675d99e4bfd"
+    },
+    "stock/tree/historical/candidateValidation.mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/candidateValidation.mli",
+      "bytes": 1293,
+      "sha256": "98deb666436a8eee5f81ecd3edd48120fdc902bdaf3dd62dee9b9729367b921f"
+    },
+    "stock/tree/historical/settlement.ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-awixqszr/previous-workspaces/settlement.ml",
+      "bytes": 3705,
+      "sha256": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b"
+    },
+    "stock/io/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-io-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "d33588dc377420b1c9dadecd320e169072130f59fc663700bb24b1adf974359e"
+    },
+    "stock/io/RESULT": {
+      "path": "/private/tmp/unison-directory-final-stock-io-20261018-001/CONTROL-RESULT.json",
+      "bytes": 86047,
+      "sha256": "df6d60d4d984bf6de30dfc93fbf4c1664c7b8835410ecee52113798c8873beda"
+    },
+    "stock/reader/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-reader-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "beee76f188ef384d835521d562bb7d3dc973e43c445bc2a45b71a90d6401d427"
+    },
+    "stock/reader/RESULT": {
+      "path": "/private/tmp/unison-directory-final-stock-reader-20261018-001/CONTROL-RESULT.json",
+      "bytes": 81302,
+      "sha256": "a66c553b8c2b0a47b93d6d6c40bcb72662d1811609164ff28a654f46950dd2fb"
+    },
+    "stock/pool/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-pool-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "bc7958a491be3daea604add6ecca88ecd5364e81594d29f678ecb8689dbe2c6c"
+    },
+    "stock/pool/RESULT": {
+      "path": "/private/tmp/unison-directory-final-stock-pool-20261018-001/CONTROL-RESULT.json",
+      "bytes": 118036,
+      "sha256": "1a14813bd34eb65388b7f63b5a512bf67a623c1eefaaddfc5c6ba131f51c7b97"
+    },
+    "ox/fault/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-ox-fault-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "cc73296336645dd25d78eab47ffe3b653c76115472a9eb707d2466391f7301e7"
+    },
+    "ox/fault/RESULT": {
+      "path": "/private/tmp/unison-directory-final-ox-fault-20261018-001/CONTROL-RESULT.json",
+      "bytes": 411832,
+      "sha256": "33e6d4a3f67386d680fdeb5403c61a875f18a2aa29492560388cdc261494f277"
+    },
+    "ox/fault/private/win_signature.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-owner-ie2y6ua1/win_signature.ml",
+      "bytes": 73,
+      "sha256": "0733adc721a3581f4c6b09b23406bfe9117a84e2c54aab86dbeace315430b1c8"
+    },
+    "ox/fault/private/system/system_win.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-directory-owner-ie2y6ua1/system/system_win.ml",
+      "bytes": 10350,
+      "sha256": "1d6d969b9d391b3389044cd3f855ab8a690e64b5bfcc47eb686c6dabdd11e48f"
+    },
+    "ox/tree/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-ox-tree-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "8ba6c070c5bab50d6541faa28521d635fc4d6601a82444b88aab6a1050e9678f"
+    },
+    "ox/tree/RESULT": {
+      "path": "/private/tmp/unison-directory-final-ox-tree-20261018-001/CONTROL-RESULT.json",
+      "bytes": 7371,
+      "sha256": "dd3ceb127732b038428d2865b19af75f9d8c5ba1020f6a8c156b6cbf66047726"
+    },
+    "ox/tree/log/actual-object-kernel": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/kernel.log",
+      "bytes": 54,
+      "sha256": "ff28cf6e5cb92aea60cd41f2e568a7d49c4d512d85972c2d3cc7bc10fe48ea7f"
+    },
+    "ox/tree/log/settlement-link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/settlement/settlement-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/settlement": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/settlement/settlement.log",
+      "bytes": 317,
+      "sha256": "79215f47dbcfca7fbfe671fe1adf37d1c0e0ab3d77524bdb2af4c48ef317513b"
+    },
+    "ox/tree/log/nested-settlement": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/nested-settlement/nested-settlement.log",
+      "bytes": 317,
+      "sha256": "3927f75eb01ac0c80c4929c5f3fe05ece275a93defab639c5ea9940256d5eb80"
+    },
+    "ox/tree/log/previous-compile-mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/previous-compile-mli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/previous-compile-ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/previous-compile-ml.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/previous-link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/previous-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/previous-workspaces": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/previous-workspaces.log",
+      "bytes": 87,
+      "sha256": "dccb825e266aeb95d3ff2ba5f44ea17fe3107f1dd3b589d3bf6e66820db28caf"
+    },
+    "ox/tree/log/compile-mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/removed-check/compile-mli.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/compile-ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/removed-check/compile-ml.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/link": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/removed-check/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ox/tree/log/enumeration": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/removed-check/enumeration.log",
+      "bytes": 88,
+      "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+    },
+    "ox/tree/historical/candidateValidation.ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/candidateValidation.ml",
+      "bytes": 12452,
+      "sha256": "0774ec2133b06575b2d9f1600c7c3699d8fbc0dc35e5731ca41bd675d99e4bfd"
+    },
+    "ox/tree/historical/candidateValidation.mli": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/candidateValidation.mli",
+      "bytes": 1293,
+      "sha256": "98deb666436a8eee5f81ecd3edd48120fdc902bdaf3dd62dee9b9729367b921f"
+    },
+    "ox/tree/historical/settlement.ml": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-nq9lrc1p/previous-workspaces/settlement.ml",
+      "bytes": 3705,
+      "sha256": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b"
+    },
+    "ox/io/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-ox-io-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "e680ba970959181d205fb15c705b400aeed48b22a5d9e6b2236c2816273139b4"
+    },
+    "ox/io/RESULT": {
+      "path": "/private/tmp/unison-directory-final-ox-io-20261018-001/CONTROL-RESULT.json",
+      "bytes": 86926,
+      "sha256": "76fc6808d22d3dc74b13af70ad32a33cd4a14fe72066dac99d92770091f8d3ed"
+    },
+    "ox/reader/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-ox-reader-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "8331bf12f2321b5d5b81fec34ca45b996820726149870940d180440865c760e9"
+    },
+    "ox/reader/RESULT": {
+      "path": "/private/tmp/unison-directory-final-ox-reader-20261018-001/CONTROL-RESULT.json",
+      "bytes": 81950,
+      "sha256": "6a482b61044266daef9a3c4fe73290ccab5552228eb2f5188dffdb50a7f83aa2"
+    },
+    "ox/pool/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-ox-pool-20261018-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "4397a895bd33e0702b6c975da99d5c89cf0b53f43a482646921b268d9add7a53"
+    },
+    "ox/pool/RESULT": {
+      "path": "/private/tmp/unison-directory-final-ox-pool-20261018-001/CONTROL-RESULT.json",
+      "bytes": 119488,
+      "sha256": "6dd62dbb3f0c70f15f285674d9c8c44a3f47769ef70ae18a6de77576161914d0"
+    },
+    "preserved-initial-fault-001/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "e6aaed207ee6ca0b9a97ed827451e8bd7bea40a668243a887403708752588645"
+    },
+    "preserved-initial-fault-001/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-001/SHARED-STDERR.txt",
+      "bytes": 640,
+      "sha256": "6ca90733e0be2164cc1c8c265e3c2c036f5d66e657fef16c747de20367ff7ee3"
+    },
+    "preserved-initial-fault-002/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c919c740e4b1b98b1c4c724b450de40e74b757aa36d23b5b05697a216975dc04"
+    },
+    "preserved-initial-fault-002/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-002/SHARED-STDERR.txt",
+      "bytes": 336,
+      "sha256": "e7619e31bbf743e49e13605af2df8280303c7ef94637970b962004261c652896"
+    },
+    "preserved-initial-fault-003/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-003/SHARED-CLOSED.json",
+      "bytes": 538,
+      "sha256": "a8245a3d22a5f7427296a10cd26010da7eb2ed80fa5ad77fdb4d28007a87c806"
+    },
+    "preserved-initial-fault-003/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-owner-fault-20261018-003/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preserved-tree-fixture-001/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-001/SHARED-CLOSED.json",
+      "bytes": 533,
+      "sha256": "8f900832f599bedbd56ce56f5858e55c735296fa93feee633c7f2c784c0fbbec"
+    },
+    "preserved-tree-fixture-001/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-001/SHARED-STDERR.txt",
+      "bytes": 1803,
+      "sha256": "978a3df39b8c4d558eb901be63187f8ea984a47fe2c8b2f012340aa5d5dda7f9"
+    },
+    "preserved-tree-fixture-001/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-001/CONTROL-RESULT.json",
+      "bytes": 2720,
+      "sha256": "016cd4105bcb370437fc4f2eb2fa5fd5135292772860b86b4acb5fbce1e7aeae"
+    },
+    "preserved-tree-fixture-002/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-002/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "e76965c34b1f4333c77f430e520b0268b79695f41f9d04549d0008ae9070983f"
+    },
+    "preserved-tree-fixture-002/SHARED-STDERR.txt": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-002/SHARED-STDERR.txt",
+      "bytes": 2247,
+      "sha256": "7e0614d59ef87ac216b58d763ca0a302efa7c7a3a1b9c85b61185569b0b1c941"
+    },
+    "preserved-tree-fixture-002/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-directory-final-stock-tree-20261018-002/CONTROL-RESULT.json",
+      "bytes": 2720,
+      "sha256": "0e74773c0109998f5f91b4bc6090d383d9ec09bf8b38cd7efbb3e0ae42ff422f"
+    }
+  },
+  "preserved_failures": [
+    {
+      "session": 6877,
+      "chunk": "3a9645",
+      "exit_code": 1,
+      "cause": "Negative binary/case pathname collision; all contained processes closed."
+    },
+    {
+      "session": 50798,
+      "chunk": "df46b5",
+      "exit_code": 1,
+      "cause": "Expected negative raised synchronously before test assertion; test now captures sync failure into a failed promise, production unchanged."
+    },
+    {
+      "session": 10956,
+      "chunk": "a9bfe1",
+      "exit_code": 1,
+      "cause": "Combined compiler suite exceeded60s; child91992 SIGTERM/reaped-15/groupabsent/tokensclosed; split per compiler without deadline extension."
+    },
+    {
+      "session": 13332,
+      "chunk": "55d9ae",
+      "exit_code": 1,
+      "cause": "Historical tree fixture missing newer destination field; compatibility adds field, negative refuses before context use."
+    },
+    {
+      "session": 53207,
+      "chunk": "bb4636",
+      "exit_code": 1,
+      "cause": "Historical candidate implementation paired with current expanded interface; restored actual historical interface."
+    }
+  ],
+  "regressions": {
+    "directory": {
+      "positive": 26,
+      "designated_negative": 4
+    },
+    "runtime_io": {
+      "positive": 12,
+      "designated_negative": 4
+    },
+    "runtime_reader": {
+      "positive": 24,
+      "designated_negative": 4
+    },
+    "pool": {
+      "positive": 20,
+      "designated_negative": 4
+    },
+    "tree": "Both compilers:14 kernel checks, normal/nested tree pass/reject/cancel/fresh-pass, previous budget negative, enumeration cancel and removed-check negative. In-process-only; actual transport cases not run."
+  },
+  "limits": [
+    "Opaque handle and acquisition pathname retained; no numeric FD/inode attestation invented.",
+    "Unknown close controls settle only at actual process exit, not claimed normal closedir.",
+    "Unix.opendir internal failures before returning a handle remain the Unix-stub boundary.",
+    "Windows Core/wrapper compilation and fsmonitor object ordering are source checks on Darwin, not native Windows runtime/link qualification.",
+    "Other legacy directory consumers still require complete borrowed-lifetime/error-path review.",
+    "Aggregate descendant FD/RSS, complete baseline accounting, wider benchmark and final integration remain open."
+  ],
+  "resources": "All current and preserved-failure controllers/groups settled; CPU4 synthetic scopes and CPU8 builds (compilerjobs2) closed; no EXIO/native SDK/Photo allocation used."
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "unison-exiftool-install/1",
+  "version": "13.59",
+  "repository": "https://github.com/exiftool/exiftool",
+  "tag": "13.59",
+  "commit": "2200871d9cef988051d2a99d67df3bda6cbb30a8",
+  "archive_sha256": "e1e2ad6c6fbf568afee5993ef8b2b91ab013d21698c9304e079e633ad82776f5",
+  "installation": "/Users/alexy/.local/share/unison/tools/exiftool/13.59/exiftool-2200871d9cef988051d2a99d67df3bda6cbb30a8",
+  "shared_exiftool_untouched": true,
+  "upstream_script_sha256": "a6b8018093845ac93011307bac4ab630d6604b2365fc7f66bb88c88d7dedb5ed",
+  "local_derivation": "Replace only first-line /usr/bin/env perl with pinned /usr/bin/perl5.34; chmod0700. No other script bytes changed.",
+  "installed_script_sha256": "8186a3597f609a6197659e0083cd542841b33889d6e6beb956fd5cd2d04931cb"
+}

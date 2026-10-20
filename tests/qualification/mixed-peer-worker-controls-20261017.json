@@ -1,0 +1,59 @@
+{
+  "scope": "Worker flow with original8KiB disposable TIFFs and fake retained-call/audit boundaries; no CLI/transport or canonicalIO",
+  "actual_terminals": [
+    {
+      "chunk": "36714a",
+      "exit": 0,
+      "no_session": true,
+      "tests": 3
+    },
+    {
+      "chunk": "d0932e",
+      "exit": 0,
+      "no_session": true,
+      "tests": 5
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "776e18c7f8cbd05d8231bc431c20d688bb831b9064ca910d70a81cd5d8a022b7"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-001/SHARED-START.json",
+      "bytes": 1132,
+      "sha256": "0b3015fa4abd6797b5ef2dc2dfbb60be979d095f486d25a6c74c68fffe209a09"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 101,
+      "sha256": "b9953bf2b3e2a329de4787335ec89d2e5079a854f529e78c3ed08b177e5559f1"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "458c16455f1bc0f6c983f94ffd08a7ec12a9c030b75ec6e39823bb7a84e1ef0b"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-002/SHARED-START.json",
+      "bytes": 1131,
+      "sha256": "6c4f00b010a718897628776627a455c2ec9f021e01f20fa70fc2beb1b6687e27"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "09a52ff86526f479758317ecf44509211091846af3eb8b99770b784e0324ced8"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-worker-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

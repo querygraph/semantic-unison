@@ -80,8 +80,8 @@ The following remain required before describing this as complete resource contro
   including uncertain OS close/reap settlement.
 - Pool, transport, archive and ordinary-operation baselines, operating-system
   descriptor limits, mount incarnation and cross-process attribution.
-- Admission for incoming raw/decoded RPC arguments before allocation, parser
-  expansion, directory manifests, native/child allocations and measured RSS.
+- Remaining RPC headers/replies/unbounded legacy traffic and decoded arguments,
+  parser expansion, directory manifests, native/child allocations and measured RSS.
 - Broader post-dispatch allocation/cancellation stress and lifecycle recovery.
 
 Buffer credits estimate retained proof/codec work. They do not bound the OCaml
@@ -114,3 +114,84 @@ The [subsequent full CLI check](../tests/qualification/io-registration-full-cli-
 rebuilds current stock/Ox Make applications and runs their bounded selftests after
 the IO registration repair. Both actual parents exit0 with groups and CPU tokens
 closed. Dune receipts remain their historical source snapshots.
+
+## Machine-integer accounting boundaries
+
+The [current stock/Ox admission suite](../tests/qualification/admission-integer-boundaries-actual-20261016.json)
+passes28 groups/compiler, including maximal machine-integer payload/descriptor
+budgets. A full `max_int` reservation blocks a positive sibling without wrapping
+its ledger; cancellation removes that pending owner and retirement returns the
+ledger to zero. `min_int` costs refuse before debit. A maximal valid source
+headroom and its complementary consumer envelope sum exactly to the declared
+budget, while headroom one unit above the half-budget bound refuses.
+
+These use declared integer credits and sleeping promises, not massive allocations
+or operating-system descriptor opens. They qualify accounting arithmetic and
+owner transitions, not RSS, live FD peaks, physical IO or whole-process caps.
+Both serial compiler/test groups and the canonical Unison8 owner closed normally;
+no SDK, Photo payload or EXglobal IO was used. Production sources were unchanged.
+
+The [installed ExifTool/hash bridge control](../tests/qualification/shared-exiftool-hash-actual-20261016.json)
+now exercises actual read-only ExifTool13.10 requests alongside sixteen worker
+hashes on an original private XMP per compiler. Shared supervisor identity,
+exact metadata/byte/stat fences, settled helper/worker ledgers and containing
+owner closure pass on stock/Ox. This adds real external-tool evidence to the
+synthetic/helper CPU controls; it does not qualify simultaneous Adobe/ExifTool,
+full installation dependencies, resource peaks or representative camera input.
+
+## Current production-linked census (2026-10-17)
+
+[Refreshed qualification](../tests/qualification/current-resource-lifetime-actual-20261017.json)
+links the current stock/Ox Make objects and rechecks fourteen relevant production
+source hashes per compiler. Seven executions each include the normal phase
+census, immediate/queued token handoff faults and four designated private
+regression rejections. Actual wrapper54247/400762/0 and both child groups settled.
+The observed Ready7/Finalized8 descriptor counts include the process baseline;
+the publication reservation remains charged24 descriptor credits. These phase
+observations do not establish transient peaks or a whole-process ceiling.
+
+## Bounded semantic RPC input buffers
+
+`rpcboundedinputbudget` (default64MiB) and `rpcboundedinputslots` (default4096)
+are endpoint-local process-wide limits on raw argument buffers for explicitly
+bounded RPC commands. Currently these are semantic plan/component/inspection
+requests. Incoming command limits are checked first; the actual declared frame
+length and one slot are then reserved before `Bytearray.create` or body reads.
+Empty frames consume a slot. A malformed length, exhausted quota or invalid
+configuration fails the connection instead of waiting in the receiving loop.
+Waiting there could deadlock replies needed by already admitted work.
+
+The reservation transfers to the detached request and remains charged through
+its scope, processing and queued reply consumption. A connection-close hook
+does not clear this ledger: old-session work may still borrow the buffer. Actual
+settlement retires its charge once; truncated reads and dispatch failures retire
+it as well. The limits are local policy, never accepted from peer preferences.
+Lowering a limit below current usage refuses new work until existing work settles.
+
+This bounds retained raw request buffers, not decoded objects, headers, reply
+buffers, streams, legacy unbounded commands or process RSS. Their accounting
+remains separate work. No wire format or legacy command registration changes.
+
+## XMP namespace representation
+
+[Current compact-name qualification](../tests/qualification/xmp-compact-names-actual-20261017.json)
+removes per-internal-node expanded-name strings. AST nodes retain shared URI and
+local tokens; the same length/duplicate checks remain. Expansion occurs at the
+128-property public projection and bounded scalar view. The same174KiB stress
+packet retains its independent digest while managed allocation falls65–67%
+against the pinned eager-name source on this host. Full stock/Ox builds, directed
+parser cases and scalar merge/mode checks pass. No new input refusal is used to
+obtain that reduction. This does not turn transaction estimates into RSS caps;
+namespace tables, decoded objects and native allocation peaks remain separately
+scoped. The initial fixed-only wiring error and corrected directed-only runs
+are retained in explicit receipts.
+
+## Fixed infrastructure allowance
+
+The Runtime gate now accounts separately for its single notification pipe and
+4096-byte completion-buffer payload before pool creation. Existing preferences
+and `usage` stay workspace-only; combined planning capacity adds the immutable
+allowance. Direct zero-baseline gates and child partitions retain their original
+semantics. See [contract and exact scope](fixed-semantic-infrastructure-accounting.md).
+This leaves transport/native/legacy/helper baselines and aggregate FD/RSS limits
+as separate work.

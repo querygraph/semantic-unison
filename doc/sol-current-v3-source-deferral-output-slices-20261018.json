@@ -1,0 +1,38 @@
+{
+  "state": "SOURCE_PROPOSALS_DEFERRED_DO_NOT_DISPATCH_KNOWN_NONZERO_SLICE_BUG",
+  "queue_id": "01a1502e-bad1-7f60-932a-e5850af12d94",
+  "queue_tool": {
+    "chunk_id": "36f0f7",
+    "exit_code": 0
+  },
+  "observed_unix": 1792346847.206845,
+  "index": {
+    "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-requalification-requests-v3.json",
+    "bytes": 3170,
+    "sha256": "2e9adb6ba0a9a71a65312641443f3eef46ecc95404002a9cb3ce36f47bf801b0"
+  },
+  "observations": [
+    {
+      "label": "upstream",
+      "admission_path": "/private/tmp/unison-current-upstream-admission-595b8390.json",
+      "admission_exists": false,
+      "workspace": "/private/tmp/u-mp-595b8390",
+      "workspace_exists": false
+    },
+    {
+      "label": "retained-fork",
+      "admission_path": "/private/tmp/unison-current-retained-fork-admission-585e3781.json",
+      "admission_exists": false,
+      "workspace": "/private/tmp/u-mp-585e3781",
+      "workspace_exists": false
+    },
+    {
+      "label": "properties",
+      "admission_path": "/private/tmp/unison-current-properties-admission-6d3b576a.json",
+      "admission_exists": false,
+      "workspace": "/private/tmp/u-current-properties-6d3b576a",
+      "workspace_exists": false
+    }
+  ],
+  "scope": "Original queued V3 files preserved, no actual dispatch by us. Any crossed admission must be refused unstarted, not replayed/extended. Original golden63737/1cf438/0 expected rejection controller, child59647 reaped1/groupabsent/CPU4closed; no EXIO/SDK/Photo payload. Fixed source successor qualification in progress; no scheduling hold requested."
+}

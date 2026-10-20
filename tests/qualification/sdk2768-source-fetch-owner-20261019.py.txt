@@ -1,0 +1,61 @@
+"""One TLS official-source fetch; no archive extraction/build/SDK invocation."""
+import os,sys,time,json,hashlib,urllib.request,stat
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from shared_cpu_pool import Pool,authorized_unison_tokens,UnresolvedOwnership
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle,descriptor_observation
+from shared_process_owner import retain_after_record
+from private_camera_receiving.close import close_descriptors
+from sdk_merge_receiving.store import Store
+from final_profile_owner import sha
+from cached_benchmark.contract import read_bytes
+URL='https://download.adobe.com/pub/adobe/dng/dng_sdk_1_7_1_2768_20261013.zip';COUNT=80509918
+base=Path('/Users/alexy/Library/Application Support/FirstPair Unison');parent=base/'retained-sdk-sources-v1';target=parent/'adobe-171-2768-20261013-20261019-001'
+assert base.lstat().st_mode&0o777==0o700 and base.lstat().st_uid==os.getuid() and not base.is_symlink()
+policy=R.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json';assert authorized_unison_tokens(read_bytes(str(policy),1048576))==tuple(range(8))
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd')
+bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle;store=None;fd=None;response=None;network_observation=None
+try:
+ if not parent.exists():parent.mkdir(mode=0o700)
+ s=parent.lstat();assert stat.S_ISDIR(s.st_mode) and s.st_mode&0o777==0o700 and s.st_uid==os.getuid() and not parent.is_symlink()
+ target.mkdir(mode=0o700);s=target.lstat();store=Store(str(target),dict(device=s.st_dev,inode=s.st_ino))
+ start=time.monotonic();deadline=start+90
+ store.write('START.json',dict(owner_pid=os.getpid(),URL=URL,expected_bytes=COUNT,maximum_bytes=96*1048576,observation_seconds=90,network_timeout_seconds=10,source_sha256=sha(__file__),no_SDK_execution=True))
+ print('SOURCE_FETCH_START',os.getpid(),str(target),flush=True)
+ response=urllib.request.urlopen(URL,timeout=10)
+ network_observation=descriptor_observation(response.fileno(),'official_source_TLS_response')
+ assert response.status==200 and response.url==URL and response.headers.get_content_type()=='application/zip' and int(response.headers['Content-Length'])==COUNT
+ headers=dict(response.headers);fd=os.open('dng_sdk_1_7_1_2768.zip',os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600,dir_fd=store.fd)
+ digest=hashlib.sha256();count=0
+ while count<COUNT:
+  if time.monotonic()>=deadline:raise TimeoutError('source fetch observation expired; preserve partial file')
+  block=response.read(min(65536,COUNT-count));assert block
+  count+=len(block);assert count<=COUNT and count<=96*1048576;digest.update(block);offset=0
+  while offset<len(block):
+   written=os.write(fd,block[offset:]);assert written>0;offset+=written
+ if response.read(1):raise ValueError('source body exceeds declared extent')
+ old=response;response=None
+ try:old.close()
+ except BaseException as error:
+  unknown=UnresolvedOwnership('TLS response close uncertain; no numeric retry',uncertain_fd=network_observation['fd']);unknown.uncertain_closes=[network_observation];raise unknown from error
+ os.fsync(fd);os.fchmod(fd,0o400);os.fsync(fd);s=os.fstat(fd);assert s.st_size==COUNT and s.st_nlink==1 and s.st_uid==os.getuid() and s.st_mode&0o777==0o400
+ old=fd;fd=None;close_descriptors([old])
+ receipt=dict(schema='unison-official-sdk-source-fetch/1',URL=URL,discovery='Adobe official Digital Negative page downloadlink/go/dng_sdk HEAD200 resolved exactURL; SDK1.7.1Build2768 Oct13 2026',headers=headers,bytes=count,sha256=digest.hexdigest(),archive=str(target/'dng_sdk_1_7_1_2768.zip'),identity={k:getattr(s,k) for k in ('st_dev','st_ino','st_mode','st_size','st_mtime_ns','st_ctime_ns','st_nlink','st_uid')},elapsed_seconds=time.monotonic()-start,SDK_executions=0,children=0,qualified_2724_validator_unchanged=True,scope='TLS source provenance and captured byteSHA only; not restoration2724/build/license-reviewed/fixture/semantic/decode/pixel/production qualification')
+ store.write('RESULT.json',receipt);store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ print(json.dumps(receipt));print('SOURCE_FETCH_CLOSED',flush=True)
+except BaseException as error:
+ if isinstance(error,UnresolvedOwnership):retain_after_record(lambda:print('SOURCE_CLOSE_RETAIN',repr(error),flush=True))
+ try:
+  if response is not None:
+   old=response;response=None
+   try:old.close()
+   except BaseException as e:
+    u=UnresolvedOwnership('TLS close unknown during failure',uncertain_fd=network_observation['fd'] if network_observation else None);u.original_failure=error;raise u from e
+  if fd is not None:old=fd;fd=None;close_descriptors([old])
+  if store is not None and not store.closed:store.write('FAILED.json',dict(error=repr(error),no_child_or_SDK=True));store.close()
+  if not cpu.closed:cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+  if not io.closed:io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ except BaseException as cleanup:retain_after_record(lambda:print('SOURCE_CLEANUP_RETAIN',repr(cleanup),repr(error),flush=True))
+ raise

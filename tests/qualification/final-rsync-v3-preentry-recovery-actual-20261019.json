@@ -1,0 +1,23 @@
+{
+  "state": "FAILED_PREENTRY_INDEPENDENT_RECOVERY_CLOSED",
+  "actual_owner": {
+    "session": 83838,
+    "initial": "9c9f2e",
+    "terminal": "239b25",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 87548
+  },
+  "original_child_wait_claimed": false,
+  "test_child_attempted": false,
+  "stop_proof": {
+    "path": "/private/tmp/unison-final-rsync-v3-preentry-stop-proof.json",
+    "sha256": "5cfa165f834b38999a9461ff4207295f2efde6a3f2a9d7c5c3e19b0ee2ea1873"
+  },
+  "old_owner_source": {
+    "path": "tests/qualification/final-rsync-v3-owner-source.py.txt",
+    "sha256": "bd3f3e23ba50630634a4f1e58990f6b902b78e4e282b58ef9e2d20fc7fc2fee4"
+  },
+  "fresh_ex_cpu8_acquired_closed": true,
+  "scope": "exact idle owner recovery only; no rsync functionality or original normal resource close claim"
+}

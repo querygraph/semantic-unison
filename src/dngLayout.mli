@@ -1,0 +1,3 @@
+include FormatExtension.S
+(** Layout-only exact-byte DNG profile. Opaque private regions are preserved;
+    no vendor grammar, semantic equivalence or merge authority is implied. *)

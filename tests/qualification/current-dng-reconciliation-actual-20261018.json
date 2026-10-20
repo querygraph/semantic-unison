@@ -1,0 +1,215 @@
+{
+  "schema": "unison-current-dng-reconciliation/1",
+  "state": "PASS_CLOSED",
+  "actual_controller": {
+    "session": 5070,
+    "initial_chunk": "d4fe44",
+    "terminal_chunk": "c3ff40",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "rows": [
+    {
+      "compiler": "stock",
+      "result": {
+        "schema": "unison-dng-three-way-plan/1",
+        "status": "passed",
+        "workspace": "/private/tmp/unison-dng-reconcile-_b9eb1_k",
+        "compiler": {
+          "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+          "version": "5.2.0"
+        },
+        "sourcePins": {
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+          "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+          "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+          "src/semanticFile.ox.mli.in": "1625907727d0ca4292afd30735b412e4b3354c73a5882247accad0be66be5782",
+          "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+          "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+          "src/formatExtension.ox.mli.in": "6f023de54ff0386a594bb6f4a9bb00390ac4445270cb2f11f1ca8a5202e85199",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+          "src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+          "src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+          "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+          "src/dngSemantic.ox.mli.in": "dffd6ff516bf760f0325e669b7a4ba97509b056df7eab5b0f0c6fbe9a22c3f7c",
+          "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+          "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+          "src/semanticDelta.ox.mli.in": "a511d7625957b64348860bc1fe58a659946c5047c0e29503485e06cac53ad9a4",
+          "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+          "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+          "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+          "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf",
+          "tests/dng_reconcile/test.ml": "da12cc44ce13a790ab47bd47d5a0c774bf585cdbda4f295f64b7ce52984f0d2f",
+          "tests/dng_reconcile/run.py": "1f55d62419bd2e639b1a7ead04f2cab68d63ae1567b86afef0b19faac99e7314"
+        },
+        "binarySha256": "5e3334cb0c21d60fefed7b7eba5d71e3f7f9518ab868dbadedc6e26276b096a0",
+        "compileLogSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "testLogSha256": "72d9d48acdffec63ce8d2c6025014ca360a555f552dc966707ec39b70ec40950",
+        "targetSha256": "34bf3a0d5bd6cc85aaed24e73f0538cc6ec4cd7723dbaaa1762848b86d750fec",
+        "inputHashes": {
+          "base.dng": "88ec0465cb76262e815c7538c3758ee89b084ce31728868b0580f711f303d4b5",
+          "left.dng": "01d91eebdc8febdc906551604d0757c8e73141ef7269a33996c050510cc05ce3",
+          "right.dng": "b15edd0ab0b0b565efe8f9b1389a7a2af524cdac1ea60f3ed3a04868e7f6e4d5",
+          "target.dng": "34bf3a0d5bd6cc85aaed24e73f0538cc6ec4cd7723dbaaa1762848b86d750fec",
+          "opaque.dng": "1693e16acf23ac403839dd67c60bdc8dae8a496655df034f6ffe89d3fe1c33d2",
+          "conflict.dng": "8222139c9eacbdab0d2f7f87b99b01865d284612b1ae17828ede149b97f76263"
+        },
+        "modeChecked": false,
+        "stageSubstrate": "Darwin clonefile success on private same-volume fixture",
+        "automaticMergeEnabled": false,
+        "archiveBaseAuthorityQualified": false
+      },
+      "closure": {
+        "child": {
+          "pid": 37640,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37640,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/RESULT.json",
+          "bytes": 3974,
+          "sha256": "43afff3838aa7722b31c5d9ad115342e1a127a6398c7bce6ee68598e616a765a"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "dcc84f0ca676393d3a0e34422a6d50b51707317e48c77d40e15391014c0b2737"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 56,
+          "sha256": "72d9d48acdffec63ce8d2c6025014ca360a555f552dc966707ec39b70ec40950"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "result": {
+        "schema": "unison-dng-three-way-plan/1",
+        "status": "passed",
+        "workspace": "/private/tmp/unison-dng-reconcile-tw08xdeu",
+        "compiler": {
+          "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "version": "5.2.0+ox"
+        },
+        "sourcePins": {
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+          "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+          "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+          "src/semanticFile.ox.mli.in": "1625907727d0ca4292afd30735b412e4b3354c73a5882247accad0be66be5782",
+          "src/formatExtension.mli": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56",
+          "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+          "src/formatExtension.ox.mli.in": "6f023de54ff0386a594bb6f4a9bb00390ac4445270cb2f11f1ca8a5202e85199",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+          "src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+          "src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+          "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+          "src/dngSemantic.ox.mli.in": "dffd6ff516bf760f0325e669b7a4ba97509b056df7eab5b0f0c6fbe9a22c3f7c",
+          "src/semanticDelta.mli": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34",
+          "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+          "src/semanticDelta.ox.mli.in": "a511d7625957b64348860bc1fe58a659946c5047c0e29503485e06cac53ad9a4",
+          "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+          "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+          "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+          "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf",
+          "tests/dng_reconcile/test.ml": "da12cc44ce13a790ab47bd47d5a0c774bf585cdbda4f295f64b7ce52984f0d2f",
+          "tests/dng_reconcile/run.py": "1f55d62419bd2e639b1a7ead04f2cab68d63ae1567b86afef0b19faac99e7314"
+        },
+        "binarySha256": "17b57e801534aff05988a5b081624f1405ecd4d3f7710f48643fb3f505e1cd0c",
+        "compileLogSha256": "5860c31e58bd3a27b022fb30da44a6ef44810b4db6e91f1ae0ad425747ddb14b",
+        "testLogSha256": "72d9d48acdffec63ce8d2c6025014ca360a555f552dc966707ec39b70ec40950",
+        "targetSha256": "34bf3a0d5bd6cc85aaed24e73f0538cc6ec4cd7723dbaaa1762848b86d750fec",
+        "inputHashes": {
+          "base.dng": "88ec0465cb76262e815c7538c3758ee89b084ce31728868b0580f711f303d4b5",
+          "left.dng": "01d91eebdc8febdc906551604d0757c8e73141ef7269a33996c050510cc05ce3",
+          "right.dng": "b15edd0ab0b0b565efe8f9b1389a7a2af524cdac1ea60f3ed3a04868e7f6e4d5",
+          "target.dng": "34bf3a0d5bd6cc85aaed24e73f0538cc6ec4cd7723dbaaa1762848b86d750fec",
+          "opaque.dng": "1693e16acf23ac403839dd67c60bdc8dae8a496655df034f6ffe89d3fe1c33d2",
+          "conflict.dng": "8222139c9eacbdab0d2f7f87b99b01865d284612b1ae17828ede149b97f76263"
+        },
+        "modeChecked": true,
+        "stageSubstrate": "Darwin clonefile success on private same-volume fixture",
+        "automaticMergeEnabled": false,
+        "archiveBaseAuthorityQualified": false
+      },
+      "closure": {
+        "child": {
+          "pid": 37711,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37711,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/RESULT.json",
+          "bytes": 3977,
+          "sha256": "0341e8aca15c723059b1bfa8d32bc630d51399bd3ec531c6b24ad8b34ee84798"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5620a18093167fc99fcd1ca245323ca05661b3a6c25790fa4da7e6f6ddb1fe2b"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 56,
+          "sha256": "72d9d48acdffec63ce8d2c6025014ca360a555f552dc966707ec39b70ec40950"
+        },
+        {
+          "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "scope": "Nine original controls/compiler; private 2MiB generated inputs and distinct clonefile stage; independent exact target, unchanged inputs, 3072 returned logical bytes/one write. No RPC/receiving, archive-base authority, SDK/Photo/camera/EXglobal/physical storage/performance claim.",
+  "runner_fix": "Copy required semanticHash_evp.h into isolated compiler snapshot; no production or frozen V6 source changes."
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "unison-saved-timed-resource-distributions/1",
+  "state": "PASS_CLOSED_METADATA_ONLY",
+  "actual_controls_terminal": {
+    "chunk": "add86c",
+    "exit_code": 0,
+    "no_session": true,
+    "tests": 4
+  },
+  "actual_saved_report_terminal": {
+    "chunk": "2adb9d",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_sha256": {
+    "tests/sync_timed_summary.py": "d4958f3f03a6a5fdb686bdeb90dcb2c9922bb18c23a165032ba19d6b6161f4ee",
+    "tests/sync_timed_summary_test.py": "c04ab50da81bf38f635a3d86a067e2a0148d5c42296d830f19cebc7f0092e05a",
+    "tests/sync_timed_saved_report.py": "8b0c0f4138bbf4a7cda78ca616b42a04012781a3b4c3f802a710b54d96bf71e5",
+    "tests/sync_timed_darwin_audit.py": "a965c84719e1e7eb81408b7359159f4eb6d673e16564f086c3c1a2e33ced875f",
+    "bench/sync/resource_report.py": "a78a603d752a18a14c19d16bd24389eceda32cdbd27dc0e1895bedb688859154",
+    "bench/sync/timed_shared.py": "e9ffd3a5faa2b1f6eeae47cd8b6906c4c7109f886fd4cee9ac3d98a2fb2bf23f",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-current-timed-summary-controls-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "a12e11761afac498ea5e8f5056142c604be0491d64ab295b45589c2e075d9960"
+    },
+    {
+      "path": "/private/tmp/unison-current-timed-summary-controls-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-current-timed-summary-controls-20261018-001/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "2a017d31f068bc02e85ada78f2f9a5723d83146bc0823f949251504a03d69eed"
+    },
+    {
+      "path": "/private/tmp/unison-current-timed-summary-saved-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "20b136bfe094a352afb28e2957df4f84a5b630c7fc8fdeafddb0319a8d015ded"
+    },
+    {
+      "path": "/private/tmp/unison-current-timed-summary-saved-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 780,
+      "sha256": "dffefa074e01be5e3f7f7816ad930fd1efb9ea1b2b5186015a8e9ecebaafbe60"
+    },
+    {
+      "path": "/private/tmp/unison-current-timed-summary-saved-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "report": {
+    "path": "/Users/alexy/src/unison-stream-classifier-20261018/bench/sync/results/shared-timed-resource-distributions-20261018.json",
+    "bytes": 630635,
+    "sha256": "eb89bf8d6f0f4b3eab60dc0ed42dfb8578630d4206341d328913897045d54c8b"
+  },
+  "raw_input_sha256": "66422ef741e827bf527a4622f4c49e81f25e71ad6aa89e96bec95a1d8b67b437",
+  "scope": "Saved historical 108 rows only; 18 warmups separate, all 90 measured retained. No sync, payload, SDK, Photo, EXglobal or current-source performance claim. Unknowns remain unknown; modeled extents not physical writes."
+}

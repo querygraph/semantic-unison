@@ -1,0 +1,28 @@
+{
+  "state": "QUEUED_SOURCE_REQUEST_NO_RUNTIME_GRANT",
+  "queue_id": "01a150b4-62ea-7ca1-ba19-56376210b6b7",
+  "receiver_thread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "actual_queue_tool": {
+    "chunk_id": "1c7179",
+    "exit_code": 0
+  },
+  "index": {
+    "path": "/Users/alexy/src/unison-stream-qualified-20261018/doc/sol-stream-requalification-requests-v6.json",
+    "bytes": 2710,
+    "sha256": "3fa0df6e7be8ffefe66939a1d55d19b9857edf29d496b8b2d8013d6a09e35085"
+  },
+  "metadata_head": "5cc96102",
+  "source_base": "63e4b947",
+  "production_commit": "513c121a",
+  "actual_metadata_preparation": {
+    "chunk_id": "ad5352",
+    "exit_code": 0
+  },
+  "actual_fork_push": {
+    "session_id": 60462,
+    "chunk_id": "9b47ac",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "scope": "No actual admission/workspace/lock/child/transport or SourceIO scheduling hold. Separate fresh Root grants required; V5 source-deferred and older histories preserved."
+}

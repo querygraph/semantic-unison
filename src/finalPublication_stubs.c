@@ -38,6 +38,8 @@ CAMLprim value unison_final_publication_errno_unavailable(value error)
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <math.h>
 
 enum final_phase { PREPARED, PRODUCING, ATTACHED, PUBLISHED, CLOSED };
 struct directory_identity {
@@ -939,13 +941,31 @@ CAMLprim value unison_final_publication_check(value handle)
   raise_error(error);
   CAMLreturn(Val_unit);
 }
-CAMLprim value unison_final_publication_publish(value handle)
+/* Diagnostics cannot replace the native operation errno or select a wall
+ * clock fallback. No allocation, callback, FD or ownership change occurs. */
+static double publication_clock(void)
+{
+  struct timespec now;
+  int saved = errno;
+  double seconds = NAN;
+  if (clock_gettime(CLOCK_MONOTONIC, &now) == 0)
+    seconds = (double)now.tv_sec + (double)now.tv_nsec / 1e9;
+  errno = saved;
+  return seconds;
+}
+static value publish_common(value handle, int timed)
 {
   CAMLparam1(handle);
+  CAMLlocal1(observation);
+  /* Allocate before looking up the rooted handle or changing any name. Once
+     rename succeeds, filling this existing float cannot raise allocation OOM. */
+  observation = timed ? caml_copy_double(NAN) : Val_unit;
   struct final_context *context = *(struct final_context **)Data_custom_val(handle);
   struct publication_error error = { 0, NULL };
   int result;
+  double started = NAN, stopped = NAN;
   caml_enter_blocking_section_no_pending();
+  if (timed) started = publication_clock();
   if (!enter_context(context, &error, "final_publication.publish.lock")) goto published_unlocked;
   check_candidate(context, &error);
   if (error.number != 0) goto published;
@@ -978,9 +998,23 @@ CAMLprim value unison_final_publication_publish(value handle)
 published:
   pthread_mutex_unlock(&context->mutex);
 published_unlocked:
+  if (timed) stopped = publication_clock();
   caml_acquire_runtime_system();
   raise_error(error);
-  CAMLreturn(Val_unit);
+  if (timed) {
+    double elapsed = stopped - started;
+    if (isfinite(started) && isfinite(stopped) && isfinite(elapsed) && elapsed >= 0.0)
+      Store_double_val(observation, elapsed);
+  }
+  CAMLreturn(observation);
+}
+CAMLprim value unison_final_publication_publish(value handle)
+{
+  return publish_common(handle, 0);
+}
+CAMLprim value unison_final_publication_publish_timed(value handle)
+{
+  return publish_common(handle, 1);
 }
 CAMLprim value unison_final_publication_check_published(value handle)
 {
@@ -1132,6 +1166,7 @@ UNISON_FINAL_UNAVAILABLE(unison_final_publication_check_candidate, (value handle
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_observe_target, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_check, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_publish, (value handle), CAMLparam1(handle))
+UNISON_FINAL_UNAVAILABLE(unison_final_publication_publish_timed, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_check_published, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_published, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_release, (value handle), CAMLparam1(handle))

@@ -1,0 +1,35 @@
+{
+  "schema": "unison-sol-final-scope-audit-owner/1",
+  "actual_tool": {
+    "chunk": "48a315",
+    "exit": 0,
+    "no_session": true
+  },
+  "audit": {
+    "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/sol-final-source-scope-audit-20261018-v1.json",
+    "bytes": 100636,
+    "sha256": "59c0667c7a1aac8aa46bc1f849924bf0b6ad4c97dfafa2e352bb138c70061e02"
+  },
+  "closure": {
+    "child": {
+      "pid": 61565,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 61565,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "scope": "14 selected receipt JSONs and explicit current production source hashes only; no new payload/runtime/automatic adoption"
+}

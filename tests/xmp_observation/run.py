@@ -86,6 +86,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ocamlopt", default="ocamlopt")
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--fixed-only", action="store_true", help="skip generated XML mutation campaign")
+    parser.add_argument("--baseline-revision", help="one exact local Git40-hex source baseline")
     parser.add_argument("--negative-control", choices=("namespace", "subtree", "duplicate"))
     args = parser.parse_args()
     compiler = shutil.which(args.ocamlopt)
@@ -95,7 +97,7 @@ def main():
     environment = os.environ.copy()
     for variable in ("OCAMLLIB", "OCAMLPATH", "CAML_LD_LIBRARY_PATH", "OCAMLRUNPARAM"):
         environment.pop(variable, None)
-    inputs = ["src/semanticHash.ml", "src/semanticHash.mli", "src/semanticHash_stubs.c",
+    inputs = ["src/semanticHash.ml", "src/semanticHash.mli", "src/semanticHash_stubs.c", "src/semanticHash_evp.h",
               "src/xmpObservation.ml", "src/xmpObservation.mli",
               "tests/xmp_observation/test.ml", "tests/xmp_observation/probe.ml",
               "tests/xmp_observation/run.py"]
@@ -104,6 +106,15 @@ def main():
         work = Path(tmp)
         for name in inputs[:-1]:
             shutil.copyfile(root / name, work / Path(name).name)
+        if args.baseline_revision:
+            import re
+            if not re.fullmatch('[0-9a-f]{40}',args.baseline_revision) or args.negative_control:
+                parser.error('one exact Git revision and no combined source mutation required')
+            baseline=subprocess.check_output(['git','show',args.baseline_revision+':src/xmpObservation.ml'],
+                                             cwd=root,timeout=10)
+            if len(baseline)>1048576:parser.error('bounded baseline source required')
+            (work/'xmpObservation.ml').write_bytes(baseline)
+            pins['src/xmpObservation.ml']=hashlib.sha256(baseline).hexdigest()
         ns = {
             "xml": "http://www.w3.org/XML/1998/namespace",
             "r": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -116,6 +127,11 @@ def main():
                                  "<crs:MaskGroup><mask:Mask>AI</mask:Mask></crs:MaskGroup>"),
             "self_closing": transcript("E", ns, "<crs:Exposure2012/>"),
         }
+        long_uri='urn:'+'x'*480
+        def names(n):return ' '.join('p:a'+str(i)+'="v"' for i in range(n))
+        long_children='<crs:MaskGroup>'+''.join('<Value '+names(256)+'/>' for _ in range(63))+\
+                      '<Value '+names(252)+'/></crs:MaskGroup>'
+        expected['long_names']=transcript('E',dict(ns,p=long_uri),long_children)
         (work / "expected.ml").write_text("".join(
             f'let {name} = "{digest}"\n' for name, digest in expected.items()))
         if args.negative_control:
@@ -137,7 +153,8 @@ def main():
                    "xmpObservation.mli", "xmpObservation.ml", "expected.ml", "test.ml",
                    "-o", "xmp-test"]
         subprocess.run(command, cwd=work, env=environment, check=True)
-        result = subprocess.run([str(work / "xmp-test")], cwd=work, env=environment,
+        test_argv=[str(work / "xmp-test")]+(['--fixed-only'] if args.fixed_only else [])
+        result = subprocess.run(test_argv, cwd=work, env=environment,
                                 capture_output=True, text=True, timeout=60)
         print(result.stdout, end="", flush=True)
         print(result.stderr, end="", flush=True)
@@ -152,13 +169,15 @@ def main():
             print(f"PASS: {args.negative_control} negative control rejected", flush=True)
         else:
             result.check_returncode()
-        differential = None if args.negative_control else differential_check(compiler, work, environment)
+        differential = None if args.negative_control or args.fixed_only else differential_check(compiler, work, environment)
         receipt = {
             "observed_at_utc": datetime.now(timezone.utc).isoformat(),
             "compiler": compiler, "version": version, "source_sha256": pins,
             "tested_xmp_sha256": hashlib.sha256((work / "xmpObservation.ml").read_bytes()).hexdigest(),
             "compile_command": command,
             "negative_control": args.negative_control, "exit_code": result.returncode,
+            "fixed_only": args.fixed_only, "baseline_revision": args.baseline_revision,
+            "test_argv": test_argv, "random_byte_cases": 0 if args.fixed_only else 512,
             "stdout": result.stdout, "stderr": result.stderr,
             "independent_python_digest_vectors": expected,
             "independent_elementtree_xml_mutations": differential,

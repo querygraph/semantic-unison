@@ -1,0 +1,58 @@
+{
+  "schema": "unison-generated-workload-extended-controls/1",
+  "state": "PASS_ACTUAL_CLOSED_NATIVE_SYNC_UNSTARTED",
+  "actual_tool": {
+    "chunk": "987431",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "tests": 15,
+  "source_pins": {
+    "bench/sync/workloads.py": "09f21ca1bbd9953a487a8a53ad6139c5f6ce271fa0d6cc1c870b9bdd64e1a9c0",
+    "bench/sync/workloads_test.py": "bf1c632ccef437e2a45e4816a4fd409c84794833b0eac9673f8309c8ace1ba0b",
+    "bench/sync/workload_fixtures.py": "059421cd2df4894e69b9098d4f12cc0366a28e15815f4c33313b26edbe72afe6",
+    "bench/sync/workload_fixtures_test.py": "926f04c9d8d16d0d31cc3b588aadf8b97a18f91ab798a3cb1dd475068fb9daad",
+    "bench/sync/run.py": "78a2c43bf846d5fa3bdd103add48f0aabd2835f4df13345aa119047fb1e5d219",
+    "bench/sync/fixtures.py": "cd81f38c03d2e556726c3bb7752d0e72ae78ae36e71d362aea635b35dcb50335"
+  },
+  "artifact": {
+    "path": "/private/tmp/unison-workload-extended-controls-hhy_t78s/RESULT.json",
+    "bytes": 8260,
+    "sha256": "8957c8680cc437305e8ab9ddd2fa9bfed623fc95964f5188f3b1ba16ae777c27"
+  },
+  "actual_children": [
+    {
+      "pid": 70793,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    {
+      "pid": 70802,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    {
+      "pid": 70804,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    }
+  ],
+  "scope": "Eight pure generated recipes/owned tiny file consumer, expected fallback counter controls, legacyfixture and actualCLIhelp. No Unison receiving, codec validation, SDK, camera, Photo or benchmark. Full-change bytes checked by independent perbyte XOR oracle; no multiGiB/physicalIO claim.",
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false
+}

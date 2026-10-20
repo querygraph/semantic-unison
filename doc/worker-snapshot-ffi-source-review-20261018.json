@@ -1,0 +1,25 @@
+{
+  "schema": "unison-worker-snapshot-ffi-review/1",
+  "state": "MANUAL_SOURCE_REVIEW_PARTIAL",
+  "source_sha256": {
+    "src/semanticWorkers.ml": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721",
+    "src/validationSnapshot.ml": "c876943e429ed9efe75db4f3b41256736c5373b456a5adbce3642d6ca193e3ff",
+    "src/wholeFileClone.ml": "57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca",
+    "src/wholeFileClone_stubs.c": "e99d7e9fbc71937d44919c498b2ef9392e73cb7944598821bf58d06a2afdcb75",
+    "src/componentHash.ox.mli.in": "ceb87bf7b470786abfc770dc0d017fa4dba06f385111c6d95f9927e9a6d6db41",
+    "src/dngComponents.ox.mli.in": "c436f57d49f52c761300910f53b1dbeefdde62a989c1846641c6019fb1f04f5d"
+  },
+  "worker_path": "SemanticWorkers.execute Snapshot -> ValidationSnapshot.materialize -> existing_clone -> unison_clone_file_status",
+  "review": [
+    "CAMLparam3 roots arguments; pending actions before descriptor extraction; copies scalar/native handles and length before no-pending runtime release. Released POSIX helper operates only on stack result/stat/descriptor scalars; reacquires before rooted result tuple/Int64/error-option allocation.",
+    "No descriptor acquisition or close in FD clone primitive. Source/destination exclusivity retained by caller/worker duplicate ownership. Preflight checks readable regular source, exact source length, distinct singly linked empty writable nonappend output and initial cursor.",
+    "On macOS FD backend returns explicit no-effect platform decline after preflight (empty input may return No_work); native APFS named clone API is separate. Snapshot fallback copies/hashes, verifies output and source stability. Not a native FD clone success claim.",
+    "Owner component namespace/publication APIs have explicit nonportable interface declarations. Representative compiler controls bind exact named rejections. No blanket exclusion of all componentHash functions: pure record encoding and borrowed-descriptor staging have separate contracts."
+  ],
+  "limitations": [
+    "Linux ioctl/Windows branches not runtime qualified by this source review",
+    "Named whole-file clone, stage/final publication and metadata namespace/quota functions need their own evidence",
+    "Inherited Unix implementation and provider internals not newly audited",
+    "No new SDK/Photo/payload/IO execution or complete M6 claim"
+  ]
+}

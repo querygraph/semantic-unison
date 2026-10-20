@@ -1,0 +1,3986 @@
+{
+  "schema": "unison-auto-cohort-report/1",
+  "state": "INCOMPLETE_MATRIX",
+  "workload": {
+    "file_mib": 128,
+    "files": 4
+  },
+  "matrix_complete": false,
+  "missing_cohorts": [
+    {
+      "label": "ox",
+      "selection": 1
+    },
+    {
+      "label": "stock",
+      "selection": 2
+    },
+    {
+      "label": "ox",
+      "selection": 2
+    },
+    {
+      "label": "stock",
+      "selection": 4
+    },
+    {
+      "label": "ox",
+      "selection": 4
+    },
+    {
+      "label": "stock",
+      "selection": 8
+    },
+    {
+      "label": "ox",
+      "selection": 8
+    },
+    {
+      "label": "stock",
+      "selection": "auto"
+    },
+    {
+      "label": "ox",
+      "selection": "auto"
+    }
+  ],
+  "cohorts": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "lifecycle": {
+        "attempted_cli_invocations": 54,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": true,
+        "scope": "nested cohort journal and functional rows; not artifact authentication or measurements",
+        "rows": 18,
+        "cli_invocations": 54,
+        "parent_terminal_proved": false,
+        "token_release_authorized": false,
+        "functional_status": "PASSED"
+      },
+      "reserved_credits": 8,
+      "declared_peak_credits": 4,
+      "endpoint_permit_upper_bound": 1,
+      "functional_status": "PASSED",
+      "raw_sample_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "observations": {
+        "schema": "unison-saved-sync-resource-report/1",
+        "state": "SAVED_OBSERVATIONS_ONLY",
+        "input_complete": true,
+        "repository_head": "63fd4c8a73ad1dab1dfa18c05eddcff145fddcd7",
+        "host": {
+          "system": "Darwin",
+          "release": "24.6.0",
+          "machine": "x86_64",
+          "logical_cpus": 36,
+          "hw.physicalcpu": 18,
+          "hw.memsize": 137438953472
+        },
+        "parameters": {
+          "modes": [
+            "ordinary",
+            "receiver-clone",
+            "semantic"
+          ],
+          "workers": [
+            1
+          ],
+          "file_mib": 128,
+          "files": 4,
+          "packet_bytes": 8192,
+          "warmups": 1,
+          "repetitions": 5,
+          "timeout_seconds": 180.0,
+          "background_note": "generated auto cohort; concurrent host activity disclosed; no quiet-window claim",
+          "measure_primary_reads": true,
+          "measure_semantic_phases": true,
+          "property_removal_controls": false,
+          "layout_only_controls": false,
+          "loopback_cpu_credit_bound": 8,
+          "maximum_configured_endpoint_credit_sum": 2,
+          "orchestration_cpu_credits": 2,
+          "maximum_declared_cpu_credit_sum": 4,
+          "endpoint_cpu_budget_ceiling": 8,
+          "endpoint_cpu_permit_upper_bounds": [
+            {
+              "selection": 1,
+              "upper_bound": 1
+            }
+          ],
+          "automatic_cpu_scope": "auto is semanticworkers=0 with explicit semanticcpubudget; these are conservative permit upper bounds, not measured domain/OS-thread counts or a machine token grant"
+        },
+        "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
+        "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
+        "rows": [
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "warmup",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 9.40633277001325,
+            "client_wait4": {
+              "user_seconds": 3.302419,
+              "system_seconds": 0.245023,
+              "cpu_seconds": 3.547442,
+              "maxrss_bytes": 12800000,
+              "maxrss_native_units": 12800000,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 5.843663,
+              "system_seconds": 0.7501049999999999,
+              "cpu_seconds": 6.593768,
+              "maxrss_bytes": 10833920,
+              "maxrss_native_units": 10833920,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80656,
+              "server_to_client_bytes": 299228
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007346000.",
+                  "inclusive_seconds": 0.007346
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007321000.",
+                  "inclusive_seconds": 0.007321
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007180000.",
+                  "inclusive_seconds": 0.00718
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007112000.",
+                  "inclusive_seconds": 0.007112
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "warmup",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 10.766540352022275,
+            "client_wait4": {
+              "user_seconds": 3.678433,
+              "system_seconds": 0.293168,
+              "cpu_seconds": 3.971601,
+              "maxrss_bytes": 13271040,
+              "maxrss_native_units": 13271040,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.627184,
+              "system_seconds": 0.8086479999999999,
+              "cpu_seconds": 7.4358319999999996,
+              "maxrss_bytes": 11341824,
+              "maxrss_native_units": 11341824,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80657,
+              "server_to_client_bytes": 299228
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.011707000.",
+                  "inclusive_seconds": 0.011707
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.012802000.",
+                  "inclusive_seconds": 0.012802
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008467000.",
+                  "inclusive_seconds": 0.008467
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008872000.",
+                  "inclusive_seconds": 0.008872
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "warmup",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 20.915110120084137,
+            "client_wait4": {
+              "user_seconds": 4.984493,
+              "system_seconds": 0.369181,
+              "cpu_seconds": 5.353674,
+              "maxrss_bytes": 12693504,
+              "maxrss_native_units": 12693504,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 15.266483,
+              "system_seconds": 1.202323,
+              "cpu_seconds": 16.468806,
+              "maxrss_bytes": 14569472,
+              "maxrss_native_units": 14569472,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47608,
+              "server_to_client_bytes": 4785
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.765021000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.765021
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000067000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.759101000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.759101
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000072000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.2e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.752441000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.752441
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000075000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.761787000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.761787
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000048000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.8e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.770563000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.770563
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000734000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000734
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.760319000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.760319
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000070000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.936979000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.936979
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000176000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000176
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009536000.",
+                  "inclusive_seconds": 0.009536
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.774936000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.774936
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000635000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000635
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.770134000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.770134
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000053000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.3e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.936047000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.936047
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000164000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000164
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009328000.",
+                  "inclusive_seconds": 0.009328
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.774777000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.774777
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000680000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00068
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.766356000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.766356
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000042000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.2e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.941213000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.941213
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.000280000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00028
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008395000.",
+                  "inclusive_seconds": 0.008395
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.773061000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.773061
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000557000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000557
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.753231000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.753231
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000044000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.4e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.917764000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.917764
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000162000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000162
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009508000.",
+                  "inclusive_seconds": 0.009508
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 11.266858018003404,
+            "client_wait4": {
+              "user_seconds": 3.893704,
+              "system_seconds": 0.361937,
+              "cpu_seconds": 4.255641,
+              "maxrss_bytes": 13344768,
+              "maxrss_native_units": 13344768,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.839656,
+              "system_seconds": 1.02853,
+              "cpu_seconds": 7.868186,
+              "maxrss_bytes": 11563008,
+              "maxrss_native_units": 11563008,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80752,
+              "server_to_client_bytes": 299246
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008967000.",
+                  "inclusive_seconds": 0.008967
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008854000.",
+                  "inclusive_seconds": 0.008854
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008421000.",
+                  "inclusive_seconds": 0.008421
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009573000.",
+                  "inclusive_seconds": 0.009573
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 11.131957350997254,
+            "client_wait4": {
+              "user_seconds": 3.906476,
+              "system_seconds": 0.365267,
+              "cpu_seconds": 4.271743,
+              "maxrss_bytes": 13283328,
+              "maxrss_native_units": 13283328,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.802087,
+              "system_seconds": 0.909716,
+              "cpu_seconds": 7.711803,
+              "maxrss_bytes": 11264000,
+              "maxrss_native_units": 11264000,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80753,
+              "server_to_client_bytes": 299246
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.010043000.",
+                  "inclusive_seconds": 0.010043
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008888000.",
+                  "inclusive_seconds": 0.008888
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.011096000.",
+                  "inclusive_seconds": 0.011096
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008611000.",
+                  "inclusive_seconds": 0.008611
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 1,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 21.047782148001716,
+            "client_wait4": {
+              "user_seconds": 4.978619,
+              "system_seconds": 0.39460799999999996,
+              "cpu_seconds": 5.373227,
+              "maxrss_bytes": 12677120,
+              "maxrss_native_units": 12677120,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 15.292812,
+              "system_seconds": 1.2928060000000001,
+              "cpu_seconds": 16.585618,
+              "maxrss_bytes": 14700544,
+              "maxrss_native_units": 14700544,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47704,
+              "server_to_client_bytes": 4803
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.757197000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.757197
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000079000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.9e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.760292000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.760292
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000081000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 8.1e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.767793000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.767793
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000079000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.9e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.757811000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.757811
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000152000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000152
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.773430000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.77343
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000708000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000708
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.753973000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.753973
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000050000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.930175000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.930175
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000277000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000277
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008822000.",
+                  "inclusive_seconds": 0.008822
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.782816000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.782816
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000618000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000618
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.758755000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.758755
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000076000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.6e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.984890000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.98489
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000156000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000156
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009255000.",
+                  "inclusive_seconds": 0.009255
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.785157000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.785157
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000680000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00068
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.763945000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.763945
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000076000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7.6e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.970318000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.970318
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.000187000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000187
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.010186000.",
+                  "inclusive_seconds": 0.010186
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.788415000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.788415
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000646000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000646
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.750618000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.750618
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000117000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000117
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.909558000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.909558
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000137000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000137
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008477000.",
+                  "inclusive_seconds": 0.008477
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 2,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 20.70063288800884,
+            "client_wait4": {
+              "user_seconds": 4.976286,
+              "system_seconds": 0.33730499999999997,
+              "cpu_seconds": 5.313591,
+              "maxrss_bytes": 12582912,
+              "maxrss_native_units": 12582912,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 15.152538,
+              "system_seconds": 1.117938,
+              "cpu_seconds": 16.270476,
+              "maxrss_bytes": 14888960,
+              "maxrss_native_units": 14888960,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47704,
+              "server_to_client_bytes": 4803
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.777855000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.777855
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000065000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6.5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.747729000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.747729
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000045000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.760000000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.76
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000050000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.740123000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.740123
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000046000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.6e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.761799000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.761799
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000701000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000701
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.746802000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.746802
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000053000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.3e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.909761000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.909761
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000146000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000146
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008455000.",
+                  "inclusive_seconds": 0.008455
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.766559000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.766559
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000517000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000517
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.742667000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.742667
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000062000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6.2e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.891162000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.891162
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000147000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000147
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009670000.",
+                  "inclusive_seconds": 0.00967
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.759780000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.75978
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000650000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00065
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.797329000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.797329
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000068000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6.8e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.960537000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.960537
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.000194000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000194
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009230000.",
+                  "inclusive_seconds": 0.00923
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.760728000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.760728
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000369000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000369
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.754929000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.754929
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000040000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.923038000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.923038
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000224000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000224
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008933000.",
+                  "inclusive_seconds": 0.008933
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 2,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 10.983108395943418,
+            "client_wait4": {
+              "user_seconds": 3.849391,
+              "system_seconds": 0.367948,
+              "cpu_seconds": 4.217339,
+              "maxrss_bytes": 13291520,
+              "maxrss_native_units": 13291520,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.736086,
+              "system_seconds": 0.868898,
+              "cpu_seconds": 7.604984,
+              "maxrss_bytes": 11436032,
+              "maxrss_native_units": 11436032,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80753,
+              "server_to_client_bytes": 299246
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009302000.",
+                  "inclusive_seconds": 0.009302
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009667000.",
+                  "inclusive_seconds": 0.009667
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008586000.",
+                  "inclusive_seconds": 0.008586
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008465000.",
+                  "inclusive_seconds": 0.008465
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 2,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 11.401103705051355,
+            "client_wait4": {
+              "user_seconds": 3.949881,
+              "system_seconds": 0.33802099999999996,
+              "cpu_seconds": 4.287902,
+              "maxrss_bytes": 13344768,
+              "maxrss_native_units": 13344768,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.944063,
+              "system_seconds": 1.004271,
+              "cpu_seconds": 7.948334,
+              "maxrss_bytes": 11628544,
+              "maxrss_native_units": 11628544,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80750,
+              "server_to_client_bytes": 299244
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008726000.",
+                  "inclusive_seconds": 0.008726
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.010082000.",
+                  "inclusive_seconds": 0.010082
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008571000.",
+                  "inclusive_seconds": 0.008571
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008916000.",
+                  "inclusive_seconds": 0.008916
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 3,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 11.393867193022743,
+            "client_wait4": {
+              "user_seconds": 3.9230359999999997,
+              "system_seconds": 0.365595,
+              "cpu_seconds": 4.288631,
+              "maxrss_bytes": 13369344,
+              "maxrss_native_units": 13369344,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.884537,
+              "system_seconds": 1.073751,
+              "cpu_seconds": 7.958288,
+              "maxrss_bytes": 11112448,
+              "maxrss_native_units": 11112448,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80750,
+              "server_to_client_bytes": 299244
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.010143000.",
+                  "inclusive_seconds": 0.010143
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.009566000.",
+                  "inclusive_seconds": 0.009566
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008945000.",
+                  "inclusive_seconds": 0.008945
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.010041000.",
+                  "inclusive_seconds": 0.010041
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 3,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 9.310263787047006,
+            "client_wait4": {
+              "user_seconds": 3.314723,
+              "system_seconds": 0.265749,
+              "cpu_seconds": 3.580472,
+              "maxrss_bytes": 12845056,
+              "maxrss_native_units": 12845056,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 5.785213,
+              "system_seconds": 0.6418189999999999,
+              "cpu_seconds": 6.427032,
+              "maxrss_bytes": 10711040,
+              "maxrss_native_units": 10711040,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80751,
+              "server_to_client_bytes": 299244
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007748000.",
+                  "inclusive_seconds": 0.007748
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007814000.",
+                  "inclusive_seconds": 0.007814
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007685000.",
+                  "inclusive_seconds": 0.007685
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007726000.",
+                  "inclusive_seconds": 0.007726
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 3,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 18.61292314506136,
+            "client_wait4": {
+              "user_seconds": 4.338984,
+              "system_seconds": 0.314002,
+              "cpu_seconds": 4.652986,
+              "maxrss_bytes": 11943936,
+              "maxrss_native_units": 11943936,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 13.500851,
+              "system_seconds": 1.067204,
+              "cpu_seconds": 14.568055000000001,
+              "maxrss_bytes": 14852096,
+              "maxrss_native_units": 14852096,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47703,
+              "server_to_client_bytes": 4802
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.648289000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.648289
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000058000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.8e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.661069000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.661069
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000060000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.647293000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.647293
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000050000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.647416000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.647416
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000043000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.3e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.667139000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.667139
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000644000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000644
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.656068000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.656068
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000048000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.8e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.880650000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.88065
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000157000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000157
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007726000.",
+                  "inclusive_seconds": 0.007726
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.670166000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.670166
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000670000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00067
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.654508000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.654508
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000057000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.655136000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.655136
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000101000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000101
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007814000.",
+                  "inclusive_seconds": 0.007814
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.670361000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.670361
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000614000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000614
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.645696000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.645696
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000037000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.651743000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.651743
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.004126000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.004126
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007896000.",
+                  "inclusive_seconds": 0.007896
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.658323000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.658323
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000613000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000613
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.649937000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.649937
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000037000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.643542000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.643542
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000158000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000158
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007700000.",
+                  "inclusive_seconds": 0.0077
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 4,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 17.53303555806633,
+            "client_wait4": {
+              "user_seconds": 4.198661,
+              "system_seconds": 0.263877,
+              "cpu_seconds": 4.462538,
+              "maxrss_bytes": 12140544,
+              "maxrss_native_units": 12140544,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 12.917957,
+              "system_seconds": 0.8820239999999999,
+              "cpu_seconds": 13.799980999999999,
+              "maxrss_bytes": 14237696,
+              "maxrss_native_units": 14237696,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47703,
+              "server_to_client_bytes": 4802
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.639712000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.639712
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000057000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.635571000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.635571
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000065000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 6.5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.633871000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.633871
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000039000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.9e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.634601000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.634601
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000042000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.2e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.650104000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.650104
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000620000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00062
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.635245000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.635245
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000058000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.8e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.613688000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.613688
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000152000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000152
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007746000.",
+                  "inclusive_seconds": 0.007746
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.647450000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.64745
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000602000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000602
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.638014000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.638014
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000032000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.2e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.628021000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.628021
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000173000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000173
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007518000.",
+                  "inclusive_seconds": 0.007518
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.652395000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.652395
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000639000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000639
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.637537000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.637537
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000031000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.1e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.614437000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.614437
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.000106000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000106
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007444000.",
+                  "inclusive_seconds": 0.007444
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.654513000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.654513
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000591000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000591
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.636969000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.636969
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000037000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.619268000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.619268
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000128000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000128
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007454000.",
+                  "inclusive_seconds": 0.007454
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 4,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 9.385100683080964,
+            "client_wait4": {
+              "user_seconds": 3.334552,
+              "system_seconds": 0.268942,
+              "cpu_seconds": 3.603494,
+              "maxrss_bytes": 12894208,
+              "maxrss_native_units": 12894208,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 5.832095,
+              "system_seconds": 0.65455,
+              "cpu_seconds": 6.486644999999999,
+              "maxrss_bytes": 10833920,
+              "maxrss_native_units": 10833920,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80752,
+              "server_to_client_bytes": 299245
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008056000.",
+                  "inclusive_seconds": 0.008056
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007877000.",
+                  "inclusive_seconds": 0.007877
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007948000.",
+                  "inclusive_seconds": 0.007948
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007985000.",
+                  "inclusive_seconds": 0.007985
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 4,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 10.145716008963063,
+            "client_wait4": {
+              "user_seconds": 3.543859,
+              "system_seconds": 0.27580299999999996,
+              "cpu_seconds": 3.8196619999999997,
+              "maxrss_bytes": 13037568,
+              "maxrss_native_units": 13037568,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.189418,
+              "system_seconds": 0.819928,
+              "cpu_seconds": 7.009346,
+              "maxrss_bytes": 10788864,
+              "maxrss_native_units": 10788864,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80751,
+              "server_to_client_bytes": 299245
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008143000.",
+                  "inclusive_seconds": 0.008143
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007728000.",
+                  "inclusive_seconds": 0.007728
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007856000.",
+                  "inclusive_seconds": 0.007856
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007510000.",
+                  "inclusive_seconds": 0.00751
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "ordinary",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 5,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 10.007144152070396,
+            "client_wait4": {
+              "user_seconds": 3.492375,
+              "system_seconds": 0.279014,
+              "cpu_seconds": 3.771389,
+              "maxrss_bytes": 13094912,
+              "maxrss_native_units": 13094912,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.150826,
+              "system_seconds": 0.833923,
+              "cpu_seconds": 6.984749000000001,
+              "maxrss_bytes": 10842112,
+              "maxrss_native_units": 10842112,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80751,
+              "server_to_client_bytes": 299245
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 536870912,
+            "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007792000.",
+                  "inclusive_seconds": 0.007792
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008030000.",
+                  "inclusive_seconds": 0.00803
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007989000.",
+                  "inclusive_seconds": 0.007989
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008260000.",
+                  "inclusive_seconds": 0.00826
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "receiver-clone",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 5,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 9.801000162027776,
+            "client_wait4": {
+              "user_seconds": 3.512758,
+              "system_seconds": 0.278619,
+              "cpu_seconds": 3.7913769999999998,
+              "maxrss_bytes": 13004800,
+              "maxrss_native_units": 13004800,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 6.09008,
+              "system_seconds": 0.659818,
+              "cpu_seconds": 6.749898,
+              "maxrss_bytes": 11079680,
+              "maxrss_native_units": 11079680,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 80752,
+              "server_to_client_bytes": 299245
+            },
+            "primary_reader": {
+              "reported_jobs": 0,
+              "logical_bytes": null,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": "unavailable or no primary-reader jobs; not measured zero"
+            },
+            "returned_semantic_logical_write_bytes": null,
+            "semantic_payload_bytes": null,
+            "inherited_same_offset_bytes": 536805376,
+            "non_inherited_output_extent_model_bytes": 65536,
+            "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007761000.",
+                  "inclusive_seconds": 0.007761
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007638000.",
+                  "inclusive_seconds": 0.007638
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007727000.",
+                  "inclusive_seconds": 0.007727
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007828000.",
+                  "inclusive_seconds": 0.007828
+                }
+              ],
+              "reported_worker_jobs": 0,
+              "observed_worker_stages": [],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": "unavailable or no instrumented worker jobs; not measured zero",
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          },
+          {
+            "label": "stock",
+            "mode": "semantic",
+            "workers": 1,
+            "phase": "measured",
+            "repetition": 5,
+            "availability": "SAVED_UPDATE_OBSERVATIONS",
+            "wall_seconds": 18.823946724063717,
+            "client_wait4": {
+              "user_seconds": 4.506196,
+              "system_seconds": 0.27761399999999997,
+              "cpu_seconds": 4.78381,
+              "maxrss_bytes": 12279808,
+              "maxrss_native_units": 12279808,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "server_wait4": {
+              "user_seconds": 13.874043,
+              "system_seconds": 0.9389609999999999,
+              "cpu_seconds": 14.813004,
+              "maxrss_bytes": 14372864,
+              "maxrss_native_units": 14372864,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 47703,
+              "server_to_client_bytes": 4802
+            },
+            "primary_reader": {
+              "reported_jobs": 12,
+              "logical_bytes": 1610613648,
+              "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+              "absence": null
+            },
+            "returned_semantic_logical_write_bytes": 12288,
+            "semantic_payload_bytes": 32768,
+            "inherited_same_offset_bytes": 0,
+            "non_inherited_output_extent_model_bytes": 12288,
+            "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+            "application_read_bytes": null,
+            "semantic_phase_observations": {
+              "schema": "unison-local-phase-observations/1",
+              "records": [
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.679026000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.679026
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000070000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.685246000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.685246
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000059000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.9e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.684090000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.68409
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000040000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.686376000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.686376
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "client",
+                  "raw_line": "[semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000044000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.4e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.702025000.",
+                  "job": 0,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.702025
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000685000.",
+                  "job": 0,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000685
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.688096000.",
+                  "job": 1,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.688096
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000045000.",
+                  "job": 1,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 4.5e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=1.754453000.",
+                  "job": 1,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.754453
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000201000.",
+                  "job": 1,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000201
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.008087000.",
+                  "inclusive_seconds": 0.008087
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.699127000.",
+                  "job": 2,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.699127
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000640000.",
+                  "job": 2,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.00064
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.685496000.",
+                  "job": 3,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.685496
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000059000.",
+                  "job": 3,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 5.9e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=verify calls=3 inclusive-seconds=1.738999000.",
+                  "job": 3,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.738999
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000141000.",
+                  "job": 3,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000141
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007997000.",
+                  "inclusive_seconds": 0.007997
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=hash calls=1 inclusive-seconds=0.703515000.",
+                  "job": 4,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.703515
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 4 stage=parse calls=1 inclusive-seconds=0.000741000.",
+                  "job": 4,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000741
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=hash calls=1 inclusive-seconds=0.681125000.",
+                  "job": 5,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.681125
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=parse calls=1 inclusive-seconds=0.000037000.",
+                  "job": 5,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=verify calls=3 inclusive-seconds=1.746485000.",
+                  "job": 5,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.746485
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 5 stage=write calls=1 inclusive-seconds=0.000183000.",
+                  "job": 5,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000183
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007899000.",
+                  "inclusive_seconds": 0.007899
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=hash calls=1 inclusive-seconds=0.718132000.",
+                  "job": 6,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.718132
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 6 stage=parse calls=1 inclusive-seconds=0.000652000.",
+                  "job": 6,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000652
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=hash calls=1 inclusive-seconds=0.685630000.",
+                  "job": 7,
+                  "stage": "hash",
+                  "calls": 1,
+                  "inclusive_seconds": 0.68563
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=parse calls=1 inclusive-seconds=0.000037000.",
+                  "job": 7,
+                  "stage": "parse",
+                  "calls": 1,
+                  "inclusive_seconds": 3.7e-05
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=verify calls=3 inclusive-seconds=1.739766000.",
+                  "job": 7,
+                  "stage": "verify",
+                  "calls": 3,
+                  "inclusive_seconds": 1.739766
+                },
+                {
+                  "kind": "worker",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic worker job 7 stage=write calls=1 inclusive-seconds=0.000119000.",
+                  "job": 7,
+                  "stage": "write",
+                  "calls": 1,
+                  "inclusive_seconds": 0.000119
+                },
+                {
+                  "kind": "namespace_publication",
+                  "endpoint": "server",
+                  "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.007868000.",
+                  "inclusive_seconds": 0.007868
+                }
+              ],
+              "reported_worker_jobs": 12,
+              "observed_worker_stages": [
+                "hash",
+                "parse",
+                "verify",
+                "write"
+              ],
+              "unavailable_worker_jobs": 0,
+              "namespace_publication_observations": 4,
+              "worker_absence": null,
+              "namespace_absence": null,
+              "scope": "Normally returned reader-local inclusive intervals and bound native namespace publication only; worker phases overlap, include I/O/scheduling and exclude queue/admission/delivery. Publication precedes later readback/archive work and is not full transfer success or durability. No phase sum, isolated CPU, whole-application coverage or lifecycle proof is inferred."
+            },
+            "hash_parse_verify_commit_seconds": null,
+            "physical_storage_write_bytes": null,
+            "descriptor_queue_peaks": null
+          }
+        ],
+        "source_currentness": "Not rebound to later checkout; retain exact input/build manifests.",
+        "actual_parent_terminal_or_resource_release_inferred": false,
+        "interpretation": [
+          "Client/server wait4 CPU may overlap through reaped descendants; never sum these receipts as whole-tree CPU.",
+          "maxrss is per-process lifetime high water, not simultaneous tree RSS or a configured hard memory cap.",
+          "Forwarded protocol bytes include metadata/RPC overhead and exclude launcher framing; not encrypted or physical network bytes.",
+          "Primary-reader bytes exclude nested verification, legacy/helper reads and prefetch; absent counters are unknown, not zero.",
+          "Semantic write counts are successful returned logical writes; other output extents are labeled models, not write syscalls or APFS block savings.",
+          "Block operations are native operations, never converted into physical bytes.",
+          "Inclusive phase records overlap and are not summed; native namespace events do not prove later archive/full transfer success.",
+          "Functional single samples are not repeated throughput benchmarks; missing total-commit/physical/peak measurements remain null."
+        ]
+      },
+      "distributions_qualified": true
+    }
+  ],
+  "groups": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "ordinary",
+      "warmup_rows": 1,
+      "measured_rows": 5,
+      "update_wall_seconds": {
+        "samples": [
+          11.266858018003404,
+          11.401103705051355,
+          11.393867193022743,
+          10.145716008963063,
+          10.007144152070396
+        ],
+        "available": true,
+        "median": 11.266858018003404,
+        "minimum": 10.007144152070396,
+        "maximum": 11.401103705051355,
+        "p90_nearest_rank": 11.401103705051355
+      },
+      "client_cpu_seconds": {
+        "samples": [
+          4.255641,
+          4.287902,
+          4.288631,
+          3.8196619999999997,
+          3.771389
+        ],
+        "available": true,
+        "median": 4.255641,
+        "minimum": 3.771389,
+        "maximum": 4.288631,
+        "p90_nearest_rank": 4.288631
+      },
+      "server_cpu_seconds": {
+        "samples": [
+          7.868186,
+          7.948334,
+          7.958288,
+          7.009346,
+          6.984749000000001
+        ],
+        "available": true,
+        "median": 7.868186,
+        "minimum": 6.984749000000001,
+        "maximum": 7.958288,
+        "p90_nearest_rank": 7.958288
+      },
+      "client_maxrss_bytes": {
+        "samples": [
+          13344768,
+          13344768,
+          13369344,
+          13037568,
+          13094912
+        ],
+        "available": true,
+        "median": 13344768,
+        "minimum": 13037568,
+        "maximum": 13369344,
+        "p90_nearest_rank": 13369344
+      },
+      "server_maxrss_bytes": {
+        "samples": [
+          11563008,
+          11628544,
+          11112448,
+          10788864,
+          10842112
+        ],
+        "available": true,
+        "median": 11112448,
+        "minimum": 10788864,
+        "maximum": 11628544,
+        "p90_nearest_rank": 11628544
+      },
+      "primary_reader_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "returned_semantic_write_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "inherited_same_offset_bytes": {
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "available": true,
+        "median": 0,
+        "minimum": 0,
+        "maximum": 0,
+        "p90_nearest_rank": 0
+      },
+      "non_inherited_extent_model_bytes": {
+        "samples": [
+          536870912,
+          536870912,
+          536870912,
+          536870912,
+          536870912
+        ],
+        "available": true,
+        "median": 536870912,
+        "minimum": 536870912,
+        "maximum": 536870912,
+        "p90_nearest_rank": 536870912
+      },
+      "client_to_server_bytes": {
+        "samples": [
+          80752,
+          80750,
+          80750,
+          80751,
+          80751
+        ],
+        "available": true,
+        "median": 80751,
+        "minimum": 80750,
+        "maximum": 80752,
+        "p90_nearest_rank": 80752
+      },
+      "server_to_client_bytes": {
+        "samples": [
+          299246,
+          299244,
+          299244,
+          299245,
+          299245
+        ],
+        "available": true,
+        "median": 299245,
+        "minimum": 299244,
+        "maximum": 299246,
+        "p90_nearest_rank": 299246
+      },
+      "application_read_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "physical_storage_write_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "descriptive_one_worker_wall_ratio": 1.0
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "receiver-clone",
+      "warmup_rows": 1,
+      "measured_rows": 5,
+      "update_wall_seconds": {
+        "samples": [
+          11.131957350997254,
+          10.983108395943418,
+          9.310263787047006,
+          9.385100683080964,
+          9.801000162027776
+        ],
+        "available": true,
+        "median": 9.801000162027776,
+        "minimum": 9.310263787047006,
+        "maximum": 11.131957350997254,
+        "p90_nearest_rank": 11.131957350997254
+      },
+      "client_cpu_seconds": {
+        "samples": [
+          4.271743,
+          4.217339,
+          3.580472,
+          3.603494,
+          3.7913769999999998
+        ],
+        "available": true,
+        "median": 3.7913769999999998,
+        "minimum": 3.580472,
+        "maximum": 4.271743,
+        "p90_nearest_rank": 4.271743
+      },
+      "server_cpu_seconds": {
+        "samples": [
+          7.711803,
+          7.604984,
+          6.427032,
+          6.486644999999999,
+          6.749898
+        ],
+        "available": true,
+        "median": 6.749898,
+        "minimum": 6.427032,
+        "maximum": 7.711803,
+        "p90_nearest_rank": 7.711803
+      },
+      "client_maxrss_bytes": {
+        "samples": [
+          13283328,
+          13291520,
+          12845056,
+          12894208,
+          13004800
+        ],
+        "available": true,
+        "median": 13004800,
+        "minimum": 12845056,
+        "maximum": 13291520,
+        "p90_nearest_rank": 13291520
+      },
+      "server_maxrss_bytes": {
+        "samples": [
+          11264000,
+          11436032,
+          10711040,
+          10833920,
+          11079680
+        ],
+        "available": true,
+        "median": 11079680,
+        "minimum": 10711040,
+        "maximum": 11436032,
+        "p90_nearest_rank": 11436032
+      },
+      "primary_reader_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "returned_semantic_write_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "inherited_same_offset_bytes": {
+        "samples": [
+          536805376,
+          536805376,
+          536805376,
+          536805376,
+          536805376
+        ],
+        "available": true,
+        "median": 536805376,
+        "minimum": 536805376,
+        "maximum": 536805376,
+        "p90_nearest_rank": 536805376
+      },
+      "non_inherited_extent_model_bytes": {
+        "samples": [
+          65536,
+          65536,
+          65536,
+          65536,
+          65536
+        ],
+        "available": true,
+        "median": 65536,
+        "minimum": 65536,
+        "maximum": 65536,
+        "p90_nearest_rank": 65536
+      },
+      "client_to_server_bytes": {
+        "samples": [
+          80753,
+          80753,
+          80751,
+          80752,
+          80752
+        ],
+        "available": true,
+        "median": 80752,
+        "minimum": 80751,
+        "maximum": 80753,
+        "p90_nearest_rank": 80753
+      },
+      "server_to_client_bytes": {
+        "samples": [
+          299246,
+          299246,
+          299244,
+          299245,
+          299245
+        ],
+        "available": true,
+        "median": 299245,
+        "minimum": 299244,
+        "maximum": 299246,
+        "p90_nearest_rank": 299246
+      },
+      "application_read_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "physical_storage_write_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "descriptive_one_worker_wall_ratio": 1.0
+    },
+    {
+      "label": "stock",
+      "selection": 1,
+      "mode": "semantic",
+      "warmup_rows": 1,
+      "measured_rows": 5,
+      "update_wall_seconds": {
+        "samples": [
+          21.047782148001716,
+          20.70063288800884,
+          18.61292314506136,
+          17.53303555806633,
+          18.823946724063717
+        ],
+        "available": true,
+        "median": 18.823946724063717,
+        "minimum": 17.53303555806633,
+        "maximum": 21.047782148001716,
+        "p90_nearest_rank": 21.047782148001716
+      },
+      "client_cpu_seconds": {
+        "samples": [
+          5.373227,
+          5.313591,
+          4.652986,
+          4.462538,
+          4.78381
+        ],
+        "available": true,
+        "median": 4.78381,
+        "minimum": 4.462538,
+        "maximum": 5.373227,
+        "p90_nearest_rank": 5.373227
+      },
+      "server_cpu_seconds": {
+        "samples": [
+          16.585618,
+          16.270476,
+          14.568055000000001,
+          13.799980999999999,
+          14.813004
+        ],
+        "available": true,
+        "median": 14.813004,
+        "minimum": 13.799980999999999,
+        "maximum": 16.585618,
+        "p90_nearest_rank": 16.585618
+      },
+      "client_maxrss_bytes": {
+        "samples": [
+          12677120,
+          12582912,
+          11943936,
+          12140544,
+          12279808
+        ],
+        "available": true,
+        "median": 12279808,
+        "minimum": 11943936,
+        "maximum": 12677120,
+        "p90_nearest_rank": 12677120
+      },
+      "server_maxrss_bytes": {
+        "samples": [
+          14700544,
+          14888960,
+          14852096,
+          14237696,
+          14372864
+        ],
+        "available": true,
+        "median": 14700544,
+        "minimum": 14237696,
+        "maximum": 14888960,
+        "p90_nearest_rank": 14888960
+      },
+      "primary_reader_bytes": {
+        "samples": [
+          1610613648,
+          1610613648,
+          1610613648,
+          1610613648,
+          1610613648
+        ],
+        "available": true,
+        "median": 1610613648,
+        "minimum": 1610613648,
+        "maximum": 1610613648,
+        "p90_nearest_rank": 1610613648
+      },
+      "returned_semantic_write_bytes": {
+        "samples": [
+          12288,
+          12288,
+          12288,
+          12288,
+          12288
+        ],
+        "available": true,
+        "median": 12288,
+        "minimum": 12288,
+        "maximum": 12288,
+        "p90_nearest_rank": 12288
+      },
+      "inherited_same_offset_bytes": {
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "available": true,
+        "median": 0,
+        "minimum": 0,
+        "maximum": 0,
+        "p90_nearest_rank": 0
+      },
+      "non_inherited_extent_model_bytes": {
+        "samples": [
+          12288,
+          12288,
+          12288,
+          12288,
+          12288
+        ],
+        "available": true,
+        "median": 12288,
+        "minimum": 12288,
+        "maximum": 12288,
+        "p90_nearest_rank": 12288
+      },
+      "client_to_server_bytes": {
+        "samples": [
+          47704,
+          47704,
+          47703,
+          47703,
+          47703
+        ],
+        "available": true,
+        "median": 47703,
+        "minimum": 47703,
+        "maximum": 47704,
+        "p90_nearest_rank": 47704
+      },
+      "server_to_client_bytes": {
+        "samples": [
+          4803,
+          4803,
+          4802,
+          4802,
+          4802
+        ],
+        "available": true,
+        "median": 4802,
+        "minimum": 4802,
+        "maximum": 4803,
+        "p90_nearest_rank": 4803
+      },
+      "application_read_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "physical_storage_write_bytes": {
+        "samples": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "available": false,
+        "median": null,
+        "minimum": null,
+        "maximum": null,
+        "p90_nearest_rank": null
+      },
+      "descriptive_one_worker_wall_ratio": 1.0
+    }
+  ],
+  "raw_samples_retained": 18,
+  "actual_parent_terminal_proved": false,
+  "resource_release_authorized": false,
+  "current_production_proved": false,
+  "interpretation": [
+    "All raw samples stay in authenticated input files; every row index including failed prefixes is retained here. No exclusions, replacements or retries.",
+    "Only one declared warmup per successful configuration is excluded from measured distributions.",
+    "Five-sample nearest-rank p90 is the maximum, not a stable population-tail estimate.",
+    "Configured auto upper bound is not actual domain count or OS-thread count.",
+    "CPU and per-process RSS remain endpoint-separated; no sum as simultaneous tree usage.",
+    "Returned semantic writes and modeled extents are different quantities; physical IO remains unknown unless measured.",
+    "Descriptive one-worker wall ratios are not causal speedup, quiet-host, corpus or full SOL evidence.",
+    "Nested audit/metadata pins do not prove actual parent terminal, authenticate tool events or authorize FD release."
+  ],
+  "saved_inputs": [
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-128-v1-20261019/stock-1-plan.json",
+      "sha256": "944176b8387a4ab9b8d0f1807e8f0a2149b111cbb3f68934849b8501f9d49490",
+      "bytes": 9440
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-18d2fe7b45df433ba9fb2ca9def4cb3f/RESULT.json",
+      "sha256": "c40b4e6a729b4fa366d5dfbf18e2e3747f74f38de43dc122eb02dd03f85b5363",
+      "bytes": 1484728
+    }
+  ],
+  "manifest_sha256": "0c52be78152dc11d98cbb77952969521f862256381c76d2049428d23aee32611"
+}

@@ -1,0 +1,484 @@
+{
+  "schema": "unison-dng-field-encoding-actual/1",
+  "complete": true,
+  "scope": "Generated metadata-dense fixtures, no camera/Photo/SDK/Adobe or transport. New schema/2 groups parser-classified field encodings only when prior /1 exceeds480 leaves; unknown fields remain private and image claims unchanged. Raw65536/final480/core1024 bounds unchanged. No claim that the retained camera is supported.",
+  "actual_tools": {
+    "final_controls": {
+      "session": 34511,
+      "chunk": "f7898b",
+      "exit": 0,
+      "no_session": true
+    },
+    "all_six_builds": {
+      "session": 32658,
+      "chunk": "a53a3c",
+      "exit": 0,
+      "no_session": true
+    },
+    "reproduced_failure_wrapper": {
+      "session": 16534,
+      "chunk": "89330f",
+      "exit": 0,
+      "no_session": true,
+      "expected_inner_failure": 1
+    }
+  },
+  "controls": [
+    {
+      "label": "stock",
+      "checks": 1536,
+      "calls": 37,
+      "source_pins_checked": 45,
+      "role_run_cli": {
+        "hash_bytes_requested": 24576,
+        "layout_view_sha256": "c1131a52733a7c642da78cb7badf31a6cd7886cbcdb25bbcccefa90d706cbfe0",
+        "partition_schema": "dng-physical-partition/1",
+        "path": "/private/tmp/unison-dng-component-controls-kt9dvur9/stock/original-600-strip.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d6b743964767572392f73746f636b2f6f726967696e616c2d3630302d73747269702e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 9600,
+            "components": 1,
+            "sha256": "a24867d2f20418449581a2e14304a431aacc7897e379edd8f987d985850654b5"
+          },
+          "opaque": {
+            "bytes": 10126,
+            "components": 3,
+            "sha256": "d9b306ff591d151889b816d8fa973c5b8d92b31cc4e6601e89ed817220eb1694"
+          },
+          "private_metadata": null,
+          "standard_metadata": {
+            "bytes": 4804,
+            "components": 2,
+            "sha256": "5745108851df22c6e9a80d917d405ab2e7385689874730d5afb33a82216b3c80"
+          },
+          "structural": {
+            "bytes": 46,
+            "components": 2,
+            "sha256": "809ddedaa7e5d6f52cc8eb1a15e15abad671297d0f8a7a8aecb549a1945a0704"
+          }
+        },
+        "sha256": "15514ecfcb3450d16ed2df361f8bbc26278362f614a8d9b61fde25a860ff01d4",
+        "size": 24576,
+        "status": "observed"
+      },
+      "field_encoding_cli": {
+        "hash_bytes_requested": 33024,
+        "layout_view_sha256": "6e24853536d63897b824deaee6f23d555ed63911be727c9bc4333331052fd957",
+        "partition_schema": "dng-physical-partition/2",
+        "path": "/private/tmp/unison-dng-component-controls-kt9dvur9/stock/original-600-inline-fields.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d6b743964767572392f73746f636b2f6f726967696e616c2d3630302d696e6c696e652d6669656c64732e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 16,
+            "components": 1,
+            "sha256": "793b6248bd3498c04833fcf97fa5121ea769d4d6cc2a038284d3b29cd6535327"
+          },
+          "opaque": {
+            "bytes": 25758,
+            "components": 2,
+            "sha256": "1e31d4ed60c3ee28beb0bfda3c19d4427f5e0bd0d76985d3ea1ad77c5e03d041"
+          },
+          "private_metadata": {
+            "bytes": 7200,
+            "components": 1,
+            "sha256": "2c8c7cad2243046383b0cd6ef2ac453898afbab89181672c8f6ec496203b3250"
+          },
+          "standard_metadata": {
+            "bytes": 36,
+            "components": 1,
+            "sha256": "3f6d556e0bdcfd76e43b9b88748da6c0228997aac81fb1ea19d6bce9f29d2fb8"
+          },
+          "structural": {
+            "bytes": 14,
+            "components": 2,
+            "sha256": "940e6419d400796b2f6f34f79b1402a0ada2ce360828371199ec68a5ca9387ed"
+          }
+        },
+        "sha256": "3278b3f9dd4d85dc89cac5d84abfef5994d41abb544d52788932e113fe1f0b93",
+        "size": 33024,
+        "status": "observed"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-final-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "46e600f90897313815808f6641bbf44c384235597048f7810bcbb371a5a347b4"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-stock-20261017-001/SHARED-START.json",
+          "bytes": 1159,
+          "sha256": "fe97521e695464e2e1c8ded669ab478495c1a1fa300da8bd434e7c711c4a81e2"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-stock-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-stock-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 52,
+          "sha256": "58a824e14e889ef6381551b8c9bab07ced5cc6d75cddc6f98e7c5e691d30da01"
+        },
+        {
+          "path": "/private/tmp/unison-dng-component-controls-kt9dvur9/RESULT.json",
+          "bytes": 279905,
+          "sha256": "e8916138159fb06f2ec30794fb7ef84095df06b3679a2821c22bc03eccde163b"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "checks": 1536,
+      "calls": 40,
+      "source_pins_checked": 45,
+      "role_run_cli": {
+        "hash_bytes_requested": 24576,
+        "layout_view_sha256": "c1131a52733a7c642da78cb7badf31a6cd7886cbcdb25bbcccefa90d706cbfe0",
+        "partition_schema": "dng-physical-partition/1",
+        "path": "/private/tmp/unison-dng-component-controls-9wliyd0c/ox/original-600-strip.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d39776c69796430632f6f782f6f726967696e616c2d3630302d73747269702e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 9600,
+            "components": 1,
+            "sha256": "a24867d2f20418449581a2e14304a431aacc7897e379edd8f987d985850654b5"
+          },
+          "opaque": {
+            "bytes": 10126,
+            "components": 3,
+            "sha256": "d9b306ff591d151889b816d8fa973c5b8d92b31cc4e6601e89ed817220eb1694"
+          },
+          "private_metadata": null,
+          "standard_metadata": {
+            "bytes": 4804,
+            "components": 2,
+            "sha256": "5745108851df22c6e9a80d917d405ab2e7385689874730d5afb33a82216b3c80"
+          },
+          "structural": {
+            "bytes": 46,
+            "components": 2,
+            "sha256": "809ddedaa7e5d6f52cc8eb1a15e15abad671297d0f8a7a8aecb549a1945a0704"
+          }
+        },
+        "sha256": "15514ecfcb3450d16ed2df361f8bbc26278362f614a8d9b61fde25a860ff01d4",
+        "size": 24576,
+        "status": "observed"
+      },
+      "field_encoding_cli": {
+        "hash_bytes_requested": 33024,
+        "layout_view_sha256": "6e24853536d63897b824deaee6f23d555ed63911be727c9bc4333331052fd957",
+        "partition_schema": "dng-physical-partition/2",
+        "path": "/private/tmp/unison-dng-component-controls-9wliyd0c/ox/original-600-inline-fields.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d39776c69796430632f6f782f6f726967696e616c2d3630302d696e6c696e652d6669656c64732e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 16,
+            "components": 1,
+            "sha256": "793b6248bd3498c04833fcf97fa5121ea769d4d6cc2a038284d3b29cd6535327"
+          },
+          "opaque": {
+            "bytes": 25758,
+            "components": 2,
+            "sha256": "1e31d4ed60c3ee28beb0bfda3c19d4427f5e0bd0d76985d3ea1ad77c5e03d041"
+          },
+          "private_metadata": {
+            "bytes": 7200,
+            "components": 1,
+            "sha256": "2c8c7cad2243046383b0cd6ef2ac453898afbab89181672c8f6ec496203b3250"
+          },
+          "standard_metadata": {
+            "bytes": 36,
+            "components": 1,
+            "sha256": "3f6d556e0bdcfd76e43b9b88748da6c0228997aac81fb1ea19d6bce9f29d2fb8"
+          },
+          "structural": {
+            "bytes": 14,
+            "components": 2,
+            "sha256": "940e6419d400796b2f6f34f79b1402a0ada2ce360828371199ec68a5ca9387ed"
+          }
+        },
+        "sha256": "3278b3f9dd4d85dc89cac5d84abfef5994d41abb544d52788932e113fe1f0b93",
+        "size": 33024,
+        "status": "observed"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-final-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "6c8e012f37e517a5d25fe00293b85f57b1100d842318448f883abd8323a4b863"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-ox-20261017-001/SHARED-START.json",
+          "bytes": 1155,
+          "sha256": "0af8a03ec4287b7f3238b0f3fe799ce5c77d3f84a00a31b4290ad48324cb4a06"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-ox-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-final-ox-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 52,
+          "sha256": "45b88c31db6100f0dbacbfcee4b024bcdbde5783ae70e22671d9726ac0a8f8b7"
+        },
+        {
+          "path": "/private/tmp/unison-dng-component-controls-9wliyd0c/RESULT.json",
+          "bytes": 287515,
+          "sha256": "a8bc4aec5025b5e0d612cf7be30218828acfeac069ee4e00c01a716db5607636"
+        }
+      ]
+    }
+  ],
+  "builds": [
+    {
+      "label": "stock",
+      "system": "make",
+      "build_exit": 0,
+      "selftest_exit": 0,
+      "source_pins_matched": 318,
+      "binary_sha256": "f75a41acbe12389bd7279638e061883156324e3a196c7afce28c88936e71984b",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-make-20261017-001/RESULT.json",
+          "bytes": 52217,
+          "sha256": "8ed742aa80012a28778bdb1a8c295cc8d901f4bd2948d361bef9d76fe46e8049"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "713d9ef67f2764e66131bbed2a91e198d6bef0eb28a97a3c2c19131eec648f2e"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-make-20261017-001/SHARED-START.json",
+          "bytes": 1352,
+          "sha256": "3192cbba2ee97ca9d9271f5ef5b71b164095c3d1741bc1fa25e1e9bdef9daabf"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "0bbaad6ca0eebcae6bf465cc8be297c4098d2f2c8e88adf7d4ace36e51376e15"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "make",
+      "build_exit": 0,
+      "selftest_exit": 0,
+      "source_pins_matched": 318,
+      "binary_sha256": "188a63f030575a025120ab471aedbfa0a5aef2cdf085a48ddcb277359689d2eb",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-make-20261017-001/RESULT.json",
+          "bytes": 52223,
+          "sha256": "fed1d26c8792a79f7dac24e9c9d0caaa61b9a3944a91f70a5c499196d52c194f"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "0507a09f78062d89aeb6310dc36e29d271a0333514ca004d0012a66c149b3d7a"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-make-20261017-001/SHARED-START.json",
+          "bytes": 1347,
+          "sha256": "0acc8a46297403021d745792d82fbf88a55c61bd890e0a3989e7647124e61cc5"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "808090e0604871175d18aac3bdcf8c68722bd64123882b3070487eb08f2ff565"
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "system": "dune",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "source_pins_matched": 318,
+      "binary_sha256": "6a328c3d288a742238a026e45e0b1b4bf691d0575e8e08f0ca2bd2503b455b3a",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-dune-20261017-001/RESULT.json",
+          "bytes": 51661,
+          "sha256": "a329234458c468620e61ac4b07c5c259f4da8bace982c287fd56801c4a3b1baa"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-dune-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "8c71042e996da69abcc647f57a69c2d492ab2524371ad7a82ffd2cea5d251bee"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-dune-20261017-001/SHARED-START.json",
+          "bytes": 1299,
+          "sha256": "84d92490e722e6db90f68d6c380a25efa65e6a2ac03b0cbeba9570087a8975fb"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-dune-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-dune-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "f8a64798aae7196134d542e4d1e2c426e849c9de2f705fed4de22903171f5865"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "dune",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "source_pins_matched": 318,
+      "binary_sha256": "19c855c14eded99a3926da117ce210de341270bfb65dd8e5f93935dd9667a078",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-dune-20261017-001/RESULT.json",
+          "bytes": 51665,
+          "sha256": "12258bd26dae3478fb5452e8d6e10b295b4a90b7b5a1a35f0eba0bc2b4902888"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-dune-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "bca097a7b2d3f040148f3b8cdfc89a3dff1800d98a38ac33c699c769dc8e6707"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-dune-20261017-001/SHARED-START.json",
+          "bytes": 1295,
+          "sha256": "3ecb51ae8a9f83a8e7396c57150f4869415d9224ccca81fee2b3e1ca868194e7"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-dune-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-dune-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "9f57f0dabe8e1ee186f1872ac625bdfc2c9ee95c3773e27dd77386346b976751"
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "system": "inspector",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "source_pins_matched": 26,
+      "binary_sha256": "a96a0c164e2e835365d422091dd80e2d6d76060146f3fec7f586531f176e4b0c",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-inspector-20261017-001/RESULT.json",
+          "bytes": 4044,
+          "sha256": "eac4bbd5489cc6bbb29d845770f8ffc49620e0cf7bb5ae097351ae9bf8c8b946"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-inspector-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "718bbcab218116877074468e77eaf1c773ba589d39645456124fc4b49ce512df"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-inspector-20261017-001/SHARED-START.json",
+          "bytes": 1283,
+          "sha256": "32cc0df16a4cfbbdc871cc5fea6b40f357c229c3ec6421a66a55784dfb173929"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-inspector-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-stock-inspector-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 200,
+          "sha256": "cf3d0d692c553b4b354eb57e4542f0f64dff3bf181f171cf26c0a5c01518b63f"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "inspector",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "source_pins_matched": 26,
+      "binary_sha256": "f261ff211c1eeb152e6a1cefe8e4a4e50f286715270dc303e33912ca8c194672",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-inspector-20261017-001/RESULT.json",
+          "bytes": 4046,
+          "sha256": "c20dae6614d232e8391b8d19d817da078ae7db658ecfcebe26d479fa59ed2aee"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-inspector-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cc7890f52187581ddac6edd4927d55ab912cb663062c2edd03000f4ccf69ffbd"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-inspector-20261017-001/SHARED-START.json",
+          "bytes": 1279,
+          "sha256": "4c1b973a8e76a9847c052e446afaed6e9c48ffa8b1694f673d9f100c1cf2a0d8"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-inspector-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-dense-fields-ox-inspector-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "5f99569dbcdaa2998a2d1c21c2dc9a921df1a18f16deb3fe5f7acc916cc54ff2"
+        }
+      ]
+    }
+  ],
+  "preserved_failure": [
+    {
+      "path": "/private/tmp/unison-dense-fields-before-stock-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6244d0afce973776a97087c8cc19d1f8bf0f877e0c5c591f77045dfb82527f1a"
+    },
+    {
+      "path": "/private/tmp/unison-dense-fields-before-stock-20261017-001/SHARED-START.json",
+      "bytes": 1158,
+      "sha256": "9953798a9b14040e7a1f4b7f1e247a0a60ee7447c3b6a0d6e5293b52cac6b293"
+    },
+    {
+      "path": "/private/tmp/unison-dense-fields-before-stock-20261017-001/SHARED-STDERR.txt",
+      "bytes": 804,
+      "sha256": "8be20a8cbb68db9c17ba24d9c85f06f104012aeca481ddfb0c64bceac4037d98"
+    },
+    {
+      "path": "/private/tmp/unison-dense-fields-before-stock-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "prior_actual_camera": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/camera-role-runs-v4-actual-20261017.json",
+    "sha256": "858deaa6f75e65e1634bb6327b8d189f8f4852cb54ac29b0f091f2150641769b"
+  },
+  "source_sha256": {
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ml": "93efcd35e4354019ff834c22f857fafb0700197f09a1c269635f57f696012a93",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.mli": "e58bbc17e3367699928af1b322e4bebcd371f1717eb2d0978afb264abcd7e723",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ox.mli.in": "245d23757c0da98aa9ce22e9c81fcd5fb660b70a69a6ab5ef610268ff42d97e0",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/semantic/dng_components.ml": "d1dce966157c2ccc40ed6b390c87e9c1cfae28dcd688647e5453c99c97871a95",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/semantic/dng_component_controls.py": "702b747a942198d21eb408473f0527d1ace68e122995ec6ab68a6f2ea7a98991"
+  },
+  "remaining": [
+    "Fresh exact camera observation admission needed; no replay",
+    "Coarser metadata encoding hashes are not value-only equality or pixel/rendering equivalence",
+    "No OS hardcap/RSS/physicalIO/corpus/production/full-goal completion claim"
+  ]
+}

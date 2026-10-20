@@ -1,0 +1,369 @@
+{
+  "schema": "unison-auto-cohort-owner-source-controls/1",
+  "actual_tools": [
+    {
+      "chunk": "8aadce",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "86b30e",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "02d83e",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "f21a64",
+      "exit": 0,
+      "no_session": true
+    }
+  ],
+  "source_sha256": {
+    "bench/sync/auto_cohort.py": "3cf3c66d134303a110a8db964051458334b2b119a5c19055eb2efba8b29f8d57",
+    "bench/sync/cohort_plan.py": "0bb1f4520fa67be49de594595af502d9a7e6caec645837930f887f948d8d67cc",
+    "tests/cohort_entry.py": "83eddcd2550193c865894a7a567ef0c8a23968f2de9d90868dcfd14462c964bb",
+    "tests/cohort_entry_test.py": "88ca2f19180a039d5fdbd806485becceda6ff49afc314ab8f3e3cdd861831ad1",
+    "tests/cohort_dispatch_test.py": "585db32ba5d3f5b137422be439f0bdb33c3a811882cacbe10d3b76d57d7d1385",
+    "tests/cohort_plan_test.py": "6ef41bce803bf614f98ca35c01c4449ce487fbe5a2b8c8c7244de52050a60ae9",
+    "tests/shared_dispatch.py": "cb38ff6f204a480d8cba4183d461be4309045e8b8b20d32d3c92ed72c175db2b",
+    "tests/sdk_host_matrix/shared_binding.py": "297a0a342e832bb0598b656fd9f19bdaa57cc1bf051dac8e35cb3778a26be56e"
+  },
+  "receipts": [
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-entry-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57260,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57260,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "3ce48502a9b2634e3c0f25ea1c29a6df62b4096fa18b963618e0f5c3521820ba"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-002/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "d8788fb668ab485288228ba408880db88f6bc1e91fecb5466716ec0bebc051a5"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-plan-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57262,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57262,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-plan-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "c119e14fdf1ee2c718843b340b0afc1c1a55f31b9a152f7da94bc9d3d90ebd1c"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-plan-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-plan-20261018-002/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "c57bdec5f19166a93690118c71d5c3ee68b3bfc2827da2e950a0cdc421d4bd4f"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-cohort-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57266,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57266,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-cohort-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5813191cb84a9718fa5b74d74c139d049a23632266078748e4a0d7137cdd26ac"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-cohort-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-cohort-20261018-002/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "d90375e231bebc278d6e75f6d5e0375c8b90a6e28600226ffd86fbb8fd61279a"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-legacy-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57276,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57276,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-legacy-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cfe9df531709cca5ba8932ec6f7d4a68f05a4a18fcf9169396e1ab533ba8d23e"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-legacy-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-legacy-20261018-002/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "eeadcf5288d904278f0106c11d5f698f9ac9b1b26e0da0cbe3002c03abc7cd24"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-manual-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57279,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57279,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-manual-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "598e2fd407eb096ca6d9b8792fb6a14cebdaf864f7c6c59570582d70c481f00b"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-manual-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 233,
+          "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-manual-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-binding-20261018-002",
+      "closure": {
+        "child": {
+          "pid": 57281,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57281,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-binding-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a8579048a1398c4296dde830152ba53e4731c2afc3ecf29d1ce7e9d8d3303f6f"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-binding-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-binding-20261018-002/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "f96363f8d8dff4c4abed7197c63606ead0bd955ea4259bdcb5fb6f47dbe53992"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-owner-entry-20261018-003",
+      "closure": {
+        "child": {
+          "pid": 57509,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57509,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "90612ca7fd60479c6593732ececc5cbb5ab9aee06beaa22fd383e138f01bb5d5"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-003/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-owner-entry-20261018-003/SHARED-STDERR.txt",
+          "bytes": 105,
+          "sha256": "cedb82dc56386349028ceffb44102c4710aeaac8c7851a279af282486d8d23a8"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-cohort-dispatch-composition-20261018-001",
+      "closure": {
+        "child": {
+          "pid": 57831,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 57831,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-cohort-dispatch-composition-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "2e5fd2a7634ecbac5b6e1eeddd1b8300dde9a05296419042a4713c5d3127268f"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-dispatch-composition-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-cohort-dispatch-composition-20261018-001/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "8eb0a1b99c7f5e2ba7f342c7ac54e5e7de77cc956f57e7cdba76d4dfe41d7b06"
+        }
+      ]
+    }
+  ],
+  "scope": "directed source/metadata/inert-owner/disposable-FD controls and legacy regressions; only outer CPU4 owners real; no EXglobal or transport/SDK/Photo payload",
+  "shared8_source_integrated": true,
+  "runtime_transport_qualified": false,
+  "temporary18_owner_integrated": false
+}

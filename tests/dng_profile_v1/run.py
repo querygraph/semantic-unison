@@ -9,7 +9,6 @@ from pathlib import Path
 import re
 import shutil
 import stat
-import subprocess
 import sys
 import tempfile
 import time
@@ -17,18 +16,25 @@ import time
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT / "tests/semantic/conformance"))
+sys.path[:0] = [str(ROOT / "tests"), str(ROOT / "tests/semantic/conformance")]
 from reference import Region, inspect, plan, encode_request, encode_envelope
-from fixtures import (Layout, PROFILE, PRIMARY, XMP, XMP_LENGTH, SIZE,
+from owned_call import execute
+from shared_cpu_pool import UnresolvedOwnership
+from shared_process_owner import retain_after_record
+from shared_io_pool import uncertainty_records
+from dng_profile_v1.fixtures import (Layout, PROFILE, PRIMARY, XMP, XMP_LENGTH, SIZE,
                       valid_fixtures, invalid_fixtures)
 
 MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge",
            "dngSemantic", "dngExtended", "semanticDelta")
 INPUTS = tuple("src/" + name + suffix for name in MODULES for suffix in (".mli", ".ml")) + (
-    "src/semanticHash_stubs.c", "src/semanticFile_stubs.c",
+    "src/semanticHash_stubs.c", "src/semanticHash_evp.h", "src/semanticFile_stubs.c",
     "tests/semantic/conformance/reference.py", "doc/semantic-delta-v0.md",
     "tests/dng_profile_v1/fixtures.py", "tests/dng_profile_v1/test.ml",
     "tests/dng_profile_v1/fs.c", "tests/dng_profile_v1/run.py",
+    "tests/dng_profile_v1/owned_call.py", "tests/sdk_host_matrix/shared_child.py",
+    "tests/shared_cpu_pool.py", "tests/shared_io_pool.py",
+    "tests/shared_process_owner.py", "tests/private_camera_receiving/close.py",
     "tests/dng_profile_v1/README.md", "tests/dng_profile_v1/SDK-SOURCE-NOTES.md")
 
 
@@ -189,21 +195,6 @@ def make_cases(directory):
     return commands, metadata, fixture_oracles, sparse_records
 
 
-def execute(argv, directory, env, log, timeout=120):
-    started = time.monotonic()
-    with log.open("w") as stream:
-        result = subprocess.run(argv, cwd=directory, env=env,
-                                stdout=stream, stderr=subprocess.STDOUT, timeout=timeout)
-    output = log.read_text()
-    if result.returncode:
-        print(output[-12000:], end="", flush=True)
-    elif output.strip():
-        print(output.strip().splitlines()[-1], flush=True)
-    return {"argv": argv, "cwd": str(directory), "exit_code": result.returncode,
-            "elapsed_seconds": time.monotonic() - started,
-            "log": str(log), "log_sha256": sha_file(log)}
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ocamlopt", required=True)
@@ -232,12 +223,17 @@ def main():
     command_path.write_text("\n".join(commands) + "\n")
     oracle_path = work / "fixture-oracles.json"
     oracle_path.write_text(json.dumps(oracles, indent=2) + "\n")
-    version = subprocess.check_output([compiler, "-version"], text=True, env=env).strip()
-    config = subprocess.check_output([compiler, "-config"], text=True, env=env)
+    compiler_probes = [execute([compiler, flag], work, env, work / name)
+                       for flag, name in (("-version", "compiler-version.log"),
+                                          ("-config", "compiler-config.log"))]
+    if any(row["exit_code"] != 0 for row in compiler_probes):
+        raise AssertionError("compiler metadata probe failed")
+    version = compiler_probes[0]["stdout"].strip()
+    config = compiler_probes[1]["stdout"]
     record = {"schema": "unison-dng-profile-v1-direct-qualification/1",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "compiler": compiler, "compiler_version": version, "compiler_sha256": sha_file(Path(compiler)),
-        "compiler_config": config, "platform": sys.platform,
+        "compiler_config": config, "compiler_probes": compiler_probes, "platform": sys.platform,
         "source_sha256": {relative: sha(data) for relative, data in original.items()},
         "artifact_directory": str(work), "retained": args.keep_work, "runs": [],
         "commands_sha256": sha_file(command_path), "commands": metadata,
@@ -245,7 +241,7 @@ def main():
         "scope": "real public DNG /1 locator and semantic kernel in private compiler snapshots; independent synthetic containers/placement/wire bytes; no valid photo, decoded pixels, rendering, SDK validation, physical clone or speed claim",
         "limitations": ["No Adobe SDK linking/invocation or Photo/Lightroom/catalog/cache/production file access",
             "Large sparse cases inspect and read exact packets only; never full-file hash or transfer",
-            "Rejection is bounded by finite small fixtures, cancellation-check budget and timeout; no whole-process RSS claim",
+            "Rejection is bounded by finite small fixtures, cancellation-check budget and observation deadline; unknown retains without signal; no whole-process RSS claim",
             "Private mutations demonstrate specific graph guards; no production hook or public test switch"]}
     modes = ("fixed",) if args.fixed_only else ("fixed", "wrong-CR-base", "missing-CR-protection", "widened-CR-pointer")
     for mode in modes:
@@ -310,4 +306,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except UnresolvedOwnership as error:
+        def preserve():
+            print(json.dumps({"state": "UNRESOLVED_RETAIN_OWNER",
+                "error": repr(error),
+                "retained_fds": list(error.retained_fds),
+                "uncertain_closes": list(uncertainty_records(error, {})),
+                "outcome": getattr(error, "outcome", None)}), flush=True)
+        retain_after_record(preserve)

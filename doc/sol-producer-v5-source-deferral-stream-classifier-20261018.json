@@ -1,0 +1,38 @@
+{
+  "state": "V5_SOURCE_PROPOSALS_DEFERRED_CONFIRMED_CLASSIFIER_CONTRACT_GAP",
+  "old_index": {
+    "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-requalification-requests-v5.json",
+    "bytes": 2734,
+    "sha256": "db616795aa0c03775745f2ec7457007baa7921133c798ddafd61648b1e743cde"
+  },
+  "observed_unix": 1792355142.447505,
+  "observations": [
+    {
+      "path": "/private/tmp/unison-producer-upstream-admission-239498a8.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-mp-239498a8",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-producer-retained-fork-admission-1651fe45.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-mp-1651fe45",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-producer-properties-admission-59455b3c.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-props-59455b3c",
+      "exists": false
+    }
+  ],
+  "finding": "Frozen b8c stream exception-filter path violates documented pure-classifier-exception retention contract. Original counterexample confirmed; fix is now qualified separately, requiring fresh exact successor proposals. V5 bytes remain unchanged.",
+  "author_dispatch_state": "No V5 dispatch by this agent. Observed absence is not a fabricated historical parent terminal; contrary actual grant/START must be reconciled.",
+  "scope": "No admission created, no run/cancellation/replay/RootIOhold. Source-only request deferral; current-source successor must receive a separate exact fresh Root grant."
+}

@@ -1,0 +1,67 @@
+import hashlib,json,os,re,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha,closed
+from final_clone_sync_owner import fixtures,audit_refusal
+from final_clone_interruption_owner import generated_bytes
+from sdk_fixture_build_owner import tool_sha
+from batch_pair import audit
+from batch_transport import restore
+from sdk_merge_receiving.store import Store
+from component_remote.io import identity
+from shared_cpu_pool import Pool
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+P=R/'doc/final-clone-sync-plan-v1-20261019.json';assert sha(P)=='41030a2d510e21a5abd344f135964c77f958dd75e1d5fdbe8ed498fdeff5878e';p=json.loads(read_bytes(str(P),2*1048576));root=Path(p['workspace'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle
+try:
+ start=json.loads(read_bytes(str(root/'START.json'),65536));result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576));assert start['owner_pid']==61213 and start['cases_per_compiler']==14 and result['complete'] is True and len(result['cases'])==28 and len(result['modifiers'])==4 and result['SDK_or_Photo_calls']==0 and result['parent_tool_terminal_proved'] is False
+ assert {(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in (*cpu.fds,*io.fds)}=={(row['device'],row['inode']) for row in start['resource_rows']}
+ for name,digest in p['source_pins'].items():assert sha(R/name)==digest,name
+ for name,digest in result['production_pins'].items():assert sha(R/name)==digest,name
+ for ref in (*p['artifacts'].values(),p['interpreter'],*p['compiler_artifacts'].values()):assert sha(ref['path'],64*1048576)==ref['sha256']
+ assert p['flag_tool']['path']=='/usr/bin/chflags' and tool_sha(p['flag_tool']['path'])==p['flag_tool']['sha256']
+ for path,pin in result['scripts'].items():assert sha(path,65536)==pin['sha256']
+ native=root.stat();store=Store(str(root),dict(device=native.st_dev,inode=native.st_ino));rows=[];pids=[];fresh_bytes=0;refs=[]
+ for index,label in enumerate(('stock','ox')):
+  directory=root/str(index);original,edits=fixtures();saved=edits[-1][1];updated=saved[:9000]+b'new hardlink update'+saved[9019:]
+  steps=[('seed',original,'auto'),*[(name,data,'auto') for name,data in edits],('noop',saved,'auto'),('hardlink',updated,'auto'),('clone-off',original,'off'),('require-flagged',original,'require'),('auto-flagged',updated,'auto'),('final-noop',updated,'auto')]
+  previous=None;off_identity=None
+  for phase,(name,expected,policy) in enumerate(steps):
+   call='c%d-%d'%(index,phase);record=next(x for x in result['cases'] if x['compiler']==label and x['phase']==phase);intent=json.loads(read_bytes(str(root/(call+'-INTENT.json')),65536));row=intent['row'];proxy_command=[p['interpreter']['path'],'-B',str(root/(call+'-proxy.py'))]
+   assert record['case']==intent['case']==name and record['policy']==policy and record['source_identity']==intent['source_before']
+   for key in ('command','server_command','server_flags'):
+    assert row[key][row[key].index('-clone')+1]==policy and row[key][row[key].index('-adobevalidate')+1]=='off'
+   if name=='require-flagged':
+    value=json.loads(read_bytes(str(root/(call+'-RAW-PAIR.json')),2*1048576));value['raw_proxy']=value['raw_proxy'].encode();joined=audit_refusal(value,client_command=row['command'],proxy_command=proxy_command,server_command=row['server_command']);assert json.loads(value['raw_proxy'])==json.loads(read_bytes(str(root/(call+'-PROXY.json')),65536))
+    assert joined==store.read_json(record['pair']['name'],expected_sha256=record['pair']['sha256'])['audit'];client=value['client'];server=value['proxy']
+    for field in off_identity:
+     if field!='st_ctime_ns':assert record['target_identity'][field]==off_identity[field],field
+   else:
+    pair=store.read_json(record['pair']['name'],expected_sha256=record['pair']['sha256']);joined=audit(store,pair['evidence'],client_command=row['command'],proxy_command=proxy_command,server_command=row['server_command']);client=restore(store,pair['evidence']['client'],row['command']);server=restore(store,pair['evidence']['proxy'],proxy_command)
+   text=''.join(out[key] for out in (client,server) for key in ('stdout','stderr'));marker='Using immutable receiver clone basis' in text
+   assert marker==record['clone_marker']==(name in [n for n,_ in edits]+['hardlink'])
+   counts=[int(n) for n in re.findall(r'Receiver clone preserved (\d+) logical bytes',text)]
+   if name=='same-offset':assert counts[-1]>len(expected)//2
+   if name=='auto-flagged':assert 'Receiver clone declined:' in text
+   if name=='noop':assert record['target_identity']==previous
+   if name=='clone-off':off_identity=record['target_identity']
+   assert record['target_sha256']==hashlib.sha256(expected).hexdigest()
+   if phase>=9:assert record['old_reader_preserved'] is True
+   pids.extend(joined[k] for k in ('client_pid','proxy_pid','server_pid'));rows.append(dict(compiler=label,phase=phase,case=name,audit=joined,clone_marker=marker,reported_preserved_logical_bytes=counts,pair=record['pair']));previous=record['target_identity']
+  assert identity(directory/'right/ordinary.bin')==previous and {x.name for x in (directory/'right').iterdir()}=={'ordinary.bin'}
+  for path,expected in [(directory/'left/ordinary.bin',updated),(directory/'right/ordinary.bin',updated),(directory/'old-hardlink',saved)]:
+   data=generated_bytes(path,links=1);assert data==expected;fresh_bytes+=len(data)
+  assert (directory/'right/ordinary.bin').stat().st_flags==0
+  for name,flag in [('setflag','nodump'),('clearflag','0')]:
+   key='c%d-%s'%(index,name);out=json.loads(read_bytes(str(root/(key+'.json')),65536));closed(out,0);assert out['command']==['/usr/bin/chflags',flag,str(directory/'right/ordinary.bin')]
+   record=next(x for x in result['modifiers'] if x['name']==key);assert out['client_cleanup']==record['child'];pids.append(record['child']['pid'])
+ assert len(pids)==len(set(pids))==88
+ for path in [root/'START.json',root/'RESULT.json',*(root/('c%d-%d-INTENT.json'%(i,j)) for i in range(2) for j in range(14)),*(root/('c%d-11-RAW-PAIR.json'%i) for i in range(2))]:refs.append(dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path,2*1048576)))
+ store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ receipt=dict(schema='unison-final-clone-sync-independent-audit/1',actual_owner_terminal=dict(session_id=43369,initial_chunk='69a81f',terminal_chunk='a6d4ef',exit_code=0,running_session=None,pid=61213),plan=dict(path=str(P),sha256=sha(P)),workspace=str(root),calls=28,normal_pairs=26,designated_normal_refusal_pairs=2,primary_peer_roles=84,flag_modifier_children=4,source_pins=len(p['source_pins']),production_pins=len(result['production_pins']),cases=rows,raw_references=refs,fresh_final_generated_bytes=fresh_bytes,old_readers_temporal_preservation_recorded=True,flagged_require_target_bytes_and_identity_except_modifier_ctime_preserved=True,final_target_flags_cleared=True,staging_absent=True,canonical9_reacquired_closed=True,SDK_or_Photo_calls=0,scope='Original generated stock/Ox generic clone exactness/prefixinsert-delete/duplicate-shift/literal/EOF/hardlink/off/requireflagged/auto fallback/noop; no physical-write/performance/camera/pixels.')
+ path=R/'tests/qualification/final-clone-sync-actual-20261019.json';assert not path.exists();path.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(receipt=str(path),sha256=sha(path),calls=28,peer_roles=84,modifiers=4,fresh_bytes=fresh_bytes,CPU8_EX_closed=True)))
+except BaseException as error:retain_after_record(lambda:print('CLONE_SYNC_AUDIT_RETAIN',repr(error),flush=True))

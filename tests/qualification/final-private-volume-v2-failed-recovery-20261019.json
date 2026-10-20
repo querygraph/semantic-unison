@@ -1,0 +1,62 @@
+{
+  "schema": "unison-final-volume-v2-failed-prefix/1",
+  "state": "STREAM_OBSERVATION_HELD_INDEPENDENT_RECOVERY_CLOSED",
+  "original_owner": {
+    "session": 1763,
+    "initial_chunk": "22bceb",
+    "terminal_chunk": "463c95",
+    "exit_code": 137,
+    "running_session": null,
+    "pid": 18772
+  },
+  "actual_recovery": {
+    "terminal_chunk": "718ce4",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "known_original_children_reaped0": 5,
+  "matrix_cases_completed": 0,
+  "known_seed_update_cli_returned0": 2,
+  "source_error": "positive generic-clone counter in stderr was omitted from observation string",
+  "normal_owned_image_detach": true,
+  "fresh_whole8_ex_acquired": true,
+  "original_source_preserved": "tests/qualification/final-volume-v2-owner-source.py.txt",
+  "proof_pins": [
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/IDLE-OWNER-STOP-PROOF.json",
+      "bytes": 986,
+      "sha256": "46cf9b9d281b27db0bf1f29ae117144e9302a844fc1b20dfa76245f319fac115"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/KNOWN-PREFIX.json",
+      "bytes": 1164,
+      "sha256": "27c684fd0b8db117589e1254fae93f3e467ca3486d2b321c9e339e3c0ea6f6d6"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/after-info.json",
+      "bytes": 786,
+      "sha256": "b02ee2eff0d16ac93294b8adb5c2259a3c21a3275432252a5e60f25a3c577bcd"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/before-census.json",
+      "bytes": 145785,
+      "sha256": "21f0492f0177f07b97a1c16870089e4dec5f4365fb2010addaf463e532cbe38a"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/before-info.json",
+      "bytes": 2164,
+      "sha256": "d582e7f70af3574afaaf6e6c0cd13c5fa9ed71dda3a09862e23726c39bcf57d5"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/final-census.json",
+      "bytes": 145019,
+      "sha256": "aa082a36295183a29b966213c9eb9250a1b85452025cee710ebaf6b0aef3deda"
+    },
+    {
+      "path": "/private/tmp/u-volume-v2-prefix-recovery-8dd3fc5272974f06/normal-owned-detach.json",
+      "bytes": 447,
+      "sha256": "cfb626c50d6f5fd79253787b2bec96af2da25229b965a254c42e1d9fce09bc3f"
+    }
+  ],
+  "no_native_signal_or_old_admission_replay": true
+}

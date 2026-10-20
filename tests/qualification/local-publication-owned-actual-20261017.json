@@ -1,0 +1,298 @@
+{
+  "complete": true,
+  "scope": "Bound local SemanticSync native publication uncertainty migration only; original8192B generated DNG fixtures; source/basis preserved",
+  "actual_tool_terminals": [
+    {
+      "session": 11183,
+      "chunk": "10b447",
+      "exit": 0,
+      "scope": "Initial candidate passed composed controls; superseded after source review of adoption/registration ordering"
+    },
+    {
+      "session": 69137,
+      "chunk": "6e7f13",
+      "exit": 0,
+      "scope": "Current002 stock/Ox Make+selftests and four composed controls/compiler"
+    },
+    {
+      "session": 5612,
+      "chunk": "96b9cb",
+      "exit": 0,
+      "scope": "Current32producer handoff cases/compiler; remote unit in-process, no transport"
+    },
+    {
+      "session": 2544,
+      "chunk": "c41a6f",
+      "exit": 0,
+      "scope": "Current stock/Ox Dune"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "a640193578646ddea73a6b5c5a412a8a239feadff97446c2b753fd901068be87"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5439ff79c6fcfc10b1bbc8fa4a414f4afa0052c743c86f96ea71ebb54e14421c"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-001/RESULT.json",
+      "bytes": 51881,
+      "sha256": "8454e2e40aed7894f54e05fddde763ebe5c8c51a40b9773c3baf5bae707894c8"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "dd5c09e0c1c464a760259976db9b6d155ceaba6a13ea9475a15706ddece52615"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1311,
+      "sha256": "bf73a9384f2371a1cc56f571169ce00bddbab4ed784b3495b4019c23aeb954c0"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b95a2ae48eccdfe0cf545153025bcbb91e46c643a71dbbe0447ebdce2b213854"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-001/RESULT.json",
+      "bytes": 51887,
+      "sha256": "171c67edd518c66c85daf6469f507d9d6562436ec3ffeb0c8d7e2a3ad1daa766"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "dc2119ad11b5da7664912bd93cb82dce63b9bf2ad15f1b48a63a766be0337be0"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-001/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "5d738e8496ed5caa62aaaff6dbb951f36b965c24753fe474c02e3c2de540585a"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5875f9feceaecb98c2a5bcf030a03180e4c681dd12ffbe083a379bdb6305db88"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "660c9da1d99c81772aba35d6d953c10deb6cd712fddb65b5721cbd8de9c47b41"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-imjby1c2/RESULT.json",
+      "bytes": 140940,
+      "sha256": "599450cb89cb6e41e59c2a1694a1132204f9c9edbf4b575201065a3b922c27e6"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-002/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "1e1c538b2c378da2a2acbb8de815042469ea67268653b87e9cbc1a10007ac104"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "ee9adfdea2ec936bccf9a601859c820ed4dc461e31e77cd840afba1df382549b"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-002/RESULT.json",
+      "bytes": 51881,
+      "sha256": "1c13a6c922f6110964a4f72964220c880172f67ca6d6fd869105ab7c8b31253d"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "5cd22021ba151604c3d3a74087938d37d2b6a54a6605f7677e8eaa6e4693d406"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-make-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-002/SHARED-START.json",
+      "bytes": 1313,
+      "sha256": "28c4edd5e55a97a9bd0d017cfc51f08fcaa39a6baeafa94c412f22b05e3cbc00"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "abb5f14d21400f8227af33b020078de375b25bc3b726c8f7e85c34e0331ae047"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-002/RESULT.json",
+      "bytes": 51887,
+      "sha256": "be204a45380d3e611d39bda9c96eada0d1404ca33b0db0552a9b4b7e9bb8b439"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "7234c5f8b6dad661909ca4a6dcc2eadabe311ca06a2c8a7e545db9e22f71bfb9"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-make-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-002/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "ba1a2295915df2dc30a5d6b96d22bbffe739e1ff7dd938b4be938fc3b8fa06c1"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f089f3944e960fc3e36acfd29b097d5b281d0a43b655fc2e703975f81f94a31f"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "561c41ae34aa9c47e5ade67cf6fe358c2b51ee41c35723a2dc9bac4ec2e6d236"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-both-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-vthxm8yh/RESULT.json",
+      "bytes": 140940,
+      "sha256": "05794922a4ab230da3d410a9e2a0b52958e34b507fde696cba63ec6c005f6b76"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-handoff-controls-20261017-001/SHARED-START.json",
+      "bytes": 1326,
+      "sha256": "582beaa30955b75acb226245e63816835389525289e2d67be70a90af713288b2"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-handoff-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "857189c192ea2a1ff8fdd6432dc276061be3890d2f4fa6fbcd25cded324db277"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-handoff-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "836878d5e27fae59744998473c20689636fa76c422d4bc2620366dc927d78331"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-handoff-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-7cpqs33r/RESULT.json",
+      "bytes": 52381,
+      "sha256": "14fe6748eb304421701980087e57e0f806ffe473c6f203d6f3796cf2a7818118"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-dune-20261017-001/SHARED-START.json",
+      "bytes": 1303,
+      "sha256": "a3cb0db058efc65e0c2a06d51a61ceea7abe5357c6fbb0bb2ebca08f12fb5f60"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "ae40078beced2cfa6c8b842ffcc0e4295beb9932fc67a39b3e61eee3fe6189c8"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-dune-20261017-001/RESULT.json",
+      "bytes": 51325,
+      "sha256": "6d707a7b5bd9de5998d068aa798fc18f6eba4b8b3c94c4c4375223be1d2aba99"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "f5b0e8626c19ae9b28873eee5e491cd2e0ed0a2c5569f7d403a0249803bc35d3"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-stock-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-dune-20261017-001/SHARED-START.json",
+      "bytes": 1298,
+      "sha256": "48d37d2e65a4794d5ee22d944c980c7020d890ae3dcc0e0ecdb4639f5e3f9f98"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "8741c028a54428be6e77173fc1bfb83b6d0732b9159940e0e1f44cde2d0adf9d"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-dune-20261017-001/RESULT.json",
+      "bytes": 51329,
+      "sha256": "c2515930556a94301030df8ed9bdb8f4d59a456cdf1e34b8a8fd8d9580710fce"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "b23b495b19bc946f272b248222a0423e49a793fa03bab92119e49a2a54becd75"
+    },
+    {
+      "path": "/private/tmp/unison-local-owned-ox-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticSync.ml",
+      "bytes": 33259,
+      "sha256": "5f520ef521c9360ce80908f11807fc966d1d986f388885742eadb25a883d14a5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticSync.mli",
+      "bytes": 3908,
+      "sha256": "14db88e80ecd564432c77d45b3c31d48d85edec8c644b2ffd530ffc253b27f8e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/local_publication_owned/controls.py",
+      "bytes": 4538,
+      "sha256": "fe8169a9708177484347e877d6732da009ba9c2c68952070cba9098d4b52158c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/local_publication_owned/handoff_controls.py",
+      "bytes": 2970,
+      "sha256": "15ed378265a192ff0c88c47e9837ec4c573173b60db017016329f7c4353f82b9"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/local_publication_owned/probe.ml",
+      "bytes": 5337,
+      "sha256": "9200c37d9691c06e9380bff831f4d58f875062d9e06c937a812b04628721963d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/test_semantic_handoff.py",
+      "bytes": 23661,
+      "sha256": "d6a03e1a580503aa46965b84dcdef3a8c4163dd76da5d9515c8b3a468cff6514"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/local-publication-owned-v1.md",
+      "bytes": 2461,
+      "sha256": "2ea2d77937b96776c82b2d4211030f9e13da58253a1b8c23d2918e1d715f04ff"
+    }
+  ],
+  "limitations": [
+    "Copy and SemanticRemote legacy publication callers not migrated",
+    "Raw transaction/channel close uncertainty remains a separate gap",
+    "Disposable unknown native/application owners intentionally persist until process exit; external OS/group closure verified separately",
+    "No real transport/SDK/camera/bulk IO or new admission"
+  ]
+}

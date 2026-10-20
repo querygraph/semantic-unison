@@ -1,0 +1,559 @@
+{
+  "schema": "unison-final-clone-case-binding-audit/1",
+  "scope": "Metadata and source/saved artifact bytes only; no native or test execution",
+  "range_receipt": {
+    "path": "tests/qualification/current-range-components-actual-20261018.json",
+    "sha256": "fcfc6d25cd5d843cb3d311d3454e824a3ddab3b64e3322a48c2ad71eda0715d2",
+    "actual_controller": {
+      "session": 6994,
+      "initial_chunk": "404879",
+      "terminal_chunk": "96a5a8",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "rows": [
+    {
+      "compiler": "stock",
+      "kind": "native",
+      "source_bindings": [
+        {
+          "path": "src/cloneRange.ml",
+          "sha256": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+          "matches_current": true
+        },
+        {
+          "path": "src/cloneRange.mli",
+          "sha256": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.ml",
+          "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.mli",
+          "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+          "matches_current": true
+        },
+        {
+          "path": "src/nativeCopyRange_stubs.c",
+          "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+          "matches_current": true
+        },
+        {
+          "path": "src/copy_stubs.c",
+          "sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_generic.ml",
+          "sha256": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_intf.ml",
+          "sha256": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.ml",
+          "sha256": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.mli",
+          "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/run.py",
+          "sha256": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/test.ml",
+          "sha256": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/run.py",
+          "sha256": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/test.ml",
+          "sha256": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/native.ml",
+          "sha256": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5",
+          "matches_current": true
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e6ddbbcac17cbcd9220d42aa45143d3e5df9dfff26aba9707e8c38cc57346e8a",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3773,
+          "sha256": "c71b6752cc89d91b7d1a7a298471b1427da05d7578f76e4552142252d9138d75",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 328,
+          "sha256": "e4f51e8097490d4b7299f9e417b05fd48c6029b4cc864ec48951a53af5958f97",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-stock-20261018-001/RESULT.json",
+          "bytes": 31219,
+          "sha256": "0b988e6708c077affb23afeb764000c0a986c41a255b01cc664551c47dfdb9e3",
+          "matches_current": true
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "kind": "constrained",
+      "source_bindings": [
+        {
+          "path": "src/cloneRange.ml",
+          "sha256": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+          "matches_current": true
+        },
+        {
+          "path": "src/cloneRange.mli",
+          "sha256": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.ml",
+          "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.mli",
+          "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+          "matches_current": true
+        },
+        {
+          "path": "src/nativeCopyRange_stubs.c",
+          "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+          "matches_current": true
+        },
+        {
+          "path": "src/copy_stubs.c",
+          "sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_generic.ml",
+          "sha256": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_intf.ml",
+          "sha256": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.ml",
+          "sha256": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.mli",
+          "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/run.py",
+          "sha256": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/test.ml",
+          "sha256": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/run.py",
+          "sha256": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/test.ml",
+          "sha256": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/native.ml",
+          "sha256": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5",
+          "matches_current": true
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d82b844f0f633828fe7e32b5ec23a4603d192971c01f444a6be28e881fc86cbf",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3678,
+          "sha256": "3d136573075bb625e563a9c006c3223135c932a01c59dbf6f89dd68abe42e099",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_current": true
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "kind": "native",
+      "source_bindings": [
+        {
+          "path": "src/cloneRange.ml",
+          "sha256": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+          "matches_current": true
+        },
+        {
+          "path": "src/cloneRange.mli",
+          "sha256": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.ml",
+          "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.mli",
+          "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+          "matches_current": true
+        },
+        {
+          "path": "src/nativeCopyRange_stubs.c",
+          "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+          "matches_current": true
+        },
+        {
+          "path": "src/copy_stubs.c",
+          "sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_generic.ml",
+          "sha256": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_intf.ml",
+          "sha256": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.ml",
+          "sha256": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.mli",
+          "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/run.py",
+          "sha256": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/test.ml",
+          "sha256": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/run.py",
+          "sha256": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/test.ml",
+          "sha256": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/native.ml",
+          "sha256": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5",
+          "matches_current": true
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cea6e6c9e5df17fac6596d2bd96c49a4fbed043f1c1cc14565e8f62d82b5eb2b",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3774,
+          "sha256": "28574806bff01b30e243245eae2247face32438c283a6c1f9ba37b3b8185d3c5",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 328,
+          "sha256": "e4f51e8097490d4b7299f9e417b05fd48c6029b4cc864ec48951a53af5958f97",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-native-ox-20261018-001/RESULT.json",
+          "bytes": 31250,
+          "sha256": "c3502f23e663440c48002ff07b45876e132aa1a521dea4b5305497e2f839ab80",
+          "matches_current": true
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "kind": "constrained",
+      "source_bindings": [
+        {
+          "path": "src/cloneRange.ml",
+          "sha256": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093",
+          "matches_current": true
+        },
+        {
+          "path": "src/cloneRange.mli",
+          "sha256": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.ml",
+          "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7",
+          "matches_current": true
+        },
+        {
+          "path": "src/copyRange.mli",
+          "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4",
+          "matches_current": true
+        },
+        {
+          "path": "src/nativeCopyRange_stubs.c",
+          "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+          "matches_current": true
+        },
+        {
+          "path": "src/copy_stubs.c",
+          "sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_generic.ml",
+          "sha256": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a",
+          "matches_current": true
+        },
+        {
+          "path": "src/system/system_intf.ml",
+          "sha256": "47dd1735cfe007ff168533108ace0ecd4504c75d52b51ed0bab1c356c38103c7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.ml",
+          "sha256": "3181eed4c80b83ae2ba20fe49c5d5c6bb5b123613aa1f6f05d7b08f5b7cb9ce7",
+          "matches_current": true
+        },
+        {
+          "path": "src/fs.mli",
+          "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/run.py",
+          "sha256": "b50552522d5492c3d55aaefd942bf2b8c33c393faf190dd9a5c73e945a580c44",
+          "matches_current": true
+        },
+        {
+          "path": "tests/clone_range/test.ml",
+          "sha256": "659622515f0c18954f58f5d31d69d195ebc8dc322921c982b8254ee9579d83d8",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/run.py",
+          "sha256": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/test.ml",
+          "sha256": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e",
+          "matches_current": true
+        },
+        {
+          "path": "tests/native_copy_range/native.ml",
+          "sha256": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5",
+          "matches_current": true
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SOURCE-PINS.json",
+          "bytes": 1439,
+          "sha256": "9f08a330e7d490761f74ea307e226f29ec57c150058d1104617d126d81bd99f7",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "de19d6e4de01cf9fcca821d6064f2c10debf6d101a8361aa7fe4f3f32e3e2b4b",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 3681,
+          "sha256": "6132d1d6866764d9d600a7ea05aaec649bcad1bb82bb2ed30dc44358f63dcb4c",
+          "matches_current": true
+        },
+        {
+          "path": "/private/tmp/unison-current-range-constrained-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "matches_current": true
+        }
+      ]
+    }
+  ],
+  "historical_transfer_receipts": [
+    {
+      "receipt": "tests/qualification/transfer-output-allowance-actual-20261018.json",
+      "sha256": "087e84b33992e0e7f5c4ed02d33098075795faf257d100280c7d82a93602d2ff",
+      "state": "CALLER_OUTPUT_ALLOWANCE_FINAL_FOUR_BUILDS_AND_CONTROLS_PASS",
+      "source_bindings": [
+        {
+          "path": "src/transfer.ml",
+          "recorded_sha256": "c6a369c3032486cbb75dc06f080c7ecf4a59ff4c046ceaaf7dab11498cc75cf3",
+          "current_sha256": "a128b305cd0b874c8bfc5a0873bd36fa495764ec162b2f4ca3c7dab21c696448",
+          "matches_current": false
+        },
+        {
+          "path": "src/transfer.mli",
+          "recorded_sha256": "690693c4d5efef5e2433b299ac396798bd0e7e0beb095170443a3eb81aceef6d",
+          "current_sha256": "e4b8ac496e0aba764adb6971b9ee7b4ace7dfae0a2c8d16bff68006a1b0f1c6d",
+          "matches_current": false
+        },
+        {
+          "path": "src/copy.ml",
+          "recorded_sha256": "7e8cffc83cd625b1cb82d7a981cbe57089eadbf803c7ee3332e1a80ec2bd9861",
+          "current_sha256": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e",
+          "matches_current": false
+        },
+        {
+          "path": "tests/transfer_instruction_bounds/run.py",
+          "recorded_sha256": "5b6822b29a16e367b6eceb321197c412a6a1190696f09635a51fad23707d8c58",
+          "current_sha256": "e2e558eda3f95796c6a105fcbf84fc6e1955560c1b7c6154b770200780513e59",
+          "matches_current": false
+        },
+        {
+          "path": "tests/transfer_instruction_bounds/probe.ml",
+          "recorded_sha256": "9257ebf01cbd66b695e0dd1e1725b36fea6cbb00601cc28479a4852faf05ca95",
+          "current_sha256": "4acc2ff6ba0d46f528b2f7047ac7f5d2529c1778998d31c5b5e53d1db0acfc17",
+          "matches_current": false
+        }
+      ],
+      "limitation": "Partial source match does not prove current full transitive control execution"
+    },
+    {
+      "receipt": "tests/qualification/stream-command-input-cap-actual-20261018.json",
+      "sha256": "361ac49f3333b8913d8487728da9ef72efe4e32c44a47986ac4453146225427d",
+      "state": "KNOWN_STREAM_PAYLOAD_CAP_CURRENT_FOUR_BUILDS_CONTROLS_PASS",
+      "source_bindings": [
+        {
+          "path": "src/remote.ml",
+          "recorded_sha256": "4a072990d03e5768088faee48c5d9c8e3eccff077879be93b4ccac9a71fb68f5",
+          "current_sha256": "866be986f3a4ee7d73b21ad1fb864528bae896c70a77c13df628a2d661f7929f",
+          "matches_current": false
+        },
+        {
+          "path": "src/remote.mli",
+          "recorded_sha256": "50d60f0619bdb6c781006db24d30d6376a77483d03066d1fa467e546670e4d16",
+          "current_sha256": "7ab83c838481c40072be56f22e6adf6571e34f7ab564fc3b4389ad5af7715aa4",
+          "matches_current": false
+        },
+        {
+          "path": "src/copy.ml",
+          "recorded_sha256": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e",
+          "current_sha256": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e",
+          "matches_current": true
+        },
+        {
+          "path": "src/transfer.ml",
+          "recorded_sha256": "a128b305cd0b874c8bfc5a0873bd36fa495764ec162b2f4ca3c7dab21c696448",
+          "current_sha256": "a128b305cd0b874c8bfc5a0873bd36fa495764ec162b2f4ca3c7dab21c696448",
+          "matches_current": true
+        },
+        {
+          "path": "src/transfer.mli",
+          "recorded_sha256": "e4b8ac496e0aba764adb6971b9ee7b4ace7dfae0a2c8d16bff68006a1b0f1c6d",
+          "current_sha256": "e4b8ac496e0aba764adb6971b9ee7b4ace7dfae0a2c8d16bff68006a1b0f1c6d",
+          "matches_current": true
+        },
+        {
+          "path": "tests/remote_stream_limits.ml",
+          "recorded_sha256": "c4bb1366a9af96aeba7dbf840da6475a3dfeaff29bf1cf9ec3760ac9012e96d5",
+          "current_sha256": "c4bb1366a9af96aeba7dbf840da6475a3dfeaff29bf1cf9ec3760ac9012e96d5",
+          "matches_current": true
+        },
+        {
+          "path": "tests/test_remote_bounds.py",
+          "recorded_sha256": "3cc125f1630b1541df0ad3e2bf2e17689782e49bf83dd5834b88c8cda9e24771",
+          "current_sha256": "9d8147984f583a863b5c3b601d15e04b427eb097c1583ea47d23fdc085315b0f",
+          "matches_current": false
+        },
+        {
+          "path": "tests/transfer_instruction_bounds/run.py",
+          "recorded_sha256": "e2e558eda3f95796c6a105fcbf84fc6e1955560c1b7c6154b770200780513e59",
+          "current_sha256": "e2e558eda3f95796c6a105fcbf84fc6e1955560c1b7c6154b770200780513e59",
+          "matches_current": true
+        },
+        {
+          "path": "tests/transfer_instruction_bounds/probe.ml",
+          "recorded_sha256": "4acc2ff6ba0d46f528b2f7047ac7f5d2529c1778998d31c5b5e53d1db0acfc17",
+          "current_sha256": "4acc2ff6ba0d46f528b2f7047ac7f5d2529c1778998d31c5b5e53d1db0acfc17",
+          "matches_current": true
+        }
+      ],
+      "limitation": "Partial source match does not prove current full transitive control execution"
+    }
+  ]
+}

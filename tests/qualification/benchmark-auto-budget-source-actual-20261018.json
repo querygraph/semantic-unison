@@ -1,0 +1,164 @@
+{
+  "schema": "unison-benchmark-auto-budget-source/1",
+  "state": "SOURCE_CONTROLS_PASS_NOT_TRANSPORT_QUALIFIED",
+  "actual_success_terminal": {
+    "chunk": "d46957",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "actual_initial_failed_terminal": {
+    "chunk": "6c602d",
+    "exit_code": 1,
+    "no_session": true
+  },
+  "jobs": [
+    {
+      "family": "auto",
+      "closure": {
+        "child": {
+          "pid": 51766,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 51766,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5e34fb08a5a19bdb89739f6ad9baf58d055510b457f80a79224a7d22f2ef88cb"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 57,
+          "sha256": "4718c666e028334ecc7ea1c45f27319567435bc3549a46825e709e5bef883b68"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-002/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "38bf320bde0206302c1e57a1b42621b895232f0c74ebfec8c7b81ec6681fa5a0"
+        }
+      ]
+    },
+    {
+      "family": "legacy",
+      "closure": {
+        "child": {
+          "pid": 51775,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 51775,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-legacy-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "ceb0a1baad2e93dee9bed62a7225b4a25df55a8c11f8d9f1ad6092762f7b2f8a"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-legacy-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 79,
+          "sha256": "b9811efc5e215d8ccb51a1299d83d2b04467f683a97314bbf2bd9e86152e1857"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-legacy-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "family": "artifact",
+      "closure": {
+        "child": {
+          "pid": 51777,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 51777,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-artifact-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "fbe766e19b05b57b7d1f5d8c255d38089ebef8a4e514520bc39c1b7b889e048e"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-artifact-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-benchmark-cpu-selection-artifact-20261018-001/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "d26bdd8902cfd9615fdc56631c8cf5c6f50365669f489e98ad81e93f48fdb11a"
+        }
+      ]
+    }
+  ],
+  "preserved_failure": [
+    {
+      "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c34309ff92e82630938bb02d13d758d4e9683d0531df5f3dfaefbee57ea727e3"
+    },
+    {
+      "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 57,
+      "sha256": "4718c666e028334ecc7ea1c45f27319567435bc3549a46825e709e5bef883b68"
+    },
+    {
+      "path": "/private/tmp/unison-benchmark-cpu-selection-auto-20261018-001/SHARED-STDERR.txt",
+      "bytes": 722,
+      "sha256": "96000b366d9d5ed2043dadba8eef636e62a7e8723936cad7d08004fabac62650"
+    }
+  ],
+  "source_sha256": {
+    "bench/sync/run.py": "682a136b139c0992b38371a354364ceb9cc45c75a46fcf78d6b6879e606eee0e",
+    "bench/sync/worker_config.py": "dfcba614c316dba870087396eefe785bbfee049cdd8c43850029b889e6228163",
+    "bench/sync/worker_config_test.py": "98bdc1e4f0d732d467c53394495a685ed61be88581ec5124497e9e1f53871438",
+    "bench/sync/shared_budget_test.py": "1611f23f923a11627a6e191cc5464f4c77ce7e7dfbec9ed1d97f70a6bcf115bf",
+    "bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304"
+  },
+  "scope": "Five original auto/declaration/refusal tests (including9main argument cases),15existing legacy budget controls,6artifact pin controls; metadata/tool calls mocked. No binary, compiler, fixture payload, transport, SDK, Photo, EXglobal, performance or new runtime grant. Initial test expected1instead of2prepare saves; corrected and budget declaration moved before first save."
+}

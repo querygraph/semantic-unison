@@ -1,0 +1,71 @@
+{
+  "schema": "unison-auto-cohort-build-binding-controls/1",
+  "actual_tools": [
+    {
+      "chunk": "03a54f",
+      "exit": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "80eb6c",
+      "exit": 0,
+      "no_session": true
+    }
+  ],
+  "closures": [
+    {
+      "child": {
+        "pid": 55472,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 55472,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    {
+      "child": {
+        "pid": 55574,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 55574,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  ],
+  "sources": [
+    {
+      "path": "bench/sync/cohort_plan.py",
+      "sha256": "fa82bf7ac3983058df670c28efcb53b68146ee268459b87c9c22769039ca72f0"
+    },
+    {
+      "path": "tests/cohort_plan_test.py",
+      "sha256": "7e13c22439aea518cb35620e930ede32cd9c3801c03e8685be23e73ca425cdbe"
+    }
+  ],
+  "scope": "generated source/build receipt controls and metadata inventory existence; no actual binary execution/hash or EXIO",
+  "runtime_qualified": false
+}

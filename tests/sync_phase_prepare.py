@@ -1,0 +1,97 @@
+"""Prepare one generated-fixture phase smoke; never create a runtime admission."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import re
+import subprocess
+import sys
+import time
+from unittest.mock import patch
+
+import manual
+import shared_dispatch as dispatch
+import shared_io_pool as io
+
+ROOT=Path(__file__).resolve().parents[1]
+
+
+def pin(path):
+    path=Path(path);data=path.read_bytes()
+    return dict(path=str(path),bytes=len(data),sha256=hashlib.sha256(data).hexdigest())
+
+
+def save(path,value):
+    with Path(path).open('x') as out:json.dump(value,out,indent=2);out.write('\n')
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    for name in ('stock','ox','nonce','report'):p.add_argument('--'+name,required=True)
+    args=p.parse_args()
+    if re.fullmatch('[0-9a-f]{8}',args.nonce) is None:raise ValueError('eight-hex fresh nonce required')
+    workspace=Path('/private/tmp/u-phase-'+args.nonce)
+    admission=Path('/private/tmp/unison-sync-phase-admission-v2-'+args.nonce+'.json')
+    request_path=ROOT/'doc/sync-phase-collection-request-v2.json'
+    plan_path=ROOT/'doc/sync-phase-collection-plan-v2.json'
+    if any(x.exists() for x in (workspace,admission,request_path,plan_path)):
+        raise ValueError('new namespace/documents required; no overwrite or replay')
+    env=dict(SHARED_CPU_CREDITS='8',OUTPUT_DIR=str(workspace),STOCK_RECEIPT=args.stock,
+        OX_RECEIPT=args.ox,SYNC_PROPERTY_REMOVAL_CONTROLS='1',MEASURE_SEMANTIC_PHASES='1',
+        SHARED_IO_ADMISSION=str(admission),SHARED_IO_ADMISSION_SHA256='0'*64)
+    builds=[manual.checked_build(env[label+'_RECEIPT']) for label in ('STOCK','OX')]
+    command=manual.command('sync-functional',workspace,env)
+    assert command.count('--measure-semantic-phases')==1 and '--shared-qualification' in command
+    paths={Path(dispatch.__file__),ROOT/'tests/manual.py',ROOT/'tests/shared_io_pool.py',
+        ROOT/'tests/shared_cpu_pool.py',ROOT/'tests/shared_process_owner.py',
+        ROOT/'bench/sync/ownership.py',Path(command[1])}
+    paths.update((ROOT/'bench/sync').glob('*.py'))
+    fields=dict(state='ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB',target='sync-functional',
+        command=command,workspace=str(workspace),cpu_credits=8,io_manifest_sha256=io.CANONICAL_SHA256,
+        execution_source_sha256={str(path):pin(path)['sha256'] for path in sorted(paths)})
+    prospective=dict(fields,start_deadline_unix=time.time()+600)
+    # Check the existing guard with an in-memory prospective admission and a
+    # fake manifest result. This does not read/acquire the canonical pool or
+    # publish an admission file. Root must separately authorize the real run.
+    with patch.object(io,'read_manifest',return_value=prospective),patch.object(io.GlobalPool,'read',return_value='NO_LOCK_METADATA_CHECK'):
+        assert dispatch.checked_io_request(dict(path=str(admission),sha256='0'*64),
+            'sync-functional',command,workspace,8)[0]=='NO_LOCK_METADATA_CHECK'
+    limits=dict(rows=18,CLI_calls_max=54,files_per_row=2,file_bytes_each=2097152,
+        endpoint_workers_max=[3,3],owner_credits=2,cpu_indexes=list(range(8)),
+        retained_property_readers_max=36,per_CLI_seconds=30,owner_observation_seconds=300,
+        logical_IO_budget_declared_bytes=8*1024**3,IO_budget_instrumented=False,
+        compilation_calls=0,SDK_Adobe_camera_Photo_payload_calls=0,
+        compiler_metadata_queries=4,Unison_binary_version_queries=2,
+        Darwin_sysctl_metadata_queries=2,Darwin_diskutil_metadata_queries=1,git_metadata_queries=1,
+        CLI_call_count_scope='54 journaled seed/update/noop clients; two extra binary version queries separately declared',
+        unknown='Retain actual owner and IO/CPU descriptions on unknown; no broad aggregate kill/retry.',
+        scope='Finite generated property-removal trace collection smoke, not repeated performance or whole-path commit qualification.')
+    prerequisites=[pin(args.stock),pin(args.ox),pin(ROOT/'tests/qualification/sync-phase-report-source-actual-20261018.json'),
+        pin(ROOT/'tests/qualification/semantic-phase-observations-actual-20261017.json'),
+        pin(ROOT/'tests/qualification/bound-publication-timing-actual-20261018.json')]
+    plan=dict(schema='unison-sync-phase-collection-plan/2',state='SOURCE_ONLY_NOT_ADMITTED',
+        command=command,workspace=str(workspace),limits=limits,
+        diagnostics=dict(primary_reads=True,semantic_phases=True,raw_streams_preserved=True,
+            phase_intervals_inclusive=True,phase_sum_or_total_commit_claim=False,
+            explicit_unavailable_retained=True,source_field_types_rebound_to_raw=True),
+        next_step='Collection smoke before fresh repeated end-to-end performance planning; no old run replay.')
+    save(plan_path,plan)
+    env['SHARED_IO_ADMISSION_SHA256']='ROOT_PUBLISHED_SHA_REQUIRED'
+    request=dict(schema='unison-sync-phase-collection-request/2',state='PREPARED_NOT_ADMITTED_NOT_DISPATCHED',
+        integration_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        plan=pin(plan_path),admission_path=str(admission),admission_fields=fields,
+        launch_argv=[sys.executable,str(ROOT/'tests/manual.py'),'sync-functional'],
+        launch_environment=env,prerequisites=prerequisites,interpreter=pin(sys.executable),
+        production_source_sha256={n:d for n,d in builds[0]['source_sha256'].items() if n.startswith('src/')},
+        limits=limits,deadline_policy='Root supplies fresh deadline; exact one use only; refuse expired/stale/started grant.',
+        supersession='Source V2 corrects metadata-query budgeting in unstarted V1. Fresh namespace only; V1 retained/no dispatch or admission reuse. Every older runtime grant remains consumed or retired.')
+    assert all(request['production_source_sha256'][n]==d for n,d in builds[1]['source_sha256'].items() if n.startswith('src/'))
+    save(request_path,request)
+    save(args.report,dict(state='METADATA_PREPARATION_ONLY_NO_RUNTIME_GRANT',request=pin(request_path),plan=pin(plan_path),
+        command_checked_by_manual=True,prospective_IO_guard_checked_with_fake_manifest=True,
+        canonical_pool_acquired=False,runtime_workspace_created=workspace.exists(),runtime_admission_created=admission.exists(),
+        Unison_compiler_SDK_Photo_payload_invocations=0,source_preparer=pin(Path(__file__))))
+    print('PREPARED',json.dumps(pin(request_path)),flush=True)
+
+
+if __name__=='__main__':main()

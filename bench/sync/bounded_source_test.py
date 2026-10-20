@@ -9,6 +9,7 @@ import time
 import run_bounded as bounded
 
 root=bounded.ROOT
+assert 'bench/sync/phase_stats.py' in bounded.SOURCES
 historical=json.loads((root/'bench/sync/results/checked-worker-performance-20261014.json').read_text())
 proof=bounded.audit(historical)
 assert proof['rows']==72 and proof['cli_invocations']==216

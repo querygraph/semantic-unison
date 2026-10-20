@@ -72,7 +72,7 @@ using Photo-owned fixtures; never substitute this tool for a rendering fingerpri
 ## Reuse the pinned build
 
 `--use-build /absolute/build-receipt.json -- ...` checks a successful retained
-build-only receipt, the exact current19-file kernel source set, the private
+build-only receipt, the exact current pinned kernel source set, the private
 workspace/binary binding and binary SHA256, then forwards arguments without a
 compiler lookup or rebuild. Receipt reads are bounded regular no-follow reads;
 duplicate keys, changed files and stale/missing pins fail before input access.
@@ -128,3 +128,70 @@ editable-metadata versus protected-byte classifications, unsupported input, and
 unchanged input identities/bytes. It does not establish real-camera eligibility.
 Run `integration_test.py --build-receipt /stock/build.json --build-receipt
 /ox/build.json --report /fresh/report.json` after building the current inspector.
+
+## Separate component observations
+
+Use `--components TARGET` (optionally `--base FILE`) for the DNG component
+partition rather than a transfer profile. This prints schema
+`unison-dng-components/0`, full-file SHA256, a versioned layout-view hash and
+encoded-pixel/standard/private/structural/opaque projections with claimed byte
+and component counts. Missing lanes are null. Inline and outlined values are
+separate from descriptors/padding; unknown bytes remain covered. XMP is optional
+in this observation mode, and physical aliases return unsupported.
+
+These are encoded byte-unit observations, not complete raw-image classification,
+decoded-pixel equality, render equivalence or persistent-cache authority. The
+hash-byte count excludes the parser's preceding bounded geometry reads. No sync
+archive or patch/merge policy changes. See [component hashing](../../doc/component-hashes.md).
+
+
+## Current source refresh (2026-10-17)
+
+The standalone build copies and pins the mandatory production EVP header.
+Current stock5.2.0 andOx5.2.0+ox build-only executions opened no image. Sixteen
+subsequent calls used only original256-byte fixtures: strict exact/metadata/
+complement/unsupported results, layout-only eligibility with uninterpreted-region
+classification, and role-separated metadata/pixel/opaque edits. Full SHA256 and
+unchanged input bytes/epochs were independently checked. Other role projections
+remain stable when only one role changes; opaque edits remain covered. Reuse and
+refusal controls pass. See
+`../../tests/qualification/integration-inspector-ready-actual-20261017.json`.
+This is not a real-camera/Adobe/decoded-pixel or receiving qualification. Fresh
+coordinated IO permission remains required before opening retained camera data.
+
+
+For the same shared entry point, `INSPECT_COMPONENTS=1` selects advisory
+component observations instead of a transfer profile. Leave `INSPECT_PROFILE`
+unset; `INSPECT_BASE` may still name a separately authorized comparison input.
+The default remains strict profile1 when this flag is absent or0. Selecting
+component mode is not semantic transfer eligibility, image decoding, or permission
+to read a retained camera copy. Such a run still requires its own exact IO grant.
+
+Current source qualification is refreshed in
+`tests/qualification/current-inspector-components-actual-20261017.json`:
+stock/Ox build-only artifacts and16 complete calls on original256B fixtures.
+Earlier receipts remain historical; their changed source pins must not be
+relabelled as a fresh real-camera observation.
+
+## Optional exiftool-rs MakerNote child interpretation
+
+Add `--exiftool-build /absolute/pinned-bridge/BUILD.json` to a retained-build
+`--components FILE` invocation to obtain the exact component report plus actual
+exiftool-rs MakerNote observations, nested by vendor and field. See
+[build/use, typed schemas and qualification](../exiftool-bridge/README.md).
+This reuses the pinned Rust library and does not shell out to Perl. Default
+inspection is unchanged; no metadata writer or semantic transfer authority is
+introduced. The library's field values currently lack byte spans, so their
+versioned hashes are advisory interpretation views alongside the exact partition.
+
+
+Large DNG component graphs may use the versioned [bounded role/field-encoding
+views](../../doc/dng-component-role-runs.md). Existing small partitions keep
+`dng-physical-partition/0`; adjacent role runs use `/1`, and dense metadata field
+encodings may use `/2`. The actual snapshot schema is printed. These are exact
+byte-preserving but coarser advisory views; field encodings include descriptor
+and padding/offset bytes, not value-only equality. Raw claims are bounded65536
+and the exact leaf+opaque-gap+root count must fit the unchanged1024-node budget.
+Unknown fields stay private and image claims are never promoted from metadata.
+Still-excessive geometries refuse; no camera/corpus/pixel/transfer authority is
+implied by support for generated fixtures.

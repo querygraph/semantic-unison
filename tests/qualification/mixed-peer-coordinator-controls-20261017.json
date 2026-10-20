@@ -1,0 +1,30 @@
+{
+  "scope": "Six fake-owner/OS coordinator settlement controls; no process launch, native wait or canonicalIO",
+  "actual_terminal": {
+    "chunk": "c2c5e1",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-coordinator-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "65b3cff83212936a663bc665997f2cb58002fe1f3057dcbcbb0b5680f93c2965"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-coordinator-controls-20261017-001/SHARED-START.json",
+      "bytes": 1142,
+      "sha256": "476ce7e14c315a81ce02a0d0d75f666e5fcac2d6cf0b4ac93adf057b041dd7b9"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-coordinator-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 104,
+      "sha256": "d1a3bdcaa925bbf92cc120237c5ab1078f911832e5f3bbdd16fd82aab85d59fa"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-coordinator-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

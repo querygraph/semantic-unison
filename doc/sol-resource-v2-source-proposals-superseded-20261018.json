@@ -1,0 +1,50 @@
+{
+  "state": "UNADMITTED_SOURCE_PROPOSALS_SUPERSEDED_DO_NOT_SCHEDULE",
+  "observed_unix": 1792346183.5692852,
+  "scope": "Our v2 source proposals only; original bytes preserved. No actual v2 dispatch/owner was created by us, no admission cancelled/rewritten or absence used to fabricate terminal. Use fresh distinct v3 requests for current456776d8; no grant inferred.",
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-requalification-requests-v2.json",
+    "bytes": 2686,
+    "sha256": "3b49e39e392ad2287ca22dc8ed8b517696566b21efb9db814e10eef2198718f3"
+  },
+  "observations": [
+    {
+      "request": {
+        "bytes": 2307,
+        "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-upstream-request-v2.json",
+        "sha256": "ab99d70226330fb4f59314b8e57cd9fc289340a979f916c83020dcc3098b4fc6"
+      },
+      "workspace": "/private/tmp/u-mp-29e41b2b",
+      "admission_path": "/private/tmp/unison-resource-upstream-admission-29e41b2b.json",
+      "workspace_exists": false,
+      "admission_exists": false
+    },
+    {
+      "request": {
+        "bytes": 2332,
+        "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-retained-fork-request-v2.json",
+        "sha256": "41f86b361b6093d72537527067e9f1db589e8abb4dc8e6d53861218bb3513e29"
+      },
+      "workspace": "/private/tmp/u-mp-47a974a7",
+      "admission_path": "/private/tmp/unison-resource-retained-fork-admission-47a974a7.json",
+      "workspace_exists": false,
+      "admission_exists": false
+    },
+    {
+      "request": {
+        "bytes": 44288,
+        "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-properties-request-v2.json",
+        "sha256": "49b97ea4bd9efc1b73ece5bf34cd7feff4fa3d983fa4e42f6a5b450c14bc3de7"
+      },
+      "workspace": "/private/tmp/u-resource-properties-3658b281",
+      "admission_path": "/private/tmp/unison-resource-properties-admission-3658b281.json",
+      "workspace_exists": false,
+      "admission_exists": false
+    }
+  ],
+  "successor_index": {
+    "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-requalification-requests-v3.json",
+    "bytes": 3170,
+    "sha256": "2e9adb6ba0a9a71a65312641443f3eef46ecc95404002a9cb3ce36f47bf801b0"
+  }
+}

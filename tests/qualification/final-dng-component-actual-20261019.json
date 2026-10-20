@@ -1,0 +1,95 @@
+{
+  "schema": "unison-final-dng-component-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 38297,
+    "initial_chunk": "c250e5",
+    "terminal_chunk": "b5ca6f",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 56659
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-dng-component-plan-v1-20261019.json",
+    "sha256": "453a61ab9a62485df06f97681dcbd43829072fd9f5546c32072cfe10a547e535"
+  },
+  "workspace": "/private/tmp/u-dng-components-6152823581394875",
+  "runner": {
+    "group_cleanup_before_leader_reap": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "pid": 56679,
+    "reaped": true,
+    "returncode": 0
+  },
+  "nested_calls": 76,
+  "normal_zero": 72,
+  "designated_two": 4,
+  "component_checks_per_compiler": 1590,
+  "layout_checks_per_compiler": 49,
+  "private_refusals_per_compiler": 8,
+  "archive_reference_fault_checks_per_compiler": 29,
+  "source_pins": 565,
+  "production_pins": 329,
+  "original_suite_pins": 45,
+  "raw_references": [
+    {
+      "path": "/private/tmp/u-dng-components-6152823581394875/START.json",
+      "bytes": 787,
+      "sha256": "fdcca7ce600685d5c25503f02da98fa72595e0f173a38624a8c345fa7d7fee94"
+    },
+    {
+      "path": "/private/tmp/u-dng-components-6152823581394875/RUNNER-CHILD.json",
+      "bytes": 606,
+      "sha256": "9a6989ba11be49ff5295641d72c15be91297b63a917dac39d972771ab5b462d7"
+    },
+    {
+      "path": "/private/tmp/u-dng-components-6152823581394875/RESULT.json",
+      "bytes": 57149,
+      "sha256": "eff92e333d1e9cde759ed2bf42c927ba6baf7019f22f9566f34beaedbce37b35"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/RESULT.json",
+      "bytes": 578066,
+      "sha256": "c7aaec3ddce586542c6a3aca061551286ae00206f333b838eb7e2c9ad0db5e9c"
+    }
+  ],
+  "executables": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/stock/dng-component-controls",
+      "sha256": "f1533cae7ebc152f9cebd9a69124a538ea89cc39c1d4bd2e3bcc678e51e9a991"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/stock/archive-reference-fault",
+      "sha256": "6a9ef65944d740fcc262ad59d2164b3069b82c245db806a950cdbdd51d1097b2"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/stock/component-inspector",
+      "sha256": "a291381abbc60a8e5505bb2e4313c7b8f0ca800e2d1ba178d7198aee7d4311e9"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/stock/dng-component-ablation",
+      "sha256": "822d82f55306bc7f74632efecc781ff8bb70db0c8f47ad141578fd95145fee6d"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/ox/dng-component-controls",
+      "sha256": "a027ad2685e5fd19e2f09dd572d4ee579f3916b9f2983f1d7f7beb2d9f891b91"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/ox/archive-reference-fault",
+      "sha256": "ac1ffe3c3f75694fd2cc513d1f99c8ce232cf5b448a7084b54e6f09a6b890810"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/ox/component-inspector",
+      "sha256": "915651c26b66c54c54aeab97afc680264e59e9061a90b3b3aa3a337e46f799ab"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-3xxvjg07/ox/dng-component-ablation",
+      "sha256": "31768812ff6d5083b2e1691518ac369d05bb8d4e8b9a6062abdb2e9c521ebed9"
+    }
+  ],
+  "fresh_generated_inspector_fixture_hash_bytes": 115712,
+  "filtered_ablation_source_restored": true,
+  "canonical9_reacquired_closed": true,
+  "SDK_or_Photo_calls": 0,
+  "scope": "Generated original current stock/Ox component/private-layout/partition schema1+2/refinement/cache/archive-reference fault/guard ablation; not real receiving, full Unison archive crash durability, physical ENOSPC, camera semantics or pixels."
+}

@@ -1,0 +1,43 @@
+{
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-resource-review-20261018/tests/mixed_peer_compatibility/entry.py",
+    "--plan",
+    "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-upstream-plan-v2.json",
+    "--plan-sha256",
+    "9d89fc8645f921c92c16b382f3e75b9a3ceefa492a8bb27aa605e489f1d1a6c7",
+    "--admission",
+    "/private/tmp/unison-resource-upstream-admission-29e41b2b.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "limits": {
+    "call_observation_seconds": 30,
+    "calls": 12,
+    "cases": 4,
+    "endpoint_workers": 2,
+    "owner_credits": 2,
+    "owner_observation_seconds": 300,
+    "sdk_calls": 0,
+    "total_credits": 8
+  },
+  "metadata_preflight": "Exact current checked_plan passed within explicit256KiB limit; worker verify_artifacts stays after actual IO/CPU acquisition. No admission, lock or native invocation created.",
+  "plan": {
+    "bytes": 64215,
+    "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-upstream-plan-v2.json",
+    "sha256": "9d89fc8645f921c92c16b382f3e75b9a3ceefa492a8bb27aa605e489f1d1a6c7"
+  },
+  "prepared_from_commit": "b6904f6591d4d378414df43d5bf65f7a7787e011",
+  "proposed_admission": "/private/tmp/unison-resource-upstream-admission-29e41b2b.json",
+  "required_admission_fields": {
+    "plan_sha256": "9d89fc8645f921c92c16b382f3e75b9a3ceefa492a8bb27aa605e489f1d1a6c7",
+    "start_deadline_unix": "ROOT_FRESH_DEADLINE_REQUIRED",
+    "state": "ROOT_ADMITTED_ONE_MIXED_PEER_JOB",
+    "workspace": "/private/tmp/u-mp-29e41b2b"
+  },
+  "scope": "Fresh combined candidate upstream, four generated8KiB cases/12CLI/both directions; no SDK/Adobe/camera/Photo/nativeUI/compiler/performance/automatic successor. Unison00..07+existingEXglobal only.",
+  "state": "PREPARED_NOT_ADMITTED_NOT_DISPATCHED",
+  "supersession": "V1 partial preparation preserved/unstarted; this is a distinct namespace, plan and source closure after bounded plan-capacity fix.",
+  "unknown_policy": "Retain actual owners/grants on unknown child/server/pump/group/FD; no broad kill, retry or numeric-FD reuse. Return actual owning-tool terminal independently of CLOSED.",
+  "workspace": "/private/tmp/u-mp-29e41b2b"
+}

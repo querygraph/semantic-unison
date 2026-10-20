@@ -1,0 +1,33 @@
+{
+  "calls": [
+    {
+      "script": "tests/validation_endpoint_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 68092,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-v2-case-1-actual-20261017.json",
+        "bytes": 215584,
+        "sha256": "a3d1bc4da4a69697490c3bd7a76c91d0fb6cb9a10ca59b837dbc2a632b4b5a41"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Generated private roots/current Make scanner objects; all-scanned scope exercised through actual local scan RPCs plus private endpoint/artifact ownership controls; no SDK/helper subprocess/Photo payload.",
+  "actual_owner_terminal": {
+    "initial_chunk": "682238",
+    "session_id": 61836,
+    "terminal_chunk": "f6a231",
+    "exit_code": 0,
+    "session_present": false
+  }
+}

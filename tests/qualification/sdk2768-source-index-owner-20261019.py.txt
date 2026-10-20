@@ -1,0 +1,38 @@
+import os,sys,json,zipfile,stat
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from shared_cpu_pool import Pool,UnresolvedOwnership
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+from private_camera_receiving.close import close_descriptors
+from final_profile_owner import sha
+from cached_benchmark.contract import read_bytes
+root=Path('/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001');receipt=json.loads(read_bytes(str(root/'RESULT.json'),65536));archive=Path(receipt['archive'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle;fds=[]
+try:
+ fd=os.open(archive,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC);fds.append(fd);s=os.fstat(fd);assert {k:getattr(s,k) for k in receipt['identity']}==receipt['identity']
+ texts={}
+ # File wrappers do not own the underlying FD; one qualified close below.
+ with os.fdopen(fd,'rb',closefd=False) as stream:
+  with zipfile.ZipFile(stream) as z:
+   info=z.infolist();assert len(info)<=30000
+   names=[v.filename for v in info];assert len(set(names))==len(names)
+   selected=[v for v in info if not v.is_dir() and any(w in v.filename.lower().split('/')[-1] for w in ('license','readme','read_me'))]
+   selected.sort(key=lambda v:(v.filename.count('/'),v.filename.lower()))
+   rows=[dict(path=v.filename,bytes=v.file_size,compressed_bytes=v.compress_size) for v in selected]
+   for v in selected:
+    if v.file_size<=65536 and len(texts)<6:texts[v.filename]=z.read(v).decode('utf8','replace')
+   findings=dict(schema='unison-official-sdk-source-index/1',archive_sha256=receipt['sha256'],archive_bytes=s.st_size,entries=len(info),declared_uncompressed_bytes=sum(v.file_size for v in info),key_sources=[n for n in names if n.endswith(('dng_host.h','dng_validate.cpp','dng_image_writer.cpp','dng_sdk_version.h','CMakeLists.txt'))][:35],license_readme_candidates=rows,selected_texts=texts,extracted_files=0,SDK_executions=0,archive_payload_full_rehash_bytes=0)
+ assert {k:getattr(os.fstat(fd),k) for k in receipt['identity']}==receipt['identity'] and {k:getattr(os.lstat(archive),k) for k in receipt['identity']}==receipt['identity']
+ closing=fds;fds=[];close_descriptors(closing);cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ out=R/'tests/qualification/official-sdk2768-source-index-v2-20261019.json';out.write_text(json.dumps(findings,indent=2)+'\n');print(json.dumps({k:v for k,v in findings.items() if k not in ('selected_texts','license_readme_candidates')}));print('SELECTED_TEXTS',list(texts))
+except BaseException as error:
+ if isinstance(error,UnresolvedOwnership):retain_after_record(lambda:print('INDEX_RETAIN',repr(error),flush=True))
+ try:
+  closing=fds;fds=[];close_descriptors(closing)
+  if not cpu.closed:cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+  if not io.closed:io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ except BaseException as cleanup:retain_after_record(lambda:print('INDEX_CLOSE_RETAIN',repr(cleanup),repr(error),flush=True))
+ raise

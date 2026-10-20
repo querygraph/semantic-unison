@@ -1,0 +1,80 @@
+{
+  "schema": "unison-external-process-build-qualification/1",
+  "state": "CURRENT_MAKE_SELFTEST_AND_COMPONENTS_PASSED_CLOSED",
+  "builds": [
+    {
+      "label": "stock",
+      "actual_terminal": {
+        "session_id": 87161,
+        "initial_chunk": "b8ddda",
+        "terminal_chunk": "52664d",
+        "exit_code": 0,
+        "running_session_returned": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-external-observation-stock-check-20261016/RESULT.json",
+        "bytes": 44245,
+        "sha256": "30f71809ffe1c9a1e43dcb522bcbf3bcddc13b14bb575ac0ad90ffda1ed8ccf1"
+      },
+      "start": {
+        "path": "/private/tmp/unison-external-observation-stock-check-20261016/SHARED-START.json",
+        "bytes": 1337,
+        "sha256": "8d4d9b113f5d97806717ae7d993e1b1e470b410c427c6da9354e143db82b0eb1"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-external-observation-stock-check-20261016/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "97b23fd9c7c2a041ee11d9ccaddd28cb3227e763eea55272f227dad64c24590f"
+      },
+      "production_source_count": 293,
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/unison",
+        "bytes": 5669336,
+        "sha256": "3c2791f387bdfa6609f627e1b1e2dd03365265c44260155d06310e7e05eeceaa"
+      }
+    },
+    {
+      "label": "ox",
+      "actual_terminal": {
+        "session_id": 80362,
+        "initial_chunk": "27ce49",
+        "terminal_chunk": "09fca0",
+        "exit_code": 0,
+        "running_session_returned": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-external-observation-ox-check-20261016/RESULT.json",
+        "bytes": 44251,
+        "sha256": "a12936afd012a74af2ac9df78caa3ed6c201a586b5cc38380e6f86b7aaf45383"
+      },
+      "start": {
+        "path": "/private/tmp/unison-external-observation-ox-check-20261016/SHARED-START.json",
+        "bytes": 1333,
+        "sha256": "542f822257f83d73ec0a04ff383d5585bb749fec78555446a6a12b118c01825e"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-external-observation-ox-check-20261016/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "8825e398c2f02e371460304312af573d5833947ec5e664d1d009cccf43c62ac1"
+      },
+      "production_source_count": 293,
+      "binary": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/unison",
+        "bytes": 7590736,
+        "sha256": "0f42369191f3416ef7e5483c8ba0184f5be0f8965b9de6751bf4c51dd6729f50"
+      }
+    }
+  ],
+  "component": {
+    "path": "/Users/alexy/src/unison/tests/qualification/external-process-current-interface-actual-20261016.json",
+    "bytes": 128083,
+    "sha256": "573056390cceb1d7bdf0cc7065aa1609be7d558e118e80ef5374e3c961feadcd"
+  },
+  "preexec_refusal": {
+    "chunk": "96cbc5",
+    "exit_code": 2,
+    "running_session_returned": false,
+    "reason": "STOCK_PREFIX missing before output/workspace/resource dispatch"
+  },
+  "scope": "New opt-in generic external-helper diagnostics; no API/default policy change, no current Dune/GUI/SDK/camera/pixel/whole-goal qualification"
+}

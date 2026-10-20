@@ -19,6 +19,8 @@ import time
 import zlib
 
 from fixtures import create, edit, equal_files, sha256, validate_dimensions
+from workloads import KINDS as WORKLOADS, layout as workload_layout, recipe as workload_recipe
+from workload_fixtures import create as create_workload, edit as edit_workload
 import partitions
 import artifact_pins
 import properties as property_controls
@@ -26,11 +28,12 @@ from invocation_journal import Journal
 from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
+from phase_stats import parse as semantic_phase_counters
+from worker_config import WORKER_CHOICES, parse_workers, endpoint_bound, worker_options
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 MODES = ("ordinary", "receiver-clone", "semantic", "source-clone")
-WORKER_CHOICES = (1, 2, 3, 4, 6, 8, 18, 36)
 SDE = re.compile(
     r"Remote semantic clone wrote (\d+) logical metadata bytes in (\d+) write calls "
     r"\((\d+) payload bytes; (\d+)-byte comparison windows; ([^)]+)\)")
@@ -125,7 +128,15 @@ def save(path, value):
         os.close(directory)
 
 
-def internal_counters(log, mode, files, size, *, primary_reads=False):
+def diagnostic_text(outcome):
+    # Streams are separate observations: never fuse an unterminated stdout tail
+    # with a stderr/server record, or manufacture a record across two streams.
+    return "\n".join(outcome[name] for name in ('stdout','stderr','supervisor_output'))
+
+
+def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timings=False, expect_semantic=True):
+    if type(expect_semantic) is not bool:
+        raise ValueError("typed semantic expectation required")
     semantic = [tuple(int(value) for value in match[:4]) + (match[4],)
                 for match in SDE.findall(log)]
     preserved = [int(value) for value in PRESERVED.findall(log)]
@@ -138,7 +149,7 @@ def internal_counters(log, mode, files, size, *, primary_reads=False):
     elif preserved:
         logical_writes = None
         model = files * size - sum(preserved)
-        model_basis = "complete fixed-length output minus same-offset inherited clone bytes"
+        model_basis = "complete output extents minus same-offset inherited clone bytes"
     elif source_clones == files:
         logical_writes = None
         model = 0
@@ -147,8 +158,11 @@ def internal_counters(log, mode, files, size, *, primary_reads=False):
         logical_writes = None
         model = files * size
         model_basis = "full output extent; syscall/physical-write accounting unavailable"
-    if mode == "semantic" and (len(semantic) != files or preserved or clone_started or source_clones):
+    if mode == "semantic" and expect_semantic and (len(semantic) != files or preserved or clone_started or source_clones):
         raise AssertionError("semantic mode failed to select exactly one SDE update per file")
+    if mode == "semantic" and not expect_semantic and (semantic or source_clones
+            or clone_started != len(preserved) or clone_started > files):
+        raise AssertionError("fallback workload has inconsistent semantic/receiver path evidence")
     if mode == "receiver-clone" and (len(preserved) != files or clone_started != files or semantic or source_clones):
         raise AssertionError("receiver-clone mode did not qualify every receiver basis")
     if mode in ("ordinary", "reference") and (semantic or clone_started or source_clones or preserved):
@@ -157,7 +171,7 @@ def internal_counters(log, mode, files, size, *, primary_reads=False):
         raise AssertionError("same-volume local source cloning was not selected")
     if not 0 <= model <= files * size:
         raise AssertionError("logical output model outside expected size")
-    return {"semantic_updates": len(semantic), "receiver_clone_starts": clone_started,
+    return {"semantic_updates": len(semantic), "expected_semantic_update": mode == "semantic" and expect_semantic, "receiver_clone_starts": clone_started,
             "receiver_clone_completed": len(preserved), "source_clone_completed": source_clones,
             "same_offset_inherited_bytes": sum(preserved),
             "semantic_logical_write_bytes": logical_writes,
@@ -169,8 +183,10 @@ def internal_counters(log, mode, files, size, *, primary_reads=False):
             "materialization_model_basis": model_basis,
             "receiver_clone_declines": log.count("Receiver clone declined:"),
             "semantic_fallback_events": log.count("Remote semantic fallback:"),
-            "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic")
+            "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic" and expect_semantic)
               if primary_reads else None,
+            "semantic_phase_observations": semantic_phase_counters(log, required_workers=mode == "semantic" and expect_semantic)
+              if phase_timings else None,
             "application_read_bytes": None, "hash_parse_verify_commit_seconds": None,
             "physical_storage_write_bytes": None, "queue_descriptor_peaks": None}
 
@@ -243,7 +259,9 @@ def main():
                         help="unmodified original/upstream binary; no new preferences")
     parser.add_argument("--compiler", action="append", default=[], metavar="LABEL=OCAMLOPT")
     parser.add_argument("--modes", default="ordinary,receiver-clone,semantic")
-    parser.add_argument("--workers", default="1")
+    parser.add_argument("--workers", default="1", help="comma-separated selections, including auto with an explicit endpoint budget")
+    parser.add_argument("--endpoint-cpu-budget", type=int,
+                        help="explicit semanticcpubudget ceiling1..36 on each current endpoint; required for auto")
     parser.add_argument("--partition", type=int,
                         help="one explicit0..5 stock/Ox worker partition; never starts other parts")
     parser.add_argument("--loopback-cpu-credits",type=int,
@@ -253,6 +271,8 @@ def main():
     parser.add_argument("--file-mib", type=int, default=32)
     parser.add_argument("--files", type=int, default=2)
     parser.add_argument("--packet-bytes", type=int, default=8192)
+    parser.add_argument("--workload", choices=WORKLOADS, default="fixed-xmp",
+                        help="versioned generated workload; nonfixed cases expect exact fallback, not SDE success")
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--repetitions", type=int, default=5)
     parser.add_argument("--timeout", type=float, default=180)
@@ -260,11 +280,15 @@ def main():
                         help="fixed finite smoke: two 2 MiB files, workers 1/2, no warmup, one sample")
     parser.add_argument("--shared-qualification", action="store_true",
                         help="finite shared smoke: two 2 MiB files, workers1/2, six to eight credits including two owner credits")
+    parser.add_argument("--layout-only-controls", action="store_true",
+                        help="finite generated opaque-private exact-layout receiving matrix")
     parser.add_argument("--property-removal-controls", action="store_true",
                         help="Darwin shared functional fixtures: old fork/xattr removal and retained readers")
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
     parser.add_argument("--measure-primary-reads", action="store_true",
                         help="opt-in worker primary-reader counters; not total application/disk reads")
+    parser.add_argument("--measure-semantic-phases", action="store_true",
+                        help="opt-in inclusive worker/native-publication observations, not total commit time")
     parser.add_argument("--background-note", default="ordinary host activity uncontrolled")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-binary-sha256", action="append", default=[],
@@ -280,21 +304,32 @@ def main():
         parser.error("reference/current labels must differ; compiler labels must match current binaries")
     modes = args.modes.split(",")
     try:
-        workers = [int(value) for value in args.workers.split(",")]
-    except ValueError:
-        parser.error("workers must be comma-separated integers")
+        workers = parse_workers(args.workers)
+    except ValueError as error:
+        parser.error(str(error))
     if args.qualification and args.shared_qualification:
         parser.error("choose one qualification profile")
     finite_qualification = args.qualification or args.shared_qualification
+    if args.workload != "fixed-xmp" and (finite_qualification or args.partition is not None
+            or args.layout_only_controls or args.property_removal_controls):
+        parser.error("new workloads require a separate explicit matrix, not frozen qualification/partition controls")
+    if ('auto' in workers or args.endpoint_cpu_budget is not None) and (finite_qualification or args.partition is not None):
+        parser.error("automatic/ceiling selections require a separate versioned matrix, not fixed qualification or legacy partitions")
+    if args.endpoint_cpu_budget is not None and (references or args.loopback_cpu_credits is None):
+        parser.error("endpoint CPU budget requires current endpoints and explicit loopback credits")
     if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2, 3] if args.shared_qualification else [1, 2]
+    if args.layout_only_controls and (not args.shared_qualification or args.property_removal_controls):
+        parser.error("layout-only controls require a separate finite shared qualification matrix")
     if args.property_removal_controls and (not args.shared_qualification or platform.system() != "Darwin"):
         parser.error("property-removal controls require the Darwin shared qualification matrix")
     if args.shared_qualification and (args.loopback_cpu_credits != 8 or args.orchestration_cpu_credits != 2):
         parser.error("shared qualification requires eight credits including two owner credits")
-    if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
-        parser.error("workers must be unique values from 1,2,3,4,6,8,18,36")
+    try:
+        worker_bounds = [endpoint_bound(value, args.endpoint_cpu_budget) for value in workers]
+    except ValueError as error:
+        parser.error(str(error))
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
         parser.error("invalid/duplicate mode")
     endpoint_count=2 if any(mode!="source-clone" for mode in modes) else 1
@@ -305,12 +340,18 @@ def main():
     if args.loopback_cpu_credits is not None:
         if references:parser.error("reference CPU budgets cannot be qualified by the loopback credit bound")
         if (args.loopback_cpu_credits<=0 or
-                endpoint_count*max(workers)+args.orchestration_cpu_credits>args.loopback_cpu_credits):
+                endpoint_count*max(worker_bounds)+args.orchestration_cpu_credits>args.loopback_cpu_credits):
             parser.error("endpoint plus orchestration CPU credits exceed loopback budget")
     if not (args.warmups >= 0 and 1 <= args.repetitions <= 50 and args.timeout > 0):
         parser.error("fixture/count bounds exceeded")
     try:
         size = validate_dimensions(args.file_mib, args.files, args.packet_bytes)
+        largest_fixture_size = size
+        if args.workload != "fixed-xmp":
+            changed = workload_recipe(workload_layout(size, args.packet_bytes), args.workload)
+            largest_fixture_size = max(size, changed.target_size)
+            if changed.target_size * args.files > 8*1024**3:
+                raise ValueError("grown generated working set exceeds8GiB")
     except ValueError as error:
         parser.error(str(error))
     if not finite_qualification and (args.warmups < 1 or args.repetitions < 5):
@@ -357,24 +398,34 @@ def main():
                     "configuration": subprocess.check_output([str(path), "-config"], text=True)}
                     for label, path in compilers.items()},
               "parameters": {"modes": modes, "workers": workers, "file_mib": args.file_mib,
-                    "files": args.files, "packet_bytes": args.packet_bytes,
+                    "files": args.files, "packet_bytes": args.packet_bytes, "workload": args.workload,
+                    "maximum_source_or_target_file_bytes": largest_fixture_size,
                     "warmups": args.warmups, "repetitions": args.repetitions,
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
+                    "measure_semantic_phases": args.measure_semantic_phases,
                     "property_removal_controls": args.property_removal_controls,
+                    "layout_only_controls": args.layout_only_controls,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
-                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers),
+                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(worker_bounds),
                     "orchestration_cpu_credits":args.orchestration_cpu_credits,
-                    "maximum_declared_cpu_credit_sum":endpoint_count*max(workers)+args.orchestration_cpu_credits},
+                    "maximum_declared_cpu_credit_sum":endpoint_count*max(worker_bounds)+args.orchestration_cpu_credits},
               "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
               "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
               "rss_units": "bytes on Darwin; KiB on Linux; native OS units elsewhere",
               "resource_scope": "per-process wait4 receipts; CPU may include reaped descendants; never sum overlapping main/server reports; maxrss is not aggregate tree RSS",
-              "unmeasured": ["application read bytes", "internal hash/parse/verify/commit times",
+              "unmeasured": ["application read bytes", "complete hash/parse/verify/commit accounting (optional inclusive traces are partial)",
                     "aggregate process-tree peak RSS", "descriptor/queue peaks", "physical storage writes",
                     "range/extent sharing", "cross-volume or non-APFS behavior", "cold cache",
                     "real SSH/network behavior", "Adobe validation or photographic rendering"],
               "samples": [], "summary": []}
+    if args.endpoint_cpu_budget is not None:
+        result['parameters']['endpoint_cpu_budget_ceiling'] = args.endpoint_cpu_budget
+        result['parameters']['endpoint_cpu_permit_upper_bounds'] = [
+            dict(selection=selection, upper_bound=bound) for selection, bound in zip(workers, worker_bounds)]
+        result['parameters']['automatic_cpu_scope'] = (
+            'auto is semanticworkers=0 with explicit semanticcpubudget; these are conservative '
+            'permit upper bounds, not measured domain/OS-thread counts or a machine token grant')
     if args.partition is not None:
         result['partition'] = partitions.specification(args.partition)
     save(args.output, result)
@@ -387,11 +438,11 @@ def main():
         work = Path(temporary)
         capacity=os.statvfs(work)
         available=capacity.f_bavail*capacity.f_frsize
-        required=4*size*args.files+64*1048576
+        required=4*largest_fixture_size*args.files+64*1048576
         if args.property_removal_controls:
             required += size * args.files * len(configurations)
         result["fixture_capacity"]={"available_bytes_before_run":available,
-            "required_bytes":required,"model":"four full corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
+            "required_bytes":required,"model":"four largest source/target corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
         if available<required:raise RuntimeError("insufficient private fixture capacity")
         for name in ("proxy.py", "measure.py", "launcher.py", "ownership.py"):
             shutil.copy2(HERE / name, work / name)
@@ -422,9 +473,11 @@ def main():
             flags = ["-debug", "copy", "-debug", "semantic"] if mode != "reference" else []
             if args.measure_primary_reads and mode != "reference":
                 flags += ["-debug", "semantic-reads"]
+            if args.measure_semantic_phases and mode != "reference":
+                flags += ["-debug", "semantic-timings"]
             if worker is not None:
                 flags += ["-clone", "off" if mode == "ordinary" else "auto",
-                          "-semanticworkers", str(worker), "-maxthreads", str(max(2, worker))]
+                          *worker_options(worker, args.endpoint_cpu_budget)]
                 if mode == "semantic":
                     flags += ["-semanticdng"]
             if args.property_removal_controls:
@@ -449,7 +502,9 @@ def main():
             try:
                 outcome = measure_invocation(command, env, args.timeout, work / "proxy.py",
                                           use_proxy=mode != "source-clone",
-                                          strict_group_settlement=args.shared_qualification)
+                                          # Every benchmark call owns its groups, including timed runs
+                                          # which deliberately do not set shared_qualification.
+                                          strict_group_settlement=True)
             except InvocationFailure as error:
                 result["failed_invocation"] = error.outcome
                 journal.finish(error.outcome)
@@ -468,8 +523,11 @@ def main():
                         for name in ("left", "right", "state", "basis"):
                             (directory / name).mkdir(parents=True)
                         start = time.monotonic()
-                        fixtures = [create(directory / "left" / f"image-{index:04d}.dng", size,
-                                           args.packet_bytes, index) for index in range(args.files)]
+                        fixtures = [(create(directory / "left" / f"image-{index:04d}.dng", size,
+                                           args.packet_bytes, index, layout_only=args.layout_only_controls)
+                                     if args.workload == "fixed-xmp" else
+                                     create_workload(directory / "left" / f"image-{index:04d}.dng", size,
+                                                     args.packet_bytes, index)) for index in range(args.files)]
                         if args.property_removal_controls:
                             for item in fixtures:
                                 property_controls.initialise(directory / "left" / item["name"])
@@ -486,7 +544,11 @@ def main():
                                 observed = property_controls.old_reader_snapshot(handle.fileno())
                                 assert observed['sha256'] == item['before_sha256']
                                 old_readers[name] = (handle, observed)
-                            item["expected_after_sha256"] = edit(directory / "left" / name, item)
+                            item["expected_after_sha256"] = (edit(directory / "left" / name, item)
+                                if args.workload == "fixed-xmp" else
+                                edit_workload(directory / "left" / name, item, args.workload))
+                            if item["expected_after_sha256"] == item["before_sha256"]:
+                                raise AssertionError("declared change workload unexpectedly produced a no-op")
                             if args.property_removal_controls:
                                 property_controls.remove_source(directory / "left" / name)
                         sample = {"label": label, "mode": mode, "workers": worker,
@@ -497,9 +559,14 @@ def main():
                         save(args.output, result)
                         measured = invoke(label, binary, mode, worker, directory, "update")
                         sample["update_sync"] = measured
-                        log = measured["stdout"] + measured["stderr"] + measured["supervisor_output"]
-                        sample["counters"] = internal_counters(log, mode, args.files, size,
-                            primary_reads=args.measure_primary_reads and mode != "reference")
+                        log = diagnostic_text(measured)
+                        sample["counters"] = internal_counters(log, mode, args.files, fixtures[0].get("after_size_bytes", size),
+                            expect_semantic=args.workload == "fixed-xmp",
+                            primary_reads=args.measure_primary_reads and mode != "reference",
+                            phase_timings=args.measure_semantic_phases and mode != "reference")
+                        if args.layout_only_controls and mode=="semantic":
+                            assert sample['counters']['semantic_profiles']==['org.firstpair.dng-layout/0'], \
+                                "opaque private fixture did not select exact layout-only profile"
                         verification_start = time.monotonic()
                         inodes = {}
                         selected_property_epochs = {}

@@ -1,0 +1,35 @@
+{
+  "scope": "19 original metadata-only contract/refusal controls; no camera payload or canonical IO",
+  "actual_tool": {
+    "chunk": "6e65d2",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-knowledge-contract-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "d85a5b912b484133d22f47b4781387ac5831c59a960ff5817129ae71abbcbec5"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-contract-controls-20261017-001/SHARED-START.json",
+      "bytes": 1111,
+      "sha256": "6a45c6c75e00b6aa76c1fba9226b37b60735da6e4f4290e8ece534d80af4e6b8"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-contract-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 118,
+      "sha256": "25c57990a4f7f44d3d8361c8b8cecd4dd375bbc1abc3435c2803b1893626852e"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-contract-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "sources": {
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_io_contract.py": "3c9d0665d36594343b74079f2cdabdcb5b62a451b9900bd2ef3bb27fed8bd2d0",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_io_contract_test.py": "237fdd8d724df0b321459d745d8cde61688333ed206f6d60430544c5186f7088",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_knowledge_entry.py": "8d1475ffa87121f9a373a63af03704b00e34c2a1e9083967d17495e48b5fd493"
+  }
+}

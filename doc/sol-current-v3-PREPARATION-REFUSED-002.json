@@ -1,0 +1,9 @@
+{
+  "actual_terminal": {
+    "chunk_id": "89c629",
+    "exit_code": 1,
+    "no_session": true
+  },
+  "reason": "Mock targeted shared_dispatch.read_manifest but function imports it locally from shared_io_pool. No admission, worker, canonical locks or payload; only mixed files already prepared. Correct metadata control patches only inert sentinel read at defining module, leaving canonical manifest read real.",
+  "state": "METADATA_PREPARATION_REFUSED_NO_RUNTIME"
+}

@@ -467,7 +467,26 @@ let observe_semantic_pair ri =
               text=SemanticReport.render ~left_label ~right_label left.observation right.observation} else None in
             if both then return observation else select (match best with Some _ -> best | None -> observation) rest
           | _ -> assert false)
-      in select None extensions))
+      in BorrowedWork.bind (fun () -> select None extensions) (fun detail ->
+        match detail with
+        | None -> return None
+        | Some detail when not (SemanticRemote.component_details_enabled ()) -> return (Some detail)
+        | Some detail ->
+          BorrowedWork.bind (fun () -> BorrowedWork.all
+            [(fun () -> SemanticRemote.observe_components_with_worker ~local_worker:(Update.inspect_configured_components (snd root1) absolute1) ~root:root1 ~path:absolute1);
+             (fun () -> SemanticRemote.observe_components_with_worker ~local_worker:(Update.inspect_configured_components (snd root2) absolute2) ~root:root2 ~path:absolute2)]) (function
+            | [left;right] ->
+              let text=match left.SemanticRemote.component_observation,right.SemanticRemote.component_observation with
+                | Ok left,Ok right -> (match SemanticReport.render_components ~left ~right with
+                    | Ok text -> text | Error why -> "Component report unavailable: " ^ SemanticReport.display_reason why ^ "\n")
+                | left,right ->
+                    let describe label = function Ok _ -> label ^ ": component view available\n"
+                      | Error why -> label ^ ": " ^ SemanticReport.display_reason why ^ "\n" in
+                    describe "Left component view" left ^ describe "Right component view" right in
+              let snapshots=detail.snapshots @ List.filter_map
+                (fun value -> value.SemanticRemote.component_snapshot) [left;right] in
+              return (Some {detail with snapshots;text=detail.text ^ "\n" ^ text})
+            | _ -> assert false))))
 let inspectDetails ri =
   semantic_detail:=None;
   try semantic_detail:=Lwt_unix.run (observe_semantic_pair ri)

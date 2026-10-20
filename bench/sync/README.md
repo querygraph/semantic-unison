@@ -441,3 +441,181 @@ Historical 216-CLI receipts can be read by the pure auditor without relabeling
 those historical measurements as current. The receipt-preservation correction
 carries the actual settled outcome on the original exception; it does not
 retroactively reconstruct a missing client receipt from the stopped attempt.
+
+### Opaque-private exact-layout receiving controls
+
+`SYNC_LAYOUT_ONLY_CONTROLS=1` selects a separate, explicitly admitted shared8
+`sync-functional` run. It cannot be combined with property-removal controls or
+used through the CPU-only dispatcher. The18-row/54-call matrix generates two
+2MiB nonphotographic DNGs per row, including opaque private references into the
+changed XMP packet. Semantic rows must actually report
+`org.firstpair.dng-layout/0`; the audit rejects a strict-profile substitution.
+Output exactness, old-basis preservation and no-op epochs remain required.
+The declared8GiB logical IO budget is conservative planning, not instrumentation
+or a physical hard cap. No SDK/camera read, quiet timing or throughput claim.
+See `doc/layout-receiving-request-v1.json` for the exact one-use request; source
+readiness is not an admission or a command to dispatch.
+
+## Interpreting saved resource receipts
+
+`resource_report.py INPUT.json --input-sha256 EXACT_SHA --output NEW.json` reads
+only bounded saved metadata and refuses an existing output. It never invokes
+Unison, follows payload references, rebinds source snapshots or infers an owning
+parent terminal/resource release. Eight original controls cover unknown versus
+zero, raw reader totals, per-platform RSS units and invalid/overflowing numbers.
+
+[Property-cohort observations](results/property-resource-observations-20261017.md)
+show independent endpoint CPU, forwarded protocol bytes, semantic returned writes
+and explicitly labeled output-extent models. They retain unknown total reads,
+internal stage times and physical IO/peak measurements as null. The input is
+a historical one-sample functional cohort, not a repeated current performance
+study. Do not sum client/server wait4 CPU or process high-water RSS, convert
+block operations to bytes, or interpret a write model as physical APFS savings.
+
+## Optional local phase observations
+
+`--measure-semantic-phases` enables `-debug semantic-timings` on current
+endpoints. The shared `sync-functional` entrypoint accepts the explicit
+`MEASURE_SEMANTIC_PHASES=1` environment setting; its default is off. This changes
+diagnostic work and wire/log overhead and must be recorded with every comparison.
+Reference binaries remain uninstrumented. It does not grant an IO window.
+
+`semantic_phase_observations` retains the original trace lines and typed records
+for hash/parse/verify/write and native bound namespace publication. Client/server
+job namespaces are separate; duplicate/conflicting worker records refuse the
+measurement. Independent stdout, stderr and supervisor streams are separated
+before parsing, so partial lines cannot be fused into an invented observation.
+The parser bounds text/record counts and rejects malformed, nonfinite,
+noncanonical or contradictory saved fields. Source inventories include the
+parser before an admitted job may enter the shared IO pool.
+
+Worker intervals are inclusive and overlap: basis verification includes parsing
+and hashing; staging verification includes independent readers. They include
+I/O/scheduling, not isolated CPU. Native namespace publication excludes later
+readback/archive advancement and does not prove full transfer success. No
+intervals are summed as total commit time. The old
+`hash_parse_verify_commit_seconds` field remains null until whole-path accounting
+is qualified; the saved-resource reporter refuses unsupported non-null totals.
+Explicit unavailable reports remain unknown. No records means unobserved or
+uninstrumented work, never measured zero. Historical raw results are unchanged.
+
+Pure controls (no Unison, compiler, SDK, Photo payload or canonical IO lock):
+
+```sh
+python3 bench/sync/phase_stats_test.py
+python3 bench/sync/resource_report_test.py
+```
+
+Collection in an actual synchronization cohort needs a fresh exact source/argv/
+binary admission under the shared IO policy. The parser qualification alone is
+not an end-to-end timing/scaling, physical-IO, resource-closure or hard-limit proof.
+
+### Fixed shared-eight repeated entry point
+
+`tests/manual.py sync-timed` constructs a separate performance command from
+current `STOCK_RECEIPT` and `OX_RECEIPT` build receipts. It requires
+`SHARED_CPU_CREDITS=8`, `SHARED_IO_ADMISSION` and its exact SHA256. The admission
+must pin the exact command and current execution sources; this is not a standing
+payload or IO grant. It uses generated 32MiB files (two per case), ordinary,
+receiver-clone and semantic modes, workers 1/2/3 per endpoint plus two owner
+credits, one warmup and five measured repetitions: 108 rows and 324 journaled
+seed/update/noop calls. No compilation, SDK or camera inputs are included.
+Version/compiler/host metadata queries remain additional processes and must be
+explicitly disclosed in the eventual request.
+
+The fixed option checker rejects alternate options and duplicate overrides.
+The dispatcher observes its worker for 600 seconds (each CLI has a 30-second
+limit); an unclosed coordinator retains ownership instead of being killed by a
+broad outer timeout. Every attempted call must have client, supervisor, server
+and pump proof before known resource release. A complete result must also bind
+all journal outcomes to the exact rows and show a successful worker exit.
+Missing phase observations refuse measurement qualification separately from
+process closure. These are inclusive phase intervals, not total commit time,
+physical IO, aggregate RSS limits, or quiet-machine/scaling proof. This entry
+point has source/control qualification only until a fresh actual run is admitted
+and audited. It covers one dataset in the larger SOL benchmark matrix.
+
+## Budgeted automatic worker selection
+
+The runner now accepts `--workers 1,2,4,8,auto` with an explicit
+`--endpoint-cpu-budget 8`. Only use binaries implementing semanticcpubudget.
+The auto row passes semanticworkers=0 and semanticcpubudget=8 to both current
+endpoints. It remains labeled `auto`; its recorded eight permits are a
+conservative upper bound, not measured domains or OS threads. A smaller physical
+CPU count may select fewer. Explicit8 with ceiling3 refuses rather than reporting
+a clipped3-worker execution as8.
+
+Two endpoints at eight permits plus two owner credits require the explicit
+`--loopback-cpu-credits 18 --orchestration-cpu-credits 2` declaration AND a fresh
+coordinated machine grant. This is not the standing default and this document
+creates no reservation. An ordinary shared8 declaration can use1/2/auto with
+ceiling3, subject to a separately reviewed IO job. CPU/IO acquisition/settlement
+remains the launching owner's responsibility.
+
+Uncapped auto, a reference peer with a new ceiling flag, insufficient loopback
+credits, invalid ceiling values and auto/ceiling overrides of fixed qualification
+or legacy partition profiles refuse before binary metadata. Old integer-only
+arguments are unchanged. Parameters record the selection and conservative bound
+before the first saved result; zero actual performance is inferred from source
+controls. Existing fixed-profile audit modules do not automatically qualify a
+new auto matrix; it needs its own exact versioned plan/audit/owner integration.
+
+[Source-control qualification](../../tests/qualification/benchmark-auto-budget-source-actual-20261018.json)
+uses mocked metadata and launches no binary/transport. `--prepare-only` in a real
+invocation still queries executable metadata, so it is not a zero-executable
+permission. Actual measurement needs current artifact pins, the exact reviewed
+command and its own coordination window. No quiet-host or hard-cap claim.
+
+### Versioned automatic-worker cohorts
+
+`auto_cohort.py` and `cohort_plan.py` define one compiler/selector cohort:
+workers `1`, `2`, `4`, `8`, or `auto`, endpoint ceiling 8, three modes,
+one warmup plus five measured repetitions (18 rows/54 CLI calls), and eight
+32 MiB generated fixtures per row. They distinguish configured permit upper
+bounds, declared owner-plus-endpoint credits, and actually reserved credits.
+These are cooperative declarations, not OS-thread or RSS hard caps.
+
+`tests/cohort_entry.py` is the dedicated authenticated-plan dispatcher entry.
+The default runtime route accepts **shared8 cohorts** (selectors 1 or 2).
+It requires a fresh exact IO admission, existing EXglobal then Unison00..07,
+and an actual parent/worker/inherited-nine-descriptor binding. Binaries and
+compilers are hashed after acquisition; current production sources are rebound
+to a successful build/selftest receipt before execution and before release.
+A cohort plan must use canonical executable paths (the installed `ocamlopt`
+symlink resolves to `ocamlopt.opt`).
+
+Larger cohorts require a separately published temporary18 authorization in the
+same exact admission. Its `temporary_cpu_borrow` object must contain state
+`ROOT_COORDINATED_TEMPORARY18`, token indexes 0..17, the exact standing policy
+SHA, `restore_standing_policy: true`, and a pinned `coordination_receipt`
+(path/SHA). The publisher independently reviews the actual Photo handoff;
+the consumer authenticates its bytes, not historical process closure by itself.
+Only this target accepts the explicit temporary-borrow argument. The grant is
+rechecked before launch; worker and parent bind all nineteen inherited
+CPU/IO descriptors. Standing policy files are never rewritten. Unknown outcomes
+retain ownership of the full acquired set until actual settlement.
+
+There is no silent clipping, retrospective resize, or automatic 18-credit grant.
+Directed synthetic-owner controls cover shared8 and temporary18 paths; no actual
+auto cohort transport or live temporary18 run has yet been qualified.
+
+Complete results bind all client/server command words and every nested outcome.
+Failed prefixes are audited independently. A failure before benchmark entry has
+an explicit metadata-only zero-call record; an absent/unknown journal after
+benchmark entry retains the parent and its descriptors. Observation expiry is
+not authority to kill the worker. Parent terminal evidence is collected from
+the owning tool separately from worker/group receipts.
+
+`tests/cohort_report.py` aggregates saved results using an explicit metadata
+manifest (`unison-auto-cohort-report-input/1`) with at most ten `records`, each
+containing pinned `plan` and `result` path/SHA pairs. It performs no sync, binary
+execution, payload hashing or resource release. Missing cohorts remain listed;
+known failed prefixes retain their row indexes and original failure and cannot
+become a successful full matrix. Unknown lifecycle evidence refuses reporting.
+Raw bytes stay in the authenticated input files, while all row indexes remain
+represented in the report. Client/server CPU/RSS and directional protocol
+counts remain separate. Missing read/physical-write observations stay unknown,
+and modeled extents never become measured write syscalls. Ratios to the
+one-worker median are descriptive, not causal scaling or quiet-host proof.
+The report tool is outside the frozen cohort execution closure, so preparing it
+does not silently repin the runtime requests.

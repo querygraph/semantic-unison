@@ -1,0 +1,113 @@
+{
+  "state": "MAKE_BUILD_SELFTEST_PASS_CLOSED",
+  "source_head": "4d42753b",
+  "scope": "Both current Make builds and full selftests; Dune successor and automatic cache/store integration remain outstanding",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_terminal": {
+        "session": 90151,
+        "chunk": "b8a560",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "current_src_checked": 318,
+      "binary_sha256": "10dac160a2a64f29a42fa418a31f508dbc1fa99d7495d9a15147d412417e9878",
+      "selftest_workers": 3,
+      "child": {
+        "pid": 20632,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 20632,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true
+    },
+    {
+      "compiler": "ox",
+      "actual_terminal": {
+        "session": 28025,
+        "chunk": "35ef1b",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "current_src_checked": 318,
+      "binary_sha256": "ad2436f50bd0c3c3ca7f41825c325c5033062f458c6743839e145b7f2049a2fc",
+      "selftest_workers": 3,
+      "child": {
+        "pid": 21802,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 21802,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-stock-20261017-001/RESULT.json",
+      "bytes": 49380,
+      "sha256": "a70bb2eceb2c1280c740a6d12cf4d5df3598d042aef4cf7f20124d52edb210f6"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-stock-20261017-001/SHARED-START.json",
+      "bytes": 1328,
+      "sha256": "8f4aee0ae50b2b67df9611d43daeac4b39f5a52b659869e1a48bc08651584895"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-stock-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "339e2c245b65c9159ee33299f3c75e34cafcaa25dfa4f4de76a0249423ee091d"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-stock-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "54766f301f7ff496647b3e35f52b01b7c35480a6512503de6f651b09446540c1"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-stock-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-ox-20261017-001/RESULT.json",
+      "bytes": 49386,
+      "sha256": "82e5191be6b85726999f6ebfb76519a188f91e14c8abee338dce33be57798c68"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-ox-20261017-001/SHARED-START.json",
+      "bytes": 1324,
+      "sha256": "f1711af00930ec721e09b2584f5b71b134738cdf50033604e976989a768a9661"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-ox-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3246b7fc84a890db1aaac6545a53bc609a497ecd0cfac81293e55b6b5ff67154"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-ox-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "84cf775acafbb143158da3739a06fcc053737472199583094830f0ed937472ce"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-integration-ox-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

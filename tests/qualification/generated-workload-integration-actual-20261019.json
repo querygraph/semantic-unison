@@ -1,0 +1,114 @@
+{
+  "schema": "unison-generated-workload-integration/1",
+  "state": "SOURCE_DIRECTED_CONTROLS_PASS_ACTUAL_CLOSED_NATIVE_SYNC_UNSTARTED",
+  "actual_tools": [
+    {
+      "chunk": "432e08",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "initial12tests/legacyfixture/CLIhelp"
+    },
+    {
+      "chunk": "0318dd",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "final14tests including close-uncertainty; fake close outcomes only"
+    },
+    {
+      "chunk": "9a2c1a",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "two expectedCLIexit2 frozen-scope guards; no supplied binary execution/output"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-workload-integration-controls-54h3qw7_/RESULT.json",
+      "bytes": 7705,
+      "sha256": "80f24defc45a1bd308d59ae1550f835f439ddf74a2a6fb854f7791aa624d95f9",
+      "actual_children": [
+        {
+          "pid": 69462,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        {
+          "pid": 69465,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        {
+          "pid": 69467,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/unison-workload-final-controls-esaount4/RESULT.json",
+      "bytes": 2659,
+      "sha256": "14d8a08ad52ae9a0dfbf61c318d2d80642f4de5d4e621f545da36c0fb14a9e83",
+      "actual_children": [
+        {
+          "pid": 69835,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/unison-workload-guard-controls-o36ciibz/RESULT.json",
+      "bytes": 4153,
+      "sha256": "0a8a507c188d85688bfff6e6e4f7ec6f2e2ba08e4b6886394e499b33c5a4fd19",
+      "actual_children": [
+        {
+          "pid": 70077,
+          "returncode": 2,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        {
+          "pid": 70079,
+          "returncode": 2,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        }
+      ]
+    }
+  ],
+  "source_pins": {
+    "bench/sync/run.py": "78a2c43bf846d5fa3bdd103add48f0aabd2835f4df13345aa119047fb1e5d219",
+    "bench/sync/fixtures.py": "cd81f38c03d2e556726c3bb7752d0e72ae78ae36e71d362aea635b35dcb50335",
+    "bench/sync/workloads.py": "6279f743f135879eabfdab4d8627f0fbe73834b3c190863df7ef5bcb9ecb6714",
+    "bench/sync/workloads_test.py": "3845fb871c72c3ed7a1afbdc28f8fdd21c6deb052b573a3d4a83d50b356aa709",
+    "bench/sync/workload_fixtures.py": "f2567de9df7e4a7c0d6cf43a8d997bd320bf8ab830ec08198cd27064ce1e35c1",
+    "bench/sync/workload_fixtures_test.py": "5aedc17a7b930c120b76cba840c5bd6821bf326e17bddedf1446076706eeb3f7"
+  },
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed_after_each": true,
+  "EXglobal_acquired": false,
+  "tiny_generated_control_files": true,
+  "Unison_or_SDK_or_Photo_payload_execution": false,
+  "scope": "Source integration and tiny directed consumer/counter/guard checks only. No end-to-end receiving or performance proof. Latest capacity source correction charges larger source/target extents, validated by final CLI import/guards; not an actual full-capacity/disk qualification."
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "unison-final-xmp-case-binding/1",
+  "verified": true,
+  "actual_original_receipt": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/current-xmp-kernel-observation-actual-20261018.json",
+    "bytes": 10292,
+    "sha256": "f5b505b1df817cd5a82b8b445f1f22a71f399809cb0f0b784587c7d19364e126"
+  },
+  "source_pins": {
+    "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+    "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+    "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+    "src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+    "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+    "src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+    "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf",
+    "tests/xmp_merge/test.ml": "dfc35dac66fa9f8e20ee90769b2671233d7e66a7c17c7f0b27c1c46769bcef40",
+    "tests/xmp_merge/run.py": "10402201d31f851050dba259402a9b431a5838487c46d0b062603faa95c3e494",
+    "tests/xmp_observation/test.ml": "ab35fdc7f6a18fd0415c7d1ec2af69c8af2894f607e66c1e7087b732321590e6",
+    "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+    "tests/xmp_observation/run.py": "ff4bbcaf9d0320937f7ad5db0abb5ae6b28b20a8f76658387fc6c2626c21942c"
+  },
+  "bindings": [
+    {
+      "compiler": "stock",
+      "family": "kernel",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/RESULT.json",
+        "bytes": 2069,
+        "sha256": "1c5e6804c1fb91eb80b97967006c02e7dfc78f8cff6f7799cd4b6262167b9ea2"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "3feb6b04260e5a87d22720c377428fa8aedeec24f65108f5d889f21abf986882"
+      },
+      "scope": {
+        "original_scalar_controls": 25,
+        "rating_decisions": 343,
+        "RDF_conflicts": 4,
+        "control_domains": 1,
+        "file_merge_enabled": false
+      }
+    },
+    {
+      "compiler": "stock",
+      "family": "observation",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/RESULT.json",
+        "bytes": 2402,
+        "sha256": "9da74b968f35f3c11c5261f47761809152d892e7012cc9eb1bbc785bd5186ff2"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "09cf9aa497d1bfdfeb4b68072a05120fb8a95721262b8358fb1d68833f93c08f"
+      },
+      "scope": {
+        "fixed_observation_checks": 458,
+        "random_byte_cases": 0,
+        "independent_recorded_digest_vectors": 5
+      }
+    },
+    {
+      "compiler": "ox",
+      "family": "kernel",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/RESULT.json",
+        "bytes": 2072,
+        "sha256": "6c8313eeea4a2e4d3a58e878366a5a01d14347f9fb0557a1290f2b246262b8cd"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "e096a8c6efddf14da27161040b0848e8443135f74ff96201800cab85e68c1969"
+      },
+      "scope": {
+        "original_scalar_controls": 25,
+        "rating_decisions": 343,
+        "RDF_conflicts": 4,
+        "control_domains": 4,
+        "file_merge_enabled": false
+      }
+    },
+    {
+      "compiler": "ox",
+      "family": "observation",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/RESULT.json",
+        "bytes": 2407,
+        "sha256": "7b326769c9e227ecced48d5d33f37d81923f0588a889eedc2833f70140a54ba5"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "af962cd8c5e2e6f8e35248175c073313e3da1b90f52c9d89555050317696c5d0"
+      },
+      "scope": {
+        "fixed_observation_checks": 458,
+        "random_byte_cases": 0,
+        "independent_recorded_digest_vectors": 5
+      }
+    }
+  ],
+  "named_XML_limit_cases": [
+    "DTD unsupported",
+    "external entity declaration unsupported",
+    "truncated XML entity",
+    "truncated element",
+    "1 MiB exact packet limit",
+    "1 MiB plus one packet rejected",
+    "depth 64 accepted",
+    "depth 65 rejected",
+    "128 properties accepted",
+    "129 properties rejected",
+    "8192 nodes accepted",
+    "8193 nodes rejected",
+    "16384 packet attributes accepted",
+    "16385 packet attributes rejected",
+    "namespace prefix exactly 128",
+    "namespace prefix 129 rejected"
+  ],
+  "new_native_execution": false,
+  "new_fuzz_or_sanitizer_campaign": false,
+  "EXglobal_acquired": false,
+  "CPU00_closed": true,
+  "Photo_or_Capitola_hold": false,
+  "limitations": [
+    "Kernel/observation scope only; final current generatedSDK receiving merge remains unrun",
+    "343decisions are the seven canonical rating values across base/left/right, not arbitrary XMP values",
+    "Compound/delete/rendering shape changes conservatively refuse; not general RDF merge support",
+    "Recorded footprint numbers are neither whole-process RSS peaks nor enforced memory caps"
+  ]
+}

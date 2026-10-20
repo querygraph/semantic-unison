@@ -1,0 +1,131 @@
+{
+  "schema": "unison-mixed-validation-1359-source/2",
+  "complete": true,
+  "actual_tool": {
+    "session": 87107,
+    "chunk": "b6d967",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "phase": "build",
+      "receipt": {
+        "path": "/private/tmp/unison-mixed-1359-current-stock-build-20261017-001/probe-build/RESULT.json",
+        "bytes": 69820,
+        "sha256": "0bae8178b7aaafcd87f3c398486937fc69d88d4d84ae537a0e2f784f331a5637"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-mixed-1359-current-stock-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "9d8b6631ecfe5611a25cb41d32a12ea9b085a366fad7e00f9d67b3ae1418bc7d"
+      }
+    },
+    {
+      "label": "stock",
+      "phase": "fake-controls",
+      "receipt": {
+        "path": "/private/tmp/unison-mixed-1359-current-stock-fake-controls-20261017-001/RESULT.json",
+        "bytes": 71501,
+        "sha256": "c23f994891ba66f66d14917ef4fda8ce01e42cd83b1a96b8fa6054092ce26a7b"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-mixed-1359-current-stock-fake-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "35a8727b9e7903649623e533751d19d09d32593f14ca26141fc8fe769f39ae35"
+      }
+    },
+    {
+      "label": "ox",
+      "phase": "build",
+      "receipt": {
+        "path": "/private/tmp/unison-mixed-1359-current-ox-build-20261017-001/probe-build/RESULT.json",
+        "bytes": 69805,
+        "sha256": "43792c3403dc5e866c0fb44a3529145bc034a7dcdca9b4bd4bcbda0f387ae417"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-mixed-1359-current-ox-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "d8e32d42c6db7f2fc50df4e91fb2b4ee992938dcea67fff9e8a11ddc318c4c5d"
+      }
+    },
+    {
+      "label": "ox",
+      "phase": "fake-controls",
+      "receipt": {
+        "path": "/private/tmp/unison-mixed-1359-current-ox-fake-controls-20261017-001/RESULT.json",
+        "bytes": 71503,
+        "sha256": "ca7b3dac606e4e84977380f36cf6fb31d065bc9afea2d4c90af5bc64255a46f2"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-mixed-1359-current-ox-fake-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "603df0f3bbbed349e41f904acb0561801e840ec0f6013eeff4bc93e2fbf7fb31"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-build-20261017-001/SHARED-START.json",
+      "bytes": 1301,
+      "sha256": "30835280222d3ef72f7d765f7f935ec09a82bb38a14454d2a7334abf89d844ee"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-build-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-build-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 313,
+      "sha256": "2012ebfab72103382bd3ea10e280755fc93bd4313ee847c575a8470bde6cff05"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-fake-controls-20261017-001/SHARED-START.json",
+      "bytes": 1322,
+      "sha256": "50b2cf22a5ac67a8664cc49100421c9fb3e83a115c76e2b1c540e08f1bb1d354"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-fake-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-stock-fake-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 169,
+      "sha256": "a7c13467000580c815ae33e1c5041812d21417225acc39dccaab42d6df8961a2"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-build-20261017-001/SHARED-START.json",
+      "bytes": 1293,
+      "sha256": "830194503d318bb29aba4a62f60c6360435e4055e5b2f724fb05cb5ee738990a"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-build-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-build-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 307,
+      "sha256": "32d49c26602830059d8612708583e911ddfa736d9da58fed663d85aacafe951c"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-fake-controls-20261017-001/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "0125c7699cee3b8b075ec3f50b788c095f120452ff897c6ed4443fafffef8753"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-fake-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-1359-current-ox-fake-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 169,
+      "sha256": "a7c13467000580c815ae33e1c5041812d21417225acc39dccaab42d6df8961a2"
+    }
+  ],
+  "scope": "Current production stock/Ox objects; two build-only probes,8 authored fake-helper combinations/16fakehelpers+128hashjobs, allgroups/CPU8closed. No SDK/installed ExifTool/native DNG/media runtime in these controls; separate admission required."
+}

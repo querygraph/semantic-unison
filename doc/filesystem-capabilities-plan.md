@@ -10,7 +10,7 @@ retains the old API/loop unchanged. The legacy errno-fallback descriptions below
 are historical. Current macOS descriptor/platform/no-effect and actual caller
 tests pass stock/Ox; Linux/BSD/Solaris/Windows paths are source-implemented and
 await native qualification. This adds no range-sharing or capability cache.
-This maps [SOL.md's M2-G contract](../SOL.md) onto the current code. It preserves
+This maps [SEMANTIC-UNISON-DESIGN.md's M2-G contract](../SEMANTIC-UNISON-DESIGN.md) onto the current code. It preserves
 the working APFS path and ordinary upstream acceleration while preparing a
 constrained range adapter for future ZFS/ReFS qualification. Review was limited
 to source/document reads during the Adobe benchmark. After that benchmark,

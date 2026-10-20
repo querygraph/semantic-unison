@@ -1,0 +1,301 @@
+{
+  "complete": true,
+  "scope": "Bound remote receiver publication ownership migration; generated8192B fixtures and in-process planner delivery only",
+  "actual_tool_terminals": [
+    {
+      "session": 99104,
+      "chunk": "933cae",
+      "exit": 0,
+      "scope": "Stock/Ox Make+selftests and four composed receiver controls/compiler"
+    },
+    {
+      "session": 50665,
+      "chunk": "ae2ab3",
+      "exit": 0,
+      "scope": "32producer handoff cases/compiler and both Dune builds"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1318,
+      "sha256": "2df61d695b49f85c87d72bf8d981999fd4871ee7190b395d3c160b745b03bb86"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "6aa25fd657c849659237ba7d9d3e525e0bd7041d3578413c918bd64885cb212c"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-make-20261017-001/RESULT.json",
+      "bytes": 51996,
+      "sha256": "f6233397a0f4e2dcc422be965eabb41610485ddaa1862ba4165f3302a12f8bc8"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "e19edef6bb002e87e0e60faeb19c6a3db38b3a8d035d859bd286bece79041df2"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1313,
+      "sha256": "ee3ad73bd71e3a89fb5d679b905e043943b8e4cc4c4079c9aaffcf12eec7b5f8"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "74a152e4b9c81c65fe7ab2ce87ca22bb18f22082dc62ceee2506236e4cef1b09"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-make-20261017-001/RESULT.json",
+      "bytes": 52002,
+      "sha256": "f34e2b27089c2428b510bfdd81052b00393bc82ee23e4220152af2e6cc922e3a"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "e440f45de163fc1790318333044ea78d4e802655bced701e998764e38bbcc8a7"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-both-controls-20261017-001/SHARED-START.json",
+      "bytes": 1313,
+      "sha256": "774b3bdc099a8490571ffcff3cdedd0c8d6b6b6710f3fb1180318aae1939369a"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-both-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fd6ce830231fd273efe4c121ada2a098d65ece23323d8f33f9de6f1415c9e948"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-both-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "c848df285f03cca4753cbeb5b7e625bcadec9cb1044df326dab2f38ef7cb0768"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-both-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/RESULT.json",
+      "bytes": 141812,
+      "sha256": "105c5bed56aa1524f40ce80ca5b87ff9df49f92a87b9487976080468696f9c37"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-handoff-controls-20261017-001/SHARED-START.json",
+      "bytes": 1327,
+      "sha256": "e3c43a1b608e65d8db05beaa6d1dc9e7dbb2a4e7561b0ec1070e41e91af114fe"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-handoff-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "67d8ab9707926374b5d7e625f1b613b5fe8fa98e77d8a4c13a983b03e5a12e32"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-handoff-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "0b5336ef5ea2758a47ba58d2f814476bc166cb85fde5e37513b3b6885ec02b61"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-handoff-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-5a4mwhar/RESULT.json",
+      "bytes": 52381,
+      "sha256": "1d78a8a79a0caf3a6e99c8cd350debf8eae91d34c8cca4e0c41f2a3b3d2f6408"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-dune-20261017-001/SHARED-START.json",
+      "bytes": 1304,
+      "sha256": "047e5f2b7c716e5e4e7b5829b6bb0a13ea669f6f652d83af8a2aee047f074926"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "9203797c7644145a230569a6819583a5cfc69464831f2069b9b15d916c80bce4"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-dune-20261017-001/RESULT.json",
+      "bytes": 51440,
+      "sha256": "c801e67c0cd7d0cbb2e1d6d9fc57f7ffddcb01b655d855da60fcf84e196f661d"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "b24695acaf5278ff8a154bd8e8bd977dd410e4e53d2425cfbc47ffeab6b49768"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-stock-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-dune-20261017-001/SHARED-START.json",
+      "bytes": 1299,
+      "sha256": "d872e93189101c4e9fe243bac8fe30a7a6c55193806b8c5e2f7d7596082145a8"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "901e2d6fd15f6465fdec07fd238d9e1d15f69cf9403d167cdb998723f8973065"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-dune-20261017-001/RESULT.json",
+      "bytes": 51444,
+      "sha256": "ce365c507188c0cecdb69c66e39ac3512842e9f4f0e8fafd1d72934c5adc5290"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-dune-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "74ad1870e6c1116ce1ce1b6579552d07efee02fe073e55ebaecafff805ce9dae"
+    },
+    {
+      "path": "/private/tmp/unison-remote-owned-ox-dune-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/semanticRemoteForOwned.cmx",
+      "bytes": 11931,
+      "sha256": "a89d4be8dd3658db4b83d0175eb7dd7f160d3a6acd828e59b6e1d5a475e1bbd5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/fixture.o",
+      "bytes": 17880,
+      "sha256": "4d118eb1afcad8c224d5e27afd9a6cdcfb23681b4024f00bdbb83717f9b61870"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/semanticRemoteForOwned.ml",
+      "bytes": 37721,
+      "sha256": "cdf29b2e6af7cffa1dcc2b0a40736bbea61b7082fde724439cb6985c4224ccc5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/probe.cmi",
+      "bytes": 4075,
+      "sha256": "01c9dae3a0d738c1480d5a4625b706ee5660d37d14098c7b89beeeb8a5e4955b"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/probe.o",
+      "bytes": 23952,
+      "sha256": "b913bdf917012236a7a69b8a5bea9d100ae853489cec64f53312213776fe42c1"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/semanticRemoteForOwned.o",
+      "bytes": 100760,
+      "sha256": "70324fc9bb9ba6b49234d74404ef329f3bfb7e0d3474d1a981f593aeaa41aa15"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/semanticRemoteForOwned.cmi",
+      "bytes": 20847,
+      "sha256": "eaeda50b0bbeb8429015d133deba92da4b063e8aaf172c033b17ad5b2609b00d"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/probe.cmx",
+      "bytes": 4103,
+      "sha256": "81bfa71a24733254379bf7008a80e61fec8c2651e0ea82062bbf0730baaa040e"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/stock/probe",
+      "bytes": 4393800,
+      "sha256": "237c0877ed06a9e141c4a46bb85617b25e43823e2a5606dbca038cf847aad9a7"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/semanticRemoteForOwned.cmx",
+      "bytes": 115393,
+      "sha256": "01daaa68370f069b9392642c6f321a13e5ec3d07907f9495d25ccd8876ef4ab5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/fixture.o",
+      "bytes": 17880,
+      "sha256": "9e2baed9fb8809377a437433f9b0b3f9bc42e060b105006d4fa32f57da4187d5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/semanticRemoteForOwned.ml",
+      "bytes": 37721,
+      "sha256": "cdf29b2e6af7cffa1dcc2b0a40736bbea61b7082fde724439cb6985c4224ccc5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/probe.cmi",
+      "bytes": 6418,
+      "sha256": "4195a33943af592282d02334b90986b702d4e28d79e5dce278f84fed9bef6db5"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/probe.o",
+      "bytes": 27864,
+      "sha256": "4b2acc024fc2df1c81106f539561f9ed9e8ca9a4afffd86a626b68a5535ccce6"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/semanticRemoteForOwned.o",
+      "bytes": 115448,
+      "sha256": "02a9339b40aeb4b5b9728e4758a8f8cce995c991c08aee0972dd95db1b119c3e"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/semanticRemoteForOwned.cmi",
+      "bytes": 43681,
+      "sha256": "7d7edcb9855d8b4278a55d0921b3b02eccbd84c2ce18e44d30e43239d162c969"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/probe.cmx",
+      "bytes": 18430,
+      "sha256": "dd61776793e9d8ea3bf5f5265fd7afe93c2023fda769848b200d35c5ad4d1910"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-ksz9j4nf/ox/probe",
+      "bytes": 6025936,
+      "sha256": "5af564ba1235196870e59b891c76933c7f3586b2d1bba2dcd283d49e57d69b56"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.ml",
+      "bytes": 37717,
+      "sha256": "1778c17b2fec4ef55564328e246d19cefaa080d9622bfc31a5264636993494a4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.mli",
+      "bytes": 4302,
+      "sha256": "a77623cd872782c6d08dab32e29c0c66812881f387ad7e42e0135822a4466d84"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/remote_publication_owned/controls.py",
+      "bytes": 5498,
+      "sha256": "3e78060c340c574ded4d7b7224d193d5b596500c18d8e8105afb53d94333eae3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/remote_publication_owned/probe.ml",
+      "bytes": 5461,
+      "sha256": "51f83820e7f3105da64e29a8914f6a46302e032c0b3d5bd844c1538e37c850f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/test_semantic_handoff.py",
+      "bytes": 23723,
+      "sha256": "06643d9391b1c4daf490950d9e0ac1835ab6b8fa2dadd2d0bb747302992b4284"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/remote-publication-owned-v1.md",
+      "bytes": 2146,
+      "sha256": "c89dff2d2ff31f8f5a4361fdf4a98b8a50c9dede9290088843e5feb5fe102c61"
+    }
+  ],
+  "limitations": [
+    "No actual transport/server/pump execution or new IO admission",
+    "Ordinary Copy and unbound/raw/channel close handling remain separate",
+    "Disposable application/native unknown owners persist until process exit; external OS/group closure verified separately",
+    "No SDK/camera/Photo payload, performance, physical IO isolation or production claim"
+  ],
+  "pending_property_admission_observation": {
+    "unix": 1792240571.767494,
+    "path": "/private/tmp/unison-sol-properties-admission-86df187d7c95.json",
+    "exists": false
+  }
+}

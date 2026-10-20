@@ -5,7 +5,9 @@ finalized private received files before the normal rename/archive lifecycle.
 Companions are independent of semantic transfer profiles: ordinary copying,
 cloning, resumption, reuse, external copying and generated merge results use
 the same receiving hook. Unchanged, property-only and rename-only operations
-do not invoke it; optional all-scanned validation remains unimplemented.
+do not invoke the receiving hook. Explicit [all-scanned validation](all-scanned-validation.md)
+now adds a separate scan phase over private snapshots, including unchanged files.
+Received/off defaults remain unchanged.
 
 Register a companion on the owner during startup:
 
@@ -138,3 +140,10 @@ could start. The [resource-admission fix](../tests/qualification/publication-adm
 keeps an oversized receiving reservation a recoverable transfer error instead of
 an uncaught server exception, without weakening the gate. Check the diagnostic
 and correct the endpoint configuration; do not treat refusal as SDK decode failure.
+
+## Unchanged-file scope
+
+See [all-scanned validation](all-scanned-validation.md) for the opt-in policy,
+capability, limits, private lifetime and exact current qualification. Policies
+are captured once per endpoint phase; artifacts use qualified temporary owners,
+and logical diagnostics remain separate from executable input paths.

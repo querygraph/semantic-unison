@@ -1,0 +1,110 @@
+{
+  "schema": "unison-all-scanned-sdk-parent-controls/1",
+  "actual_terminal": {
+    "chunk_id": "120cc2",
+    "exit_code": 0,
+    "session_id": null
+  },
+  "control_groups": 30,
+  "closure": {
+    "child": {
+      "pid": 94218,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 94218,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-all-scanned-sdk-parent-controls-20261017-001/SHARED-START.json",
+      "bytes": 1087,
+      "sha256": "aa769c557840cf7718d78a89f41a32168abe04e4272bc3c003494bc2e3d28677"
+    },
+    {
+      "path": "/private/tmp/unison-all-scanned-sdk-parent-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "38ee4b481a4685912165282d0b2c98780a4d240122549cd2ad862d20f478bca1"
+    },
+    {
+      "path": "/private/tmp/unison-all-scanned-sdk-parent-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 4505,
+      "sha256": "6a752890fb97a1299411e8b7287efe70e1fb2af43540009971e9195dacd95b4e"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "tests/all_scanned_sdk_plan.py",
+      "bytes": 3833,
+      "sha256": "e4851bedeb86cb88200d3f2692f5c0667969368f893154909ced594edf2b56ae"
+    },
+    {
+      "path": "tests/all_scanned_sdk_plan_test.py",
+      "bytes": 2034,
+      "sha256": "6a564fbed89c539e1f9f7e6f7c5880f71e0f6c2cf853ca7dfa08dfde1025e4b8"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport.py",
+      "bytes": 3388,
+      "sha256": "3da2b67628f5ae8f0d7869b44e8d0751ec21b3f8143940940e10a31345822037"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport_test.py",
+      "bytes": 4071,
+      "sha256": "e35a5c844aa488278dff1b918a3f5cac4a216b1726513be3ed3ebc3a74f7b446"
+    },
+    {
+      "path": "tests/all_scanned_sdk_audit.py",
+      "bytes": 3033,
+      "sha256": "87b8c9215937532322dfa5073c04a9de2989be9f66b2b9c22bedf013cef5d329"
+    },
+    {
+      "path": "tests/all_scanned_sdk_audit_test.py",
+      "bytes": 3624,
+      "sha256": "36a9a1be9c35737a02314cd6d955e38b325ef7cf261f8a9935aeb94bc615dae1"
+    },
+    {
+      "path": "tests/all_scanned_sdk_parent.py",
+      "bytes": 4788,
+      "sha256": "968600a4d212df7126da0cefa5db0173aedb9c02a9823ad680aaaa783e609cd1"
+    },
+    {
+      "path": "tests/all_scanned_sdk_parent_test.py",
+      "bytes": 5853,
+      "sha256": "e24ba52653bbbe23aa54ca5451b4f2564c9ce5fc397d40505eb723c2a9f453d7"
+    },
+    {
+      "path": "tests/all_scanned_sdk_controls.py",
+      "bytes": 503,
+      "sha256": "ffebc630e40e842dfa47b34e5ca27e245920a3a1f78c796fb1fd08abaf2e94a0"
+    },
+    {
+      "path": "bench/sync/invocation_journal.py",
+      "bytes": 7283,
+      "sha256": "1e99ff956720471480c201a6fafb6bd96679c20832c7089bcee3b44269931eb1"
+    },
+    {
+      "path": "bench/sync/invocation_journal_test.py",
+      "bytes": 7196,
+      "sha256": "dad2b764eba3401edce959368957af0c3770e15b0e3252ab961b2726a690fae7"
+    }
+  ],
+  "CLI_invoked": false,
+  "SDK_invoked": false,
+  "EXglobal_acquired": false,
+  "media_payload_opened": false,
+  "private_path_isolation_qualified": false,
+  "aggregate_executor_qualified": false,
+  "scope": "Pure original synthetic journal/proxy/helper/status frames and mocked transport only; includes legacy journal regression controls."
+}

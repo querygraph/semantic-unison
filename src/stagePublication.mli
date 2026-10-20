@@ -65,3 +65,40 @@ val abort_and_close : t -> unit
 
 val close_noerr : t -> unit
 (** [abort_and_close] with errors suppressed. *)
+
+
+(** Explicit retained-ownership successor; existing APIs above are unchanged.
+    It is not yet wired into Copy/SemanticSync/SemanticRemote transaction owners. *)
+type owned
+exception Ownership_uncertain of owned option
+(** Native delivery always carries [Some owner]. [None] is the registration
+    template only. The carrier is rooted before any owned native descriptor;
+    uncertain delivery does not allocate. Unknown owners retain remaining known
+    handles and are not finalized/retried as settled. *)
+val prepare_owned : working_dir:string -> stage:string -> temporary:string -> owned
+val adopt_owned : owned -> parent:Unix.file_descr -> stage:Unix.file_descr -> unit
+type parent_handoff
+val prepare_parent_handoff : unit -> parent_handoff
+val parent_consumed : parent_handoff -> bool
+val adopt_owned_tracked : owned -> parent_handoff -> parent:Unix.file_descr -> stage:Unix.file_descr -> unit
+(** Versioned single-attempt handoff. Prepare before acquiring parent. Native C
+    acknowledges exactly when it takes ownership; pre-consumption rejection
+    leaves false. Check even when this call raises. True is transferred authority,
+    NOT known OS closure. The caller must never close a consumed parent, and must
+    keep an unconsumed parent owned until qualified cleanup. No reset/forge API.
+    Does not change the legacy adopt entry point's behavior. *)
+val publish_owned : owned -> unit
+val disarm_owned : owned -> unit
+val abort_owned : owned -> unit
+(** Normal abort/disarm closes once and releases the native carrier root.
+    A close failure raises [Ownership_uncertain] even after a successful rename
+    or name relinquishment. Further operations refuse before new IO/consumption;
+    caller must retain admission and must not retry numeric descriptors.
+    This API requires explicit settlement; it has no implicit finalizer cleanup. *)
+val owned_evidence : owned -> string * (int * string) *
+  (int * int * string * int64 option * int64 option) array * int array
+(** Native name/lifecycle phase, original native operation errno/phase, every
+    uncertain descriptor with close errno/phase and optional preclose device/inode,
+    and remaining known descriptor numbers. Errno integers are native observations,
+    not portable Unix.error codes. Missing preclose identity remains unknown.
+    Reading evidence does not close, retry, unlink or release ownership. *)

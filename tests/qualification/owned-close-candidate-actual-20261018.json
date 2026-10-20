@@ -1,0 +1,67 @@
+{
+  "state": "CANDIDATE_FIXED_CONTROLS_PASS_NOT_PRODUCTION_INTEGRATED",
+  "actual_owner_tool": {
+    "session_id": 15043,
+    "terminal_chunk": "d42658",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controller_child": 70116,
+  "child_reaped": true,
+  "group_others_absent": true,
+  "cpu_tokens": [
+    0,
+    1,
+    2
+  ],
+  "tokens_closed": true,
+  "io_acquired": false,
+  "compiler_jobs_max": 1,
+  "os_descriptor_faults_injected": false,
+  "worker_integration_qualified": false,
+  "hard_fd_or_rss_enforcement_qualified": false,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/resource_close/fixed.ml",
+      "bytes": 2246,
+      "sha256": "c9cbe1c624baab299b7b12a518b6c90a3701e75663182c1c42c14819b8709855"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/resource_close/ownedClose.ml",
+      "bytes": 2139,
+      "sha256": "ccef82e09968945a5f955ada63040d73ef585a66d02a8da3cba156fbb87bca80"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/resource_close/ownedClose.mli",
+      "bytes": 1396,
+      "sha256": "4ff0ddf5ae0cbc88add1daf770eec5f55f949a9cdc8282cf3c35281cbd82ec34"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/resource_close/run.py",
+      "bytes": 1590,
+      "sha256": "8ef6ee4b5a60c9e34b6e1f5d12184387b25b6cc8f3e72213dd0a7bde608b5954"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-owned-close-candidate-20261018-001/RESULT.json",
+      "bytes": 3130,
+      "sha256": "be468baf34afd8a6da786b3d2c6d87ab60d737de6a323f7acd2c579317cf9d64"
+    },
+    {
+      "path": "/private/tmp/unison-owned-close-candidate-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "fb8c1d055048fc47deb8406b8cd0cf702707c453718f416ef16351429f8adc6c"
+    },
+    {
+      "path": "/private/tmp/unison-owned-close-candidate-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 61,
+      "sha256": "954926eecba4beaa14ff48396a87a286ddaa1f6e39fb85f4e02c522adaf7baec"
+    },
+    {
+      "path": "/private/tmp/unison-owned-close-candidate-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "unison-camera-role-runs-actual/1",
+  "state": "OBSERVATION_CLOSED_SAFE_COMPONENT_REFUSAL",
+  "actual_tool": {
+    "owner_pid": 69341,
+    "session": 42275,
+    "chunk": "3a60d6",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "admission": {
+    "path": "/private/tmp/unison-camera-role-runs-admission-20261017-4edb027a.json",
+    "sha256": "240ec9a541e0c0075861103323fa8f3d32d3d68a8c99622536c8e0873779180a"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-role-runs-request-v4.json",
+    "sha256": "48d1e992c831b4da08d5e044f24d5412af8c15f58119e054e1f0be96fc910cfb",
+    "source_commit": "cbe2f3e3"
+  },
+  "closure": {
+    "child": {
+      "pid": 69362,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 69362,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": {
+      "unchanged": true,
+      "observed": {
+        "st_dev": 16777223,
+        "st_ino": 307228717,
+        "st_mode": 33024,
+        "st_nlink": 1,
+        "st_uid": 501,
+        "st_size": 193851848,
+        "st_mtime_ns": 1792099229810540469,
+        "st_ctime_ns": 1792113844382073309
+      },
+      "error": null
+    },
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "component_status": {
+    "path": "/dev/fd/3",
+    "path_bytes_hex": "2f6465762f66642f33",
+    "status": "unsupported",
+    "reason": "DNG component coalesced region limit"
+  },
+  "makernote_tag_count": 30,
+  "makernote_warning_count": 0,
+  "source_full_sha256_matches_historical": true,
+  "helpers": [
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 69371,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    },
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 69374,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/OWNER-TERMINAL.json",
+      "bytes": 161,
+      "sha256": "58416f8dc82514aa3421f62f64bcd49ab7c35a8536550be816f7ccbab648c72d"
+    },
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/SHARED-CLOSED.json",
+      "bytes": 833,
+      "sha256": "07b0aa30d15ab71792e8aa66c845a7b7eecea31f81c875e8d74e9eda4d151148"
+    },
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/SHARED-IO-ATTEMPT.json",
+      "bytes": 745,
+      "sha256": "5290e630b758e163d01173f244b0203cb597b8a9d80e247492210e4928328066"
+    },
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/SHARED-START.json",
+      "bytes": 4925,
+      "sha256": "445103753271438c4d8e1ff4e9349a348eba3fa45c643db1383c04a9b5d51717"
+    },
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-camera-role-runs-20261017-4edb027a/SHARED-STDOUT.txt",
+      "bytes": 50001,
+      "sha256": "f6cd5b0912fe54907c0f3cd86e7b88f2aa9939bd6379e40abdaa085a4e8853e1"
+    }
+  ],
+  "scope": "Readonly retained Unison clone;30MakerNote tags/no warnings, components safely refused coalesced480limit. No complete forest/eligibility/SDK/pixel/corpus claim. Input8fields unchanged, both helpers0/reaped; source pins unchanged at actual closure. Later source edits are distinct, not a changed runtime or replay. Private tag values remain in pinned external raw output only."
+}

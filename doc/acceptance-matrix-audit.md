@@ -1,14 +1,168 @@
+Latest requirement-by-requirement checkpoint: [2026-10-19 final acceptance map](sol-final-acceptance-map-20261019.md). Older snapshots below retain their original scope.
+
 # Required acceptance matrix: scope audit
 
-This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
+Current consolidated review: [2026-10-17 release readiness](sol-release-readiness-20261017.md).
+The twelve rows remain in scope. Local report capture/reuse/namespace archive
+persistence and outer uncertainty retention are now implemented and scoped-
+qualified; older paragraphs calling all persistent integration absent are historical.
+The current receipt pin review records actual source differences rather than
+promoting old fault/transport executions to this candidate. No new run or grant.
+
+
+This maps the twelve requirements in `SEMANTIC-UNISON-DESIGN.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
+
+Latest user steering in SEMANTIC-UNISON-DESIGN.md changes the coverage criterion: exhaustive private
+camera understanding is not a global deployment gate. The baseline is separate
+pixel/standard metadata components plus conservative opaque hash coverage, with
+nested plugins and incremental refinement. The component core, DNG adapter and frozen nested dispatch now have generated
+stock/Ox qualification; persistent reuse and broader integration remain open.
+Partial camera knowledge itself must not be relabeled as blocking the whole
+feature. Open rows delimit unproven claims, rather than requiring exhaustive
+camera/vendor knowledge before deploying a separately qualified baseline.
+
+[Component core](../tests/qualification/component-hash-core-actual-20261017.json),
+[DNG adapter](../tests/qualification/dng-components-actual-20261017.json) and
+[frozen dispatch](../tests/qualification/frozen-dng-decoders-actual-20261017.json)
+now establish separately counted encoded-pixel/metadata/opaque lanes, localized
+private refinement and nested owner-selected bindings. Current frozen-dispatch
+controls passed80 checks/compiler and four full builds. These are generated
+fixtures and historical snapshot hashes, not camera pixel/rendering equality,
+persistent reuse or component archive/worker deployment evidence.
+
+The [explicit component-worker API](component-workers.md) now has
+[stock/Ox87checks/compiler and four builds](../tests/qualification/component-domain-workers-actual-20261017.json),
+including Dune fullselftests and current-main byte rebind. Compact immutable
+observations cross the existing typed completion boundary; reader/session
+capabilities do not. Cancellation/shutdown, failure/FD/CPU/localIO settlement and
+read accounting passed on generated8KiB files. No new camera/SDK/EXglobal or
+persistent/archive/RPC/UI deployment follows. This advances worker integration;
+remaining report consumers and persistent identity binding are still open.
+
+The [new-profile production receiving successor](../tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
+now adds18actual rows/54CLI stock/Ox workers1/2/3, six semantic rows/twelve exact
+layout updates with opaque private references into changed XMP. Exact donor,
+old-basis and no-op checks passed; actual parent11517/85a4a8/0, all groups and
+CPU8/EXglobal closed. [Root independently adopted/released](../tests/qualification/layout-receiving-root-adoption-actual-20261017.json).
+This closes that generated current-current receiving step, without promoting it
+to real-camera, old-peer transport, semantic merge, pixel or physical savings
+proof. The old expired grant and separately consumed reschedule remain distinct.
+
+The new [layout-only DNG exact profile](dng-layout-exact.md) now implements the
+first operation in that design: opaque private data no longer prevents exact
+donor reconstruction when span/layout/complement checks succeed. It has separate
+capability negotiation, local immutable interpretation annotations, unchanged
+strict merge/cache authority and full staged-target hash verification.
+[Actual source qualification](../tests/qualification/dng-layout-exact-source-actual-20261017.json)
+includes49checks per stock/Ox compiler, strict safety regressions, four full builds
+and the stock legacy kernel/inspector. Broader remote/mixed-version receiving,
+component report/RPC/archive integration and incremental cache remain open. The
+component forest and nested dispatch are now implemented as described above;
+neither full-goal acceptance nor production camera qualification follows.
+
+The [opt-in production OpenSSL successor](../tests/qualification/openssl-production-backend-actual-20261017.json)
+now has opaque native contexts, a shared EVP implementation and Make/Dune
+configuration. Four stock/Ox Make/Dune OpenSSL builds plus a platform stock Dune
+build passed; five actual object-symbol/configuration audits and2310input-source
+hash checks bind those artifacts. Both platform/default and selected-production
+component runs passed. Actual source/runtime scope is macOS/OpenSSL3.6.4;
+Linux/Windows, provider policy, resource peaks and performance remain open.
+The older source-rebind paragraphs below describe their historical source, not
+a claim that all those pins still match this production successor.
+
+The corrected [all-scanned SDK V2](../tests/qualification/all-scanned-sdk-v2-actual-20261017.json)
+also actually passed/closed: four real SDK calls on unchanged stock/Ox endpoint
+replicas, all raw-digestvalid/decodeSUCCESS/errors0/warnings0. V1 remains withdrawn.
+This supersedes the prior fresh-grant wait below; it is one retained-camera case,
+not corpus, pixel or full-goal acceptance.
+
+Current all-scanned compatibility now includes actual stock/Ox clients against
+older feature-incapable peers: required scope explicitly refused before scanning,
+off completed on empty roots. Four additional current transport empty-root calls
+qualified per-phase sockets and native-to-retained-supervisor group binding;
+90inert controls passed. [Evidence](../tests/qualification/native-proxy-group-actual-20261017.json)
+retains the source-model/group and socket failures. This advances mixed-version
+capability/ordinary-off evidence only, not arbitrary networking, watcher, SDK or
+corpus acceptance. The real-SDK V1 request was withdrawn unstarted before any
+media access; its corrected V2 successor requires a fresh separate IO grant.
+
+The [actual mixed SDK/ExifTool/hash V1](../tests/qualification/mixed-validation-v1-actual-20261017.json)
+now advances rows9/12: two stock/Ox probes, two single-thread SDK helpers, two
+readonly ExifTool requests and32 shared hash tasks. Actual59209/cedf13/0/no
+session; worker/probe/helper groups and CPU8/EXglobal closed, parent disposable
+byte checks/all326 source pins/input epoch match. SDK errors0/rawvalid/decode
+success retain four warnings each. Declared backend2192MiB/64 credits is symbolic
+accounting, not RSS/FD peaks or hard limits. Shared functional completion does
+not prove simultaneous CPU computation, quiet scaling, representative inputs
+or whole-goal acceptance. Admission00d8de55 is consumed, no replay/successor.
+
+## Hash-backend source reconciliation
+
+The [current source/receipt rebind](../tests/qualification/hash-backend-source-audit-20261017.json)
+confirms all six source pins in both historical checked-hash participants still
+match. `semanticHash.create` selects CommonCrypto through the native stubs on
+macOS; the portable reference is the fallback elsewhere and independently
+testable. The C context is private to its worker, copied through a properly
+aligned local context, rooted across allocations, and fed in bounded64KiB
+chunks without storing global OCaml pointers or calling back into OCaml.
+These source properties and the historical vector/domain tests are not a new
+independent cryptographic audit or NIST module-validation claim.
+
+The historical stock participant was5.5.1, not the current5.2.0 build; Ox was
+5.2.0+ox. Native and qualification-only forced-reference modes both passed then.
+The source identity rebind preserves that distinction and does not invent a new
+execution. macOS already consumes a maintained platform hash implementation;
+the non-Apple reference fallback does not close the maintained-library and
+runtime qualification requirements for other platforms. Keep those scopes open
+rather than replacing the current macOS backend or counting vector agreement
+as a third-party implementation audit. This review changes no frozen mixed pins.
+
+The [current boundary/state successor](../tests/qualification/hash-bounds-current-actual-20261017.json)
+subsequently passed on stock5.2.0 and Ox5.2.0+ox: native/forced-reference modes,
+ten rejected ranges/domain, unchanged stream after rejection, independent
+contexts and the existing15 vectors/four domains. All containing groups/Unison8
+closed, actual40896/bd9038/0. Only the component test changed; production and
+all326 frozen mixed execution pins remain unchanged. This supersedes the prior
+test-source binding for that test file while preserving the historical receipt.
+
+Requirement5's late-worker result scope now also has a deterministic
+[completed-before-owner control](../tests/qualification/worker-late-owner-completion-actual-20261017.json).
+On actual production-linked stock/Ox workers, completion is queued before the
+owner loop resumes. CPU/IO/job credits remain charged, cancellation and shutdown
+suppress the queued result, normal delivery succeeds, and all descriptors/
+ledgers settle. Source and frozen mixed pins remain unchanged. This advances
+late-delivery evidence without claiming an atomic namespace commit or universal
+async-fault coverage. Actual owner11412/66fb24/0/no session, Unison8 closed.
 
 The current [SDK resource-observation scope addendum](../tests/qualification/acceptance-sdk-scope-addendum-20261016.json)
 updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
 actual completed native runs, not pending requests; V2 includes12 SDK calls and62
 closed process-probe children. Bounded per-process samples do not prove peaks,
 hard caps, mixed ExifTool/Adobe throughput or multi-file receiving SDK overlap.
-The separate multi-file receiving V1 remains prepared/unadmitted/unstarted at
-this audit. Original fake endpoints exercise its transport but are not SDKs.
+The separate multi-file receiving V1 subsequently ran once and
+[PASSED/CLOSED](../tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json):
+actual23264/2004ad/0, two receiving calls/four qualified SDK helpers, exact four
+received outputs, all attempted groups and IO/CPU closed. Root independently
+[adopted the result](../tests/qualification/sdk-multifile-v1-root-adoption-20261016.json)
+and rehashed174044512B of received output. Raw SDK protocols reported valid
+raw digests/decode success/errors0 with four warnings each, preserved as findings.
+Known-live helper spans are not CPU compute overlap or throughput evidence.
+This advances rows4/9/12 without closing their broader requirements.
+
+The distinct [receiving comparison request](sdk-receiving-comparison-request-v1.json)
+subsequently ran once and [PASSED/CLOSED](../tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json):
+actual36282/0f8d61/0,24CLI/48SDKhelpers, all raw proxy/client/server/pump/helper
+and worker groups independently audited, all172 postpins/borrowed epochs match,
+CPU8/EXglobal closed. Four warmups and20measured samples are retained in the
+[report](../bench/sync/results/sdk-receiving-comparison-v1-20261016/sdk-receiving-comparison.md).
+Worker1/3 descriptive median ratios are1.3518stock/1.3586Ox for these two warm
+generated inputs. This advances comparative end-to-end receiving evidence,
+not isolated SDK scaling, quiet timing, representative corpus or hard limits.
+All48 protocols retain four warnings each with errors0/rawdigestvalid/decodeSUCCESS.
+Admissionac55fe28 consumed once; no replay or automatic successor.
+The [offline reporter](../bench/report_sdk_receiving_comparison.py) and
+[seven synthetic/disposable controls](../tests/qualification/sdk-receiving-comparison-report-entry-controls-20261016.json)
+qualify report behavior only; synthetic timings are not measured SDK evidence.
 
 The latest [generated property-transfer V3 qualification](../tests/qualification/shared-property-io-actual-20261016.json)
 now adds actual18-row/54-call stock/Ox ordinary/clone/semantic coverage with
@@ -52,7 +206,7 @@ pre-helper budget failure and independent recovery remain preserved separately.
 | 9. Parallelism and resource accounting | Checked worker closures, seeded apply/cancellation parity, endpoint-local filesystem job gates and actual standing8 shared ownership/functional controls. [checked_worker](../tests/checked_worker/qualification.json), [workers](../tests/workers/seeded-apply-stress-qualification.json), [io_admission](../tests/io_admission/runtime-qualification-20261013.json), [qualification](../tests/qualification/shared-entrypoints-actual-20261016.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | No hard whole-tree RSS/FD/CPU cap, physical-device shared IO lanes, arbitrary native thread fanout or race-sanitizer qualification. st_dev is not a physical disk identity. |
 | 10. Semantic merge | Conservative opt-in fixed-region scalar reconciliation, compact common-base cache controls, archive downgrade/refusal and generated SDK receiving/merge. [dng_reconcile](../tests/dng_reconcile/qualification.json), [dng_merge](../tests/dng_merge/qualification.json), [sdk_container_receive](../tests/sdk_container_receive/quota-merge-qualification.json), [archive_downgrade](../tests/archive_downgrade/qualification.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json) | No general RDF/Bag/Seq/Alt/qualifier/rendering merge, packet growth or distributed atomic two-replica commit. Unsupported shape/unknown edits must preserve conflict, not imply safe semantic equivalence. |
 | 11. Generic cloned transfer | Upstream reuse, strict whole-file clone, receiver-basis ordinary-file path, scoped range adapter and exact/no-op generated comparisons. [whole_file_clone](../tests/whole_file_clone/qualification.json), [whole-file-clone-integration-20261014](../tests/qualification/whole-file-clone-integration-20261014.json), [cross_volume](../tests/cross_volume/qualification.json), [shared-functional-actual-20261016](../tests/qualification/shared-functional-actual-20261016.json), [native-copy-range-integration-20261013](../tests/qualification/native-copy-range-integration-20261013.json), [native_copy_range](../tests/native_copy_range/typed-context-qualification.json) | Not filesystem-wide capability caching/mount incarnation, universal alignment/partial-effect/native-backend qualification or physical sharing proof. Failed timed part3 remains incomplete. |
-| 12. Adobe invocation and CPU accounting | Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting. [validation_paths](../tests/validation_paths/qualification-20261013.json), [qualification](../tests/qualification/validation-companion-integration-20261013.json), [validation_settlement](../tests/validation_settlement/qualification-20261013.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | No all-scanned validation feature, representative camera corpus, experimental SDK OS-thread/scaling/RSS/cancellation qualification or full mixed ExifTool/hash/Adobe workload proof. Each new SDK slot remains separately coordinated. |
+| 12. Adobe invocation and CPU accounting | Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting. [validation_paths](../tests/validation_paths/qualification-20261013.json), [qualification](../tests/qualification/validation-companion-integration-20261013.json), [validation_settlement](../tests/validation_settlement/qualification-20261013.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Opt-in all-scanned now has generated local scan-RPC/private-snapshot/fake-driver qualification; real SDK all-scanned has the four-call scope above; broader remote-process qualification, representative camera corpus and complete experimental SDK OS-thread/scaling/RSS/cancellation qualification remain open. The actual mixed functional workload above does not establish those broader resource/throughput properties. Each new SDK slot remains separately coordinated. |
 
 Current [configured-worker parity](../tests/qualification/shared-worker-parity-actual-20261016.json)
 adds actual stock/Ox production-object controls for pool sizes1/2/4/8,64 jobs
@@ -62,7 +216,7 @@ but this does not establish a hard FD/RSS cap or eight-way concurrent throughput
 
 The [machine-readable map](../tests/qualification/acceptance-scope-audit-20261016.json) pins the selected receipt documents. Older intermediate checkpoints are not silently promoted to their successors. In particular, producer-handoff, native publication and source/GUI checks keep their own limitations.
 
-Next practical gate: bounded copy-only real-camera DNG eligibility and exact receiving, using explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
+The current-current generated layout-only receiving step has now passed above. Next operation-specific coverage is actual mixed-version transport and representative retained-camera exact receiving. Existing camera controls proved safe unsupported fallback/SDK decode under their own profiles; they do not qualify this new profile. Real-camera successors use explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
 
 An optional generated-fixture property-removal successor matrix is source-prepared
 (`SYNC_PROPERTY_REMOVAL_CONTROLS=1` on the exact-admitted shared IO route).

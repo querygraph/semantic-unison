@@ -1,0 +1,117 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 78381,
+      "chunk": "a36294",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 21381,
+      "chunk": "479836",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "unison-portable-source-owner-controls-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-controls-93w9tkog/RESULT.json",
+        "bytes": 469922,
+        "sha256": "1c0aab17621afbd23bc28eba172189bc89ecd331a453dd384f40efa19a556dda"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-owner-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "65a63f9ca4502cce75396d136e98eb57ec144160e1722a43bf32c1ba00225709"
+      }
+    },
+    {
+      "name": "unison-portable-source-stock-make-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-portable-source-stock-make-20261017-001/RESULT.json",
+        "bytes": 51298,
+        "sha256": "dc9256f33f8e5f1cf7d0673126f0747e8405692365ae6e8b61986287d2292cf3"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "e39af48f0d657f326cc2f8606eb984632e69e57e9df593bf0b6e1fb71f31480f"
+      }
+    },
+    {
+      "name": "unison-portable-source-ox-make-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-portable-source-ox-make-20261017-001/RESULT.json",
+        "bytes": 51304,
+        "sha256": "3413301856ef3add8da036acd98aaaecc3f626864b1ccf0bd7ec57b638bdd7a8"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "963423612df8c1b7628c408831b1b321461e93f62de90723a5f6c68286e1a158"
+      }
+    },
+    {
+      "name": "unison-portable-source-both-report-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-61_ei8tl/RESULT.json",
+        "bytes": 148254,
+        "sha256": "2fc0356cce780ac9bdb69617f20ff7225666214be2209e85ab1cc5b7a0ff009e"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-both-report-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "bbac14a5610f7d75d9848288a9bd95f3f49c69baa4cdafa4a5c6df6903877607"
+      }
+    },
+    {
+      "name": "unison-portable-source-both-retention-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-j04e14ih/RESULT.json",
+        "bytes": 147457,
+        "sha256": "aa89bb0ab6f77087bca26f2f31408ed9d21c0583512fe6051f2ee3c415ef1da9"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-both-retention-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "6801e948013384a0a37f775c8cfbbb9ca676525e07d80b38e03c8a651f57aad5"
+      }
+    },
+    {
+      "name": "unison-portable-source-stock-dune-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-portable-source-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50742,
+        "sha256": "fedaa3286aed1ceba4967c232a3920aff6d416c4795c39b82b2a28be71fbb8e8"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f5aea2dfc84729686f79dc9fdc1d13eff96276242e0fc73e46dca413a1100c4b"
+      }
+    },
+    {
+      "name": "unison-portable-source-ox-dune-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-portable-source-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50746,
+        "sha256": "1bbe4f5c17c9088eb1fc22915b76e8e834e30bafa7b52f26a1637d34774eea2a"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-portable-source-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "d4432f3a10fa02a4ba0dff7a8efe5f7442179bdcac6559910b433bb65f42d5f9"
+      }
+    }
+  ],
+  "scope": "Uncached regular source cleanup independent of macOS cache close; stock/Ox normal/fault/conditional C build controls plus current production Make/selftests/Dune and report/retention",
+  "conditional_build": "semanticFile_stubs.c compiled with -U__APPLE__ on Darwin;6 actual API controls/compiler",
+  "limitations": [
+    "Not Linux or Windows runtime/ABI qualification",
+    "Windows ML Unix.close branch source-reviewed, not executed here",
+    "No camera/SDK/transport/IO grant or deployment"
+  ]
+}

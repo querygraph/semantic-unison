@@ -141,10 +141,11 @@ let finish t =
 let string s = let t = create () in feed t (Bytes.of_string s) 0 (String.length s); finish t
 (* The reference implementation above remains independently testable. *)
 let reference_string = string
-external native_init : unit -> bytes option (* ox-portable-ffi *) = "unison_semantic_sha256_init"
-external native_feed : bytes -> bytes -> int -> int -> unit (* ox-portable-ffi *) = "unison_semantic_sha256_feed"
-external native_finish : bytes -> string (* ox-portable-ffi *) = "unison_semantic_sha256_finish"
-type t = Reference of reference | Native of { state:bytes; mutable finalized:bool; mutable length:int64 }
+type native
+external native_init : unit -> native option (* ox-portable-ffi *) = "unison_semantic_sha256_init"
+external native_feed : native -> bytes -> int -> int -> unit (* ox-portable-ffi *) = "unison_semantic_sha256_feed"
+external native_finish : native -> string (* ox-portable-ffi *) = "unison_semantic_sha256_finish"
+type t = Reference of reference | Native of { state:native; mutable finalized:bool; mutable length:int64 }
 let create () = match native_init () with
   | None -> Reference (create ())
   | Some state -> Native {state;finalized=false;length=0L}

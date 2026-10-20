@@ -1,0 +1,36 @@
+{
+  "scope": "Synthetic report end-to-end and disposable metadata receipt controls; zero CLI/SDK/Photo payload/EXIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "bench/report_sdk_receiving_comparison_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"complete\": true, \"attempted_cli_calls\": 24, \"sdk_helpers_settled\": 48, \"new_native_executions\": 0}\n",
+    "stderr": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.113s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 85392,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "sources": {
+    "bench/report_sdk_receiving_comparison.py": "4d8e35403cc4b45c811b52dae5a92e22f4120e826db7520c02fbf1870707f69e",
+    "bench/report_sdk_receiving_comparison_test.py": "8f0e551f9c40b403b3eaf9b084d5edf0dba42712348f0f4678f6fdb8a358f4d5"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "03792b",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Faithful actual exec_command terminal transcription; distinct from child/group proof"
+  }
+}

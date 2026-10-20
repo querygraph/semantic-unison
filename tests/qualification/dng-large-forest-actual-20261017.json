@@ -1,0 +1,125 @@
+{
+  "schema": "unison-dng-large-forest-actual/1",
+  "complete": true,
+  "scope": "Generated inputs only. Explicit local2048 nodes/default1024 unchanged; DNG/3 only newly accepted large partitions; opaque gaps preserved; UCH1 large/default refuses/UCH0 small/1MiB cap. Actual Update capacity test preserves report/cache/archive. No camera/SDK/Adobe/transport/hard memory claim. Production src pins current; test fixtures subsequently strengthened and separately qualified final kernel1590 and capacity002, not falsely rebound to earlier Make snapshot fixtures.",
+  "actual_tools": {
+    "make_both": {
+      "session": 76504,
+      "chunk": "3d51d7",
+      "exit": 0,
+      "no_session": true
+    },
+    "final_controls_dune_inspectors": {
+      "session": 97696,
+      "chunk": "8f927d",
+      "exit": 0,
+      "no_session": true
+    },
+    "production_capacity": {
+      "session": 73925,
+      "chunk": "8fdfa1",
+      "exit": 0,
+      "no_session": true
+    }
+  },
+  "controls": [
+    {
+      "label": "stock",
+      "checks": 1590,
+      "calls": 37,
+      "result": "/private/tmp/unison-dng-component-controls-mgsmhu2f/RESULT.json"
+    },
+    {
+      "label": "ox",
+      "checks": 1590,
+      "calls": 40,
+      "result": "/private/tmp/unison-dng-component-controls-bu_fp5n9/RESULT.json"
+    }
+  ],
+  "builds": [
+    {
+      "label": "stock",
+      "phase": "make",
+      "receipt": "/private/tmp/unison-large-forest-stock-make-20261017-001/RESULT.json",
+      "current_production_pins": 318
+    },
+    {
+      "label": "stock",
+      "phase": "dune",
+      "receipt": "/private/tmp/unison-large-forest-stock-dune-20261017-001/RESULT.json",
+      "current_production_pins": 318
+    },
+    {
+      "label": "stock",
+      "phase": "inspector",
+      "receipt": "/private/tmp/unison-large-forest-stock-inspector-20261017-001/RESULT.json",
+      "current_production_pins": 25
+    },
+    {
+      "label": "ox",
+      "phase": "make",
+      "receipt": "/private/tmp/unison-large-forest-ox-make-20261017-001/RESULT.json",
+      "current_production_pins": 318
+    },
+    {
+      "label": "ox",
+      "phase": "dune",
+      "receipt": "/private/tmp/unison-large-forest-ox-dune-20261017-001/RESULT.json",
+      "current_production_pins": 318
+    },
+    {
+      "label": "ox",
+      "phase": "inspector",
+      "receipt": "/private/tmp/unison-large-forest-ox-inspector-20261017-001/RESULT.json",
+      "current_production_pins": 25
+    }
+  ],
+  "capacity_result": "/private/tmp/unison-archive-hints-8vh_08k7/RESULT.json",
+  "artifact_sha256": {
+    "/private/tmp/unison-large-forest-stock-make-20261017-001/SHARED-CLOSED.json": "12881c02c2a2703665d0685a1168e43f7d6a8e1eeee3d8e623fb835ac7f113b5",
+    "/private/tmp/unison-large-forest-stock-make-20261017-001/SHARED-START.json": "0aa27b426abbb0b70bb7b05dcd93bb03713cc6a7d6334e499938de84cf09d8f9",
+    "/private/tmp/unison-large-forest-stock-make-20261017-001/SHARED-STDOUT.txt": "a5c64eaa3a1cf4c47056985c3f4ae92c2b9d73b4747582667c07485ac43f57ff",
+    "/private/tmp/unison-large-forest-stock-make-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-stock-make-20261017-001/RESULT.json": "ef16441610a8aa8d630c75312c62e3ff4282231578af94407c877f6ff64ddf28",
+    "/private/tmp/unison-large-forest-stock-dune-20261017-001/SHARED-CLOSED.json": "6fa24b6b8c875a8210f9716571b06b5a6cc59e4b1ef4f99792ecb4705f4b553c",
+    "/private/tmp/unison-large-forest-stock-dune-20261017-001/SHARED-START.json": "1a3f106a812323ac1f5257e39ac1453247ea01153d1f0b976afd880d6eeaa883",
+    "/private/tmp/unison-large-forest-stock-dune-20261017-001/SHARED-STDOUT.txt": "eb424ed9aa90a3c909536252a864d12240e4f5c78d13f412f2479a868c210f46",
+    "/private/tmp/unison-large-forest-stock-dune-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-stock-dune-20261017-001/RESULT.json": "10c5309cfe74ce31190930bf7e0069aa6da379f983385398c3f44f8c5b8b8d18",
+    "/private/tmp/unison-large-forest-stock-inspector-20261017-001/SHARED-CLOSED.json": "60f6e29f6464ed6902a665c8ce93e4370c943998b39eb39a6e68e27420b9a297",
+    "/private/tmp/unison-large-forest-stock-inspector-20261017-001/SHARED-START.json": "e76af90ebfe8709527a927fc61683e27fd4ab749994298fee484f97bb777221e",
+    "/private/tmp/unison-large-forest-stock-inspector-20261017-001/SHARED-STDOUT.txt": "7369fe82123472fd2000bce6bff9ac0135bf7974462a38d7c387c8948d9e8b08",
+    "/private/tmp/unison-large-forest-stock-inspector-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-stock-inspector-20261017-001/RESULT.json": "efa60f1466e56fafe9aff23b2183d3d2754d5149c914d494c062d79c4dd23f57",
+    "/private/tmp/unison-large-forest-stock-controls-final-20261017-001/SHARED-CLOSED.json": "b2cf96785dddc63c12d27d61cb2c96922459fe853822df774f335c4671c6837f",
+    "/private/tmp/unison-large-forest-stock-controls-final-20261017-001/SHARED-START.json": "5c2c40735476382038fdf58e634eded15f99008567f82756c5e1f657a2e17e83",
+    "/private/tmp/unison-large-forest-stock-controls-final-20261017-001/SHARED-STDOUT.txt": "93085c4f705ce0f342b63d9bb1e1b97a39f1cc2220e916247315180f4e5cc390",
+    "/private/tmp/unison-large-forest-stock-controls-final-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-dng-component-controls-mgsmhu2f/RESULT.json": "48318873bcf380a9aa30cd11928fdbb05c928c547be6f6ba0785d806c63df27a",
+    "/private/tmp/unison-large-forest-ox-make-20261017-001/SHARED-CLOSED.json": "2ae0bce93fddfabe7e3c92ac5f0d307a2cb7fb3443b1839ca171f46dd9057946",
+    "/private/tmp/unison-large-forest-ox-make-20261017-001/SHARED-START.json": "b34de580e6ab8a2fba73b0ba2d0d8fcda63b4d698c9a3d8f1b7c0851dc2c4046",
+    "/private/tmp/unison-large-forest-ox-make-20261017-001/SHARED-STDOUT.txt": "6fd121db76885c28c7fed90fc1f4e3fd121d88bce608cc0299c2cb72b1363feb",
+    "/private/tmp/unison-large-forest-ox-make-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-ox-make-20261017-001/RESULT.json": "5af9f9eac7816eb596fa17971e0af8516f0bbee70863591595daa0f550b7189c",
+    "/private/tmp/unison-large-forest-ox-dune-20261017-001/SHARED-CLOSED.json": "d00c9e59d8ad7e3d236fa7707bfbbf5406fa2cd5acfb4dee49e5625ce3a2f30f",
+    "/private/tmp/unison-large-forest-ox-dune-20261017-001/SHARED-START.json": "bda72112a7481a11982cc36c2bffe08487a8da242a5fb16b5c19e7cfb5cf8494",
+    "/private/tmp/unison-large-forest-ox-dune-20261017-001/SHARED-STDOUT.txt": "2ac633b5e2b52feb930dc9fe45d3429069af8d54546a6db09c260aa440e2959e",
+    "/private/tmp/unison-large-forest-ox-dune-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-ox-dune-20261017-001/RESULT.json": "67f41f0292fa86644a7112504b0f6f78e8fb5dd857e338372b2f0bc0989b9a88",
+    "/private/tmp/unison-large-forest-ox-inspector-20261017-001/SHARED-CLOSED.json": "fdfd47f35ef179bf94aaf10a8ed391b2e8c28bae256412aa001d0dbb39ca232a",
+    "/private/tmp/unison-large-forest-ox-inspector-20261017-001/SHARED-START.json": "4a7eca7f7dffd94fe7b2ebbe1d503e104ae625286391a978fc5ec624c5eaab81",
+    "/private/tmp/unison-large-forest-ox-inspector-20261017-001/SHARED-STDOUT.txt": "e2fe6fd977b7264641e0a8154514cef243fb857aeee301aaad80025a226fac85",
+    "/private/tmp/unison-large-forest-ox-inspector-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-large-forest-ox-inspector-20261017-001/RESULT.json": "31ad78eee7d9c05fd6fea130775e53b50e7644defb40276664d6a8d8e0d705f1",
+    "/private/tmp/unison-large-forest-ox-controls-final-20261017-001/SHARED-CLOSED.json": "2045ac2a0a6122173ee16915465ae03644c89af9a97d7220ccc4925a0fac9f1f",
+    "/private/tmp/unison-large-forest-ox-controls-final-20261017-001/SHARED-START.json": "a30634b5155da5e968c17de0bdc6c8d94b0281275f088f29727b844734f43b7b",
+    "/private/tmp/unison-large-forest-ox-controls-final-20261017-001/SHARED-STDOUT.txt": "c1edf7929903c7bb50a0d586ed3270e20f81a74a3dead49960595b3d3966f952",
+    "/private/tmp/unison-large-forest-ox-controls-final-20261017-001/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-dng-component-controls-bu_fp5n9/RESULT.json": "79a9a3a8b1cbe8668e5d08cdfefe4b764f756af4c04973ecbcdd62aa48ad91b1",
+    "/private/tmp/unison-large-forest-capacity-controls-20261017-002/SHARED-CLOSED.json": "8220b532162176b795bf8260d2e011c8f7fa9ef7d3fc15d24d628d282721fda6",
+    "/private/tmp/unison-large-forest-capacity-controls-20261017-002/SHARED-START.json": "9a203ed7b86dae82f441036159660a3c7fea8af84c00be626bb3302c7ea488d5",
+    "/private/tmp/unison-large-forest-capacity-controls-20261017-002/SHARED-STDOUT.txt": "672fae807304ae32765a12e5a21296052ee2ea908ca034ee14d34d409ef0f2fe",
+    "/private/tmp/unison-large-forest-capacity-controls-20261017-002/SHARED-STDERR.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/private/tmp/unison-archive-hints-8vh_08k7/RESULT.json": "ff77671f89c86a47f9f50efa256c8356390e40fa43b01fefcfd3f840b73b1a45"
+  }
+}

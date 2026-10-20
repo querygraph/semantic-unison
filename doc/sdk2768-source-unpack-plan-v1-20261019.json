@@ -1,0 +1,56 @@
+{
+  "schema": "unison-official-sdk-source-unpack-plan/1",
+  "repository": "/Users/alexy/src/unison-final-adobe-20261019",
+  "source_head": "aa57988c plus exact unpack-source pins",
+  "workspace": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/source-unpack-8a93911c923d41a68326326035fb5278",
+  "source_receipt": {
+    "path": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-sources-v1/adobe-171-2768-20261013-20261019-001/RESULT.json",
+    "bytes": 1212,
+    "sha256": "7bcba65742676dd85735f915a56d759b7511caf9b68cad95365ce55fb10ac22a"
+  },
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "extractor": {
+    "path": "/usr/bin/unzip",
+    "sha256": "12954ccb82651dd4133db66e414eaa40423106a9e61d431f8da77fedfc5ca93c"
+  },
+  "source_pins": {
+    "tests/sdk_source_unpack.py": "0917ce8a65b95f291320bbde2a1a3b6605dbd344821a254a0f81dd8d835072c1",
+    "tests/sdk_source_unpack_test.py": "a65c02c1874c36803ba6487011424fe4547ba451558920b22ca6bf3c72bc74fa",
+    "tests/sdk_source_unpack_owner.py": "4591e6581b8dababf43e137a896789247b0a5d17da655e17b391cdb8b122b1da",
+    "tools/adobe-validator/sdk_source_identity.py": "f60810cb347104a195ef17ae7a97f055208bdc18d24bb7af07472692392b3595",
+    "tests/sdk_host_matrix/shared_child.py": "b4491baf26abecc3a38796529f0fb132a22994e18cbb83537502c4f51e1d8712",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/shared_io_pool.py": "7d35c3fc60fa85db9a88745e54c8f593682e551edb194042595a943209ac97c1",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/cached_benchmark/contract.py": "ab1dd29451d5d1ab05405a7b6411ec3f5f88786e7d37b761760477647be992e3",
+    "tests/final_profile_owner.py": "e5f42ee1ed089462e75e088189a4ddd15521d7e49c9d430ce8e6de5e4ef16d50"
+  },
+  "limits": {
+    "exact_archive_entries": 4215,
+    "exact_declared_uncompressed_bytes": 133855079,
+    "maximum_uncompressed_bytes": 167772160,
+    "per_file_maximum": 67108864,
+    "extractor_observation_seconds": 90,
+    "CPU_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "io_mode": "EX_GLOBAL",
+    "SDK_executions": 0,
+    "compiler_jobs": 0
+  },
+  "original_controls": "a22bdd/0 six original ZIP path/type/budget controls; first fixture failure recovered separately",
+  "authority": "User authorized independent Unison source preparation after Photo drain; no SDKhost/Photo/original/Main/cache execution."
+}

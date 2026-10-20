@@ -1,0 +1,1200 @@
+{
+  "schema": "unison-mixed-exiftool-package/1",
+  "version": "13.10",
+  "executable": {
+    "path": "/usr/local/Cellar/exiftool/13.10/bin/exiftool",
+    "bytes": 338042,
+    "sha256": "62e624a95042805a9e334a8c8a771a349ab57c7b723662d52db4b876870a5de9"
+  },
+  "modules": [
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/File/RandomAccess.pm",
+      "bytes": 15595,
+      "sha256": "79ebc018bd8611aa2dda745e3f32f474ebf1e8af50d0618280f62e4c5ee19ca7"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/File/RandomAccess.pod",
+      "bytes": 4255,
+      "sha256": "0868f660258eb5f193437023ad2062351fe8ffa7cf072172da3c4aa178869b9b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/7Z.pm",
+      "bytes": 22502,
+      "sha256": "241e0bae7f6f4122d1c4c5b5c47a8b698957834d50815a88308a9b0807bcf9c2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/AAC.pm",
+      "bytes": 5204,
+      "sha256": "349fbc32c68132827f484abc1f15f8b8ff6d6975a4226b301309296da4b2cba1"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/AES.pm",
+      "bytes": 19103,
+      "sha256": "9ad70b7ae37b6f6e504f80c00fdbe13961b6e0aa93e92b08a4890bdb6910b1a4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/AFCP.pm",
+      "bytes": 10634,
+      "sha256": "14d9db71984b42b0459f2654355e7669c650c4397630389fddfa9738c3badb0b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/AIFF.pm",
+      "bytes": 10035,
+      "sha256": "3d9590acd8e4ab7c8d40f36992ee52d251eb476cfceffbae52fd00088e5ecf2c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/APE.pm",
+      "bytes": 9268,
+      "sha256": "d0618cf01b7f4eec3af1a9fb053acdd55e5bf1acd06bb24926d87163ba6f48d0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/APP12.pm",
+      "bytes": 10770,
+      "sha256": "02aee238a475047d7a4236da717ff80866febf249a5dee69fab543e05ed1f5ce"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ASF.pm",
+      "bytes": 31103,
+      "sha256": "426b390e35e6a2a497c2ef432104de94514b58a7a4a41618b55551dae893386c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Apple.pm",
+      "bytes": 14335,
+      "sha256": "a15f757b56df4d6cb6b623c67ecbb6b79b71dd483ba90c7e06620b96d544cb70"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Audible.pm",
+      "bytes": 11795,
+      "sha256": "48a6b3a87d5684b0ca1716654e30d1bb4194b8c04cdeec95b5974521e64008f9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/BMP.pm",
+      "bytes": 10701,
+      "sha256": "eddd311a6cadd98ea3137607883987ec941444354dfc661fd8bf9a3d0581963b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/BPG.pm",
+      "bytes": 7715,
+      "sha256": "393aabbb0df97d1b9c562d74ed395fae8c230398820a8abe0f6893a7a5ee4929"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/BZZ.pm",
+      "bytes": 17877,
+      "sha256": "95330d04f99571f1f1312d28e0a21a05302fc5afce0ed66d9b632a7521cc3bdf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/BigTIFF.pm",
+      "bytes": 11819,
+      "sha256": "0fb3bf7b52ab23ed6696338e970e8988a9eb844a851c631d95a6c2959d3c8caf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/BuildTagLookup.pm",
+      "bytes": 127870,
+      "sha256": "1cdc7d61157fd0f8e2ce7193dd53f007d1befcaf2052bcc1eb7fe3b5a6c6f3f6"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/CBOR.pm",
+      "bytes": 13061,
+      "sha256": "7f8b2e29ae40da271f47c6841295e30fb535404fbc5e652379db6b26ed3b3abf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Canon.pm",
+      "bytes": 404884,
+      "sha256": "cbeeb1b445f722a089f5914aa256c0e1688b7d70c376c7ca49cd3f5491246104"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/CanonCustom.pm",
+      "bytes": 86340,
+      "sha256": "ac2d8e82e0f3980d2411a8aec67882cdc2e0358db7d86b8ddc437024ca3c303e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/CanonRaw.pm",
+      "bytes": 30881,
+      "sha256": "42d92f0e9be880362a06ec2c67bdd9af2f5354e2942bb87df9d477f4fb3ccabd"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/CanonVRD.pm",
+      "bytes": 78180,
+      "sha256": "f6454eec98e419dc2ab4c5e4147ff117f6665f0278f804bb2a5ea31767add441"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/CaptureOne.pm",
+      "bytes": 8039,
+      "sha256": "553a208a34257759e7eddfe1d3f47b5b148d5225f65460b2ac30624a7dcc7337"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Casio.pm",
+      "bytes": 63705,
+      "sha256": "856112f14dc211ab70958e735a527063c079e686e10de6ef348e674b0e4de620"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Arabic.pm",
+      "bytes": 1913,
+      "sha256": "90625d5c7ff09c976f9768ae36dd19d99f66faf742a6d9cef35b1c1af16348bf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Baltic.pm",
+      "bytes": 1731,
+      "sha256": "c02c01046099116a116780de5ca822c69cdf986a83d75eaf3603911241ce21a3"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Cyrillic.pm",
+      "bytes": 2361,
+      "sha256": "39bf8e08e3ba0f6e63fe42eb07a4df28cddbaf8559c6b16f38252fd6d3f00f13"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/DOSCyrillic.pm",
+      "bytes": 2629,
+      "sha256": "09a00893c948759aa2807e9b23503f535aa3b7e7e2de68cade5557630b98bc11"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/DOSLatin1.pm",
+      "bytes": 2619,
+      "sha256": "ce2bca149aeb40d376a5d3e596ad3acc7fa5ce1244736a827de6521a05dcc089"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/DOSLatinUS.pm",
+      "bytes": 2621,
+      "sha256": "55d28e289e3b10bbd60dde97e72d8baa54cfbdae55f21c80722a9b3842b3e55d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Greek.pm",
+      "bytes": 1993,
+      "sha256": "5200b436582e79eab7a6424124e4481ec619c1784ae48265f90d8421cc9a6b9b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Hebrew.pm",
+      "bytes": 1759,
+      "sha256": "b43457e1b50a7180592fc627eb5dd84e415d3e5c28e7e4ce74ea2fee4c210bcd"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/JIS.pm",
+      "bytes": 127692,
+      "sha256": "1094fb6d5bc9ea792f9d68ddab277e6aa80b3f5335d2c1c6bfd8c1c5babe5411"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Latin.pm",
+      "bytes": 953,
+      "sha256": "2112fc60915466d29e54afba64bf3ffb586158a5cda6339b5e2f89f5216e9d7e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Latin2.pm",
+      "bytes": 1731,
+      "sha256": "52f17a32169da0141f9a653d6b81e08eb697d238fd026a5b390be70d44e8ef1d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacArabic.pm",
+      "bytes": 2559,
+      "sha256": "15aedb3d69b0770bfd8b0322b31985adb0488506cccd24e060a17ed3f52ae951"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacChineseCN.pm",
+      "bytes": 129364,
+      "sha256": "42af87d918a3eece920344be0b2f4bb97cd236860e2debd3224f664a8e089075"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacChineseTW.pm",
+      "bytes": 231400,
+      "sha256": "d1b6d89e0f6c102132fc5b5183506c777b3b3500f9b2d3e28a0f674125b7ba15"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacCroatian.pm",
+      "bytes": 2406,
+      "sha256": "2a573cf416ce3282a6dc1960103f9d4600726cf3db02e56ed603335c69c37381"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacCyrillic.pm",
+      "bytes": 2544,
+      "sha256": "ec49c4e79bf7fc5a18f5a4eb77d48fad40209f92c4e5f3d167c61d3f9587bbde"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacGreek.pm",
+      "bytes": 2502,
+      "sha256": "d0833ab250f51f99d2c7d172a7628c98537117a3dca22a4fe980c85ed824bdd0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacHebrew.pm",
+      "bytes": 2569,
+      "sha256": "bb3229736d486a4614ccd3be57afa29728dca939b51073eac85773fa8c253a85"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacIceland.pm",
+      "bytes": 2358,
+      "sha256": "28f0ac1102478079afb329096ac317954febdb120c924147b033ad28d2db98ba"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacJapanese.pm",
+      "bytes": 125371,
+      "sha256": "36b9819d02c5aafd1fc4ab5616dadf7a6e3d5de8d026bdbdf3d46cd1189fa4e1"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacKorean.pm",
+      "bytes": 171931,
+      "sha256": "f90c20ebacae587e8e9c8b57b95f64c10053da5afd2d83e0a3527232c412c676"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacLatin2.pm",
+      "bytes": 2526,
+      "sha256": "1e216c769557eb927cd6eee2ac4121f5df5caf052fdc058c08719b4a16484d3d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacRSymbol.pm",
+      "bytes": 129227,
+      "sha256": "9d8bd0c20775120c71c5e3b5996c6a076e0b62b96f84038964fb407c73eca58d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacRoman.pm",
+      "bytes": 2374,
+      "sha256": "243a84e50839abbcee96ce4b72c115fbf8d6f0fd755d2e7ff796da6dcf42c1be"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacRomanian.pm",
+      "bytes": 2394,
+      "sha256": "14d9d15c357acc6388bb95bcb08d00d9cc12895c73378d2351a50200074466f5"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacThai.pm",
+      "bytes": 2692,
+      "sha256": "6f11db69e246cfc46df92af3f5f4280da07e2b8831a7b311c8f00894c42e194b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/MacTurkish.pm",
+      "bytes": 2382,
+      "sha256": "9bfc65e53ed2666feecfe0cb27b1e940f836b64fd79e02ebd752ebd78a5ee6a3"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/PDFDoc.pm",
+      "bytes": 1264,
+      "sha256": "5571e74cd68b89afbf47dda2fd59da90d86fd026477383d41b5db51aacf0d4a6"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/ShiftJIS.pm",
+      "bytes": 119258,
+      "sha256": "757bc7e41b0b9f8db6ac31c4e9cb99964dda73a84ec9e10c9f63ac5990502001"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Symbol.pm",
+      "bytes": 3000,
+      "sha256": "463b9e12e4736fee4fbe504111251b2c90f0ff77afb832f37f3996a22201c916"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Thai.pm",
+      "bytes": 2087,
+      "sha256": "71ac8d56facacd91d3a3ac0cba11ebc11944dd3e10a95373e4a22fd505a7b4c1"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Turkish.pm",
+      "bytes": 1023,
+      "sha256": "97a40026b0cfe77f8186470085d8e51c2cee956f3d1719ae8151c35ce021cba5"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset/Vietnam.pm",
+      "bytes": 1123,
+      "sha256": "8ed317390f76295db70067231020a176d9c85f29e9030662ef7ed3de4665a4cc"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Charset.pm",
+      "bytes": 16397,
+      "sha256": "6060f5a4a7289206aff5079d6452796f41199f2312ef6b32eb87d8b1b73cabff"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DICOM.pm",
+      "bytes": 250975,
+      "sha256": "fc3c1756edd29be9293f46f5302724bd2e9c5a15e575f700a37c1f59c012f446"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DJI.pm",
+      "bytes": 14615,
+      "sha256": "f936225e1885d086e843d09f85cfddc7b28f39ebfb56108033247066cff97dda"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DNG.pm",
+      "bytes": 33853,
+      "sha256": "4f86d9260d226c6703f02699a58177993b182c000110fc5aa12247b7e61b90a4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DPX.pm",
+      "bytes": 9742,
+      "sha256": "6a11ae7315bd35262f8c033386c3b9034039f327f7d7b7c7128d809b3693ee21"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DV.pm",
+      "bytes": 9985,
+      "sha256": "5a9069dc98a46f1106471bfc4aeb2c8dbc70ee62f711057593513e825c4b0d13"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DarwinCore.pm",
+      "bytes": 16380,
+      "sha256": "4f887f009c1b8785669bbce505f6f534ede519067196d60e788163995aba00e0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DjVu.pm",
+      "bytes": 12758,
+      "sha256": "5e497d6a80832ced0aded5df5e359fc1dab888d0020895d6e5ccb33e5ed9c13e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/EXE.pm",
+      "bytes": 54209,
+      "sha256": "aad0bfe751cd109a5186904382ab3f07bb6f24a5044085e08ba48f0306950daa"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Exif.pm",
+      "bytes": 268124,
+      "sha256": "a8454b8ed0f39b709a882566102442ec66f236bfc123b559558ee065519c2e7a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FITS.pm",
+      "bytes": 5855,
+      "sha256": "1f96efde103732f7579d272dac5e2b9fdcfe44e2877a7d6959075fbe89e019e0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FLAC.pm",
+      "bytes": 10527,
+      "sha256": "a5691c79850ba91fda8125ddcf49aa354adf59e017ea086d4b7afb2265895fdb"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FLIF.pm",
+      "bytes": 11920,
+      "sha256": "bc09590d5781c1f8dab7f744a29bc76d4954552dbf2e24813a74e3a4029d82e7"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FLIR.pm",
+      "bytes": 61145,
+      "sha256": "0756186e070c61832f4f54f9d154ce260d84b2c04b2ae9c04dc0dc22062c6941"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Fixup.pm",
+      "bytes": 12732,
+      "sha256": "293605dbdfce8a91248a312bc8a5b0dde55264f2397e887d646d8cf792710326"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Flash.pm",
+      "bytes": 28161,
+      "sha256": "2d4a322d79420bf2e9389505c5231470862db47f11b8e03b8fb193dd5e219564"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FlashPix.pm",
+      "bytes": 97241,
+      "sha256": "efe701f95a5bf6770c539a0b451377ba365a6d3a872ae38ac91faacef5529f2b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Font.pm",
+      "bytes": 28468,
+      "sha256": "3907a3d7f5a054395e8f1f9f12f861dc70006a082df630826a8fe0be5e9eafb7"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FotoStation.pm",
+      "bytes": 8162,
+      "sha256": "3cc8c5968f9dc9ce7483970b826d4c43b7ab859f61018868652a6ae6bc013fcb"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/FujiFilm.pm",
+      "bytes": 66990,
+      "sha256": "062041c2ae7f24ca07e4dd4b09cde12c3558b938073dba05c6b9d81e5d8f9083"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GE.pm",
+      "bytes": 2046,
+      "sha256": "9459dfa92d66416e99c04cd2e6cd5297f0d4feabdcb6cf6a7384b39314636d99"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GIF.pm",
+      "bytes": 25065,
+      "sha256": "62194c1395259ce67f5947e9ee0eaa240dfa1209dd2f0fbf89cd692a25d615ed"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GIMP.pm",
+      "bytes": 8550,
+      "sha256": "d45a04ae47fee5e6de1e95e52f7ba57753221258de10df6f6718080f1d250b74"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GM.pm",
+      "bytes": 21052,
+      "sha256": "ddd4515a1970c7fbc0eb4bd1f24344b10b4fb8b0f686ce3af7e22d2c2d5435b2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GPS.pm",
+      "bytes": 21408,
+      "sha256": "2ad5a3e0c12a83fdc2a09ed0b3769a7a6cc85a6ad29aaecccd2ee306e13593be"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GeoTiff.pm",
+      "bytes": 89614,
+      "sha256": "b816fec1017adb0a752fff1a330b9102051c3cc13bfc87098a0da07b35cf8855"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Geolocation.dat",
+      "bytes": 2934090,
+      "sha256": "ccbbb928c87abd6b00498cb12f5b31c5cf2ce39f0e96516a846963a75a025362"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Geolocation.pm",
+      "bytes": 37984,
+      "sha256": "1ee3a28ccad3b118b6f5d49f06bd987dbd5aea6a5eb797beb8f5a9649919e691"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Geotag.pm",
+      "bytes": 71149,
+      "sha256": "7886de3e7a4f6d37c9499cfbd290162b40a4b8051fa011381dbac14933bb6675"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/GoPro.pm",
+      "bytes": 33418,
+      "sha256": "5f90119853b9cb0f0487df9cee2ec089b8028db133730e79478b9c9a9aaab77c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/H264.pm",
+      "bytes": 40235,
+      "sha256": "2e260db1c8b90e4cc1287e60abd75e63d8df0c41c1726d77f9ca95791e570307"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/HP.pm",
+      "bytes": 8197,
+      "sha256": "f039c0a21225481e355c2983f259237752a82ac7401dfd07e2d6b8ba58e46f37"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/HTML.pm",
+      "bytes": 22634,
+      "sha256": "7bddb8ec9e118721b5e94068d72eb4923c3f58e64159d7e2bace10b910ba062c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/HtmlDump.pm",
+      "bytes": 33758,
+      "sha256": "370a53ba18fc9c7b68cbf902959ba76d968f27b48e4554634f83db8583ad632f"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ICC_Profile.pm",
+      "bytes": 49720,
+      "sha256": "db2bf587eb4a1c580e3b894792a6305c94035e685433a77bc49fd2902a11c610"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ICO.pm",
+      "bytes": 3736,
+      "sha256": "7359182de47c424c39f75df9be83cf19c2834983e9c147678046b5d3b5cc2910"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ID3.pm",
+      "bytes": 61584,
+      "sha256": "2291852b40e2ab131ca0947d9f1b62fcabe1590258bb13141b825f115f3070e8"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/IPTC.pm",
+      "bytes": 40891,
+      "sha256": "8134115d4af4b80d663b47974f51c1c4e3dd0e73fcf28fd605dd9234915f08f0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ISO.pm",
+      "bytes": 6970,
+      "sha256": "723d194f54bcdc9e323c08b32edf0189b2fdf5a492ccc2c516dac41d1da64676"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ITC.pm",
+      "bytes": 6792,
+      "sha256": "3faa53655f6194ef5d53516b7b93269438f96d1d019dc5a517d1c8358356ad26"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Import.pm",
+      "bytes": 13554,
+      "sha256": "d88a525b7a9bcec53bc27368d3555b722efed013e46358c8e0045d168ad69b97"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/InDesign.pm",
+      "bytes": 11455,
+      "sha256": "75069d4991d907067d63ffd3ec7850df5c6bac0402574621f864f6f586c2ea8d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/InfiRay.pm",
+      "bytes": 10374,
+      "sha256": "f470a012a8c55e00767fec4c4e5f7344d95cdc40aa62c5a5e28201fc5197cd3c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/JPEG.pm",
+      "bytes": 27974,
+      "sha256": "d16561a0c62d44d48603ed3ab3a09c55f536623fd9ec938c1deb106ccc951a02"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/JPEGDigest.pm",
+      "bytes": 217476,
+      "sha256": "6a691499805ccd64bce015b79d6e7c80e27d2167b351dc3df66558f79fc1f4db"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/JSON.pm",
+      "bytes": 6632,
+      "sha256": "348953694cb191646aff5e195cb0bdc09303de10f7472552d8da64543f772ba3"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/JVC.pm",
+      "bytes": 3638,
+      "sha256": "54a321266c9934307febd0f2dc96cad8571c08bfe6b8cc0f71975e42f4af6e18"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Jpeg2000.pm",
+      "bytes": 65553,
+      "sha256": "f4f51f4219773bce2f7940de38eb3a9b10104d28e1f6ee0f0c03c9de0e61c0af"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Kodak.pm",
+      "bytes": 123357,
+      "sha256": "6571bdf0e44ddbb0c546e7617fa1a2e9791e0a8859662a99037954ae443976e8"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/KyoceraRaw.pm",
+      "bytes": 4411,
+      "sha256": "5b8e86c0ce3b1f13c4973d3d5010670260b122a59344e87bbd4578565ccdaed9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/LIF.pm",
+      "bytes": 5102,
+      "sha256": "88f9db96e7c4396c079dd1142d48c4c3255265f38a410b3feebe9ab906e40494"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/LNK.pm",
+      "bytes": 22797,
+      "sha256": "c6070c11941b0fb97965f7829132da43c036042d8a6bafa353046b2654b2c26c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/cs.pm",
+      "bytes": 46754,
+      "sha256": "356ea96696272052f9e8bdab98565f2a96e6c1feeacb0d24afe0ba632a8c914a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/de.pm",
+      "bytes": 299967,
+      "sha256": "ee418f4b502b66265fd3ac0eb91e74d9711b868fcbbf298285ed43f3438e25cc"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/en_ca.pm",
+      "bytes": 38532,
+      "sha256": "1f5bb2d33dc546b7b4e6abf9425b915bda5a4806a0b919119d087ee01a24721b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/en_gb.pm",
+      "bytes": 40449,
+      "sha256": "f37875f44608a0a8204ea200234891f142dea0f88aeab299f8a84f8926598216"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/es.pm",
+      "bytes": 123030,
+      "sha256": "4cb5c81f41d13c1da72bc0d5f44761bd048d4c1b97a9de54a676790989df8368"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/fi.pm",
+      "bytes": 112353,
+      "sha256": "3f1594cb2e1348ef67804f9296bcf56246f7ba62d83bb9e53e26b1185ee0a5fb"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/fr.pm",
+      "bytes": 435790,
+      "sha256": "13ee529b7f1282a7269ac7999a7852fc1be28d4fb9fecd706681d032db26fdce"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/it.pm",
+      "bytes": 250848,
+      "sha256": "3eae0d8edcbeeb7d38c6743d81e1bdb04d9159b56682ddcd17091801ffd5c89c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/ja.pm",
+      "bytes": 209853,
+      "sha256": "48faf2e0e1cc836c0ba7a744d25e37757a03734c010b6961764a262a368a3e21"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/ko.pm",
+      "bytes": 68220,
+      "sha256": "b34e1c5bb8825628b07fde8007d74cefdcdd85e52d6b8d13dd25e10bc07c8706"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/nl.pm",
+      "bytes": 91735,
+      "sha256": "3a1969c3d04f065a8d69bf5e94b8e8d235b6029d0c16ef1945a72c3423503950"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/pl.pm",
+      "bytes": 46570,
+      "sha256": "522413597c7b885e73df8abdf05a80ede342eb389d29e52ed769aa1e16574055"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/ru.pm",
+      "bytes": 321153,
+      "sha256": "bbb703e21ad7548b42a62c1daa064a3d70f1a838a498b5238ef683adc56ccf79"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/sk.pm",
+      "bytes": 78976,
+      "sha256": "1e5f42dfa0810dd9d5196af1fce6bf31317e5cf7f364225be33be34d903082b2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/sv.pm",
+      "bytes": 21686,
+      "sha256": "6a132e88e5b9641df15cb324627b02395c2c8c98605f49a21c05ea69976ff9b7"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/tr.pm",
+      "bytes": 19207,
+      "sha256": "4acbd0254dba7cc031a359a9794cf512d987de7a3dddeb7b2dfba80290b08539"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/zh_cn.pm",
+      "bytes": 37677,
+      "sha256": "5519dfbddc48dbd7fe2f9b7260893a416811da18b38576c8eedd296423e7e0f1"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lang/zh_tw.pm",
+      "bytes": 27478,
+      "sha256": "e2fda1b5d95a7361d305f12235d3cd28ca60ce639a94b1265fe385d8b767e713"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Leaf.pm",
+      "bytes": 16715,
+      "sha256": "22e0df886c74f98edbc0ffe69b28d130328f8695895aedeaa24c66f7ee095bbf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Lytro.pm",
+      "bytes": 7760,
+      "sha256": "e93de20f9b79f685d91329d7a9ebcc54c4ebbe734dd60bbe174c750c51e37495"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/M2TS.pm",
+      "bytes": 47431,
+      "sha256": "7bd9aa2c5674dad851e332f7c856223920ee926131e7148c9432760b0cb9b844"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MIE.pm",
+      "bytes": 105049,
+      "sha256": "c6a6e78ce9cf00966579d7117487772e682cd336cbaac9f32a5ac9c15283d234"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MIEUnits.pod",
+      "bytes": 14004,
+      "sha256": "81cedff0b95885d7a134b5eeb083a00b547da90b13b5c3de88a1fc356af6ed27"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MIFF.pm",
+      "bytes": 9263,
+      "sha256": "b98f85394ac3f38ad00475aaf515750c67f89fc2c58dff33d6d3044c75db21bc"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MISB.pm",
+      "bytes": 23383,
+      "sha256": "8e1ba7de4d2095b5e9849363f6eaafb3b3c04cf593c90ebc587ccd99f7560bf3"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MNG.pm",
+      "bytes": 16606,
+      "sha256": "6f8d673a3f4ea002782c1b8c34e2785513c25a55c9c5a069bccd83e9a448adbb"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MOI.pm",
+      "bytes": 4241,
+      "sha256": "6c5decb62039278a534063bdf9894a324cb07a49c981fad97154efb5b91b605b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MPC.pm",
+      "bytes": 4152,
+      "sha256": "f5af8c3048569d96c5b970e41609775e6195d084cd4b6c72cdfbda0d750e0064"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MPEG.pm",
+      "bytes": 22853,
+      "sha256": "58be0b092946580fbc2d1cc410ca2fa1df8ab4ce7f2234900051fd4acf711ac9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MPF.pm",
+      "bytes": 9226,
+      "sha256": "cc9c39fb6654d9ba87084bb7894370d47db0770a73d33822222e43961ed5075a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MRC.pm",
+      "bytes": 18835,
+      "sha256": "84a7f2e1820281c60c6bda311c03d03a1bb1caf5f9477e75d8d0b37c43435848"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MWG.pm",
+      "bytes": 31458,
+      "sha256": "ac6a4dea1b0c065872849fb6d68247435368c42927339481706f619f1762bb05"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MXF.pm",
+      "bytes": 258701,
+      "sha256": "736a6240ca9124c3e32d3f121d4d53c0bbc4f839f391eaa953367940528febe0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MacOS.pm",
+      "bytes": 31966,
+      "sha256": "d26ecf9d8152d8a85c7c326a02634e37d7e3548ca29deed80369fa951b712959"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MakerNotes.pm",
+      "bytes": 71302,
+      "sha256": "e889491010117df0ba19fa63edd91d37aa5710994ec9f6b489d4b001d6bd4b58"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Matroska.pm",
+      "bytes": 47263,
+      "sha256": "4654a34d50a0ed082c508cdbdda72ba1532f4d629c9e8f49ed6931a51aa0b383"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Microsoft.pm",
+      "bytes": 53409,
+      "sha256": "74286afe65266c1376f2e82e5ae6cfcbcd9977b96db406e10f2f15f42c3548c0"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Minolta.pm",
+      "bytes": 102156,
+      "sha256": "44fc2e5e7db8faa8d529a77068778249c43753fd58f32721e00c652a75d97f82"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MinoltaRaw.pm",
+      "bytes": 16946,
+      "sha256": "30d59e19238582515e94a301125ca232970e6171f388754e2663032390153b81"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Motorola.pm",
+      "bytes": 5672,
+      "sha256": "364c59862eea4b24ab734334111bfdb053e769b2bbe2f6d2a8762f5cf5d289a6"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Nikon.pm",
+      "bytes": 551760,
+      "sha256": "2ae17b4db07a3174660582c4ae9998a0229aef7734af39cdcf8ca7f0244a496d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/NikonCapture.pm",
+      "bytes": 28807,
+      "sha256": "0b2667cc3eaeb72e60717cc60621dfb0b6655010f72e4b04f7774d78632ba1d9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/NikonCustom.pm",
+      "bytes": 358897,
+      "sha256": "dace8bac2618facb3cfd21554c16ae148cf085daffafb02d456fb53bc190e65e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/NikonSettings.pm",
+      "bytes": 75338,
+      "sha256": "185219841e8873cb013e783d515d8cbd728ba831677dbca8249989e9ec39d43f"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Nintendo.pm",
+      "bytes": 3322,
+      "sha256": "82594e4613dfe779fa8fe982c20d4ad1df5f14b904df9f2ee28097dd0fc10025"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/OOXML.pm",
+      "bytes": 14039,
+      "sha256": "a3e80a35d6b197064efc4afe876837a2607019d8437ee0c921fb287c14241f6b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Ogg.pm",
+      "bytes": 9064,
+      "sha256": "18c4366b2f899642bdaebad779482b89d4dadcf08c3e258103c1b71971c1cb34"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Olympus.pm",
+      "bytes": 148560,
+      "sha256": "4f6e5520edcb445c5c08b058d31cf158d11259322cbcc0d928cc7e72e1d1ec56"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/OpenEXR.pm",
+      "bytes": 12157,
+      "sha256": "37e7b43f3a0be0b6e358f10dccc59aa6c8951d3ef36d17f0dd495d2498cd203e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Opus.pm",
+      "bytes": 2270,
+      "sha256": "3aa69253a66a5d39dfd8a996bbc3f2e6a63a10a3317c7e4b0d5e8c36a6f7a86e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Other.pm",
+      "bytes": 2694,
+      "sha256": "f102896309b73bdb728f7ff87cc6b772313a662524dcc92afe230f36835fc4d2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PCX.pm",
+      "bytes": 3810,
+      "sha256": "986cdc12c3ae695e6e9cb5a902e42d4df766f056c88d5995e10eac1148533a66"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PDF.pm",
+      "bytes": 97323,
+      "sha256": "f0567f53c00bb5eed725fd2afd5bdfedb5d073c81d4f30c352f6ea14797a6c63"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PGF.pm",
+      "bytes": 4135,
+      "sha256": "9d3bd18826234d3b1bebdfe56e485b495c49fa9384294078e8737840b54990a5"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PICT.pm",
+      "bytes": 33998,
+      "sha256": "14698189e506e4e9cf9f3de3938fd9f5bf399314703dacab38b9895d9756ae4c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PLIST.pm",
+      "bytes": 18206,
+      "sha256": "d04911886270de88d3ad6c5a4bafd5c0c908da0742a989ad8cf128b44cd5217c"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PLUS.pm",
+      "bytes": 152122,
+      "sha256": "63d0a2fd02ae7e43c3e55332012f2b933e56c6e0aa36ab1566cd8b08faa25ab2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PNG.pm",
+      "bytes": 67318,
+      "sha256": "21b16a0afa9f23f85c38707f95f11b8ba4bac1eef758afc4f765f75a992cb8bf"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PPM.pm",
+      "bytes": 5492,
+      "sha256": "6c18083067b2e2b56ff3d3032ee5749d3719d4c161ea6b4c2cdec112543790bc"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PSP.pm",
+      "bytes": 9235,
+      "sha256": "008935e15dba1f66c88eceec0f1f86167707f2c38cb20a53704425a8854a65f1"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Palm.pm",
+      "bytes": 12184,
+      "sha256": "4af5c5367ce5fb5a4ab04ff1ecc1457be12e63175f21ddafe935f69ba2da9052"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Panasonic.pm",
+      "bytes": 101464,
+      "sha256": "2fd0ff94373253cfdad28bac01e6ea6bbcb817951694e1942016faf8f136c38a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PanasonicRaw.pm",
+      "bytes": 34923,
+      "sha256": "1af16b00ad749648fbf4eb1cf80d0a29e73403a42fd91f969163764e880ab735"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Parrot.pm",
+      "bytes": 24515,
+      "sha256": "d833e51730f3f243838da8bdf86811c28ebb7f8620e3334b7083f8449253f0c4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Pentax.pm",
+      "bytes": 231788,
+      "sha256": "281e3983b4f8cb797cff4e6bcf2b3214c7c3e962d08a20d5dd4e607c97be916a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PhaseOne.pm",
+      "bytes": 27408,
+      "sha256": "f192b913ca7b0ff1ac4e8302dd0f7f512b037cc9c161b467f45fd0dd9de53687"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PhotoCD.pm",
+      "bytes": 18688,
+      "sha256": "1c976ac23a69c7536061803cb44ff3c30145488988fcb84d06b006811f23498b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PhotoMechanic.pm",
+      "bytes": 8325,
+      "sha256": "a1e60301b7da2e3b28e8c1de396240c8030590bbb10389b115e57c96b86ceeef"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Photoshop.pm",
+      "bytes": 48024,
+      "sha256": "52a6a7e21c5f319dc269d6f46b4c24a686c6e77d1b190158e33a30611798977f"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PostScript.pm",
+      "bytes": 29588,
+      "sha256": "fbccf8b2f9e6426131676ce31f0e4c0a11df73984d01e2d153274a5c05b77081"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/PrintIM.pm",
+      "bytes": 3521,
+      "sha256": "f90cd933e855db55a3ecfe17e6c1e26c22c0db30bfa3ba8b728c28e2b2d023c9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Protobuf.pm",
+      "bytes": 8221,
+      "sha256": "425157489b4627c98656efe7cb2bff13c0deabf0739742062fba8844f11d085d"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Qualcomm.pm",
+      "bytes": 44472,
+      "sha256": "43ec54e6cf679358b319ff36545ed73eb4206fba2f41656c380952b05df72c8b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/QuickTime.pm",
+      "bytes": 444764,
+      "sha256": "a45fab84bc6054a0e6a60237ee8dd0739f02159d33b78bf0ea12a896e32b8f34"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/QuickTimeStream.pl",
+      "bytes": 182477,
+      "sha256": "41c9fa5b4a0ada1f42769bca8f08a3af6025eb61ab2cb6dbf6e143e582aac150"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/README",
+      "bytes": 69305,
+      "sha256": "7a4067985d9cf05962e49a0d0c4447d537c6b8e1111f7df44439bbc289492836"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/RIFF.pm",
+      "bytes": 79952,
+      "sha256": "1f40177c8d961fff3faa52e50141102306a70cb18fa425169bd2b061cb409e98"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/RSRC.pm",
+      "bytes": 9814,
+      "sha256": "25b000141240530df359b1c3c6b2b7ad8aedc6b7e3dbcce72cf5d3274f26ccfe"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/RTF.pm",
+      "bytes": 13776,
+      "sha256": "385c20d318d09c7849c879b862415abeb0e97b996acd81763abaff3f76151149"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Radiance.pm",
+      "bytes": 4665,
+      "sha256": "b752d00547dc884fa117c27e9ffc9e485a64d12816b902143d23b9408abe93b4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Rawzor.pm",
+      "bytes": 6316,
+      "sha256": "e4427bf63be836ea3b4e5f31cb1fa013ee944051978ee42690fdabc050f671bb"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Real.pm",
+      "bytes": 27549,
+      "sha256": "dc19441944a4b863f7236e47e11ed1aec064b82bdafb8ddc6f89736918370494"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Reconyx.pm",
+      "bytes": 14541,
+      "sha256": "2d687bee4e3d44d6c8af07a5de98e1ee3d69365425aec5d182078b6f22463d0b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Red.pm",
+      "bytes": 11084,
+      "sha256": "b56a817aaea5bfc664253a43347259f1816e91098bf434193d944f4fd98cb004"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Ricoh.pm",
+      "bytes": 41991,
+      "sha256": "0c36fbbf6eb6f057d9116dcbdec9b2c46acb598af889a6be1c009be408fd4858"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Samsung.pm",
+      "bytes": 67433,
+      "sha256": "c500fcc7d7d9dd4cee57c8fec988bc6a3de130ea99626f0a1b738c4b69c92402"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Sanyo.pm",
+      "bytes": 12116,
+      "sha256": "4e69108d46f0d3ed7c6fe437aabb7a8e9ce582c639fba131aea5cc8ed82b5f02"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Scalado.pm",
+      "bytes": 4006,
+      "sha256": "608201eabfb31b55f6435cb5ed1d7d46ceba7434e325388cdeafc6f659bfc395"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Shift.pl",
+      "bytes": 23773,
+      "sha256": "238b56963b29c9be45582fd4f2e41f688cb10a53a68003ccc2f8a79aa3436481"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Shortcuts.pm",
+      "bytes": 10174,
+      "sha256": "da806787cb32f8ea95378562400d17442171a1f57ebba4af9e24cc623976b696"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Sigma.pm",
+      "bytes": 35176,
+      "sha256": "4dcb8721f2c25f7ad05d166cc1cda8392028ffa0f62495e5cbbeb2fb10b69832"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/SigmaRaw.pm",
+      "bytes": 25684,
+      "sha256": "91a8dac9c208e686846f828f83e78f35048c18bf9bcb93f9c716a8f8133ecdf6"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Sony.pm",
+      "bytes": 470665,
+      "sha256": "99a196daf9add2a8418c8efb9019bcb5db1157b4498655765c8c21bd9cd491e4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/SonyIDC.pm",
+      "bytes": 12237,
+      "sha256": "aeec3d58a239a43727c749110545f0a0ff9332399ea451910579c5ef694a4e52"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Stim.pm",
+      "bytes": 4640,
+      "sha256": "c77d3849a84f4caab421cd1d449f7b11dfc3a51e196afeac79921bf698058f46"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/TagInfoXML.pm",
+      "bytes": 34403,
+      "sha256": "910a30457d7cbbf220272f3edb535429ac0a03da9ce0da067de27f7ad7e2a1f4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/TagLookup.pm",
+      "bytes": 737427,
+      "sha256": "7a09914adad94ded7cf1ef8b022ad6601d96aa3ec5e40608b6abfd834e861e74"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/TagNames.pod",
+      "bytes": 2022973,
+      "sha256": "03ab04bbf73b9dcf059e7c88777266bb31e9de4ed370781a093ee54a7ca50af9"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Text.pm",
+      "bytes": 8381,
+      "sha256": "9719582c2a6117c10707c5f3593097717118829f0e1b6f01c3a190fb6a28d7e5"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Theora.pm",
+      "bytes": 3496,
+      "sha256": "702b8d7e7cbdef2ef957ce5dbcfe519a89de78b29968285b9366d5c0a4f7d8e7"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Torrent.pm",
+      "bytes": 11832,
+      "sha256": "c7dfb7f14465562e04456d93091b819a2ebedd83bf65be4a6551bc2b68a015f3"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Unknown.pm",
+      "bytes": 1731,
+      "sha256": "0fd367c7375a60cda360fbe73d0d8e6a3a1a3c7f953578b73d7bd548a7adfd0e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/VCard.pm",
+      "bytes": 18242,
+      "sha256": "adb3d0e6d69aa0f92f83d9b0b25509f56daf411974b2e32a8edd737eac1fdb78"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Validate.pm",
+      "bytes": 31332,
+      "sha256": "6b41c8df2bea51139e675c3a84d122322b3f0bea912e74bb8e2532f29a58370a"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Vorbis.pm",
+      "bytes": 8321,
+      "sha256": "f32b0f0915ac4551f00b4d26ac366da83c877b676139f2682b2b8503631efc43"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WPG.pm",
+      "bytes": 9933,
+      "sha256": "b58d4d9d8d1066ca5662c752099f1625337ed61f23061cb5cd9bdf0a4f396f06"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WTV.pm",
+      "bytes": 13285,
+      "sha256": "a9f65052feb58b98cefdc1b23c2df3541027f4471416e99cea33412ad4f66494"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteCanonRaw.pl",
+      "bytes": 25164,
+      "sha256": "0aab8a29dd7ea18d81b5658961135b3fa54b00ea1edae2b6b39ca61c83a5637b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteExif.pl",
+      "bytes": 142891,
+      "sha256": "10783f1e9714e569fda49acba1b031dc8ed509223f38b70767e2e10cbeb61d4b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteIPTC.pl",
+      "bytes": 30224,
+      "sha256": "cd5873b8630a7deb594ee25234dd6a9465821a4a10c65512bd732dade8d4caf6"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WritePDF.pl",
+      "bytes": 30701,
+      "sha256": "7b374ef65cbabd4f30ca211f9687e16fd61d9e86c29cce9d0ea134ff9ec3fe9b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WritePNG.pl",
+      "bytes": 16453,
+      "sha256": "d56f24057c0c67adf72b2d33a3097c9dc1e0500c2165cfa5aa0afa6ac6e34237"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WritePhotoshop.pl",
+      "bytes": 11172,
+      "sha256": "db1896514274d0626a60ca407f82871effc84f3429f7d86a42da7e4e213a72d4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WritePostScript.pl",
+      "bytes": 27353,
+      "sha256": "395c9bf7df93a1d34dce1f46e032d8e7a7a595fb6631f97f915f4101ce84a3e4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteQuickTime.pl",
+      "bytes": 102028,
+      "sha256": "2d6a69b3a989e8c4a655585a7e4a474c951eb84c7bf0b771f5714afda137cca2"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteRIFF.pl",
+      "bytes": 16417,
+      "sha256": "b35fdfa302f202b1eac014a0dcab465f497903f71c546bd181ab276bee25422f"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/WriteXMP.pl",
+      "bytes": 73604,
+      "sha256": "62adfcd816a72556f8dba54e4a75f1083fdf5b9e6b89ee5efe40f8104c6e8f51"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Writer.pl",
+      "bytes": 325567,
+      "sha256": "e38209b906ed0cf6e5da4956298f3f914300ba3bc0fe4c23665716d7b8e62107"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/XISF.pm",
+      "bytes": 5715,
+      "sha256": "9e1cd7df2064e602206bca48df5f0509a4bde99defd50c0ab11a48ceebdc8f56"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/XMP.pm",
+      "bytes": 190765,
+      "sha256": "1059a8f775324b43dfe268a1c60d881510c900472cba95cce5fb589db7d96b1f"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/XMP2.pl",
+      "bytes": 95306,
+      "sha256": "f5caa6fd2c325a03a0ae20961a8ac8e38cd4d098d5576fa4eb98d2ab4d06d65e"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/XMPStruct.pl",
+      "bytes": 40985,
+      "sha256": "a7fe0dfb441e67fc9f13281dae13d3b0261b45cc6af3ecf90f7a80a2840ef60b"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ZIP.pm",
+      "bytes": 33453,
+      "sha256": "a843d3fbf9faea191592757cbc2bdc50c7726455ab48b36dd876603abb7f9ce4"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/ZISRAW.pm",
+      "bytes": 8043,
+      "sha256": "a82de763f31e0ea4be328e98312681682c753a0814f4950b39cf65a987fe3630"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/iWork.pm",
+      "bytes": 7976,
+      "sha256": "06f859a1f2b36a3b2853ea73b74241b0669db282b91cfdabe037f909aa149d06"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool.pm",
+      "bytes": 436563,
+      "sha256": "915bc25b83c201bbda5fb8231e0e3c929ea1e4506b98e8ad72c6521d46cdd971"
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool.pod",
+      "bytes": 116779,
+      "sha256": "121184d3d85182756b6150c457723fb6a6fe0aca4fc0cb214923c800f59f2651"
+    }
+  ],
+  "system_interpreter": {
+    "path": "/usr/bin/perl5.34",
+    "bytes": 101840,
+    "sha256": "d43b51a8d1393b90f16b3aade811428c1e6b1fbf24faca2d9c75465bb829a82f"
+  },
+  "package_root": "/usr/local/Cellar/exiftool/13.10/libexec/lib",
+  "package_roster_complete": true,
+  "full_runtime_dependency_inventory_complete": false,
+  "trust_boundary": "Existing OS Perl module search paths and system dylibs; not a hermetic Perl runtime or image/pixel qualification."
+}

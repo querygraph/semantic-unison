@@ -1,0 +1,65 @@
+{
+  "schema": "unison-sdk-followon-source-actual/1",
+  "actual_tool": {
+    "terminal_chunk": "f9078b",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/admission.py": "7f1988cf7583583e2caa008ca9f0da2671e65861ec0b1ae799f342f23d2a6057",
+    "tests/sdk_merge_receiving/freeze.py": "938ea9d898ba3b6f9f4dc9375465eed1a04abbbacf6b375781962bd21574f6a9",
+    "tests/sdk_merge_receiving/inputs.py": "20d76e40f11428726e45222bd899bd3fbc21b3c82dfb681582dd903446898d58",
+    "tests/sdk_merge_receiving/inventory.py": "ff33595ecc0a1e78e69f759d2daba28e5546e8cb80fbb6914eac7243e057480f",
+    "tests/sdk_merge_receiving/metadata.py": "85e1bc7d0a87b85165637ff0377be5e131f84c4082c92713aaa7682d817466f1"
+  },
+  "child": {
+    "group_cleanup_before_leader_reap": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "pid": 3772,
+    "reaped": true,
+    "returncode": 0
+  },
+  "CPU00_closed": true,
+  "EX_acquired": false,
+  "scope": "Actual authentic generated-state manifest metadata-only freeze; no input payload/executable read, SDK call or runtime admission",
+  "raw_references": [
+    {
+      "path": "/private/tmp/unison-sdk-merge-native-freeze-20261019-001/RESULT.json",
+      "bytes": 781,
+      "sha256": "9c05a444299e94ef064f6f8834e941990759e96c6f293c29e91b93a31c81d5af"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-merge-native-freeze-20261019-001/CHILD.json",
+      "bytes": 2309,
+      "sha256": "e8498265d901b57caf63fc73d58c8ffaa51689eb4308918b7211ca388af1d443"
+    }
+  ],
+  "index": {
+    "launch_argv_template": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py",
+      "--plan",
+      "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/PLAN.json",
+      "--plan-sha256",
+      "7047511856ed22ea39bd4b7a8b29fb8f10a17900ddd854810f515ec649cf2eb7",
+      "--admission",
+      "ROOT_PUBLISHED_PATH_REQUIRED",
+      "--admission-sha256",
+      "ROOT_PUBLISHED_SHA_REQUIRED"
+    ],
+    "plan": {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/PLAN.json",
+      "sha256": "7047511856ed22ea39bd4b7a8b29fb8f10a17900ddd854810f515ec649cf2eb7"
+    },
+    "request": {
+      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/REQUEST.json",
+      "sha256": "66c0bfe11dd8be169033a11cec2963818e8bd97c2bf4da6253a02fd7fd12e450"
+    },
+    "runtime_admitted": false,
+    "schema": "unison-current-sdk-merge-freeze/1",
+    "sdk_invoked": false,
+    "state": "PREPARED_UNADMITTED",
+    "workspace": "/private/tmp/u-smg-19b4448de9564e4a"
+  }
+}

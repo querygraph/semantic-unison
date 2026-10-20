@@ -1,0 +1,43 @@
+{
+  "scope": "Opt-in main endpoint hard per-process FD96; stock/Ox full CLI+selftests, native limit/exhaustion/readback oracle. Requested RSS refuses before exec; no actual RSS or aggregate descendant bound. Original helper behavior regressions pass.",
+  "endpoint_parent": {
+    "session": 2117,
+    "terminal_chunk": "4ffa50",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "helper_parent": {
+    "session": 63655,
+    "terminal_chunk": "24be90",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "artifacts": {
+    "endpoint/RESULT.json": {
+      "path": "/private/tmp/unison-endpoint-fd-limits-20261018-001/RESULT.json",
+      "bytes": 6095,
+      "sha256": "d11f064615fb6f54f6b6ba2f470fc6adbc710c10014c3f87b920ef8d076207f9"
+    },
+    "endpoint/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-endpoint-fd-limits-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "7133b96c131eca7cba631a2b767fad04d5c9937b733d18e1c3c7af074e37a4ab"
+    },
+    "helper/RESULT.json": {
+      "path": "/private/tmp/unison-endpoint-helper-regression-20261018-001/RESULT.json",
+      "bytes": 607,
+      "sha256": "1235817676e1c0242b1657f0800be26bb150161a4cacbdf6d4ff6a96b3e047c3"
+    },
+    "helper/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-endpoint-helper-regression-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "09f135e0d6919b3c0dc4887168e95b365e6e407327fb5c889435dfd6e7769d56"
+    }
+  },
+  "remaining": [
+    "hard RSS supported backend and functional enforcement",
+    "aggregate descendant FD and memory containment",
+    "per-acquisition accounting beyond estimated transaction credits",
+    "broader benchmarks and final integration"
+  ]
+}

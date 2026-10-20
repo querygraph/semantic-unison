@@ -1,0 +1,35 @@
+{
+  "schema": "unison-final-rpc-version-independent-audit/1",
+  "actual_owner_terminal": {
+    "session": 17884,
+    "initial_chunk": "3faf91",
+    "terminal_chunk": "a57f83",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 40210
+  },
+  "plan_sha256": "63cb36641489014870a53f4ba8f21323de02e8be5cd77f73fc6e5fa3078a4735",
+  "workspace": "/private/tmp/u-rpc-version-2a0efc0e58504f18",
+  "calls": 6,
+  "normal_reaps": 6,
+  "groups_absent": true,
+  "versions": [
+    0,
+    1,
+    999
+  ],
+  "source_pins": 536,
+  "production_pins": 329,
+  "generated_input_bytes_rechecked": 64,
+  "same_pid_exec_source_and_shim_bound": true,
+  "canonical9_reacquired_closed": true,
+  "accepted": [
+    1
+  ],
+  "refused": [
+    0,
+    999
+  ],
+  "RPCv0_ordinary_fallback_proved": false,
+  "scope": "Current stock/Ox direct generated negotiation bytes only; not v0 sync/SSH/camera/SDK/pixel/production compatibility."
+}

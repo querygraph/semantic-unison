@@ -1,0 +1,38 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "DNG explicit private-view replacement; not automatic registry/store integration or full builds",
+  "calls": 58,
+  "actual_terminal": {
+    "session": 91068,
+    "chunk": "d77ad7",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-99viej8k/RESULT.json",
+      "bytes": 348645,
+      "sha256": "9836a0a85833f4cc3c6ae7bbccbfec1128d6fd41b4be87bfe6454b884a8b10a3"
+    },
+    {
+      "path": "/private/tmp/unison-dng-replacement-controls-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "5300b27a177e882863a16429067cf4b84ae3576cd1a05db9d6e182d5892a5c89"
+    },
+    {
+      "path": "/private/tmp/unison-dng-replacement-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "8fd884e8804477f4d92e1fa29c99e2450c8cbcd2e92c6113279ff1c62c0ef8a7"
+    },
+    {
+      "path": "/private/tmp/unison-dng-replacement-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-replacement-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "f57d0dda1b5b351d27061163992c2b2a9a590f98e5ad473a01253df3e9c0b392"
+    }
+  ]
+}

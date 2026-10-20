@@ -1,0 +1,305 @@
+{
+  "state": "ARCHIVE_OWNED_MANAGED_COMPONENT_LOADER_PASS_CLOSED",
+  "actual_parent_terminal": {
+    "session": 35813,
+    "chunk": "42bf8f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-stock-make-20261017-002/RESULT.json",
+        "bytes": 50502,
+        "sha256": "ad7c6529e95eee71376a53b3dbbb11680ba659915d3521962fd6142aa9545d9a"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-stock-make-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "5f03ad0eb47e66cdb7e470614bffd08b612346a67261815d893a0fd08997c986"
+      },
+      "current_production_source_checks": 318
+    },
+    {
+      "label": "stock",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-stock-dune-20261017-002/RESULT.json",
+        "bytes": 49946,
+        "sha256": "9c73da31d64527ff6d2e3d9c614a55ea6bde19ff1d33417a5c9286a89ff53008"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-stock-dune-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "fad50e032f1f85c3c4e25ead83c58b8dad1c6e5b48198db32efa6d39493265d9"
+      },
+      "current_production_source_checks": 318
+    },
+    {
+      "label": "ox",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-ox-make-20261017-002/RESULT.json",
+        "bytes": 50508,
+        "sha256": "43ea14cc006d151df08e4bbbfc4242728fb897addcab596e2872816e52d2a97d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-ox-make-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "49fc382e36eee72b71fb632c9c4a29b021af5b6e0b9055a4b84b2f7533296300"
+      },
+      "current_production_source_checks": 318
+    },
+    {
+      "label": "ox",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-ox-dune-20261017-002/RESULT.json",
+        "bytes": 49950,
+        "sha256": "209c02dd3086492713eb062fee8c5df87dae783eaf64ed06ea5c955a74641f27"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-ox-dune-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c14fd100b34a1e6418d5db5b2a25fde4920c8140ad906a822479ba2a0617f713"
+      },
+      "current_production_source_checks": 318
+    }
+  ],
+  "controls": [
+    {
+      "label": "core",
+      "raw": {
+        "path": "/private/tmp/unison-component-controls-_p7rbyt7/RESULT.json",
+        "bytes": 155974,
+        "sha256": "b6bafdf8183538a868d2b2ded8b608e12f33006977f9a73c2b1aa81c1df048ca"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-core-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "826788ec00f2680af6162dbee5fd2b335a8da439dc527d4827ec1200aec9da12"
+      },
+      "direct_calls": 41,
+      "reports": [
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 1005 checkpoint controls; authenticated metadata, full input verification, localized refinement, malformed/tampered/stale refusals",
+        "PASS 13 borrowed positional reader fault checks",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 27 record publication fault checks; postrename effect retained, stage EIO/EINTR not retried",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 1005 checkpoint controls; authenticated metadata, full input verification, localized refinement, malformed/tampered/stale refusals",
+        "PASS 13 borrowed positional reader fault checks",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 27 record publication fault checks; postrename effect retained, stage EIO/EINTR not retried"
+      ]
+    },
+    {
+      "label": "dng",
+      "raw": {
+        "path": "/private/tmp/unison-dng-component-controls-ypi86nns/RESULT.json",
+        "bytes": 495731,
+        "sha256": "8847ff2602866e0c81886bf5ca34b6b1292226da035216e080ab4e99dfd8dc6f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-dng-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "bc5d95a8d5ce5d627a543ade8616de7b6bbde52bb03b69d620a2d2e83bf32b51"
+      },
+      "direct_calls": 72,
+      "reports": [
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "DNG component controls: 1391 checks PASS",
+        "PASS 29 owner archive-reference publication fault checks",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "DNG component controls: 1391 checks PASS",
+        "PASS 29 owner archive-reference publication fault checks",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge"
+      ]
+    },
+    {
+      "label": "loader",
+      "raw": {
+        "path": "/private/tmp/unison-cache-loader-controls-cqgx670e/RESULT.json",
+        "bytes": 411439,
+        "sha256": "a538ad7395dc92c8e7256e504ff0093f363987436c9bf3ce8bbc8b0cf9a49f4e"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-loader-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "1978f6c5f1c2b66d2c1b1666a95daa9c1d1f2e62616b0b60013e35855a8f29f4"
+      },
+      "direct_calls": 58,
+      "reports": [
+        "PASS 80 managed cache loader checks; exact metadata, no-follow, cancellation, retained close uncertainty",
+        "PASS 7 production native cache loader checks; two trusted entries/records and complete FD retirement",
+        "PASS 80 managed cache loader checks; exact metadata, no-follow, cancellation, retained close uncertainty",
+        "PASS 7 production native cache loader checks; two trusted entries/records and complete FD retirement"
+      ]
+    },
+    {
+      "label": "worker",
+      "raw": {
+        "path": "/private/tmp/unison-component-worker-controls-1toj7qtl/RESULT.json",
+        "bytes": 125593,
+        "sha256": "10cd79ede280236c6b2a3e7087c0c5d3c84370c19319d2e4504a16163ae26ea7"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-worker-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "8afdf2a5fdd0bf6b758df809a73f2c07896a0f98c6ca467d7269b92baf817198"
+      },
+      "direct_calls": 4,
+      "reports": [
+        "PASS 126 component worker checks; parallel parity, off-owner refinement, read reporting, failure and queued/late cancellation",
+        "PASS 126 component worker checks; parallel parity, off-owner refinement, read reporting, failure and queued/late cancellation"
+      ]
+    },
+    {
+      "label": "archive",
+      "raw": {
+        "path": "/private/tmp/unison-archive-hints-37w6ah8l/RESULT.json",
+        "bytes": 156988,
+        "sha256": "e523975105989dfc110867a1a94defdaeaefefa380773e539848399f449553d8"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-archive-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "efee205b9cc27ec843ed2c6963637c4071ad1b7117fed7b6c564bd3266c07dd9"
+      },
+      "direct_calls": 14,
+      "reports": []
+    }
+  ],
+  "earlier_closed_attempts": [
+    {
+      "scope": "Original test expected corruption exception instead of Invalid_argument for bad limits; failed closed",
+      "actual_parent_terminal": {
+        "session": 75439,
+        "chunk": "b54c00",
+        "exit_code": 1,
+        "no_session": true
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "6918948d29e922634e97fcec4bcf7222f4d7a00bd1e51e86aee34a5c8c7ea791"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-001/SHARED-STDERR.txt",
+        "bytes": 785,
+        "sha256": "0a2982b23da68a20d7ff981df8866564d8565dd4ffa7c6b718fed68f320d5cc4"
+      }
+    },
+    {
+      "scope": "Ox owner-only loader annotation missing; compile refusal, corrected interface/filter",
+      "actual_parent_terminal": {
+        "session": 32727,
+        "chunk": "08db74",
+        "exit_code": 1,
+        "no_session": true
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "aadd02ba4cbbce58646cd7955f810b4a4193ef2267c931da5e1f944d345d0abb"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-002/SHARED-STDERR.txt",
+        "bytes": 2033,
+        "sha256": "d57208be149b56888ed7d31a5b0e799a53b5279ae91c1727db735d4328f59230"
+      }
+    },
+    {
+      "scope": "Focused controls before unmodified production-native probe and final identity-retention fix",
+      "actual_parent_terminal": {
+        "session": 48529,
+        "chunk": "97827e",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-003/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "61452ab00925455b257b4486f93f525b7c63bde5446b3a96b7d8fd12bae97b4d"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-003/SHARED-STDOUT.txt",
+        "bytes": 51,
+        "sha256": "d109b9975a3732a5fd9fd975c133b28cb5e36bc9ed8a7e2cea2c224232cff150"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-003/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "scope": "Focused plus production-native probe before final identity-retention fix",
+      "actual_parent_terminal": {
+        "session": 19173,
+        "chunk": "5c4970",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-004/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "fca630236b06e039ec5b9df942e5d6774f9aa4e7474503edb83773725533a4e4"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-004/SHARED-STDOUT.txt",
+        "bytes": 51,
+        "sha256": "c9dc2c8dab9e48b39eac61ec94021da91411a67eb2e7a034431dd522e9878064"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-cache-loader-focused-20261017-004/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "pre_identity_fix_full_pass": {
+    "actual_parent_terminal": {
+      "session": 55637,
+      "chunk": "228122",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "scope": "Earlier 001 builds/controls passed; current evidence uses 002 after last-known-identity retention correction."
+  },
+  "scope": "macOS borrowed private directory; strict digest-named read-only no-follow opens, bounded UIX/UDI/UCR authentication and once-only close with qualified uncertainty carrier; loaded archive supplies manifest trust. No directory installation, automatic capture/report routing, source payload, SDK/transport, hardware persistence or physical IO savings qualification.",
+  "fault_artifact_scope": "Fault native object digest was captured at compile time; that object was replaced by the separately recompiled unmodified native object in each disposable directory. Rechecked retained fault executable and shim object, normal executable/native object and exact sources; no claim that the overwritten standalone fault object was rehashed."
+}
