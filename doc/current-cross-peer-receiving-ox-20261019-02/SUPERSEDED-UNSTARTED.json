@@ -1,0 +1,5 @@
+{
+  "state": "SUPERSEDED_UNSTARTED",
+  "reason": "invoke launcher binary fix after cross_peer stock-02 stop; no admission written",
+  "successor": "current-cross-peer-receiving-ox-20261019-03"
+}

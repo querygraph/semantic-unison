@@ -1,0 +1,35 @@
+{
+  "schema": "unison-current-named-receiving-failed-recovery/1",
+  "state": "FAILED_RECOVERY_CLOSED",
+  "plan_sha256": "af68786671ec6d5fc7ce7cb462a61f6b528092610c2707a51b4dd6450e90cb9d",
+  "admission_sha256": "7429679a25f4f0ed0e459a091b516e884402279cad1dc9c895e383bdd6c10ad2",
+  "admission_consumed": true,
+  "workspace": "/private/tmp/u-xpeer-82d7aa2260634e3e",
+  "owner_pid": 64643,
+  "worker_pid": 64650,
+  "proxy_pid": 64658,
+  "source_commit": "831cf783",
+  "progress": {
+    "cases_passed": 0,
+    "calls_accepted": 0
+  },
+  "failure": {
+    "case": "seed-update",
+    "call": 1,
+    "error": "proxy RETAINED: TimeoutError('proxy accept expired'); client never connected",
+    "product_finding": null,
+    "harness_finding": "invoke.py still exported UNISON_MERGE_BINARY as the client binary; the loopback launcher builds its header for that binary and refused the peer -servercmd, so the client never reached the proxy. Fixed to the server binary with a peered invoke regression test."
+  },
+  "recovery": {
+    "evidence": "RECOVERY-EVIDENCE/",
+    "stopped": [
+      "SIGKILL exact pid 64658 (call-001 proxy)",
+      "SIGKILL exact pid 64650 (worker)",
+      "SIGKILL exact pid 64643 (owner)"
+    ],
+    "native_children_present": false,
+    "locks_verified_free": "EXglobal + CPU00..07 freshly reacquired and closed"
+  },
+  "ox_run_started": false,
+  "no_replay": true
+}

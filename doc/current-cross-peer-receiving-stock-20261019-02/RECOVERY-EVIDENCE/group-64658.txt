@@ -1,0 +1,2 @@
+  PID  PPID  PGID STAT COMMAND
+64658 64650 64658 SNs  /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14 -B /private/tmp/u-xpeer-82d7aa2260634e3e/seed-update/call-001-proxy.py

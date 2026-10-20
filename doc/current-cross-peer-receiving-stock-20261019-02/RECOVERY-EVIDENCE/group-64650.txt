@@ -1,0 +1,2 @@
+  PID  PPID  PGID STAT COMMAND
+64650 64643 64650 SNs  /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14 /Users/alexy/src/unison-final-adobe-20261019/tests/current_validation_paths/entry.py --worker --plan /Users/alexy/src/unison-final-adobe-20261019/doc/current-cross-peer-receiving-stock-20261019-02/PLAN.json --plan-sha256 af68786671ec6d5fc7ce7cb462a61f6b528092610c2707a51b4dd6450e90cb9d --workspace /private/tmp/u-xpeer-82d7aa2260634e3e
