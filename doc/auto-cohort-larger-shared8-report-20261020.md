@@ -24,8 +24,9 @@ Median update wall seconds, with client / server CPU seconds:
 At both sizes the semantic mode is the only one that gains from a second worker
 (128 MiB: 1.5–1.6×, 512 MiB: 1.35–1.5×). Ordinary and receiver-clone stay flat
 because they are bound by transfer, not by CPU. Stock and OxCaml are within a
-few percent of each other everywhere, except the 512 MiB two-worker semantic row
-(46.4 s against 51.2 s). The rows come from separate runs on a warm, uncontrolled
+few percent of each other except in two rows: 128 MiB one-worker ordinary
+(stock 11.3 s, OxCaml 9.6 s) and 512 MiB two-worker semantic (stock 46.4 s,
+OxCaml 51.2 s), so neither compiler is consistently faster. The rows come from separate runs on a warm, uncontrolled
 same-host loopback. These are descriptive figures, not causal scaling, quiet-host
 timings or physical APFS savings.
 
