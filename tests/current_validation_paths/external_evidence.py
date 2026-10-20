@@ -28,7 +28,8 @@ def audit(log,expected,transport_pids,*,disposed_at_exit=False):
         if key not in remaining:raise ValueError('external counter/process binding differs')
         record=remaining.pop(key)
         normal=record.outcome=='completed' and record.status==('exit',0)
-        disposed=disposed_at_exit and record.outcome=='cancelled' and record.status in (('exit',0),('signal',9))
+        # Exit-time teardown SIGKILLs; Unison traces OCaml's constant -7.
+        disposed=disposed_at_exit and record.outcome=='cancelled' and record.status in (('exit',0),('signal',-7))
         if (not (normal or disposed) or record.cpu_weight!=1
             or record.group_observation!='observed' or record.other_members!=0 or record.capture_truncated):
             raise ValueError('external fixture child/group/capture not normally settled')

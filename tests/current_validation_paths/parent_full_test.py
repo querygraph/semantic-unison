@@ -41,7 +41,7 @@ def receipt(endpoint,mode,sha,size):
 
 def helper_lines(value,outcome):
     prefix='server: ' if value['endpoint']=='server' else '';hang=value['mode']=='hang'
-    return ('['+prefix+'validation-process] Helper result v0 pid='+str(value['pid'])+' status='+('signal:15' if hang else 'exit:0')+
+    return ('['+prefix+'validation-process] Helper result v0 pid='+str(value['pid'])+' status='+('signal:-11' if hang else 'exit:0')+
         ' outcome='+outcome+' candidate-sha256='+value['sha256']+' candidate-bytes='+str(value['size'])+
         ' capture-truncated=false stdout-truncated=false stderr-truncated=false stdout-hex='+receipt(value['endpoint'],value['mode'],value['sha256'],value['size']).hex()+
         ' stderr-hex=\n['+prefix+'validation-group] Retained group v0 pid='+str(value['pid'])+' candidate-sha256='+value['sha256']+' other-members=0\n')

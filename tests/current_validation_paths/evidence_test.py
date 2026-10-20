@@ -12,7 +12,7 @@ def expected(mode='pass',pid=321,endpoint='server'):
 
 def lines(entry):
     mode=entry['mode'];pid=entry['pid'];endpoint=entry['endpoint'];prefix='server: ' if endpoint=='server' else ''
-    if mode=='hang':payload=b'';status='signal:15'
+    if mode=='hang':payload=b'';status='signal:-11'
     else:
         payload=('UNISON-DNG-VALIDATION 1\ncandidate-sha256 '+('0'*64 if mode=='wrong-receipt' else SHA)+
             '\ncandidate-size 4096\ndriver-build validation-path-'+endpoint+'-v1\nstructure valid\ndecode success\nraw-digest missing\nerrors '+('1' if mode=='error' else '0')+'\nwarnings 0\nEND\n').encode();status='exit:0'

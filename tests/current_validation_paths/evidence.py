@@ -66,8 +66,9 @@ def helpers(log,expected,transport_pids):
         require(process.candidate_bytes==entry['candidate_bytes'] and group.observation=='observed'
             and group.other_members==0 and process.complete_capture,'helper capture or retained group unresolved')
         require(process.outcome==entry['outcome'],'actual helper disposition differs from source-declared phase')
+        # Unison traces OCaml's signal constants: SIGTERM -11, SIGKILL -7.
         if entry['mode']=='hang':
-            require(entry['outcome'] in ('timed-out','cancelled') and process.status in (('signal',15),('signal',9))
+            require(entry['outcome'] in ('timed-out','cancelled') and process.status in (('signal',-11),('signal',-7))
                 and process.stdout==b'','only declared owned timeout/cancellation helper signal allowed')
             report=None
         else:

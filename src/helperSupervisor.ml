@@ -357,7 +357,20 @@ let execute ?observe_group ?observe_alive ?observe_teardown c ~release ~owner_cl
         match
           (if owns_child () then begin
              (try signal_group !owned_pid Sys.sigkill with Unix.Unix_error _ -> ());
-             if notify then observe_before_reap ()
+             match notify, group_owner with
+             | true, Some _ ->
+                 (* The census needs a terminal leader. Allow a killed leader a
+                    bounded moment to exit; otherwise the census stays unknown. *)
+                 let deadline = monotonic_now () +. 1. in
+                 let rec terminal () =
+                   exited_unreaped !owned_pid
+                   || (monotonic_now () < deadline && (Unix.sleepf 0.001; terminal ())) in
+                 if (try terminal () with _ -> false) then
+                   (* As on the ordinary path: kill leftover members before the
+                      census. Darwin reports EPERM when only the zombie leader remains. *)
+                   (try signal_group !owned_pid Sys.sigkill with Unix.Unix_error _ -> ());
+                 observe_before_reap ()
+             | _ -> ()
            end;
            reap_now ())
         with
