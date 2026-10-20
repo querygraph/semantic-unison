@@ -9,8 +9,7 @@ import hashlib,json,math
 from pathlib import PurePosixPath as Path
 from sdk_merge_receiving.admission import exact,PYTHON
 from sdk_merge_receiving.metadata import document
-from current_validation_paths import recipes,parent_counters,dng_contract
-DNG_SCHEMA='unison-current-dng-merge-receiving-execution/1'
+from current_validation_paths import recipes,parent_counters,successors
 NAMED_TOTALS=dict(cli_calls=69,fake_validators=54,copy=9,merge=7,producer_interruptions=4,client_cancellations=2)
 from current_validation_paths.evidence import audit as audit_normal
 from current_validation_paths.cancel_evidence import audit as audit_cancel
@@ -41,8 +40,10 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         or any(type(r) is not dict or set(r)!={'fd','device','inode'} or any(type(v) is not int or v<=0 for v in r.values()) for r in resources)
         or len({r['fd'] for r in resources})!=9
         or type(owner_deadline) not in (int,float) or not math.isfinite(owner_deadline) or owner_deadline<=0):raise ValueError('exact contiguous call/worker/resource inventory required')
-    dng=packet.get('schema')==DNG_SCHEMA;phase_of=recipes.dng_phase if dng else recipes.phase
-    totals=dng_contract.TOTALS if dng else NAMED_TOTALS
+    successor=successors.contract(packet.get('schema'))
+    server=successors.server_binary(packet)
+    phase_of=(lambda *a:recipes.successor_phase(successor,*a,server_binary=server)) if successor else recipes.phase
+    totals=successor.TOTALS if successor else NAMED_TOTALS
     if not 0<=n<=totals['cli_calls']:raise ValueError('attempted calls exceed declared suite inventory')
     scripts=recipes.scripts(recipes.literal_templates(source),packet['repository']);rowmap={row['directory']:row for row in rows}
     loaded=[];by_root={};last_index=-1
@@ -57,7 +58,7 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         if not exact(intent_record,dict(intent=intent,global_call=number,resource_release_authorized=False)):
             raise ValueError('exact independently read intent number required')
         phase=phase_of(row,sequence,scripts,packet['binary']['path'])
-        kind=None if dng else 'producer_interruption' if row['family']=='resumed' and sequence==1 else 'cancellation' if row['family']=='cancelled' and sequence==2 else None
+        kind=None if successor else 'producer_interruption' if row['family']=='resumed' and sequence==1 else 'cancellation' if row['family']=='cancelled' and sequence==2 else None
         keys={'case_root','sequence','resource_release_authorized','before_fake_helper_counts','before_external_counts',*phase}
         if kind:keys.add(kind)
         if (type(intent) is not dict or set(intent)!=keys or intent['case_root']!=root or type(intent['sequence']) is not int
@@ -71,7 +72,7 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         expected_keys={'directory','identity','stage','binary','flags','deadline','worker_pid','resource_fds'}|({'producer_observer'} if kind=='producer_interruption' else set())
         if (type(config_record) is not dict or set(config_record)!={'proxy','script_sha256','resource_release_authorized'}
             or config_record['resource_release_authorized'] is not False or type(config) is not dict or set(config)!=expected_keys
-            or config['directory']!=root or config['stage']!=stem or config['binary']!=packet['binary']['path']
+            or config['directory']!=root or config['stage']!=stem or config['binary']!=server
             or not exact(config['flags'],phase['server_command'][3:]) or type(config['worker_pid']) is not int or config['worker_pid']!=worker_pid
             or not exact(config['resource_fds'],resources) or type(config['deadline']) not in (int,float)
             or not math.isfinite(config['deadline']) or not 0<config['deadline']<=owner_deadline

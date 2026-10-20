@@ -53,6 +53,26 @@ class Freeze(unittest.TestCase):
         self.assertEqual(packet['schema'],'unison-current-dng-merge-receiving-execution/1');self.assertEqual(len(packet['rows']),13)
         self.assertTrue(index['workspace'].startswith('/private/tmp/u-dmerge-'));self.assertEqual(packet['limits']['CLI_calls'],29)
         with self.assertRaises(ValueError):freeze.prepare('stock',source.receipt,Path(A.REPOSITORY)/'doc'/'current-named-receiving-stock-x',read=source.read,suite='dng_merge')
+    def test_fs_properties_suite_freezes_its_own_contract_and_namespace(self):
+        source=Sources();output=Path(A.REPOSITORY)/'doc'/('current-fs-properties-receiving-stock-control-'+uuid.uuid4().hex[:16]);self.outputs.append(output)
+        with patch.object(freeze.inventory,'execution',return_value=EXECUTION),patch.object(freeze.inventory,'production',return_value=PRODUCTION):
+            index=freeze.prepare('stock',source.receipt,output,read=source.read,suite='fs_properties')
+        packet=json.loads((output/'PLAN.json').read_text())
+        self.assertEqual(packet['schema'],'unison-current-fs-properties-receiving-execution/1');self.assertEqual(len(packet['rows']),6)
+        self.assertTrue(index['workspace'].startswith('/private/tmp/u-fsprop-'));self.assertEqual(packet['limits']['CLI_calls'],17)
+        with self.assertRaises(ValueError):freeze.prepare('stock',source.receipt,Path(A.REPOSITORY)/'doc'/'current-dng-merge-receiving-stock-x',read=source.read,suite='fs_properties')
+    def test_cross_peer_suite_pins_the_other_compilers_build(self):
+        source=Sources('stock');peer=Sources('ox');source.files.update(peer.files)
+        output=Path(A.REPOSITORY)/'doc'/('current-cross-peer-receiving-stock-control-'+uuid.uuid4().hex[:16]);self.outputs.append(output)
+        with patch.object(freeze.inventory,'execution',return_value=EXECUTION),patch.object(freeze.inventory,'production',return_value=PRODUCTION):
+            index=freeze.prepare('stock',source.receipt,output,read=source.read,suite='cross_peer',peer_build_receipt=peer.receipt)
+            packet=json.loads((output/'PLAN.json').read_text())
+            self.assertEqual(packet['peer']['compiler'],'ox');self.assertEqual(packet['peer']['binary']['path'],'/private/tmp/named-build-ox/src/unison')
+            self.assertEqual(set(packet['prerequisite_sha256']),{source.receipt,peer.receipt});self.assertTrue(index['workspace'].startswith('/private/tmp/u-xpeer-'))
+            for suite,receipt,name in (('cross_peer',None,'a'),('cross_peer',source.receipt,'b'),('fs_properties',peer.receipt,'c')):
+                bad=Path(A.REPOSITORY)/'doc'/('current-'+suite.replace('_','-')+'-receiving-stock-control-'+name+uuid.uuid4().hex[:8]);self.outputs.append(bad)
+                with self.subTest(suite=suite,receipt=receipt),self.assertRaises(ValueError):
+                    freeze.prepare('stock',source.receipt,bad,read=source.read,suite=suite,peer_build_receipt=receipt)
     def test_stale_compiled_source_or_failed_selftest_refuses_without_request(self):
         for mutation in ('compiled','selftest'):
             with self.subTest(mutation=mutation),self.assertRaisesRegex(ValueError,'compiled source|selftest'):self.prepare(mutation=mutation)

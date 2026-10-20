@@ -10,7 +10,8 @@ from current_validation_paths.cancel_observation import validate_fixture
 from current_validation_paths import recipes
 
 
-def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist,options=recipes.options):
+def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist,options=recipes.options,server_binary=None):
+    server_binary=binary if server_binary is None else server_binary
     if not all(callable(f) for f in (invoke,audit,interrupt,persist,options)):raise ValueError('owned source adapters required')
     ns=legacy.__init__.__globals__;ns['ADMISSION_OPTIONS']=['-semanticvolumejobs','1']
     ns['HELPER_CONFIG']={};ns['SERVER_HELPER_DESCRIPTORS']=None
@@ -60,7 +61,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist,opti
         def command(self,*,policy='require',options=()):
             self._ready();settings=[value for k,v in self.config('client').items() for value in ('-'+k,v)]
             return [self.binary,str(self.left),'ssh://localhost/'+str(self.right),'-sshcmd',str(self.launcher),
-                '-servercmd',self.binary,'-batch','-auto','-fastcheck','false',*self.common_flags(policy),*settings,*self._options(options)]
+                '-servercmd',server_binary,'-batch','-auto','-fastcheck','false',*self.common_flags(policy),*settings,*self._options(options)]
         def sync(self,*,policy='require',options=(),success=True,exit=None,designated=None):
             # Explicit exit/designated serve source-owned successor cases; the
             # original assertions only ever pass success.
@@ -83,7 +84,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist,opti
             profile=(self.server_state/'endpoint.prf').read_text()
             before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
             intent=dict(sequence=self.sequence,case_root=str(self.root),command=self.command(policy=policy,options=options),
-                server_command=[self.binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
+                server_command=[server_binary,'-server','__new-rpc-mode',*self.common_flags(policy),*self._options(options)],
                 expected_client_exit=expected_exit,before_fake_helper_counts=before,
                 before_external_counts={kind:len(ns['records'](path.with_suffix('.calls.jsonl'))) for kind,path in (('copy',self.copy),('merge',self.merger))},
                 helper_controls={endpoint:json.loads(self.drivers[endpoint].with_suffix('.control.json').read_text()) for endpoint in ('client','server')},

@@ -8,8 +8,8 @@ import hashlib,math,re
 from sdk_merge_receiving.plan import require,path,digest
 from sdk_negative_receiving.admission import PYTHON,PYTHON_SHA,POLICY,IO,REPOSITORY,COMPILERS,exact,reference,inventory
 from current_validation_paths.contract import plan as case_plan,LIMITS
-from current_validation_paths import dng_contract
-SCHEMAS={'unison-current-named-receiving-execution/1':'named','unison-current-dng-merge-receiving-execution/1':'dng-merge'}
+from current_validation_paths import successors
+SCHEMAS={'unison-current-named-receiving-execution/1':'named',**{schema:'successor' for schema in successors.SUITES}}
 
 TARGET='current-named-receiving'
 LEGACY='tests/validation_paths/run.py'
@@ -18,9 +18,10 @@ LEGACY='tests/validation_paths/run.py'
 def validate(packet,*,source,execution_sources,production_sources):
     fields={'schema','repository','workspace','compiler','interpreter','binary','build','legacy_source','rows','limits',
             'source_pins','production_sha256','prerequisite_sha256','cpu_policy_sha256','io_manifest_sha256'}
+    if type(packet) is dict and packet.get('schema') in SCHEMAS and successors.peered(packet['schema']):fields=fields|{'peer'}
     require(type(packet) is dict and set(packet)==fields and packet['schema'] in SCHEMAS,
             'exact named execution packet required')
-    dng=SCHEMAS[packet['schema']]=='dng-merge'
+    successor=successors.contract(packet['schema'])
     require(packet['repository']==REPOSITORY,'exact reviewed owner repository required')
     require(exact(packet['interpreter'],dict(path=PYTHON,sha256=PYTHON_SHA)),'qualified pinned interpreter required')
     require(packet['cpu_policy_sha256']==POLICY and packet['io_manifest_sha256']==IO,'exact standing8/EXglobal pins required')
@@ -29,17 +30,28 @@ def validate(packet,*,source,execution_sources,production_sources):
     raw=source.encode()
     require(exact(packet['legacy_source'],dict(path=REPOSITORY+'/'+LEGACY,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())),
             'exact original legacy case source required')
-    contract=dng_contract.plan(packet['workspace'],packet['compiler']) if dng else case_plan(source,packet['workspace'],packet['compiler'])
-    require(exact(packet['rows'],contract['rows']) and exact(packet['limits'],dng_contract.LIMITS if dng else LIMITS),'complete original ordered cases/limits required')
+    contract=successor.plan(packet['workspace'],packet['compiler']) if successor else case_plan(source,packet['workspace'],packet['compiler'])
+    require(exact(packet['rows'],contract['rows']) and exact(packet['limits'],successor.LIMITS if successor else LIMITS),'complete original ordered cases/limits required')
     inventory(packet['source_pins'],execution_sources);inventory(packet['production_sha256'],production_sources)
     require(packet['source_pins'].get(LEGACY)==packet['legacy_source']['sha256'],'legacy source must be pinned execution')
     build=packet['build'];binary=packet['binary']
     require(type(build) is dict and set(build)=={'receipt','compiler'},'exact build/compiler references required')
     reference(build['receipt']);reference(build['compiler']);reference(binary)
     require(build['compiler']['path']==COMPILERS[packet['compiler']],'canonical compiler executable required')
-    require(exact(packet['prerequisite_sha256'],{build['receipt']['path']:build['receipt']['sha256']}),
-            'exactly the authenticated build receipt prerequisite required')
-    require(len({PYTHON,binary['path'],build['compiler']['path']})==3,'distinct interpreter/binary/compiler required')
+    receipts={build['receipt']['path']:build['receipt']['sha256']}
+    executables=[PYTHON,binary['path'],build['compiler']['path']]
+    if 'peer' in packet:
+        peer=packet['peer']
+        require(type(peer) is dict and set(peer)=={'compiler','binary','build'} and peer['compiler'] in COMPILERS
+            and peer['compiler']!=packet['compiler'] and type(peer['build']) is dict and set(peer['build'])=={'receipt','compiler'},
+            'exact other-compiler peer build required')
+        reference(peer['build']['receipt']);reference(peer['build']['compiler']);reference(peer['binary'])
+        require(peer['build']['compiler']['path']==COMPILERS[peer['compiler']],'canonical peer compiler executable required')
+        receipts[peer['build']['receipt']['path']]=peer['build']['receipt']['sha256']
+        executables+=[peer['binary']['path'],peer['build']['compiler']['path']]
+    require(exact(packet['prerequisite_sha256'],receipts),
+            'exactly the authenticated build receipt prerequisites required')
+    require(len(set(executables))==len(executables),'distinct interpreter/binary/compiler required')
     return contract
 
 
