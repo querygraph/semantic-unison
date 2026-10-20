@@ -1,0 +1,37 @@
+{
+  "schema": "unison-current-named-receiving-failed-recovery/1",
+  "state": "FAILED_RECOVERY_CLOSED",
+  "plan_sha256": "b5b9e5e87e501389c33c71f1a4a1c2a2c2ba279415dd6ab2194618dfff73a6c8",
+  "admission_sha256": "eecaefb9768b7d73c025936c0499f045b4395b87e41d7d269de685f832233de6",
+  "admission_consumed": true,
+  "workspace": "/private/tmp/u-fsprop-aca49dca464a4cde",
+  "owner_pid": 62324,
+  "worker_pid": 62331,
+  "source_commit": "79f67939",
+  "progress": {
+    "cases_passed": 0,
+    "calls_accepted": 3,
+    "includes": [
+      "zero-length: empty create, grow to 4096, shrink to zero all exact"
+    ]
+  },
+  "failure": {
+    "case": "zero-length",
+    "call": 4,
+    "error": "client exit 3, expected 0; worker parked before audit",
+    "product_finding": null,
+    "case_design_finding": "deleting the only file emptied the left replica root; Unison batch mode aborts on confirmbigdel (\"The root of one of the replicas has been completely emptied\"), exit 3. Correct safety behavior; the case needs a sibling anchor file"
+  },
+  "recovery": {
+    "evidence": "RECOVERY-EVIDENCE/",
+    "stopped": [
+      "SIGKILL exact pid 62331 (worker)",
+      "SIGKILL exact pid 62324 (owner)"
+    ],
+    "worker_group_members_other_than_leader": 0,
+    "no_group_or_native_signal": true,
+    "locks_verified_free": "EXglobal + CPU00..07 freshly reacquired and closed"
+  },
+  "ox_run_started": false,
+  "no_replay": true
+}

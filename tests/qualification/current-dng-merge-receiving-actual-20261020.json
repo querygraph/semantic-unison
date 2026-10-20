@@ -1,0 +1,77 @@
+{
+  "schema": "unison-current-dng-merge-receiving-actual-pair/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "date": "2026-10-20",
+  "production_commit": "8581f357",
+  "plans_commit": "f86c3c2f",
+  "runs": {
+    "stock": {
+      "plan": "59fa0a8e6680e15bfd45b2cdcd2f86941bc2102b3c66bcd6e90e324eb586f044",
+      "admission": "f29e5fae3aa793ade0f824af1d793514735290399f441414bca432a674c1ec1b",
+      "workspace": "/private/tmp/u-dmerge-988b5b3201f24622",
+      "owner_pid": 61240,
+      "worker_pid": 61247,
+      "owner_audit_sha256": "184038b9af92815cd6ba28d74295fa609a818c7e7055edf87f9427ec80017397",
+      "build_receipt": "/private/tmp/unison-named-build-stock-20261019-05.json",
+      "binary_sha256": "11440f082ea7ca88089c3f18e22921f8a3089de90d0df8990684e81d277ec2fd",
+      "build_receipt_sha256": "59619e3321a514f7fda3fae4dd49633fafb52e2db4e2952b0c9d1feee239e6f9",
+      "totals": {
+        "original_completed_cases": 13,
+        "cli_calls": 29,
+        "fake_validators": 9,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    },
+    "ox": {
+      "plan": "6aa47a497bf9a3b0c54521a8e84a4cb724d7ebba20b22d7f911c6b30f992528a",
+      "admission": "2ba67e4da831eef90959b19ed41f74ce016fbee6af30e424003d1a4c2707c786",
+      "workspace": "/private/tmp/u-dmerge-05cc6d917982471d",
+      "owner_pid": 61744,
+      "worker_pid": 61752,
+      "owner_audit_sha256": "29db2ffe9b51ff85704cf0fd82883f6673fc034acbbad4a28a91947363e41448",
+      "build_receipt": "/private/tmp/unison-named-build-ox-20261019-05.json",
+      "binary_sha256": "9e27a92822554701d051253c319b48d86cfea2ee5e689c566ddbeaa45d7980f7",
+      "build_receipt_sha256": "eb27e9e777e9996a08239ad351ee29748e5bc5e3e6679bdef82f84519e97d303",
+      "totals": {
+        "original_completed_cases": 13,
+        "cli_calls": 29,
+        "fake_validators": 9,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    }
+  },
+  "product_fixes_exercised": [
+    {
+      "commit": "10c5d159",
+      "summary": "second-receiver-reject: first replica archive restored; item fails exit 2, retry merges again"
+    },
+    {
+      "commit": "8581f357",
+      "summary": "policy-mismatch: unknown unison: built-in policy fails with an explicit message instead of running /bin/sh"
+    }
+  ],
+  "designated_declines": [
+    "competing",
+    "opaque-payload",
+    "unknown-field",
+    "deleted-field",
+    "missing-base",
+    "stale-base",
+    "policy-mismatch",
+    "policy-disabled (exit 1)",
+    "resource-fork"
+  ],
+  "independent_postclosure_replay": {
+    "token": "CPU04",
+    "matches_owner_audit": true,
+    "executables_opened": false
+  },
+  "supersedes": "tests/dng_merge/run.py bare-harness evidence, whose last run accepted any failure and had hit the archive-divergence bug",
+  "scope": "Synthetic 64 KiB DNG containers, fake validators, stock and OxCaml each as both client and server. No SDK, camera payload, Photo/Lightroom or performance claim."
+}
