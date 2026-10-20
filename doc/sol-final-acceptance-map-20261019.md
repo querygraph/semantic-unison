@@ -1,5 +1,16 @@
 # SOL final acceptance map — 2026-10-19
 
+**Update 2026-10-19 (late):** production head is now `10c5d159`: three fixes
+found by the actual named receiving runs (exit-time external helper reporting,
+post-kill group census, merge archive restore). Impact on earlier evidence:
+[production-delta-10c5d159-impact-20261019.md](production-delta-10c5d159-impact-20261019.md).
+The complete original 21-case named receiving suite PASSED on stock and OxCaml
+at that head ([result](current-named-receiving-result-20261019.md)), closing the
+generated-validator receiving off/warn/require, external copy, moved-file reuse,
+resume after receiver interruption, merge first/second-receiver failure and
+recovery, timeout and client-cancellation mappings for rows 6, 11 and 12.
+Genuine-SDK negative receiving is separately PASS (negative03).
+
 Goal remains ACTIVE/incomplete. Production candidate971271a8 changes only
 `src/semanticRuntime.ml` relative to V6 production513c121a; later work through
 508ded42 is test tooling, evidence and documentation. Full current stock/Ox
