@@ -1,0 +1,29 @@
+{
+  "schema": "unison-current-fs-properties-receiving-actual/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "compiler": "ox",
+  "plan": "e4f136cdb62eabd4c5e1438085a1e43410189cc919f9e1efed1b1ad013d717b2",
+  "admission": "000e7fe4a742451742b02f477660cb438195d966d33e3163793e437af07cc987",
+  "workspace": "/private/tmp/u-fsprop-9bc94cb21c5447d5",
+  "owner_pid": 64385,
+  "worker_pid": 64392,
+  "owner_audit_sha256": "c1cffbf942646f2b87e97a586107c6ceda0b93bb94458032d9e812defd46bfb5",
+  "build_receipt": "/private/tmp/unison-named-build-ox-20261019-05.json",
+  "binary_sha256": "9e27a92822554701d051253c319b48d86cfea2ee5e689c566ddbeaa45d7980f7",
+  "build_receipt_sha256": "eb27e9e777e9996a08239ad351ee29748e5bc5e3e6679bdef82f84519e97d303",
+  "owner_exit": 0,
+  "owner_state": "OWNED_WORKER_AND_EXTERNAL_CHILDREN_CLOSED",
+  "totals": {
+    "original_completed_cases": 6,
+    "cli_calls": 17,
+    "fake_validators": 0,
+    "copy": 0,
+    "merge": 0,
+    "producer_interruptions": 0,
+    "client_cancellations": 0
+  },
+  "cpu_closed": true,
+  "io_closed": true,
+  "admission_consumed": true,
+  "independent_postclosure_replay_matches_owner_audit": true
+}

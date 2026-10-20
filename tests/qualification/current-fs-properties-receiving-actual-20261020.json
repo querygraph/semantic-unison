@@ -1,0 +1,73 @@
+{
+  "schema": "unison-current-fs-properties-receiving-actual-pair/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "date": "2026-10-20",
+  "production_commit": "8581f357",
+  "plans_commit": "831cf783",
+  "runs": {
+    "stock": {
+      "plan": "bc06263f8850346c80073169eeee69128c73557854539831ffa8c900c141db92",
+      "admission": "6facf4b2ded00da382d976c1d376c56ccb9fdd5625a8fa2e0740df9ad31ccf75",
+      "workspace": "/private/tmp/u-fsprop-d23830410d7f4efa",
+      "owner_pid": 63982,
+      "worker_pid": 63997,
+      "owner_audit_sha256": "52fa32bccf9ed44d9bc5e870f2cdd975a95925f8517acb75ec46843117b0f62b",
+      "build_receipt": "/private/tmp/unison-named-build-stock-20261019-05.json",
+      "binary_sha256": "11440f082ea7ca88089c3f18e22921f8a3089de90d0df8990684e81d277ec2fd",
+      "build_receipt_sha256": "59619e3321a514f7fda3fae4dd49633fafb52e2db4e2952b0c9d1feee239e6f9",
+      "totals": {
+        "original_completed_cases": 6,
+        "cli_calls": 17,
+        "fake_validators": 0,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    },
+    "ox": {
+      "plan": "e4f136cdb62eabd4c5e1438085a1e43410189cc919f9e1efed1b1ad013d717b2",
+      "admission": "000e7fe4a742451742b02f477660cb438195d966d33e3163793e437af07cc987",
+      "workspace": "/private/tmp/u-fsprop-9bc94cb21c5447d5",
+      "owner_pid": 64385,
+      "worker_pid": 64392,
+      "owner_audit_sha256": "c1cffbf942646f2b87e97a586107c6ceda0b93bb94458032d9e812defd46bfb5",
+      "build_receipt": "/private/tmp/unison-named-build-ox-20261019-05.json",
+      "binary_sha256": "9e27a92822554701d051253c319b48d86cfea2ee5e689c566ddbeaa45d7980f7",
+      "build_receipt_sha256": "eb27e9e777e9996a08239ad351ee29748e5bc5e3e6679bdef82f84519e97d303",
+      "totals": {
+        "original_completed_cases": 6,
+        "cli_calls": 17,
+        "fake_validators": 0,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    }
+  },
+  "case_results": {
+    "zero_length": "created-grown-shrunk-deleted",
+    "holes": {
+      "result": "bytes-exact",
+      "file_bytes": 8392704,
+      "source_allocated_bytes": 2101248,
+      "first_receiver_allocated_bytes": 8392704,
+      "update_receiver_allocated_bytes": 8392704,
+      "holes_preserved": false
+    },
+    "xattr": "set-changed-removed with -xattrs",
+    "xattr_default_off": "not-propagated",
+    "acl": "set-removed with -acl",
+    "acl_default_off": "not-propagated"
+  },
+  "failed_predecessors": [
+    "stock-01: zero-length deletion emptied the replica root; batch confirmbigdel abort exit 3 (case design); recovered, not replayed"
+  ],
+  "independent_postclosure_replay": {
+    "token": "CPU08",
+    "matches_owner_audit": true,
+    "executables_opened": false
+  },
+  "scope": "Tiny generated files plus one 8 MiB punched-hole file over the loopback remote transport, stock and OxCaml each as client and server. Darwin APFS only."
+}
