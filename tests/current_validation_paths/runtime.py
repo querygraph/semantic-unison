@@ -4,7 +4,7 @@ No CLI, token acquisition, arbitrary callback selected by a plan, or resource
 release here. Inherited IO/CPU copies stay held through the actual worker exit
 and independent parent audit. Unknown metadata/process ownership never unwinds.
 """
-import hashlib,time
+import hashlib,os,time
 from copy import deepcopy
 from pathlib import Path
 from cached_benchmark.contract import read_bytes
@@ -16,6 +16,8 @@ from current_validation_paths.original import load
 from current_validation_paths.session import factory as session_factory
 from current_validation_paths.cancel_case import factory as cancel_factory
 from current_validation_paths.invoke import Actor
+from current_validation_paths import dng_contract,dng_cases,recipes
+DNG_SCHEMA='unison-current-dng-merge-receiving-execution/1'
 
 
 def prefix_settled(actor,files,error):
@@ -41,7 +43,8 @@ def run(packet,store,resources,deadline):
     if legacy['path']!=expected_path:raise ValueError('exact original legacy source reference required')
     raw=read_bytes(expected_path,256*1024)
     if len(raw)!=legacy['bytes'] or hashlib.sha256(raw).hexdigest()!=legacy['sha256']:raise ValueError('original case source changed')
-    source=raw.decode('utf-8');expected=case_plan(source,packet['workspace'],packet['compiler'])
+    source=raw.decode('utf-8');dng=packet.get('schema')==DNG_SCHEMA
+    expected=dng_contract.plan(packet['workspace'],packet['compiler']) if dng else case_plan(source,packet['workspace'],packet['compiler'])
     if not exact(packet['rows'],expected['rows']) or not exact(packet['limits'],expected['limits']):
         raise ValueError('complete original ordered cases/limits required')
     if not time.monotonic()<deadline<float('inf'):raise ValueError('fresh inherited worker observation required')
@@ -55,12 +58,16 @@ def run(packet,store,resources,deadline):
         store.write('case-%02d-seq-%03d-%s.json'%(row['index'],session.sequence,event),value)
     def make_session(legacy_class):
         cls=session_factory(legacy_class,files=files,binary=packet['binary']['path'],repository=packet['repository'],
-            invoke=actor.invoke,audit=actor.audit,interrupt=actor.interrupt,persist=persist)
+            invoke=actor.invoke,audit=actor.audit,interrupt=actor.interrupt,persist=persist,
+            options=recipes.dng_options if dng else recipes.options)
         selected['session']=cls;return cls
     def cancelled(root,binary,policy):return cancel_factory(selected['session'])(root,binary,policy)
     try:
         functions=load(source,session_factory=make_session,cancel_actor=cancelled,path_factory=lambda _:files.Path,
             filename=expected_path)['functions']
+        if dng:
+            # Unison then creates its own state (backups) private, as owned IO requires.
+            os.umask(0o077);functions=dng_cases.bind(selected['session'])
         for row in packet['rows']:
             if time.monotonic()>=deadline:raise TimeoutError('no new case after observation deadline')
             if files.Path(row['directory']).exists():raise ValueError('new original case workspace must be absent')
@@ -79,10 +86,11 @@ def run(packet,store,resources,deadline):
                 break
         if failed is None:
             try:
-                if actor.attempts!=69 or len(completed)!=21:raise ValueError('full original case/call inventory differs')
-                if sum(row['fake_validators'] for row in completed)!=54:raise ValueError('full fake-validator inventory differs')
+                totals=dng_contract.TOTALS if dng else dict(cli_calls=69,fake_validators=54,copy=9,merge=7)
+                if actor.attempts!=totals['cli_calls'] or len(completed)!=len(packet['rows']):raise ValueError('full original case/call inventory differs')
+                if sum(row['fake_validators'] for row in completed)!=totals['fake_validators']:raise ValueError('full fake-validator inventory differs')
                 kinds=[item['expected']['kind'] for call in actor.calls.values() for item in call['verdict'].get('external_observations',[])]
-                if kinds.count('copy')!=9 or kinds.count('merge')!=7:raise ValueError('all original producer/merge children required')
+                if kinds.count('copy')!=totals['copy'] or kinds.count('merge')!=totals['merge']:raise ValueError('all original producer/merge children required')
             except BaseException as error:
                 if not prefix_settled(actor,files,error):raise
                 failed=dict(index=None,family='whole-inventory',name='whole-inventory',error=repr(error),

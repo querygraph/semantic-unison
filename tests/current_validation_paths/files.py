@@ -45,6 +45,8 @@ class Files:
                 except FileNotFoundError:return False
             def chmod(self,mode,*,follow_symlinks=True):return owner.chmod(self,mode)
             def unlink(self,missing_ok=False):return owner.unlink(self,missing_ok)
+            def owned_names(self):return owner.names(self)
+            def resource_fork(self,data=None):return owner.resource_fork(self,data)
             def _unsupported(self,*args,**kwargs):raise ValueError('undeclared fixture mutation refused')
             rename=replace=symlink_to=hardlink_to=touch=rmdir=_unsupported
         self.Path=Owned
@@ -156,6 +158,33 @@ class Files:
                 raise
             if not stat.S_ISREG(st.st_mode) or st.st_uid!=os.getuid() or st.st_nlink!=1:raise ValueError('only owned single-link fixture files may be unlinked')
             os.unlink(name,dir_fd=parent)
+        return self._operation(path,action)
+    def names(self,path):
+        def action(parent,name,fds):
+            if name is None:return sorted(os.listdir(parent))
+            fd=os.open(name,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC,dir_fd=parent);fds.append(fd)
+            st=os.fstat(fd)
+            if not(stat.S_ISDIR(st.st_mode) and st.st_uid==os.getuid()):raise ValueError('owned fixture directory required')
+            return sorted(os.listdir(fd))
+        return self._operation(path,action)
+    def resource_fork(self,path,data=None):
+        # Darwin named fork through the held single-link descriptor, never a
+        # "..namedfork" pathname that bypasses component traversal checks.
+        import ctypes,sys
+        if sys.platform!='darwin':raise ValueError('resource forks are a Darwin fixture only')
+        if data is not None and (type(data) is not bytes or not 0<len(data)<=65536):raise ValueError('bounded resource fork bytes required')
+        libc=ctypes.CDLL(None,use_errno=True);key=b'com.apple.ResourceFork'
+        libc.fsetxattr.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_size_t,ctypes.c_uint32,ctypes.c_int]
+        libc.fgetxattr.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_void_p,ctypes.c_size_t,ctypes.c_uint32,ctypes.c_int]
+        libc.fgetxattr.restype=ctypes.c_ssize_t
+        def action(parent,name,fds):
+            fd,_=self._file(parent,name,os.O_RDONLY if data is None else os.O_WRONLY,fds)
+            if data is not None:
+                if libc.fsetxattr(fd,key,data,len(data),0,0)!=0:raise OSError(ctypes.get_errno(),'fsetxattr resource fork')
+                return len(data)
+            buffer=ctypes.create_string_buffer(65536);n=libc.fgetxattr(fd,key,buffer,65536,0,0)
+            if n<0:raise OSError(ctypes.get_errno(),'fgetxattr resource fork')
+            return buffer.raw[:n]
         return self._operation(path,action)
     def close(self):
         self._ready();self.close_attempted=True

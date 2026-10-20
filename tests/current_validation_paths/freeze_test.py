@@ -45,6 +45,14 @@ class Freeze(unittest.TestCase):
             self.assertFalse(Path(index['workspace']).exists());self.assertFalse(index['runtime_admitted'])
             self.assertNotIn(packet['binary']['path'],source.reads);self.assertNotIn(A.PYTHON,source.reads)
             self.assertNotIn(packet['build']['compiler']['path'],source.reads)
+    def test_dng_merge_suite_freezes_its_own_contract_and_namespace(self):
+        source=Sources();output=Path(A.REPOSITORY)/'doc'/('current-dng-merge-receiving-stock-control-'+uuid.uuid4().hex[:16]);self.outputs.append(output)
+        with patch.object(freeze.inventory,'execution',return_value=EXECUTION),patch.object(freeze.inventory,'production',return_value=PRODUCTION):
+            index=freeze.prepare('stock',source.receipt,output,read=source.read,suite='dng_merge')
+        packet=json.loads((output/'PLAN.json').read_text())
+        self.assertEqual(packet['schema'],'unison-current-dng-merge-receiving-execution/1');self.assertEqual(len(packet['rows']),13)
+        self.assertTrue(index['workspace'].startswith('/private/tmp/u-dmerge-'));self.assertEqual(packet['limits']['CLI_calls'],29)
+        with self.assertRaises(ValueError):freeze.prepare('stock',source.receipt,Path(A.REPOSITORY)/'doc'/'current-named-receiving-stock-x',read=source.read,suite='dng_merge')
     def test_stale_compiled_source_or_failed_selftest_refuses_without_request(self):
         for mutation in ('compiled','selftest'):
             with self.subTest(mutation=mutation),self.assertRaisesRegex(ValueError,'compiled source|selftest'):self.prepare(mutation=mutation)

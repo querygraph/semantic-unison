@@ -117,7 +117,8 @@ class Actor:
                     before_interrupt=lambda child,limit:observe_cancel(session,fixture['name'],fixture['incoming'],fixture['previous'],before,child,limit))
                 result=value[:2];self.active['cancellation_pin']=store.write(stem+'-CANCELLATION.json',value[2])
             else:
-                if intent['expected_client_exit'] not in (0,2) and 'producer_interruption' not in intent:raise ValueError('normal call cannot claim cancellation')
+                if (intent['expected_client_exit'] not in (0,2) and 'producer_interruption' not in intent
+                    and not (intent['expected_client_exit']==1 and 'designated' in intent)):raise ValueError('normal call cannot claim cancellation')
                 result=self.pair_call(dict(command=intent['command']),client_env,**arguments)
             self.active.update(returned=result,proxy_command=proxy)
             return dict(global_call=number,pair_pin=deepcopy(self.active['pair_pin']),resource_release_authorized=False)
@@ -206,6 +207,7 @@ class Actor:
                 verdict=audit_cancel(record['pair'],**arguments,cancellation=cancellation,
                     expected_helpers=self._helpers(session,intent,hang_outcome='cancelled'))
             else:
+                if 'designated' in intent:arguments['designated']=intent['designated']
                 verdict=audit_pair(record['pair'],**arguments,expected_client_exit=intent['expected_client_exit'],expected_helpers=self._helpers(session,intent),expected_external=self._external(session,intent))
             audit_pin=store.write(active['stem']+'-AUDIT.json',verdict)
             self.calls[active['number']]=dict(root=active['root'],intent=deepcopy(intent),pair_pin=active['pair_pin'],intent_pin=active['intent_pin'],config_pin=active['config_pin'],audit_pin=audit_pin,verdict=verdict)

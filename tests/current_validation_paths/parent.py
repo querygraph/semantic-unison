@@ -9,7 +9,9 @@ import hashlib,json,math
 from pathlib import PurePosixPath as Path
 from sdk_merge_receiving.admission import exact,PYTHON
 from sdk_merge_receiving.metadata import document
-from current_validation_paths import recipes,parent_counters
+from current_validation_paths import recipes,parent_counters,dng_contract
+DNG_SCHEMA='unison-current-dng-merge-receiving-execution/1'
+NAMED_TOTALS=dict(cli_calls=69,fake_validators=54,copy=9,merge=7,producer_interruptions=4,client_cancellations=2)
 from current_validation_paths.evidence import audit as audit_normal
 from current_validation_paths.cancel_evidence import audit as audit_cancel
 from current_validation_paths.producer_evidence import audit as audit_producer
@@ -34,11 +36,14 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         or type(result['actual_Photo_calls']) is not int or result['actual_Photo_calls']!=0):raise ValueError('exact non-releasing original worker result required')
     n=result['attempted_CLI_calls'];calls=result['calls'];rows=packet['rows']
     if (type(n) is not int or not 0<=n<=69 or type(calls) is not dict or set(calls)!={str(i) for i in range(1,n+1)}
-        or type(result['cases']) is not list or len(result['cases'])>21
+        or type(result['cases']) is not list or len(result['cases'])>len(rows)
         or type(worker_pid) is not int or not 0<worker_pid<2**31 or type(resources) is not list or len(resources)!=9
         or any(type(r) is not dict or set(r)!={'fd','device','inode'} or any(type(v) is not int or v<=0 for v in r.values()) for r in resources)
         or len({r['fd'] for r in resources})!=9
         or type(owner_deadline) not in (int,float) or not math.isfinite(owner_deadline) or owner_deadline<=0):raise ValueError('exact contiguous call/worker/resource inventory required')
+    dng=packet.get('schema')==DNG_SCHEMA;phase_of=recipes.dng_phase if dng else recipes.phase
+    totals=dng_contract.TOTALS if dng else NAMED_TOTALS
+    if not 0<=n<=totals['cli_calls']:raise ValueError('attempted calls exceed declared suite inventory')
     scripts=recipes.scripts(recipes.literal_templates(source),packet['repository']);rowmap={row['directory']:row for row in rows}
     loaded=[];by_root={};last_index=-1
     for number in range(1,n+1):
@@ -51,7 +56,8 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         intent_record=pinned(root,item['intent_pin'],stem+'-INTENT.json',read_case);intent=intent_record['intent']
         if not exact(intent_record,dict(intent=intent,global_call=number,resource_release_authorized=False)):
             raise ValueError('exact independently read intent number required')
-        phase=recipes.phase(row,sequence,scripts,packet['binary']['path']);kind='producer_interruption' if row['family']=='resumed' and sequence==1 else 'cancellation' if row['family']=='cancelled' and sequence==2 else None
+        phase=phase_of(row,sequence,scripts,packet['binary']['path'])
+        kind=None if dng else 'producer_interruption' if row['family']=='resumed' and sequence==1 else 'cancellation' if row['family']=='cancelled' and sequence==2 else None
         keys={'case_root','sequence','resource_release_authorized','before_fake_helper_counts','before_external_counts',*phase}
         if kind:keys.add(kind)
         if (type(intent) is not dict or set(intent)!=keys or intent['case_root']!=root or type(intent['sequence']) is not int
@@ -112,6 +118,7 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
                 verdict=audit_cancel(pair,**arguments,cancellation=cancel,expected_helpers=helpers);counts['client_cancellations']+=1
             else:
                 if 'cancellation_pin' in item:raise ValueError('ordinary call cannot import cancellation proof')
+                if 'designated' in intent:arguments['designated']=intent['designated']
                 verdict=audit_normal(pair,**arguments,expected_client_exit=intent['expected_client_exit'],expected_helpers=helpers,expected_external=external)
             inherited=read_case(root,stem+'-INHERITED.json');inherited=document(inherited)
             observed=dict(proxy_pid=pair['proxy']['client_cleanup']['pid'],worker_pid=worker_pid,resource_fds=resources,
@@ -130,17 +137,17 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         if not exact(expected,summary) or not exact(read_root('case-%02d-RESULT.json'%index),summary):raise ValueError('original case summary differs from raw independent inventory')
     failure=result['failed_case']
     if result['complete']:
-        if failure is not None or len(completed)!=21 or not exact(counts,dict(cli_calls=69,fake_validators=54,copy=9,merge=7,producer_interruptions=4,client_cancellations=2)):raise ValueError('full original case inventory not proven')
+        if failure is not None or len(completed)!=len(rows) or not exact(counts,totals):raise ValueError('full original case inventory not proven')
     else:
         if (type(failure) is not dict or set(failure)!={'index','family','name','error','ordinary_case_failure_only','worker_local_settled_candidate','independent_parent_raw_audit_required','resource_release_authorized'}
             or failure['ordinary_case_failure_only'] is not True or failure['worker_local_settled_candidate'] is not True
             or failure['independent_parent_raw_audit_required'] is not True or failure['resource_release_authorized'] is not False):raise ValueError('exact ordinary settled failed-prefix classification required')
         index=failure['index']
         if index is None:
-            if len(completed)!=21 or failure['family']!='whole-inventory' or failure['name']!='whole-inventory':raise ValueError('whole-inventory failure must follow complete original cases')
-            name='INVENTORY-FAILED.json';last_allowed=20
+            if len(completed)!=len(rows) or failure['family']!='whole-inventory' or failure['name']!='whole-inventory':raise ValueError('whole-inventory failure must follow complete original cases')
+            name='INVENTORY-FAILED.json';last_allowed=len(rows)-1
         else:
-            if type(index) is not int or index!=len(completed) or not 0<=index<21 or failure['family']!=rows[index]['family'] or failure['name']!=rows[index]['name']:raise ValueError('failed prefix cannot skip original cases')
+            if type(index) is not int or index!=len(completed) or not 0<=index<len(rows) or failure['family']!=rows[index]['family'] or failure['name']!=rows[index]['name']:raise ValueError('failed prefix cannot skip original cases')
             name='case-%02d-FAILED.json'%index;last_allowed=index
         if any(entry['row']['index']>last_allowed for entry in loaded) or not exact(read_root(name),failure):raise ValueError('calls after failed prefix or mismatched failure record')
     attempted_cases=len(completed)+(1 if not result['complete'] and failure['index'] is not None else 0)

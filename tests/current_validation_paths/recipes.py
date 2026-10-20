@@ -65,6 +65,7 @@ def phase(row,sequence,script_sources,binary):
     root=Path(row['directory']);family=row['family'];args=row['arguments'];policy='require';code=0;opts=[]
     client=server='pass';directory=False
     names={'resumed':'resumed.DNG','external':'external.dng','moved':'a-moved.dng','merged':'merge.dng','timed_out':'timed.dng','cancelled':'cancelled.dng','directory_admission':'image.dng'}
+    if family not in names:raise ValueError('undeclared original case family')
     name=names[family]
     copyopts=['-copythreshold','0','-copyprog',str(root/'external-copy.py'),'-copyprogrest',str(root/'external-copy.py'),'-xferbycopying=false']
     mergeopts=['-merge','Name *.dng -> '+str(root/'merge.py')+' CURRENT1 CURRENT2 NEW']
@@ -125,3 +126,29 @@ def cancellation_fixture():
     incoming=previous+b'reverse receive that must never commit after cancellation'
     return dict(name='cancelled.dng',incoming_sha256=hashlib.sha256(incoming).hexdigest(),incoming_bytes=len(incoming),
         previous_sha256=hashlib.sha256(previous).hexdigest(),previous_bytes=len(previous))
+
+
+def dng_options(root,values):
+    from current_validation_paths.dng_contract import OPTS,MISMATCH,DISABLED,FORK
+    values=list(values)
+    if values not in ([],OPTS,MISMATCH,DISABLED,FORK):raise ValueError('undeclared DNG merge case option')
+    return values
+
+
+def dng_phase(row,sequence,script_sources,binary):
+    from current_validation_paths.dng_contract import call
+    if type(sequence) is not int or not 1<=sequence<=row['max_CLI_calls']:raise ValueError('bounded exact DNG merge case sequence required')
+    root=Path(row['directory']);policy,opts,client,server,code,designated=call(row['family'],sequence)
+    controls={endpoint:dict(endpoint=endpoint,build='validation-path-'+endpoint+'-v1',mode=mode,
+        destination=str(root/('left' if endpoint=='client' else 'right')/'image.dng')) for endpoint,mode in (('client',client),('server',server))}
+    settings=[value for key,setting in config(root,'client',script_sources).items() for value in ('-'+key,setting)]
+    command=[binary,str(root/'left'),'ssh://localhost/'+str(root/'right'),'-sshcmd',str(root/'loopback.py'),'-servercmd',binary,
+        '-batch','-auto','-fastcheck','false',*flags(policy),*settings,*opts]
+    server_config=config(root,'server',script_sources);server_config['semanticvolumejobs']='1'
+    profile=''.join(key+' = '+value+'\n' for key,value in server_config.items())
+    value=dict(command=command,server_command=[binary,'-server','__new-rpc-mode',*flags(policy),*opts],
+        expected_client_exit=code,helper_controls=controls,server_profile_text=profile,
+        server_profile_sha256=hashlib.sha256(profile.encode()).hexdigest(),
+        prepared_scripts={str(root/name):hashlib.sha256(text.encode()).hexdigest() for name,text in script_sources.items()})
+    if designated is not None:value['designated']=designated
+    return value

@@ -10,8 +10,8 @@ from current_validation_paths.cancel_observation import validate_fixture
 from current_validation_paths import recipes
 
 
-def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
-    if not all(callable(f) for f in (invoke,audit,interrupt,persist)):raise ValueError('owned source adapters required')
+def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist,options=recipes.options):
+    if not all(callable(f) for f in (invoke,audit,interrupt,persist,options)):raise ValueError('owned source adapters required')
     ns=legacy.__init__.__globals__;ns['ADMISSION_OPTIONS']=['-semanticvolumejobs','1']
     ns['HELPER_CONFIG']={};ns['SERVER_HELPER_DESCRIPTORS']=None
     generated=recipes.scripts(ns,repository)
@@ -55,15 +55,19 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             driver=self.drivers[endpoint]
             return dict(adobevalidator=str(driver),adobevalidatorhash=hashlib.sha256(driver.read_bytes()).hexdigest(),
                 adobevalidatorbuild='validation-path-'+endpoint+'-v1',adobevalidatorthreads='1',adobevalidatetimeout='30')
-        def _options(self,values):return recipes.options(self.root,values)
+        def _options(self,values):return options(self.root,values)
         def common_flags(self,policy):return recipes.flags(policy)
         def command(self,*,policy='require',options=()):
             self._ready();settings=[value for k,v in self.config('client').items() for value in ('-'+k,v)]
             return [self.binary,str(self.left),'ssh://localhost/'+str(self.right),'-sshcmd',str(self.launcher),
                 '-servercmd',self.binary,'-batch','-auto','-fastcheck','false',*self.common_flags(policy),*settings,*self._options(options)]
-        def sync(self,*,policy='require',options=(),success=True):
-            if type(success) is not bool:raise self._retain(ValueError('exact case expectation required'))
-            return self._run(policy,options,0 if success else 2)
+        def sync(self,*,policy='require',options=(),success=True,exit=None,designated=None):
+            # Explicit exit/designated serve source-owned successor cases; the
+            # original assertions only ever pass success.
+            if (type(success) is not bool or exit not in (None,0,1,2) or exit is not None and (exit==0)!=success
+                or designated is not None and (type(designated) is not str or len(designated)<20 or success)):
+                raise self._retain(ValueError('exact case expectation required'))
+            return self._run(policy,options,(0 if success else 2) if exit is None else exit,designated)
         def cancel(self,name,incoming,previous,*,policy):
             self._ready()
             try:
@@ -74,7 +78,7 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
             result=self._run(policy,(),3)
             self.cancel_fixture=None
             return result
-        def _intent(self,policy,options,expected_exit):
+        def _intent(self,policy,options,expected_exit,designated=None):
             self.sequence+=1
             profile=(self.server_state/'endpoint.prf').read_text()
             before={endpoint:len(self.calls(endpoint)) for endpoint in ('client','server')}
@@ -86,16 +90,17 @@ def factory(legacy,*,files,binary,repository,invoke,audit,interrupt,persist):
                 server_profile_text=profile,server_profile_sha256=hashlib.sha256(profile.encode()).hexdigest(),
                 prepared_scripts=dict(self.prepared_scripts),
                 resource_release_authorized=False)
+            if designated is not None:intent['designated']=designated
             if self.cancel_fixture is not None:
                 f=self.cancel_fixture
                 intent['cancellation']=dict(name=f['name'],incoming_sha256=hashlib.sha256(f['incoming']).hexdigest(),
                     incoming_bytes=len(f['incoming']),previous_sha256=hashlib.sha256(f['previous']).hexdigest(),previous_bytes=len(f['previous']))
             return intent
-        def _run(self,policy,options,expected_exit):
+        def _run(self,policy,options,expected_exit,designated=None):
             self._ready()
             try:
                 self.last_outcome=None;self.last_verdict=None
-                intent=self._intent(policy,options,expected_exit)
+                intent=self._intent(policy,options,expected_exit,designated)
                 before=intent['before_fake_helper_counts']
                 self.active_intent=intent
                 persist('INTENT',self,intent) # Must finish before any child adapter.

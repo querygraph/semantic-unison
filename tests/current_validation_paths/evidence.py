@@ -19,6 +19,27 @@ def terminal(out,command,code):
     return rejected_child(out,command)
 
 
+def designated_terminal(out,command,code):
+    # A source-designated decline: Unison failed (2) or skipped (1) the item.
+    require(type(code) is int and code in (1,2),'designated decline expects exact skipped1 or failed2')
+    if code==2:
+        from sdk_negative_receiving.transport_audit import rejected_child
+        return rejected_child(out,command)
+    require(type(out) is dict and set(out)=={'command','returncode','timed_out','capture_truncated','stdout','stderr',
+        'client_cleanup','aggregate_or_parent_terminal_proved','io_cpu_release_authorized'},'exact child evidence required')
+    c=out['client_cleanup']
+    require(exact(out['command'],command) and type(out['returncode']) is int and out['returncode']==1
+        and out['timed_out'] is False and out['capture_truncated'] is False and out['aggregate_or_parent_terminal_proved'] is False
+        and out['io_cpu_release_authorized'] is False and type(c) is dict and set(c)=={'pid','returncode','reaped','hard_kill_required',
+        'other_group_members_absent_before_reap','group_cleanup_before_leader_reap'} and type(c['pid']) is int and 0<c['pid']<2**31
+        and type(c['returncode']) is int and c['returncode']==1 and c['reaped'] is True and c['hard_kill_required'] is False
+        and c['other_group_members_absent_before_reap'] is True and c['group_cleanup_before_leader_reap'] is True,
+        'exact designated skipped client/group required')
+    for stream in ('stdout','stderr'):
+        require(type(out[stream]) is str and len(out[stream].encode())<=262144,'bounded full designated diagnostics required')
+    return c['pid']
+
+
 def trace(command):
     require(type(command) is list and all(type(v) is str for v in command) and '-nodebug' not in command,
             'exact fully traced command required')
@@ -79,7 +100,7 @@ def helpers(log,expected,transport_pids):
     return verdicts
 
 
-def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers,terminal_audit,expected_external=()):
+def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,expected_client_exit,expected_helpers,terminal_audit,expected_external=(),designated=None):
     trace(client_command);trace(server_command)
     require(type(pair) is dict and set(pair)=={'client','proxy','raw_proxy','external_sdk_audit_required','resource_release_authorized'}
         and pair['external_sdk_audit_required'] is True and pair['resource_release_authorized'] is False,
@@ -103,15 +124,20 @@ def _audit(pair,*,client_command,proxy_command,server_command,raw_proxy_bytes,ex
     require(type(counts) is dict and set(counts)=={'client_to_server_bytes','server_to_client_bytes'}
         and all(type(v) is int and 0<v<2**63 for v in counts.values()),'both typed protocol directions required')
     log='\n'.join(pair[p][s] for p in ('client','proxy') for s in ('stdout','stderr'))
-    require(expected_client_exit==0 or bool(expected_helpers),'failed no-helper prefix needs separate source/creation audit')
+    if designated is not None:
+        client_lines=(pair['client']['stdout']+'\n'+pair['client']['stderr']).splitlines()
+        require(type(designated) is str and len(designated)>=20 and expected_client_exit in (1,2)
+            and any(designated in line for line in client_lines),'exact source-designated client decline diagnostic required')
+    require(expected_client_exit==0 or bool(expected_helpers) or designated is not None,'failed no-helper prefix needs separate source/creation audit')
     identities={client_pid,proxy_pid,frame['server_pid']}
     verdicts=helpers(log,expected_helpers,identities)
     externals=external_audit(log,list(expected_external),identities|{e['pid'] for e in expected_helpers})
     return dict(command=client_command,client_returncode=expected_client_exit,log=log,
         external_children_settled=True,helper_observations=verdicts,external_observations=externals,raw_proxy_sha256=hashlib.sha256(raw_proxy_bytes).hexdigest(),
         publication_fence_required=True,worker_settlement_required=True,parent_terminal_proved=False,
-        real_SDK_calls=0,resource_release_authorized=False)
+        real_SDK_calls=0,resource_release_authorized=False,**({} if designated is None else dict(designated_decline=designated)))
 
 
-def audit(pair,**arguments):
-    return _audit(pair,terminal_audit=terminal,**arguments)
+def audit(pair,*,designated=None,**arguments):
+    if designated is None:return _audit(pair,terminal_audit=terminal,**arguments)
+    return _audit(pair,terminal_audit=designated_terminal,designated=designated,**arguments)

@@ -13,11 +13,14 @@ from cached_benchmark.contract import read_bytes
 from sdk_merge_receiving.store import Store
 from current_validation_paths import admission as A,inventory,metadata
 from current_validation_paths.contract import LIMITS,plan as case_plan
+from current_validation_paths import dng_contract
+SUITES=dict(named=('current-named-receiving-','/private/tmp/u-vpath-','unison-current-named-receiving-execution/1'),
+    dng_merge=('current-dng-merge-receiving-','/private/tmp/u-dmerge-','unison-current-dng-merge-receiving-execution/1'))
 
 
-def prepare(compiler,build_receipt,output,*,read=read_bytes,workspace=None):
-    output=Path(output)
-    A.require(output.parent==Path(A.REPOSITORY)/'doc' and output.name.startswith('current-named-receiving-'+compiler+'-'),
+def prepare(compiler,build_receipt,output,*,read=read_bytes,workspace=None,suite='named'):
+    output=Path(output);A.require(suite in SUITES,'known receiving suite required');prefix,space,schema=SUITES[suite]
+    A.require(output.parent==Path(A.REPOSITORY)/'doc' and output.name.startswith(prefix+compiler+'-'),
               'one-use repository doc freeze directory required')
     A.require(compiler in A.COMPILERS,'one exact compiler label required')
     name=str(Path(build_receipt).resolve());A.path(name)
@@ -29,15 +32,15 @@ def prepare(compiler,build_receipt,output,*,read=read_bytes,workspace=None):
     def pins(names):return {n:hashlib.sha256(read(str(Path(A.REPOSITORY)/n),16*1048576)).hexdigest() for n in names}
     if workspace is None:
         import uuid
-        workspace='/private/tmp/u-vpath-'+uuid.uuid4().hex[:16]
+        workspace=space+uuid.uuid4().hex[:16]
     A.require(not os.path.lexists(workspace),'fresh named workspace already consumed')
-    rows=case_plan(legacy.decode('utf-8'),workspace,compiler)['rows']
-    packet=dict(schema='unison-current-named-receiving-execution/1',repository=A.REPOSITORY,workspace=workspace,compiler=compiler,
+    rows=(dng_contract.plan(workspace,compiler) if suite=='dng_merge' else case_plan(legacy.decode('utf-8'),workspace,compiler))['rows']
+    packet=dict(schema=schema,repository=A.REPOSITORY,workspace=workspace,compiler=compiler,
         interpreter=dict(path=A.PYTHON,sha256=A.PYTHON_SHA),binary=dict(path=str(Path(receipt['binary']).resolve()),sha256=receipt['binary_sha256']),
         build=dict(receipt=dict(path=name,sha256=hashlib.sha256(raw).hexdigest()),
             compiler=dict(path=str(Path(receipt['compiler']).resolve()),sha256=receipt['compiler_sha256'])),
         legacy_source=dict(path=A.REPOSITORY+'/'+A.LEGACY,bytes=len(legacy),sha256=hashlib.sha256(legacy).hexdigest()),
-        rows=rows,limits=dict(LIMITS),source_pins=pins(source_names),production_sha256=pins(production_names),
+        rows=rows,limits=dict(dng_contract.LIMITS if suite=='dng_merge' else LIMITS),source_pins=pins(source_names),production_sha256=pins(production_names),
         prerequisite_sha256={name:hashlib.sha256(raw).hexdigest()},cpu_policy_sha256=A.POLICY,io_manifest_sha256=A.IO)
     A.validate(packet,source=legacy.decode('utf-8'),execution_sources=source_names,production_sources=production_names)
     output.mkdir(mode=0o700);native=output.stat();store=Store(str(output),dict(device=native.st_dev,inode=native.st_ino))
@@ -71,8 +74,9 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--compiler',required=True,choices=sorted(A.COMPILERS))
     parser.add_argument('--build-receipt',required=True);parser.add_argument('--output',required=True)
+    parser.add_argument('--suite',choices=sorted(SUITES),default='named')
     args=parser.parse_args()
-    print(json.dumps(prepare(args.compiler,args.build_receipt,Path(args.output)),indent=2))
+    print(json.dumps(prepare(args.compiler,args.build_receipt,Path(args.output),suite=args.suite),indent=2))
 
 if __name__=='__main__':
     try:main()

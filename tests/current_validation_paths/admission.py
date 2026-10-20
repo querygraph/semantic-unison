@@ -8,6 +8,8 @@ import hashlib,math,re
 from sdk_merge_receiving.plan import require,path,digest
 from sdk_negative_receiving.admission import PYTHON,PYTHON_SHA,POLICY,IO,REPOSITORY,COMPILERS,exact,reference,inventory
 from current_validation_paths.contract import plan as case_plan,LIMITS
+from current_validation_paths import dng_contract
+SCHEMAS={'unison-current-named-receiving-execution/1':'named','unison-current-dng-merge-receiving-execution/1':'dng-merge'}
 
 TARGET='current-named-receiving'
 LEGACY='tests/validation_paths/run.py'
@@ -16,8 +18,9 @@ LEGACY='tests/validation_paths/run.py'
 def validate(packet,*,source,execution_sources,production_sources):
     fields={'schema','repository','workspace','compiler','interpreter','binary','build','legacy_source','rows','limits',
             'source_pins','production_sha256','prerequisite_sha256','cpu_policy_sha256','io_manifest_sha256'}
-    require(type(packet) is dict and set(packet)==fields and packet['schema']=='unison-current-named-receiving-execution/1',
+    require(type(packet) is dict and set(packet)==fields and packet['schema'] in SCHEMAS,
             'exact named execution packet required')
+    dng=SCHEMAS[packet['schema']]=='dng-merge'
     require(packet['repository']==REPOSITORY,'exact reviewed owner repository required')
     require(exact(packet['interpreter'],dict(path=PYTHON,sha256=PYTHON_SHA)),'qualified pinned interpreter required')
     require(packet['cpu_policy_sha256']==POLICY and packet['io_manifest_sha256']==IO,'exact standing8/EXglobal pins required')
@@ -26,8 +29,8 @@ def validate(packet,*,source,execution_sources,production_sources):
     raw=source.encode()
     require(exact(packet['legacy_source'],dict(path=REPOSITORY+'/'+LEGACY,bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())),
             'exact original legacy case source required')
-    contract=case_plan(source,packet['workspace'],packet['compiler'])
-    require(exact(packet['rows'],contract['rows']) and exact(packet['limits'],LIMITS),'complete original ordered cases/limits required')
+    contract=dng_contract.plan(packet['workspace'],packet['compiler']) if dng else case_plan(source,packet['workspace'],packet['compiler'])
+    require(exact(packet['rows'],contract['rows']) and exact(packet['limits'],dng_contract.LIMITS if dng else LIMITS),'complete original ordered cases/limits required')
     inventory(packet['source_pins'],execution_sources);inventory(packet['production_sha256'],production_sources)
     require(packet['source_pins'].get(LEGACY)==packet['legacy_source']['sha256'],'legacy source must be pinned execution')
     build=packet['build'];binary=packet['binary']
@@ -59,7 +62,7 @@ def check(admission,packet,*,request_ref,plan_ref,command,now):
         and admission['workspace']==packet['workspace'] and admission['compiler']==packet['compiler']
         and exact(admission['command'],command) and exact(admission['source_pins'],packet['source_pins'])
         and exact(admission['production_sha256'],packet['production_sha256'])
-        and exact(admission['limits'],LIMITS) and exact(admission['cpu_token_indexes'],list(range(8)))
+        and exact(admission['limits'],packet['limits']) and exact(admission['cpu_token_indexes'],list(range(8)))
         and admission['cpu_policy_sha256']==POLICY and admission['io_manifest_sha256']==IO,
         'admission differs from exact reviewed command/source/resource declarations')
     deadline=admission['start_deadline_unix']
