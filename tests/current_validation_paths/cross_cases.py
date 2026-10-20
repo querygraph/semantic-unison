@@ -29,9 +29,11 @@ def bind(Session):
         check('Nothing to do: replicas have not changed since last sync.' in sync(s,'seed-update'),'no-op call propagated')
         return dict(result='seeded-updated-idle')
     def reverse_deletion(s):
-        (s.left/'gone.txt').write_bytes(b'short-lived');sync(s,'reverse-deletion');same(s,'gone.txt',b'short-lived')
+        # A sibling keeps the deletion from emptying the root, which batch mode refuses (confirmbigdel).
+        (s.left/'anchor.txt').write_bytes(b'anchor');(s.left/'gone.txt').write_bytes(b'short-lived');sync(s,'reverse-deletion');same(s,'gone.txt',b'short-lived')
         (s.right/'gone.txt').unlink();sync(s,'reverse-deletion')
         check(not (s.left/'gone.txt').exists() and not (s.right/'gone.txt').exists(),'server-side deletion not propagated to the client')
+        same(s,'anchor.txt',b'anchor')
         return dict(result='deleted-from-server')
     def conflict_skip(s):
         (s.left/'c.txt').write_bytes(b'common');sync(s,'conflict-skip');same(s,'c.txt',b'common')

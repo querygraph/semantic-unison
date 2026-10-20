@@ -58,6 +58,8 @@ def fake_session(outcome):
 
 
 def mirror(s,source,target,properties):
+    if any(p.startswith(target.path+'/') for p in Path.store) and not any(p.startswith(source.path+'/') for p in Path.store):
+        raise AssertionError('Unison batch aborts when a replica root is emptied (confirmbigdel)')
     for path in [p for p in Path.store if p.startswith(target.path+'/')]:
         if source.path+path[len(target.path):] not in Path.store:del Path.store[path]
     for path,entry in list(Path.store.items()):

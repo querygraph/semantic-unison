@@ -76,6 +76,8 @@ def fake_session(propagate):
 def declared(s,options):
     """The current production behavior: content always, xattrs/ACLs only when enabled, holes materialized."""
     changed=False;prefix=s.left.path+'/'
+    if any(p.startswith(s.right.path+'/') for p in FakePath.store) and not any(p.startswith(prefix) for p in FakePath.store):
+        raise AssertionError('Unison batch aborts when a replica root is emptied (confirmbigdel)')
     for path in [p for p in FakePath.store if p.startswith(s.right.path+'/')]:
         if s.left.path+path[len(s.right.path):] not in FakePath.store:del FakePath.store[path];changed=True
     for path,entry in list(FakePath.store.items()):

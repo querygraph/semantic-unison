@@ -29,11 +29,13 @@ def bind(Session):
         return left,right
     def nothing(log):check('Nothing to do: replicas have not changed since last sync.' in log,'default-off property propagated')
     def zero_length(s):
+        # A sibling keeps the deletion from emptying the root, which batch mode refuses (confirmbigdel).
+        (s.left/'anchor.txt').write_bytes(b'anchor')
         f=s.left/'empty.bin';f.write_bytes(b'');sync(s,'zero-length')
         _,right=same(s,'empty.bin');check(right.stat().st_size==0,'zero-length file not created empty')
         f.write_bytes(b'z'*4096);sync(s,'zero-length');same(s,'empty.bin')
         f.write_bytes(b'');sync(s,'zero-length');_,right=same(s,'empty.bin');check(right.stat().st_size==0,'shrink to zero not propagated')
-        f.unlink();sync(s,'zero-length');check(not (s.right/'empty.bin').exists(),'zero-length deletion not propagated')
+        f.unlink();sync(s,'zero-length');check(not (s.right/'empty.bin').exists(),'zero-length deletion not propagated');same(s,'anchor.txt')
         return dict(result='created-grown-shrunk-deleted')
     def holes(s):
         f=s.left/'holes.bin';f.write_bytes(b'a'*(8*MiB)+b'b'*4096);f.punch_hole(MiB,6*MiB)
