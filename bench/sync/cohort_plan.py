@@ -1,7 +1,7 @@
 """Immutable auto-cohort metadata contract; validation is not admission."""
 from pathlib import PurePosixPath
 import re
-from auto_cohort import reconstruct, exact, launch_argv
+from auto_cohort import reconstruct, exact, launch_argv, LARGER_CLI_SECONDS
 
 SCHEMA = 'unison-auto-cohort-plan/2'
 LIMITS = dict(owner_observation_seconds=900, cli_observation_seconds=30,
@@ -15,8 +15,9 @@ def limits(cohort):
         raise ValueError('cohort declaration differs')
     if canonical['schema'] == 'unison-auto-cohort/1':
         return dict(LIMITS)
-    return dict(LIMITS, owner_observation_seconds=7200,
-                cli_observation_seconds=180, declared_logical_io_bytes=4*1024**4)
+    seconds = LARGER_CLI_SECONDS[canonical['file_mib']]
+    return dict(LIMITS, owner_observation_seconds=7200 if seconds == 180 else 28800,
+                cli_observation_seconds=seconds, declared_logical_io_bytes=4*1024**4)
 
 
 def path(value):

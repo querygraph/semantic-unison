@@ -14,6 +14,9 @@ def exact(left, right):
 
 
 LARGER_WORKLOADS = ((128, 4), (512, 4), (2048, 2))
+# Per-CLI seconds: a 2048 MiB x 2 semantic row moves 4 GiB through one permit,
+# which exceeded 180 s in its first actual warm-up (stock, 2026-10-20).
+LARGER_CLI_SECONDS = {128: 180, 512: 180, 2048: 900}
 
 
 def contract(label, selection, *, file_mib=32, files=8):
@@ -112,7 +115,7 @@ def parameters(cohort):
         raise ValueError('cohort contract differs')
     larger = c['schema'] == 'unison-auto-cohort/2'
     return dict(modes=list(MODES), workers=[c['selection']], file_mib=c.get('file_mib',32), files=c.get('files',8),
-                packet_bytes=8192, warmups=1, repetitions=5, timeout_seconds=180.0 if larger else 30.0,
+                packet_bytes=8192, warmups=1, repetitions=5, timeout_seconds=float(LARGER_CLI_SECONDS[c['file_mib']]) if larger else 30.0,
                 background_note=BACKGROUND, measure_primary_reads=True,
                 measure_semantic_phases=True, property_removal_controls=False,
                 layout_only_controls=False, loopback_cpu_credit_bound=c['reserved_credits'],

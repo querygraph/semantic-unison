@@ -34,11 +34,12 @@ class Cohort(unittest.TestCase):
                 self.assertEqual(c['schema'],'unison-auto-cohort/2')
                 self.assertEqual(auto_cohort.reconstruct(c),c)
                 p=auto_cohort.parameters(c)
-                self.assertEqual((p['file_mib'],p['files'],p['timeout_seconds']),(mib,files,180.0))
+                seconds=900 if mib==2048 else 180
+                self.assertEqual((p['file_mib'],p['files'],p['timeout_seconds']),(mib,files,float(seconds)))
                 argv=auto_cohort.launch_argv(c,**bindings)
                 self.assertEqual(argv[argv.index('--file-mib')+1],str(mib))
                 self.assertEqual(argv[argv.index('--files')+1],str(files))
-                self.assertEqual(argv[argv.index('--timeout')+1],'180')
+                self.assertEqual(argv[argv.index('--timeout')+1],str(seconds))
         for mib,files in ((True,4),(128,True),(128.0,4),(128,8),(512,2),(2048,4)):
             with self.assertRaises(ValueError):
                 auto_cohort.contract('stock',1,file_mib=mib,files=files)
