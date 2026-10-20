@@ -1,6 +1,6 @@
 """Built-in DNG merge successor controls; fabricated captures and inert sessions only."""
 import copy,hashlib,json,os,unittest
-from current_validation_paths import dng_contract as C,recipes,parent
+from current_validation_paths import dng_contract as C,recipes,parent,successors
 from current_validation_paths.dng_cases import bind,TARGET,LEFT,RIGHT,BASE,FORK_BYTES,INPUTS
 from current_validation_paths.evidence import audit
 from current_validation_paths.evidence_test import bundle,lines
@@ -131,6 +131,8 @@ def fabricate(contract,workspace,endpoints_of):
     """A complete successor run's raw records, as the worker would pin them."""
     packet=dict(contract.plan(workspace,'stock'),schema=contract.SCHEMA,
         repository='/source-only/current-repository',binary=dict(path='/inert/current-unison',sha256='a'*64))
+    if successors.peered(contract.SCHEMA):packet['peer']=dict(compiler='ox',binary=dict(path='/inert/peer-unison',sha256='b'*64))
+    server=successors.server_binary(packet)
     scripts=recipes.scripts(recipes.literal_templates(SOURCE),packet['repository'])
     records={};root_records={};states={};calls={};summaries=[];number=0
     for row in packet['rows']:
@@ -139,7 +141,7 @@ def fabricate(contract,workspace,endpoints_of):
         helpers_left=row['max_fake_validator_calls']
         for sequence in range(1,row['max_CLI_calls']+1):
             number+=1;stem='call-%03d'%number;base=10000+20*number
-            phase=recipes.successor_phase(contract,row,sequence,scripts,packet['binary']['path'])
+            phase=recipes.successor_phase(contract,row,sequence,scripts,packet['binary']['path'],server_binary=server)
             intent=dict(sequence=sequence,case_root=root,**phase,before_fake_helper_counts=dict(client=len(streams['client']),server=len(streams['server'])),
                 before_external_counts=dict(copy=0,merge=0),resource_release_authorized=False)
             endpoints=endpoints_of(row,sequence,phase)
@@ -162,7 +164,7 @@ def fabricate(contract,workspace,endpoints_of):
             if 'designated' in phase:arguments['designated']=phase['designated']
             expected=[dict(endpoint=v['endpoint'],pid=v['pid'],candidate_sha256=v['sha256'],candidate_bytes=4096,mode=v['mode'],outcome='completed') for v in values]
             verdict=json.loads(json.dumps(audit(pair,**arguments,expected_client_exit=phase['expected_client_exit'],expected_helpers=expected,expected_external=[])))
-            config=dict(directory=root,identity=identity,stage=stem,binary=packet['binary']['path'],flags=phase['server_command'][3:],deadline=900.,worker_pid=500,resource_fds=RESOURCES)
+            config=dict(directory=root,identity=identity,stage=stem,binary=server,flags=phase['server_command'][3:],deadline=900.,worker_pid=500,resource_fds=RESOURCES)
             item=dict(root=root)
             for key,name,value in (('intent_pin','INTENT',dict(intent=intent,global_call=number,resource_release_authorized=False)),
                 ('config_pin','CONFIG',dict(proxy=config,script_sha256=hashlib.sha256(recipes.proxy_source(packet['repository'],config).encode()).hexdigest(),resource_release_authorized=False)),

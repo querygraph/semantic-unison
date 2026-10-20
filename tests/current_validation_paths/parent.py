@@ -41,7 +41,8 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         or len({r['fd'] for r in resources})!=9
         or type(owner_deadline) not in (int,float) or not math.isfinite(owner_deadline) or owner_deadline<=0):raise ValueError('exact contiguous call/worker/resource inventory required')
     successor=successors.contract(packet.get('schema'))
-    phase_of=(lambda *a:recipes.successor_phase(successor,*a)) if successor else recipes.phase
+    server=successors.server_binary(packet)
+    phase_of=(lambda *a:recipes.successor_phase(successor,*a,server_binary=server)) if successor else recipes.phase
     totals=successor.TOTALS if successor else NAMED_TOTALS
     if not 0<=n<=totals['cli_calls']:raise ValueError('attempted calls exceed declared suite inventory')
     scripts=recipes.scripts(recipes.literal_templates(source),packet['repository']);rowmap={row['directory']:row for row in rows}
@@ -71,7 +72,7 @@ def replay(packet,result,*,source,worker_pid,resources,owner_deadline,read_case,
         expected_keys={'directory','identity','stage','binary','flags','deadline','worker_pid','resource_fds'}|({'producer_observer'} if kind=='producer_interruption' else set())
         if (type(config_record) is not dict or set(config_record)!={'proxy','script_sha256','resource_release_authorized'}
             or config_record['resource_release_authorized'] is not False or type(config) is not dict or set(config)!=expected_keys
-            or config['directory']!=root or config['stage']!=stem or config['binary']!=packet['binary']['path']
+            or config['directory']!=root or config['stage']!=stem or config['binary']!=server
             or not exact(config['flags'],phase['server_command'][3:]) or type(config['worker_pid']) is not int or config['worker_pid']!=worker_pid
             or not exact(config['resource_fds'],resources) or type(config['deadline']) not in (int,float)
             or not math.isfinite(config['deadline']) or not 0<config['deadline']<=owner_deadline

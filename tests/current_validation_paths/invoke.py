@@ -18,6 +18,7 @@ from current_validation_paths.cancel_evidence import audit as audit_cancel
 from current_validation_paths.producer_evidence import audit as audit_producer
 from current_validation_paths.files import epoch
 from current_validation_paths.recipes import proxy_source
+from current_validation_paths.successors import server_binary
 
 
 def artifacts(packet):
@@ -26,7 +27,7 @@ def artifacts(packet):
         if path.is_absolute() or '..' in path.parts or str(path)!=name:raise ValueError('canonical repository source pin required')
         if hashlib.sha256(read_bytes(str(Path(packet['repository'])/path),8*1048576)).hexdigest()!=digest:
             raise ValueError('named-path execution source changed '+name)
-    for ref in (packet['binary'],packet['interpreter']):
+    for ref in (packet['binary'],packet['interpreter'],*([packet['peer']['binary']] if 'peer' in packet else [])):
         if hashlib.sha256(read_bytes(ref['path'],256*1048576)).hexdigest()!=ref['sha256']:raise ValueError('named-path execution artifact changed')
 
 
@@ -57,9 +58,9 @@ class Actor:
                 or self.attempts>=self.packet['limits']['CLI_calls']
                 or self.normal_sequences.get(root,0)>=self.rows[root]['max_CLI_calls']):raise ValueError('one exact ordered case call within declared budget required')
             if intent['command'][:8]!=[self.packet['binary']['path'],str(session.left),'ssh://localhost/'+str(session.right),
-                '-sshcmd',str(session.abort_launcher if 'producer_interruption' in intent else session.launcher),'-servercmd',self.packet['binary']['path'],'-batch']:
+                '-sshcmd',str(session.abort_launcher if 'producer_interruption' in intent else session.launcher),'-servercmd',server_binary(self.packet),'-batch']:
                 raise ValueError('exact current endpoint/launcher command required')
-            if intent['server_command'][:3]!=[self.packet['binary']['path'],'-server','__new-rpc-mode']:raise ValueError('exact current server required')
+            if intent['server_command'][:3]!=[server_binary(self.packet),'-server','__new-rpc-mode']:raise ValueError('exact current server required')
             now=time.monotonic();phase=min(self.deadline,now+self.packet['limits']['per_CLI_observation_seconds'])
             if not now<phase:raise TimeoutError('no new call after observation deadline')
             self.attempts+=1;number=self.attempts;stem='call-%03d'%number
@@ -80,7 +81,7 @@ class Actor:
             for endpoint,control in intent['helper_controls'].items():
                 if not exact(json.loads(session.drivers[endpoint].with_suffix('.control.json').read_text()),control):raise ValueError('fake helper control changed after intent')
             native=session.root.lstat();config=dict(directory=root,identity=dict(device=native.st_dev,inode=native.st_ino),stage=stem,
-                binary=self.packet['binary']['path'],flags=intent['server_command'][3:],deadline=phase,worker_pid=os.getpid(),resource_fds=self.resources)
+                binary=server_binary(self.packet),flags=intent['server_command'][3:],deadline=phase,worker_pid=os.getpid(),resource_fds=self.resources)
             if 'producer_interruption' in intent:
                 observer=intent['producer_interruption'];row=self.rows[root]
                 if (row['family']!='resumed' or observer['kind']!=row['arguments'][0] or intent['expected_client_exit']!='connection-failure'

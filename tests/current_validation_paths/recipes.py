@@ -134,17 +134,18 @@ def successor_options(contract,root,values):
     return values
 
 
-def successor_phase(contract,row,sequence,script_sources,binary):
+def successor_phase(contract,row,sequence,script_sources,binary,server_binary=None):
     if type(sequence) is not int or not 1<=sequence<=row['max_CLI_calls']:raise ValueError('bounded exact successor case sequence required')
     root=Path(row['directory']);policy,opts,client,server,code,designated=contract.call(row['family'],sequence)
     controls={endpoint:dict(endpoint=endpoint,build='validation-path-'+endpoint+'-v1',mode=mode,
         destination=str(root/('left' if endpoint=='client' else 'right')/'image.dng')) for endpoint,mode in (('client',client),('server',server))}
     settings=[value for key,setting in config(root,'client',script_sources).items() for value in ('-'+key,setting)]
-    command=[binary,str(root/'left'),'ssh://localhost/'+str(root/'right'),'-sshcmd',str(root/'loopback.py'),'-servercmd',binary,
+    server_binary=binary if server_binary is None else server_binary
+    command=[binary,str(root/'left'),'ssh://localhost/'+str(root/'right'),'-sshcmd',str(root/'loopback.py'),'-servercmd',server_binary,
         '-batch','-auto','-fastcheck','false',*flags(policy),*settings,*opts]
     server_config=config(root,'server',script_sources);server_config['semanticvolumejobs']='1'
     profile=''.join(key+' = '+value+'\n' for key,value in server_config.items())
-    value=dict(command=command,server_command=[binary,'-server','__new-rpc-mode',*flags(policy),*opts],
+    value=dict(command=command,server_command=[server_binary,'-server','__new-rpc-mode',*flags(policy),*opts],
         expected_client_exit=code,helper_controls=controls,server_profile_text=profile,
         server_profile_sha256=hashlib.sha256(profile.encode()).hexdigest(),
         prepared_scripts={str(root/name):hashlib.sha256(text.encode()).hexdigest() for name,text in script_sources.items()})

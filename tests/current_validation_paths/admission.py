@@ -18,6 +18,7 @@ LEGACY='tests/validation_paths/run.py'
 def validate(packet,*,source,execution_sources,production_sources):
     fields={'schema','repository','workspace','compiler','interpreter','binary','build','legacy_source','rows','limits',
             'source_pins','production_sha256','prerequisite_sha256','cpu_policy_sha256','io_manifest_sha256'}
+    if type(packet) is dict and packet.get('schema') in SCHEMAS and successors.peered(packet['schema']):fields=fields|{'peer'}
     require(type(packet) is dict and set(packet)==fields and packet['schema'] in SCHEMAS,
             'exact named execution packet required')
     successor=successors.contract(packet['schema'])
@@ -37,9 +38,20 @@ def validate(packet,*,source,execution_sources,production_sources):
     require(type(build) is dict and set(build)=={'receipt','compiler'},'exact build/compiler references required')
     reference(build['receipt']);reference(build['compiler']);reference(binary)
     require(build['compiler']['path']==COMPILERS[packet['compiler']],'canonical compiler executable required')
-    require(exact(packet['prerequisite_sha256'],{build['receipt']['path']:build['receipt']['sha256']}),
-            'exactly the authenticated build receipt prerequisite required')
-    require(len({PYTHON,binary['path'],build['compiler']['path']})==3,'distinct interpreter/binary/compiler required')
+    receipts={build['receipt']['path']:build['receipt']['sha256']}
+    executables=[PYTHON,binary['path'],build['compiler']['path']]
+    if 'peer' in packet:
+        peer=packet['peer']
+        require(type(peer) is dict and set(peer)=={'compiler','binary','build'} and peer['compiler'] in COMPILERS
+            and peer['compiler']!=packet['compiler'] and type(peer['build']) is dict and set(peer['build'])=={'receipt','compiler'},
+            'exact other-compiler peer build required')
+        reference(peer['build']['receipt']);reference(peer['build']['compiler']);reference(peer['binary'])
+        require(peer['build']['compiler']['path']==COMPILERS[peer['compiler']],'canonical peer compiler executable required')
+        receipts[peer['build']['receipt']['path']]=peer['build']['receipt']['sha256']
+        executables+=[peer['binary']['path'],peer['build']['compiler']['path']]
+    require(exact(packet['prerequisite_sha256'],receipts),
+            'exactly the authenticated build receipt prerequisites required')
+    require(len(set(executables))==len(executables),'distinct interpreter/binary/compiler required')
     return contract
 
 

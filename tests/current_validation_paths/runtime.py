@@ -58,7 +58,8 @@ def run(packet,store,resources,deadline):
     def make_session(legacy_class):
         cls=session_factory(legacy_class,files=files,binary=packet['binary']['path'],repository=packet['repository'],
             invoke=actor.invoke,audit=actor.audit,interrupt=actor.interrupt,persist=persist,
-            options=(lambda root,values:recipes.successor_options(successor,root,values)) if successor else recipes.options)
+            options=(lambda root,values:recipes.successor_options(successor,root,values)) if successor else recipes.options,
+            server_binary=successors.server_binary(packet))
         selected['session']=cls;return cls
     def cancelled(root,binary,policy):return cancel_factory(selected['session'])(root,binary,policy)
     try:
