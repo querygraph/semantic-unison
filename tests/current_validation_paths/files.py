@@ -47,6 +47,10 @@ class Files:
             def unlink(self,missing_ok=False):return owner.unlink(self,missing_ok)
             def owned_names(self):return owner.names(self)
             def resource_fork(self,data=None):return owner.resource_fork(self,data)
+            def xattr(self,key,data=None,*,remove=False):return owner.xattr(self,key,data,remove)
+            def xattr_names(self):return owner.xattr_names(self)
+            def acl(self,text=None):return owner.acl(self,text)
+            def punch_hole(self,offset,length):return owner.punch_hole(self,offset,length)
             def _unsupported(self,*args,**kwargs):raise ValueError('undeclared fixture mutation refused')
             rename=replace=symlink_to=hardlink_to=touch=rmdir=_unsupported
         self.Path=Owned
@@ -185,6 +189,84 @@ class Files:
             buffer=ctypes.create_string_buffer(65536);n=libc.fgetxattr(fd,key,buffer,65536,0,0)
             if n<0:raise OSError(ctypes.get_errno(),'fgetxattr resource fork')
             return buffer.raw[:n]
+        return self._operation(path,action)
+    # Darwin descriptor-anchored properties for filesystem transition fixtures.
+    XATTR='org.unison.fsprop.tag'
+    def _libc(self):
+        import ctypes,sys
+        if sys.platform!='darwin':raise ValueError('xattr/ACL/hole fixtures are Darwin only')
+        libc=ctypes.CDLL(None,use_errno=True)
+        libc.fsetxattr.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_char_p,ctypes.c_size_t,ctypes.c_uint32,ctypes.c_int]
+        libc.fgetxattr.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_void_p,ctypes.c_size_t,ctypes.c_uint32,ctypes.c_int]
+        libc.fremovexattr.argtypes=[ctypes.c_int,ctypes.c_char_p,ctypes.c_int]
+        libc.flistxattr.argtypes=[ctypes.c_int,ctypes.c_void_p,ctypes.c_size_t,ctypes.c_int]
+        libc.fgetxattr.restype=libc.flistxattr.restype=ctypes.c_ssize_t
+        libc.acl_get_fd_np.argtypes=[ctypes.c_int,ctypes.c_int];libc.acl_get_fd_np.restype=ctypes.c_void_p
+        libc.acl_set_fd_np.argtypes=[ctypes.c_int,ctypes.c_void_p,ctypes.c_int]
+        libc.acl_from_text.argtypes=[ctypes.c_char_p];libc.acl_from_text.restype=ctypes.c_void_p
+        libc.acl_init.argtypes=[ctypes.c_int];libc.acl_init.restype=ctypes.c_void_p
+        libc.acl_to_text.argtypes=[ctypes.c_void_p,ctypes.c_void_p];libc.acl_to_text.restype=ctypes.c_void_p
+        libc.acl_free.argtypes=[ctypes.c_void_p]
+        libc.fcntl.argtypes=[ctypes.c_int,ctypes.c_int,ctypes.c_void_p]
+        return ctypes,libc
+    def xattr(self,path,key,data=None,remove=False):
+        if key!=self.XATTR:raise ValueError('declared fixture xattr key only')
+        if data is not None and (remove or type(data) is not bytes or not 0<len(data)<=4096):raise ValueError('bounded xattr bytes or removal required')
+        ctypes,libc=self._libc();name=key.encode()
+        def action(parent,name_,fds):
+            fd,_=self._file(parent,name_,os.O_RDONLY if data is None and not remove else os.O_WRONLY,fds)
+            if remove:
+                if libc.fremovexattr(fd,name,0)!=0:raise OSError(ctypes.get_errno(),'fremovexattr fixture')
+                return None
+            if data is not None:
+                if libc.fsetxattr(fd,name,data,len(data),0,0)!=0:raise OSError(ctypes.get_errno(),'fsetxattr fixture')
+                return len(data)
+            buffer=ctypes.create_string_buffer(4096);n=libc.fgetxattr(fd,name,buffer,4096,0,0)
+            if n<0:raise OSError(ctypes.get_errno(),'fgetxattr fixture')
+            return buffer.raw[:n]
+        return self._operation(path,action)
+    def xattr_names(self,path):
+        ctypes,libc=self._libc()
+        def action(parent,name,fds):
+            fd,_=self._file(parent,name,os.O_RDONLY,fds);buffer=ctypes.create_string_buffer(65536)
+            n=libc.flistxattr(fd,buffer,65536,0)
+            if n<0:raise OSError(ctypes.get_errno(),'flistxattr fixture')
+            return sorted(k.decode() for k in buffer.raw[:n].split(b'\0') if k)
+        return self._operation(path,action)
+    def acl(self,path,text=None):
+        # Extended ACL text; '' clears every entry. Returns the current text or None.
+        if text is not None and (type(text) is not str or len(text)>4096):raise ValueError('bounded ACL text required')
+        ctypes,libc=self._libc();EXTENDED=0x100
+        def action(parent,name,fds):
+            fd,_=self._file(parent,name,os.O_RDONLY,fds)
+            if text is not None:
+                value=libc.acl_from_text(text.encode()) if text else libc.acl_init(0)
+                if not value:raise OSError(ctypes.get_errno(),'acl_from_text fixture')
+                try:
+                    if libc.acl_set_fd_np(fd,value,EXTENDED)!=0:raise OSError(ctypes.get_errno(),'acl_set_fd_np fixture')
+                finally:libc.acl_free(value)
+            value=libc.acl_get_fd_np(fd,EXTENDED)
+            if not value:return None
+            try:
+                rendered=libc.acl_to_text(value,None)
+                if not rendered:raise OSError(ctypes.get_errno(),'acl_to_text fixture')
+                try:return ctypes.string_at(rendered).decode()
+                finally:libc.acl_free(rendered)
+            finally:libc.acl_free(value)
+        return self._operation(path,action)
+    def punch_hole(self,path,offset,length):
+        if not all(type(v) is int and v>0 and v%4096==0 for v in (offset,length)):raise ValueError('aligned positive hole required')
+        ctypes,libc=self._libc()
+        class Hole(ctypes.Structure):_fields_=[('flags',ctypes.c_uint32),('reserved',ctypes.c_uint32),('offset',ctypes.c_int64),('length',ctypes.c_int64)]
+        F_PUNCHHOLE=99
+        def action(parent,name,fds):
+            fd,before=self._file(parent,name,os.O_RDWR,fds)
+            if offset+length>=before.st_size:raise ValueError('hole must stay inside the fixture data')
+            hole=Hole(0,0,offset,length)
+            if libc.fcntl(fd,F_PUNCHHOLE,ctypes.byref(hole))!=0:raise OSError(ctypes.get_errno(),'F_PUNCHHOLE fixture')
+            os.fsync(fd)
+            if os.fstat(fd).st_size!=before.st_size:raise ValueError('hole changed fixture length')
+            return length
         return self._operation(path,action)
     def close(self):
         self._ready();self.close_attempted=True

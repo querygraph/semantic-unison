@@ -12,6 +12,8 @@ OPTS=['-backupcurrent','Name *.dng','-merge','Name *.dng -> unison:dng-xmp-scala
 MISMATCH=['-backupcurrent','Name *.dng','-merge','Name *.dng -> unison:dng-xmp-scalars/99']
 DISABLED=['-backupcurrent','Name *.dng']
 FORK=[*OPTS,'-rsrc','true']
+OPTIONS=([],OPTS,MISMATCH,DISABLED,FORK)
+SCHEMA='unison-current-dng-merge-receiving-execution/1'
 PROFILE='Failed [image.dng]: DNG scalar merge: no compatible fixed-region profile: '
 BASE='Failed [image.dng]: DNG scalar merge requires a saved common version; enable backupcurrent before synchronization'
 # name, maximum CLI calls, fake validator calls, seed saves a common version.

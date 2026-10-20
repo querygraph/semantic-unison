@@ -128,17 +128,15 @@ def cancellation_fixture():
         previous_sha256=hashlib.sha256(previous).hexdigest(),previous_bytes=len(previous))
 
 
-def dng_options(root,values):
-    from current_validation_paths.dng_contract import OPTS,MISMATCH,DISABLED,FORK
+def successor_options(contract,root,values):
     values=list(values)
-    if values not in ([],OPTS,MISMATCH,DISABLED,FORK):raise ValueError('undeclared DNG merge case option')
+    if values not in contract.OPTIONS:raise ValueError('undeclared successor case option')
     return values
 
 
-def dng_phase(row,sequence,script_sources,binary):
-    from current_validation_paths.dng_contract import call
-    if type(sequence) is not int or not 1<=sequence<=row['max_CLI_calls']:raise ValueError('bounded exact DNG merge case sequence required')
-    root=Path(row['directory']);policy,opts,client,server,code,designated=call(row['family'],sequence)
+def successor_phase(contract,row,sequence,script_sources,binary):
+    if type(sequence) is not int or not 1<=sequence<=row['max_CLI_calls']:raise ValueError('bounded exact successor case sequence required')
+    root=Path(row['directory']);policy,opts,client,server,code,designated=contract.call(row['family'],sequence)
     controls={endpoint:dict(endpoint=endpoint,build='validation-path-'+endpoint+'-v1',mode=mode,
         destination=str(root/('left' if endpoint=='client' else 'right')/'image.dng')) for endpoint,mode in (('client',client),('server',server))}
     settings=[value for key,setting in config(root,'client',script_sources).items() for value in ('-'+key,setting)]
@@ -152,3 +150,13 @@ def dng_phase(row,sequence,script_sources,binary):
         prepared_scripts={str(root/name):hashlib.sha256(text.encode()).hexdigest() for name,text in script_sources.items()})
     if designated is not None:value['designated']=designated
     return value
+
+
+def dng_options(root,values):
+    from current_validation_paths import dng_contract
+    return successor_options(dng_contract,root,values)
+
+
+def dng_phase(row,sequence,script_sources,binary):
+    from current_validation_paths import dng_contract
+    return successor_phase(dng_contract,row,sequence,script_sources,binary)

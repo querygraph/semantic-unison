@@ -16,8 +16,7 @@ from current_validation_paths.original import load
 from current_validation_paths.session import factory as session_factory
 from current_validation_paths.cancel_case import factory as cancel_factory
 from current_validation_paths.invoke import Actor
-from current_validation_paths import dng_contract,dng_cases,recipes
-DNG_SCHEMA='unison-current-dng-merge-receiving-execution/1'
+from current_validation_paths import successors,recipes
 
 
 def prefix_settled(actor,files,error):
@@ -43,8 +42,8 @@ def run(packet,store,resources,deadline):
     if legacy['path']!=expected_path:raise ValueError('exact original legacy source reference required')
     raw=read_bytes(expected_path,256*1024)
     if len(raw)!=legacy['bytes'] or hashlib.sha256(raw).hexdigest()!=legacy['sha256']:raise ValueError('original case source changed')
-    source=raw.decode('utf-8');dng=packet.get('schema')==DNG_SCHEMA
-    expected=dng_contract.plan(packet['workspace'],packet['compiler']) if dng else case_plan(source,packet['workspace'],packet['compiler'])
+    source=raw.decode('utf-8');successor=successors.contract(packet.get('schema'))
+    expected=successor.plan(packet['workspace'],packet['compiler']) if successor else case_plan(source,packet['workspace'],packet['compiler'])
     if not exact(packet['rows'],expected['rows']) or not exact(packet['limits'],expected['limits']):
         raise ValueError('complete original ordered cases/limits required')
     if not time.monotonic()<deadline<float('inf'):raise ValueError('fresh inherited worker observation required')
@@ -59,15 +58,15 @@ def run(packet,store,resources,deadline):
     def make_session(legacy_class):
         cls=session_factory(legacy_class,files=files,binary=packet['binary']['path'],repository=packet['repository'],
             invoke=actor.invoke,audit=actor.audit,interrupt=actor.interrupt,persist=persist,
-            options=recipes.dng_options if dng else recipes.options)
+            options=(lambda root,values:recipes.successor_options(successor,root,values)) if successor else recipes.options)
         selected['session']=cls;return cls
     def cancelled(root,binary,policy):return cancel_factory(selected['session'])(root,binary,policy)
     try:
         functions=load(source,session_factory=make_session,cancel_actor=cancelled,path_factory=lambda _:files.Path,
             filename=expected_path)['functions']
-        if dng:
+        if successor:
             # Unison then creates its own state (backups) private, as owned IO requires.
-            os.umask(0o077);functions=dng_cases.bind(selected['session'])
+            os.umask(0o077);functions=successors.cases(packet['schema']).bind(selected['session'])
         for row in packet['rows']:
             if time.monotonic()>=deadline:raise TimeoutError('no new case after observation deadline')
             if files.Path(row['directory']).exists():raise ValueError('new original case workspace must be absent')
@@ -86,7 +85,7 @@ def run(packet,store,resources,deadline):
                 break
         if failed is None:
             try:
-                totals=dng_contract.TOTALS if dng else dict(cli_calls=69,fake_validators=54,copy=9,merge=7)
+                totals=successor.TOTALS if successor else dict(cli_calls=69,fake_validators=54,copy=9,merge=7)
                 if actor.attempts!=totals['cli_calls'] or len(completed)!=len(packet['rows']):raise ValueError('full original case/call inventory differs')
                 if sum(row['fake_validators'] for row in completed)!=totals['fake_validators']:raise ValueError('full fake-validator inventory differs')
                 kinds=[item['expected']['kind'] for call in actor.calls.values() for item in call['verdict'].get('external_observations',[])]

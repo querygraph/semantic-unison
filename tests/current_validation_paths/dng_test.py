@@ -120,61 +120,69 @@ class Cases(unittest.TestCase):
         with self.assertRaises(AssertionError):bind(fake_session(lazy))['second-receiver-reject'](WORKSPACE+'/second-receiver-reject','/bin/u')
 
 
+def dng_endpoints(row,sequence,phase):
+    if row['family']=='first-receiver-reject' and sequence==2:return ['client']
+    if row['family']=='second-receiver-reject' and sequence==2:return ['client','server']
+    if phase['expected_client_exit']==0 and sequence>1 and not (row['family'] in ('disjoint','swapped') and sequence==3):return ['client','server']
+    return []
+
+
+def fabricate(contract,workspace,endpoints_of):
+    """A complete successor run's raw records, as the worker would pin them."""
+    packet=dict(contract.plan(workspace,'stock'),schema=contract.SCHEMA,
+        repository='/source-only/current-repository',binary=dict(path='/inert/current-unison',sha256='a'*64))
+    scripts=recipes.scripts(recipes.literal_templates(SOURCE),packet['repository'])
+    records={};root_records={};states={};calls={};summaries=[];number=0
+    for row in packet['rows']:
+        root=row['directory'];identity=dict(device=1,inode=100+row['index']);streams=dict(client=[],server=[],copy=[],merge=[]);verdicts=[]
+        root_records['case-%02d-START.json'%row['index']]=dict(row=row,resource_release_authorized=False)
+        helpers_left=row['max_fake_validator_calls']
+        for sequence in range(1,row['max_CLI_calls']+1):
+            number+=1;stem='call-%03d'%number;base=10000+20*number
+            phase=recipes.successor_phase(contract,row,sequence,scripts,packet['binary']['path'])
+            intent=dict(sequence=sequence,case_root=root,**phase,before_fake_helper_counts=dict(client=len(streams['client']),server=len(streams['server'])),
+                before_external_counts=dict(copy=0,merge=0),resource_release_authorized=False)
+            endpoints=endpoints_of(row,sequence,phase)
+            stderr={'client':'','server':''};values=[]
+            for k,endpoint in enumerate(endpoints):
+                control=phase['helper_controls'][endpoint];destination=control['destination'];candidate=destination.rsplit('/',1)[0]+'/.image.dng.%03d.unison.tmp'%number
+                sha=hashlib.sha256((stem+endpoint).encode()).hexdigest()
+                value=dict(candidate=candidate,destination=destination,sha256=sha,size=4096,device=1,inode=base+50+k,
+                    argv=['--unison-dng-validation-v1','--expected-sha256',sha,'--expected-size','4096','--threads','1','--',candidate],
+                    pid=base+4+k,destination_sha256=None,mode=control['mode'],endpoint=endpoint,nofile_hard=256)
+                streams[endpoint].append(value);values.append(value);stderr[endpoint]+=helper_lines(value,'completed')
+            if 'designated' in phase:stderr['client']+=phase['designated']+'\n'
+            proxy=[PYTHON,'-B',root+'/'+stem+'-proxy.py']
+            raw=dict(schema='unison-retained-merge-proxy/1',server_command=phase['server_command'],server_pid=base+3,server_returncode=0,server_reaped=True,
+                server_group=base+2,input_eof_forwarded=True,output_eof_forwarded=True,forwarded_protocol_bytes=dict(client_to_server_bytes=7,server_to_client_bytes=9),
+                parent_group_audit_required=True,sdk_helper_audit_required=True,resource_release_authorized=False)
+            pair=dict(client=child(phase['command'],phase['expected_client_exit'],base+1,stderr['client']),proxy=child(proxy,0,base+2,stderr['server']),
+                raw_proxy=raw,external_sdk_audit_required=True,resource_release_authorized=False)
+            arguments=dict(client_command=phase['command'],proxy_command=proxy,server_command=phase['server_command'],raw_proxy_bytes=json.dumps(raw).encode())
+            if 'designated' in phase:arguments['designated']=phase['designated']
+            expected=[dict(endpoint=v['endpoint'],pid=v['pid'],candidate_sha256=v['sha256'],candidate_bytes=4096,mode=v['mode'],outcome='completed') for v in values]
+            verdict=json.loads(json.dumps(audit(pair,**arguments,expected_client_exit=phase['expected_client_exit'],expected_helpers=expected,expected_external=[])))
+            config=dict(directory=root,identity=identity,stage=stem,binary=packet['binary']['path'],flags=phase['server_command'][3:],deadline=900.,worker_pid=500,resource_fds=RESOURCES)
+            item=dict(root=root)
+            for key,name,value in (('intent_pin','INTENT',dict(intent=intent,global_call=number,resource_release_authorized=False)),
+                ('config_pin','CONFIG',dict(proxy=config,script_sha256=hashlib.sha256(recipes.proxy_source(packet['repository'],config).encode()).hexdigest(),resource_release_authorized=False)),
+                ('pair_pin','PAIR',dict(pair=pair,raw_proxy_hex=json.dumps(raw).encode().hex(),resource_release_authorized=False)),('audit_pin','AUDIT',verdict)):
+                data=encode(value);records[root,stem+'-'+name+'.json']=data;item[key]=dict(name=stem+'-'+name+'.json',sha256=hashlib.sha256(data).hexdigest(),bytes=len(data))
+            records[root,stem+'-INHERITED.json']=encode(dict(proxy_pid=base+2,worker_pid=500,resource_fds=RESOURCES,
+                binding=dict(inherited_fds=[r['fd'] for r in RESOURCES],canonical_metadata_bound=True,lock_ownership_independently_proved=False,resource_release_authorized=False)))
+            prefix='case-%02d-seq-%03d-'%(row['index'],sequence)
+            root_records[prefix+'INTENT.json']=copy.deepcopy(intent);root_records[prefix+'ACCEPTED.json']=dict(intent=copy.deepcopy(intent),verdict=verdict,resource_release_authorized=False)
+            calls[str(number)]=item;verdicts.append(dict(root=root,verdict=verdict))
+        states[root]=dict(identity=identity,counters=streams,scripts_current=True,profile_current=True)
+        summary=case_summary(row,verdicts,dict(name=row['name']));summaries.append(summary);root_records['case-%02d-RESULT.json'%row['index']]=summary
+    result=dict(complete=True,cases=summaries,failed_case=None,calls=calls,attempted_CLI_calls=number,actual_SDK_calls=0,actual_Photo_calls=0,
+        parent_terminal_proved=False,resource_release_authorized=False,independent_parent_raw_audit_required=True)
+    return packet,result,records,root_records,states
+
+
 class Replay(unittest.TestCase):
     """A complete fabricated D run replayed by the parent under the D schema."""
-    def build(self):
-        packet=dict(C.plan(WORKSPACE,'stock'),schema='unison-current-dng-merge-receiving-execution/1',
-            repository='/source-only/current-repository',binary=dict(path='/inert/current-unison',sha256='a'*64))
-        scripts=recipes.scripts(recipes.literal_templates(SOURCE),packet['repository'])
-        records={};root_records={};states={};calls={};summaries=[];number=0
-        for row in packet['rows']:
-            root=row['directory'];identity=dict(device=1,inode=100+row['index']);streams=dict(client=[],server=[],copy=[],merge=[]);verdicts=[]
-            root_records['case-%02d-START.json'%row['index']]=dict(row=row,resource_release_authorized=False)
-            helpers_left=row['max_fake_validator_calls']
-            for sequence in range(1,row['max_CLI_calls']+1):
-                number+=1;stem='call-%03d'%number;base=10000+20*number
-                phase=recipes.dng_phase(row,sequence,scripts,packet['binary']['path'])
-                intent=dict(sequence=sequence,case_root=root,**phase,before_fake_helper_counts=dict(client=len(streams['client']),server=len(streams['server'])),
-                    before_external_counts=dict(copy=0,merge=0),resource_release_authorized=False)
-                endpoints=[]
-                if phase['expected_client_exit']==0 and sequence>1 and not (row['family'] in ('disjoint','swapped') and sequence==3):endpoints=['client','server']
-                if row['family']=='first-receiver-reject' and sequence==2:endpoints=['client']
-                if row['family']=='second-receiver-reject' and sequence==2:endpoints=['client','server']
-                stderr={'client':'','server':''};values=[]
-                for k,endpoint in enumerate(endpoints):
-                    control=phase['helper_controls'][endpoint];destination=control['destination'];candidate=destination.rsplit('/',1)[0]+'/.image.dng.%03d.unison.tmp'%number
-                    sha=hashlib.sha256((stem+endpoint).encode()).hexdigest()
-                    value=dict(candidate=candidate,destination=destination,sha256=sha,size=4096,device=1,inode=base+50+k,
-                        argv=['--unison-dng-validation-v1','--expected-sha256',sha,'--expected-size','4096','--threads','1','--',candidate],
-                        pid=base+4+k,destination_sha256=None,mode=control['mode'],endpoint=endpoint,nofile_hard=256)
-                    streams[endpoint].append(value);values.append(value);stderr[endpoint]+=helper_lines(value,'completed')
-                if 'designated' in phase:stderr['client']+=phase['designated']+'\n'
-                proxy=[PYTHON,'-B',root+'/'+stem+'-proxy.py']
-                raw=dict(schema='unison-retained-merge-proxy/1',server_command=phase['server_command'],server_pid=base+3,server_returncode=0,server_reaped=True,
-                    server_group=base+2,input_eof_forwarded=True,output_eof_forwarded=True,forwarded_protocol_bytes=dict(client_to_server_bytes=7,server_to_client_bytes=9),
-                    parent_group_audit_required=True,sdk_helper_audit_required=True,resource_release_authorized=False)
-                pair=dict(client=child(phase['command'],phase['expected_client_exit'],base+1,stderr['client']),proxy=child(proxy,0,base+2,stderr['server']),
-                    raw_proxy=raw,external_sdk_audit_required=True,resource_release_authorized=False)
-                arguments=dict(client_command=phase['command'],proxy_command=proxy,server_command=phase['server_command'],raw_proxy_bytes=json.dumps(raw).encode())
-                if 'designated' in phase:arguments['designated']=phase['designated']
-                expected=[dict(endpoint=v['endpoint'],pid=v['pid'],candidate_sha256=v['sha256'],candidate_bytes=4096,mode=v['mode'],outcome='completed') for v in values]
-                verdict=json.loads(json.dumps(audit(pair,**arguments,expected_client_exit=phase['expected_client_exit'],expected_helpers=expected,expected_external=[])))
-                config=dict(directory=root,identity=identity,stage=stem,binary=packet['binary']['path'],flags=phase['server_command'][3:],deadline=900.,worker_pid=500,resource_fds=RESOURCES)
-                item=dict(root=root)
-                for key,name,value in (('intent_pin','INTENT',dict(intent=intent,global_call=number,resource_release_authorized=False)),
-                    ('config_pin','CONFIG',dict(proxy=config,script_sha256=hashlib.sha256(recipes.proxy_source(packet['repository'],config).encode()).hexdigest(),resource_release_authorized=False)),
-                    ('pair_pin','PAIR',dict(pair=pair,raw_proxy_hex=json.dumps(raw).encode().hex(),resource_release_authorized=False)),('audit_pin','AUDIT',verdict)):
-                    data=encode(value);records[root,stem+'-'+name+'.json']=data;item[key]=dict(name=stem+'-'+name+'.json',sha256=hashlib.sha256(data).hexdigest(),bytes=len(data))
-                records[root,stem+'-INHERITED.json']=encode(dict(proxy_pid=base+2,worker_pid=500,resource_fds=RESOURCES,
-                    binding=dict(inherited_fds=[r['fd'] for r in RESOURCES],canonical_metadata_bound=True,lock_ownership_independently_proved=False,resource_release_authorized=False)))
-                prefix='case-%02d-seq-%03d-'%(row['index'],sequence)
-                root_records[prefix+'INTENT.json']=copy.deepcopy(intent);root_records[prefix+'ACCEPTED.json']=dict(intent=copy.deepcopy(intent),verdict=verdict,resource_release_authorized=False)
-                calls[str(number)]=item;verdicts.append(dict(root=root,verdict=verdict))
-            states[root]=dict(identity=identity,counters=streams,scripts_current=True,profile_current=True)
-            summary=case_summary(row,verdicts,dict(name=row['name']));summaries.append(summary);root_records['case-%02d-RESULT.json'%row['index']]=summary
-        result=dict(complete=True,cases=summaries,failed_case=None,calls=calls,attempted_CLI_calls=number,actual_SDK_calls=0,actual_Photo_calls=0,
-            parent_terminal_proved=False,resource_release_authorized=False,independent_parent_raw_audit_required=True)
-        return packet,result,records,root_records,states
+    def build(self):return fabricate(C,WORKSPACE,dng_endpoints)
     def replay(self,packet,result,records,root_records,states):
         return parent.replay(packet,result,source=SOURCE,worker_pid=500,resources=RESOURCES,owner_deadline=1000.,
             read_case=lambda root,name:records[root,name],read_root=lambda name:copy.deepcopy(root_records[name]),
