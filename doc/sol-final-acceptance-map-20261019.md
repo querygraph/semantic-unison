@@ -9,6 +9,11 @@ at that head ([result](current-named-receiving-result-20261019.md)), closing the
 generated-validator receiving off/warn/require, external copy, moved-file reuse,
 resume after receiver interruption, merge first/second-receiver failure and
 recovery, timeout and client-cancellation mappings for rows 6, 11 and 12.
+Read-only case maps now exist for row 5
+([concurrent modification](final-concurrent-modification-case-map-20261019.md))
+and row 10 ([semantic merge](final-semantic-merge-case-map-20261019.md)), each
+with explicit gaps; the largest is that the built-in semantic DNG merge has not
+run end to end on the `10c5d159` binary.
 Genuine-SDK negative receiving is separately PASS (negative03).
 
 Goal remains ACTIVE/incomplete. Production candidate971271a8 changes only
