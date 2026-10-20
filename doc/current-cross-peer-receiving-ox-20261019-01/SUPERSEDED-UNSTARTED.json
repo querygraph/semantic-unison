@@ -1,0 +1,5 @@
+{
+  "state": "SUPERSEDED_UNSTARTED",
+  "reason": "case sources changed (anchor sibling for deletion cases) after the fs_properties stock-01 confirmbigdel stop; no admission written",
+  "successor": "current-cross-peer-receiving-ox-20261019-02"
+}
