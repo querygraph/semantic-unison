@@ -19,7 +19,13 @@ commit, and predate the fixes in `a5fd1bfb`, `defd5732`, `10c5d159` and
 | Non-APFS clone fallback | APFS→HFS+ exact fallback (generic and DNG) | same | inherited logical bytes are not physical writes |
 | Platforms | Darwin only | — | Linux/BSD/Solaris/Windows runtime, ZFS/ReFS and other non-APFS execution unqualified |
 
-Row 7 gaps: end-to-end ACL, compressed-file and full fork transitions; backup
+Since 2026-10-20, ACL and xattr set/change/remove, the default-off controls,
+zero-length files and punched holes run end to end through the remote
+transport on both compilers ([result](current-fs-properties-receiving-result-20261020.md)).
+Holes keep their bytes but are not preserved: the receiver is fully allocated.
+
+Row 7 gaps: compressed-file and full fork transitions; sparse-aware remote
+receive; backup
 rotation and backup+semantic combinations; independent physical device,
 remount and case-sensitivity cases.
 
@@ -35,5 +41,10 @@ remount and case-sensitivity cases.
 | Archive format / downgrade | round trip above; older `tests/archive_downgrade/qualification.json` | — | downgrade not inferred beyond the round trip |
 
 Row 8 gaps: no receipt binds the final head by commit; no current retained-fork
-rerun; no stock↔OxCaml cross-compiler peer case; only upstream 8772 and 2.53.5;
-no real SSH, GUI or non-Darwin case.
+rerun; only upstream 8772 and 2.53.5;
+no real SSH, GUI or non-Darwin case. The stock↔OxCaml cross-compiler peer
+suite (`current-cross-peer-receiving-{stock,ox}-20261019-03`: 5 cases and 12
+calls per direction, covering seed/delta/no-op, server-side deletion, a skipped
+conflict, xattr+ACL in both directions and a gated DNG receive at each endpoint)
+passed with owner exit 0 in both directions. Its independent post-closure
+replay is pending until the temporary18 series releases its CPU tokens.

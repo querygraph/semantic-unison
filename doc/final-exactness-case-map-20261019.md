@@ -21,9 +21,12 @@ these paths are unaffected by the later fixes.
 1. No current execution receipt for the `tests/semantic/test.ml` "Sparse
    metadata" first/last/disjoint/adjacent/full/multi-region apply cases (the
    current hash is pinned only as a source input).
-2. No end-to-end sync of a zero-length file or accepted zero-region delta.
+2. Zero-length file: closed by [fs_properties](current-fs-properties-receiving-result-20261020.md)
+   (create, grow, shrink, delete on both compilers). Still open: an accepted
+   zero-region delta.
 3. No DNG with several XMP packets, or a packet at EOF.
-4. No fork/xattr carried through a semantic DNG update; no end-to-end ACL,
-   BSD-flag or hole preservation.
+4. ACL and xattr transitions now run end to end (fs_properties). Holes arrive
+   byte-exact, but remote transfers materialize them. Still open: a fork or
+   xattr carried through a semantic DNG update, and BSD flags beyond `nodump`.
 5. `tests/transfer_instruction_bounds/probe.ml` covers empty/first/last/multiple
    token frames but its receipt binds 6 of 9 pins.
