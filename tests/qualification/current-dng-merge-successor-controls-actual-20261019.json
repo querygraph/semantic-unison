@@ -1,0 +1,54 @@
+{
+  "schema": "unison-current-dng-merge-successor-controls/1",
+  "source_commit": "1b0f448d",
+  "product_commit": "8581f357",
+  "actual_tool": {
+    "runner": "in-process unittest (scratchpad runner)",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "token": {
+    "index": 8,
+    "reason": "CPU00..07 held by the running larger benchmark cohort series; Photo paused per user direction 2026-10-19, so its idle CPU08 was used for ~7 s in-process controls; closed after"
+  },
+  "original_methods": 195,
+  "new_methods": 15,
+  "source_sha256": {
+    "tests/current_validation_paths/dng_contract.py": "26f3bd3c419b842ba855556ea7b4fa6d90fb2916966ef5d4320b7a6a1072b05e",
+    "tests/current_validation_paths/dng_cases.py": "a05728e3a0525cbdc9d69a109c089c145f492bd0e32e49653e64851511a94b52",
+    "tests/current_validation_paths/dng_test.py": "3799b14e44e6a08f6dbac121c8a6244754132b1eb5def9892b200294229a1212",
+    "tests/current_validation_paths/recipes.py": "d9242e91bce69f7a89ffdd7537604e3ade2cbb35f0947065f81d3568041ecd4b",
+    "tests/current_validation_paths/session.py": "7c65a692e4d4d00f37a3ace9064937891503c1e86cdf0dadfecd69644a9049b4",
+    "tests/current_validation_paths/evidence.py": "5d2a3b0054eb0ed32e84b678b2b8a8f52b888e67d0a9786f20e1569542dc6b83",
+    "tests/current_validation_paths/invoke.py": "371d3c3abb9ed2d963d8182ad39e6e5f48ade96219926989e06c64e625d5766d",
+    "tests/current_validation_paths/parent.py": "5bd24da9a39592fde6b5181877b670c62d10c30d8e2e945bec53b16551dbbe1f",
+    "tests/current_validation_paths/runtime.py": "8ac6010a6363c5796cb1884f0f8b7c985f3f6ab728002b77b8a767999427068e",
+    "tests/current_validation_paths/admission.py": "827bd10bc7c8b6734238aa9808fcb59024ddfa3519df0b442042c4f8781d0cac",
+    "tests/current_validation_paths/freeze.py": "b00ed4d904cd2af64e9c392e8dd2987e9e4c0d0185717ac07c355183db93f0f0",
+    "tests/current_validation_paths/files.py": "e7d52343547bc444d0c8c14ab89e49f7f22245c7fa9b705fe566450e684f769b",
+    "tests/current_validation_paths/freeze_test.py": "1332fc332e9fe2b4d01fc7995cc15677fc37b73b0c458016a32c76749e23107b",
+    "src/files.ml": "8399b92c8545795b4e8bc9f8f34b4b8ca6bd2368d70856c38194003ddb5c46b9"
+  },
+  "actual_children": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "derived_from_actual_predecessor": {
+    "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-built-in-dng-merge-vbnoy0ax",
+    "observations": [
+      "13 case directories, 29 calls, 9 validator calls per run",
+      "failed calls exit 2, policy-disabled skipped exit 1",
+      "second-receiver-reject merge sync raised Internal error: New archives are not identical (fixed in 10c5d159); the bare harness accepted it as any failure",
+      "policy-mismatch ran /bin/sh unison:dng-xmp-scalars/99 and exited 127 (now refused without a shell in 8581f357)"
+    ]
+  },
+  "initial_failed_controls": [
+    "fake Session seed copied the replica path instead of image.dng (test bug)",
+    "named recipe raised KeyError for D rows (hardened to ValueError)",
+    "session guard test expected ValueError where retained Session correctly raises UnresolvedOwnership"
+  ],
+  "scope": "Source composition only: contract/recipes/designated-decline audit/case translation against a simulated Session/fabricated complete D replay/freeze. No Unison, SDK or native run; the new product refusal is not yet built.",
+  "remaining": [
+    "rebuild stock+Ox with 8581f357 and selftests after the benchmark series",
+    "freeze dng_merge plans, admit, run stock then Ox"
+  ]
+}
