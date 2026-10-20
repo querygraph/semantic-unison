@@ -1,0 +1,100 @@
+{
+  "schema": "unison-auto-cohort-report/1",
+  "state": "INCOMPLETE_MATRIX",
+  "workload": {
+    "file_mib": 2048,
+    "files": 2
+  },
+  "matrix_complete": false,
+  "missing_cohorts": [
+    {
+      "label": "ox",
+      "selection": 1
+    },
+    {
+      "label": "stock",
+      "selection": 2
+    },
+    {
+      "label": "ox",
+      "selection": 2
+    },
+    {
+      "label": "stock",
+      "selection": 4
+    },
+    {
+      "label": "ox",
+      "selection": 4
+    },
+    {
+      "label": "stock",
+      "selection": 8
+    },
+    {
+      "label": "ox",
+      "selection": 8
+    },
+    {
+      "label": "stock",
+      "selection": "auto"
+    },
+    {
+      "label": "ox",
+      "selection": "auto"
+    }
+  ],
+  "cohorts": [
+    {
+      "label": "stock",
+      "selection": 1,
+      "lifecycle": {
+        "attempted_cli_invocations": 8,
+        "server_not_created_invocations": 0,
+        "all_attempted_client_server_supervisor_settled": true,
+        "functional_success_inferred": false,
+        "scope": "journal-prefix lifecycle only; not aggregate or parent terminal",
+        "functional_status": "FAILED_PREFIX"
+      },
+      "reserved_credits": 8,
+      "declared_peak_credits": 4,
+      "endpoint_permit_upper_bound": 1,
+      "functional_status": "FAILED_PREFIX",
+      "raw_sample_indexes": [
+        0,
+        1,
+        2
+      ],
+      "failure": "InvocationFailure('sync invocation failed: {\"command\": [\"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison\", \"/private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left\", \"ssh://localhost//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right\", \"-sshcmd\", \"/private/tmp/unison-sync-bench-kdfeo_k2/launcher.py\", \"-servercmd\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison\", \"-batch\", \"-auto\", \"-fastcheck\", \"false\", \"-times\", \"-debug\", \"copy\", \"-debug\", \"semantic\", \"-debug\", \"semantic-reads\", \"-debug\", \"semantic-timings\", \"-clone\", \"auto\", \"-semanticworkers\", \"1\", \"-semanticcpubudget\", \"8\", \"-maxthreads\", \"2\", \"-semanticdng\"], \"returncode\": 3, \"wall_seconds\": 180.78736090497114, \"timed_out\": true, \"resources\": {\"wait4_user_seconds\": 49.344751, \"wait4_system_seconds\": 3.614311, \"wait4_maxrss_native_units\": 13299712, \"minor_faults\": 9397, \"major_faults\": 58, \"block_input_operations\": 0, \"block_output_operations\": 0}, \"client_cleanup\": {\"pid\": 56550, \"returncode\": 3, \"reaped\": true, \"cancel_reason\": \"native client deadline\", \"hard_kill_required\": false, \"observation_error\": null, \"group_cleanup_result\": \"only_owned_leader_zombie_darwin\", \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"capture_bytes\": {\"stdout\": 142, \"stderr\": 2110}, \"capture_truncated\": false, \"stdout\": \"changed  ---->            image-0000.dng  \\\\nchanged  ---->            image-0001.dng  \\\\nFailed [image-0001.dng]: Semantic inspection cancelled\\\\n\\\\n\", \"stderr\": \"\\\\nUnison 2.54.0 (ocaml 5.2.0) log started at 2026-10-20 at  1:26:17\\\\n\\\\nRoots:\\\\n  /private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left\\\\n  ssh://localhost//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right\\\\n\\\\nUnison 2.54.0 (ocaml 5.2.0): Contacting server...\\\\nConnected [//morrobay.local//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left -> //morrobay.local//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right]\\\\n\\\\nLooking for changes\\\\n  image-0001.dng\\\\n  \\\\n  Waiting for changes from server\\\\nReconciling changes\\\\n\\\\n2 items will be synced, 0 skipped\\\\n4.00 GiB to be synced from local to morrobay.local\\\\n0 B to be synced from morrobay.local to local\\\\nPropagating updates\\\\nUnison 2.54.0 (ocaml 5.2.0) started propagating changes at 01:26:30.33 on 20 Oct 2026\\\\n[BGN] Updating file image-0000.dng from /private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left to //morrobay.local//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right\\\\n[BGN] Updating file image-0001.dng from /private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left to //morrobay.local//private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right\\\\n[semantic] Semantic runtime: 18 physical/fallback CPUs, 36 logical CPUs, 1 CPU permits, 1 domains, 2 transaction slots, 512 MiB estimated payload, 512 descriptor credits, 1 jobs per filesystem\\\\n[semantic] Semantic fixed infrastructure allowance: 2 descriptors and 4096 completion-buffer bytes (not whole-process limits)\\\\n[semantic-reads] Completed semantic worker job 0 primary reader delivered 2147483724 logical bytes in 32776 chunks (saturated=false).\\\\n[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=22.070408000.\\\\n[semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000138000.\\\\n[END] Updating file image-0000.dng\\\\n  0%  1/2  (0 B of 4.00 GiB)  --:-- ETA\\\\nFailed [image-0001.dng]: Semantic inspection cancelled\\\\nUnison 2.54.0 (ocaml 5.2.0) finished propagating changes at 01:29:18.17 on 20 Oct 2026, 167.841 s\\\\nSaving synchronizer state\\\\nSynchronization incomplete at 01:29:18  (1 item transferred, 0 skipped, 1 failed)\\\\n  failed: image-0001.dng\\\\nTerminated!\\\\n\", \"native_client_lifetime_seconds\": 180.50445019593462, \"supervisor_cleanup\": {\"pid\": 56548, \"returncode\": 0, \"reaped\": true, \"cancel_reason\": \"native client failed, timed out or exceeded captured output limit\", \"hard_kill_required\": false, \"observation_error\": null, \"group_cleanup_result\": \"only_owned_leader_zombie_darwin\", \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"supervisor_output\": \"[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left,image-0000.dng) -> (/private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right,.unison.image-0000.dng.a8f98c2ae1b661e498d6523cece86351.unison.tmp,image-0000.dng,modified on 2026-10-20 at  1:25:49  size 2147483648 rw-------)\\\\n[server: semantic] Semantic runtime: 18 physical/fallback CPUs, 36 logical CPUs, 1 CPU permits, 1 domains, 2 transaction slots, 512 MiB estimated payload, 512 descriptor credits, 1 jobs per filesystem\\\\n[server: semantic] Semantic fixed infrastructure allowance: 2 descriptors and 4096 completion-buffer bytes (not whole-process limits)\\\\n[server: semantic-reads] Completed semantic worker job 0 primary reader delivered 2147483724 logical bytes in 32776 chunks (saturated=false).\\\\n[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=22.583600000.\\\\n[server: semantic-timings] Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000792000.\\\\n[server: semantic] Remote semantic clone wrote 3072 logical metadata bytes in 1 write calls (8192 payload bytes; 4096-byte comparison windows; org.firstpair.dng-xmp/1)\\\\n[server: copy] transferResourceForkAndSetFileinfo .unison.image-0000.dng.a8f98c2ae1b661e498d6523cece86351.unison.tmp\\\\n[server: copy] Resource fork transferred for image-0000.dng; doing last paranoid check\\\\n[server: semantic-reads] Completed semantic worker job 1 primary reader delivered 2147483724 logical bytes in 32776 chunks (saturated=false).\\\\n[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=21.974915000.\\\\n[server: semantic-timings] Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000105000.\\\\n[server: semantic-timings] Semantic worker job 1 stage=verify calls=3 inclusive-seconds=56.457923000.\\\\n[server: semantic-timings] Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.001939000.\\\\n[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.252051000.\\\\n[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/left,image-0001.dng) -> (/private/tmp/unison-sync-bench-kdfeo_k2/warmup-1-2/right,.unison.image-0001.dng.a8f98c2ae1b661e498d6523cece86351.unison.tmp,image-0001.dng,modified on 2026-10-20 at  1:26:08  size 2147483648 rw-------)\\\\n[server: semantic-reads] Completed semantic worker job 2 primary reader delivered 2147483724 logical bytes in 32776 chunks (saturated=false).\\\\n[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=22.683876000.\\\\n[server: semantic-timings] Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.001035000.\\\\n\", \"supervisor_capture_bytes\": 2797, \"supervisor_capture_truncated\": false, \"proxy\": {\"schema\": \"unison-loopback-protocol-count/1\", \"server_command\": [\"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlqisnp2/src/unison\", \"-server\", \"__new-rpc-mode\", \"-debug\", \"copy\", \"-debug\", \"semantic\", \"-debug\", \"semantic-reads\", \"-debug\", \"semantic-timings\", \"-clone\", \"auto\", \"-semanticworkers\", \"1\", \"-semanticcpubudget\", \"8\", \"-maxthreads\", \"2\", \"-semanticdng\"], \"server_pid\": 56556, \"server_returncode\": 0, \"server_cleanup\": {\"pid\": 56556, \"returncode\": 0, \"reaped\": true, \"cancel_reason\": null, \"hard_kill_required\": false, \"normal_exit_timeout_seconds\": 2.0, \"settlement_wall_seconds\": 0.0004340569721534848}, \"fault\": null, \"server_group_binding\": {\"native_pid\": 56556, \"native_process_group\": 56548, \"supervisor_pid\": 56548, \"supervisor_process_group\": 56548, \"observed_before_native_reap\": true}, \"forwarded_protocol_bytes\": {\"client_to_server_bytes\": 19105, \"server_to_client_bytes\": 2965}, \"server_wall_seconds\": 180.31630318099633, \"server_resources\": {\"wait4_user_seconds\": 127.613959, \"wait4_system_seconds\": 10.940439, \"wait4_maxrss_native_units\": 14708736, \"minor_faults\": 4397, \"major_faults\": 0, \"block_input_operations\": 0, \"block_output_operations\": 0}, \"pump_errors\": [], \"cancellation_signals\": [], \"input_pump_joined\": true, \"launcher_control_header_bytes_excluded\": 126}, \"fault\": \"native client failed, timed out or exceeded captured output limit\"}')",
+      "distributions_qualified": false
+    }
+  ],
+  "groups": [],
+  "raw_samples_retained": 3,
+  "actual_parent_terminal_proved": false,
+  "resource_release_authorized": false,
+  "current_production_proved": false,
+  "interpretation": [
+    "All raw samples stay in authenticated input files; every row index including failed prefixes is retained here. No exclusions, replacements or retries.",
+    "Only one declared warmup per successful configuration is excluded from measured distributions.",
+    "Five-sample nearest-rank p90 is the maximum, not a stable population-tail estimate.",
+    "Configured auto upper bound is not actual domain count or OS-thread count.",
+    "CPU and per-process RSS remain endpoint-separated; no sum as simultaneous tree usage.",
+    "Returned semantic writes and modeled extents are different quantities; physical IO remains unknown unless measured.",
+    "Descriptive one-worker wall ratios are not causal speedup, quiet-host, corpus or full SOL evidence.",
+    "Nested audit/metadata pins do not prove actual parent terminal, authenticate tool events or authorize FD release."
+  ],
+  "saved_inputs": [
+    {
+      "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-larger-2048-v1-20261019/stock-1-plan.json",
+      "sha256": "b6d9241efda858462d43b1e2b0da93bed59b7deb391d91f889f397e618cb0aa4",
+      "bytes": 9442
+    },
+    {
+      "path": "/private/tmp/unison-auto-cohort-526258cf5fe1454e96ccd71c69049787/RESULT.json",
+      "sha256": "213856c52b53e0c821f78eaa57f0030948d880a06c66cc144b19e422324955e3",
+      "bytes": 286051
+    }
+  ],
+  "manifest_sha256": "56fa7b2abb3f4382f9e4275a4ab0c3e1f97ef936c3091dcf361431f4c5e82063"
+}
