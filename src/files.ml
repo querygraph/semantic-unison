@@ -1722,8 +1722,17 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
          end else
            (desc1, desc2, None)
          in
+         (* Both replicas' archives must stay identical. If the second
+            publication fails (for example a receiving validator rejects it),
+            restore the first replica's previous entry: its file now holds the
+            merge result, so the next sync sees a conflict and merges again. *)
+         let previous1 = Update.updateArchive fspath1 localPath1 NoUpdates in
          copyBack workingDirForMerge working1 root1 path1 desc1 ui1 archTo id >>= (fun () ->
-         copyBack workingDirForMerge working2 root2 path2 desc2 ui2 archTo id >>= (fun () ->
+         Lwt.catch
+           (fun () -> copyBack workingDirForMerge working2 root2 path2 desc2 ui2 archTo id)
+           (fun error ->
+              Update.replaceArchiveLocal fspath1 localPath1 previous1;
+              Lwt.fail error) >>= (fun () ->
          Lwt.return () )))) )
     (fun _ ->
       Util.ignoreTransientErrors
