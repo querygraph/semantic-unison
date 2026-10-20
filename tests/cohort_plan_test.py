@@ -34,8 +34,8 @@ class Plan(unittest.TestCase):
             p['launch_argv']=cohort.launch_argv(p['cohort'],interpreter=p['interpreter'],script=p['script'],
                 output=p['workspace']+'/RESULT.json',artifact=p['artifact'])
             cohort_plan.validate(p,execution_sources=['bench/sync/run.py'])
-            self.assertEqual(p['limits']['owner_observation_seconds'],7200)
-            self.assertEqual(p['limits']['cli_observation_seconds'],180)
+            self.assertEqual(p['limits']['owner_observation_seconds'],28800 if mib==2048 else 7200)
+            self.assertEqual(p['limits']['cli_observation_seconds'],900 if mib==2048 else 180)
             for field,value in (('owner_observation_seconds',900),('cli_observation_seconds',30),
                                 ('retry_allowed',True)):
                 bad=copy.deepcopy(p);bad['limits'][field]=value
