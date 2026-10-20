@@ -96,7 +96,7 @@ class Actor:
             socket=str(session.root/(stem+'.sock'))
             if len(os.fsencode(socket))>=100:raise ValueError('bounded local socket path required')
             env=dict(PATH='/usr/bin:/bin:/usr/sbin:/sbin',LANG='C',LC_ALL='C',HOME=str(session.root/'home'),TMPDIR=str(session.root/'tmp'),PYTHONNOUSERSITE='1',PYTHONDONTWRITEBYTECODE='1')
-            client_env=dict(env,UNISON=str(session.client_state),UNISON_MERGE_BINARY=self.packet['binary']['path'],UNISON_MERGE_SOCKET=socket,UNISON_MERGE_DEADLINE=str(phase))
+            client_env=dict(env,UNISON=str(session.client_state),UNISON_MERGE_BINARY=server_binary(self.packet),UNISON_MERGE_SOCKET=socket,UNISON_MERGE_DEADLINE=str(phase))
             def persist(row,pair,raw):
                 if 'pair_pin' in self.active:raise ValueError('one-use pair already persisted')
                 self.active['pair_pin']=store.write(stem+'-PAIR.json',dict(pair=pair,raw_proxy_hex=raw.hex(),resource_release_authorized=False))
