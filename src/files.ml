@@ -1520,7 +1520,12 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
           Unix.WEXITED 0, Printf.sprintf
             "Built-in DNG scalar merge verified one exact result (%d metadata bytes, %d writes).\n"
             report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
-        end else begin
+        end else if Util.startswith (Globals.mergeCmdForPath path1) "unison:" then
+          (* Reserved built-in namespace: never hand an unknown policy name to
+             the shell, which would only fail later with "command not found". *)
+          raise (Util.Transient ("Unknown built-in merge policy "
+            ^ Globals.mergeCmdForPath path1 ^ "; supported: unison:dng-xmp-scalars/0"))
+        else begin
       let cmd = formatMergeCmd
           path1
           (Fspath.quotes (Fspath.concat workingDirForMerge working1))

@@ -8,7 +8,10 @@ merge = Name *.dng -> unison:dng-xmp-scalars/0
 ```
 
 The exact command identifier selects the built-in policy instead of launching a
-shell command. Other `merge` commands retain their existing behavior. This is
+shell command. Any other command beginning with `unison:` is a reserved
+built-in name: it fails the merge with "Unknown built-in merge policy" and
+preserves both replicas, without starting a shell. Other `merge` commands retain
+their existing behavior. This is
 independent of `semanticdng` transfer optimization and defaults to disabled.
 Compact metadata bases are an alternative to full saved merge bases; see
 [compact capture](dng-compact-merge-base.md) before choosing backup retention.
