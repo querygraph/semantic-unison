@@ -156,5 +156,6 @@ every lease, child and directory and exits through the retained diagnostic.
 pinned; only two uncalled generic dispatcher functions are excluded.
 Twenty-five methods passed with all 179 under CPU00, then closed.
 [Evidence](../qualification/current-named-entry-controls-actual-20261019.json).
-Stock and Ox plans are frozen and pass `--check-plan`. No admission has been
-written and no worker has run.
+Actual stock and OxCaml runs PASSED at `10c5d159` after three product fixes
+found by failed stock attempts; see
+[the result](../../doc/current-named-receiving-result-20261019.md).

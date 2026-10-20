@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-20T00:53:43.533958+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-20T04:34:29.374308+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -28,6 +28,8 @@ admissions or statements that consumed jobs remain unstarted.
   `I-AM-AN-HONEST-WORKING-LLM.md` is linked from README. No upstream posting.
 
 ## Actual resources and scheduling — ZERO held
+
+- NAMED RECEIVING SUITE ACTUAL PASS/CLOSED (2026-10-19, source 10c5d159): stock and Ox -04 each 21 cases/69CLI/54fake/9copy/7merge/4interrupt/2cancel, owner exit0, EX+CPU closed, independent CPU04 replay matches owner audits. Product fixes found by failed stock-01/02/03 (all FAILED-RECOVERY-CLOSED, no replay): a5fd1bfb exit-time helper External result, defd5732 census after terminal leader + OCaml signal decoding, 10c5d159 merge archive restore on second-publication failure. Report doc/current-named-receiving-result-20261019.md. Next: remaining requirement joins in doc/sol-final-acceptance-map-20261019.md, measurements/topologies; Lightroom/Photo block last.
 
 - USER DIRECTION 2026-10-19 supersedes Photo/Capitola coordination below: Photo agent is paused (now Opus too). No Photo/Capitola clearance or release acknowledgement is needed; owners still acquire EXglobal IO then CPU through the pool protocol. Claude may use Lightroom itself, but ALL Lightroom/Photo/Adobe-UI work is grouped in one block at the END, after Unison qualification. Earlier Main catalog/cache/original-photo prohibitions still need explicit user confirmation when that end block starts.
 

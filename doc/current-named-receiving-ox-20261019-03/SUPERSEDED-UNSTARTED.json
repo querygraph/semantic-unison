@@ -1,0 +1,5 @@
+{
+  "state": "SUPERSEDED_UNSTARTED",
+  "reason": "stock run of the same source failed; no Ox admission written",
+  "successor": "current-named-receiving-ox-20261019-04"
+}

@@ -1,0 +1,64 @@
+{
+  "schema": "unison-current-named-receiving-actual-pair/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "date": "2026-10-19",
+  "source_commit": "10c5d159",
+  "runs": {
+    "stock": {
+      "plan": "550581180e80aabd261341556e9765c8fa2b34984e247d97bb85fa8867484b4e",
+      "admission": "50ce49db6cff8772d7b73e38a4ad407981fb6f4afa9527d56d45e68234c2b10b",
+      "workspace": "/private/tmp/u-vpath-bc40a56013464721",
+      "owner_pid": 85322,
+      "worker_pid": 85329,
+      "owner_audit_sha256": "be1d7a7c2868c41f75434557cc2dac9418d21837655f4568e75c86819ba84771",
+      "build_receipt": "/private/tmp/unison-named-build-stock-20261019-04.json",
+      "binary_sha256": "2e65f664d27526a1ad490d07a1a6c8d0a56bfd15b583df3b2c2481d0ee5ce7d8",
+      "build_receipt_sha256": "b3ca013d7e549bb6a77143ed95dc5e642c04b2a716c45e27d1cf57ae4b1428b6"
+    },
+    "ox": {
+      "plan": "d2fe0a7a3e8c2ee141058a02ef9f025a97f5c066b1a21944600f6fcf9aa17b2e",
+      "admission": "a937460dd155db108353375212e763ef18a2498bd9dcf9e9130534738b40cc69",
+      "workspace": "/private/tmp/u-vpath-13e195b1eeb741d7",
+      "owner_pid": 86210,
+      "worker_pid": 86217,
+      "owner_audit_sha256": "6bc8d327570bd1a865173146981412551ad91718e31930164b2bb6ba5db03ea4",
+      "build_receipt": "/private/tmp/unison-named-build-ox-20261019-04.json",
+      "binary_sha256": "9fb815f85f54db1aa3af9d4a7b0bcf7bd8f76e03afa37f390371af0a26727e63",
+      "build_receipt_sha256": "57f4d2e2e69706a3164c6eb8d1d676a7efd101a43372030b4f294e76d94ada0e"
+    }
+  },
+  "totals_each": {
+    "cases": 21,
+    "cli_calls": 69,
+    "fake_validators": 54,
+    "copy": 9,
+    "merge": 7,
+    "producer_interruptions": 4,
+    "client_cancellations": 2
+  },
+  "product_fixes": [
+    {
+      "commit": "a5fd1bfb",
+      "summary": "exit-time HelperSupervisor teardown reports External result via observe_teardown; SupervisedExternal traces once"
+    },
+    {
+      "commit": "defd5732",
+      "summary": "teardown census waits up to 1s for the killed leader before group census; harness decodes OCaml signal constants -11/-7"
+    },
+    {
+      "commit": "10c5d159",
+      "summary": "merge restores first replica archive entry when second copyBack fails, avoiding Fatal New archives are not identical"
+    }
+  ],
+  "failed_predecessors": [
+    "stock-01 (no exit-time External result)",
+    "stock-02 (census unknown, POSIX vs OCaml signal numbers)",
+    "stock-03 (14 cases passed; merge-pass-error archive divergence exit 3)"
+  ],
+  "independent_postclosure_replay": {
+    "token": "CPU04",
+    "matches_owner_audit": true,
+    "executables_opened": false
+  },
+  "scope": "Generated tiny files with fake validators and fixture copy/merge programs, stock and OxCaml each as both client and server. No SDK, camera payload, Photo/Lightroom, performance or crash-durability claim."
+}
