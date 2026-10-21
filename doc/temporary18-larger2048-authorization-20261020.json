@@ -1,0 +1,120 @@
+{
+  "schema": "unison-larger-cohort-temporary18-authorization/1",
+  "state": "ROOT_COORDINATED_TEMPORARY18",
+  "utc": "2026-10-21T01:20:23.969739+00:00",
+  "authority": "User direction 2026-10-20: \"photo is ready to run for days. Do your runs now first.\" and \"you can use all CPUs\". Photo waits until these runs finish. These exact 2048 MiB v2 cohorts only.",
+  "token_indexes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "standing_policy_sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+  "restore_standing_policy": true,
+  "standing_policy_file_rewritten": false,
+  "exact_cohorts": [
+    {
+      "size_mib": 2048,
+      "label": "stock-4",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-4-request.json",
+        "bytes": 15722,
+        "sha256": "b1d29f620df756db29b9bec8bbc67a5f2465bf4ced370fbbaa8cf60dcc667900"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-4-plan.json",
+        "sha256": "81ec496a7937b710f5c95d305856038016afd2cac21bcffeb97e0d254ac01c69"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-afb8c8e752e94da6a72aaa9a6751bb45"
+    },
+    {
+      "size_mib": 2048,
+      "label": "ox-4",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-4-request.json",
+        "bytes": 15713,
+        "sha256": "2dbeb02c65e07cb94bf1a6cdfcac90a4ec447aa40662e2cc64e8198338daed2b"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-4-plan.json",
+        "sha256": "5aa6d80c56d22555012cfcd15ff9d0de607a50b0e51d8f26c984480c481c921b"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-13e35fa35b254de9b4ead79d47a6ae76"
+    },
+    {
+      "size_mib": 2048,
+      "label": "stock-8",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-8-request.json",
+        "bytes": 15722,
+        "sha256": "d5b21f5215f0a6a624d0d462a9e52285e73400bac905e677f2ffb36ed2dc179b"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-8-plan.json",
+        "sha256": "d08b49286017c704b9df84310865149ecf1a4b247c454c93188114a03d0d1343"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-685eda8608b940a3ab21caeb5f7d8549"
+    },
+    {
+      "size_mib": 2048,
+      "label": "ox-8",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-8-request.json",
+        "bytes": 15713,
+        "sha256": "a1aa636053dcb17023295fc8b15c7b4599ba6e3fe07aa241bcf50a9290416a85"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-8-plan.json",
+        "sha256": "7aeb98a65a9f6633ebe457df52afff32dc58a17853cacaff6df9f050c46d158c"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-8df43d18af444a37b33a440649f82974"
+    },
+    {
+      "size_mib": 2048,
+      "label": "stock-auto",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-auto-request.json",
+        "bytes": 15731,
+        "sha256": "3938fad4c36b6d017f516497ee1a9dbda91ba452590f7518bee4fccb72382769"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/stock-auto-plan.json",
+        "sha256": "5ee42467345773acec1e6fa4716e8ee3aad1e5a8082d6b5adb60e5ae5f647525"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-587d95a4193d45ff8142bf0dbd514974"
+    },
+    {
+      "size_mib": 2048,
+      "label": "ox-auto",
+      "request": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-auto-request.json",
+        "bytes": 15722,
+        "sha256": "c12d32de1fe99ccb57de5c852003fff4fc5862176371b298c6d206a0345a555d"
+      },
+      "plan": {
+        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/auto-cohort-qualification-larger-2048-v2-20261020/ox-auto-plan.json",
+        "sha256": "f473e133a24ea60f2f6ee32b0fa27e8861452cb0fcd736fee2aa7ecb58c28a9a"
+      },
+      "workspace": "/private/tmp/unison-auto-cohort-5e847252865e42f9a8df4f4eb51f5089"
+    }
+  ],
+  "conditions": [
+    "serial, one cohort at a time, after the shared8 larger series",
+    "one fresh admission per request, no retry or successor",
+    "stop the series at the first non-pass or retained owner"
+  ]
+}
