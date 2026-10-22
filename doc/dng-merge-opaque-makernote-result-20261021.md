@@ -78,4 +78,37 @@ The suite's fixtures carry no MakerNote, so this is a regression run for the
 existing behaviour; the MakerNote cases themselves are covered by
 `tests/dng_reconcile` and the real-file run above.
 
-Pending: a Lightroom Classic recheck of the MakerNote pair (sent to Capitola).
+## DNGPrivateData (2026-10-21, `1f0454b2`)
+
+`/2` now also accepts `DNGPrivateData` (tag 50740) when it is BYTE type and in
+the primary IFD, as the DNG spec requires. It gets the same treatment as the
+MakerNote: an opaque protected extent that must be identical in all three
+versions and must not overlap the XMP. Adobe's "original offset" inside the
+block is not interpreted. Readers use it only to rebase after the block is
+relocated, and nothing is relocated here. `/0` and `/1` still decline 50740,
+so existing fallback tests and benchmarks are unchanged.
+
+| | stock | OxCaml |
+| --- | --- | --- |
+| `tests/dng_reconcile` (25 checks) | PASS | PASS |
+| `tests/dng_merge` integration (13 cases) | PASS | PASS |
+| `tests/dng_profile_v1` controls | PASS | PASS |
+| retained-owner DNG merge suite (13 cases/29 calls/9 validators, replay matches) | PASS | PASS |
+| real iPhone MakerNote merge (same output `0e7c6a05…`) | PASS | PASS |
+
+New reconcile cases:
+
+- `/0` and `/1` still decline 50740.
+- `/2` declines a 50740 block that overlaps the XMP.
+- `/2` declines 50740 of the wrong type (UNDEFINED).
+- `/2` declines 50740 outside the primary IFD.
+- `/2` refuses a single changed byte in the block on one side.
+- `/2` merges files with `DNGPrivateData` alone, and with a MakerNote plus
+  `DNGPrivateData` together, to independently built targets.
+
+[Receipt](../tests/qualification/current-dng-merge-receiving-actual-20261021b.json).
+
+Pending:
+
+- a real Lightroom-converted DNG carrying 50740;
+- a Lightroom Classic recheck of the MakerNote pair (sent to Capitola).

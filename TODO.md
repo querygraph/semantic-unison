@@ -9,6 +9,8 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
   profile `org.firstpair.dng-xmp/2`. Unit, integration, the long retained-owner
   suite and a real iPhone DNG all pass on stock OCaml and OxCaml
   ([result](doc/dng-merge-opaque-makernote-result-20261021.md)).
+- `DNGPrivateData` (50740) accepted the same way in `/2`; fixtures and suites
+  pass on both compilers.
 - Scope is macOS only, so Linux and Windows are not release blockers.
 
 ## Blockers
@@ -20,10 +22,9 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    also grow or re-lay out the XMP packet. Any of these makes the merge decline
    and leave the conflict. That is safe, but if it happens on every real edit,
    the feature does nothing in practice. This is the most important unknown.
-2. **`DNGPrivateData` (tag 50740) still declines.** DNGs made with Lightroom's
-   "Convert to DNG" store the original maker data there, so many Lightroom
-   users' files will not merge. The requirements for a safe profile are in
-   [dng-private-data-next-profile.md](doc/dng-private-data-next-profile.md).
+2. **`DNGPrivateData` (tag 50740) has no real-file test yet.** `/2` now
+   accepts it as an opaque blob, and the fixtures and suites pass. No real
+   Lightroom-converted DNG has been merged yet.
 3. **No real network SSH runs.** All runs were same-machine loopback.
 4. **Open acceptance-map items** ([map](doc/sol-final-acceptance-map-20261019.md)):
    - negative cases where corrupted data is received;
