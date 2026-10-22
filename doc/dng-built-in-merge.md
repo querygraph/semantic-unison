@@ -51,7 +51,8 @@ packet. The merged packet keeps its exact length and position, so nothing a
 MakerNote might point to moves. This profile is registered only for the local
 merge. It is not selectable with `semanticprofile` and is not offered to peers,
 so transfer negotiation is unchanged. `DNGPrivateData` (50740, BYTE, primary
-IFD only) gets the same opaque treatment. Other private tags still decline.
+IFD only) gets the same opaque treatment, as do single-LONG `ImageNumber`
+(37393) and `CacheVersion` (51114). Other private tags still decline.
 
 Shared workers inspect all three private files, construct the exact target plan,
 and verify/materialize it in one private output already containing the left

@@ -1,0 +1,29 @@
+{
+  "schema": "unison-current-dng-merge-receiving-actual/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "compiler": "ox",
+  "plan": "fee9e661708af0f5840626c09446cbb8782d78901081d2e61a0fef24d705ea4e",
+  "admission": "8f4a379381020b978fab9cd6bfbfcd3813da43db0c55da61aa00bd66a06c9988",
+  "workspace": "/private/tmp/u-dmerge-c56c2b3dc25f4c71",
+  "owner_pid": 86684,
+  "worker_pid": 86691,
+  "owner_audit_sha256": "22b8a56d9af0ea75f823afa40eaa6d2f7a748aa6b57a11898aa810651b82327f",
+  "build_receipt": "/private/tmp/unison-named-build-ox-20261021-08.json",
+  "binary_sha256": "416303319ce576f4381c01df9d83c47fbbbac0ed5c1f9e02ccab52f0ea20858e",
+  "build_receipt_sha256": "4e841493b1e67c7bc06b0589bee06ac41eace5f229db799e11e4cfa4989f7ebd",
+  "owner_exit": 0,
+  "owner_state": "OWNED_WORKER_AND_EXTERNAL_CHILDREN_CLOSED",
+  "totals": {
+    "original_completed_cases": 13,
+    "cli_calls": 29,
+    "fake_validators": 9,
+    "copy": 0,
+    "merge": 0,
+    "producer_interruptions": 0,
+    "client_cancellations": 0
+  },
+  "cpu_closed": true,
+  "io_closed": true,
+  "admission_consumed": true,
+  "independent_postclosure_replay_matches_owner_audit": true
+}

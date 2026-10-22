@@ -108,7 +108,49 @@ New reconcile cases:
 
 [Receipt](../tests/qualification/current-dng-merge-receiving-actual-20261021b.json).
 
+## Real Lightroom-converted Panasonic DNGs (2026-10-21, `bdf97884`)
+
+Two Panasonic DC-S5M2X `.RW2` files converted to DNG 1.7 by Lightroom Classic,
+sent by the owner over Taildrop. Each has 539,558 bytes of `DNGPrivateData`
+with an `Adobe\0Pano` header (Panasonic's own section format, not `MakN`), 7
+IFDs including three Lightroom fast-load previews, and XMP with
+`xmp:Label="None"` and no Rating. On copies, ExifTool added Rating 1 and Label
+Yellow; then left edited Rating to 3 and right edited Label to Purple, using
+the same script as the iPhone run.
+
+At `1f0454b2` the merge declined safely on tag 37393 and left both replicas
+as they were. A scan of every tag in both files against the allow-lists found
+only two gaps, both self-contained LONG scalars in image IFDs:
+
+- 37393 `ImageNumber` (TIFF/EP), in IFD0;
+- 51114 `CacheVersion` (DNG 1.7), in each preview IFD.
+
+`bdf97884` admits both in `/2` as LONG with count 1; `/0` and `/1` still
+decline them. Three more reconcile checks (28 in total) cover acceptance, a
+count of 2 declining, and `/0`/`/1` still declining 37393.
+
+| | stock | OxCaml |
+| --- | --- | --- |
+| `tests/dng_reconcile` (28 checks) | PASS | PASS |
+| `tests/dng_merge` integration (13 cases) | PASS | PASS |
+| `tests/dng_profile_v1` controls | PASS | PASS |
+| retained-owner DNG merge suite (13 cases/29 calls/9 validators, replay matches) | PASS | PASS |
+| Panasonic 7160 merge | PASS | PASS |
+| Panasonic 7164 merge | PASS | PASS |
+
+For both files, both replicas converged on the exact expected target at the
+same length, and the next sync was a no-op. Stock and OxCaml outputs are
+byte-identical. ExifTool reads every tag, the 150 Panasonic maker tags
+included, identically in base and merged, apart from Rating and Label.
+
+| File | base sha256 | merged sha256 |
+| --- | --- | --- |
+| 7160 | `6403afbe…cecaf2` | `7bc6c350…61d39b` |
+| 7164 | `64c8c057…f4440` | `5d533038…d8951` |
+
+[Receipt](../tests/qualification/current-dng-merge-receiving-actual-20261021c.json).
+
 Pending:
 
-- a real Lightroom-converted DNG carrying 50740;
+- a Lightroom round-trip in which Lightroom itself saves both edits (deferred);
 - a Lightroom Classic recheck of the MakerNote pair (sent to Capitola).
