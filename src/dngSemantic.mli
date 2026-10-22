@@ -11,7 +11,8 @@ val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) 
     UNDEFINED or BYTE), primary-IFD DNGPrivateData (tag50740, BYTE), and single
     LONG ImageNumber (37393) and CacheVersion (51114), UNDEFINED
     ProfileGainTableMap (52525) and tag 52545, a 4-byte TIFF/EP
-    StandardID (37398), any field of a simple type (ASCII, SHORT,
+    StandardID (37398), Exif CompositeImageExposureTimes (42082,
+    UNDEFINED), any field of a simple type (ASCII, SHORT,
     RATIONAL, SSHORT, SRATIONAL, FLOAT, DOUBLE) outside camera profiles, and the
     fields named by [admit_fields], kept as protected values. XMP packets
     outside the primary IFD are protected values too; only the primary packet,

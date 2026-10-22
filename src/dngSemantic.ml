@@ -140,6 +140,7 @@ let parse_admission spec =
 
 let merge_only_field kind tag typ n = match kind, tag with
   | Exif, 37500 -> Some (typ = 7 || typ = 1)
+  | Exif, 42082 -> Some (typ = 7)
   | Image, 50740 -> Some (typ = 1)
   | Image, (37393 | 51114) -> Some (typ = 4 && n = 1L)
   | Image, 37398 -> Some (typ = 1 && n = 4L)

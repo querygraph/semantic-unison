@@ -30,9 +30,9 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    review. The full Photo scan (1.59M DNGs) is running. Its Smart Preview
    declines, large develop-settings packets, tag 52545 and Leica NUL-padded
    packets, UNDEFINED primary XMP, tag 37398 and element-form Rating are now
-   covered: 1,556,892 of 1,586,314 Photo DNGs (98.1%) pass. Still declined:
-   files with no or an empty XMP packet (26.5k), truncated recovered files
-   (2.8k) and tag 42082 (97).
+   covered, as is iPhone ProRAW's Exif 42082: 1,556,958 of 1,586,314 Photo
+   DNGs (98.1%) pass. Still declined: files with no or an empty XMP packet
+   (26.6k) and truncated or broken recovered files (2.8k).
 3. **No real network SSH runs.** All runs were same-machine loopback.
 4. **Open acceptance-map items** ([map](doc/sol-final-acceptance-map-20261019.md)):
    - negative cases where corrupted data is received;

@@ -10,7 +10,7 @@ for n in mods:
   q=w/(n+'.'+ext);q.write_bytes(subprocess.check_output([str(w/'filter'),version,str(q)]))
 if ox:
  q=w/'test.ml';s=q.read_text();assert s.count('let () =')==1;q.write_text(s.replace('let () =','let controls () =')+'\nlet () = let d=Domain.Safe.spawn(fun () -> controls()) in Domain.join d\n')
-def fixture(rating,label,opaque=False,maker=None,private=None,scalars=(),flip_at=None,subxmp=False,props=0,xmptype=1):
+def fixture(rating,label,opaque=False,maker=None,private=None,scalars=(),flip_at=None,subxmp=False,props=0,xmptype=1,composite=False):
  b=bytearray(bytes((i*71+19)%256 for i in range(2097152)));struct.pack_into('<2sHIH',b,0,b'II',42,8,4)
  packet=(f'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xmp="http://ns.adobe.com/xap/1.0/"><rdf:Description rdf:about="" xmp:Rating="{rating}" xmp:Label="{label}"'+''.join(f' xmp:P{i}="0"' for i in range(props))+'/></rdf:RDF>').encode();packet+=b' '*(8192-len(packet))
  entries=[(273,4,1,12288),(279,4,1,len(b)-12288),(700,xmptype,8192,1024),(50706,1,4,1025)]
@@ -25,6 +25,8 @@ def fixture(rating,label,opaque=False,maker=None,private=None,scalars=(),flip_at
  if maker:
   # One-entry Exif IFD holding an opaque MakerNote: (type, offset, flipped byte or None).
   typ,offset,flip=maker;struct.pack_into('<HHHII',b,9216,1,37500,typ,64,offset);struct.pack_into('<I',b,9230,0)
+  # iPhone ProRAW: a 58-byte UNDEFINED CompositeImageExposureTimes beside the MakerNote.
+  if composite:struct.pack_into('<HHHIIHHII',b,9216,2,37500,typ,64,offset,42082,7,58,9940);struct.pack_into('<I',b,9242,0)
   if flip is not None:b[offset+flip]^=1
  if private:
   typ,offset,flip,ifd1=private
@@ -47,7 +49,7 @@ P=(1,9400,None,False);M=(7,9300,None)
 # 64-byte ProfileGainTableMap at 9800, a 32-byte tag 52545 at 9920, an inline
 # 4-byte TIFF/EP StandardID and an SSHORT 34858.
 X=[(34858,8,1,0),(34859,3,1,0),(37398,1,4,1),(51177,3,1,1),(51178,5,1,9900),(51179,5,1,9908),(51180,3,1,1),(51181,3,1,0),(52525,7,64,9800),(52545,7,32,9920),(60001,11,1,0)]
-for prefix,kw in (('priv',dict(private=P)),('both',dict(maker=M,private=P)),('extra',dict(scalars=X)),('sub',dict(subxmp=True)),('many',dict(props=300)),('undef',dict(xmptype=7))):
+for prefix,kw in (('priv',dict(private=P)),('both',dict(maker=M,private=P)),('extra',dict(scalars=X)),('sub',dict(subxmp=True)),('many',dict(props=300)),('undef',dict(xmptype=7)),('comp',dict(maker=M,composite=True))):
  for name,(rating,label) in dict(base=('1','Blue'),left=('2','Blue'),right=('1','Gold'),target=('2','Gold')).items():
   inputs[f'{prefix}-{name}.dng']=fixture(rating,label,**kw)
 inputs.update({'priv-changed.dng':fixture('1','Gold',private=(1,9400,7,False)),'priv-alias.dng':fixture('1','Blue',private=(1,2048,None,False)),
@@ -56,8 +58,9 @@ inputs.update({'priv-changed.dng':fixture('1','Gold',private=(1,9400,7,False)),'
  'scalar-base.dng':fixture('1','Blue',scalars=[(37393,4,1,7160),(51114,4,1,0x01000000)]),
  'scalar-count.dng':fixture('1','Blue',scalars=[(37393,4,2,9700)]),
  'extra-changed.dng':fixture('1','Gold',scalars=X,flip_at=9803),'sub-changed.dng':fixture('1','Gold',subxmp=True,flip_at=9760),'long-unknown.dng':fixture('1','Blue',scalars=[(60000,4,1,7)]),'gain-type.dng':fixture('1','Blue',scalars=[(52525,1,64,9800)]),
- 'gain-alias.dng':fixture('1','Blue',scalars=[(52525,7,64,2048)]),'priv-ifd1.dng':fixture('1','Blue',private=(1,9600,None,True))})
-STAGED=('maker','priv','both','extra','sub','many','undef')
+ 'gain-alias.dng':fixture('1','Blue',scalars=[(52525,7,64,2048)]),'priv-ifd1.dng':fixture('1','Blue',private=(1,9600,None,True)),
+ 'comp-changed.dng':fixture('1','Gold',maker=M,composite=True,flip_at=9950)})
+STAGED=('maker','priv','both','extra','sub','many','undef','comp')
 for n,b in inputs.items():(w/n).write_bytes(b)
 if sys.platform=='darwin':
  libc=ctypes.CDLL(None,use_errno=True);clone=libc.clonefile;clone.argtypes=[ctypes.c_char_p,ctypes.c_char_p,ctypes.c_int];clone.restype=ctypes.c_int

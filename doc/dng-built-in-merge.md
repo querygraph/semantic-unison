@@ -54,7 +54,8 @@ so transfer negotiation is unchanged. `DNGPrivateData` (50740, BYTE, primary
 IFD only) gets the same opaque treatment, as do single-LONG `ImageNumber`
 (37393) and `CacheVersion` (51114) and the UNDEFINED `ProfileGainTableMap`
 (52525) and tag 52545 (UNDEFINED, primary IFD, found by the Photo scan), and
-the 4-byte TIFF/EP `StandardID` (37398). `/2` also takes a primary XMP packet
+the 4-byte TIFF/EP `StandardID` (37398) and the UNDEFINED Exif
+`CompositeImageExposureTimes` (42082) that iPhone ProRAW writes. `/2` also takes a primary XMP packet
 stored as UNDEFINED instead of BYTE, as Lightroom mobile writes it.
 
 The XMP merge accepts packets of up to 4096 properties and 1024 attributes on

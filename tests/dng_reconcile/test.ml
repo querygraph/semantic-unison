@@ -70,7 +70,7 @@ let () =
      check(with_file(prefix^"-left.dng")(fun f->match make bad f with
        | Error e->e="reconciliation protected bytes changed" | Ok _->false))(p^": changed opaque byte accepted"))
    ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None;
-    "extra",Some "extra-changed.dng"; "sub",Some "sub-changed.dng"; "many",None; "undef",None];
+    "extra",Some "extra-changed.dng"; "sub",Some "sub-changed.dng"; "many",None; "undef",None; "comp",Some "comp-changed.dng"];
  check(with_file "sub-base.dng"(fun file->DngSemantic.inspect_extended file=Error "multiple XMP packets"))
    "/1 admitted a sub-image XMP packet";
  check(refused "extra-base.dng" 34858)"/0 or /1 admitted TimeZoneOffset";
