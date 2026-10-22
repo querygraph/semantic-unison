@@ -223,6 +223,10 @@ let () =
   rejected "UTF16 little-endian BOM" ("\255\254<\000r\000/\000>\000");
   rejected "UTF16 big-endian BOM" ("\254\255\000<\000r\000/\000>");
   rejected "NUL character unsupported" (attr "\000");
+  (* Trailing NUL padding, as Leica writes it, is outside the document. *)
+  check "trailing NUL padding ignored"
+    (observe (attr "1" ^ "\000\000") = observe (attr "1") && Result.is_ok (observe (attr "1")));
+  rejected "NUL before trailing data" (attr "1" ^ "\000 ");
   rejected "UTF8 overlong sequence" (attr "\192\175");
   rejected "UTF8 surrogate encoding" (attr "\237\160\128");
   rejected "UTF8 truncated sequence" (attr "\240\159");
@@ -310,10 +314,10 @@ let () =
   ignore (single "depth 64 accepted" (description "" (nested 61)));
   rejected "depth 65 rejected" (description "" (nested 62));
   let attributes n = String.concat " " (List.init n (fun i -> "a" ^ string_of_int i ^ "=\"v\"")) in
-  ignore (single "256 element attributes accepted"
-      (description "" ("<crs:MaskGroup " ^ attributes 256 ^ "/>")));
-  rejected "257 element attributes rejected"
-      (description "" ("<crs:MaskGroup " ^ attributes 257 ^ "/>"));
+  ignore (single "1024 element attributes accepted"
+      (description "" ("<crs:MaskGroup " ^ attributes 1024 ^ "/>")));
+  rejected "1025 element attributes rejected"
+      (description "" ("<crs:MaskGroup " ^ attributes 1025 ^ "/>"));
   let nodes n = "<crs:MaskGroup>" ^ String.concat "" (List.init n (fun _ -> "<Value/>")) ^ "</crs:MaskGroup>" in
   ignore (single "8192 nodes accepted" (description "" (nodes 8189)));
   rejected "8193 nodes rejected" (description "" (nodes 8190));

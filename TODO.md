@@ -27,8 +27,10 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    text tag, sub-image XMP packets, and the gain-table map. LONG, BYTE and
    UNDEFINED fields still need a name. `unison-dngscan -tags` records unknown
    fields for review, and `dngmergeadmit` admits one field at a time after
-   review. The full Photo scan (1.59M DNGs) is running. All its declines so
-   far, all in Lightroom Smart Previews, are covered by the new rules.
+   review. The full Photo scan (1.59M DNGs) is running. Its Smart Preview
+   declines, large develop-settings packets, tag 52545 and Leica NUL-padded
+   packets are now covered. Still declined: primary XMP stored as UNDEFINED
+   (Lightroom mobile), files without XMP, and truncated recovered files.
 3. **No real network SSH runs.** All runs were same-machine loopback.
 4. **Open acceptance-map items** ([map](doc/sol-final-acceptance-map-20261019.md)):
    - negative cases where corrupted data is received;

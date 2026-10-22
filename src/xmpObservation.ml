@@ -10,6 +10,9 @@ let fail reason = raise (Parse_error reason)
 
 let max_packet = 1024 * 1024
 let max_properties = 128
+(* The merge only validates the packet's property structure; it does not send
+   the property list anywhere, so it may accept larger develop-settings packets. *)
+let max_merge_properties = 4096
 let max_expanded_name = 512
 let max_uri = 512
 let max_prefix = 128
@@ -17,7 +20,7 @@ let max_local = 256
 let max_bindings = 64
 let max_depth = 64
 let max_nodes = 8192
-let max_element_attributes = 256
+let max_element_attributes = 1024
 let max_attributes = 16384
 
 let xml_uri = "http://www.w3.org/XML/1998/namespace"
@@ -436,9 +439,12 @@ let read_packet_instruction r =
   in loop ()
 
 let read_document input =
-  let length = String.length input in
-  if length > max_packet then fail "XMP packet limit exceeded";
-  validate_utf8 input;
+  if String.length input > max_packet then fail "XMP packet limit exceeded";
+  (* Some cameras (Leica) end the TIFF XMP field with NUL padding.  It is not
+     XML; the parse stops before it and callers keep its bytes unchanged. *)
+  let rec unpadded n = if n > 0 && input.[n - 1] = '\000' then unpadded (n - 1) else n in
+  let length = unpadded (String.length input) in
+  validate_utf8 (String.sub input 0 length);
   let r = { input; length; at = 0; nodes = 0; attributes = 0 } in
   if starts r "\239\187\191" then r.at <- 3;
   if starts r "<?xml" && r.at + 5 < length && space input.[r.at + 5] then
@@ -527,14 +533,14 @@ let hash_encoding input namespaces kind first last =
   SemanticHash.feed hash (Bytes.unsafe_of_string input) first (last - first);
   SemanticHash.finish hash
 
-let collect r rdf =
+let collect ?(limit=max_properties) r rdf =
   let properties = ref [] in
-  let names = Hashtbl.create max_properties in
+  let names = Hashtbl.create limit in
   let subject = ref None in
   let add uri local namespaces kind first last =
     let name = expanded uri local in
     if Hashtbl.mem names name then fail "duplicate expanded XMP property";
-    if Hashtbl.length names = max_properties then fail "XMP property limit exceeded";
+    if Hashtbl.length names = limit then fail "XMP property limit exceeded";
     Hashtbl.add names name ();
     properties := { name; category = category uri local;
       digest = hash_encoding r.input namespaces kind first last } :: !properties in
@@ -585,7 +591,7 @@ let scalar_view input =
   try
     let r,root=read_document input in
     let rdf=rdf_root r root in
-    ignore(collect r rdf);
+    ignore(collect ~limit:max_merge_properties r rdf);
     let selected=ref [] in
     let allowed uri local = uri=xmp_uri && (local="Rating" || local="Label") in
     List.iter(fun description ->

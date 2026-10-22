@@ -53,7 +53,12 @@ merge. It is not selectable with `semanticprofile` and is not offered to peers,
 so transfer negotiation is unchanged. `DNGPrivateData` (50740, BYTE, primary
 IFD only) gets the same opaque treatment, as do single-LONG `ImageNumber`
 (37393) and `CacheVersion` (51114) and the UNDEFINED `ProfileGainTableMap`
-(52525).
+(52525) and tag 52545 (UNDEFINED, primary IFD, found by the Photo scan).
+
+The XMP merge accepts packets of up to 4096 properties and 1024 attributes on
+one element, enough for older Lightroom develop settings (about 150 to 230
+properties). The advisory property observation keeps its 128-property bound.
+NUL padding after the packet, as Leica writes it, is left as it is.
 
 `/2` also admits simple tags proactively. Any unknown field in the image, Exif,
 GPS or interop directories is accepted when its type carries only numbers or

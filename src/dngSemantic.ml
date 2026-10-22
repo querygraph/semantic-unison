@@ -142,7 +142,7 @@ let merge_only_field kind tag typ n = match kind, tag with
   | Exif, 37500 -> Some (typ = 7 || typ = 1)
   | Image, 50740 -> Some (typ = 1)
   | Image, (37393 | 51114) -> Some (typ = 4 && n = 1L)
-  | Image, 52525 -> Some (typ = 7)
+  | Image, (52525 | 52545) -> Some (typ = 7)
   | CameraProfile, _ -> None
   | _ when simple_type typ -> Some true
   | _ when List.mem (directory_name kind, tag, typ) (Atomic.get admitted_fields) -> Some true
