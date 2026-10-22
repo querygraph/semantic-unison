@@ -44,6 +44,15 @@ unsupported. Packet growth, competing values, deletion, rendering or unknown
 field changes and changed image payloads fail conservatively. JPEG merging is
 not enabled by this identifier.
 
+A camera MakerNote (Exif tag 37500) is accepted as an opaque blob through the
+merge-only profile `org.firstpair.dng-xmp/2`. Its bytes are never interpreted.
+They must be identical in base, left and right, and must not overlap the XMP
+packet. The merged packet keeps its exact length and position, so nothing a
+MakerNote might point to moves. This profile is registered only for the local
+merge. It is not selectable with `semanticprofile` and is not offered to peers,
+so transfer negotiation is unchanged. `DNGPrivateData` (50740) and other
+private tags still decline.
+
 Shared workers inspect all three private files, construct the exact target plan,
 and verify/materialize it in one private output already containing the left
 bytes. The runtime reserves descriptors/payload before opening and uses the

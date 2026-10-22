@@ -97,7 +97,7 @@ let reconcile_xmp ?max_payload extension ~nonce ~(base:proof) ~(left:proof)
     ~(right:proof) file =
   let fail reason=Error reason in
   if String.length nonce<>32 then fail "nonce must be32 bytes"
-  else if not(List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1"])
+  else if not(List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1";"org.firstpair.dng-xmp/2"])
   then fail "unsupported XMP reconciliation profile"
   else if not(same_layout base left && same_layout base right) then
     fail "reconciliation profile, size or layout changed"
@@ -250,7 +250,7 @@ let base_cache_view packet =
     encoded
 let encode_base_cache (base:proof) =
   let invalid reason = invalid_arg ("semantic base cache: " ^ reason) in
-  if not (List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1"])
+  if not (List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1";"org.firstpair.dng-xmp/2"])
   then invalid "unsupported profile";
   let packet = match base.items with
     | [item] when String.length item.contents = item.region.length &&

@@ -102,7 +102,14 @@ type component_role = Image_bytes | Standard_value | Private_value | Structure
 type component_region = { logical_id : string; schema : string; role : component_role;
                            offset : int64; length : int64 }
 
-let inspect_with_policy ~extended ?(layout_only=false) ?(require_xmp=true)
+(* Merge-only /2 widens /1 by exactly one opaque field: the Exif MakerNote.
+   Its bytes are a protected extent like any other value, so the complement
+   proof keeps them identical and the XMP region may not overlap them. Its
+   internal pointers are not interpreted; nothing outside XMP moves or changes. *)
+let opaque_maker_profile = "org.firstpair.dng-xmp/2"
+let opaque_maker_note kind tag = kind = Exif && tag = 37500
+
+let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(require_xmp=true)
     ?(record=(fun (_:component_region) -> ())) file =
  try
   let size = SemanticFile.size file in
@@ -208,7 +215,9 @@ let inspect_with_policy ~extended ?(layout_only=false) ?(require_xmp=true)
       (match scalar with
        | Some valid when not valid || n <> 1L -> reject "invalid extended DNG scalar type or count"
        | _ -> ());
-      if not (layout_only || allowed_tag kind tag || profile_pointer || scalar <> None) then
+      let maker_note = opaque_maker && opaque_maker_note kind tag in
+      if maker_note && typ <> 7 && typ <> 1 then reject "invalid opaque MakerNote type";
+      if not (layout_only || allowed_tag kind tag || profile_pointer || scalar <> None || maker_note) then
         reject (Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag);
       let child = child_kind kind tag in
       if not layout_only && (typ = 13 || (extended && typ = 18)) && child = None then
@@ -325,6 +334,7 @@ let inspect_with_policy ~extended ?(layout_only=false) ?(require_xmp=true)
 
 let inspect file = inspect_with_policy ~extended:false file
 let inspect_extended file = inspect_with_policy ~extended:true file
+let inspect_opaque_maker file = inspect_with_policy ~extended:true ~opaque_maker:true file
 
 (* Geometry-only exact transfer: private contents remain part of complete and
    complement hashes. This grants no pointer-independence or merge authority. *)

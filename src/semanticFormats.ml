@@ -19,7 +19,15 @@ let () =
   register ~span_semantics:FormatExtension.Known_metadata ~capability:"jpeg-xmp-v0" ~max_payload:65504
     ~suffixes:[".jpg";".jpeg"] (module JpegSemantic);
   register ~span_semantics:FormatExtension.Opaque_spans ~capability:"dng-layout-exact-v0"
-    ~max_payload:FormatExtension.max_region ~suffixes:[".dng"] (module DngLayout)
+    ~max_payload:FormatExtension.max_region ~suffixes:[".dng"] (module DngLayout);
+  (* Reconciliation-only: resolvable by the merge owner, but outside [known],
+     so it is neither selectable nor offered as a peer feature. *)
+  let module OpaqueMaker = struct
+    let profile = DngSemantic.opaque_maker_profile
+    let inspect = DngSemantic.inspect_opaque_maker
+  end in
+  FormatExtension.register ~span_semantics:FormatExtension.Known_metadata ~capability:"dng-xmp-merge-v2"
+    ~max_payload:FormatExtension.max_region ~suffixes:[".dng"] ~observer:DngSemantic.observer (module OpaqueMaker)
 
 let validate_selected profiles =
   List.iter (fun profile ->

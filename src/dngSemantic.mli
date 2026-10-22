@@ -5,6 +5,12 @@ val inspect_extended : SemanticFile.t -> (FormatExtension.manifest, string) resu
     byte orders and each embedded profile's relative offset base are explicit.
     The same single fixed XMP region and complete complement proof are required;
     this does not establish full DNG validity or rendering equivalence. *)
+val opaque_maker_profile : string
+val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) result
+(** Merge-only inspector: the v1 grammar plus one Exif MakerNote (tag37500,
+    UNDEFINED or BYTE) kept as an opaque protected value. Its bytes stay in the
+    complement proof and may not overlap the XMP region; its internal pointers
+    are not interpreted. Registered locally for reconciliation, never negotiated. *)
 val inspect_layout : SemanticFile.t -> (FormatExtension.manifest, string) result
 (** Layout-only exact transfer inspector. Unknown/private declared values stay
     protected and byte-exact; hidden pointer rules are not interpreted. Must be
