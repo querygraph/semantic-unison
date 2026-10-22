@@ -1,0 +1,77 @@
+{
+ "schema": "unison-current-dng-merge-receiving-actual-pair/1",
+ "state": "PASS_ACTUAL_CLOSED",
+ "date": "2026-10-21",
+ "production_commit": "e5e391ae",
+ "plans_commit": "b83aa24f",
+ "runs": {
+  "stock": {
+   "plan": "30e5abdda3716e30efaedd02b5cb6c2014e85936d54a3addbe44521e0a5879df",
+   "admission": "dbc77223844b7f66e3827b9c2821cdeebcd6c33e68af0d4bdc3fdbc83b492560",
+   "workspace": "/private/tmp/u-dmerge-4dfd17437b9c4caf",
+   "owner_pid": 36516,
+   "worker_pid": 36526,
+   "owner_audit_sha256": "b91a316db03594f3454eb36454f64530165b945019a183efb4f4920f1063a834",
+   "build_receipt": "/private/tmp/unison-named-build-stock-20261021-09.json",
+   "binary_sha256": "2dd1d6ae0de713fbada214d943b93462dbc897dfe7f94e8163b09da183faf3f1",
+   "build_receipt_sha256": "b85e0d7586b8fc654159a1f9c8e4dc385ed88a5b6bbd915559eb288b7f1c0c0f",
+   "totals": {
+    "original_completed_cases": 13,
+    "cli_calls": 29,
+    "fake_validators": 9,
+    "copy": 0,
+    "merge": 0,
+    "producer_interruptions": 0,
+    "client_cancellations": 0
+   }
+  },
+  "ox": {
+   "plan": "2570809621806a73d1d91d54f3885bd7596d4d74622edc19c637ad31d9ac7d04",
+   "admission": "cefa948bbc37a4d9ad219f364aefcefa496959e6b45bca7a6a50a90691ccc5c8",
+   "workspace": "/private/tmp/u-dmerge-c83c2f8b296d47c4",
+   "owner_pid": 36828,
+   "worker_pid": 36835,
+   "owner_audit_sha256": "90f5b9abac314699f03d14d66ca1a18d577733de0bd63a9926eebb886162815f",
+   "build_receipt": "/private/tmp/unison-named-build-ox-20261021-09.json",
+   "binary_sha256": "40db9099f4ef459b823b4e894360054d3e7910e98ae07f354b9389d826e4c2f6",
+   "build_receipt_sha256": "12c9ddc27c06c22285a4996be8dab8095dde74aa7dff10a98737dadbbe080278",
+   "totals": {
+    "original_completed_cases": 13,
+    "cli_calls": 29,
+    "fake_validators": 9,
+    "copy": 0,
+    "merge": 0,
+    "producer_interruptions": 0,
+    "client_cancellations": 0
+   }
+  }
+ },
+ "product_fixes_exercised": [
+  {
+   "commit": "10c5d159",
+   "summary": "second-receiver-reject: first replica archive restored; item fails exit 2, retry merges again"
+  },
+  {
+   "commit": "8581f357",
+   "summary": "policy-mismatch: unknown unison: built-in policy fails with an explicit message instead of running /bin/sh"
+  }
+ ],
+ "designated_declines": [
+  "competing",
+  "opaque-payload",
+  "unknown-field",
+  "deleted-field",
+  "missing-base",
+  "stale-base",
+  "policy-mismatch",
+  "policy-disabled (exit 1)",
+  "resource-fork"
+ ],
+ "independent_postclosure_replay": {
+  "token": "CPU04",
+  "matches_owner_audit": true,
+  "executables_opened": false
+ },
+ "supersedes": "tests/qualification/current-dng-merge-receiving-actual-20261021c.json runs at bdf97884",
+ "scope": "Synthetic 64 KiB DNG containers, fake validators, stock and OxCaml each as both client and server. No SDK, camera payload, Photo/Lightroom or performance claim. Rerun after dng-xmp/2 admitted simple-type fields, ProfileGainTableMap and sub-image XMP and added dngmergeadmit; the suite fixtures carry none of these, so this is a regression check of the merge contract. The two real Panasonic DNG merges were repeated on both compilers with identical merged bytes (7bc6c350..., 5d533038...) and a no-op next sync."
+}
