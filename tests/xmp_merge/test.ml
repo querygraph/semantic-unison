@@ -67,4 +67,19 @@ let () =
    no (packet "2" "Blue" "") (packet "1" "Blue" nested)) ["Bag";"Seq";"Alt"];
  no (packet "2" "Blue" "")
    (packet "1" "Blue" "<xmp:Label rdf:parseType=\"Resource\"><rdf:value>Blue</rdf:value><xmp:Qualifier>q</xmp:Qualifier></xmp:Label>");
- print_endline "PASS25 original scalar controls +343 rating decisions/symmetry +4 RDF conflicts"
+ (* Element form, as Leica and Lightroom mobile write it. *)
+ let element body="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:Description rdf:about=\"\">"^body^"</rdf:Description></rdf:RDF>" in
+ let rating r="<xmp:Rating>"^r^"</xmp:Rating>" and label l="<xmp:Label>"^l^"</xmp:Label>" in
+ let ok3 b l r expected=match XmpMerge.merge ~base:(element b) ~left:(element l) ~right:(element r) with
+   | Ok value->check(value=element expected)"wrong element-form output" | Error e->failwith e in
+ let no3 b l r=check(Result.is_error(XmpMerge.merge ~base:(element b) ~left:(element l) ~right:(element r)))"element-form conflict admitted" in
+ ok3 (rating "0") (rating "3") (rating "0") (rating "3");
+ ok3 (rating "0"^label "Blue") (rating "3"^label "Blue") (rating "0"^label "Red") (rating "3"^label "Red");
+ no3 (rating "0") (rating "3") (rating "4");
+ no3 (rating "0") (rating " 3") (rating "0");
+ no3 (rating "0"^label "Blue") (rating "0"^label "B&amp;") (rating "0"^label "Blue");
+ no3 (rating "0"^label "Blue") (rating "0"^label "<![CDATA[Red]]>") (rating "0"^label "Blue");
+ no3 (rating "0") (rating "0"^label "Red") (rating "0");
+ no3 (label "") (label "Red") (label "");
+ check(Result.is_error(XmpMerge.merge ~base:(element (rating "0")) ~left:(element (rating "3")) ~right:(packet "0" "Blue" "")))"attribute and element forms mixed";
+ print_endline "PASS25 original scalar controls +343 rating decisions/symmetry +4 RDF conflicts +10 element form"

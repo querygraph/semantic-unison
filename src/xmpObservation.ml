@@ -594,22 +594,32 @@ let scalar_view input =
     ignore(collect ~limit:max_merge_properties r rdf);
     let selected=ref [] in
     let allowed uri local = uri=xmp_uri && (local="Rating" || local="Label") in
+    let select uri local first last value =
+      if last-first>4096 then fail "scalar encoding limit";
+      if local="Rating" then begin
+        if not(List.mem value ["-1";"0";"1";"2";"3";"4";"5"])
+        then fail "unsupported scalar rating"
+      end else if String.length value>256 then fail "scalar label limit";
+      selected:={scalar_name=expanded uri local;first;last;value;
+        encoded=String.sub input first (last-first)} :: !selected in
     List.iter(fun description ->
       List.iter(fun attribute ->
-        if allowed attribute.attribute_uri attribute.attribute_local then begin
-          let first=attribute.value_first and last=attribute.value_last in
-          if last-first>4096 then fail "scalar encoding limit";
-          let value=decode_attribute input first last in
-          if attribute.attribute_local="Rating" then begin
-            if not(List.mem value ["-1";"0";"1";"2";"3";"4";"5"])
-            then fail "unsupported scalar rating"
-          end else if String.length value>256 then fail "scalar label limit";
-          selected:={scalar_name=expanded attribute.attribute_uri attribute.attribute_local;first;last;value;
-            encoded=String.sub input first (last-first)} :: !selected
-        end) description.element_attributes;
+        if allowed attribute.attribute_uri attribute.attribute_local then
+          select attribute.attribute_uri attribute.attribute_local
+            attribute.value_first attribute.value_last
+            (decode_attribute input attribute.value_first attribute.value_last))
+        description.element_attributes;
+      (* Element form, <xmp:Rating>3</xmp:Rating>: only plain text with no
+         attributes, references, CDATA or carriage returns, so the raw bytes
+         are the value and the shell keeps the element markup. *)
       List.iter(fun property ->
         if allowed property.element_uri property.element_local then
-          fail "scalar element form unsupported") (structural_children r description))
+          match property.element_attributes, property.children with
+          | [], [Text (first,last)] when first<last && input.[first-1]='>' &&
+              not (String.exists (fun c -> c='&' || c='\r') (String.sub input first (last-first))) ->
+              select property.element_uri property.element_local first last
+                (String.sub input first (last-first))
+          | _ -> fail "scalar element form unsupported") (structural_children r description))
       (structural_children r rdf);
     let scalars=List.sort(fun a b -> compare a.first b.first) !selected in
     let shell=Buffer.create(String.length input) in

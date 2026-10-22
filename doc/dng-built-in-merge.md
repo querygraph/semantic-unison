@@ -60,7 +60,10 @@ stored as UNDEFINED instead of BYTE, as Lightroom mobile writes it.
 The XMP merge accepts packets of up to 4096 properties and 1024 attributes on
 one element, enough for older Lightroom develop settings (about 150 to 230
 properties). The advisory property observation keeps its 128-property bound.
-NUL padding after the packet, as Leica writes it, is left as it is.
+NUL padding after the packet, as Leica writes it, is left as it is. Rating and
+Label may be attributes or plain-text elements (`<xmp:Rating>3</xmp:Rating>`,
+as Leica and Lightroom mobile write them); the element text must have no
+attributes, references or CDATA, and the three replicas must use the same form.
 
 `/2` also admits simple tags proactively. Any unknown field in the image, Exif,
 GPS or interop directories is accepted when its type carries only numbers or
