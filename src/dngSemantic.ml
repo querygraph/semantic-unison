@@ -142,6 +142,7 @@ let merge_only_field kind tag typ n = match kind, tag with
   | Exif, 37500 -> Some (typ = 7 || typ = 1)
   | Image, 50740 -> Some (typ = 1)
   | Image, (37393 | 51114) -> Some (typ = 4 && n = 1L)
+  | Image, 37398 -> Some (typ = 1 && n = 4L)
   | Image, (52525 | 52545) -> Some (typ = 7)
   | CameraProfile, _ -> None
   | _ when simple_type typ -> Some true
@@ -299,7 +300,8 @@ let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(r
          an ordinary protected value; only the primary IFD's packet is edited. *)
       if tag = 700 && not (opaque_maker && offset <> primary) then begin
         if !xmp <> None then reject "multiple XMP packets";
-        if typ <> 1 || n <= Int64.of_int layout.inline_width ||
+        (* Lightroom mobile writes the primary packet as UNDEFINED; only /2 takes it. *)
+        if not (typ = 1 || (opaque_maker && typ = 7)) || n <= Int64.of_int layout.inline_width ||
            n > Int64.of_int FormatExtension.max_region then
           reject "unsupported XMP type or packet size";
         xmp := Some {FormatExtension.offset = value_offset; length = Int64.to_int n}

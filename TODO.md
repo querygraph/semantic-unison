@@ -29,7 +29,8 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    fields for review, and `dngmergeadmit` admits one field at a time after
    review. The full Photo scan (1.59M DNGs) is running. Its Smart Preview
    declines, large develop-settings packets, tag 52545 and Leica NUL-padded
-   packets are now covered. Still declined: primary XMP stored as UNDEFINED
+   packets, UNDEFINED primary XMP and tag 37398 are now covered. Still
+   declined: Rating or Label written as XML elements instead of attributes
    (Lightroom mobile), files without XMP, and truncated recovered files.
 3. **No real network SSH runs.** All runs were same-machine loopback.
 4. **Open acceptance-map items** ([map](doc/sol-final-acceptance-map-20261019.md)):

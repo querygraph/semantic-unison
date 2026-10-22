@@ -70,10 +70,12 @@ let () =
      check(with_file(prefix^"-left.dng")(fun f->match make bad f with
        | Error e->e="reconciliation protected bytes changed" | Ok _->false))(p^": changed opaque byte accepted"))
    ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None;
-    "extra",Some "extra-changed.dng"; "sub",Some "sub-changed.dng"; "many",None];
+    "extra",Some "extra-changed.dng"; "sub",Some "sub-changed.dng"; "many",None; "undef",None];
  check(with_file "sub-base.dng"(fun file->DngSemantic.inspect_extended file=Error "multiple XMP packets"))
    "/1 admitted a sub-image XMP packet";
- check(refused "extra-base.dng" 34859)"/0 or /1 admitted SelfTimerMode";
+ check(refused "extra-base.dng" 34858)"/0 or /1 admitted TimeZoneOffset";
+ check(with_file "undef-base.dng"(fun file->DngSemantic.inspect_extended file=Error "unsupported XMP type or packet size"))
+   "/1 admitted an UNDEFINED XMP packet";
  (* 302 properties: past the advisory observation limit, inside the merge limit. *)
  let packet=with_file "many-base.dng"(fun f->SemanticFile.read f 1024L 8192) in
  check(XmpObservation.observe packet=Error "XMP property limit exceeded")"observation limit raised";

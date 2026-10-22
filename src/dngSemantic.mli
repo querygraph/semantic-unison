@@ -10,10 +10,12 @@ val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) 
 (** Merge-only inspector: the v1 grammar plus an Exif MakerNote (tag37500,
     UNDEFINED or BYTE), primary-IFD DNGPrivateData (tag50740, BYTE), and single
     LONG ImageNumber (37393) and CacheVersion (51114), UNDEFINED
-    ProfileGainTableMap (52525) and tag 52545, any field of a simple type (ASCII, SHORT,
+    ProfileGainTableMap (52525) and tag 52545, a 4-byte TIFF/EP
+    StandardID (37398), any field of a simple type (ASCII, SHORT,
     RATIONAL, SSHORT, SRATIONAL, FLOAT, DOUBLE) outside camera profiles, and the
     fields named by [admit_fields], kept as protected values. XMP packets
-    outside the primary IFD are protected values too; only the primary packet
+    outside the primary IFD are protected values too; only the primary packet,
+    BYTE or UNDEFINED,
     is the editable region.
     Their bytes stay in the complement proof and may not overlap the XMP region;
     internal pointers are not interpreted.
