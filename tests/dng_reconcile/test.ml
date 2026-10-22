@@ -24,27 +24,38 @@ let () =
  let _,peer=match SemanticDelta.decode_request(SemanticDelta.encode_request ~nonce:(String.make 32 'p') base) with Ok p->p | Error e->failwith e in
  check(with_file "left.dng"(fun f->Result.is_error(SemanticDelta.reconcile_xmp extension ~nonce:(String.make 32 'n') ~base:peer ~left ~right f)))"peer-only base accepted";
  check(with_file "left.dng"(fun f->Result.is_error(SemanticDelta.reconcile_xmp extension ~nonce:"bad" ~base ~left ~right f)))"invalid nonce accepted";
- (* Merge-only /2: an opaque Exif MakerNote is admitted, kept identical, and
-    never allowed to overlap the XMP region. /0 and /1 still decline it. *)
+ (* Merge-only /2: an opaque Exif MakerNote and primary-IFD DNGPrivateData are
+    admitted, kept identical, and never allowed to overlap the XMP region.
+    /0 and /1 still decline both. *)
  let maker=(module struct let profile=DngSemantic.opaque_maker_profile let inspect=DngSemantic.inspect_opaque_maker end : FormatExtension.S) in
- let refused p=with_file p(fun file->match DngSemantic.inspect file,DngSemantic.inspect_extended file with
-   | Error a,Error b->a=b && a="unsupported TIFF tag 37500 (opaque or private graph)" | _->false) in
- check(refused "maker-base.dng")"/0 or /1 admitted an opaque MakerNote";
+ let refused p tag=with_file p(fun file->match DngSemantic.inspect file,DngSemantic.inspect_extended file with
+   | Error a,Error b->a=b && a=Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag | _->false) in
+ check(refused "maker-base.dng" 37500)"/0 or /1 admitted an opaque MakerNote";
+ check(refused "priv-base.dng" 50740)"/0 or /1 admitted DNGPrivateData";
  let mproof p=with_file p(fun file->match SemanticDelta.inspect maker file with Ok p->p | Error e->failwith e) in
  let reason p=with_file p(fun file->match SemanticDelta.inspect maker file with Ok _->"accepted" | Error e->e) in
- check(reason "maker-alias.dng"="XMP aliases protected extent")"MakerNote overlapping XMP accepted";
- check(reason "maker-type.dng"="invalid opaque MakerNote type")"non-opaque MakerNote type accepted";
- check(reason "base.dng"="accepted")"/2 declined the plain v0 fixture";
- let mb=mproof "maker-base.dng" and ml=mproof "maker-left.dng" and mr=mproof "maker-right.dng" in
- let mmake l r file=SemanticDelta.reconcile_xmp maker ~nonce:(String.make 32 'n') ~base:mb ~left:l ~right:r file in
- let mplan=with_file "maker-left.dng"(fun file->match mmake ml mr file with Ok p->p | Error e->failwith e) in
- let mexpected=with_file "maker-target.dng" SemanticFile.digest in
- check(SemanticDelta.target_digest mplan=mexpected)"MakerNote target digest differs from independent target";
- let moutput=Unix.openfile "maker-stage.dng" [Unix.O_RDWR;Unix.O_CLOEXEC] 0 in
- Fun.protect ~finally:(fun ()->Unix.close moutput)(fun ()->
-   ignore(with_file "maker-left.dng"(fun basis->SemanticDelta.apply_report_with_extension maker mplan ~basis ~output:moutput)));
- check(with_file "maker-stage.dng" SemanticFile.digest=mexpected)"materialized MakerNote target differs";
- let changed=mproof "maker-changed.dng" in
- check(with_file "maker-left.dng"(fun f->match mmake ml changed f with
-   | Error e->e="reconciliation protected bytes changed" | Ok _->false))"changed MakerNote byte accepted";
- print_endline "PASS16 exact DNG reconciliation/materialization controls"
+ List.iter (fun (p,expected) -> check(reason p=expected)(p^": "^reason p)) [
+   "maker-alias.dng","XMP aliases protected extent"; "priv-alias.dng","XMP aliases protected extent";
+   "maker-type.dng","invalid opaque maker field type"; "priv-type.dng","invalid opaque maker field type";
+   "priv-ifd1.dng","DNGPrivateData outside primary IFD"; "base.dng","accepted"];
+ let merges prefix=
+   let file n=prefix^"-"^n^".dng" in
+   let mb=mproof(file "base") and ml=mproof(file "left") and mr=mproof(file "right") in
+   let mmake l r f=SemanticDelta.reconcile_xmp maker ~nonce:(String.make 32 'n') ~base:mb ~left:l ~right:r f in
+   let mplan=with_file(file "left")(fun f->match mmake ml mr f with Ok p->p | Error e->failwith e) in
+   let mexpected=with_file(file "target") SemanticFile.digest in
+   check(SemanticDelta.target_digest mplan=mexpected)(prefix^": target digest differs from independent target");
+   let moutput=Unix.openfile(file "stage") [Unix.O_RDWR;Unix.O_CLOEXEC] 0 in
+   Fun.protect ~finally:(fun ()->Unix.close moutput)(fun ()->
+     ignore(with_file(file "left")(fun basis->SemanticDelta.apply_report_with_extension maker mplan ~basis ~output:moutput)));
+   check(with_file(file "stage") SemanticFile.digest=mexpected)(prefix^": materialized target differs");
+   mmake ml in
+ List.iter (fun (prefix,changed) ->
+   let make=merges prefix in
+   match changed with
+   | None -> ()
+   | Some p -> let bad=mproof p in
+     check(with_file(prefix^"-left.dng")(fun f->match make bad f with
+       | Error e->e="reconciliation protected bytes changed" | Ok _->false))(p^": changed opaque byte accepted"))
+   ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None];
+ print_endline "PASS25 exact DNG reconciliation/materialization controls"
