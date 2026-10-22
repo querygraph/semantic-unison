@@ -3378,6 +3378,25 @@ Generate **one deterministic exact target artifact**, validate it, then send tho
 
 True non-byte convergence (different full files declared synchronized) would require per-replica byte identities plus a common semantic base, new archive/reconciliation invariants, explicit capability/policy negotiation, and downgrade protection. It is not required for useful semantic extensions and is **out of scope for the first implementation**. Do not smuggle it into `Fingerprint.equal`, `ContentsSame`, or `RawImageDigest` handling. If later requested, design it as a separate archive-format feature with migration/rollback tests.
 
+### Which files the merge touches
+
+The built-in merge never rewrites the XMP of an unedited DNG. Most files in a
+sync are identical on both sides, and they are not touched at all. The merge
+writes an XMP packet only for a real conflict: the same DNG changed on both
+replicas since the last sync, to different contents.
+
+| Situation | What Unison does |
+| --- | --- |
+| Unchanged on both sides (the bulk) | Nothing. Size, modification time and inode match the archive, so the file is not opened or hashed. No transfer, no semantic inspection, no merge. |
+| Changed on both sides to identical bytes | Unison sees equal fingerprints, records them, and moves on. No merge. |
+| Edited on one side only, e.g. a new rating | Ordinary one-way propagation. With `semanticdng`, only the changed XMP bytes travel and the rest is verified against the receiver's existing copy. This is a transfer, not a rewrite of the file. |
+| Edited on both sides, e.g. a rating here and a label there | The only case where the built-in merge writes an XMP packet. |
+
+The opaque MakerNote profile `org.firstpair.dng-xmp/2` applies only in that
+last case. It lets original camera DNGs that still carry their MakerNote be
+merged after they have been edited on both machines. It is never used for
+unchanged files or for transfer.
+
 ### Growing XMP and layout-changing files
 
 Milestone 1 does not invent unused padding. Only bytes actually owned by a parsed, validated packet are writable. A later, separately assigned profile version can allow changed count/offset cells, a grown packet in proved reusable space, or append-and-repoint, provided every changed structural field is explicitly accounted for and all unchanged bytes retain exact source layout. The target is still the source's exact byte sequence; do not append an equivalent packet in a different place and pretend it is the source.
