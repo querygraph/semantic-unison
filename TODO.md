@@ -42,7 +42,7 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
 ## Next
 
 1. Run a real Lightroom round-trip on Capitola, in two scratch catalogs over
-   copies of one DNG:
+   copies of one DNG (deferred until the owner is home on a fast network):
    - set a rating in one catalog and a label in the other;
    - run "Save Metadata to File" in each;
    - let Unison merge the two copies;
