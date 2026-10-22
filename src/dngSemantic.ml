@@ -116,8 +116,12 @@ let merge_only_field kind tag typ n = match kind, tag with
   | Image, (37393 | 51114) -> Some (typ = 4 && n = 1L)
   | _ -> None
 
+let directory_name = function
+  | Image -> "Image" | Exif -> "Exif" | Gps -> "GPS" | Interop -> "Interop"
+  | CameraProfile -> "CameraProfile"
+
 let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(require_xmp=true)
-    ?(record=(fun (_:component_region) -> ())) file =
+    ?(record=(fun (_:component_region) -> ())) ?unknown file =
  try
   let size = SemanticFile.size file in
   let byte_order header = match String.sub header 0 2 with
@@ -228,7 +232,9 @@ let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(r
       if merge_only && tag = 50740 && offset <> primary then
         reject "DNGPrivateData outside primary IFD";
       if not (layout_only || allowed_tag kind tag || profile_pointer || scalar <> None || merge_only) then
-        reject (Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag);
+        (match unknown with
+         | Some note -> note (directory_name kind) tag typ n
+         | None -> reject (Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag));
       let child = child_kind kind tag in
       if not layout_only && (typ = 13 || (extended && typ = 18)) && child = None then
         reject "IFD type on non-pointer field";
@@ -345,6 +351,16 @@ let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(r
 let inspect file = inspect_with_policy ~extended:false file
 let inspect_extended file = inspect_with_policy ~extended:true file
 let inspect_opaque_maker file = inspect_with_policy ~extended:true ~opaque_maker:true file
+
+(* Survey only: the same /2 walk, noting each field outside its grammar instead
+   of stopping at the first. A noted field is then walked as a generic value, so
+   later findings are advisory; the verdict stays with inspect_opaque_maker. *)
+let unknown_fields file =
+  let found = ref [] in
+  let note directory tag typ n = found := (directory, tag, typ, n) :: !found in
+  let stop = match inspect_with_policy ~extended:true ~opaque_maker:true ~unknown:note file with
+    | Ok _ -> None | Error reason -> Some reason in
+  List.rev !found, stop
 
 (* Geometry-only exact transfer: private contents remain part of complete and
    complement hashes. This grants no pointer-independence or merge authority. *)

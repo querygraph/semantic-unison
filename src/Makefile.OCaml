@@ -102,6 +102,9 @@ COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \
 ## Text UI
 OCAMLOBJS_TUI = linktext.cmo
 
+## DNG survey command
+OCAMLOBJS_DNGSCAN = dngscan.cmo
+
 ## Mac UI
 OCAMLOBJS_MAC = uimacbridge.cmo
 OCAMLLIBS_MAC = threads.cma
@@ -121,6 +124,9 @@ buildexecutable:
 
 .PHONY: tui
 tui: buildexecutable $(NAME)$(EXEC_EXT)
+
+.PHONY: dngscan
+dngscan: buildexecutable $(NAME)-dngscan$(EXEC_EXT)
 
 .PHONY: gui
 gui: buildexecutable $(NAME_GUI)$(EXEC_EXT)
@@ -392,6 +398,10 @@ xmpMerge.cmx: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
 include Makefile2.cfg
 
 $(NAME)$(EXEC_EXT): $(COMPAT_OBJS) $(CAMLOBJS) $(CAMLOBJS_TUI) $(COBJS)
+	@echo Linking $@
+	$(CAMLC) -verbose $(CAMLFLAGS_X) $(CAMLLDFLAGS) -o $@ $(CAMLLIBS) $(ALL__SRC) $(CLIBS)
+
+$(NAME)-dngscan$(EXEC_EXT): $(COMPAT_OBJS) $(CAMLOBJS) $(CAMLOBJS_DNGSCAN) $(COBJS)
 	@echo Linking $@
 	$(CAMLC) -verbose $(CAMLFLAGS_X) $(CAMLLDFLAGS) -o $@ $(CAMLLIBS) $(ALL__SRC) $(CLIBS)
 

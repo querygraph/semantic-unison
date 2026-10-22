@@ -13,6 +13,10 @@ val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) 
     Their bytes stay in the complement proof and may not overlap the XMP region;
     internal pointers are not interpreted.
     Registered locally for reconciliation, never negotiated. *)
+val unknown_fields : SemanticFile.t -> (string * int * int * int64) list * string option
+(** Survey diagnostic, never merge authority: walks the /2 grammar and lists each
+    field outside it as (directory, tag, type, count) rather than stopping at the
+    first, plus the first other reason the walk stopped, if any. *)
 val inspect_layout : SemanticFile.t -> (FormatExtension.manifest, string) result
 (** Layout-only exact transfer inspector. Unknown/private declared values stay
     protected and byte-exact; hidden pointer rules are not interpreted. Must be

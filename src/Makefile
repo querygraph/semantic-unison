@@ -33,7 +33,7 @@ Makefile.cfg: _mk.cfg make_tools.ml
 	@ocaml make_tools.ml conf2 MAKE="$(MAKE)" > Makefile2.cfg
 _mk.cfg: ;
 
-TARGETS = all tui gui macui fsmonitor manpage docs clean depend dependgraph paths
+TARGETS = all tui dngscan gui macui fsmonitor manpage docs clean depend dependgraph paths
 FILES = unison unison.exe
 
 .NOTPARALLEL:

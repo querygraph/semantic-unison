@@ -98,3 +98,40 @@ six acquisition failures and unchanged sentinels. This is error classification,
 not authorization to retry with a guessed base or publish an incomplete result.
 Cancellation, programming errors and allocation exceptions keep their original
 identity through the existing Unix-error conversion utility.
+
+## Checking a photo library: `unison-dngscan`
+
+`unison-dngscan [-j WORKERS] [-o REPORT.jsonl] PATH...` walks the paths (no
+symlinks followed) and checks every `*.dng` file against the merge, read-only.
+Only the TIFF directories and the XMP packet are read. The scanned trees are
+never written, and neither are Lightroom catalogs, caches or anything else.
+
+Each file runs through the same inspectors the merge uses: dng-xmp `/0`, `/1`
+and the merge-only `/2`. Files that pass `/2` then get an identity XmpMerge of
+their packet at its fixed length. The verdicts are:
+
+- `mergeable`: both checks pass, so a Rating/Label conflict can be merged.
+- `xmp-unsupported`: the container passes, but the packet shape does not.
+- `declined`: the container fails, with the inspector's first stop as the
+  reason.
+- `error`: the file could not be read.
+
+For each declined file, `/2` is walked once more to list every field outside
+it, by IFD, tag, type and count. That way one pass over a library shows all
+the allow-list entries that would be missing. The extra findings are advisory:
+the verdict always comes from the real inspector.
+
+Files are sharded over forked worker processes, 8 by default. The summary
+counts verdicts, reasons and unknown fields, each with an example path, and
+`-o` writes one JSON line per file. The exit status is:
+
+| Status | Meaning |
+| --- | --- |
+| 0 | every DNG is mergeable |
+| 1 | some DNG is not mergeable |
+| 2 | the scan is incomplete (unreadable paths or a failed worker) |
+
+The command builds with `make -C src dngscan` or `dune build
+./src/dngscan.exe`. Its findings say which files the built-in merge would
+accept. They are not a DNG validity check, and they do not show what Lightroom
+writes when it saves an edit.
