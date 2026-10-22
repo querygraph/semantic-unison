@@ -121,9 +121,12 @@ it, by IFD, tag, type and count. That way one pass over a library shows all
 the allow-list entries that would be missing. The extra findings are advisory:
 the verdict always comes from the real inspector.
 
-Files are sharded over forked worker processes, 8 by default. The summary
+Files are sharded over forked worker processes: 8 by default, up to 256 with
+`-j`. The scan is I/O bound, so more workers than cores helps on large arrays.
+A progress line goes to stderr every 30 s. The summary
 counts verdicts, reasons and unknown fields, each with an example path, and
-`-o` writes one JSON line per file. The exit status is:
+`-o` writes one JSON line per file as each result arrives, so a partial report
+can be read during the run. The exit status is:
 
 | Status | Meaning |
 | --- | --- |

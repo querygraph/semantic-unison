@@ -86,15 +86,10 @@ let inspect path =
 (* Worker k takes files k, k+workers, ... and marshals one record per file. *)
 let run_worker files workers k out =
   let channel = Unix.out_channel_of_descr out in
-  let total = (Array.length files - k + workers - 1) / workers in
-  let done_ = ref 0 in
   let i = ref k in
   while !i < Array.length files do
     Marshal.to_channel channel (inspect files.(!i) : record) [];
     flush channel;
-    incr done_;
-    if !done_ mod 2000 = 0 then
-      Printf.eprintf "dngscan: worker %d: %d/%d\n%!" k !done_ total;
     i := !i + workers
   done;
   close_out channel
@@ -134,10 +129,10 @@ let sorted table =
 let () =
   let workers = ref 8 and report = ref "" and roots = ref [] in
   Arg.parse [
-    "-j", Arg.Set_int workers, "N  worker processes (default 8)";
-    "-o", Arg.Set_string report, "FILE  write one JSON line per DNG";
+    "-j", Arg.Set_int workers, "N  worker processes, up to 256 (default 8); the scan is I/O bound";
+    "-o", Arg.Set_string report, "FILE  write one JSON line per DNG as results arrive";
   ] (fun p -> roots := p :: !roots) usage;
-  if !roots = [] || !workers < 1 || !workers > 64 then (prerr_endline usage; exit 2);
+  if !roots = [] || !workers < 1 || !workers > 256 then (prerr_endline usage; exit 2);
   let started = Unix.gettimeofday () in
   let files, walk_errors = walk (List.rev !roots) in
   Printf.eprintf "dngscan: %d DNG files found in %.0fs; scanning with %d workers\n%!"
@@ -148,26 +143,38 @@ let () =
     match Unix.fork () with
     | 0 -> Unix.close input; run_worker files workers k output; Unix._exit 0
     | pid -> Unix.close output; pid, Unix.in_channel_of_descr input) in
-  (* Records arrive in any order and carry their path; a pipe at EOF is retired. *)
-  let collected = ref [] in
+  (* Records arrive in any order and carry their path; a pipe at EOF is retired.
+     Report lines are written as they arrive, so a partial report is readable. *)
+  let out = if !report = "" then None else Some (open_out_bin !report) in
+  let collected = ref [] and received = ref 0 and last = ref (Unix.gettimeofday ()) in
+  let scan_started = !last in
   let pending = ref (List.map snd children) in
   while !pending <> [] do
     let ready, _, _ = Unix.select (List.map Unix.descr_of_in_channel !pending) [] [] (-1.) in
     pending := List.filter (fun ch ->
       if not (List.mem (Unix.descr_of_in_channel ch) ready) then true else
       match (Marshal.from_channel ch : record) with
-      | r -> collected := r :: !collected; true
+      | r ->
+          collected := r :: !collected; incr received;
+          Option.iter (fun ch -> output_string ch (json r); output_char ch '\n') out;
+          let now = Unix.gettimeofday () in
+          if now -. !last >= 30. then begin
+            last := now;
+            Option.iter flush out;
+            let rate = float !received /. (now -. scan_started) in
+            Printf.eprintf "dngscan: %d/%d files, %.0f/s, about %.0f min left\n%!" !received
+              (Array.length files) rate (float (Array.length files - !received) /. rate /. 60.)
+          end;
+          true
       | exception End_of_file -> close_in ch; false) !pending
   done;
   let results = List.sort (fun a b -> compare a.path b.path) !collected in
   let missing = Array.length files - List.length results in
   let failed_workers = List.filter (fun (pid, _) -> match Unix.waitpid [] pid with
     | _, Unix.WEXITED 0 -> false | _ -> true) children in
-  let out = if !report = "" then None else Some (open_out_bin !report) in
   let verdicts = Hashtbl.create 8 and reasons = Hashtbl.create 32 and unknown = Hashtbl.create 64 in
   let profiles = Array.make 3 0 and bytes = ref 0L in
   List.iter (fun r ->
-        Option.iter (fun ch -> output_string ch (json r); output_char ch '\n') out;
         bytes := Int64.add !bytes r.size;
         if r.v0 then profiles.(0) <- profiles.(0) + 1;
         if r.v1 then profiles.(1) <- profiles.(1) + 1;
