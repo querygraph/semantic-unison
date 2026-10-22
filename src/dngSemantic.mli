@@ -8,9 +8,10 @@ val inspect_extended : SemanticFile.t -> (FormatExtension.manifest, string) resu
 val opaque_maker_profile : string
 val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) result
 (** Merge-only inspector: the v1 grammar plus an Exif MakerNote (tag37500,
-    UNDEFINED or BYTE) and primary-IFD DNGPrivateData (tag50740, BYTE), kept as
-    opaque protected values. Their bytes stay in the complement proof and may
-    not overlap the XMP region; their internal pointers are not interpreted.
+    UNDEFINED or BYTE), primary-IFD DNGPrivateData (tag50740, BYTE), and single
+    LONG ImageNumber (37393) and CacheVersion (51114), kept as protected values.
+    Their bytes stay in the complement proof and may not overlap the XMP region;
+    internal pointers are not interpreted.
     Registered locally for reconciliation, never negotiated. *)
 val inspect_layout : SemanticFile.t -> (FormatExtension.manifest, string) result
 (** Layout-only exact transfer inspector. Unknown/private declared values stay

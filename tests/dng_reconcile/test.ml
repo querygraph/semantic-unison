@@ -36,8 +36,10 @@ let () =
  let reason p=with_file p(fun file->match SemanticDelta.inspect maker file with Ok _->"accepted" | Error e->e) in
  List.iter (fun (p,expected) -> check(reason p=expected)(p^": "^reason p)) [
    "maker-alias.dng","XMP aliases protected extent"; "priv-alias.dng","XMP aliases protected extent";
-   "maker-type.dng","invalid opaque maker field type"; "priv-type.dng","invalid opaque maker field type";
-   "priv-ifd1.dng","DNGPrivateData outside primary IFD"; "base.dng","accepted"];
+   "maker-type.dng","invalid merge-only field type or count"; "priv-type.dng","invalid merge-only field type or count";
+   "priv-ifd1.dng","DNGPrivateData outside primary IFD"; "base.dng","accepted";
+   "scalar-base.dng","accepted"; "scalar-count.dng","invalid merge-only field type or count"];
+ check(refused "scalar-base.dng" 37393)"/0 or /1 admitted ImageNumber";
  let merges prefix=
    let file n=prefix^"-"^n^".dng" in
    let mb=mproof(file "base") and ml=mproof(file "left") and mr=mproof(file "right") in
@@ -58,4 +60,4 @@ let () =
      check(with_file(prefix^"-left.dng")(fun f->match make bad f with
        | Error e->e="reconciliation protected bytes changed" | Ok _->false))(p^": changed opaque byte accepted"))
    ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None];
- print_endline "PASS25 exact DNG reconciliation/materialization controls"
+ print_endline "PASS28 exact DNG reconciliation/materialization controls"

@@ -10,13 +10,14 @@ for n in mods:
   q=w/(n+'.'+ext);q.write_bytes(subprocess.check_output([str(w/'filter'),version,str(q)]))
 if ox:
  q=w/'test.ml';s=q.read_text();assert s.count('let () =')==1;q.write_text(s.replace('let () =','let controls () =')+'\nlet () = let d=Domain.Safe.spawn(fun () -> controls()) in Domain.join d\n')
-def fixture(rating,label,opaque=False,maker=None,private=None):
+def fixture(rating,label,opaque=False,maker=None,private=None,scalars=()):
  b=bytearray(bytes((i*71+19)%256 for i in range(2097152)));struct.pack_into('<2sHIH',b,0,b'II',42,8,4)
  packet=(f'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xmp="http://ns.adobe.com/xap/1.0/"><rdf:Description rdf:about="" xmp:Rating="{rating}" xmp:Label="{label}"/></rdf:RDF>').encode();packet+=b' '*(8192-len(packet))
  entries=[(273,4,1,12288),(279,4,1,len(b)-12288),(700,1,8192,1024),(50706,1,4,1025)]
  if maker:entries.append((34665,4,1,9216))
  # Opaque DNGPrivateData: (type, offset, flipped byte or None, in IFD1 instead of the primary IFD).
  if private and not private[3]:entries.append((50740,private[0],64,private[1]))
+ entries+=list(scalars)
  struct.pack_into('<H',b,8,len(entries))
  for i,e in enumerate(entries):struct.pack_into('<HHII',b,10+12*i,*e)
  struct.pack_into('<I',b,10+12*len(entries),0);b[1024:9216]=packet
@@ -40,7 +41,10 @@ for prefix,kw in (('priv',dict(private=P)),('both',dict(maker=M,private=P))):
  for name,(rating,label) in dict(base=('1','Blue'),left=('2','Blue'),right=('1','Gold'),target=('2','Gold')).items():
   inputs[f'{prefix}-{name}.dng']=fixture(rating,label,**kw)
 inputs.update({'priv-changed.dng':fixture('1','Gold',private=(1,9400,7,False)),'priv-alias.dng':fixture('1','Blue',private=(1,2048,None,False)),
- 'priv-type.dng':fixture('1','Blue',private=(7,9400,None,False)),'priv-ifd1.dng':fixture('1','Blue',private=(1,9600,None,True))})
+ 'priv-type.dng':fixture('1','Blue',private=(7,9400,None,False)),
+ # Merge-only LONG scalars: ImageNumber and CacheVersion, count 1; count 2 must decline.
+ 'scalar-base.dng':fixture('1','Blue',scalars=[(37393,4,1,7160),(51114,4,1,0x01000000)]),
+ 'scalar-count.dng':fixture('1','Blue',scalars=[(37393,4,2,9700)]),'priv-ifd1.dng':fixture('1','Blue',private=(1,9600,None,True))})
 STAGED=('maker','priv','both')
 for n,b in inputs.items():(w/n).write_bytes(b)
 if sys.platform=='darwin':
