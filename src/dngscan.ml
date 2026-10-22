@@ -16,7 +16,7 @@ type record = {
   unknown : (string * int * int * int64) list;
 }
 
-let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-o REPORT.jsonl [-resume]] PATH..."
+let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH..."
 
 let is_dng name =
   String.lowercase_ascii (Filename.extension name) = ".dng"
@@ -290,14 +290,21 @@ let sorted table =
 
 let () =
   let workers = ref 8 and report = ref "" and resume = ref false and cache = ref "" and roots = ref [] in
+  let admit = ref [] and tags = ref "" in
   Arg.parse [
     "-j", Arg.Set_int workers, "N  worker processes, up to 256 (default 8); the scan is I/O bound";
     "-o", Arg.Set_string report, "FILE  write one JSON line per DNG as results arrive";
     "-cache", Arg.Set_string cache, "FILE  reuse and update directory listings whose mtime is unchanged";
+    "-admit", Arg.String (fun spec -> match DngSemantic.parse_admission spec with
+      | Ok field -> admit := !admit @ [field]
+      | Error reason -> raise (Arg.Bad reason)),
+      "IFD:TAG:TYPE  also admit this field in /2, as the dngmergeadmit preference does";
+    "-tags", Arg.Set_string tags, "FILE  write the fields outside /2 as a review table with admit specs";
     "-resume", Arg.Set resume, " keep the complete lines already in the -o report, skip those files and append";
   ] (fun p -> roots := p :: !roots) usage;
   if !roots = [] || !workers < 1 || !workers > 256 || (!resume && !report = "") then
     (prerr_endline usage; exit 2);
+  DngSemantic.admit_fields !admit;
   let started = Unix.gettimeofday () in
   let all_files, walk_errors, (listed, reused) =
     walk ?cache:(if !cache = "" then None else Some !cache) (List.rev !roots) in
@@ -371,9 +378,29 @@ let () =
     Printf.printf "\nreasons (first stop of the real inspector or XMP merge):\n";
     List.iter (fun (k, (n, e)) -> Printf.printf "  %8d  %s\n            e.g. %s\n" n k e) (sorted reasons)
   end;
+  (* Review table: one row per directory, tag and type, with the files that
+     carry it and the spec that would admit it. *)
+  let review = Hashtbl.create 64 in
+  List.iter (fun r ->
+    List.iter (fun (d, tag, typ) -> bump review (d, tag, typ) r.path)
+      (List.sort_uniq compare (List.map (fun (d, t, ty, _) -> d, t, ty) r.unknown))) results;
+  let review = List.sort (fun ((_, (a, _)) as x) ((_, (b, _)) as y) -> compare (b, fst x) (a, fst y))
+      (Hashtbl.fold (fun k v l -> (k, v) :: l) review []) in
+  if !tags <> "" then begin
+    let ch = open_out_bin !tags in
+    output_string ch "ifd\ttag\ttype\tfiles\tadmit\texample\n";
+    List.iter (fun ((d, tag, typ), (n, e)) ->
+      Printf.fprintf ch "%s\t%d\t%d\t%d\t%s:%d:%d\t%s\n" d tag typ n d tag typ e) review;
+    close_out ch
+  end;
+  if !admit <> [] then
+    Printf.printf "\nadmitted with -admit: %s\n" (String.concat " "
+      (List.map (fun (d, t, ty) -> Printf.sprintf "%s:%d:%d" d t ty) !admit));
   if Hashtbl.length unknown > 0 then begin
     Printf.printf "\nfields outside dng-xmp/2 (files containing each):\n";
-    List.iter (fun (k, (n, e)) -> Printf.printf "  %8d  %s\n            e.g. %s\n" n k e) (sorted unknown)
+    List.iter (fun (k, (n, e)) -> Printf.printf "  %8d  %s\n            e.g. %s\n" n k e) (sorted unknown);
+    Printf.printf "\nto try them, after review: %s\n" (String.concat " "
+      (List.map (fun ((d, t, ty), _) -> Printf.sprintf "-admit %s:%d:%d" d t ty) review))
   end;
   if walk_errors <> [] then begin
     Printf.printf "\nunreadable paths: %d\n" (List.length walk_errors);

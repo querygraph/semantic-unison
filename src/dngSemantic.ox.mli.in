@@ -10,10 +10,20 @@ val opaque_maker_profile : string
 val inspect_opaque_maker : SemanticFile.t -> (FormatExtension.manifest, string) result
 (** Merge-only inspector: the v1 grammar plus an Exif MakerNote (tag37500,
     UNDEFINED or BYTE), primary-IFD DNGPrivateData (tag50740, BYTE), and single
-    LONG ImageNumber (37393) and CacheVersion (51114), kept as protected values.
+    LONG ImageNumber (37393) and CacheVersion (51114), UNDEFINED
+    ProfileGainTableMap (52525), any field of a simple type (ASCII, SHORT,
+    RATIONAL, SSHORT, SRATIONAL, FLOAT, DOUBLE) outside camera profiles, and the
+    fields named by [admit_fields], kept as protected values. XMP packets
+    outside the primary IFD are protected values too; only the primary packet
+    is the editable region.
     Their bytes stay in the complement proof and may not overlap the XMP region;
     internal pointers are not interpreted.
     Registered locally for reconciliation, never negotiated. *)
+val admit_fields : (string * int * int) list -> unit
+(** Owner only: replace the run-time /2 admissions, as (directory, tag, type)
+    with directory Image, Exif, GPS or Interop. Workers read the current list. *)
+val parse_admission : string -> (string * int * int, string) result
+(** Parse one [Image|Exif|GPS|Interop:TAG:TYPE] admission; IFD types refused. *)
 val unknown_fields : SemanticFile.t -> (string * int * int * int64) list * string option
 (** Survey diagnostic, never merge authority: walks the /2 grammar and lists each
     field outside it as (directory, tag, type, count) rather than stopping at the

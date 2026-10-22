@@ -23,9 +23,12 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    also grow or re-lay out the XMP packet. Any of these makes the merge decline
    and leave the conflict. That is safe, but if it happens on every real edit,
    the feature does nothing in practice. This is the most important unknown.
-2. **Other cameras and converters.** Two Lightroom-converted Panasonic DNGs
-   merge. Other cameras' maker data and other converters may need further
-   allow-list entries; each decline names the tag it stopped on.
+2. **Other cameras and converters.** `/2` now admits every simple numeric or
+   text tag, sub-image XMP packets, and the gain-table map. LONG, BYTE and
+   UNDEFINED fields still need a name. `unison-dngscan -tags` records unknown
+   fields for review, and `dngmergeadmit` admits one field at a time after
+   review. The full Photo scan (1.59M DNGs) is running. All its declines so
+   far, all in Lightroom Smart Previews, are covered by the new rules.
 3. **No real network SSH runs.** All runs were same-machine loopback.
 4. **Open acceptance-map items** ([map](doc/sol-final-acceptance-map-20261019.md)):
    - negative cases where corrupted data is received;

@@ -52,7 +52,29 @@ MakerNote might point to moves. This profile is registered only for the local
 merge. It is not selectable with `semanticprofile` and is not offered to peers,
 so transfer negotiation is unchanged. `DNGPrivateData` (50740, BYTE, primary
 IFD only) gets the same opaque treatment, as do single-LONG `ImageNumber`
-(37393) and `CacheVersion` (51114). Other private tags still decline.
+(37393) and `CacheVersion` (51114) and the UNDEFINED `ProfileGainTableMap`
+(52525).
+
+`/2` also admits simple tags proactively. Any unknown field in the image, Exif,
+GPS or interop directories is accepted when its type carries only numbers or
+text: ASCII, SHORT, SSHORT, RATIONAL, SRATIONAL, FLOAT or DOUBLE. Examples are
+TIFF/EP SelfTimerMode and the DNG 1.6 depth fields. TIFF writers keep offsets
+and private structures in LONG, BYTE, UNDEFINED or IFD fields, so those are
+still admitted only by name. XMP packets that belong to sub-images, such as the
+portrait and segmentation mattes in iPhone files, are protected values, and
+only the primary IFD's packet is edited. Camera-profile IFDs keep their own
+fixed grammar.
+
+When a merge declines on an unknown field, its message names the tag. To admit
+a field after review, set the preference `dngmergeadmit = Image:TAG:TYPE`. The
+directory is `Image`, `Exif`, `GPS` or `Interop`, and the preference is
+repeatable. The named field is then a protected value: its bytes must be
+identical on all three sides and may not overlap the packet, but they are not
+interpreted. Only admit fields known not to point into the file. The
+preference is sent to the server only when set, so both hosts inspect with the
+same list. The merge base is captured with the same admissions, so files whose
+base was captured before a field was admitted still decline until their next
+sync captures a new base.
 
 Shared workers inspect all three private files, construct the exact target plan,
 and verify/materialize it in one private output already containing the left
@@ -101,7 +123,7 @@ identity through the existing Unix-error conversion utility.
 
 ## Checking a photo library: `unison-dngscan`
 
-`unison-dngscan [-j WORKERS] [-cache WALK] [-o REPORT.jsonl [-resume]] PATH...` walks the paths (no
+`unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH...` walks the paths (no
 symlinks followed) and checks every `*.dng` file against the merge, read-only.
 Only the TIFF directories and the XMP packet are read. The scanned trees are
 never written, and neither are Lightroom catalogs, caches or anything else.
@@ -119,7 +141,12 @@ their packet at its fixed length. The verdicts are:
 For each declined file, `/2` is walked once more to list every field outside
 it, by IFD, tag, type and count. That way one pass over a library shows all
 the allow-list entries that would be missing. The extra findings are advisory:
-the verdict always comes from the real inspector.
+the verdict always comes from the real inspector. `-tags FILE` writes the fields outside `/2` as a
+review table. Each row gives the directory, tag, type, number of files and an
+example path, plus the `IFD:TAG:TYPE` spec that would admit the field. Review
+and record new fields this way. `-admit SPEC` previews a library with that field
+admitted, just as `dngmergeadmit` does in a sync. Fields that prove safe and
+common belong in the built-in list instead.
 
 Files are sharded over forked worker processes: 8 by default, up to 256 with
 `-j`. The scan is I/O bound, so more workers than cores helps on large arrays.

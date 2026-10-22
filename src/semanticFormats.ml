@@ -41,6 +41,30 @@ let dng_enabled = Prefs.createBool "semanticdng" false ~local:true
   "Enable the built-in DNG profiles, preferring strict XMP interpretation \
    before the layout-only exact-byte fallback when negotiated. All transfers preserve exact bytes and full verification."
 
+(* Permissive merge admissions. Sent only when set, so peers built without the
+   preference are unaffected; both hosts then inspect with the same list. *)
+let dng_merge_admit_set = ref (fun () -> false)
+let dng_merge_admit = Prefs.createStringList "dngmergeadmit"
+  ~category:(`Advanced `General)
+  ~send:(fun () -> !dng_merge_admit_set ())
+  "admit a DNG field in the built-in merge (Image|Exif|GPS|Interop:TAG:TYPE, repeatable)"
+  "Admit one more TIFF field, named by directory, tag number and type number, \
+   as a protected value in the built-in DNG merge. The field's bytes are kept \
+   identical and may not overlap the XMP packet, but its contents are not \
+   interpreted: only admit fields known not to point into the file. \
+   unison-dngscan -tags lists candidates. The merge base is captured with \
+   the same admissions, so a newly admitted field takes effect for files \
+   whose base is captured after the change."
+let () = dng_merge_admit_set := (fun () -> Prefs.read dng_merge_admit <> [])
+
+(* Owner thread only: publish the current admissions before inspecting. *)
+let apply_dng_merge_admissions () =
+  DngSemantic.admit_fields (List.map (fun spec ->
+    match DngSemantic.parse_admission spec with
+    | Ok field -> field
+    | Error reason -> raise (Util.Fatal ("dngmergeadmit: " ^ reason)))
+    (Prefs.read dng_merge_admit))
+
 let outgoing_selected profiles =
   validate_selected profiles;
   (* Expand the shorthand on the client, where the final intersection of all

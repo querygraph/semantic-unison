@@ -552,6 +552,7 @@ let capture_common_base_async ~root ~path ~source =
                         raise (Util.Transient "DNG base persistence cancelled"))
                   | Some {SemanticWorkers.proof=Error _;_} -> inspect rest
                   | None -> raise (Util.Transient "DNG base capture cancelled")) in
+           SemanticFormats.apply_dng_merge_admissions ();
            inspect [DngExtended.profile;DngSemantic.profile;DngSemantic.opaque_maker_profile]
          | _ -> raise (Util.Transient "DNG base capture admission cancelled")))
 )
@@ -563,6 +564,7 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
   let open Lwt in
   let fail reason = raise (Util.Transient ("DNG scalar merge: " ^ reason)) in
   if Os.isPseudoFingerprint base_fingerprint then fail "the saved base has only a pseudo-fingerprint";
+  SemanticFormats.apply_dng_merge_admissions ();
   let extensions = List.filter_map FormatExtension.resolve
     [DngExtended.profile; DngSemantic.profile; DngSemantic.opaque_maker_profile] in
   SemanticRuntime.with_transaction ~max_payload:FormatExtension.max_region (fun cancellation ->

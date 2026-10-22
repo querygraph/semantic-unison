@@ -1,4 +1,5 @@
-let check yes why=if not yes then failwith why
+let checks=Atomic.make 0
+let check yes why=Atomic.incr checks;if not yes then failwith why
 let fd p=Unix.openfile p [Unix.O_RDONLY;Unix.O_CLOEXEC] 0
 let with_file p f=let d=fd p in Fun.protect ~finally:(fun ()->Unix.close d)(fun ()->SemanticFile.with_fd d f)
 let extension=(module DngSemantic : FormatExtension.S)
@@ -38,7 +39,16 @@ let () =
    "maker-alias.dng","XMP aliases protected extent"; "priv-alias.dng","XMP aliases protected extent";
    "maker-type.dng","invalid merge-only field type or count"; "priv-type.dng","invalid merge-only field type or count";
    "priv-ifd1.dng","DNGPrivateData outside primary IFD"; "base.dng","accepted";
-   "scalar-base.dng","accepted"; "scalar-count.dng","invalid merge-only field type or count"];
+   "scalar-base.dng","accepted"; "scalar-count.dng","invalid merge-only field type or count";
+   "extra-base.dng","accepted"; "gain-type.dng","invalid merge-only field type or count";
+   "long-unknown.dng","unsupported TIFF tag 60000 (opaque or private graph)";
+   "gain-alias.dng","XMP aliases protected extent"];
+ (* A run-time admission (dngmergeadmit) accepts exactly the named field. *)
+ DngSemantic.admit_fields ["Image",60000,9];
+ check(reason "long-unknown.dng"<>"accepted")"admission of another type accepted the field";
+ DngSemantic.admit_fields ["Image",60000,4];
+ check(reason "long-unknown.dng"="accepted")"admitted field still declined";
+ DngSemantic.admit_fields [];
  check(refused "scalar-base.dng" 37393)"/0 or /1 admitted ImageNumber";
  let merges prefix=
    let file n=prefix^"-"^n^".dng" in
@@ -59,5 +69,9 @@ let () =
    | Some p -> let bad=mproof p in
      check(with_file(prefix^"-left.dng")(fun f->match make bad f with
        | Error e->e="reconciliation protected bytes changed" | Ok _->false))(p^": changed opaque byte accepted"))
-   ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None];
- print_endline "PASS28 exact DNG reconciliation/materialization controls"
+   ["maker",Some "maker-changed.dng"; "priv",Some "priv-changed.dng"; "both",None;
+    "extra",Some "extra-changed.dng"; "sub",Some "sub-changed.dng"];
+ check(with_file "sub-base.dng"(fun file->DngSemantic.inspect_extended file=Error "multiple XMP packets"))
+   "/1 admitted a sub-image XMP packet";
+ check(refused "extra-base.dng" 34859)"/0 or /1 admitted SelfTimerMode";
+ Printf.printf "PASS%d exact DNG reconciliation/materialization controls\n" (Atomic.get checks)

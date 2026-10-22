@@ -8,3 +8,6 @@ val local_enabled : unit -> FormatExtension.handle list
 val peer_enabled : unit -> FormatExtension.handle list
 val resolve_peer : string -> FormatExtension.handle option
 (** Explicitly selected profiles whose capabilities were negotiated. *)
+val apply_dng_merge_admissions : unit -> unit
+(** Owner thread only: publish the dngmergeadmit fields to the merge-only DNG
+    inspector before base capture or reconciliation. *)

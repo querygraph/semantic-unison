@@ -104,21 +104,49 @@ type component_region = { logical_id : string; schema : string; role : component
 
 (* Merge-only /2 widens /1 by two opaque maker fields, the Exif MakerNote and
    the primary IFD's DNGPrivateData, and two self-contained LONG scalars seen in
-   converted camera DNGs: TIFF/EP ImageNumber and DNG 1.7 CacheVersion. All are
+   converted camera DNGs: TIFF/EP ImageNumber and DNG 1.7 CacheVersion, plus
+   the DNG 1.6 ProfileGainTableMap (an UNDEFINED table). Any other field of a
+   simple numeric or text type is admitted too, as are fields the owner names
+   in dngmergeadmit, and XMP packets of sub-images (iPhone portrait and
+   segmentation mattes carry their own); only the primary packet is editable.
+   All are
    protected extents like any other value, so the complement proof keeps them
    identical and the XMP region may not overlap them. Internal pointers,
    including DNGPrivateData's original offset, are not interpreted; nothing
    outside XMP moves or changes. *)
 let opaque_maker_profile = "org.firstpair.dng-xmp/2"
+let directory_name = function
+  | Image -> "Image" | Exif -> "Exif" | Gps -> "GPS" | Interop -> "Interop"
+  | CameraProfile -> "CameraProfile"
+
+(* Simple values: ASCII, SHORT, RATIONAL, SSHORT, SRATIONAL, FLOAT and DOUBLE
+   carry only numbers or text. TIFF writers hold offsets and private structures
+   in LONG, BYTE, UNDEFINED or IFD fields, so those stay named one by one. *)
+let simple_type typ = List.mem typ [2; 3; 5; 8; 10; 11; 12]
+
+(* Fields admitted at run time (dngmergeadmit), as (directory, tag, type). The
+   owner replaces the immutable list; workers only read it. *)
+let admitted_fields : (string * int * int) list Atomic.t = Atomic.make []
+let admit_fields fields = Atomic.set admitted_fields fields
+
+let parse_admission spec =
+  match String.split_on_char ':' spec with
+  | [directory; tag; typ] when List.mem directory ["Image"; "Exif"; "GPS"; "Interop"] ->
+      (match int_of_string_opt tag, int_of_string_opt typ with
+       | Some tag, Some typ when tag >= 0 && tag < 65536 && typ >= 1 && typ <= 18
+                                && typ <> 13 && typ <> 18 -> Ok (directory, tag, typ)
+       | _ -> Error ("bad tag or type in " ^ spec))
+  | _ -> Error ("expected Image|Exif|GPS|Interop:TAG:TYPE, got " ^ spec)
+
 let merge_only_field kind tag typ n = match kind, tag with
   | Exif, 37500 -> Some (typ = 7 || typ = 1)
   | Image, 50740 -> Some (typ = 1)
   | Image, (37393 | 51114) -> Some (typ = 4 && n = 1L)
+  | Image, 52525 -> Some (typ = 7)
+  | CameraProfile, _ -> None
+  | _ when simple_type typ -> Some true
+  | _ when List.mem (directory_name kind, tag, typ) (Atomic.get admitted_fields) -> Some true
   | _ -> None
-
-let directory_name = function
-  | Image -> "Image" | Exif -> "Exif" | Gps -> "GPS" | Interop -> "Interop"
-  | CameraProfile -> "CameraProfile"
 
 let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(require_xmp=true)
     ?(record=(fun (_:component_region) -> ())) ?unknown file =
@@ -267,7 +295,9 @@ let inspect_with_policy ~extended ?(opaque_maker=false) ?(layout_only=false) ?(r
         record_region (logical_entry^"/offset") Structure inline_start (Int64.of_int layout.inline_width)
       else record_region (logical_entry^"/padding") Structure (Int64.add inline_start bytes)
         (Int64.sub (Int64.of_int layout.inline_width) bytes);
-      if tag = 700 then begin
+      (* In /2 an auxiliary image's own packet, such as a portrait matte's, is
+         an ordinary protected value; only the primary IFD's packet is edited. *)
+      if tag = 700 && not (opaque_maker && offset <> primary) then begin
         if !xmp <> None then reject "multiple XMP packets";
         if typ <> 1 || n <= Int64.of_int layout.inline_width ||
            n > Int64.of_int FormatExtension.max_region then
