@@ -101,7 +101,7 @@ identity through the existing Unix-error conversion utility.
 
 ## Checking a photo library: `unison-dngscan`
 
-`unison-dngscan [-j WORKERS] [-o REPORT.jsonl] PATH...` walks the paths (no
+`unison-dngscan [-j WORKERS] [-cache WALK] [-o REPORT.jsonl [-resume]] PATH...` walks the paths (no
 symlinks followed) and checks every `*.dng` file against the merge, read-only.
 Only the TIFF directories and the XMP packet are read. The scanned trees are
 never written, and neither are Lightroom catalogs, caches or anything else.
@@ -126,7 +126,14 @@ Files are sharded over forked worker processes: 8 by default, up to 256 with
 A progress line goes to stderr every 30 s. The summary
 counts verdicts, reasons and unknown fields, each with an example path, and
 `-o` writes one JSON line per file as each result arrives, so a partial report
-can be read during the run. The exit status is:
+can be read during the run. With `-resume`, the complete lines already in the
+`-o` report are kept and those files are skipped, so a stopped run can be
+restarted (for example with a different `-j`) without losing work; a line cut
+off by the stop is dropped and its file scanned again. `-cache FILE` stores each
+directory's listing (its subdirectories and DNG names) with its device, inode
+and mtime; a later walk reuses a listing while those are unchanged, since adding,
+removing or renaming an entry changes the directory's mtime. Directories changed
+in the last few seconds, or with an unreadable entry, are not cached. The exit status is:
 
 | Status | Meaning |
 | --- | --- |
