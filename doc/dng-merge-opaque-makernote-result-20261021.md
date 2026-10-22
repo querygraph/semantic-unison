@@ -69,5 +69,13 @@ Purple; one ssh-loopback sync with `-backupcurrent` and
 - base sha256 `38ec6f36ef74d87ef0f10ecd09e2953158376358fa695ca3d8d49224a9b96419`
 - merged sha256 `0e7c6a0580afc3da30934b8afc4af9d807dfb0bcb666fcac01314cecb1b929d2`
 
-Not rerun: the retained-owner DNG merge successor suite (13 cases/29 calls),
-and a Lightroom Classic recheck of the MakerNote pair (staged, pending the user).
+Retained-owner DNG merge suite rerun at `4f02271e` (plans `fc9753f6`): stock and
+OxCaml each passed all 13 cases, 29 CLI calls and 9 fake validator calls. Each
+owner exited 0 with CPU00..07 and EXglobal closed, and the independent
+post-closure replay on CPU04 matched both owner audits.
+[Receipt](../tests/qualification/current-dng-merge-receiving-actual-20261021.json).
+The suite's fixtures carry no MakerNote, so this is a regression run for the
+existing behaviour; the MakerNote cases themselves are covered by
+`tests/dng_reconcile` and the real-file run above.
+
+Pending: a Lightroom Classic recheck of the MakerNote pair (sent to Capitola).

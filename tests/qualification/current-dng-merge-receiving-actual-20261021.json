@@ -1,0 +1,77 @@
+{
+  "schema": "unison-current-dng-merge-receiving-actual-pair/1",
+  "state": "PASS_ACTUAL_CLOSED",
+  "date": "2026-10-21",
+  "production_commit": "4f02271e",
+  "plans_commit": "fc9753f6",
+  "runs": {
+    "stock": {
+      "plan": "e831fc1663afef30b6bb4fbcf057dfea9d8222555fdca0e548f432e96c74f99a",
+      "admission": "bcbfbd17d28294a84ccb4048772d42785b181534de7318e8b9130bd8282e1cc5",
+      "workspace": "/private/tmp/u-dmerge-f710c609b9f64c26",
+      "owner_pid": 73077,
+      "worker_pid": 73084,
+      "owner_audit_sha256": "8d4e81e871dfa2616be620faca444a2b14178dcd491d29c126d3986decacd3f1",
+      "build_receipt": "/private/tmp/unison-named-build-stock-20261021-06.json",
+      "binary_sha256": "b5d5298aa557b90899f9ac396ee38bf1508f2e93bf31d75e00f1bacd686c413f",
+      "build_receipt_sha256": "e924a6acf941b6522c59edf8bea9b6a5dc062bbc7daa50418285959725c1df11",
+      "totals": {
+        "original_completed_cases": 13,
+        "cli_calls": 29,
+        "fake_validators": 9,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    },
+    "ox": {
+      "plan": "f63f8ecbb86de175263748f395207c0e2a3531aaf2242315e91d7c9221cc4347",
+      "admission": "c9562eb0924d7da04958e6dd5226efae26e0c19302265f1d21257a6cf93ba571",
+      "workspace": "/private/tmp/u-dmerge-60803ac3e9604a2e",
+      "owner_pid": 73380,
+      "worker_pid": 73387,
+      "owner_audit_sha256": "b14ecca117cbc6d89588bbbeab656853c0a3a44bbc96c03996aebf295c61c555",
+      "build_receipt": "/private/tmp/unison-named-build-ox-20261021-06.json",
+      "binary_sha256": "2b1e2b39a2470a7ee1aa8381d81069519c4079490fd72b8c0cfea1e0bf218d5a",
+      "build_receipt_sha256": "d50aa797a4f49c8a278a8ca8ccf570ad6526c2ba9d8b45e9826866961a23019f",
+      "totals": {
+        "original_completed_cases": 13,
+        "cli_calls": 29,
+        "fake_validators": 9,
+        "copy": 0,
+        "merge": 0,
+        "producer_interruptions": 0,
+        "client_cancellations": 0
+      }
+    }
+  },
+  "product_fixes_exercised": [
+    {
+      "commit": "10c5d159",
+      "summary": "second-receiver-reject: first replica archive restored; item fails exit 2, retry merges again"
+    },
+    {
+      "commit": "8581f357",
+      "summary": "policy-mismatch: unknown unison: built-in policy fails with an explicit message instead of running /bin/sh"
+    }
+  ],
+  "designated_declines": [
+    "competing",
+    "opaque-payload",
+    "unknown-field",
+    "deleted-field",
+    "missing-base",
+    "stale-base",
+    "policy-mismatch",
+    "policy-disabled (exit 1)",
+    "resource-fork"
+  ],
+  "independent_postclosure_replay": {
+    "token": "CPU04",
+    "matches_owner_audit": true,
+    "executables_opened": false
+  },
+  "supersedes": "tests/qualification/current-dng-merge-receiving-actual-20261020.json (production 8581f357, before the opaque MakerNote profile)",
+  "scope": "Synthetic 64 KiB DNG containers, fake validators, stock and OxCaml each as both client and server. No SDK, camera payload, Photo/Lightroom or performance claim. Rerun after the merge-only dng-xmp/2 profile; the suite fixtures carry no MakerNote, so this is a regression run of the 13 existing cases."
+}
