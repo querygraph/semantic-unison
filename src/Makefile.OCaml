@@ -103,7 +103,7 @@ COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \
 OCAMLOBJS_TUI = linktext.cmo
 
 ## DNG survey command
-OCAMLOBJS_DNGSCAN = dngscan.cmo
+OCAMLOBJS_DNGSCAN = scanCommon.cmo semdiff.cmo dngscan.cmo
 
 ## Mac UI
 OCAMLOBJS_MAC = uimacbridge.cmo

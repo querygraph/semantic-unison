@@ -166,6 +166,140 @@ let confirmmerge =
      ^ " turns out that the result is not satisfactory.  In "
      ^ " batch-mode, this preference has no effect.  Default is false.")
 
+(* Semantic Unison (fork only): shuttle-disk preservation. With -semdiff the
+   run first calls unison-dngscan -semdiff to match every file under the first
+   root (a shuttle disk) on the second (long-term) root by content, then syncs
+   only the files missing there: creation on the second root only, nothing
+   changed on the first, and no archive, so a wiped and refilled shuttle disk
+   can never delete or overwrite anything on the long-term root. *)
+let semdiffPref =
+  Prefs.createBool "semdiff" false ~category:(`Advanced `General) ~local:true
+    "match root 1 on root 2 by content first, then copy only what is missing"
+    ("Run unison-dngscan -semdiff ROOT2 ROOT1 before synchronizing. Files under the \
+      first root are matched on the second by relative path, else by file name, and \
+      compared by content; then only the files missing on the second root are \
+      synchronized, with creation on the second root only and no update or \
+      deletion on either. Both roots must be local. The summary says whether the \
+      first root is safe to wipe.")
+let semdiffSameview =
+  Prefs.createBool "sameview" false ~category:(`Advanced `General) ~local:true
+    "with -semdiff, also decide which metadata-only differences cannot affect rendering"
+    "Passed to unison-dngscan -semdiff -sameview."
+let semdiffPreserve =
+  Prefs.createBool "preserve" false ~category:(`Advanced `General) ~local:true
+    "with -semdiff, record metadata differences in a dng-compare archive"
+    ("Store the metadata differences of files whose image is the same on both roots \
+      in a dng-compare archive, by default ROOT2/.dng-compare/NAME-OF-ROOT1.")
+let semdiffPreserveDb =
+  Prefs.createString "preservedb" "" ~category:(`Advanced `General) ~local:true
+    "dng-compare archive for -preserve (implies -preserve)"
+    "Directory of the dng-compare archive that -preserve writes."
+let semdiffPreserveFull =
+  Prefs.createBool "preservefull" false ~category:(`Advanced `General) ~local:true
+    "with -semdiff, also keep each metadata-only file in full, as a verified delta"
+    ("Implies -preserve. dng-compare's preserve_apo stores each file whose image is \
+      the same on both roots but whose bytes differ as a VCDIFF delta against its \
+      match on the second root, verified to rebuild the exact file.")
+let semdiffTree =
+  Prefs.createString "tree" "review" ~category:(`Advanced `General) ~local:true
+    "with -preserve, keep files whose content differs under ROOT2/../NAME"
+    ("The shuttle's version of a file whose content differs on the second root is \
+      copied, with the same relative path, into this tree beside the second root.")
+let semdiffSuffix =
+  Prefs.createString "suffix" "/" ~category:(`Advanced `General) ~local:true
+    "with -preserve, keep differing files beside the original as NAME_2.EXT or, with -suffix=SUF, NAME_SUF.EXT"
+    ("Instead of a -tree, copy the shuttle's version of a differing file next to the \
+      file on the second root: -suffix alone numbers the copies _2, _3 and so on; \
+      -suffix=SUF names them _SUF.")
+let () = Uarg.optional_value := "-suffix" :: !Uarg.optional_value
+let semdiffReview =
+  Prefs.createBool "review" false ~category:(`Advanced `General) ~local:true
+    "with -semdiff, quickly keep only the conflicts reported by the previous run"
+    ("Rerun only on the files the previous -semdiff run of these roots found to \
+      differ, keeping each as -tree or -suffix says; nothing else is scanned or \
+      synchronized.")
+let semdiffRoots =
+  Prefs.createStringList "semdiffroot" ~category:(`Advanced `General) ~local:true
+    "with -semdiff, also count a file as kept when it is on this root (repeatable)"
+    "Further long-term roots that -semdiff compares against; only the second root is synchronized."
+let semdiffScanner =
+  Prefs.createString "semdiffscanner" "" ~category:(`Advanced `General) ~local:true
+    "unison-dngscan binary for -semdiff"
+    "Defaults to unison-dngscan next to this program, then on the PATH."
+let semcatchupFrom =
+  Prefs.createString "semcatchupfrom" "" ~category:(`Advanced `General) ~local:true
+    "synchronize only the paths in this unison-dngscan catch-up list, creation only"
+    ("A list written by unison-dngscan -semdiff or -summarize. Its roots must be \
+      this run's roots. Used by unison-dngscan -catchup and by -semdiff.")
+
+let semdiffSetup () =
+  let roots = List.map (fun r ->
+    if String.length r > 1 && r.[String.length r - 1] = '/' then String.sub r 0 (String.length r - 1) else r)
+    (Globals.rawRoots ()) in
+  let raw1, raw2 = match Globals.rawRoots () with [a; b] -> a, b | _ -> "", "" in
+  let r1, r2 = match roots with
+    | [a; b] when not (Util.startswith a "ssh:" || Util.startswith a "socket:" ||
+                       Util.startswith b "ssh:" || Util.startswith b "socket:") -> a, b
+    | _ -> raise (Util.Fatal "-semdiff and -semcatchupfrom need exactly two local roots") in
+  let list =
+    if Prefs.read semcatchupFrom <> "" then Prefs.read semcatchupFrom else begin
+      let base = Util.fileInUnisonDir ("semdiff-" ^ Digest.to_hex (Digest.string (r1 ^ "\000" ^ r2))) in
+      let scanner = match Prefs.read semdiffScanner with
+        | "" ->
+            let here = Filename.dirname Sys.executable_name in
+            (match List.find_opt Sys.file_exists
+                     [Filename.concat here "unison-dngscan"; Filename.concat here "dngscan.exe"] with
+             | Some p -> p | None -> "unison-dngscan")
+        | p -> p in
+      let db = Prefs.read semdiffPreserveDb in
+      let suffix = Prefs.read semdiffSuffix in
+      if String.contains suffix '/' && suffix <> "/" then raise (Util.Fatal "-suffix=SUF: SUF must be a plain name");
+      let placement = if suffix = "/" then ["-tree"; Prefs.read semdiffTree]
+        else if suffix = "" then ["-suffix"] else ["-suffix=" ^ suffix] in
+      let full = Prefs.read semdiffPreserveFull in
+      let args = [scanner; "-semdiff"; r2]
+        @ List.concat_map (fun r -> ["-semdiff"; r]) (Prefs.read semdiffRoots)
+        @ (if Prefs.read semdiffSameview then ["-sameview"] else [])
+        @ (if Prefs.read semdiffPreserve || db <> "" || full then ["-preserve"] else [])
+        @ (if db <> "" then ["-preservedb"; db] else [])
+        @ (if full then ["-preservefull"] else [])
+        @ placement
+        @ (if Prefs.read semdiffReview then ["-review"] else [])
+        @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
+           "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
+      Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));
+      let pid = Unix.create_process scanner (Array.of_list args) Unix.stdin Unix.stdout Unix.stderr in
+      (match snd (Unix.waitpid [] pid) with
+       | Unix.WEXITED (0 | 1) -> ()
+       | _ -> raise (Util.Fatal "unison-dngscan -semdiff did not complete; nothing was synchronized"));
+      (* -review keeps the conflicts itself; there is nothing to synchronize. *)
+      if Prefs.read semdiffReview then exit 0;
+      base ^ ".catchup"
+    end in
+  let lines = try
+      let ch = open_in_bin list in
+      Fun.protect ~finally:(fun () -> close_in ch) (fun () ->
+        let rec loop acc = match input_line ch with l -> loop (l :: acc) | exception End_of_file -> List.rev acc in
+        loop [])
+    with Sys_error e -> raise (Util.Fatal ("cannot read catch-up list: " ^ e)) in
+  let field k l = let p = k ^ "\t" in
+    if Util.startswith l p then Some (String.sub l (String.length p) (String.length l - String.length p)) else None in
+  (match lines with
+   | "unison-semcatchup/1" :: left :: right :: _
+     when field "left" left = Some r1 && field "right" right = Some r2 -> ()
+   | _ -> raise (Util.Fatal (list ^ " is not a catch-up list for " ^ r1 ^ " -> " ^ r2)));
+  let paths = List.filter_map (field "path") lines in
+  if paths = [] then begin
+    Util.msg "semdiff: nothing under %s is missing on %s\n" r1 r2;
+    exit 0
+  end;
+  Util.msg "semdiff: synchronizing %d paths missing on %s, creation only\n" (List.length paths) r2;
+  Prefs.set Globals.paths [];
+  Prefs.loadStrings
+    (["noupdate = " ^ raw1; "nodeletion = " ^ raw1; "nocreation = " ^ raw1;
+      "noupdate = " ^ raw2; "nodeletion = " ^ raw2; "ignorearchives = true"]
+     @ List.map (fun p -> "path = " ^ p) paths)
+
 let runTestsPrefName = "selftest"
 let runtests =
   Prefs.createBool runTestsPrefName false
@@ -1209,6 +1343,8 @@ let initPrefs ~profileName ~promptForRoots ?(prepDebug = fun () -> ()) () =
       parsedRoots in
       if numRemote > 1 then
         raise(Util.Fatal "cannot synchronize more than one remote root");
+
+  if Prefs.read semdiffPref || Prefs.read semcatchupFrom <> "" then semdiffSetup ();
 
   Recon.checkThatPreferredRootIsValid();
 

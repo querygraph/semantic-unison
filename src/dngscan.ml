@@ -16,86 +16,15 @@ type record = {
   unknown : (string * int * int * int64) list;
 }
 
-let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH..."
+let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH...\n\
+\       unison-dngscan -semdiff ROOT... [-sameview] [-preserve [-preservedb DIR] [-preservefull] [-tree NAME | -suffix[=SUF]]] [-review] [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]\n\
+\       unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]"
 
 let is_dng name =
   String.lowercase_ascii (Filename.extension name) = ".dng"
 
-(* A directory's cached listing: its subdirectories and regular *.dng files.
-   Adding, removing or renaming an entry changes the directory's mtime, so the
-   listing is reused only while device, inode and mtime are all unchanged. *)
-type listing = { dev : int; ino : int; mtime : float; subdirs : string list; dngs : string list }
 let cache_format = "unison-dngscan-walk/1"
-
-let load_cache path =
-  try
-    let ch = open_in_bin path in
-    Fun.protect ~finally:(fun () -> close_in ch) (fun () ->
-      match (Marshal.from_channel ch : string * (string, listing) Hashtbl.t) with
-      | format, table when format = cache_format -> table
-      | _ -> Hashtbl.create 0)
-  with Sys_error _ | End_of_file | Failure _ -> Hashtbl.create 0
-
-let save_cache path table =
-  let temp = path ^ ".tmp" in
-  let ch = open_out_bin temp in
-  Marshal.to_channel ch (cache_format, table) [];
-  close_out ch;
-  Sys.rename temp path
-
-(* Depth-first, no symlinks followed, unreadable directories reported. With a
-   cache, unchanged directories are listed from it without reading their entries.
-   A directory modified in the last few seconds, or with an unreadable entry, is
-   not cached. Returns the files, the errors, and directories (listed, reused). *)
-let walk ?cache roots =
-  let old = match cache with Some path -> load_cache path | None -> Hashtbl.create 0 in
-  let fresh = Hashtbl.create (max 16 (Hashtbl.length old)) in
-  let now = Unix.gettimeofday () in
-  let files = ref [] and walk_errors = ref [] and listed = ref 0 and reused = ref 0 in
-  let error path e = walk_errors := (path, Unix.error_message e) :: !walk_errors in
-  let rec visit path =
-    match Unix.LargeFile.lstat path with
-    | exception Unix.Unix_error (e, _, _) -> error path e
-    | {Unix.LargeFile.st_kind = Unix.S_REG; _} -> if is_dng path then files := path :: !files
-    | {Unix.LargeFile.st_kind = Unix.S_DIR; st_dev; st_ino; st_mtime; _} ->
-        let listing = match Hashtbl.find_opt old path with
-          | Some l when l.dev = st_dev && l.ino = st_ino && l.mtime = st_mtime -> incr reused; Some l
-          | _ -> list path st_dev st_ino st_mtime in
-        Option.iter (fun l ->
-          if cache <> None then Hashtbl.replace fresh path l;
-          List.iter (fun name -> files := Filename.concat path name :: !files) l.dngs;
-          List.iter (fun name -> visit (Filename.concat path name)) l.subdirs) listing
-    | _ -> ()
-  and list path dev ino mtime =
-    match Unix.opendir path with
-    | exception Unix.Unix_error (e, _, _) -> error path e; None
-    | dir ->
-        incr listed;
-        let names = ref [] in
-        (try while true do
-           let name = Unix.readdir dir in
-           if name <> "." && name <> ".." then names := name :: !names
-         done with End_of_file -> ());
-        Unix.closedir dir;
-        let subdirs = ref [] and dngs = ref [] and complete = ref true in
-        List.iter (fun name ->
-          let child = Filename.concat path name in
-          match Unix.LargeFile.lstat child with
-          | exception Unix.Unix_error (e, _, _) -> error child e; complete := false
-          | {Unix.LargeFile.st_kind = Unix.S_DIR; _} -> subdirs := name :: !subdirs
-          | {Unix.LargeFile.st_kind = Unix.S_REG; _} when is_dng name -> dngs := name :: !dngs
-          | _ -> ()) (List.sort compare !names);
-        let l = {dev; ino; mtime; subdirs = List.rev !subdirs; dngs = List.rev !dngs} in
-        if !complete && mtime < now -. 5. then Some l
-        else begin
-          (* Still walked now, but left out of the cache. *)
-          List.iter (fun name -> files := Filename.concat path name :: !files) l.dngs;
-          List.iter (fun name -> visit (Filename.concat path name)) l.subdirs;
-          None
-        end in
-  List.iter visit roots;
-  Option.iter (fun path -> save_cache path fresh) cache;
-  Array.of_list (List.rev !files), List.rev !walk_errors, (!listed, !reused)
+let walk_dngs ?cache roots = ScanCommon.walk ?cache ~format:cache_format ~keep:is_dng roots
 
 let read_packet file (region : FormatExtension.region) =
   let buffer = Buffer.create region.length in
@@ -137,27 +66,7 @@ let inspect path =
         | SemanticFile.Invalid reason -> {blank with verdict = Error reason}
         | Unix.Unix_error (e, _, _) -> {blank with verdict = Error (Unix.error_message e)})
 
-(* Worker k takes files k, k+workers, ... and marshals one record per file. *)
-let run_worker files workers k out =
-  let channel = Unix.out_channel_of_descr out in
-  let i = ref k in
-  while !i < Array.length files do
-    Marshal.to_channel channel (inspect files.(!i) : record) [];
-    flush channel;
-    i := !i + workers
-  done;
-  close_out channel
-
-let json_string s =
-  let b = Buffer.create (String.length s + 2) in
-  Buffer.add_char b '"';
-  String.iter (fun c -> match c with
-    | '"' -> Buffer.add_string b "\\\"" | '\\' -> Buffer.add_string b "\\\\"
-    | '\n' -> Buffer.add_string b "\\n" | '\t' -> Buffer.add_string b "\\t"
-    | c when Char.code c < 0x20 -> Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
-    | c -> Buffer.add_char b c) s;
-  Buffer.add_char b '"';
-  Buffer.contents b
+open ScanCommon
 
 let verdict_fields = function
   | Mergeable -> "mergeable", ""
@@ -175,67 +84,10 @@ let json r =
 (* Reader for this command's own report lines, used by -resume. Lines that do
    not parse, such as one cut short when a run was stopped, are dropped and their
    files scanned again. *)
-type value = Str of string | Num of string | Bool of bool | Arr of value list | Obj of (string * value) list
-
 exception Bad_line
 
-let parse_line line =
-  let i = ref 0 and n = String.length line in
-  let peek () = if !i < n then line.[!i] else raise Bad_line in
-  let expect c = if peek () <> c then raise Bad_line; incr i in
-  let rec value () = match peek () with
-    | '"' -> Str (string ())
-    | '{' ->
-        incr i;
-        if peek () = '}' then (incr i; Obj []) else
-        let rec fields acc =
-          let k = string () in expect ':';
-          let v = value () in
-          match peek () with
-          | ',' -> incr i; fields ((k, v) :: acc)
-          | '}' -> incr i; Obj (List.rev ((k, v) :: acc))
-          | _ -> raise Bad_line in
-        fields []
-    | '[' ->
-        incr i;
-        if peek () = ']' then (incr i; Arr []) else
-        let rec items acc =
-          let v = value () in
-          match peek () with
-          | ',' -> incr i; items (v :: acc)
-          | ']' -> incr i; Arr (List.rev (v :: acc))
-          | _ -> raise Bad_line in
-        items []
-    | 't' when !i + 4 <= n && String.sub line !i 4 = "true" -> i := !i + 4; Bool true
-    | 'f' when !i + 5 <= n && String.sub line !i 5 = "false" -> i := !i + 5; Bool false
-    | '-' | '0'..'9' ->
-        let start = !i in
-        while !i < n && (match line.[!i] with '-' | '0'..'9' -> true | _ -> false) do incr i done;
-        Num (String.sub line start (!i - start))
-    | _ -> raise Bad_line
-  and string () =
-    expect '"';
-    let b = Buffer.create 64 in
-    let rec loop () = match peek () with
-      | '"' -> incr i
-      | '\\' ->
-          incr i;
-          (match peek () with
-           | '"' -> Buffer.add_char b '"' | '\\' -> Buffer.add_char b '\\'
-           | 'n' -> Buffer.add_char b '\n' | 't' -> Buffer.add_char b '\t'
-           | 'u' when !i + 5 <= n ->
-               Buffer.add_char b (Char.chr (int_of_string ("0x" ^ String.sub line (!i + 1) 4) land 0xff));
-               i := !i + 4
-           | _ -> raise Bad_line);
-          incr i; loop ()
-      | c -> Buffer.add_char b c; incr i; loop () in
-    loop (); Buffer.contents b in
-  let v = value () in
-  if !i <> n then raise Bad_line;
-  v
-
 let record_of_line line =
-  match parse_line line with
+  match (try parse line with Bad_json -> raise Bad_line) with
   | Obj fields ->
       let get k = try List.assoc k fields with Not_found -> raise Bad_line in
       let str k = match get k with Str s -> s | _ -> raise Bad_line in
@@ -291,7 +143,38 @@ let sorted table =
 let () =
   let workers = ref 8 and report = ref "" and resume = ref false and cache = ref "" and roots = ref [] in
   let admit = ref [] and tags = ref "" in
-  Arg.parse [
+  let semdiff = ref [] and sameview = ref false and summarize = ref false and catchup = ref false in
+  let catchup_to = ref "" and catchup_file = ref "" and db = ref false and db_archive = ref "" in
+  let rules = ref "" and exiftool = ref "" and unison = ref "" and unison_args = ref [] in
+  let preserve_full = ref false and review = ref false and placement = ref (Semdiff.Tree "review") in
+  (* -suffix=SUF: Arg has no optional values, so split it here. *)
+  let argv = Array.concat (Array.to_list (Array.map (fun a ->
+    if String.length a > 8 && String.sub a 0 8 = "-suffix=" then [|"-suffixname"; String.sub a 8 (String.length a - 8)|]
+    else [|a|]) Sys.argv)) in
+  (try Arg.parse_argv argv [
+    "-suffixname", Arg.String (fun s ->
+      if s = "" || String.contains s '/' then raise (Arg.Bad "-suffix=SUF: SUF must be a plain name");
+      placement := Semdiff.Suffix s), "SUF  as -suffix=SUF";
+    "-semdiff", Arg.String (fun r -> semdiff := !semdiff @ [r]),
+      "ROOT  compare every file under LEFT with its match under ROOT (repeatable): same relative path, else same file name";
+    "-sameview", Arg.Set sameview, " also decide whether a pair differs only in tags that cannot affect rendering";
+    "-summarize", Arg.Set summarize, " summarize -semdiff reports given as arguments instead of scanning";
+    "-catchup", Arg.Set catchup, " then run unison to copy what is missing (creation only)";
+    "-catchupto", Arg.Set_string catchup_to, "ROOT  long-term root to catch up (default: the first -semdiff root)";
+    "-catchupfile", Arg.Set_string catchup_file, "FILE  catch-up list (default: REPORT.catchup)";
+    "-preserve", Arg.Set db, " store metadata differences in a dng-compare archive (default ROOT/.dng-compare/LEFT)";
+    "-preservedb", Arg.String (fun d -> db := true; db_archive := d), "DIR  dng-compare archive for -preserve";
+    "-preservefull", Arg.Unit (fun () -> db := true; preserve_full := true),
+      " also keep each metadata-only file in full, as a verified delta (dng-compare preserve_apo)";
+    "-review", Arg.Set review, " from the -o report only: keep the files whose content differs, as -preserve does";
+    "-tree", Arg.String (fun n -> placement := Semdiff.Tree n),
+      "NAME  keep differing files under ROOT/../NAME/ (default review)";
+    "-suffix", Arg.Unit (fun () -> placement := Semdiff.Suffix ""),
+      " keep differing files beside the long-term file as NAME_2.EXT, NAME_3.EXT, ...; -suffix=SUF names NAME_SUF.EXT";
+    "-rules", Arg.Set_string rules, "FILE  dng-compare metadata_rules.json (default $DNG_COMPARE_HOME or ~/src/dng-compare)";
+    "-exiftool", Arg.Set_string exiftool, "PATH  dng-compare's metadata-extract-exiftool-rs-oxcaml worker";
+    "-unison", Arg.Set_string unison, "PATH  unison binary for -catchup";
+    "--", Arg.Rest (fun a -> unison_args := !unison_args @ [a]), "ARGS  further unison arguments for -catchup";
     "-j", Arg.Set_int workers, "N  worker processes, up to 256 (default 8); the scan is I/O bound";
     "-o", Arg.Set_string report, "FILE  write one JSON line per DNG as results arrive";
     "-cache", Arg.Set_string cache, "FILE  reuse and update directory listings whose mtime is unchanged";
@@ -301,13 +184,25 @@ let () =
       "IFD:TAG:TYPE  also admit this field in /2, as the dngmergeadmit preference does";
     "-tags", Arg.Set_string tags, "FILE  write the fields outside /2 as a review table with admit specs";
     "-resume", Arg.Set resume, " keep the complete lines already in the -o report, skip those files and append";
-  ] (fun p -> roots := p :: !roots) usage;
-  if !roots = [] || !workers < 1 || !workers > 256 || (!resume && !report = "") then
+  ] (fun p -> roots := p :: !roots) usage
+   with Arg.Bad m -> prerr_string m; exit 2 | Arg.Help m -> print_string m; exit 0);
+  if (!roots = [] && not (!review && !report <> "")) || !workers < 1 || !workers > 256 || (!resume && !report = "") then
     (prerr_endline usage; exit 2);
+  if !semdiff <> [] || !summarize || !review then begin
+    let home = Semdiff.dng_compare_default () in
+    Semdiff.run {Semdiff.left_roots = (if !summarize then [] else List.rev !roots); review = !review;
+      preserve_full = !preserve_full; placement = !placement;
+      right_roots = !semdiff; workers = !workers; report = !report; resume = !resume; cache = !cache;
+      sameview_flag = !sameview; summarize = !summarize; reports = (if !summarize then List.rev !roots else []);
+      catchup = !catchup; catchup_to = !catchup_to; catchup_file = !catchup_file;
+      db = !db; db_archive = !db_archive;
+      rules_path = (if !rules <> "" then !rules else Filename.concat home "metadata_rules.json");
+      exiftool_path = !exiftool; dng_compare_home = home; unison_path = !unison; unison_args = !unison_args}
+  end;
   DngSemantic.admit_fields !admit;
   let started = Unix.gettimeofday () in
   let all_files, walk_errors, (listed, reused) =
-    walk ?cache:(if !cache = "" then None else Some !cache) (List.rev !roots) in
+    walk_dngs ?cache:(if !cache = "" then None else Some !cache) (List.rev !roots) in
   (* Earlier results count only for files this walk found again. *)
   let found = Hashtbl.create (Array.length all_files) in
   Array.iter (fun p -> Hashtbl.replace found p ()) all_files;
@@ -317,42 +212,17 @@ let () =
   Printf.eprintf "dngscan: %d DNG files found in %.0fs (%d directories read, %d from cache), %d already in the report; scanning %d with %d workers\n%!"
     (Array.length all_files) (Unix.gettimeofday () -. started) listed reused (List.length earlier)
     (Array.length files) !workers;
-  let workers = max 1 (min !workers (Array.length files)) in
-  let children = List.init workers (fun k ->
-    let input, output = Unix.pipe ~cloexec:true () in
-    match Unix.fork () with
-    | 0 -> Unix.close input; run_worker files workers k output; Unix._exit 0
-    | pid -> Unix.close output; pid, Unix.in_channel_of_descr input) in
-  (* Records arrive in any order and carry their path; a pipe at EOF is retired.
-     Report lines are written as they arrive, so a partial report is readable. *)
   let out = if !report = "" then None
     else Some (open_out_gen [Open_wronly; Open_creat; Open_binary; if !resume then Open_append else Open_trunc] 0o644 !report) in
-  let collected = ref earlier and received = ref 0 and last = ref (Unix.gettimeofday ()) in
-  let scan_started = !last in
-  let pending = ref (List.map snd children) in
-  while !pending <> [] do
-    let ready, _, _ = Unix.select (List.map Unix.descr_of_in_channel !pending) [] [] (-1.) in
-    pending := List.filter (fun ch ->
-      if not (List.mem (Unix.descr_of_in_channel ch) ready) then true else
-      match (Marshal.from_channel ch : record) with
-      | r ->
-          collected := r :: !collected; incr received;
-          Option.iter (fun ch -> output_string ch (json r); output_char ch '\n') out;
-          let now = Unix.gettimeofday () in
-          if now -. !last >= 30. then begin
-            last := now;
-            Option.iter flush out;
-            let rate = float !received /. (now -. scan_started) in
-            Printf.eprintf "dngscan: %d/%d files, %.0f/s, about %.0f min left\n%!" !received
-              (Array.length files) rate (float (Array.length files - !received) /. rate /. 60.)
-          end;
-          true
-      | exception End_of_file -> close_in ch; false) !pending
-  done;
+  (* Report lines are written as results arrive, so a partial report is readable. *)
+  let collected = ref earlier and last_flush = ref (Unix.gettimeofday ()) in
+  let failed_workers = run_pool ~label:"dngscan" ~workers:!workers files inspect (fun (r : record) ->
+    collected := r :: !collected;
+    Option.iter (fun ch ->
+      output_string ch (json r); output_char ch '\n';
+      if Unix.gettimeofday () -. !last_flush >= 30. then (last_flush := Unix.gettimeofday (); flush ch)) out) in
   let results = List.sort (fun a b -> compare a.path b.path) !collected in
   let missing = Array.length all_files - List.length results in
-  let failed_workers = List.filter (fun (pid, _) -> match Unix.waitpid [] pid with
-    | _, Unix.WEXITED 0 -> false | _ -> true) children in
   let verdicts = Hashtbl.create 8 and reasons = Hashtbl.create 32 and unknown = Hashtbl.create 64 in
   let profiles = Array.make 3 0 and bytes = ref 0L in
   List.iter (fun r ->
@@ -406,8 +276,8 @@ let () =
     Printf.printf "\nunreadable paths: %d\n" (List.length walk_errors);
     List.iter (fun (p, e) -> Printf.printf "  %s: %s\n" p e) walk_errors
   end;
-  if missing > 0 || failed_workers <> [] then
-    Printf.printf "\nINCOMPLETE: %d files without a result, %d workers failed\n" missing (List.length failed_workers);
+  if missing > 0 || failed_workers > 0 then
+    Printf.printf "\nINCOMPLETE: %d files without a result, %d workers failed\n" missing failed_workers;
   let all_mergeable = Hashtbl.length verdicts = 1 && Hashtbl.mem verdicts "mergeable" in
-  exit (if missing > 0 || failed_workers <> [] || walk_errors <> [] then 2
+  exit (if missing > 0 || failed_workers > 0 || walk_errors <> [] then 2
         else if all_mergeable then 0 else 1)

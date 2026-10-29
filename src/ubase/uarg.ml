@@ -50,6 +50,10 @@ let eprintf fmt =
 let verify_stdout () =
   if not (System.has_stdout ~info:"") then exit 37
 
+(* String options that may be given bare: [-name] alone means the empty
+   string, and a value needs [-name=value]. *)
+let optional_value = ref []
+
 let parse speclist anonfun errmsg =
   let argv = System.argv () in
   let initpos = !current in
@@ -102,6 +106,7 @@ let parse speclist anonfun errmsg =
               None -> f true
             | Some _ -> f (arg (catch bool_of_string) "a boolean")
             end
+        | String f when v = None && List.mem s !optional_value -> f ""
         | String f -> f (arg (fun s-> s) "")
         | Int f    -> f (arg (catch int_of_string) "an integer")
         | Float f  -> f (arg (catch float_of_string) "a float")

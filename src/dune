@@ -6,7 +6,7 @@
 (library
  (name unison_lib)
  (wrapped false)
- (modules :standard \ dngscan linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools semantic_mode_filter semantic_hash_config compat_digest)
+ (modules :standard \ dngscan scanCommon semdiff linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools semantic_mode_filter semantic_hash_config compat_digest)
  (modules_without_implementation ui)
  (flags :standard
         -open Compat_digest
@@ -72,7 +72,7 @@
  (name dngscan)
  (public_name unison-dngscan)
  (package unison) ; Dummy: we don't use packages
- (modules dngscan)
+ (modules scanCommon semdiff dngscan)
  (libraries unison_lib))
 
 ; Build-only selector; not linked into the synchronizer.

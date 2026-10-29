@@ -96,3 +96,7 @@ val current: int ref;;
     Position (in [Sys.argv]) of the argument being processed.  You can
     change this value, e.g. to force [Uarg.parse] to skip some arguments.
 *)
+
+val optional_value : string list ref
+(* Names (with their leading [-]) of [String] options that may appear without
+   a value: alone they pass the empty string; a value needs [-name=value]. *)
