@@ -365,8 +365,9 @@ let name_of root =
   | a :: b :: _ -> b ^ "-" ^ a | [a] -> a | [] -> "root"
 
 (* Where the shuttle's version of a file whose content differs on a long-term
-   root R (such as /Volumes/Photo/foto) is kept: in a tree beside R with the same
-   relative path (R/../review/REL by default, or -tree NAME), or with -suffix
+   root R (such as /Volumes/Photo/foto) is kept: in a tree beside R, under R's
+   own name and the same relative path (R/../review/foto/REL by default, or
+   -tree NAME), so roots side by side (foto/, jpg/) never collide; or with -suffix
    beside the long-term file itself, as NAME_2.EXT, NAME_3.EXT, ... or
    NAME_SUF.EXT. The default -preserve archive is R/../dng-compare/SHUTTLE.
    Tree and archive lie outside R, as dng-compare requires of an archive. *)
@@ -406,7 +407,7 @@ let preserved_unchanged table (r : record) = match Hashtbl.find_opt table r.rel,
 (* Candidate places for a conflict copy; an existing identical copy is reused. *)
 let conflict_candidates placement (r : record) (t : target) =
   match placement with
-  | Tree name -> [Filename.concat (Filename.concat (Filename.dirname t.root) name) r.rel]
+  | Tree name -> [List.fold_left Filename.concat (Filename.dirname t.root) [name; Filename.basename t.root; r.rel]]
   | Suffix suf ->
       let dir = Filename.dirname t.matched and base = Filename.basename t.matched in
       let ext = Filename.extension base in
@@ -469,7 +470,7 @@ let keep_conflicts placement ~root records =
             | Unix.Unix_error (e, _, p) -> incr failed; Printf.printf "  not kept: %s: %s\n" p (Unix.error_message e))
     | _ -> ()) records;
   let where = match placement with
-    | Tree name -> Filename.concat (Filename.dirname root) name
+    | Tree name -> List.fold_left Filename.concat (Filename.dirname root) [name; Filename.basename root]
     | Suffix "" -> "numbered copies beside the files in " ^ root
     | Suffix suf -> Printf.sprintf "_%s copies beside the files in %s" suf root in
   Printf.printf "\nfiles whose content differs: %d copied to %s, %d already there, %d not kept\n"

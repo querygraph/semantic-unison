@@ -202,9 +202,11 @@ let semdiffPreserveFull =
       match on the second root, verified to rebuild the exact file.")
 let semdiffTree =
   Prefs.createString "tree" "review" ~category:(`Advanced `General) ~local:true
-    "with -preserve, keep files whose content differs under ROOT2/../NAME"
+    "with -preserve, keep files whose content differs under ROOT2/../TREE/ROOT2NAME"
     ("The shuttle's version of a file whose content differs on the second root is \
-      copied, with the same relative path, into this tree beside the second root.")
+      copied, with the same relative path, into this tree beside the second root, \
+      under the second root's own name: /Volumes/Photo/review/foto/... for \
+      /Volumes/Photo/foto.")
 let semdiffSuffix =
   Prefs.createString "suffix" "/" ~category:(`Advanced `General) ~local:true
     "with -preserve, keep differing files beside the original as NAME_2.EXT or, with -suffix=SUF, NAME_SUF.EXT"

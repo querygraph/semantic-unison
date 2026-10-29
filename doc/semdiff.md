@@ -37,8 +37,8 @@ and session folder, and the run exits 1.
 | --- | --- | --- |
 | identical | same SHA-256 | nothing to do |
 | metadata-only | raw image byte-identical, bytes differ | differences recorded in the dng-compare archive; with `-preservefull` also a verified delta |
-| image-differs | DNG raw image or JPEG image data differ | shuttle version copied to `review/` |
-| differs | other file types whose bytes differ | shuttle version copied to `review/` |
+| image-differs | DNG raw image or JPEG image data differ | shuttle version copied to `review/foto/` |
+| differs | other file types whose bytes differ | shuttle version copied to `review/foto/` |
 | missing | not found by path or name | copied by the catch-up step |
 | ambiguous | the name occurs more than once | listed; resolve by hand |
 | unavailable | the long-term root is not mounted | listed; compare later |
@@ -60,8 +60,8 @@ Next to the long-term root `R` (for example `/Volumes/Photo/foto`):
 | `-preserve` | `R/../dng-compare/SHUTTLE` (for example `/Volumes/Photo/dng-compare/Kolobok-foto`), a dng-compare archive whose rows are only ever added |
 | `-preservedb DIR` | that archive instead (implies `-preserve`) |
 | `-preservefull` | implies `-preserve`; the same archive also holds each metadata-only file as a VCDIFF delta from dng-compare's `preserve_apo.py`, verified to rebuild the exact file |
-| default for conflicts | `R/../review/` with the same relative path |
-| `-tree NAME` | `R/../NAME/` instead |
+| default for conflicts | `R/../review/NAME/` with the same relative path, where NAME is R's own name: `/Volumes/Photo/review/foto/…` and `/Volumes/Photo/review/jpg/…` never collide |
+| `-tree TREE` | `R/../TREE/NAME/` instead |
 | `-suffix` | beside the long-term file as `NAME_2.EXT`, `NAME_3.EXT`, … |
 | `-suffix=SUF` | beside the long-term file as `NAME_SUF.EXT` |
 

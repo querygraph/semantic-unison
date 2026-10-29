@@ -169,7 +169,7 @@ let () =
     "-v", Arg.Set verbose, " -semdiff: listing progress, each file that is not identical, preservation output";
     "-review", Arg.Set review, " from the -o report only: keep the files whose content differs, as -preserve does";
     "-tree", Arg.String (fun n -> placement := Semdiff.Tree n),
-      "NAME  keep differing files under ROOT/../NAME/ (default review)";
+      "TREE  keep differing files under ROOT/../TREE/ROOTNAME/ (default review)";
     "-suffix", Arg.Unit (fun () -> placement := Semdiff.Suffix ""),
       " keep differing files beside the long-term file as NAME_2.EXT, NAME_3.EXT, ...; -suffix=SUF names NAME_SUF.EXT";
     "-rules", Arg.Set_string rules, "FILE  dng-compare metadata_rules.json (default $DNG_COMPARE_HOME or ~/src/dng-compare)";

@@ -108,8 +108,8 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
     check((right / '2026/A/s1/image.DNG').read_bytes() == files['image.DNG'][1], 'long-term conflicting file untouched')
     if have_dng_compare:
         # Conflicts kept in the default tree beside foto/, same relative paths.
-        check((vol / 'review/2026/A/s1/image.DNG').read_bytes() == files['image.DNG'][0], 'conflict copied to review/')
-        check((vol / 'review/2026/A/s1/image.jpg').read_bytes() == files['image.jpg'][0], 'JPEG conflict copied to review/')
+        check((vol / 'review/foto/2026/A/s1/image.DNG').read_bytes() == files['image.DNG'][0], 'conflict copied to review/foto/')
+        check((vol / 'review/foto/2026/A/s1/image.jpg').read_bytes() == files['image.jpg'][0], 'JPEG conflict copied to review/foto/')
         archive = vol / 'dng-compare/shuttle-foto'
         db = sqlite3.connect(archive / 'metadata/differences.sqlite3')
         check(db.execute("SELECT COUNT(*) FROM files WHERE path='2026/A/s1/meta.DNG'").fetchone()[0] == 1, 'indexed in dng-compare')
