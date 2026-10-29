@@ -92,8 +92,19 @@ affect rendering. The list of non-rendering tags is dng-compare's
 captions, dates, GPS, IPTC and similar. Any tag not on the list, including every
 `crs:` develop setting, orientation and lens data, counts as possibly rendering.
 Text padding (trailing spaces or NULs) is not a change, and repeated `CopyN`
-occurrences are compared as sets. This is a metadata rule, not a comparison of
+occurrences are compared as sets. Strip, tile and preview offsets
+(`layout_names`) move when metadata grows, so they are not a change once the
+raw image compares identical. The lens fields Lightroom copies from EXIF into
+XMP (`aux:Lens`, `aux:LensInfo`, `exifEX:LensModel`, listed under `mirrors`)
+are not a change while each value equals the EXIF value in the same file. The
+reason names the first rendering tag, develop settings (`crs:`, `crd:`) first,
+and how many more changed. This is a metadata rule, not a comparison of
 rendered images.
+
+A rerun, or `-summarize`, reclassifies earlier results under the current rules
+from the report's stored differences, without reading the files again. A
+mirror whose EXIF source was the same on both sides is not stored, so there it
+stays "possibly rendering" until the pair is compared again.
 
 ## Disks
 

@@ -37,6 +37,8 @@ type rules = {
   copy : string; (* group_copy is ^PREFIX[0-9]+$ *)
   never : string list * string list; volatile : string list * string list;
   filesystem : string list; plain : string list * string list;
+  layout : string list; (* tag names: file positions *)
+  mirrors : (string * string list) list; (* XMP copy -> source tag names *)
 }
 
 let starts prefix s = String.length s >= String.length prefix && String.sub s 0 (String.length prefix) = prefix
@@ -58,7 +60,11 @@ let load_rules path =
     | _ -> failwith (path ^ ": group_copy must be ^PREFIX[0-9]+$") in
   { copy;
     never = pair "never_compared"; volatile = pair "volatile";
-    filesystem = strs (member "filesystem_prefixes" j); plain = pair "non_rendering" }
+    filesystem = strs (member "filesystem_prefixes" j); plain = pair "non_rendering";
+    layout = (match member "layout_names" j with None -> [] | l -> strs l);
+    mirrors = (match member "mirrors" j with
+      | Some (Obj l) -> List.map (fun (k, v) -> k, strs (Some v)) l
+      | None -> [] | Some _ -> failwith (path ^ ": bad mirrors")) }
 
 let normalize rules tag =
   let n = String.length rules.copy in
@@ -68,6 +74,11 @@ let normalize rules tag =
 let compared rules tag = not (rule_match rules.never tag || rule_match rules.volatile tag)
 let category rules tag = if List.exists (fun p -> starts p tag) rules.filesystem then "filesystem" else "embedded"
 let non_rendering rules tag = rule_match rules.plain (normalize rules tag)
+let tag_name tag = match String.rindex_opt tag ':' with
+  | Some i -> String.sub tag (i + 1) (String.length tag - i - 1) | None -> tag
+(* A strip, tile or preview offset: moves with the metadata, and cannot change
+   rendering once the image data compare identical. *)
+let layout rules tag = (starts "EXIF:" tag || starts "MakerNotes:" tag) && List.mem (tag_name tag) rules.layout
 
 (* One right root's view of one left file. *)
 type diff = { tag : string; kind : string; left_value : json option; right_value : json option; cat : string }
@@ -342,8 +353,13 @@ let differences rules left right =
           | Some _, Some _ -> "changed_in_bumer" | None, _ -> "added_in_bumer" | _, None -> "missing_in_bumer" in
         Some {tag; kind; left_value = a; right_value = b; cat = category rules tag}) keys
 
-(* Copy groups are positions, not values: compare each tag's values as a set. *)
-let rendering_change rules left right =
+(* Copy groups are positions, not values: compare each tag's values as a set.
+   Returns the changed tags that may affect rendering, develop settings first.
+   An XMP copy of EXIF or maker-notes data (Lightroom's aux:Lens) is not a
+   change while each of its values equals a source value in the same file; a
+   source missing from [left] or [right] counts as a change (fail closed). *)
+let rendering_changes rules left right =
+  let text = function Str s -> s | v -> to_string v in
   let table side =
     let t = Hashtbl.create 256 in
     List.iter (fun (tag, v) -> if compared rules tag then begin
@@ -353,11 +369,37 @@ let rendering_change rules left right =
         | Str s -> let n = ref (String.length s) in
             while !n > 0 && (s.[!n - 1] = ' ' || s.[!n - 1] = '\000') do decr n done; Str (String.sub s 0 !n)
         | v -> v in
-      Hashtbl.replace t k (to_string v :: (try Hashtbl.find t k with Not_found -> [])) end) (fields side);
+      Hashtbl.replace t k (text v :: (try Hashtbl.find t k with Not_found -> [])) end) (fields side);
     Hashtbl.filter_map_inplace (fun _ vs -> Some (List.sort compare vs)) t; t in
   let a = table left and b = table right in
+  let mirrored t k = match List.assoc_opt k rules.mirrors with
+    | None -> false
+    | Some names ->
+        let sources = Hashtbl.fold (fun k' vs acc ->
+          if not (starts "XMP:" k') && List.mem (tag_name k') names then vs @ acc else acc) t [] in
+        List.for_all (fun v -> List.mem v sources) (try Hashtbl.find t k with Not_found -> []) in
   let keys = List.sort_uniq compare (Hashtbl.fold (fun k _ l -> k :: l) a (Hashtbl.fold (fun k _ l -> k :: l) b [])) in
-  List.find_opt (fun k -> Hashtbl.find_opt a k <> Hashtbl.find_opt b k && not (non_rendering rules k)) keys
+  let changed = List.filter (fun k -> Hashtbl.find_opt a k <> Hashtbl.find_opt b k &&
+    not (non_rendering rules k || layout rules k || (mirrored a k && mirrored b k))) keys in
+  let rank k = if starts "XMP:XMP-crs:" k || starts "XMP:XMP-crd:" k then 0
+    else if tag_name k = "Orientation" then 1 else 2 in
+  List.stable_sort (fun x y -> compare (rank x) (rank y)) changed
+
+let rendering_reason = function
+  | [] -> ""
+  | [tag] -> "rendering tag changed: " ^ tag
+  | tag :: more -> Printf.sprintf "rendering tag changed: %s and %d more" tag (List.length more)
+
+(* Same view again from a report's stored differences, under the current rules:
+   tags equal on both sides cancel out of the value sets, so the differences
+   alone decide, except for a mirror whose unchanged source was not stored. *)
+let reclassify rules t =
+  (* Only pairs whose metadata was compared: a failed extraction stays as it was. *)
+  if t.status <> "metadata-only" || t.sameview = None ||
+     not (t.reason = "" || starts "rendering tag changed: " t.reason) then t else
+  let side f = Obj (List.filter_map (fun d -> Option.map (fun v -> d.tag, v) (f d)) t.differences) in
+  let changes = rendering_changes rules (side (fun d -> d.left_value)) (side (fun d -> d.right_value)) in
+  {t with sameview = Some (changes = []); reason = rendering_reason changes}
 
 let compare_pair opts left matched t =
   let ext = String.lowercase_ascii (Filename.extension left) in
@@ -384,13 +426,12 @@ let compare_pair opts left matched t =
     match meta, opts.rules with
     | Ok [l; r], Some rules ->
         let differences = differences rules l r in
-        let blocking = rendering_change rules l r in
+        let blocking = rendering_changes rules l r in
         let sameview = if not opts.want_sameview then None
-          else Some (image = "same" && blocking = None) in
-        let reason = match image, blocking with
-          | "same", Some tag -> "rendering tag changed: " ^ tag
-          | "same", None -> ""
-          | "differs", _ -> "raw image differs"
+          else Some (image = "same" && blocking = []) in
+        let reason = match image with
+          | "same" -> rendering_reason blocking
+          | "differs" -> "raw image differs"
           | _ -> image_note in
         {t with status; image; previews; sameview; reason; differences;
                 left_meta = if opts.keep_meta then Some l else None;
@@ -890,6 +931,9 @@ let scan c ~left ~roots ~rules ~exiftool =
     (Array.length files) left (Unix.gettimeofday () -. started) listed reused;
   let earlier = if c.resume then load_records c.report else [] in
   let reused_records = List.filter (reusable ~sameview:c.sameview_flag roots) earlier in
+  let reused_records = match rules with
+    | Some rules -> List.map (fun r -> {r with targets = List.map (reclassify rules) r.targets}) reused_records
+    | None -> reused_records in
   let done_ = Hashtbl.create 1024 in
   List.iter (fun r -> Hashtbl.replace done_ r.path ()) reused_records;
   let prefix = left ^ "/" in
@@ -1018,7 +1062,10 @@ let run c =
   let from_reports = c.summarize || c.review in
   let records =
     if from_reports then
-      List.concat_map load_records ((if c.report <> "" then [c.report] else []) @ c.reports)
+      let records = List.concat_map load_records ((if c.report <> "" then [c.report] else []) @ c.reports) in
+      match rules with
+      | Some rules -> List.map (fun r -> {r with targets = List.map (reclassify rules) r.targets}) records
+      | None -> records
     else begin
       let left = match List.map strip_slash c.left_roots with
         | [l] -> l | _ -> prerr_endline "unison-dngscan -semdiff: give exactly one left root"; exit 2 in
