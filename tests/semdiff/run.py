@@ -132,7 +132,16 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         out = unison(*full)
         check((right / '2026/A/s1/meta.DNG').is_file() and (right / '2026/C/later.DNG').is_file(), 'wipe and refill')
         check(db.execute("SELECT COUNT(*) FROM files WHERE path='2026/A/s1/meta.DNG'").fetchone()[0] == 1, 'earlier rows kept')
+        # A later shuttle cycle brings new contents at an old path: a new version row, nothing replaced.
+        (left / '2026/A/s1').mkdir(parents=True)
+        (left / '2026/A/s1/meta.DNG').write_bytes(dng(5)); os.utime(left / '2026/A/s1/meta.DNG', (1e9, 1e9))
+        out = unison(*full)
+        versions = [v for v, in db.execute("SELECT version FROM files WHERE path='2026/A/s1/meta.DNG' ORDER BY version")]
+        check(len(versions) == 2 and versions[0] == '' and versions[1] != '', 'second version recorded: %r' % versions)
+        check('already holds another version' in out, 'full preservation never replaces another version')
+        check((right / '2026/A/s1/meta.DNG').read_bytes() == files['meta.DNG'][1], 'long-term file still untouched')
     else:
         print('SKIPPED: dng-compare archive, preservation and conflict-copy checks (no dng-compare, uv or xdelta3)')
-    check(all(sha(p) == h for p, h in before.items() if p.exists()), 'shuttle files unchanged')
+    # The tool never writes the shuttle (meta.DNG was rewritten by this test for the second cycle).
+    check(all(sha(p) == h for p, h in before.items() if p.exists() and p.name != 'meta.DNG'), 'shuttle files unchanged')
     print('PASS%d semdiff controls%s' % (checks, '' if have_dng_compare else ' (dng-compare checks skipped)'))

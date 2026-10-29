@@ -565,6 +565,11 @@ let summarize ?catchup ~left ~archives ~placement records =
    only if an earlier -preserve run created it. *)
 let tool_id = "unison-dngscan -semdiff"
 
+(* A shuttle file's version key: its size and modification time. A wiped and
+   refilled shuttle with new contents at an old path gives a new key. *)
+let source_stamp (r : record) = Printf.sprintf "%Ld:%.6f" r.size r.mtime
+
+(* Relative path -> version keys already in the archive's batches. *)
 let archive_rels batches =
   let t = Hashtbl.create 1024 in
   Array.iter (fun f -> if Filename.check_suffix f ".jsonl.gz" then begin
@@ -572,7 +577,11 @@ let archive_rels batches =
     let rec loop () = match In_channel.input_line ic with
       | None -> ()
       | Some line -> (match parse line with
-          | j -> (match member "relative_path" j with Some (Str rel) -> Hashtbl.replace t rel () | _ -> ())
+          | j -> (match member "relative_path" j with
+              | Some (Str rel) ->
+                  let stamp = match member "source_stamp" j with Some (Str s) -> s | _ -> "" in
+                  Hashtbl.replace t rel (stamp :: try Hashtbl.find t rel with Not_found -> [])
+              | _ -> ())
           | exception Bad_json -> ()); loop () in
     loop ();
     if Unix.close_process_in ic <> Unix.WEXITED 0 then failwith ("unreadable batch " ^ f) end)
@@ -599,18 +608,25 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
         ("scope", Str "metadata differences of compared pairs, added run by run; see runs.jsonl")]));
       output_char ch '\n');
   let known = archive_rels batches in
+  let stamp = utc_stamp () in
+  (* A path is recorded once per version: a new version of a recorded path gets
+     this run's stamp as its dng-compare version. *)
+  let recorded (r : record) = match Hashtbl.find_opt known r.rel with
+    | None -> false
+    | Some stamps -> List.mem (source_stamp r) stamps in
   let rows = List.filter_map (fun r ->
     match List.find_opt (fun t -> t.root = root) r.targets with
     | Some t when List.mem t.status ["identical"; "metadata-only"; "image-differs"; "differs"]
-                 && not (Hashtbl.mem known r.rel) ->
+                 && not (recorded r) ->
+        let version = if Hashtbl.mem known r.rel then stamp else "" in
         Some (to_string (Obj [
-          ("relative_path", Str r.rel); ("apo", Str r.path); ("bumer", Str t.matched);
+          ("relative_path", Str r.rel); ("version", Str version); ("source_stamp", Str (source_stamp r));
+          ("apo", Str r.path); ("bumer", Str t.matched);
           ("apo_metadata", Option.value t.left_meta ~default:(Obj []));
           ("bumer_metadata", Option.value t.right_meta ~default:(Obj []));
           ("differences", Arr (List.map diff_json t.differences));
           ("errors", Arr []); ("warnings", Arr [])]))
     | _ -> None) records in
-  let stamp = utc_stamp () in
   let rec chunks n = function [] -> [] | l ->
     List.filteri (fun i _ -> i < n) l :: chunks n (List.filteri (fun i _ -> i >= n) l) in
   List.iteri (fun i rows ->
@@ -623,11 +639,11 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
   let runs = open_out_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o644 (Filename.concat archive "runs.jsonl") in
   output_string runs (to_string (Obj [("run", Str stamp); ("source", Str left); ("reference", Str root);
     ("engine", Str engine); ("rows_added", Num (string_of_int (List.length rows)));
-    ("already_recorded", Num (string_of_int (Hashtbl.length known)))]));
+    ("paths_recorded_earlier", Num (string_of_int (Hashtbl.length known)))]));
   output_char runs '\n'; close_out runs;
   let cmd = Printf.sprintf "cd %s && uv run python metadata_index.py %s"
       (Filename.quote dng_compare) (Filename.quote archive) in
-  Printf.printf "\ndng-compare archive %s: %d rows added (%d recorded earlier); indexing with %s/metadata_index.py\n%!"
+  Printf.printf "\ndng-compare archive %s: %d rows added (%d paths recorded earlier); indexing with %s/metadata_index.py\n%!"
     archive (List.length rows) (Hashtbl.length known) dng_compare;
   if Sys.command cmd <> 0 then
     Printf.printf "  indexing failed; the batches are kept, rerun: %s\n" cmd
@@ -636,11 +652,18 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
    verified VCDIFF delta against its match, rebuildable to the exact SHA-256. *)
 let preserve_full ~archive ~dng_compare ~workers ~left records root =
   let done_ = preserved archive in
+  (* preserve_apo keeps one record per relative path: never replace the record
+     of another version. *)
+  let other = ref [] in
   let pairs = List.filter_map (fun r ->
     match List.find_opt (fun t -> t.root = root) r.targets with
     | Some t when t.status = "metadata-only" && unchanged_left r && not (preserved_unchanged done_ r) ->
-        Some (to_string (Obj [("source", Str r.path); ("reference", Str t.matched)]))
+        if Hashtbl.mem done_ r.rel then (other := r.rel :: !other; None)
+        else Some (to_string (Obj [("source", Str r.path); ("reference", Str t.matched)]))
     | _ -> None) records in
+  if !other <> [] then
+    Printf.printf "\nnot preserved in full: %d files whose path already holds another version in %s, e.g. %s\n"
+      (List.length !other) archive (List.hd !other);
   if pairs = [] then Printf.printf "\npreserved in full: nothing new for %s\n" archive else begin
     let file = Filename.concat archive (Printf.sprintf "pairs-%s.jsonl" (utc_stamp ())) in
     Out_channel.with_open_bin file (fun ch -> List.iter (fun l -> output_string ch l; output_char ch '\n') pairs);

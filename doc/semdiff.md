@@ -68,6 +68,13 @@ Next to the long-term root `R` (for example `/Volumes/Photo/foto`):
 `-suffix` with a value must be written `-suffix=SUF`, because Unison would take
 a separate word as a root or profile name.
 
+The archive records each shuttle file once per version (size and modification
+time). When a later shuttle cycle brings new contents at a path already
+recorded, its differences are added as a new dng-compare file version, stamped
+with the run. `-preservefull` keeps one full-file record per path, so it does
+not replace an earlier version; such files are listed as already holding
+another version and stay "not safe" until handled by hand.
+
 Conflict copies are verified by SHA-256 against the shuttle file and never
 replace an existing file; an identical copy from an earlier run is reused.
 Restore a preserved file into a new location with dng-compare:
