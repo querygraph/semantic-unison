@@ -30,23 +30,24 @@ let save_cache format path table =
    not cached. [format] names the cache layout and the filter, so caches kept
    with different filters never mix. Returns the files, the errors, and
    directories (listed, reused). *)
-let walk ?cache ~format ~keep roots =
+let walk ?cache ?progress ~format ~keep roots =
   let old = match cache with Some path -> load_cache format path | None -> Hashtbl.create 0 in
   let fresh = Hashtbl.create (max 16 (Hashtbl.length old)) in
   let now = Unix.gettimeofday () in
-  let files = ref [] and walk_errors = ref [] and listed = ref 0 and reused = ref 0 in
+  let files = ref [] and walk_errors = ref [] and listed = ref 0 and reused = ref 0 and count = ref 0 in
   let error path e = walk_errors := (path, Unix.error_message e) :: !walk_errors in
   let rec visit path =
     match Unix.LargeFile.lstat path with
     | exception Unix.Unix_error (e, _, _) -> error path e
-    | {Unix.LargeFile.st_kind = Unix.S_REG; _} -> if keep (Filename.basename path) then files := path :: !files
+    | {Unix.LargeFile.st_kind = Unix.S_REG; _} -> if keep (Filename.basename path) then (files := path :: !files; incr count)
     | {Unix.LargeFile.st_kind = Unix.S_DIR; st_dev; st_ino; st_mtime; _} ->
         let listing = match Hashtbl.find_opt old path with
           | Some l when l.dev = st_dev && l.ino = st_ino && l.mtime = st_mtime -> incr reused; Some l
           | _ -> list path st_dev st_ino st_mtime in
+        Option.iter (fun f -> f !listed !reused !count) progress;
         Option.iter (fun l ->
           if cache <> None then Hashtbl.replace fresh path l;
-          List.iter (fun name -> files := Filename.concat path name :: !files) l.files;
+          List.iter (fun name -> files := Filename.concat path name :: !files; incr count) l.files;
           List.iter (fun name -> visit (Filename.concat path name)) l.subdirs) listing
     | _ -> ()
   and list path dev ino mtime =
@@ -72,7 +73,7 @@ let walk ?cache ~format ~keep roots =
         if !complete && mtime < now -. 5. then Some l
         else begin
           (* Still walked now, but left out of the cache. *)
-          List.iter (fun name -> files := Filename.concat path name :: !files) l.files;
+          List.iter (fun name -> files := Filename.concat path name :: !files; incr count) l.files;
           List.iter (fun name -> visit (Filename.concat path name)) l.subdirs;
           None
         end in
@@ -82,8 +83,9 @@ let walk ?cache ~format ~keep roots =
 
 (* Worker k takes items k, k+workers, ... and marshals one result per item; the
    parent hands results to [on_result] as they arrive, in any order, and prints
-   progress every 30 seconds. Returns the number of workers that failed. *)
-let run_pool ~label ~workers items job on_result =
+   progress every [interval] seconds (default 30), followed by [status ()].
+   Returns the number of workers that failed. *)
+let run_pool ?(interval = 30.) ?status ~label ~workers items job on_result =
   let workers = max 1 (min workers (Array.length items)) in
   if Array.length items = 0 then 0 else begin
     let children = List.init workers (fun k ->
@@ -112,11 +114,14 @@ let run_pool ~label ~workers items job on_result =
         | r ->
             on_result r; incr received;
             let now = Unix.gettimeofday () in
-            if now -. !last >= 30. then begin
+            if now -. !last >= interval then begin
               last := now;
-              let rate = float !received /. (now -. started) in
-              Printf.eprintf "%s: %d/%d files, %.0f/s, about %.0f min left\n%!" label !received
-                (Array.length items) rate (float (Array.length items - !received) /. rate /. 60.)
+              match status with
+              | Some f -> Printf.eprintf "%s: %d/%d files, %s\n%!" label !received (Array.length items) (f (now -. started))
+              | None ->
+                  let rate = float !received /. (now -. started) in
+                  Printf.eprintf "%s: %d/%d files, %.0f/s, about %.0f min left\n%!" label !received
+                    (Array.length items) rate (float (Array.length items - !received) /. rate /. 60.)
             end;
             true
         | exception End_of_file -> close_in ch; false) !pending

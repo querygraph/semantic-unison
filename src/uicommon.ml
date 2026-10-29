@@ -196,7 +196,7 @@ let semdiffPreserveDb =
     "Directory of the dng-compare archive that -preserve writes."
 let semdiffPreserveFull =
   Prefs.createBool "preservefull" false ~category:(`Advanced `General) ~local:true
-    "with -semdiff, also keep each metadata-only file in full, as a verified delta"
+    "with -semdiff, -preserve and also keep each metadata-only file in full as a verified delta"
     ("Implies -preserve. dng-compare's preserve_apo stores each file whose image is \
       the same on both roots but whose bytes differ as a VCDIFF delta against its \
       match on the second root, verified to rebuild the exact file.")
@@ -218,6 +218,10 @@ let semdiffReview =
     ("Rerun only on the files the previous -semdiff run of these roots found to \
       differ, keeping each as -tree or -suffix says; nothing else is scanned or \
       synchronized.")
+let semdiffVerbose =
+  Prefs.createBool "v" false ~category:(`Advanced `General) ~local:true
+    "with -semdiff, show listing progress and each file that is not identical"
+    "Passed to unison-dngscan -semdiff -v."
 let semdiffRoots =
   Prefs.createStringList "semdiffroot" ~category:(`Advanced `General) ~local:true
     "with -semdiff, also count a file as kept when it is on this root (repeatable)"
@@ -265,6 +269,7 @@ let semdiffSetup () =
         @ (if full then ["-preservefull"] else [])
         @ placement
         @ (if Prefs.read semdiffReview then ["-review"] else [])
+        @ (if Prefs.read semdiffVerbose then ["-v"] else [])
         @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
            "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
       Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));

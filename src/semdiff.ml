@@ -629,8 +629,13 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
     | _ -> None) records in
   let rec chunks n = function [] -> [] | l ->
     List.filteri (fun i _ -> i < n) l :: chunks n (List.filteri (fun i _ -> i >= n) l) in
+  (* Batches are write-once: a name is never reused, even by two runs in one second. *)
+  let rec fresh_name i n =
+    let f = Filename.concat batches (Printf.sprintf "%s-%d-%06d%s.jsonl.gz" stamp (Unix.getpid ()) i
+        (if n = 0 then "" else Printf.sprintf "-%d" n)) in
+    if Sys.file_exists f || Sys.file_exists (f ^ ".tmp") then fresh_name i (n + 1) else f in
   List.iteri (fun i rows ->
-    let file = Filename.concat batches (Printf.sprintf "%s-%06d.jsonl.gz" stamp i) in
+    let file = fresh_name i 0 in
     let temp = file ^ ".tmp" in
     let oc = Unix.open_process_out ("gzip -n -c > " ^ Filename.quote temp) in
     List.iter (fun row -> output_string oc row; output_char oc '\n') rows;
@@ -650,7 +655,7 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
 
 (* -preservefull: dng-compare's preserve_apo keeps each metadata-only file as a
    verified VCDIFF delta against its match, rebuildable to the exact SHA-256. *)
-let preserve_full ~archive ~dng_compare ~workers ~left records root =
+let preserve_full ?(verbose = false) ~archive ~dng_compare ~workers ~left records root =
   let done_ = preserved archive in
   (* preserve_apo keeps one record per relative path: never replace the record
      of another version. *)
@@ -665,13 +670,15 @@ let preserve_full ~archive ~dng_compare ~workers ~left records root =
     Printf.printf "\nnot preserved in full: %d files whose path already holds another version in %s, e.g. %s\n"
       (List.length !other) archive (List.hd !other);
   if pairs = [] then Printf.printf "\npreserved in full: nothing new for %s\n" archive else begin
-    let file = Filename.concat archive (Printf.sprintf "pairs-%s.jsonl" (utc_stamp ())) in
+    let file = Filename.concat archive (Printf.sprintf "pairs-%s-%d.jsonl" (utc_stamp ()) (Unix.getpid ())) in
     Out_channel.with_open_bin file (fun ch -> List.iter (fun l -> output_string ch l; output_char ch '\n') pairs);
     let cmd = Printf.sprintf "cd %s && uv run python preserve_apo.py scan %s %s %s --delta --pairs %s --workers %d"
         (Filename.quote dng_compare) (Filename.quote left) (Filename.quote root) (Filename.quote archive)
         (Filename.quote file) (max 1 (min 36 workers)) in
     Printf.printf "\npreserving %d metadata-only files in full with %s/preserve_apo.py\n%!" (List.length pairs) dng_compare;
-    if Sys.command (cmd ^ " > " ^ Filename.quote (file ^ ".log")) <> 0 then
+    let cmd = if verbose then cmd ^ " 2>&1 | tee " ^ Filename.quote (file ^ ".log") ^ "; exit ${PIPESTATUS[0]}"
+      else cmd ^ " > " ^ Filename.quote (file ^ ".log") ^ " 2>&1" in
+    if Sys.command ("bash -c " ^ Filename.quote cmd) <> 0 then
       Printf.printf "  preservation incomplete; see %s.log and rerun\n" file
   end
 
@@ -681,8 +688,26 @@ type config = {
   cache : string; sameview_flag : bool; summarize : bool; reports : string list;
   catchup : bool; catchup_to : string; catchup_file : string; review : bool; placement : placement;
   db : bool; db_archive : string; preserve_full : bool; rules_path : string; exiftool_path : string;
-  dng_compare_home : string; unison_path : string; unison_args : string list;
+  dng_compare_home : string; unison_path : string; unison_args : string list; verbose : bool;
 }
+
+let human bytes =
+  let b = Int64.to_float bytes in
+  if b >= 1099511627776. then Printf.sprintf "%.2f TiB" (b /. 1099511627776.)
+  else if b >= 1073741824. then Printf.sprintf "%.1f GiB" (b /. 1073741824.)
+  else Printf.sprintf "%.0f MiB" (b /. 1048576.)
+
+(* -v: walk progress every minute. *)
+let walk_progress c what =
+  if not c.verbose then None else begin
+    let last = ref (Unix.gettimeofday ()) in
+    Some (fun listed reused files ->
+      let now = Unix.gettimeofday () in
+      if now -. !last >= 60. then begin
+        last := now;
+        Printf.eprintf "semdiff: listing %s: %d directories read, %d from cache, %d files\n%!" what listed reused files
+      end)
+  end
 
 let home () = try Sys.getenv "HOME" with Not_found -> "/"
 let dng_compare_default () = try Sys.getenv "DNG_COMPARE_HOME" with Not_found -> Filename.concat (home ()) "src/dng-compare"
@@ -696,14 +721,19 @@ let scan c ~left ~roots ~rules ~exiftool =
   let started = Unix.gettimeofday () in
   let cache_of tag = if c.cache = "" then None
     else Some (if tag = "" then c.cache else c.cache ^ "." ^ Digest.to_hex (Digest.string tag)) in
+  if c.verbose then Printf.eprintf "semdiff: listing %s\n%!" left;
   let files, walk_errors, (listed, reused) =
-    walk ?cache:(cache_of "") ~format:"unison-dngscan-walk/1-all" ~keep:(fun n -> not (system n)) [left] in
+    walk ?cache:(cache_of "") ?progress:(walk_progress c left) ~format:"unison-dngscan-walk/1-all"
+      ~keep:(fun n -> not (system n)) [left] in
   List.iter (fun (p, e) -> Printf.eprintf "semdiff: unreadable %s: %s\n" p e) walk_errors;
   (* Name indexes of the right roots: listings only, no file contents. *)
   let indexes = List.map (fun root ->
     if not (is_dir root) then root, None else begin
-      let found, _, _ = walk ?cache:(cache_of root) ~format:"unison-dngscan-walk/1-all"
-          ~keep:(fun n -> not (system n)) [root] in
+      if c.verbose then Printf.eprintf "semdiff: listing %s for matches by name\n%!" root;
+      let found, _, (l, r) = walk ?cache:(cache_of root) ?progress:(walk_progress c root)
+          ~format:"unison-dngscan-walk/1-all" ~keep:(fun n -> not (system n)) [root] in
+      if c.verbose then Printf.eprintf "semdiff: %s: %d files (%d directories read, %d from cache)\n%!"
+          root (Array.length found) l r;
       let t = Hashtbl.create (Array.length found) in
       Array.iter (fun p -> let k = String.lowercase_ascii (Filename.basename p) in
         Hashtbl.replace t k (p :: try Hashtbl.find t k with Not_found -> [])) found;
@@ -750,8 +780,29 @@ let scan c ~left ~roots ~rules ~exiftool =
     Some (open_out_gen [Open_wronly; Open_append; Open_binary] 0o644 c.report) end in
   let opts = {rules; exiftool; want_sameview = c.sameview_flag; keep_meta = c.db} in
   let collected = ref reused_records and last_flush = ref (Unix.gettimeofday ()) in
-  let failed = run_pool ~label:"semdiff" ~workers:c.workers jobs (run_job opts) (fun (r : record) ->
+  (* Progress by bytes: each job reads the shuttle file and, when sizes match, its match. *)
+  let total = Array.fold_left (fun n j -> Int64.add n j.jsize) 0L jobs and done_bytes = ref 0L in
+  let counts = Hashtbl.create 8 in
+  let status elapsed =
+    let rate = Int64.to_float !done_bytes /. elapsed in
+    let left = Int64.to_float (Int64.sub total !done_bytes) /. (max rate 1.) in
+    Printf.sprintf "%s of %s, %.0f MiB/s, about %.0f min left; %s" (human !done_bytes) (human total)
+      (rate /. 1048576.) (left /. 60.)
+      (String.concat ", " (List.filter_map (fun s -> Option.map (fun n -> Printf.sprintf "%s %d" s n)
+         (Hashtbl.find_opt counts s))
+         ["identical"; "metadata-only"; "image-differs"; "differs"; "missing"; "ambiguous"; "unavailable"; "error"])) in
+  let failed = run_pool ~interval:60. ~status ~label:"semdiff" ~workers:c.workers jobs
+      (run_job opts) (fun (r : record) ->
     collected := r :: !collected;
+    done_bytes := Int64.add !done_bytes r.size;
+    List.iter (fun t ->
+      Hashtbl.replace counts t.status (1 + try Hashtbl.find counts t.status with Not_found -> 0);
+      if c.verbose && t.status <> "identical" then
+        Printf.eprintf "semdiff: %-13s %s%s%s\n%!" t.status r.rel
+          (if t.how = "name" then "  (found as " ^ t.matched ^ ")" else "")
+          (match t.sameview, t.reason with
+           | Some true, _ -> "  same view"
+           | _, "" -> "" | _, why -> "  " ^ why)) r.targets;
     Option.iter (fun ch ->
       output_string ch (record_json r); output_char ch '\n';
       if Unix.gettimeofday () -. !last_flush >= 30. then (last_flush := Unix.gettimeofday (); flush ch)) out) in
@@ -813,7 +864,7 @@ let run c =
       let archive = archive_of root in
       try
         write_archive ~archive ~dng_compare:c.dng_compare_home ~exiftool ~left records root;
-        if c.preserve_full then preserve_full ~archive ~dng_compare:c.dng_compare_home ~workers:c.workers ~left records root
+        if c.preserve_full then preserve_full ~verbose:c.verbose ~archive ~dng_compare:c.dng_compare_home ~workers:c.workers ~left records root
       with Failure e | Sys_error e -> Printf.printf "dng-compare archive not written: %s\n" e) targets;
   if c.db && catchup_root <> "" then keep_conflicts c.placement ~root:catchup_root records;
   let archives = existing_archives () in

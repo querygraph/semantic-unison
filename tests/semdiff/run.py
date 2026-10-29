@@ -131,7 +131,7 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         (left / '2026/C').mkdir(parents=True); (left / '2026/C/later.DNG').write_bytes(dng(5))
         out = unison(*full)
         check((right / '2026/A/s1/meta.DNG').is_file() and (right / '2026/C/later.DNG').is_file(), 'wipe and refill')
-        check(db.execute("SELECT COUNT(*) FROM files WHERE path='2026/A/s1/meta.DNG'").fetchone()[0] == 1, 'earlier rows kept')
+        check(db.execute("SELECT COUNT(*) FROM files WHERE path='2026/A/s1/meta.DNG'").fetchone()[0] == 1, 'earlier rows kept: %r' % db.execute("SELECT path,version,batch FROM files WHERE path='2026/A/s1/meta.DNG'").fetchall())
         # A later shuttle cycle brings new contents at an old path: a new version row, nothing replaced.
         (left / '2026/A/s1').mkdir(parents=True)
         (left / '2026/A/s1/meta.DNG').write_bytes(dng(5)); os.utime(left / '2026/A/s1/meta.DNG', (1e9, 1e9))

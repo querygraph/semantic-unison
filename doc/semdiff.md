@@ -6,7 +6,7 @@ answers "is everything on the shuttle kept on the long-term disk?" and makes
 it so, without overwriting or deleting anything on the long-term disk:
 
 ```sh
-unison /Volumes/Kolobok/foto /Volumes/Photo/foto -semdiff -preserve -preservefull -sameview
+unison /Volumes/Kolobok/foto /Volumes/Photo/foto -semdiff -sameview -preservefull -v
 ```
 
 The first root is the shuttle and the second the long-term root. Both must be
@@ -59,7 +59,7 @@ Next to the long-term root `R` (for example `/Volumes/Photo/foto`):
 | --- | --- |
 | `-preserve` | `R/../dng-compare/SHUTTLE` (for example `/Volumes/Photo/dng-compare/Kolobok-foto`), a dng-compare archive whose rows are only ever added |
 | `-preservedb DIR` | that archive instead (implies `-preserve`) |
-| `-preservefull` | the same archive also holds each metadata-only file as a VCDIFF delta from dng-compare's `preserve_apo.py`, verified to rebuild the exact file |
+| `-preservefull` | implies `-preserve`; the same archive also holds each metadata-only file as a VCDIFF delta from dng-compare's `preserve_apo.py`, verified to rebuild the exact file |
 | default for conflicts | `R/../review/` with the same relative path |
 | `-tree NAME` | `R/../NAME/` instead |
 | `-suffix` | beside the long-term file as `NAME_2.EXT`, `NAME_3.EXT`, … |
@@ -94,6 +94,14 @@ captions, dates, GPS, IPTC and similar. Any tag not on the list, including every
 Text padding (trailing spaces or NULs) is not a change, and repeated `CopyN`
 occurrences are compared as sets. This is a metadata rule, not a comparison of
 rendered images.
+
+## Progress
+
+A progress line every minute gives files and bytes compared, MiB/s, the time
+left and the counts so far. `-v` adds listing progress (the first listing of a
+large long-term root takes minutes; later ones reuse the `.walk` cache), a line
+for each file that is not identical, and dng-compare's preservation output.
+`^C` is safe: rerun the same command and finished comparisons are reused.
 
 ## Faster reruns and other roots
 
