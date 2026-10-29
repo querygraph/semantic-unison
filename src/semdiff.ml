@@ -97,6 +97,30 @@ let hash_file path =
       | n -> SemanticHash.feed h buf 0 n; loop () in
     loop ())
 
+(* [f a] here and [f b] in a forked helper at the same time, so the two files
+   of a pair are read from their two disks concurrently. An exception in the
+   helper is raised here as Failure. *)
+let both f a b =
+  let input, output = Unix.pipe ~cloexec:true () in
+  match Unix.fork () with
+  | 0 ->
+      Unix.close input;
+      let result = try Ok (f b) with e -> Error (Printexc.to_string e) in
+      let ch = Unix.out_channel_of_descr output in
+      Marshal.to_channel ch result []; close_out ch;
+      Unix._exit 0
+  | pid ->
+      Unix.close output;
+      let mine = try Ok (f a) with e -> Error e in
+      let ch = Unix.in_channel_of_descr input in
+      let theirs = try Marshal.from_channel ch with End_of_file -> Error "helper exited" in
+      close_in ch;
+      ignore (Unix.waitpid [] pid);
+      match mine, theirs with
+      | Ok x, Ok y -> x, y
+      | Error e, _ -> raise e
+      | _, Error e -> failwith (b ^ ": " ^ e)
+
 (* Encoded image directories of a DNG, each hashed over its strips or tiles in
    order: the largest is the raw image, the rest are previews. *)
 let image_units path =
@@ -218,7 +242,7 @@ let rendering_change rules left right =
 let compare_pair opts left matched t =
   let ext = String.lowercase_ascii (Filename.extension left) in
   let lsize = (Unix.LargeFile.stat left).st_size and msize = t.msize in
-  if lsize = msize && hash_file left = hash_file matched then
+  if lsize = msize && (let h, h' = both hash_file left matched in h = h') then
     {t with status = "identical"; image = "same"; previews = "same";
             sameview = if opts.want_sameview then Some true else None}
   else begin
@@ -228,12 +252,13 @@ let compare_pair opts left matched t =
       match units with
       | None -> "unknown", "unknown", ""
       | Some units ->
-      match units left, units matched with
+      match both units left matched with
       | Ok (raw, p), Ok (raw', p') ->
           (if raw = raw' then "same" else "differs"), (if p = p' then "same" else "differs"), ""
       | Result.Error e, _ | _, Result.Error e -> "unknown", "unknown", "image not compared: " ^ e
       | exception Unix.Unix_error (e, _, _) -> "unknown", "unknown", "image not readable: " ^ Unix.error_message e
-      | exception SemanticFile.Invalid r -> "unknown", "unknown", "image not readable: " ^ r in
+      | exception SemanticFile.Invalid r -> "unknown", "unknown", "image not readable: " ^ r
+      | exception Failure r -> "unknown", "unknown", "image not readable: " ^ r in
     let meta = if opts.rules = None then Result.Error "no metadata rules" else extract opts.exiftool [left; matched] in
     let status = match image with "same" -> "metadata-only" | "differs" -> "image-differs" | _ -> "differs" in
     match meta, opts.rules with
@@ -264,7 +289,7 @@ let run_job opts j =
     if t.how <> "path" && t.how <> "name" then t else
     try compare_pair opts j.jpath t.matched t
     with Unix.Unix_error (e, _, p) -> {t with status = "error"; reason = p ^ ": " ^ Unix.error_message e}
-       | SemanticFile.Invalid r -> {t with status = "error"; reason = r}) j.jtargets in
+       | SemanticFile.Invalid r | Failure r -> {t with status = "error"; reason = r}) j.jtargets in
   {path = j.jpath; rel = j.jrel; size = j.jsize; mtime = j.jmtime; ino = j.jino; targets}
 
 (* Report lines. *)
