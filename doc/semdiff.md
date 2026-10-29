@@ -26,10 +26,12 @@ local. The run has three steps:
    copied as one directory, unless one of its files was already found there by
    name.
 
-The summary says whether the shuttle is **safe to wipe**: every file must be
+When the catch-up copied anything, the comparison runs once more after the
+copy, reusing every earlier result, so the copied files are checked too and the
+last summary printed is the final one. The summary says whether the shuttle is **safe to wipe**: every file must be
 byte-identical on the long-term root, preserved in full, or kept as a conflict
 copy, and unchanged since it was compared. Anything else is listed by reason
-and session folder, and the run exits 1.
+and session folder, and the run exits 1, also when nothing needed copying.
 
 ## What happens to each file
 

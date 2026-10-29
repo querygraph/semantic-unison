@@ -255,6 +255,10 @@ let semcatchupFrom =
     ("A list written by unison-dngscan -semdiff or -summarize. Its roots must be \
       this run's roots. Used by unison-dngscan -catchup and by -semdiff.")
 
+(* The scanner run again after the catch-up, for the final status. *)
+let final_check = ref None
+let first_status = ref 0
+
 let semdiffSetup () =
   let roots = List.map (fun r ->
     if String.length r > 1 && r.[String.length r - 1] = '/' then String.sub r 0 (String.length r - 1) else r)
@@ -294,13 +298,16 @@ let semdiffSetup () =
         @ (if Prefs.read semdiffReaders > 0 then ["-readers"; string_of_int (Prefs.read semdiffReaders)] else [])
         @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
            "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
-      Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));
-      let pid = Unix.create_process scanner (Array.of_list args) Unix.stdin Unix.stdout Unix.stderr in
-      (match snd (Unix.waitpid [] pid) with
-       | Unix.WEXITED (0 | 1) -> ()
+      let run_scanner () =
+        Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));
+        let pid = Unix.create_process scanner (Array.of_list args) Unix.stdin Unix.stdout Unix.stderr in
+        snd (Unix.waitpid [] pid) in
+      (match run_scanner () with
+       | Unix.WEXITED (0 | 1 as code) -> first_status := code
        | _ -> raise (Util.Fatal "unison-dngscan -semdiff did not complete; nothing was synchronized"));
       (* -review keeps the conflicts itself; there is nothing to synchronize. *)
       if Prefs.read semdiffReview then exit 0;
+      final_check := Some run_scanner;
       base ^ ".catchup"
     end in
   let lines = try
@@ -318,8 +325,22 @@ let semdiffSetup () =
   let paths = List.filter_map (field "path") lines in
   if paths = [] then begin
     Util.msg "semdiff: nothing under %s is missing on %s\n" r1 r2;
-    exit 0
+    exit !first_status
   end;
+  (* The status printed above counted the files about to be copied as
+     missing. After the copy, compare them too (earlier results are reused)
+     and print the final status; exit 1 unless the shuttle is safe to wipe.
+     Only in this process, not in children Unison forks. *)
+  Option.iter (fun run_scanner ->
+    let self = Unix.getpid () in
+    at_exit (fun () ->
+      if Unix.getpid () = self then begin
+        Util.msg "\nsemdiff: checking the copied files\n";
+        match run_scanner () with
+        | Unix.WEXITED 0 -> ()
+        | Unix.WEXITED 1 -> exit 1
+        | _ -> Util.msg "semdiff: the final check did not complete\n"; exit 2
+      end)) !final_check;
   Util.msg "semdiff: synchronizing %d paths missing on %s, creation only\n" (List.length paths) r2;
   Prefs.set Globals.paths [];
   Prefs.loadStrings

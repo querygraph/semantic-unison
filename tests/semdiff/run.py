@@ -82,14 +82,18 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
     # Every disk counts as spinning, so the one-reader-per-disk lock is exercised.
     env = dict(os.environ, UNISON=str(t / 'unisondir'), UNISON_SEMDIFF_ONE_READER='all')
     (t / 'unisondir').mkdir()
-    def unison(*args):
+    def unison(*args, rc=0):
         r = subprocess.run([a.unison, str(left), str(right), '-semdiff', '-batch', '-semdiffscanner', a.dngscan, *args],
                            env=env, capture_output=True, text=True)
-        check(r.returncode == 0, 'unison exited %d:\n%s%s' % (r.returncode, r.stdout, r.stderr))
+        check(r.returncode == rc, 'unison exited %d:\n%s%s' % (r.returncode, r.stdout, r.stderr))
         return r.stdout + r.stderr
 
     full = ['-preserve', '-preservefull', '-sameview'] if have_dng_compare else ['-sameview']
     out = unison(*full)
+    if have_dng_compare:
+        # stdout and stderr are captured apart, so check the lines, not their order.
+        check('checking the copied files' in out and 'safe to wipe: 7 of 9 files' in out and
+              'safe to wipe: 9 of 9 files' in out, 'status before and after the copy\n' + out)
     report = next((t / 'unisondir').glob('semdiff-*.jsonl'))
     records = {json.loads(l)['rel']: json.loads(l)['targets'][0] for l in report.read_text().splitlines()}
     status = {k: v['status'] for k, v in records.items()}
@@ -97,7 +101,9 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
     check(status['2026/A/s1/image.DNG'] == 'image-differs' and status['2026/A/s1/image.jpg'] == 'image-differs', 'image differences')
     check(status['2026/A/s1/meta.DNG'] == 'metadata-only' and status['2026/A/s1/meta.jpg'] == 'metadata-only', 'metadata-only pairs')
     check(records['2026/A/s2/moved.DNG']['how'] == 'name' and status['2026/A/s2/moved.DNG'] == 'identical', 'match by name')
-    check(status['2026/A/s1/missing.DNG'] == 'missing' and status['2026/B/s3/new.txt'] == 'missing', 'missing files')
+    # Missing on the first pass, copied, then compared by the check after the copy.
+    check(status['2026/A/s1/missing.DNG'] == 'identical' and status['2026/B/s3/new.txt'] == 'identical',
+          'missing files compared after the copy: %r' % {k: status[k] for k in ('2026/A/s1/missing.DNG', '2026/B/s3/new.txt')})
     if have_dng_compare:
         check(records['2026/A/s1/meta.DNG']['sameview'] is True, 'Rating change is the same view')
         check(any(d['tag'] == 'XMP:XMP-xmp:Rating' for d in records['2026/A/s1/meta.DNG']['differences']), 'Rating difference recorded')
@@ -136,7 +142,7 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         # A later shuttle cycle brings new contents at an old path: a new version row, nothing replaced.
         (left / '2026/A/s1').mkdir(parents=True)
         (left / '2026/A/s1/meta.DNG').write_bytes(dng(5)); os.utime(left / '2026/A/s1/meta.DNG', (1e9, 1e9))
-        out = unison(*full)
+        out = unison(*full, rc=1)  # not safe to wipe: exit 1
         versions = [v for v, in db.execute("SELECT version FROM files WHERE path='2026/A/s1/meta.DNG' ORDER BY version")]
         check(len(versions) == 2 and versions[0] == '' and versions[1] != '', 'second version recorded: %r' % versions)
         check('already holds another version' in out, 'full preservation never replaces another version')
