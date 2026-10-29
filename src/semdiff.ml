@@ -91,7 +91,7 @@ let blank_target root = {root; matched = ""; how = "none"; msize = 0L; mmtime = 
 (* One reader per spinning disk. A root whose device diskutil does not report as
    solid state is read by one stream at a time, across all workers and their
    helpers, through a lock file per device; SSDs keep their parallel readers. *)
-let spinning = ref ([] : int list)
+let spinning = ref ([] : (int * int) list) (* device, readers *)
 
 (* diskutil's fields for the volume holding [path]: "Solid State", "Volume UUID". *)
 let disk_info path =
@@ -118,43 +118,52 @@ let settings_file mount = Filename.concat mount ".semantic-unison"
 
 let mount_point path = List.assoc_opt "Mount Point" (disk_info path)
 
-let recorded_kind mount =
-  try List.find_map (fun l -> match String.index_opt l '=' with
-      | Some i when String.trim (String.sub l 0 i) = "disk" ->
-          (match String.trim (String.sub l (i + 1) (String.length l - i - 1)) with
-           | "hdd" | "ssd" as k -> Some k | _ -> None)
-      | _ -> None)
+let read_settings mount =
+  try List.filter_map (fun l -> match String.index_opt l '=' with
+      | Some i -> Some (String.trim (String.sub l 0 i), String.trim (String.sub l (i + 1) (String.length l - i - 1)))
+      | None -> None)
       (In_channel.with_open_bin (settings_file mount) In_channel.input_lines)
-  with Sys_error _ -> None
+  with Sys_error _ -> []
 
-let record_kind kind path =
+let recorded_kind mount = match List.assoc_opt "disk" (read_settings mount) with
+  | Some ("hdd" | "ssd" as k) -> Some k | _ -> None
+let recorded_readers mount =
+  Option.bind (List.assoc_opt "readers" (read_settings mount)) int_of_string_opt
+
+(* Set KEY = VALUE lines in the disk's settings file, keeping every other line. *)
+let record_settings path updates =
   match mount_point path with
-  | None -> Printf.eprintf "semdiff: %s: no mount point from diskutil; -%s applies to this run only\n%!" path kind
-  | Some mount when recorded_kind mount = Some kind -> ()
+  | None -> Printf.eprintf "semdiff: %s: no mount point from diskutil; applies to this run only\n%!" path
+  | Some mount when List.for_all (fun (k, v) -> List.assoc_opt k (read_settings mount) = Some v) updates -> ()
   | Some mount ->
       let file = settings_file mount in
-      (* Keep any other settings in the file; replace only the disk line. *)
       let others = try List.filter (fun l -> match String.index_opt l '=' with
-          | Some i -> String.trim (String.sub l 0 i) <> "disk" | None -> true)
+          | Some i -> not (List.mem_assoc (String.trim (String.sub l 0 i)) updates) | None -> true)
           (In_channel.with_open_bin file In_channel.input_lines) with Sys_error _ -> [] in
       (try
          let temp = file ^ ".tmp" in
          Out_channel.with_open_bin temp (fun ch ->
            List.iter (fun l -> output_string ch l; output_char ch '\n') others;
-           Printf.fprintf ch "disk = %s\n" kind);
+           List.iter (fun (k, v) -> Printf.fprintf ch "%s = %s\n" k v) updates);
          Sys.rename temp file;
-         Printf.eprintf "semdiff: recorded %s as %s in %s\n%!" mount kind file
-       with Sys_error e -> Printf.eprintf "semdiff: cannot record the disk kind (%s); -%s applies to this run only\n%!" e kind)
+         Printf.eprintf "semdiff: recorded %s in %s\n%!"
+           (String.concat ", " (List.map (fun (k, v) -> k ^ " = " ^ v) updates)) file
+       with Sys_error e -> Printf.eprintf "semdiff: cannot record disk settings (%s); they apply to this run only\n%!" e)
 
-(* One reader for this root's disk? An explicit or recorded kind wins over
-   diskutil; a disk not reported as solid state gets one reader. *)
-let note_disk ?kind root =
+let record_kind ?readers kind path =
+  record_settings path (("disk", kind) :: match readers with Some n -> [("readers", string_of_int n)] | None -> [])
+
+(* Limited readers for this root's disk? An explicit or recorded kind wins over
+   diskutil; a disk not reported as solid state is spinning. A spinning disk
+   gets the explicit, else the recorded, else one reader. *)
+let note_disk ?kind ?readers root =
   match Unix.LargeFile.stat root with
   | exception Unix.Unix_error _ -> None
-  | s when List.mem s.st_dev !spinning -> None
+  | s when List.mem_assoc s.st_dev !spinning -> None
   | s ->
       let info = disk_info root in
-      let recorded = Option.bind (List.assoc_opt "Mount Point" info) recorded_kind in
+      let mount = List.assoc_opt "Mount Point" info in
+      let recorded = Option.bind mount recorded_kind in
       let kind = match kind, recorded with
         | Some k, _ -> Some (k, "-" ^ k)
         | None, Some k -> Some (k, "recorded as " ^ k)
@@ -166,19 +175,36 @@ let note_disk ?kind root =
         | None -> Sys.getenv_opt "UNISON_SEMDIFF_ONE_READER" = Some "all" ||
                   List.assoc_opt "Solid State" info <> Some "Yes" in
       if one then begin
-        spinning := s.st_dev :: !spinning;
-        Some (match kind with Some (_, why) -> why | None -> "not reported as solid state")
+        let n = match readers with
+          | Some n -> n | None -> Option.value (Option.bind mount recorded_readers) ~default:1 in
+        let n = max 1 (min 64 n) in
+        spinning := (s.st_dev, n) :: !spinning;
+        Some (Printf.sprintf "%s, %s at a time"
+          (match kind with Some (_, why) -> why | None -> "not reported as solid state")
+          (if n = 1 then "one reader" else string_of_int n ^ " readers"))
       end else None
 
+(* A reader slot is one lock file of the device's [readers]: take any free
+   slot, else wait on one. Locks belong to processes, so workers and their
+   helpers share the slots. *)
 let one_reader path f =
   match Unix.LargeFile.lstat path with
-  | s when List.mem s.st_dev !spinning ->
-      let lock = Filename.concat (Filename.get_temp_dir_name ())
-          (Printf.sprintf "unison-semdiff-disk-%d.lock" s.st_dev) in
-      let fd = Unix.openfile lock [Unix.O_RDWR; Unix.O_CREAT; Unix.O_CLOEXEC] 0o600 in
-      Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
-        Unix.lockf fd Unix.F_LOCK 0;
-        f path)
+  | s when List.mem_assoc s.st_dev !spinning ->
+      let n = List.assoc s.st_dev !spinning in
+      let slot k = Filename.concat (Filename.get_temp_dir_name ())
+          (Printf.sprintf "unison-semdiff-disk-%d-%d.lock" s.st_dev k) in
+      let open_slot k = Unix.openfile (slot k) [Unix.O_RDWR; Unix.O_CREAT; Unix.O_CLOEXEC] 0o600 in
+      let rec try_slots k =
+        if k = n then None else
+        let fd = open_slot k in
+        match Unix.lockf fd Unix.F_TLOCK 0 with
+        | () -> Some fd
+        | exception Unix.Unix_error ((Unix.EAGAIN | Unix.EACCES | Unix.EWOULDBLOCK), _, _) ->
+            Unix.close fd; try_slots (k + 1) in
+      let fd = match try_slots 0 with
+        | Some fd -> fd
+        | None -> let fd = open_slot (Unix.getpid () mod n) in Unix.lockf fd Unix.F_LOCK 0; fd in
+      Fun.protect ~finally:(fun () -> Unix.close fd) (fun () -> f path)
   | _ -> f path
   | exception Unix.Unix_error _ -> f path
 
@@ -810,6 +836,7 @@ type config = {
   db : bool; db_archive : string; preserve_full : bool; rules_path : string; exiftool_path : string;
   dng_compare_home : string; unison_path : string; unison_args : string list; verbose : bool;
   disk_kinds : (string * string) list; (* -hdd / -ssd PATH, recorded for later runs *)
+  readers : int option; (* -readers N for the -hdd disks, recorded too *)
 }
 
 let human bytes =
@@ -892,11 +919,12 @@ let scan c ~left ~roots ~rules ~exiftool =
     (Array.to_list files)) in
   Printf.eprintf "semdiff: %d results reused, comparing %d files with %d workers\n%!"
     (List.length reused_records) (Array.length jobs) c.workers;
-  List.iter (fun (kind, path) -> record_kind kind path) c.disk_kinds;
-  List.iter (fun (kind, path) -> match note_disk ~kind path with
-    | Some why -> Printf.eprintf "semdiff: %s: %s, one reader at a time\n%!" path why | None -> ()) c.disk_kinds;
+  List.iter (fun (kind, path) ->
+    record_kind ?readers:(if kind = "hdd" then c.readers else None) kind path) c.disk_kinds;
+  List.iter (fun (kind, path) -> match note_disk ~kind ?readers:(if kind = "hdd" then c.readers else None) path with
+    | Some why -> Printf.eprintf "semdiff: %s: %s\n%!" path why | None -> ()) c.disk_kinds;
   List.iter (fun root -> match note_disk root with
-    | Some why -> Printf.eprintf "semdiff: %s: %s, one reader at a time\n%!" root why | None -> ()) (left :: roots);
+    | Some why -> Printf.eprintf "semdiff: %s: %s\n%!" root why | None -> ()) (left :: roots);
   let out = if c.report = "" then None else begin
     (* Rewrite the report to the reused lines, then append. *)
     let temp = c.report ^ ".resume" in
@@ -911,26 +939,51 @@ let scan c ~left ~roots ~rules ~exiftool =
      minutes', so the estimate follows what the disks deliver now. *)
   let compared j = List.exists (fun t -> t.how = "path" || t.how = "name") j.jtargets in
   let total = Array.fold_left (fun n j -> if compared j then Int64.add n j.jsize else n) 0L jobs in
-  let done_bytes = ref 0L and samples = Queue.create () in
-  Queue.add (Unix.gettimeofday (), 0L) samples;
+  let total_files = Array.fold_left (fun n j -> if compared j then n + 1 else n) 0 jobs in
+  let done_bytes = ref 0L and done_files = ref 0 and samples = Queue.create () in
+  Queue.add (Unix.gettimeofday (), 0, 0L) samples;
   let counts = Hashtbl.create 8 in
+  (* Time left = files left x seconds per file + bytes left x seconds per byte,
+     both fitted by least squares over the last 15 one-minute intervals: small
+     sidecars cost a seek each, large DNGs cost their bytes. *)
   let status _ =
     let now = Unix.gettimeofday () in
-    Queue.add (now, !done_bytes) samples;
-    while Queue.length samples > 1 && fst (Queue.peek samples) < now -. 600. do ignore (Queue.pop samples) done;
-    let t0, b0 = Queue.peek samples in
-    let rate = if now -. t0 < 1. then 0. else Int64.to_float (Int64.sub !done_bytes b0) /. (now -. t0) in
-    let left = Int64.to_float (Int64.sub total !done_bytes) /. (max rate 1.) in
-    Printf.sprintf "%s of %s, %.0f MiB/s, about %.0f min left; %s" (human !done_bytes) (human total)
-      (rate /. 1048576.) (left /. 60.)
+    Queue.add (now, !done_files, !done_bytes) samples;
+    while Queue.length samples > 16 do ignore (Queue.pop samples) done;
+    let points = Queue.fold (fun (acc, prev) (t, f, b) ->
+      (match prev with
+       | Some (t', f', b') when t > t' -> (float (f - f'), Int64.to_float (Int64.sub b b'), t -. t') :: acc
+       | _ -> acc), Some (t, f, b)) ([], None) samples |> fst in
+    let sum g = List.fold_left (fun a p -> a +. g p) 0. points in
+    let ff = sum (fun (f, _, _) -> f *. f) and bb = sum (fun (_, b, _) -> b *. b)
+    and fb = sum (fun (f, b, _) -> f *. b) and ft = sum (fun (f, _, t) -> f *. t)
+    and bt = sum (fun (_, b, t) -> b *. t) in
+    let det = ff *. bb -. fb *. fb in
+    let per_file, per_byte =
+      let only_files () = (if ff > 0. then ft /. ff else 0.), 0.
+      and only_bytes () = 0., (if bb > 0. then bt /. bb else 0.) in
+      if List.length points >= 2 && det > 1e-9 *. ff *. bb then
+        let a = (ft *. bb -. bt *. fb) /. det and b = (ff *. bt -. fb *. ft) /. det in
+        if a >= 0. && b >= 0. then a, b
+        else if a < 0. then only_bytes () else only_files ()
+      else only_bytes () in
+    let span = sum (fun (_, _, t) -> t) in
+    let rate = if span > 0. then sum (fun (_, b, _) -> b) /. span else 0. in
+    let files_rate = if span > 0. then sum (fun (f, _, _) -> f) /. span else 0. in
+    let left = float (total_files - !done_files) *. per_file
+               +. Int64.to_float (Int64.sub total !done_bytes) *. per_byte in
+    Printf.sprintf "%s of %s, %.0f MiB/s, %.0f files/s, %s; %s" (human !done_bytes) (human total)
+      (rate /. 1048576.) files_rate
+      (if per_file = 0. && per_byte = 0. then "estimating time left"
+       else Printf.sprintf "about %.0f min left" (left /. 60.))
       (String.concat ", " (List.filter_map (fun s -> Option.map (fun n -> Printf.sprintf "%s %d" s n)
          (Hashtbl.find_opt counts s))
          ["identical"; "metadata-only"; "image-differs"; "differs"; "missing"; "ambiguous"; "unavailable"; "error"])) in
   let failed = run_pool ~interval:60. ~status ~label:"semdiff" ~workers:c.workers jobs
       (run_job opts) (fun (r : record) ->
     collected := r :: !collected;
-    if List.exists (fun t -> t.how = "path" || t.how = "name") r.targets then
-      done_bytes := Int64.add !done_bytes r.size;
+    if List.exists (fun t -> t.how = "path" || t.how = "name") r.targets then begin
+      done_bytes := Int64.add !done_bytes r.size; incr done_files end;
     List.iter (fun t ->
       Hashtbl.replace counts t.status (1 + try Hashtbl.find counts t.status with Not_found -> 0);
       if c.verbose && t.status <> "identical" then

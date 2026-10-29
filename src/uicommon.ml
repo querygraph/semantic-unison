@@ -231,6 +231,12 @@ let semdiffHdd =
       stream at a time across all workers. The kind is recorded on the disk itself, \
       in MOUNT-POINT/.semantic-unison, and applies to every later run. Disks that \
       diskutil does not report as solid state are treated so already.")
+let semdiffReaders =
+  Prefs.createInt "readers" 0 ~category:(`Advanced `General) ~local:true
+    "with -semdiff -hdd, streams that may read that disk at once (recorded with it)"
+    ("How many streams -semdiff may read a spinning disk with at once, across all \
+      workers. Given with -hdd, it is recorded with the disk in .semantic-unison; \
+      0 keeps the recorded value, or one reader.")
 let semdiffSsd =
   Prefs.createStringList "ssd" ~category:(`Advanced `General) ~local:true
     "with -semdiff, record the disk holding this path as solid state: parallel readers"
@@ -285,6 +291,7 @@ let semdiffSetup () =
         @ (if Prefs.read semdiffVerbose then ["-v"] else [])
         @ List.concat_map (fun p -> ["-hdd"; p]) (Prefs.read semdiffHdd)
         @ List.concat_map (fun p -> ["-ssd"; p]) (Prefs.read semdiffSsd)
+        @ (if Prefs.read semdiffReaders > 0 then ["-readers"; string_of_int (Prefs.read semdiffReaders)] else [])
         @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
            "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
       Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));

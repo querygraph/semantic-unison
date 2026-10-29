@@ -105,13 +105,17 @@ marks PATH's disk (any path on it, once per disk, for example
 `-hdd /Volumes/Photo`) as spinning, and `-ssd PATH` as solid state, whatever
 `diskutil` reports. Both are recorded on the disk itself, as `disk = hdd` or `disk = ssd` in
 `MOUNT-POINT/.semantic-unison` (for example `/Volumes/Photo/.semantic-unison`),
-so they are given once and hold for every later run, on any Mac.
+so they are given once and hold for every later run, on any Mac. A spinning
+disk is read by one stream at a time unless `-readers N` is given with `-hdd`,
+which records `readers = N` the same way: `-hdd /Volumes/Photo -readers 3`.
 
 ## Progress
 
 A progress line every minute gives files and bytes compared (files with a
-match only; missing files cost nothing), MiB/s over the last ten minutes, the
-time left and the counts so far. `-v` adds listing progress (the first listing of a
+match only; missing files cost nothing), MiB/s and files/s, the time left and
+the counts so far. Time left is files left times a cost per file plus bytes left
+times a cost per byte, both fitted over the last 15 minutes, so it holds through
+stretches of small sidecars and of large DNGs. `-v` adds listing progress (the first listing of a
 large long-term root takes minutes; later ones reuse the `.walk` cache), a line
 for each file that is not identical, and dng-compare's preservation output.
 `^C` is safe: rerun the same command and finished comparisons are reused.
