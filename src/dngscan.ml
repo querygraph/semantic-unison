@@ -17,7 +17,7 @@ type record = {
 }
 
 let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH...\n\
-\       unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR] [-tree NAME | -suffix[=SUF]] [-review] [-v] [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]\n\
+\       unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR] [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH]... [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]\n\
 \       unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]"
 
 let is_dng name =
@@ -146,7 +146,7 @@ let () =
   let semdiff = ref [] and sameview = ref false and summarize = ref false and catchup = ref false in
   let catchup_to = ref "" and catchup_file = ref "" and db = ref false and db_archive = ref "" in
   let rules = ref "" and exiftool = ref "" and unison = ref "" and unison_args = ref [] in
-  let preserve_full = ref false and review = ref false and verbose = ref false and placement = ref (Semdiff.Tree "review") in
+  let preserve_full = ref false and review = ref false and verbose = ref false and hdd = ref [] and placement = ref (Semdiff.Tree "review") in
   (* -suffix=SUF: Arg has no optional values, so split it here. *)
   let argv = Array.concat (Array.to_list (Array.map (fun a ->
     if String.length a > 8 && String.sub a 0 8 = "-suffix=" then [|"-suffixname"; String.sub a 8 (String.length a - 8)|]
@@ -166,6 +166,8 @@ let () =
     "-preservedb", Arg.String (fun d -> db := true; db_archive := d), "DIR  dng-compare archive for -preserve";
     "-preservefull", Arg.Unit (fun () -> db := true; preserve_full := true),
       " -preserve, and also keep each metadata-only file in full as a verified delta (dng-compare preserve_apo)";
+    "-hdd", Arg.String (fun p -> hdd := !hdd @ [p]),
+      "PATH  read PATH's disk with one stream at a time, as for a disk not reported as solid state (repeatable)";
     "-v", Arg.Set verbose, " -semdiff: listing progress, each file that is not identical, preservation output";
     "-review", Arg.Set review, " from the -o report only: keep the files whose content differs, as -preserve does";
     "-tree", Arg.String (fun n -> placement := Semdiff.Tree n),
@@ -192,7 +194,7 @@ let () =
   if !semdiff <> [] || !summarize || !review then begin
     let home = Semdiff.dng_compare_default () in
     Semdiff.run {Semdiff.left_roots = (if !summarize then [] else List.rev !roots); review = !review;
-      preserve_full = !preserve_full; placement = !placement; verbose = !verbose;
+      preserve_full = !preserve_full; placement = !placement; verbose = !verbose; hdd = !hdd;
       right_roots = !semdiff; workers = !workers; report = !report; resume = !resume; cache = !cache;
       sameview_flag = !sameview; summarize = !summarize; reports = (if !summarize then List.rev !roots else []);
       catchup = !catchup; catchup_to = !catchup_to; catchup_file = !catchup_file;

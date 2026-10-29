@@ -88,7 +88,50 @@ type options = {
 let blank_target root = {root; matched = ""; how = "none"; msize = 0L; mmtime = 0.; status = "missing";
   image = ""; previews = ""; sameview = None; reason = ""; differences = []; left_meta = None; right_meta = None}
 
-let hash_file path =
+(* One reader per spinning disk. A root whose device diskutil does not report as
+   solid state is read by one stream at a time, across all workers and their
+   helpers, through a lock file per device; SSDs keep their parallel readers. *)
+let spinning = ref ([] : int list)
+
+let solid_state root =
+  try
+    let ic = Unix.open_process_args_in "df" [|"df"; "-P"; root|] in
+    let lines = In_channel.input_lines ic in
+    ignore (Unix.close_process_in ic);
+    match lines with
+    | _ :: line :: _ ->
+        let device = List.hd (String.split_on_char ' ' line) in
+        let ic = Unix.open_process_args_in "diskutil" [|"diskutil"; "info"; device|] in
+        let info = In_channel.input_all ic in
+        ignore (Unix.close_process_in ic);
+        List.exists (fun l -> match String.split_on_char ':' l with
+          | [k; v] -> String.trim k = "Solid State" && String.trim v = "Yes" | _ -> false)
+          (String.split_on_char '\n' info)
+    | _ -> false
+  with Unix.Unix_error _ | Sys_error _ | Failure _ -> false
+
+let note_disk ?(force = false) root =
+  match Unix.LargeFile.stat root with
+  (* UNISON_SEMDIFF_ONE_READER=all treats every disk as spinning (tests). *)
+  | s when not (List.mem s.st_dev !spinning) &&
+           (force || Sys.getenv_opt "UNISON_SEMDIFF_ONE_READER" = Some "all" || not (solid_state root)) ->
+      spinning := s.st_dev :: !spinning; true
+  | _ -> false
+  | exception Unix.Unix_error _ -> false
+
+let one_reader path f =
+  match Unix.LargeFile.lstat path with
+  | s when List.mem s.st_dev !spinning ->
+      let lock = Filename.concat (Filename.get_temp_dir_name ())
+          (Printf.sprintf "unison-semdiff-disk-%d.lock" s.st_dev) in
+      let fd = Unix.openfile lock [Unix.O_RDWR; Unix.O_CREAT; Unix.O_CLOEXEC] 0o600 in
+      Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
+        Unix.lockf fd Unix.F_LOCK 0;
+        f path)
+  | _ -> f path
+  | exception Unix.Unix_error _ -> f path
+
+let hash_file path = one_reader path @@ fun path ->
   let fd = Unix.openfile path [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
   Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
     let h = SemanticHash.create () and buf = Bytes.create 4194304 in
@@ -123,7 +166,7 @@ let both f a b =
 
 (* Encoded image directories of a DNG, each hashed over its strips or tiles in
    order: the largest is the raw image, the rest are previews. *)
-let image_units path =
+let image_units path = one_reader path @@ fun path ->
   let fd = Unix.openfile path [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
   Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
     SemanticFile.with_borrowed_fd fd (fun file ->
@@ -161,7 +204,7 @@ let image_units path =
    metadata, then the scans through the first EOI (entropy-coded data stuffs
    every 0xFF it contains, so the first FF D9 after a scan starts is the EOI).
    Bytes after the EOI, such as MPF secondary images, are the previews. *)
-let jpeg_units path =
+let jpeg_units path = one_reader path @@ fun path ->
   let data = In_channel.with_open_bin path In_channel.input_all in
   let n = String.length data in
   let byte i = Char.code data.[i] in
@@ -715,6 +758,7 @@ type config = {
   catchup : bool; catchup_to : string; catchup_file : string; review : bool; placement : placement;
   db : bool; db_archive : string; preserve_full : bool; rules_path : string; exiftool_path : string;
   dng_compare_home : string; unison_path : string; unison_args : string list; verbose : bool;
+  hdd : string list; (* -hdd: one reader on these paths' disks, whatever diskutil says *)
 }
 
 let human bytes =
@@ -797,6 +841,10 @@ let scan c ~left ~roots ~rules ~exiftool =
     (Array.to_list files)) in
   Printf.eprintf "semdiff: %d results reused, comparing %d files with %d workers\n%!"
     (List.length reused_records) (Array.length jobs) c.workers;
+  List.iter (fun path -> if note_disk ~force:true path then
+    Printf.eprintf "semdiff: %s: -hdd, one reader at a time\n%!" path) c.hdd;
+  List.iter (fun root -> if note_disk root then
+    Printf.eprintf "semdiff: %s is not reported as solid state: one reader at a time\n%!" root) (left :: roots);
   let out = if c.report = "" then None else begin
     (* Rewrite the report to the reused lines, then append. *)
     let temp = c.report ^ ".resume" in
@@ -806,11 +854,20 @@ let scan c ~left ~roots ~rules ~exiftool =
     Some (open_out_gen [Open_wronly; Open_append; Open_binary] 0o644 c.report) end in
   let opts = {rules; exiftool; want_sameview = c.sameview_flag; keep_meta = c.db} in
   let collected = ref reused_records and last_flush = ref (Unix.gettimeofday ()) in
-  (* Progress by bytes: each job reads the shuttle file and, when sizes match, its match. *)
-  let total = Array.fold_left (fun n j -> Int64.add n j.jsize) 0L jobs and done_bytes = ref 0L in
+  (* Progress by bytes that are actually read: shuttle files with a match.
+     Missing files cost nothing and are left out. The rate is the last ten
+     minutes', so the estimate follows what the disks deliver now. *)
+  let compared j = List.exists (fun t -> t.how = "path" || t.how = "name") j.jtargets in
+  let total = Array.fold_left (fun n j -> if compared j then Int64.add n j.jsize else n) 0L jobs in
+  let done_bytes = ref 0L and samples = Queue.create () in
+  Queue.add (Unix.gettimeofday (), 0L) samples;
   let counts = Hashtbl.create 8 in
-  let status elapsed =
-    let rate = Int64.to_float !done_bytes /. elapsed in
+  let status _ =
+    let now = Unix.gettimeofday () in
+    Queue.add (now, !done_bytes) samples;
+    while Queue.length samples > 1 && fst (Queue.peek samples) < now -. 600. do ignore (Queue.pop samples) done;
+    let t0, b0 = Queue.peek samples in
+    let rate = if now -. t0 < 1. then 0. else Int64.to_float (Int64.sub !done_bytes b0) /. (now -. t0) in
     let left = Int64.to_float (Int64.sub total !done_bytes) /. (max rate 1.) in
     Printf.sprintf "%s of %s, %.0f MiB/s, about %.0f min left; %s" (human !done_bytes) (human total)
       (rate /. 1048576.) (left /. 60.)
@@ -820,7 +877,8 @@ let scan c ~left ~roots ~rules ~exiftool =
   let failed = run_pool ~interval:60. ~status ~label:"semdiff" ~workers:c.workers jobs
       (run_job opts) (fun (r : record) ->
     collected := r :: !collected;
-    done_bytes := Int64.add !done_bytes r.size;
+    if List.exists (fun t -> t.how = "path" || t.how = "name") r.targets then
+      done_bytes := Int64.add !done_bytes r.size;
     List.iter (fun t ->
       Hashtbl.replace counts t.status (1 + try Hashtbl.find counts t.status with Not_found -> 0);
       if c.verbose && t.status <> "identical" then

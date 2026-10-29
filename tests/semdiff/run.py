@@ -79,7 +79,8 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
     (left / '2026/B/s3/new.txt').write_bytes(b'new session\n')
     before = {p: sha(p) for p in left.rglob('*') if p.is_file()}
 
-    env = dict(os.environ, UNISON=str(t / 'unisondir'))
+    # Every disk counts as spinning, so the one-reader-per-disk lock is exercised.
+    env = dict(os.environ, UNISON=str(t / 'unisondir'), UNISON_SEMDIFF_ONE_READER='all')
     (t / 'unisondir').mkdir()
     def unison(*args):
         r = subprocess.run([a.unison, str(left), str(right), '-semdiff', '-batch', '-semdiffscanner', a.dngscan, *args],

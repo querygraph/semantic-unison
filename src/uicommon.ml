@@ -224,6 +224,12 @@ let semdiffVerbose =
   Prefs.createBool "v" false ~category:(`Advanced `General) ~local:true
     "with -semdiff, show listing progress and each file that is not identical"
     "Passed to unison-dngscan -semdiff -v."
+let semdiffHdd =
+  Prefs.createStringList "hdd" ~category:(`Advanced `General) ~local:true
+    "with -semdiff, read this path's disk with one stream at a time (repeatable)"
+    ("Treat the disk holding this path as a spinning disk: -semdiff reads it with \
+      one stream at a time across all workers. Disks that diskutil does not report \
+      as solid state are treated so already.")
 let semdiffRoots =
   Prefs.createStringList "semdiffroot" ~category:(`Advanced `General) ~local:true
     "with -semdiff, also count a file as kept when it is on this root (repeatable)"
@@ -272,6 +278,7 @@ let semdiffSetup () =
         @ placement
         @ (if Prefs.read semdiffReview then ["-review"] else [])
         @ (if Prefs.read semdiffVerbose then ["-v"] else [])
+        @ List.concat_map (fun p -> ["-hdd"; p]) (Prefs.read semdiffHdd)
         @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
            "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
       Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));

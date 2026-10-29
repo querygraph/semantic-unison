@@ -95,10 +95,20 @@ Text padding (trailing spaces or NULs) is not a change, and repeated `CopyN`
 occurrences are compared as sets. This is a metadata rule, not a comparison of
 rendered images.
 
+## Disks
+
+A root on a disk that `diskutil` does not report as solid state (a spinning
+disk, or an enclosure that does not say) is read by one stream at a time,
+across all workers, so it never seeks between files; solid-state roots are
+read in parallel. Both files of a pair are read at the same time. `-hdd PATH`
+(repeatable) forces one reader for PATH's disk whatever `diskutil` reports, for
+example `-hdd /Volumes/Photo/foto`.
+
 ## Progress
 
-A progress line every minute gives files and bytes compared, MiB/s, the time
-left and the counts so far. `-v` adds listing progress (the first listing of a
+A progress line every minute gives files and bytes compared (files with a
+match only; missing files cost nothing), MiB/s over the last ten minutes, the
+time left and the counts so far. `-v` adds listing progress (the first listing of a
 large long-term root takes minutes; later ones reuse the `.walk` cache), a line
 for each file that is not identical, and dng-compare's preservation output.
 `^C` is safe: rerun the same command and finished comparisons are reused.
