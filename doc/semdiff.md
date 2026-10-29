@@ -101,8 +101,11 @@ A root on a disk that `diskutil` does not report as solid state (a spinning
 disk, or an enclosure that does not say) is read by one stream at a time,
 across all workers, so it never seeks between files; solid-state roots are
 read in parallel. Both files of a pair are read at the same time. `-hdd PATH`
-(repeatable) forces one reader for PATH's disk whatever `diskutil` reports, for
-example `-hdd /Volumes/Photo/foto`.
+marks PATH's disk (any path on it, once per disk, for example
+`-hdd /Volumes/Photo`) as spinning, and `-ssd PATH` as solid state, whatever
+`diskutil` reports. Both are recorded on the disk itself, as `disk = hdd` or `disk = ssd` in
+`MOUNT-POINT/.semantic-unison` (for example `/Volumes/Photo/.semantic-unison`),
+so they are given once and hold for every later run, on any Mac.
 
 ## Progress
 

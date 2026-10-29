@@ -93,31 +93,82 @@ let blank_target root = {root; matched = ""; how = "none"; msize = 0L; mmtime = 
    helpers, through a lock file per device; SSDs keep their parallel readers. *)
 let spinning = ref ([] : int list)
 
-let solid_state root =
+(* diskutil's fields for the volume holding [path]: "Solid State", "Volume UUID". *)
+let disk_info path =
   try
-    let ic = Unix.open_process_args_in "df" [|"df"; "-P"; root|] in
+    let ic = Unix.open_process_args_in "df" [|"df"; "-P"; path|] in
     let lines = In_channel.input_lines ic in
     ignore (Unix.close_process_in ic);
     match lines with
     | _ :: line :: _ ->
         let device = List.hd (String.split_on_char ' ' line) in
         let ic = Unix.open_process_args_in "diskutil" [|"diskutil"; "info"; device|] in
-        let info = In_channel.input_all ic in
+        let info = In_channel.input_lines ic in
         ignore (Unix.close_process_in ic);
-        List.exists (fun l -> match String.split_on_char ':' l with
-          | [k; v] -> String.trim k = "Solid State" && String.trim v = "Yes" | _ -> false)
-          (String.split_on_char '\n' info)
-    | _ -> false
-  with Unix.Unix_error _ | Sys_error _ | Failure _ -> false
+        List.filter_map (fun l -> match String.index_opt l ':' with
+          | Some i -> Some (String.trim (String.sub l 0 i), String.trim (String.sub l (i + 1) (String.length l - i - 1)))
+          | None -> None) info
+    | _ -> []
+  with Unix.Unix_error _ | Sys_error _ | Failure _ -> []
 
-let note_disk ?(force = false) root =
+(* A disk's kind given with -hdd or -ssd lives on the disk itself, in
+   MOUNT-POINT/.semantic-unison ("disk = hdd" or "disk = ssd"), so it holds for
+   every later run, on any Mac, whichever folder of the disk is synchronized. *)
+let settings_file mount = Filename.concat mount ".semantic-unison"
+
+let mount_point path = List.assoc_opt "Mount Point" (disk_info path)
+
+let recorded_kind mount =
+  try List.find_map (fun l -> match String.index_opt l '=' with
+      | Some i when String.trim (String.sub l 0 i) = "disk" ->
+          (match String.trim (String.sub l (i + 1) (String.length l - i - 1)) with
+           | "hdd" | "ssd" as k -> Some k | _ -> None)
+      | _ -> None)
+      (In_channel.with_open_bin (settings_file mount) In_channel.input_lines)
+  with Sys_error _ -> None
+
+let record_kind kind path =
+  match mount_point path with
+  | None -> Printf.eprintf "semdiff: %s: no mount point from diskutil; -%s applies to this run only\n%!" path kind
+  | Some mount when recorded_kind mount = Some kind -> ()
+  | Some mount ->
+      let file = settings_file mount in
+      (* Keep any other settings in the file; replace only the disk line. *)
+      let others = try List.filter (fun l -> match String.index_opt l '=' with
+          | Some i -> String.trim (String.sub l 0 i) <> "disk" | None -> true)
+          (In_channel.with_open_bin file In_channel.input_lines) with Sys_error _ -> [] in
+      (try
+         let temp = file ^ ".tmp" in
+         Out_channel.with_open_bin temp (fun ch ->
+           List.iter (fun l -> output_string ch l; output_char ch '\n') others;
+           Printf.fprintf ch "disk = %s\n" kind);
+         Sys.rename temp file;
+         Printf.eprintf "semdiff: recorded %s as %s in %s\n%!" mount kind file
+       with Sys_error e -> Printf.eprintf "semdiff: cannot record the disk kind (%s); -%s applies to this run only\n%!" e kind)
+
+(* One reader for this root's disk? An explicit or recorded kind wins over
+   diskutil; a disk not reported as solid state gets one reader. *)
+let note_disk ?kind root =
   match Unix.LargeFile.stat root with
-  (* UNISON_SEMDIFF_ONE_READER=all treats every disk as spinning (tests). *)
-  | s when not (List.mem s.st_dev !spinning) &&
-           (force || Sys.getenv_opt "UNISON_SEMDIFF_ONE_READER" = Some "all" || not (solid_state root)) ->
-      spinning := s.st_dev :: !spinning; true
-  | _ -> false
-  | exception Unix.Unix_error _ -> false
+  | exception Unix.Unix_error _ -> None
+  | s when List.mem s.st_dev !spinning -> None
+  | s ->
+      let info = disk_info root in
+      let recorded = Option.bind (List.assoc_opt "Mount Point" info) recorded_kind in
+      let kind = match kind, recorded with
+        | Some k, _ -> Some (k, "-" ^ k)
+        | None, Some k -> Some (k, "recorded as " ^ k)
+        | None, None -> None in
+      let one = match kind with
+        | Some ("hdd", _) -> true
+        | Some _ -> false
+        (* UNISON_SEMDIFF_ONE_READER=all treats every disk as spinning (tests). *)
+        | None -> Sys.getenv_opt "UNISON_SEMDIFF_ONE_READER" = Some "all" ||
+                  List.assoc_opt "Solid State" info <> Some "Yes" in
+      if one then begin
+        spinning := s.st_dev :: !spinning;
+        Some (match kind with Some (_, why) -> why | None -> "not reported as solid state")
+      end else None
 
 let one_reader path f =
   match Unix.LargeFile.lstat path with
@@ -758,7 +809,7 @@ type config = {
   catchup : bool; catchup_to : string; catchup_file : string; review : bool; placement : placement;
   db : bool; db_archive : string; preserve_full : bool; rules_path : string; exiftool_path : string;
   dng_compare_home : string; unison_path : string; unison_args : string list; verbose : bool;
-  hdd : string list; (* -hdd: one reader on these paths' disks, whatever diskutil says *)
+  disk_kinds : (string * string) list; (* -hdd / -ssd PATH, recorded for later runs *)
 }
 
 let human bytes =
@@ -841,10 +892,11 @@ let scan c ~left ~roots ~rules ~exiftool =
     (Array.to_list files)) in
   Printf.eprintf "semdiff: %d results reused, comparing %d files with %d workers\n%!"
     (List.length reused_records) (Array.length jobs) c.workers;
-  List.iter (fun path -> if note_disk ~force:true path then
-    Printf.eprintf "semdiff: %s: -hdd, one reader at a time\n%!" path) c.hdd;
-  List.iter (fun root -> if note_disk root then
-    Printf.eprintf "semdiff: %s is not reported as solid state: one reader at a time\n%!" root) (left :: roots);
+  List.iter (fun (kind, path) -> record_kind kind path) c.disk_kinds;
+  List.iter (fun (kind, path) -> match note_disk ~kind path with
+    | Some why -> Printf.eprintf "semdiff: %s: %s, one reader at a time\n%!" path why | None -> ()) c.disk_kinds;
+  List.iter (fun root -> match note_disk root with
+    | Some why -> Printf.eprintf "semdiff: %s: %s, one reader at a time\n%!" root why | None -> ()) (left :: roots);
   let out = if c.report = "" then None else begin
     (* Rewrite the report to the reused lines, then append. *)
     let temp = c.report ^ ".resume" in

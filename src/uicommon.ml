@@ -226,10 +226,15 @@ let semdiffVerbose =
     "Passed to unison-dngscan -semdiff -v."
 let semdiffHdd =
   Prefs.createStringList "hdd" ~category:(`Advanced `General) ~local:true
-    "with -semdiff, read this path's disk with one stream at a time (repeatable)"
-    ("Treat the disk holding this path as a spinning disk: -semdiff reads it with \
-      one stream at a time across all workers. Disks that diskutil does not report \
-      as solid state are treated so already.")
+    "with -semdiff, record the disk holding this path as spinning: one reader at a time"
+    ("The disk holding this path (any path on it) is read by -semdiff with one \
+      stream at a time across all workers. The kind is recorded on the disk itself, \
+      in MOUNT-POINT/.semantic-unison, and applies to every later run. Disks that \
+      diskutil does not report as solid state are treated so already.")
+let semdiffSsd =
+  Prefs.createStringList "ssd" ~category:(`Advanced `General) ~local:true
+    "with -semdiff, record the disk holding this path as solid state: parallel readers"
+    "The opposite of -hdd, also recorded for later runs."
 let semdiffRoots =
   Prefs.createStringList "semdiffroot" ~category:(`Advanced `General) ~local:true
     "with -semdiff, also count a file as kept when it is on this root (repeatable)"
@@ -279,6 +284,7 @@ let semdiffSetup () =
         @ (if Prefs.read semdiffReview then ["-review"] else [])
         @ (if Prefs.read semdiffVerbose then ["-v"] else [])
         @ List.concat_map (fun p -> ["-hdd"; p]) (Prefs.read semdiffHdd)
+        @ List.concat_map (fun p -> ["-ssd"; p]) (Prefs.read semdiffSsd)
         @ ["-cache"; base ^ ".walk"; "-o"; base ^ ".jsonl"; "-resume";
            "-catchupto"; r2; "-catchupfile"; base ^ ".catchup"; r1] in
       Util.msg "semdiff: %s\n" (String.concat " " (List.map Filename.quote args));
