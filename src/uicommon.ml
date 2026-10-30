@@ -197,7 +197,7 @@ let semdiffPreserveDb =
 let semdiffPreserveFull =
   Prefs.createBool "preservefull" false ~category:(`Advanced `General) ~local:true
     "with -semdiff, -preserve and also keep each metadata-only file in full as a verified delta"
-    ("Implies -preserve. dng-compare's preserve_apo stores each file whose image is \
+    ("Implies -preserve. dng-compare's dng-archive stores each file whose image is \
       the same on both roots but whose bytes differ as a VCDIFF delta against its \
       match on the second root, verified to rebuild the exact file.")
 let semdiffTree =

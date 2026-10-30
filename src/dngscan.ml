@@ -162,10 +162,10 @@ let () =
     "-catchup", Arg.Set catchup, " then run unison to copy what is missing (creation only)";
     "-catchupto", Arg.Set_string catchup_to, "ROOT  long-term root to catch up (default: the first -semdiff root)";
     "-catchupfile", Arg.Set_string catchup_file, "FILE  catch-up list (default: REPORT.catchup)";
-    "-preserve", Arg.Set db, " store metadata differences in a dng-compare archive (default ROOT/.dng-compare/LEFT)";
+    "-preserve", Arg.Set db, " store metadata differences in a dng-compare archive (default ROOT/../dng-compare/NAME)";
     "-preservedb", Arg.String (fun d -> db := true; db_archive := d), "DIR  dng-compare archive for -preserve";
     "-preservefull", Arg.Unit (fun () -> db := true; preserve_full := true),
-      " -preserve, and also keep each metadata-only file in full as a verified delta (dng-compare preserve_apo)";
+      " -preserve, and also keep each metadata-only file in full as a verified delta (dng-archive)";
     "-hdd", Arg.String (fun p -> kinds := !kinds @ [("hdd", p)]),
       "PATH  PATH's disk is spinning: one reader at a time; recorded for later runs (any path on the disk)";
     "-readers", Arg.Int (fun n -> if n < 1 || n > 64 then raise (Arg.Bad "-readers: 1..64"); readers := Some n),

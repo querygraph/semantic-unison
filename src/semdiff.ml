@@ -541,7 +541,8 @@ let utc_stamp () =
   let t = Unix.gmtime (Unix.time ()) in
   Printf.sprintf "%04d%02d%02dT%02d%02d%02dZ" (t.tm_year + 1900) (t.tm_mon + 1) t.tm_mday t.tm_hour t.tm_min t.tm_sec
 
-(* dng-compare's preserve_apo manifest: relative path -> [ino, size, mtime_ns, ctime_ns]. *)
+(* The preservation manifest, written by dng-archive or by dng-compare's
+   preserve_apo: relative path -> [ino, size, mtime_ns, ctime_ns]. *)
 let preserved archive =
   let t = Hashtbl.create 256 in
   let manifest = Filename.concat archive "manifest.jsonl" in
@@ -775,7 +776,7 @@ let archive_rels batches =
     (try Sys.readdir batches with Sys_error _ -> [||]);
   t
 
-let write_archive ~archive ~dng_compare ~exiftool ~left records root =
+let write_archive ~archive ~archiver ~exiftool ~left records root =
   let prov = Filename.concat archive "provenance.json" in
   let ours () = Sys.file_exists prov &&
     (match parse (In_channel.with_open_bin prov In_channel.input_all) with
@@ -833,18 +834,17 @@ let write_archive ~archive ~dng_compare ~exiftool ~left records root =
     ("engine", Str engine); ("rows_added", Num (string_of_int (List.length rows)));
     ("paths_recorded_earlier", Num (string_of_int (Hashtbl.length known)))]));
   output_char runs '\n'; close_out runs;
-  let cmd = Printf.sprintf "cd %s && uv run python metadata_index.py %s"
-      (Filename.quote dng_compare) (Filename.quote archive) in
-  Printf.printf "\ndng-compare archive %s: %d rows added (%d paths recorded earlier); indexing with %s/metadata_index.py\n%!"
-    archive (List.length rows) (Hashtbl.length known) dng_compare;
+  let cmd = Printf.sprintf "%s index %s" (Filename.quote archiver) (Filename.quote archive) in
+  Printf.printf "\ndng-compare archive %s: %d rows added (%d paths recorded earlier); indexing with %s\n%!"
+    archive (List.length rows) (Hashtbl.length known) archiver;
   if Sys.command cmd <> 0 then
     Printf.printf "  indexing failed; the batches are kept, rerun: %s\n" cmd
 
-(* -preservefull: dng-compare's preserve_apo keeps each metadata-only file as a
+(* -preservefull: dng-archive keeps each metadata-only file as a
    verified VCDIFF delta against its match, rebuildable to the exact SHA-256. *)
-let preserve_full ?(verbose = false) ~archive ~dng_compare ~workers ~left records root =
+let preserve_full ?(verbose = false) ~archive ~archiver ~workers ~left records root =
   let done_ = preserved archive in
-  (* preserve_apo keeps one record per relative path: never replace the record
+  (* The archive keeps one record per relative path: never replace the record
      of another version. *)
   let other = ref [] in
   let pairs = List.filter_map (fun r ->
@@ -859,10 +859,10 @@ let preserve_full ?(verbose = false) ~archive ~dng_compare ~workers ~left record
   if pairs = [] then Printf.printf "\npreserved in full: nothing new for %s\n" archive else begin
     let file = Filename.concat archive (Printf.sprintf "pairs-%s-%d.jsonl" (utc_stamp ()) (Unix.getpid ())) in
     Out_channel.with_open_bin file (fun ch -> List.iter (fun l -> output_string ch l; output_char ch '\n') pairs);
-    let cmd = Printf.sprintf "cd %s && uv run python preserve_apo.py scan %s %s %s --delta --pairs %s --workers %d"
-        (Filename.quote dng_compare) (Filename.quote left) (Filename.quote root) (Filename.quote archive)
+    let cmd = Printf.sprintf "%s preserve %s %s %s --delta --pairs %s --workers %d"
+        (Filename.quote archiver) (Filename.quote left) (Filename.quote root) (Filename.quote archive)
         (Filename.quote file) (max 1 (min 36 workers)) in
-    Printf.printf "\npreserving %d metadata-only files in full with %s/preserve_apo.py\n%!" (List.length pairs) dng_compare;
+    Printf.printf "\npreserving %d metadata-only files in full with %s\n%!" (List.length pairs) archiver;
     let cmd = if verbose then cmd ^ " 2>&1 | tee " ^ Filename.quote (file ^ ".log") ^ "; exit ${PIPESTATUS[0]}"
       else cmd ^ " > " ^ Filename.quote (file ^ ".log") ^ " 2>&1" in
     if Sys.command ("bash -c " ^ Filename.quote cmd) <> 0 then
@@ -1059,6 +1059,11 @@ let run c =
   let exiftool = if c.exiftool_path <> "" then c.exiftool_path else
     find_program "metadata-extract-exiftool-rs-oxcaml"
       (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["default"; "5.2.0+ox"]) in
+  (* dng-compare's OCaml archive tool: index, preserve, restore. *)
+  let archiver = match Sys.getenv_opt "DNG_ARCHIVE" with
+    | Some p when p <> "" -> p
+    | _ -> find_program "dng-archive"
+             (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["5.2.0+ox"; "default"]) in
   let from_reports = c.summarize || c.review in
   let records =
     if from_reports then
@@ -1099,8 +1104,8 @@ let run c =
     List.iter (fun root ->
       let archive = archive_of root in
       try
-        write_archive ~archive ~dng_compare:c.dng_compare_home ~exiftool ~left records root;
-        if c.preserve_full then preserve_full ~verbose:c.verbose ~archive ~dng_compare:c.dng_compare_home ~workers:c.workers ~left records root
+        write_archive ~archive ~archiver ~exiftool ~left records root;
+        if c.preserve_full then preserve_full ~verbose:c.verbose ~archive ~archiver ~workers:c.workers ~left records root
       with Failure e | Sys_error e -> Printf.printf "dng-compare archive not written: %s\n" e) targets;
   if c.db && catchup_root <> "" then keep_conflicts c.placement ~root:catchup_root records;
   let archives = existing_archives () in

@@ -5,10 +5,12 @@ Synthetic DNG and JPEG fixtures only, in a private temporary directory: a
 shuttle root and a long-term root beside which the review tree and the
 dng-compare archive are created. Runs the real binaries and checks the files
 they leave, the summaries, the dng-compare index and a restore from a
--preservefull delta. dng-compare (uv, metadata_index.py, preserve_apo.py,
-metadata_rules.json and the exiftool-rs worker) is found through
-DNG_COMPARE_HOME or ~/src/dng-compare; without it the archive checks are
-skipped and reported as skipped."""
+-preservefull delta. dng-compare's metadata_rules.json and exiftool-rs worker
+are found through DNG_COMPARE_HOME or ~/src/dng-compare, and its OCaml
+dng-archive through DNG_ARCHIVE, PATH or the opam switches; without them the
+archive checks are skipped and reported as skipped. Stand-in uv and python
+commands first on PATH prove that no Python runs. When dng-compare's Python
+tools are present, preserve_apo.py also restores the delta dng-archive wrote."""
 import argparse, hashlib, json, os, pathlib, shutil, sqlite3, struct, subprocess, sys, tempfile
 
 p = argparse.ArgumentParser()
@@ -16,7 +18,10 @@ p.add_argument('--unison', required=True, help='text-UI unison binary of this bu
 p.add_argument('--dngscan', required=True, help='unison-dngscan of the same build')
 a = p.parse_args()
 home = pathlib.Path(os.environ.get('DNG_COMPARE_HOME', pathlib.Path.home() / 'src/dng-compare'))
-have_dng_compare = (home / 'preserve_apo.py').is_file() and shutil.which('uv') and shutil.which('xdelta3')
+archiver = next((c for c in [os.environ.get('DNG_ARCHIVE'), shutil.which('dng-archive')] +
+                 [str(pathlib.Path.home() / '.opam' / sw / 'bin/dng-archive') for sw in ('5.2.0+ox', 'default')]
+                 if c and os.access(c, os.X_OK)), None)
+have_dng_compare = (home / 'metadata_rules.json').is_file() and archiver and shutil.which('xdelta3')
 
 
 def dng(rating, raw_flip=None, size=262144):
@@ -80,7 +85,14 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
     before = {p: sha(p) for p in left.rglob('*') if p.is_file()}
 
     # Every disk counts as spinning, so the one-reader-per-disk lock is exercised.
-    env = dict(os.environ, UNISON=str(t / 'unisondir'), UNISON_SEMDIFF_ONE_READER='all')
+    # Stand-ins first on PATH record any Python that a run starts.
+    stand_ins, python_calls = t / 'no-python', t / 'python-calls'
+    stand_ins.mkdir()
+    for name in ('uv', 'python', 'python3'):
+        (stand_ins / name).write_text('#!/bin/sh\necho "%s $*" >> %s\nexit 99\n' % (name, python_calls))
+        (stand_ins / name).chmod(0o755)
+    env = dict(os.environ, UNISON=str(t / 'unisondir'), UNISON_SEMDIFF_ONE_READER='all',
+               DNG_ARCHIVE=archiver or '', PATH=str(stand_ins) + os.pathsep + os.environ['PATH'])
     (t / 'unisondir').mkdir()
     def unison(*args, rc=0):
         r = subprocess.run([a.unison, str(left), str(right), '-semdiff', '-batch', '-semdiffscanner', a.dngscan, *args],
@@ -121,9 +133,14 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         db = sqlite3.connect(archive / 'metadata/differences.sqlite3')
         check(db.execute("SELECT COUNT(*) FROM files WHERE path='2026/A/s1/meta.DNG'").fetchone()[0] == 1, 'indexed in dng-compare')
         restored = t / 'restored.DNG'
-        r = subprocess.run(['uv', 'run', 'python', 'preserve_apo.py', 'restore', str(archive), '2026/A/s1/meta.DNG', str(restored)],
-                           cwd=home, capture_output=True, text=True)
+        r = subprocess.run([archiver, 'restore', str(archive), '2026/A/s1/meta.DNG', str(restored)], capture_output=True, text=True)
         check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'restore from the -preservefull delta')
+        check(not python_calls.exists(), 'no Python ran: ' + (python_calls.read_text() if python_calls.exists() else ''))
+        if (home / 'preserve_apo.py').is_file() and shutil.which('uv'):
+            restored.unlink()
+            r = subprocess.run(['uv', 'run', 'python', 'preserve_apo.py', 'restore', str(archive), '2026/A/s1/meta.DNG', str(restored)],
+                               cwd=home, capture_output=True, text=True)
+            check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'Python restores the OCaml delta')
         out = unison(*full)
         check('safe to wipe: 9 of 9 files' in out, 'second run: everything safe\n' + out)
         # -review reruns on the conflicts only; -suffix and -suffix=NAME copy beside the original.
@@ -148,7 +165,8 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         check('already holds another version' in out, 'full preservation never replaces another version')
         check((right / '2026/A/s1/meta.DNG').read_bytes() == files['meta.DNG'][1], 'long-term file still untouched')
     else:
-        print('SKIPPED: dng-compare archive, preservation and conflict-copy checks (no dng-compare, uv or xdelta3)')
+        print('SKIPPED: dng-compare archive, preservation and conflict-copy checks (no dng-compare rules, dng-archive or xdelta3)')
     # The tool never writes the shuttle (meta.DNG was rewritten by this test for the second cycle).
     check(all(sha(p) == h for p, h in before.items() if p.exists() and p.name != 'meta.DNG'), 'shuttle files unchanged')
+    check(not python_calls.exists(), 'no Python ran in any run: ' + (python_calls.read_text() if python_calls.exists() else ''))
     print('PASS%d semdiff controls%s' % (checks, '' if have_dng_compare else ' (dng-compare checks skipped)'))

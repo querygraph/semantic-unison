@@ -61,7 +61,7 @@ Next to the long-term root `R` (for example `/Volumes/Photo/foto`):
 | --- | --- |
 | `-preserve` | `R/../dng-compare/SHUTTLE` (for example `/Volumes/Photo/dng-compare/Kolobok-foto`), a dng-compare archive whose rows are only ever added |
 | `-preservedb DIR` | that archive instead (implies `-preserve`) |
-| `-preservefull` | implies `-preserve`; the same archive also holds each metadata-only file as a VCDIFF delta from dng-compare's `preserve_apo.py`, verified to rebuild the exact file |
+| `-preservefull` | implies `-preserve`; the same archive also holds each metadata-only file as a VCDIFF delta from dng-compare's `dng-archive`, verified to rebuild the exact file |
 | default for conflicts | `R/../review/NAME/` with the same relative path, where NAME is R's own name: `/Volumes/Photo/review/foto/…` and `/Volumes/Photo/review/jpg/…` never collide |
 | `-tree TREE` | `R/../TREE/NAME/` instead |
 | `-suffix` | beside the long-term file as `NAME_2.EXT`, `NAME_3.EXT`, … |
@@ -79,11 +79,11 @@ another version and stay "not safe" until handled by hand.
 
 Conflict copies are verified by SHA-256 against the shuttle file and never
 replace an existing file; an identical copy from an earlier run is reused.
-Restore a preserved file into a new location with dng-compare:
+Restore a preserved file into a new location with dng-compare's `dng-archive`
+(`preserve_apo.py restore` reads the same archive):
 
 ```sh
-cd ~/src/dng-compare
-uv run python preserve_apo.py restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG
+dng-archive restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG
 ```
 
 ## Same view
@@ -170,8 +170,12 @@ unison-dngscan -review -semdiff ROOT -o REPORT.jsonl [-tree NAME | -suffix[=SUF]
 - **`-catchup`** runs `unison LEFT ROOT -semcatchupfrom LIST` with the list
   just written.
 
-dng-compare is found through `DNG_COMPARE_HOME`, default `~/src/dng-compare`.
-`-preserve` needs `uv`; `-preservefull` also needs `xdelta3`.
+The metadata rules come from dng-compare, found through `DNG_COMPARE_HOME`
+(default `~/src/dng-compare`). `-preserve` and `-preservefull` run dng-compare's
+OCaml `dng-archive` (opam package `dng-archive`, in `ocaml-archive/`), found
+through `DNG_ARCHIVE`, else `PATH`, else the `5.2.0+ox` and `default` opam
+switches; it writes the same archive files as dng-compare's Python tools. No
+Python runs. `-preservefull` also needs `xdelta3`.
 
 ## Tests
 
