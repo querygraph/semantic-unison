@@ -1,0 +1,24 @@
+{
+  "state": "QUEUED_SOURCE_REQUEST_NO_RUNTIME_GRANT",
+  "queue_id": "01a1509e-899a-7a43-a82b-1ec189837fe8",
+  "receiver_thread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "actual_queue_tool": {
+    "chunk_id": "afadbc",
+    "exit_code": 0
+  },
+  "index": {
+    "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-requalification-requests-v5.json",
+    "bytes": 2734,
+    "sha256": "db616795aa0c03775745f2ec7457007baa7921133c798ddafd61648b1e743cde"
+  },
+  "frozen_metadata_head": "2e24a0fc",
+  "frozen_source_base": "3618fc58",
+  "production_commit": "b8c67465",
+  "actual_fork_push": {
+    "session_id": 32600,
+    "chunk_id": "6f4916",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "scope": "Source/preflight only; no runtime admission, payload, child, lock or scheduling hold. V4 source proposals superseded unadmitted with originals preserved. Separate exact Root grants required."
+}
