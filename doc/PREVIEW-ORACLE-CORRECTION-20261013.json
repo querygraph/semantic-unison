@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-13T10:29:25.546058+00:00",
+  "recipient": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "status": "QUEUED_TO_OWNER",
+  "returncode": 0,
+  "stdout": "Queued message 01a134cf-55a4-7fc3-b803-0b88b322bd0c for thread 01a13369-8b68-7aa1-be91-cba984ba269b.\n",
+  "stderr": "",
+  "local_task": "/root/preview_generators",
+  "local_task_acknowledged": true,
+  "lux_adoption": "Accepted/adopted and open in stable15.6, reported by takeover owner/user",
+  "native_oracle_gate": "Await corrected helper Accessibility grant and coordinated owner window",
+  "full_generator_run_authorized": false,
+  "message_file": "/Users/alexy/src/unison/PREVIEW-ORACLE-CORRECTION-20261013.txt",
+  "artifact_sha256": {
+    "/Users/alexy/src/unison/LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json": "c3da42417d3276af62e5bdb31460416cd3ae8ff45c86288ceaf2cd260177f73a",
+    "/Users/alexy/src/photo/NATIVE-DIRECT-PREVIEW-INDEPENDENT-REVIEW-20261013.md": "9652bf888087d90288576508084bab97f7ca47dc6e898fb3fd8d0c01293da34f",
+    "/Users/alexy/src/unison/doc/preview-design-integration.md": "42d23df3f4059e89943b5691a540ad82b5b26679637be4503a7c6c7cad0b1a32",
+    "/Users/alexy/src/unison/doc/lightroom-preview-placement.md": "6cf6c908799978baf28a91510dc98a7e4556baae9a156e79baf021c47e016043",
+    "/Users/alexy/src/unison/PREVIEW-ORACLE-CORRECTION-20261013.txt": "69533c66a2b5be29fa52cca0d59a6cf1c8a4a2cd0a6835a244ae2cc59aeddb6e"
+  }
+}

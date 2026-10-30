@@ -2861,13 +2861,13 @@ can be stale after direct SSH pushes. Check actual remote/PR state when necessar
 
 Protected untracked files: never stage/edit/delete them:
 
-- `LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json`
+- `doc/LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json`
 - `PHOTO-OWNER-BRIDGE-RESTORE-5e683f78e8d2454a97cc610429e1e321.json`
 - `PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json`
 - `PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json.tmp-61fb2b7d09724a88b42feed0ac167b55`
-- `PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.{json,txt}`
-- `PREVIEW-ORACLE-CORRECTION-20261013.{json,txt}`
-- `PREVIEW-REVIEW-FORWARD-20261013.{json,txt}`
+- `doc/PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.{json,txt}`
+- `doc/PREVIEW-ORACLE-CORRECTION-20261013.{json,txt}`
+- `doc/PREVIEW-REVIEW-FORWARD-20261013.{json,txt}`
 
 ## Architecture and design implemented
 
