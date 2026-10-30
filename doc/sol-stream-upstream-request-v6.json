@@ -1,0 +1,44 @@
+{
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-stream-qualified-20261018/tests/mixed_peer_compatibility/entry.py",
+    "--plan",
+    "/Users/alexy/src/unison-stream-qualified-20261018/doc/sol-stream-upstream-plan-v6.json",
+    "--plan-sha256",
+    "7260365a7eb4bf4de0ac743e9c1b01828cbec4aac01c50ffffd2b77c7cb12b2e",
+    "--admission",
+    "/private/tmp/unison-stream-upstream-admission-0c5fe64a.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "limits": {
+    "call_observation_seconds": 30,
+    "calls": 12,
+    "cases": 4,
+    "endpoint_workers": 2,
+    "owner_credits": 2,
+    "owner_observation_seconds": 300,
+    "sdk_calls": 0,
+    "total_credits": 8
+  },
+  "metadata_preflight": "Current checked_plan passed; no admission/lock/workspace/worker. Artifact verification remains mandatory after actual IO/CPU acquisition.",
+  "plan": {
+    "bytes": 64523,
+    "path": "/Users/alexy/src/unison-stream-qualified-20261018/doc/sol-stream-upstream-plan-v6.json",
+    "sha256": "7260365a7eb4bf4de0ac743e9c1b01828cbec4aac01c50ffffd2b77c7cb12b2e"
+  },
+  "prepared_from_commit": "63e4b947",
+  "production_commit": "513c121a",
+  "proposed_admission": "/private/tmp/unison-stream-upstream-admission-0c5fe64a.json",
+  "required_admission_fields": {
+    "plan_sha256": "7260365a7eb4bf4de0ac743e9c1b01828cbec4aac01c50ffffd2b77c7cb12b2e",
+    "start_deadline_unix": "ROOT_FRESH_DEADLINE_REQUIRED",
+    "state": "ROOT_ADMITTED_ONE_MIXED_PEER_JOB",
+    "workspace": "/private/tmp/u-mp-0c5fe64a"
+  },
+  "scope": "Fresh combined candidate upstream, four generated8KiB cases/12CLI/both directions; no SDK/Adobe/camera/Photo/nativeUI/compiler/performance/automatic successor. Unison00..07+existingEXglobal only.",
+  "state": "PREPARED_NOT_ADMITTED_NOT_DISPATCHED",
+  "supersession": "Fresh qualified classifier-failure correction513c121a. V5 source proposals deferred for confirmed contract gap; V4 and all predecessor bytes preserved. Separate exact Root admission required, no old grant reuse.",
+  "unknown_policy": "Retain actual owners/grants on unknown child/server/pump/group/FD; no broad kill, retry or numeric-FD reuse. Return actual owning-tool terminal independently of CLOSED.",
+  "workspace": "/private/tmp/u-mp-0c5fe64a"
+}
