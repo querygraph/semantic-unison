@@ -1,0 +1,65 @@
+{
+  "candidate_commit": "3618fc58",
+  "limits": "Separate fresh explicit Root grants only, serial Unison00..07+existingEXglobal; no SDK/Adobe/camera/Photo/nativeUI/compiler/performance/retry/automatic successor. This preparation creates no admission, workspace, lock or child.",
+  "predecessor_index": {
+    "bytes": 2983,
+    "path": "/Users/alexy/src/unison-outbound-accounting-20261018/doc/sol-fixed-requalification-requests-v4.json",
+    "sha256": "bf54dd3e064d0a27bbc0a31df50d2c5b18223cec9f17e43a76571c79f230171c"
+  },
+  "production_commit": "b8c67465",
+  "recommended_order": [
+    "upstream",
+    "retained-fork",
+    "properties"
+  ],
+  "requests": [
+    {
+      "admission_path": "/private/tmp/unison-producer-upstream-admission-239498a8.json",
+      "execution_pins": 400,
+      "label": "upstream",
+      "metadata_preflight": true,
+      "plan": {
+        "bytes": 65143,
+        "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-upstream-plan-v5.json",
+        "sha256": "6aa792b7bfdf98a037de4aaff20ad6c2623bf554509f0832f9149e348ab52851"
+      },
+      "request": {
+        "bytes": 2308,
+        "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-upstream-request-v5.json",
+        "sha256": "1388107e64bbd9f7e656da532893f41d0482213bcefad2aa10b89b8c483c14bf"
+      },
+      "workspace": "/private/tmp/u-mp-239498a8"
+    },
+    {
+      "admission_path": "/private/tmp/unison-producer-retained-fork-admission-1651fe45.json",
+      "execution_pins": 400,
+      "label": "retained-fork",
+      "metadata_preflight": true,
+      "plan": {
+        "bytes": 68920,
+        "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-retained-fork-plan-v5.json",
+        "sha256": "5e652a9dc52629bd0ff7d1393411637a85441e97027b99193f4c3581270d3b61"
+      },
+      "request": {
+        "bytes": 2333,
+        "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-retained-fork-request-v5.json",
+        "sha256": "4633fee41140e34b4a7eec891bfd138f5b411660bca3da16da619ca5e4b57a9d"
+      },
+      "workspace": "/private/tmp/u-mp-1651fe45"
+    },
+    {
+      "admission_path": "/private/tmp/unison-producer-properties-admission-59455b3c.json",
+      "execution_pins": 43,
+      "label": "properties",
+      "metadata_preflight": true,
+      "production_pins": 329,
+      "request": {
+        "bytes": 46002,
+        "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-properties-request-v5.json",
+        "sha256": "d91344aefa4570bd939a2311ca45a4fdb3303661233d1339521f800e8f448ffe"
+      },
+      "workspace": "/private/tmp/u-props-59455b3c"
+    }
+  ],
+  "state": "PREPARED_SOURCE_ONLY_NO_RUNTIME_ADMISSION"
+}
