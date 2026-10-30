@@ -1,0 +1,156 @@
+{
+  "utc": "2026-10-13T12:14:41.198682+00:00",
+  "recipient": "Codex session 01a133ca-2639-73c3-8da8-b42902c834fd in /Users/alexy/src/unison; message queued successfully",
+  "userRequirements": {
+    "implementations": [
+      "Rust",
+      "OxCaml"
+    ],
+    "physicalWorkers": 18,
+    "standaloneProductionRendering": true,
+    "LightroomAllowedAsOracle": true,
+    "investigateAdobeCompatibleRendererBeforeImplementation": true,
+    "targetMonitorPhysicalPixels": [
+      5120,
+      2880
+    ],
+    "monitorPayloadVolume": "/Volumes/Quasar",
+    "lowerLevelsAndExistingCache": "/Volumes/Ten/Lightroom/Alexy Previews.lrdata",
+    "benchmarkBothBeforeFullRun": true
+  },
+  "classic": {
+    "app": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app",
+    "version": "15.6",
+    "build": "15.6",
+    "catalog": "/Volumes/Lux/Lightroom/Alexy/Alexy.lrcat",
+    "prerelease16Excluded": true
+  },
+  "verifiedModernFormat": {
+    "schemaVersion": 13,
+    "payload": "Individual JPEG per level. Native converted legacy files may use external profile metadata without embedded ICC; preserve actual native profile evidence.",
+    "pathPattern": "<cache>/<UUID[0]>/<UUID[:4]>/<rootFileUUID>-<currentDevelopDigest>_<actualLongDimension>",
+    "rootFileUUID": "AgLibraryFile.id_global via Adobe_images.rootFile",
+    "currentDigest": "Latest Adobe_imageDevelopSettings row for image ordered id_local DESC",
+    "metadataTables": "Native PreviewDataStore Pyramid/PyramidLevel/ImageCacheEntry; exact schema/readback must be qualified",
+    "rootPixels": "Separate root-pixels.db; small first/root level, not full-resolution image",
+    "legacy": "AgHg .lrprev formatVersion3 packs all JPEG levels together; cannot split individual levels using file links"
+  },
+  "proposedSplit": {
+    "status": "DESIGN_REVIEW_COMPLETE_RUNTIME_QUALIFICATION_PENDING",
+    "ten": "Retain existing9.18TB plus smaller new levels/databases",
+    "quasar": "New monitor-resolution JPEG payloads, initially native5120 long-edge when source/crop adequate",
+    "reference": "Candidate absolute file symlink at canonical Ten filename to Quasar UUID-sharded payload",
+    "noOldBulkRecopy": true,
+    "trueOriginal1to1Separate": "Monitor-sized5120 is distinct from full original resolution; do not upscale smaller crops",
+    "highestLevelAvailabilityDependency": "Installed PreviewFile.loadPyramidfromBlobFiles checks existence and modification time of highest registered level even when requesting smaller levels. Inference: absent Quasar highest-level target may prevent loading smaller Ten levels. Unplug/fallback runtime oracle remains mandatory. Do not promise independent lower-tier availability."
+  },
+  "volumes": {
+    "Quasar": {
+      "uuid": "E31B795D-FA19-4938-97E2-B6ED56A7C78F",
+      "filesystem": "apfs",
+      "totalBytes": 8001019707392,
+      "freeBytes": 8000162947072,
+      "statvfsAvailableBytes": 8000162947072,
+      "reserveBytes": 800101970740,
+      "reservedBudgetBytes": 7200060976332,
+      "utc": "2026-10-13T09:51:20.028434+00:00",
+      "freeBytesObserved": 8000162947072
+    },
+    "Ten": {
+      "freeBytesObserved": 10335843549184
+    }
+  },
+  "mandatoryQualification": [
+    "Native modern header/ICC/crop/orientation/quality and pyramid selection",
+    "Faithful external Adobe-current-edits renderer; genericRAWdefault must not be mislabeled current digest",
+    "Native registration/actual current UUID+digest/level dimensions, not filenames alone",
+    "AgBlob.writeToFile C-extension rewrite behavior: follows target or replaces Ten symlink, temporary directory/atomicity",
+    "Durable native readback after pending/active tasks clear; in-memory return/flushToQueue does not prove persistence",
+    "Private cleanup/unlink/orphan and absent-target tests",
+    "Per-disk capacity plus reserve/staging overlap from representative native output; old2880 interpolation conditional on native ladder",
+    "Equivalent Rust/OxCaml1/6/18core benchmarks including raw rendering, I/O, outputsize, memory, correctness against LrC oracles"
+  ],
+  "nativeOracleRoute": {
+    "useExistingServer": "(import AgPreviewManager).activePreviewServer().previewServer.server; actual native entry qualified. getServerHandle() is serialized transport data.",
+    "lowLevelLoad": "cache:loadPyramidLevel({imageId,uuid,digest,orientation,width,height,reason})",
+    "pathGuards": "cache._fileStore.path and cache._dataStore._database.path",
+    "actualContentGuard": "Whole-pyramid UUID/digest must match current Main. Installed15.6 per-level Preview objects have digest but no UUID. Bind each actual level digest and decoded dimensions/orientation to native PyramidLevel rows with currentUUID/digest; positive rowfileSize must equalactualbytes. Do not synthesize levelUUID.",
+    "avoid": "UI manager shared-request coalescing can satisfy cacheOnly request from other renderer; never makeForPath against live9TB cache",
+    "fallback": "lastCacheEntryForImage(imageId), not lastCacheEntryForPyramid",
+    "transactionOwner": "getAutoCommit()==false and ds._inTransaction==true; existing persistent native Auto savepoint; never author commit/rollback/flush",
+    "currentImageMappingOrientation": "Fresh raw owning-db ImageCacheEntry for requested image, after decode, must bind current UUID/digest before native-effective orientation matches captured Main/decode. Explicit native nil/false AB normalization; retain pre/post transition provenance. Source accepted, native proof pending.",
+    "mappingSourceCorrection": "/Users/alexy/src/photo/preview-orientation-source-review-20261013/ROOT-ACCEPTANCE.json"
+  },
+  "currentTransfer": "Native Unison Smart and core accepted zero skips/failures. Morrobay active generation2; Lux catalog open stable15.6 PID10536. All7performancephases verified automatically after restart. Native Sync enabled/initialized; actualcloudUI Synced andPauseSyncing,7passivezero-count events; no resume toggle needed. Root owns finiteprevieworacles.",
+  "artifacts": [
+    "/Users/alexy/src/photo/preview-generator/DESIGN.md",
+    "/Users/alexy/src/photo/preview-generator/MODERN-STORAGE-DESIGN.md",
+    "/Users/alexy/src/photo/preview-generator/MODERN-STORAGE-RECEIPT.json",
+    "/Users/alexy/src/photo/preview-generator/common/RENDERER-FEASIBILITY.md",
+    "/Users/alexy/src/photo/preview-generator/ASTRA-MONITOR-REVIEW.md"
+  ],
+  "capacityArtifacts": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/regular-preview-historical-capacity-20261013",
+  "mutationsSoFar": {
+    "Main": false,
+    "regularCache": "Finite native conversion of three preserved controls observed; all18 derived JPEGs exact. Missing registration remains unresolved. No bulk change.",
+    "QuasarPreviewPayloads": false,
+    "generatorImplemented": false
+  },
+  "recipientThread": "01a133ca-2639-73c3-8da8-b42902c834fd",
+  "recipientWorkspace": "/Users/alexy/src/unison",
+  "nativeMetadataVersions": {
+    "previewsStoreInfo": "13.0",
+    "rootPixelsStoreInfo": "1.0",
+    "sqlitePragmaUserVersion": 0,
+    "journalModeObserved": "delete"
+  },
+  "publicationArchitectureCandidate": {
+    "mode": "Standalone offline PreviewDB/root-pixels writer; noMain writes",
+    "gates": "Nativeisolatedoracleprovesallrow/trigger/tombstone/rootpixelsemantics, Classicnormallyclosed, preservedcompletecacheDBfamilies, exclusivewriter/launchwindow, durableJPEGs/linksbeforeDBvisibility, crossvolumewriteraheadjournalrecovery",
+    "liveWritesForbidden": true,
+    "schemaCaution": "PyramidDELETEtriggerremovesImageCacheEntry;DeletedPyramidtombstonesexist. NeverblindINSERT ORREPLACE/upsert."
+  },
+  "astraReviewStatus": "COMPLETE_RUNTIME_QUALIFICATION_PENDING",
+  "reviewedDesign": "/Users/alexy/src/photo/preview-generator/ASTRA-MONITOR-REVIEW.md",
+  "modernStorageDesign": "/Users/alexy/src/photo/preview-generator/MODERN-STORAGE-DESIGN.md",
+  "futurePerDiskCapacityArtifact": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/regular-preview-historical-capacity-20261013/SPLIT-MONITOR-CAPACITY.json",
+  "registrationPolicy": "Astra-reviewed offline cache publisher candidate replaces blanket allSQL prohibition; Main/livecache writes remain forbidden.",
+  "capacityBothPoliciesArtifact": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/regular-preview-historical-capacity-20261013/SPLIT-MONITOR-CAPACITY-BOTH-POLICIES.json",
+  "capacityPolicyB": {
+    "laterGapKeys": 134582,
+    "laterGapQuasarAllowanceTB": 1.837,
+    "laterGapTenAllowanceTB": 0.828,
+    "fullBacklogKeys": 761466,
+    "fullBacklogQuasarMeanTB": 4.009,
+    "fullBacklogQuasarAllowanceTB": 9.1,
+    "fullBacklogTenAllowanceTB": 4.411,
+    "quasarReservedBudgetTB": 7.200061,
+    "tenReservedBudgetTB": 8.336,
+    "fullBacklogFit": "Mean and summed per-photo P95 fit new8TBbudget; conservative9.100TBallowance still exceedsbudget, so fullbuild remains measurement-qualified."
+  },
+  "queueReceipt": "/Users/alexy/src/photo/CODEX-PREVIEW-QUEUE-20261013.json",
+  "recipientAcknowledgedDesign": true,
+  "nativeOracleIdentityCorrectionEvidence": "/Users/alexy/src/photo/NATIVE-DIRECT-PREVIEW-INDEPENDENT-REVIEW-20261013.md",
+  "capacityCurrentArtifact": "/Users/alexy/src/photo/quasar-apfs8tb-update-20261013/SPLIT-MONITOR-CAPACITY-APFS8TB.json",
+  "quasarAPFSUpdate": {
+    "previousUUID": "C611DC0B-5B60-3B1F-90D8-CC6EAF47F920",
+    "observed": "2026-10-13T09:51:20.028434+00:00",
+    "source": "User update plus actual diskutil/statvfs",
+    "cloneScope": "Same APFS volume only; Ten remains HFS+, crossvolume journal andsymlinkqualification unchanged."
+  },
+  "registrationFindings": "/Users/alexy/src/photo/preview-registration-findings-20261013/FINDINGS.json",
+  "implementationOwnership": {
+    "rendererAndPublisher": "photo-session /root/preview_implementation",
+    "unisonTask": "preview_generators interface integration/review",
+    "integrationFindings": "/Users/alexy/src/unison/doc/preview-design-integration.md",
+    "forwardedByPhotoParent": true,
+    "implementationTaskReactivated": true,
+    "downstreamAcknowledgmentPending": false,
+    "acknowledgedByOriginalPhotoTask": true,
+    "acknowledgmentUTC": "2026-10-13T10:45:49.738986+00:00"
+  },
+  "receiverAndOracleReadiness": "/Users/alexy/src/photo/preview-unison-coordination-20261013/RECEIVER-AND-ORACLE-READINESS.json",
+  "externalOracleWindowReleased": false,
+  "sourceDocumentClientCorrectionCompleted": true,
+  "resourceContract": "One aggregate18-credit CPU budget includes native renderer/codec threads; bounded source-resolution memory; matched1/6/18compute-only+end-to-end benchmarks after qualification."
+}

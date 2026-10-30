@@ -2,7 +2,7 @@
 
 Status: **review integrated; renderer/publisher/runtime qualification pending**,
 2026-10-13. This records the user's coordination request and the current
-[handoff](../LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json),
+[handoff](LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json),
 [Astra review](../../photo/preview-generator/ASTRA-MONITOR-REVIEW.md),
 [modern storage design](../../photo/preview-generator/MODERN-STORAGE-DESIGN.md)
 and [renderer feasibility findings](../../photo/preview-generator/common/RENDERER-FEASIBILITY.md).
@@ -121,7 +121,7 @@ are separate acceptance gates.
 The full review/findings were queued successfully to the takeover parent for
 its existing preview implementation task. Direct input to that unloaded
 spawned task was rejected by the app server, so forwarding uses its parent.
-The [delivery receipt](../PREVIEW-REVIEW-FORWARD-20261013.json) records the queued
+The [delivery receipt](PREVIEW-REVIEW-FORWARD-20261013.json) records the queued
 owner message, prior rejected attempt and local task acknowledgment. Queued
 delivery is distinct from downstream acceptance or release of an oracle gate.
 The updated shared handoff now records photo-parent forwarding and acknowledgment

@@ -3,7 +3,7 @@
 Status: **architecture contract; runtime qualification pending**,
 2026-10-13. This is the Lightroom binding of
 [Component placement v0](component-placement-v0.md). It incorporates the
-[session handoff](../LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json) and the
+[session handoff](LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json) and the
 reviewed preview-generator designs listed below. Another Codex session owns
 the standalone Rust/OxCaml renderers and native publisher. This Unison work
 defines the synchronization/placement boundary; it does not launch Lightroom,

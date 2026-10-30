@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-13T10:17:07.346005+00:00",
+  "recipient": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "task": "Lightroom takeover parent; existing preview_implementation forwarding requested",
+  "status": "QUEUED_TO_OWNER",
+  "returncode": 0,
+  "stdout": "Queued message 01a134c4-120c-7cd1-9e52-156f8c608d8a for thread 01a13369-8b68-7aa1-be91-cba984ba269b.\n",
+  "stderr": "",
+  "message_file": "/Users/alexy/src/unison/PREVIEW-REVIEW-FORWARD-20261013.txt",
+  "previous_attempt": {
+    "utc": "2026-10-13T10:16:08.974061+00:00",
+    "recipient": "01a13447-71ba-77c3-9396-285b4aaff8e9",
+    "task": "photo-session /root/preview_implementation",
+    "status": "FAILED",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "message_file": "/Users/alexy/src/unison/PREVIEW-REVIEW-FORWARD-20261013.txt"
+  },
+  "local_preview_task": "/root/preview_generators",
+  "local_task_acknowledged": true,
+  "integration_evidence_utc": "2026-10-13T10:24:47.165753+00:00",
+  "source_artifact_sha256": {
+    "/Users/alexy/src/unison/LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json": "c3da42417d3276af62e5bdb31460416cd3ae8ff45c86288ceaf2cd260177f73a",
+    "/Users/alexy/src/photo/preview-generator/ASTRA-MONITOR-REVIEW.md": "84e59c594ed055ddb4f831a2060d1e9ad0c4d6502c1395c90f16e9665f779286",
+    "/Users/alexy/src/photo/preview-generator/MODERN-STORAGE-DESIGN.md": "0c0968219e247244486c585a81f4edf13e9bd1305b2b80e97c7fc49e7bf9e9d2",
+    "/Users/alexy/src/photo/preview-generator/DESIGN.md": "ada760720f38caa5f78a4c798193d8abb47a91b89549466654db4efa6859de23",
+    "/Users/alexy/src/photo/preview-generator/common/RENDERER-FEASIBILITY.md": "27ab5ea4fcc6976431595de8a45e9b54d5fc03c703130b7794016e6a0a98ecd8",
+    "/Users/alexy/src/unison/doc/preview-design-integration.md": "02880b7f1790928c7dd09340dd9ab39163342257155b2fa84e9a750da660a5fd",
+    "/Users/alexy/src/unison/PREVIEW-REVIEW-FORWARD-20261013.txt": "5b23cf345de7d55bc15f082ce145f9b755cd407180919eb5c437918c3afdd5fc"
+  },
+  "receiver_oracle_gate": "Awaiting takeover-owner acceptance/window confirmation; no native/Photo/cache work executed here"
+}

@@ -1,0 +1,46 @@
+{
+  "utc": "2026-10-14T09:37:41.714192+00:00",
+  "state": "ROOT_SMALL_QUASAR_FOUR_PASS_CLOSED_RESTART_PENDING_LOCKED_QUIT_MODAL",
+  "rootStatus": {
+    "path": "/Users/alexy/src/photo/preview-generator/ROOT-CURRENT-PREVIEW-STATUS.json",
+    "bytes": 8688,
+    "sha256": "5576f4310e62b8e13c3f2b448fbb007b0f054fff1a3a08d26dc89bc639afb289"
+  },
+  "evidence": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/preview-pyramid-timestamp-scope-addendum-v1.json",
+      "bytes": 5490,
+      "sha256": "ab0f86bea3a489dc63cf2d3fd6e92d8a0c622dbd169f1e5cc5acb8dca640a92d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/ROOT-PYRAMID-TIMESTAMP-SCOPE-COUNTERSIGN-v1.json",
+      "bytes": 1407,
+      "sha256": "b7567915e59f47f1f0a35efcc5b0343f395be78d2a87a54b2e6431404949efd1"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/quasar-placement-v2/runtimes/split-high-lower-4773d46d51844a12b15753619c3df1d9/INDEPENDENT-COMPLETED-CURRENT-QUASAR-READBACK-REVIEW.json",
+      "bytes": 7561,
+      "sha256": "1ed2f81a9f4e1b116fa5d581039012ba3e84076c83b71ebcacdf818bbba703e2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/quasar-placement-v3/CURRENT-AFTER-QUALIFIED-NATIVE-v1.json",
+      "bytes": 19488,
+      "sha256": "2575f36b11a6f6d8278f71b1b27de34506b8a9955528bdf7f1f0e9a8282f10c8"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/quasar-placement-v3/ROOT-CURRENT-CAPTURE-COUNTERSIGN-v1.json",
+      "bytes": 1429,
+      "sha256": "c4b50361882d650c67291487de558f3cde61d40327d0ab6d56e87a91c4768bad"
+    }
+  ],
+  "quasarSmallPreservedHighLowerPassed": true,
+  "restartQualified": false,
+  "BIGQualified": false,
+  "productionPublisherReleased": false,
+  "fullRunReleased": false,
+  "nativeWindowReleased": false,
+  "owner": "/root and original preview implementation",
+  "restartCoordinatorPID": 59489,
+  "classicPID": 40020,
+  "canonicalLeaseRetained": true
+}

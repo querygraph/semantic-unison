@@ -1,0 +1,147 @@
+{
+  "utc": "2026-10-14T04:51:30.245545+00:00",
+  "state": "DURABLE_PARENT_COORDINATION_RESTORED_AWAITING_RECEIVER_ACK",
+  "photoParentThread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "unisonParentThread": "01a133ca-2639-73c3-8da8-b42902c834fd",
+  "originalRendererPublisherOwner": "/root/preview_implementation",
+  "nativeDriver": "Photo /root",
+  "currentStatusPointer": "/Users/alexy/src/unison/PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json",
+  "lastObservedClassic": {
+    "pid": 40020,
+    "start": "Tue Oct 13 19:47:43 2026",
+    "observedRunningImmediatelyBeforeThisHandoff": true
+  },
+  "noRootOwnedNativeOrUIRequestsPending": true,
+  "completedHighestControlReceipts": [
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMPLETE.json",
+      "bytes": 28923,
+      "sha256": "5c14b1f24909b92845babfa3824f4c37d583380089aab3ce8cad429d70623553"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/RETURN-PACKET.json",
+      "bytes": 9019,
+      "sha256": "5eff456fe9dc7ad7f196f95fbd3c8eb2aeafe1ec2a1771cd79b4c3a388053eee"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/SLOT-CLOSED.json",
+      "bytes": 2886,
+      "sha256": "662c05ee78718dd5971b161d5e9c8cc35c1a9843a825c33c846122c616ac8a44"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/INDEPENDENT-COMPLETED-HIGHEST-REVIEW.json",
+      "bytes": 10236,
+      "sha256": "90a8ab70d475bce9e05ea2723028ed89b14ebbba72a771b67cffa47b845b8b7f"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-INDEPENDENT-ACCEPTANCE.json",
+      "bytes": 922,
+      "sha256": "76b497825baeed6f4bec11e2af708ff9ae2dbbf61fb4681721821fb838430c0e"
+    }
+  ],
+  "completedHighestScope": "One current control, native highest 2272x1704 load and reload after ordinary Classic restart; six registered native JPEG levels and files unchanged. No replay needed.",
+  "privateRecipeReady": {
+    "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/READY-FOR-REVIEW.json",
+    "bytes": 4298,
+    "sha256": "f657564ad0f31604d00cfc9e7e17418906507dabefa09c4dca3dac86d6899537"
+  },
+  "privateRecipePinsVerifiedByRoot": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/private_publisher.py",
+      "bytes": 7288,
+      "sha256": "7d865051313c961b8fa1971f9a186a370a263e567356fa38d6356bdb1c062142"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/prepare_and_test.py",
+      "bytes": 8273,
+      "sha256": "7a5f9e143d3d326c71399f22e32d71a9b36acb210b9dd5a95733cd560f676e4a"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/test_negative_contracts.py",
+      "bytes": 4213,
+      "sha256": "2fe935f1b834a9c56fb63eeadf22a7cf51f1b6643559f23b31e9afb987139597"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/PRIVATE-VALIDATION.json",
+      "bytes": 13986,
+      "sha256": "9e7438e48984469c0528f1d668dc61d6406bf602e140ed8b455afaa144b5d8a4"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/NEGATIVE-VALIDATION.json",
+      "bytes": 9403,
+      "sha256": "5ccf894c7d3dbc3743a7ec4bd72f2537a0bc34542f79e1cbc2f9a7ef81d1acc3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/INDEPENDENT-PRIVATE-RECIPE-REVIEW.json",
+      "bytes": 8898,
+      "sha256": "444f2f830449bb77a7ccd1759a91be3b6ea0d4fabda1d2ffdbf8644b8d0aaae3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/INDEPENDENT-COMMITTED-PRIVATE-READBACK.json",
+      "bytes": 5818,
+      "sha256": "2a351313e6396d529b61965e1d0f1e43de30dde1ff830534b9737611981ed324"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/NEXT-NATIVE-SCOPE.md",
+      "bytes": 5501,
+      "sha256": "d608c8fc7cef142c5603d070efe67fa27aba84dff3fb15b1189c5dbc4e8ea627"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/schema-review/CONTROL-BEFOREIMAGES.json",
+      "bytes": 8102,
+      "sha256": "59b04fbafa93834dc2b48d70c3f106a57159ba7b9f97ad84de67e02b9d53caa9"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/schema-review/FIELD-MAP.json",
+      "bytes": 4369,
+      "sha256": "a2942e7708eff543af0bfadcc9a28aa13710011252a96a5f0b7c097e790180a2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/schema-review/REVIEW-RECEIPT.json",
+      "bytes": 3735,
+      "sha256": "3390e96dfd99641b9350808df115cbd2670b2f1434d393143eb01aeb88c18d7d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/schema-review/SCHEMA.json",
+      "bytes": 26173,
+      "sha256": "031464665c09e11eafc48c2d67dee9f5aa4fd41db82239381006c839d7bc765e"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/schema-review/FINDINGS.md",
+      "bytes": 12470,
+      "sha256": "c110c5f92991ac91869acd14c76bd11fc452fede3cca68f1b0773477656bb356"
+    },
+    {
+      "path": "/Volumes/Quasar/Lightroom-Preview-Database-Backups/PRIVATE-offline-recipe-99a54c1bfa244c869634f058009f28c9/case-normal/RECIPE.json",
+      "bytes": 5271,
+      "sha256": "fd54e93829b7cf35793103b478ac76eafbc8cd0517e5a3b8376d1572b2b41d34"
+    },
+    {
+      "path": "/Volumes/Quasar/Lightroom-Preview-Database-Backups/PRIVATE-offline-recipe-99a54c1bfa244c869634f058009f28c9/NATIVE-OPAQUE-CAPTURE.json",
+      "bytes": 9401,
+      "sha256": "429956e5de0475d8dffd67fe77423d0af644ea8da25cee6f2d934552e6043bbc"
+    }
+  ],
+  "privateRecipeStatus": "11 recovery cases, 11 invalid holds, one synthetic two-alias pass; independent committed private readback before any native open. Native fixture selection/lifecycle still unqualified.",
+  "nextGate": "Original publisher owner seals supported isolated PreviewCache constructor/lifecycle/teardown proposal; Root reviews and schedules a fresh finite private native window. Native Ten-only recipe recognition precedes Quasar split matrix.",
+  "coordination": "Unison sends native requests to Photo parent through codex queue. Direct use requires an explicit per-window owner handoff with scope, nonce, resources and closure; no such handoff currently active.",
+  "freshNativeWindowReleased": false,
+  "productionPublisherReleased": false,
+  "standaloneRendererQualified": false,
+  "monitor5120Qualified": false,
+  "quasarSplitQualified": false,
+  "resourceContract": "One aggregate 18-credit CPU budget including native threads; no competing Adobe/native/cache writers or heavy Photo jobs during admitted native windows.",
+  "lostBridgeRequest": "Acknowledge receipt, identify the missing bridge (parent queue route, child context, or a runtime endpoint), and report its path/state. Do not modify Sync transport or replay completed tests to repair coordination.",
+  "desktopObservation": {
+    "source": "Actual IORegistry Root IOConsoleLocked and IOConsoleUsers",
+    "asOfUTC": "2026-10-14T04:13:54.389600+00:00",
+    "locked": true,
+    "sessions": [
+      {
+        "screenLocked": true,
+        "lockTime": 1791950826
+      }
+    ]
+  },
+  "noAdobeOrMediaOperationsInThisRecovery": true
+}

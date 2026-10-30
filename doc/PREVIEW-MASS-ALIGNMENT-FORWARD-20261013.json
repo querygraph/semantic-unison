@@ -1,0 +1,31 @@
+{
+  "schema": "org.firstpair.unison.preview-mass-alignment-forward/1",
+  "utc": "2026-10-13 22:36:32 UTC",
+  "status": "SENT_TO_PHOTO_PARENT_FOR_ORIGINAL_OWNER",
+  "parent_thread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "intended_owner": "ORIGINAL photo-session /root/preview_implementation",
+  "owner_acknowledged": true,
+  "owner_acknowledgment": {
+    "observed_utc": "2026-10-13 22:41:04 UTC",
+    "owner_thread": "01a13447-71ba-77c3-9396-285b4aaff8e9",
+    "owner_task": "ORIGINAL photo-session /root/preview_implementation",
+    "turn_id": "01a13769-6d8b-7ac1-98e4-8f4369d62d21",
+    "turn_status": "completed",
+    "owner_final": "Acknowledged and verified the handoff pins: 156,253 keys / 156,255 images staged, 987 holds resolved, and 4,299 native sizes matching. All 44,281 modern geometry checks passed; the legacy pass remains active.\n\nC/Rust/OxCaml ABI proof passes with the accepted header unchanged. Renderer fidelity and native registration/restart remain unqualified. Tombstones and separate namespaces are preserved; ready for the root-coordinated finite oracle window.",
+    "scope": "Direct read of the original owner's completed acknowledgment. Its geometry/ABI results are owner reports, not native recognition or a new Unison qualification run. Native window remains unreleased."
+  },
+  "handoff": "/Users/alexy/src/photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json",
+  "alignment_sha256": "0f745603ad1f015043faf4cbef9c05e0950c502f378b851785eaf49e062e82e3",
+  "summary_sha256": "32fc93e3179380846c1c92147d1b1eb252167c9c40e6331e493f39708d58bb0d",
+  "prompt": "User requested relay to ORIGINAL photo-session /root/preview_implementation: please forward and obtain owner ACK for /Users/alexy/src/photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json and its pinned v3 COMPLETE/SUMMARY. Staged156253 keys/156255 images; roster146476 explicit-root+984 old-format+8793 modern filename-only. All987 former metadata holds resolved,4299 native level sizes match;1338 current native associations/orientations remain decode/restart-unproven. Preserve55 mapped tombstones; RootPixels/face/motion add no monitor coverage. Known standalone gaps485185+252676 and39 unknown digests are not a regeneration count. Original10031592 control remains next native branch; no window/full-run/offline-publisher admission. Shared18 credits, Quasar/Ten placement and protected exact-version Atlas/Bumer archives persist. Unison updates docs only, no competing publisher. Your existing geometry/interface owners retain all runtime work.",
+  "transport_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a13369-8b68-7aa1-be91-cba984ba269b\"}"
+      }
+    ],
+    "isError": false
+  },
+  "scope": "Receipt/document reads and relay only. No database/cache/payload/volume access, Adobe/native invocation or competing publisher. Downstream owner acceptance and native window remain separate."
+}
