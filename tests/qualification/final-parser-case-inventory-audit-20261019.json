@@ -17,12 +17,12 @@
     "sha256": "51a3f4e54ca169f671081a613c8aa097064592d65a65ce389fbbe53df5cd126f"
   },
   "inventory": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-parser-case-inventory-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/final-parser-case-inventory-20261019.json",
     "bytes": 286480,
     "sha256": "92950e10faaf7ca8bcca4b0f67d5f08504816c2d50f9b393eef6f990c5d8033f"
   },
   "script": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/final_parser_case_inventory.py",
+    "path": "/Users/alexy/src/semantic-unison/tests/final_parser_case_inventory.py",
     "bytes": 8787,
     "sha256": "90eb02c2ae648a94f3a30f051d00065a9da0dce0d2ef2701964e1e9bca2f5451"
   },

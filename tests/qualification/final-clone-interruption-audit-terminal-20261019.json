@@ -6,7 +6,7 @@
     "running_session": null
   },
   "audit_source": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-clone-interruption-audit-20261019.py.txt",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-clone-interruption-audit-20261019.py.txt",
     "sha256": "24db8860123dfdd9298136d6b0bb400206f45fabb604ad4f236d97a57f807685"
   },
   "receipt_sha256": "34c8a067b5fa0a6b80ccb8acb42a23357703224fc577515cbdab88f79afa7d7f",

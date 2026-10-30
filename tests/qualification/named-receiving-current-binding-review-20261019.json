@@ -1,7 +1,7 @@
 {
   "schema": "unison-named-receiving-current-binding-review/1",
   "historical_receipt": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/validation_paths/qualification-20261013.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/validation_paths/qualification-20261013.json",
     "bytes": 127002,
     "sha256": "f038621f401a33e8739a01ec6bdce9ea24553b33295563d65e13ca5d0524927f"
   },

@@ -18,7 +18,7 @@
     "sha256": "19809ea412171ee3d4494d35fb8be9f9051a98603df97520bf2891157163e78a"
   },
   "plan": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-worker-state-plan-v2-cpu-only-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/final-worker-state-plan-v2-cpu-only-20261019.json",
     "bytes": 273226,
     "sha256": "dfe32b0823c969bda29f119914f583e1703a4f888f023aaea6c82a124df909e5"
   },
@@ -210,12 +210,12 @@
       "running_session": null
     },
     "receipt": {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-worker-state-cpu-independent-audit-20261019.json",
+      "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-worker-state-cpu-independent-audit-20261019.json",
       "bytes": 737,
       "sha256": "9f8df8f8ef00f4d1f36e5dbfebf018832fe25ce169d6bee5e22f5d9b3c95af60"
     },
     "source": {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-worker-state-cpu-audit-20261019.py.txt",
+      "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-worker-state-cpu-audit-20261019.py.txt",
       "bytes": 5614,
       "sha256": "4053ecc7f3effe96ebd7106e6202e809617813053561b21cc6259559ac12a64e"
     }

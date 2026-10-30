@@ -1,6 +1,6 @@
 import hashlib,json,os,signal,subprocess,sys
 from pathlib import Path
-R=Path('/Users/alexy/src/unison-final-adobe-20261019');W=Path('/private/tmp/u-snr-313af230e9374ebd')
+R=Path('/Users/alexy/src/semantic-unison');W=Path('/private/tmp/u-snr-313af230e9374ebd')
 sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
 from cached_benchmark.contract import read_bytes
 from final_profile_owner import sha

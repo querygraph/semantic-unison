@@ -11,7 +11,7 @@
     "sha256": "a306468f3adde655987bddfeef9e6d83ed62e063aab6e05452cfb4d5d5f0eeb3"
   },
   "actual": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/sdk2768-source-unpack-actual-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/sdk2768-source-unpack-actual-20261019.json",
     "bytes": 2606,
     "sha256": "edf362d70ddf8edff75dc97b0ef4b4d691e6b6df847c58e8c3378b83f0f5438e"
   },
@@ -37,7 +37,7 @@
       "sha256": "2a15d88294728e7404c99ec6de3be2426bcf00c38adefd42797a88194303ea7a"
     },
     "test_source": {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_source_unpack_test.first-fixture.py.txt",
+      "path": "/Users/alexy/src/semantic-unison/tests/sdk_source_unpack_test.first-fixture.py.txt",
       "bytes": 2218,
       "sha256": "440ccc03d5f0f1fa00c7cb072a5d6c05133f7033e5de1f2b304fe970afb76b57"
     },

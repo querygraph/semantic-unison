@@ -7,7 +7,7 @@ admissions or statements that consumed jobs remain unstarted.
 
 ## Source, public fork and review
 
-- Active source: `/Users/alexy/src/unison-final-adobe-20261019`, branch
+- Active source: `/Users/alexy/src/semantic-unison`, branch
   `implementation/final-adobe-qualification`. Inspect `git log -1` for HEAD.
   Production candidate971271a8/src is unchanged from reviewedf6bfd653; recent
   work is qualification/tooling/evidence/docs. Current stock/Ox Make+Dune
@@ -269,7 +269,7 @@ unanswered coordination question is not a verified wait or a retained owner.
 Updated UTC 2026-10-19T12:31:02.305940+00:00. Goal ACTIVE and incomplete. This block supersedes historical
 scheduling statements below; preserve original receipts and their scopes.
 
-- **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
+- **Active source:** `/Users/alexy/src/semantic-unison`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
   before this checkpoint: `d3ea5a9c`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
@@ -7025,7 +7025,7 @@ All resources/jobs currentlyclosed; payload/native remains at schedulingcheckpoi
 
 
 ### Active source worktree moved; benchmark candidate remains frozen
-NewSDKsourceworktree /Users/alexy/src/unison-final-adobe-20261019,
+NewSDKsourceworktree /Users/alexy/src/semantic-unison,
 branchimplementation/final-adobe-qualification fromf6bfd653. Worktree creation
 actual17096/466616→486ad7/0/no session, Git child/group reaped0/CPU4EXclosed;
 source checkout only, no compiler/SDK/media. OldCPU-ceilingworktree andall29
@@ -7083,7 +7083,7 @@ recovery task; no historical fixture or admission was recreated.
 
 ## SDK merge kernel and helper auditor — 2026-10-19
 
-Active source worktree `/Users/alexy/src/unison-final-adobe-20261019` now contains
+Active source worktree `/Users/alexy/src/semantic-unison` now contains
 `tests/sdk_merge_receiving/worker.py` and `helpers.py`: intent-before-invocation,
 independent transport/output adapter boundaries, strict two-endpoint SDK frame
 and retained-group parsing, unchanged nested uncertainty carriers, and no release
@@ -7132,7 +7132,7 @@ bindings, authenticated fixtures, owned freezer/admission, then native qualifica
 
 ## Retained merge proxy/transport source kernels — 2026-10-19
 
-Active source worktree `/Users/alexy/src/unison-final-adobe-20261019` now has
+Active source worktree `/Users/alexy/src/semantic-unison` now has
 `tests/sdk_merge_receiving/proxy.py` and `transport.py`. The proxy bounds buffers,
 forwards protocol EOF, separately observes normal native terminal/reap, and never
 sends cancellation signals. Errors retain native/socket/FD owners and preserve
@@ -7153,7 +7153,7 @@ Goal stays active/incomplete; no runtime grant or resource hold from source work
 
 ## Merge raw evidence binding and worker transport adapter — 2026-10-19
 
-`/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/evidence.py`
+`/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/evidence.py`
 now binds exact stock/Ox/proxy commands, both normal peer/group records, typed
 PID/counter/EOF fields and independently read raw proxy bytes (duplicate keys
 refused). Raw helper process/group lines are hashed as ledger references.

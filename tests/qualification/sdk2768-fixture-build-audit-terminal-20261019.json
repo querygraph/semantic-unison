@@ -13,7 +13,7 @@
     "sha256": "5028990240727fb162445ab9105fdc8d650f7be07b4f7237ac8d29be348f7a59"
   },
   "actual": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/sdk2768-fixture-build-actual-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/sdk2768-fixture-build-actual-20261019.json",
     "bytes": 3782,
     "sha256": "603c92bf5ac846adf93fb475197f2578557b91cf557b08cf7c8b6b7643821068"
   },
@@ -40,12 +40,12 @@
     },
     "source_snapshots": [
       {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_fixture_builder_test.first.py.txt",
+        "path": "/Users/alexy/src/semantic-unison/tests/sdk_fixture_builder_test.first.py.txt",
         "bytes": 6283,
         "sha256": "5c071d100be92dafe9a4b2bc987efd420cc7d5e0e2d8f8796c609296319cf541"
       },
       {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_source_identity_test.fixture-builder-first.py.txt",
+        "path": "/Users/alexy/src/semantic-unison/tests/sdk_source_identity_test.fixture-builder-first.py.txt",
         "bytes": 4234,
         "sha256": "b02997fb171f5a3fca564f1e8060aa1e0cd8fed5324bf8cd9250bc13e22dc113"
       }

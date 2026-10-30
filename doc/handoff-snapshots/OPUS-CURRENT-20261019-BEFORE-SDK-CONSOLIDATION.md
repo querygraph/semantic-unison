@@ -12,7 +12,7 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   Markdown references updated; immutable JSON receipts/plans and historical
   source snapshots are unchanged. Older worktrees retain their branch's old
   design filename until this commit is integrated; use the active worktree above.
-- **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
+- **Source:** `/Users/alexy/src/semantic-unison`, branch
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Earlier committed qualification: `b718c3f3` (generic clone sync), preceded by

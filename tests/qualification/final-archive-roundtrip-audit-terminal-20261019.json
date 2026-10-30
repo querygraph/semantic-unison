@@ -11,7 +11,7 @@
     "sha256": "aa84fe15c51e7dc7d5c511c2de6e462f498cd83717de57a6eca763ff3ed9e72b"
   },
   "actual_result": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-archive-roundtrip-actual-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-archive-roundtrip-actual-20261019.json",
     "bytes": 1484,
     "sha256": "ee86820c6c0fcd427921c225a92ba0b971bbf6af79c1629527664fffe69f6585"
   },

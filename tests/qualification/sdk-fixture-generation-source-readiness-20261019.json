@@ -2,7 +2,7 @@
   "schema": "unison-sdk-fixture-generation-source-readiness/1",
   "state": "TEN_ORIGINAL_CONTROLS_AND_METADATA_PASS_NATIVE_UNSTARTED",
   "plan": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-fixture-generation-plan-v2-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/sdk-fixture-generation-plan-v2-20261019.json",
     "bytes": 63218,
     "sha256": "048d0ae7aac95e89d3bae5aaf74e9d5bd2842df38ffd3ec42eefe7101d3b424c"
   },
@@ -92,7 +92,7 @@
     }
   ],
   "original_v1_plan": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/sdk-fixture-generation-plan-v1-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/sdk-fixture-generation-plan-v1-20261019.json",
     "bytes": 63218,
     "sha256": "27636b4787c28f3ae6b89924039ca575620b830311559d64f1a3464749c80d05",
     "state": "SUPERSEDED_UNSTARTED_BY_SOURCE_METADATA_PREFLIGHT_SUCCESSOR"
