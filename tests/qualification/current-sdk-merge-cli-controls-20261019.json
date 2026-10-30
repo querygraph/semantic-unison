@@ -5,7 +5,7 @@
       "command": [
         "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
         "-B",
-        "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py",
+        "/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/entry.py",
         "--help"
       ],
       "returncode": 0,
@@ -28,7 +28,7 @@
       "command": [
         "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
         "-B",
-        "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/freeze.py",
+        "/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/freeze.py",
         "--help"
       ],
       "returncode": 0,
@@ -51,7 +51,7 @@
       "command": [
         "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
         "-B",
-        "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py",
+        "/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/entry.py",
         "--plan",
         "/private/tmp/unison-must-not-open-plan.json",
         "--plan-sha256",
@@ -61,7 +61,7 @@
       "timed_out": false,
       "capture_truncated": false,
       "stdout": "",
-      "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py\", line 134, in <module>\n    try:raise SystemExit(main())\n                         ~~~~^^\n  File \"/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py\", line 121, in main\n    else:A.require(args.admission is not None and args.admission_sha256 is not None,'fresh explicit admission required')\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/plan.py\", line 19, in require\n    raise ValueError(message)\nValueError: fresh explicit admission required\n",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/entry.py\", line 134, in <module>\n    try:raise SystemExit(main())\n                         ~~~~^^\n  File \"/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/entry.py\", line 121, in main\n    else:A.require(args.admission is not None and args.admission_sha256 is not None,'fresh explicit admission required')\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/plan.py\", line 19, in require\n    raise ValueError(message)\nValueError: fresh explicit admission required\n",
       "client_cleanup": {
         "pid": 49064,
         "returncode": 1,

@@ -10,7 +10,7 @@
     "pid": 58937
   },
   "plan": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-clone-interruption-plan-v1-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/final-clone-interruption-plan-v1-20261019.json",
     "sha256": "84e32a055485d31b389ae18e9e54b1959c18c58b702058d53a41dc3ec5e72a14"
   },
   "prestop": {
@@ -24,7 +24,7 @@
     "running_session": null
   },
   "recovery_source": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-clone-interruption-v1-recovery-20261019.py.txt",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-clone-interruption-v1-recovery-20261019.py.txt",
     "sha256": "baf3dccbc450c3f30ed6c55bdbb0bb5e96a00bcb06f97b310ca0921915a69a4a"
   },
   "state": "FAILED_HARNESS_KNOWN_PREFIX_INDEPENDENT_IDLE_CONTROLLER_RECOVERY_CLOSED",

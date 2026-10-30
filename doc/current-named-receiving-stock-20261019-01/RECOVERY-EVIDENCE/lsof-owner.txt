@@ -1,5 +1,5 @@
 COMMAND     PID  USER   FD   TYPE             DEVICE SIZE/OFF      NODE NAME
-python3.1 97705 alexy  cwd    DIR                1,7      864 313043532 /Users/alexy/src/unison-final-adobe-20261019
+python3.1 97705 alexy  cwd    DIR                1,7      864 313043532 /Users/alexy/src/semantic-unison
 python3.1 97705 alexy  txt    REG                1,7 18749552 303896329 /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14
 python3.1 97705 alexy    0r   CHR                3,2      0t0       314 /dev/null
 python3.1 97705 alexy    1w   REG                1,7        0 313769285 /private/tmp/claude-501/-Users-alexy-src-unison/82b12103-6930-4393-a59a-8f5bb6f04e55/scratchpad/stock-owner.stdout

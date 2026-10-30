@@ -133,7 +133,7 @@
           "/usr/bin/git",
           "apply",
           "--check",
-          "/Users/alexy/src/unison-final-adobe-20261019/doc/upstream-8772-minimal-oxcaml-v2.patch"
+          "/Users/alexy/src/semantic-unison/doc/upstream-8772-minimal-oxcaml-v2.patch"
         ]
       },
       {
@@ -143,7 +143,7 @@
         "command": [
           "/usr/bin/git",
           "apply",
-          "/Users/alexy/src/unison-final-adobe-20261019/doc/upstream-8772-minimal-oxcaml-v2.patch"
+          "/Users/alexy/src/semantic-unison/doc/upstream-8772-minimal-oxcaml-v2.patch"
         ]
       },
       {

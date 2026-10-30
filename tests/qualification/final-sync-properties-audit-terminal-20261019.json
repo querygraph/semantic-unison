@@ -11,7 +11,7 @@
     "sha256": "79bf33ec65800ce786ba43af07f70325550b3954fd701847ef116e9f63bcee8e"
   },
   "actual": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-sync-properties-actual-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-sync-properties-actual-20261019.json",
     "bytes": 1097,
     "sha256": "44150c7188a7da9335fdc17ca16b1ec35a0cd338f8a3e048fae9a25cd213fea0"
   },
@@ -27,7 +27,7 @@
   "preserved_predecessors": [
     {
       "plan": {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-sync-properties-plan-v1-20261019.json",
+        "path": "/Users/alexy/src/semantic-unison/doc/final-sync-properties-plan-v1-20261019.json",
         "bytes": 57365,
         "sha256": "98fa905caa84adbb289ba8d9cf22de0b5af2b5fbade357b8b3449dba600c45ca"
       },
@@ -36,7 +36,7 @@
     },
     {
       "plan": {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-sync-properties-plan-v2-20261019.json",
+        "path": "/Users/alexy/src/semantic-unison/doc/final-sync-properties-plan-v2-20261019.json",
         "bytes": 58014,
         "sha256": "13b3326d5115995d282b9e9aeaffade5d0ca81cc17becfaf5324d442c1207b8a"
       },
@@ -47,12 +47,12 @@
         "sha256": "282bb93cee4f5d845a1255e827672e3eefd5adf19c838d2c64831b3bdea328e3"
       },
       "failed_owner_source": {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/final_sync_properties_owner.v2-failed.py.txt",
+        "path": "/Users/alexy/src/semantic-unison/tests/final_sync_properties_owner.v2-failed.py.txt",
         "bytes": 13479,
         "sha256": "39d059fb8dfe3d6dd4bbecf8d081efa0f6594cbeb1279d5da3ac6d9e0e501618"
       },
       "reconstructed_controls_source": {
-        "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/final_sync_properties_owner_test.v2-reconstructed.py.txt",
+        "path": "/Users/alexy/src/semantic-unison/tests/final_sync_properties_owner_test.v2-reconstructed.py.txt",
         "bytes": 1791,
         "sha256": "9bb7c508afacd3bd78e454a30143d1940620fdb68d35eae29e5b6c264c91a1fe"
       },

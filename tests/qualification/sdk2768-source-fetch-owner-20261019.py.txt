@@ -1,7 +1,7 @@
 """One TLS official-source fetch; no archive extraction/build/SDK invocation."""
 import os,sys,time,json,hashlib,urllib.request,stat
 from pathlib import Path
-R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+R=Path('/Users/alexy/src/semantic-unison');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
 from shared_cpu_pool import Pool,authorized_unison_tokens,UnresolvedOwnership
 from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle,descriptor_observation
 from shared_process_owner import retain_after_record

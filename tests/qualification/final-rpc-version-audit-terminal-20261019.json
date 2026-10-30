@@ -11,7 +11,7 @@
     "sha256": "ab9d9ab64593d1ee36b80924f336692b8b3d92c9e049a80c1d923148994ef951"
   },
   "actual": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/qualification/final-rpc-version-actual-20261019.json",
+    "path": "/Users/alexy/src/semantic-unison/tests/qualification/final-rpc-version-actual-20261019.json",
     "bytes": 910,
     "sha256": "d8e39ac3cdf0997a20511bbdf59cb1336814fa776d0c4613a8ae9eb867bf6329"
   },

@@ -38,9 +38,9 @@
   "index": {
     "launch_argv_template": [
       "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
-      "/Users/alexy/src/unison-final-adobe-20261019/tests/sdk_merge_receiving/entry.py",
+      "/Users/alexy/src/semantic-unison/tests/sdk_merge_receiving/entry.py",
       "--plan",
-      "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/PLAN.json",
+      "/Users/alexy/src/semantic-unison/doc/current-sdk-merge-native-20261019-01/PLAN.json",
       "--plan-sha256",
       "7047511856ed22ea39bd4b7a8b29fb8f10a17900ddd854810f515ec649cf2eb7",
       "--admission",
@@ -49,11 +49,11 @@
       "ROOT_PUBLISHED_SHA_REQUIRED"
     ],
     "plan": {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/PLAN.json",
+      "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-merge-native-20261019-01/PLAN.json",
       "sha256": "7047511856ed22ea39bd4b7a8b29fb8f10a17900ddd854810f515ec649cf2eb7"
     },
     "request": {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-merge-native-20261019-01/REQUEST.json",
+      "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-merge-native-20261019-01/REQUEST.json",
       "sha256": "66c0bfe11dd8be169033a11cec2963818e8bd97c2bf4da6253a02fd7fd12e450"
     },
     "runtime_admitted": false,

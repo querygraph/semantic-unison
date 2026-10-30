@@ -17,11 +17,11 @@
     "input_lstat_fences": 12
   },
   "request": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/REQUEST.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-negative-native-20261019-02/REQUEST.json",
     "sha256": "405caf1433fa8d25f04d0b56c4195809dc94089c9572242646a55aeb8b9d4939"
   },
   "plan": {
-    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/PLAN.json",
+    "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-negative-native-20261019-02/PLAN.json",
     "sha256": "175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33"
   },
   "workspace": "/private/tmp/u-snr-313af230e9374ebd",
@@ -33,17 +33,17 @@
   "old01_state": "SUPERSEDED_UNSTARTED_DO_NOT_ADMIT_OR_DISPATCH",
   "references": [
     {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/INDEX.json",
+      "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-negative-native-20261019-02/INDEX.json",
       "bytes": 1062,
       "sha256": "d44261bc4cedb002bf539a950bae9520a881cc67694b2d494e6046af449bdcf5"
     },
     {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/PLAN.json",
+      "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-negative-native-20261019-02/PLAN.json",
       "bytes": 59755,
       "sha256": "175d106cdb20ea22fef9383402d01b1f11a782b0df76f22af4dad71599ad2f33"
     },
     {
-      "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/current-sdk-negative-native-20261019-02/REQUEST.json",
+      "path": "/Users/alexy/src/semantic-unison/doc/current-sdk-negative-native-20261019-02/REQUEST.json",
       "bytes": 49274,
       "sha256": "405caf1433fa8d25f04d0b56c4195809dc94089c9572242646a55aeb8b9d4939"
     }
