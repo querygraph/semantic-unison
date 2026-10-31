@@ -67,16 +67,21 @@ are listed first, then the design as a whole.
 ## Configuration
 
 ```
-packdir = Path */*               # directories packed: here, every leaf <H>/<HHHH>
+packdepth = 2                    # every directory exactly 2 levels down: the preview leaves <H>/<HHHH>
 packroot = /Volumes/Ten/Lightroom/Alexy Previews.lrdata   # the one root that stores containers
-packmax = 4 GiB                  # report and refuse a container that would grow past it
+force = /Volumes/Quasar/Lightroom/Alexy Previews.lrdata   # required: the packed root only receives
+packbarrier = 4                  # GiB between drive-cache flushes
+packmax = 4                      # GiB: report and refuse a container that would grow past it
 ```
 
-- `packdir` takes Unison path patterns, matched against directories.
+- `packdepth` replaces the path patterns of the first draft: a depth can't nest, and it's what
+  the prototype's `--depth` does. Files above that depth on the packed root stay plain.
+- `packroot` names a root as `force` does: as given, or by a unique prefix or suffix.
 - The rest is refused with a message:
-  - nested matches;
-  - `packroot` not being one of the two roots;
-  - a packed root that's remote or acts as a source.
+  - a negative `packdepth`, or `packdepth` without `packroot`;
+  - `packroot` not being one of the two roots, or naming a remote root;
+  - no `force` naming the other root;
+  - a build without the packdir library (SQLite).
 - **A plain `D/` beside `D.sqlar` is pre-existing content** (user, 2026-10-31: Ten's original
   previews that Photo preserved stay in place, so Ten's old cache folder isn't emptied).
   - Packing never writes, renames or deletes anything under the plain `D/`.

@@ -30,3 +30,12 @@ val revertToDefaultDirection : Common.reconItem -> unit
 (* the beginning of the run, before we do anything time consuming, so that   *)
 (* we don't have to wait to hear about errors                                *)
 val checkThatPreferredRootIsValid : unit -> unit
+
+(* The direction a root name given in a preference stands for (as for force:
+   a root as given, or a unique prefix or suffix). *)
+val root2direction :
+  string -> [`Older | `Newer | `None | `Replica1ToReplica2 | `Replica2ToReplica1]
+
+(* The force or prefer preference, resolved to a direction. *)
+val lookupPreferredRoot :
+  unit -> [`Older | `Newer | `Merge | `None | `Replica1ToReplica2 | `Replica2ToReplica1] * [`Force | `Prefer]

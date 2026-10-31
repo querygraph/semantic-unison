@@ -80,9 +80,9 @@ OCAMLOBJS = \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
           validationStage.cmo validationStageWork.cmo validationDescriptor.cmo candidateValidation.cmo validationScanWork.cmo finalPublication.cmo targetBinding.cmo \
-          fpcache.cmo validationPaths.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
+          fpcache.cmo validationPaths.cmo packdirConfig.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
           files.cmo sortri.cmo recon.cmo transport.cmo \
-          strings.cmo uicommon.cmo uitext.cmo test.cmo \
+          strings.cmo packdirSupport.cmo uicommon.cmo uitext.cmo test.cmo \
           main.cmo
 
 # OCaml libraries for the bytecode version
@@ -376,6 +376,13 @@ xmpMerge.cmo: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
 
 xmpMerge.cmx: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
 	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.ml
+
+# The make build has no packdir library (SQLite): it always takes the stub
+# that refuses packed roots. dune selects the SQLite one when it can.
+packdirSupport.cmo: packdirSupport.none.ml
+	$(OCAMLC) $(CAMLFLAGS_X) -c -impl $(CWD)/packdirSupport.none.ml -o $(CWD)/packdirSupport.cmo
+packdirSupport.cmx: packdirSupport.none.ml
+	$(OCAMLOPT) $(CAMLFLAGS_X) -c -impl $(CWD)/packdirSupport.none.ml -o $(CWD)/packdirSupport.cmx
 
 .mli.cmi:
 	@echo "$(CAMLC): $< ---> $@"

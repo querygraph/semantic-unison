@@ -204,7 +204,7 @@ let archiveHash fspath =
   (* Conjoin the canonical name of the current host and the canonical
      presentation of the current fspath with the list of names/fspaths of
      all the roots and the current archive format *)
-  let thisRoot = thisRootsGlobalName fspath in
+  let thisRoot = thisRootsGlobalName fspath ^ PackdirConfig.signature fspath in
   let r = Prefs.read rootsName in
   let n = Printf.sprintf "%s;%s;%d" thisRoot r archiveFormat in
   let d = Digest.MD5.to_hex (Digest.MD5.string n) in

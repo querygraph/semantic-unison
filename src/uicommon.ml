@@ -348,6 +348,32 @@ let semdiffSetup () =
       "noupdate = " ^ raw2; "nodeletion = " ^ raw2; "ignorearchives = true"]
      @ List.map (fun p -> "path = " ^ p) paths)
 
+(* Packed directories: the checks that need the roots. The packed root must be
+   one of the two roots, local, and receive only (force names the other root). *)
+let packdirSetup () =
+  if Prefs.read PackdirConfig.depth < 0 then raise (Util.Fatal "packdepth must be 0 or more");
+  if not PackdirSupport.available then
+    raise (Util.Fatal "packdepth: this Unison was built without SQLite (the packdir library); \
+                       packed roots are not supported");
+  let given = Prefs.read PackdirConfig.root in
+  if given = "" then raise (Util.Fatal "packdepth needs packroot: the root that stores the containers");
+  (* The roots aren't installed yet: use their parsed command-line forms. *)
+  let raw1, raw2 = Globals.rawRootPair () in
+  let cl = Globals.parsedClRawRoots () in
+  let packed, other, toward = match Recon.root2direction given, cl with
+    | `Replica1ToReplica2, [c; _] -> c, raw2, `Replica2ToReplica1
+    | `Replica2ToReplica1, [_; c] -> c, raw1, `Replica1ToReplica2
+    | _ -> raise (Util.Fatal ("packroot " ^ given ^ " is not one of the roots")) in
+  let packed_path = match packed with
+    | Clroot.ConnectLocal (Some p) -> Fspath.canonize (Some p)
+    | _ -> raise (Util.Fatal "packroot must be a local root") in
+  (match Recon.lookupPreferredRoot () with
+   | d, `Force when d = toward -> ()
+   | _ -> raise (Util.Fatal ("packroot only receives: set force = " ^ other)));
+  PackdirConfig.packed := Some packed_path;
+  raise (Util.Fatal "packdepth: the Unison integration is not complete yet (milestone 1 of 6); \
+                     use unison-packdir for now")
+
 let runTestsPrefName = "selftest"
 let runtests =
   Prefs.createBool runTestsPrefName false
@@ -1393,6 +1419,8 @@ let initPrefs ~profileName ~promptForRoots ?(prepDebug = fun () -> ()) () =
         raise(Util.Fatal "cannot synchronize more than one remote root");
 
   if Prefs.read semdiffPref || Prefs.read semcatchupFrom <> "" then semdiffSetup ();
+
+  if Prefs.read PackdirConfig.depth <> 0 then packdirSetup ();
 
   Recon.checkThatPreferredRootIsValid();
 

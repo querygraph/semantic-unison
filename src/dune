@@ -25,7 +25,11 @@
   (flags :standard (:include semantic_hash_cflags.sexp))
   (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs nativeCopyRange_stubs wholeFileClone_stubs fileObservation_stubs stagePublication_stubs finalPublication_stubs helperSupervisor_stubs semanticHash_stubs semanticFile_stubs))
  (c_library_flags -lutil (:include semantic_hash_libs.sexp))
- (libraries compat str unix lwt_lib bigarray))
+ (libraries compat str unix lwt_lib bigarray
+  ; Packed directories need tools/packdir (SQLite); without it the stub refuses them.
+  (select packdirSupport.ml from
+   (packdir -> packdirSupport.sqlite.ml)
+   (-> packdirSupport.none.ml))))
 
 (include_subdirs unqualified)
 
