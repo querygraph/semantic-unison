@@ -39,9 +39,10 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-config-') as td:
     refused(['-packdepth', '2', '-packroot', str(ten), '-force', str(quasar), '-perms', '0', '-xattrs'],
             'keep no extended attributes', 'xattrs on a packed root')
     refused(['-packdepth', '2', '-packroot', str(ten), '-force', str(quasar)], 'set perms = 0', 'perms on a packed root')
-    # Accepted: detection runs, and writing stops at the milestone-3 gate.
-    refused(['-packdepth', '2', '-packroot', str(ten), '-force', str(quasar), '-perms', '0'],
-            'propagation is not built yet', 'propagation gate')
+    # Accepted: the leaf is packed into its container.
+    rc, out = unison('-packdepth', '2', '-packroot', str(ten), '-force', str(quasar), '-perms', '0')
+    check(rc == 0 and (ten / '0/0000.sqlar').is_file() and not (ten / '0/0000').exists(), 'accepted run packs the leaf:\n' + out)
+    import shutil; shutil.rmtree(ten); ten.mkdir(); shutil.rmtree(t / 'unisondir'); (t / 'unisondir').mkdir()
     # Without packdepth nothing changes: a plain one-way copy.
     rc, out = unison('-force', str(quasar))
     check(rc == 0 and (ten / '0/0000/level_320').read_bytes() == b'x' * 1000, 'plain run unchanged:\n' + out)

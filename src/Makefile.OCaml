@@ -81,8 +81,8 @@ OCAMLOBJS = \
           validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
           validationStage.cmo validationStageWork.cmo validationDescriptor.cmo candidateValidation.cmo validationScanWork.cmo finalPublication.cmo targetBinding.cmo \
           fpcache.cmo validationPaths.cmo packdirConfig.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
-          files.cmo sortri.cmo recon.cmo transport.cmo \
-          strings.cmo packdirSupport.cmo uicommon.cmo uitext.cmo test.cmo \
+          files.cmo packdirSupport.cmo sortri.cmo recon.cmo transport.cmo \
+          strings.cmo uicommon.cmo uitext.cmo test.cmo \
           main.cmo
 
 # OCaml libraries for the bytecode version

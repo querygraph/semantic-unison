@@ -244,6 +244,32 @@ reference.
 3. **Propagation through the writer.** One transaction per container; read-back SHA-256; members
    marked retained. *Test:* first and incremental runs give containers that `unison-packdir
    verify` and `unpack-tree` turn back into exactly the Quasar tree.
+
+   *Done (2026-10-31):*
+   - **Routing.** `Transport.doAction` sends every action whose target is the packed root to
+     `PackdirSupport`, not to `Files`.
+   - **What gets written:**
+     - a file becomes a member of its leaf's container;
+     - a new leaf becomes one container, in one transaction;
+     - above the packed depth, directories are created and files are copied plain, with their
+       mtime.
+   - **Checks.** Each stored MD5 has to equal the fingerprint update detection took, otherwise the
+     item fails as "changed during synchronization". Then Unison's archives are updated on both
+     roots, from what the target now holds, read back through the detection hooks.
+   - **Deletions.** A deletion of a member marks it retained: the bytes are kept, and the member
+     drops out of Unison's view. A plain file beside a container is a kept original: its deletion
+     fails with a message, and `nodeletion` silences it.
+   - **Not supported:** moves, symlinks, and directories below the packed depth. Each fails with a
+     message.
+   - **Tests:** 26 write controls (`tests/packdir/unison_write.py`), on stock OCaml and OxCaml:
+     - the first run;
+     - a quiet rerun;
+     - a change and an addition;
+     - a deletion, skipped under `nodeletion` and retained without it, and never resurrected;
+     - a kept original updated beside its container;
+     - unpacking back to the Quasar tree, with bytes and nanosecond mtimes.
+
+     Detection (10), config (16), prototype (87), semdiff (37) and `-selftest` all still pass.
 4. **Barriers and recovery.** The pending list, a barrier every 4 GiB and at the end, and
    verify-before-trust after a crash. *Test:* kills at each point; the next run converges.
 5. **Parallel preparation.** Reading and hashing the plain side in parallel, within

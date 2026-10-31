@@ -80,7 +80,7 @@ let stats ~kind ~perm ~size ~mtime =
 let member_named fspath path =
   let rel = Path.toString path in
   match members fspath (Filename.dirname rel) with
-  | Some ms -> List.find_opt (fun (m : Packdir.member) -> m.name = Filename.basename rel) ms
+  | Some ms -> List.find_opt (fun (m : Packdir.member) -> m.name = Filename.basename rel && not m.retained) ms
   | None -> None
 
 (* Members keep their mode in the sqlar table, but packed roots run with
@@ -127,12 +127,131 @@ let children fspath path =
   end else if d = !depth then
     match members fspath (Path.toString path) with
     | None -> None
-    | Some ms -> Some (List.sort_uniq compare (List.map (fun (m : Packdir.member) -> m.name) ms @ plain_names p))
+    | Some ms ->
+        (* Retained members are deletions kept on disk: not shown. *)
+        let live = List.filter (fun (m : Packdir.member) -> not m.retained) ms in
+        Some (List.sort_uniq compare (List.map (fun (m : Packdir.member) -> m.name) live @ plain_names p))
   else None
 
 let fingerprint fspath path =
   if not (owns fspath) || depth_of path <> !depth + 1 then None else
   Option.map (fun (m : Packdir.member) -> m.fp) (member_named fspath path)
+
+(* ------------------------------------------------------------------ *)
+(* Propagation into the packed root: Transport sends every action whose
+   target is on the packed root here instead of to Files. Writes happen in
+   one transaction per container, synchronously, so one writer at a time
+   reaches the disk. *)
+
+let transient fmt = Printf.ksprintf (fun m -> raise (Util.Transient ("packed root: " ^ m))) fmt
+
+(* Store [files] (name, source path, Unison's fingerprint from update
+   detection) as members of the container for [rel]; a source whose bytes
+   no longer match its fingerprint changed during synchronization. *)
+let put_members fspathTo rel files =
+  let p = abs fspathTo (Path.fromString rel) in
+  N.mkdir_p (Filename.dirname p);
+  let c = Packdir.open_ (p ^ ".sqlar") in
+  let ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+    let puts = List.map (fun (name, source, _) -> { Packdir.member = name; source }) files in
+    ignore (Packdir.apply c ~puts ~retain:[]);
+    Packdir.members c) in
+  (match container_stat p with
+   | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
+   | None -> ());
+  Hashtbl.replace read_this_run rel ms;
+  List.iter (fun (name, _, (fp : Os.fullfingerprint)) ->
+    if not (List.exists (fun (m : Packdir.member) -> m.name = name) ms) then transient "%s/%s was not stored" rel name;
+    (* The stored MD5, as update detection will read it, against the one it took. *)
+    let stored = Os.data_only_fingerprint (Fingerprint.file fspathTo (Path.fromString (rel ^ "/" ^ name))) in
+    if not (Os.fullfingerprintEqual stored fp) then
+      transient "%s/%s changed during synchronization; stored as found, will be compared again" rel name) files
+
+(* What the target now holds, for Unison's archive: read back through the
+   same hooks update detection uses, so the next run sees what was recorded. *)
+let file_arch fspathTo pt desc fp =
+  let info = Fileinfo.get false fspathTo pt in
+  if info.Fileinfo.typ <> `FILE then transient "%s did not arrive" (Path.toString pt);
+  Update.ArchiveFile (Props.override info.Fileinfo.desc desc, fp, Fileinfo.stamp info, Osx.stamp info.Fileinfo.osX)
+
+(* A plain file above the packed depth: written beside, then renamed into
+   place, with its modification time. *)
+let plain_copy source target mtime_ns =
+  let temp = Filename.concat (Filename.dirname target) (".unison-packdir." ^ Filename.basename target ^ ".tmp") in
+  In_channel.with_open_bin source (fun ic -> Out_channel.with_open_bin temp (fun oc ->
+    let buf = Bytes.create N.block in
+    let rec loop () = let n = input ic buf 0 N.block in if n > 0 then (output oc buf 0 n; loop ()) in
+    loop (); flush oc; Unix.fsync (Unix.descr_of_out_channel oc)));
+  N.utimens temp mtime_ns mtime_ns;
+  Sys.rename temp target
+
+let name_of pt = Filename.basename (Path.toString pt)
+let parent_of pt = Filename.dirname (Path.toString pt)
+
+let rec write fspathFrom fspathTo pf pt arch =
+  let d = depth_of pt in
+  let source = abs fspathFrom pf in
+  match arch with
+  | Update.ArchiveFile (desc, fp, _, _) when d = !depth + 1 ->
+      put_members fspathTo (parent_of pt) [(name_of pt, source, fp)];
+      file_arch fspathTo pt desc fp
+  | Update.ArchiveFile (desc, fp, _, _) when d <= !depth ->
+      plain_copy source (abs fspathTo pt) (N.stat source).N.mtime_ns;
+      file_arch fspathTo pt desc fp
+  | Update.ArchiveDir (desc, children) when d = !depth ->
+      let files = Update.NameMap.fold (fun name child acc -> match child with
+        | Update.ArchiveFile (_, fp, _, _) -> (Name.toString name, abs fspathFrom (Path.child pf name), fp) :: acc
+        | _ -> transient "%s/%s: a packed directory holds files only" (Path.toString pt) (Name.toString name))
+        children [] in
+      if files <> [] then put_members fspathTo (Path.toString pt) files;
+      let children' = Update.NameMap.mapi (fun name child -> match child with
+        | Update.ArchiveFile (cdesc, fp, _, _) -> file_arch fspathTo (Path.child pt name) cdesc fp
+        | a -> a) children in
+      Update.ArchiveDir (desc, children')
+  | Update.ArchiveDir (desc, children) when d < !depth ->
+      let target = abs fspathTo pt in
+      if not (is_dir target) then Unix.mkdir target 0o755;
+      Update.ArchiveDir (desc, Update.NameMap.mapi (fun name child ->
+        write fspathFrom fspathTo (Path.child pf name) (Path.child pt name) child) children)
+  | Update.ArchiveDir _ -> transient "%s: directories below the packed depth are not supported" (Path.toString pt)
+  | Update.ArchiveSymlink _ -> transient "%s: symbolic links are not supported" (Path.toString pt)
+  | Update.ArchiveFile _ | Update.NoArchive -> transient "%s: nothing to write" (Path.toString pt)
+
+let copy rootFrom pathFrom uiFrom rootTo pathTo =
+  let fspathFrom = snd rootFrom and fspathTo = snd rootTo in
+  let pf = Update.translatePathLocal fspathFrom pathFrom in
+  let pt = Update.translatePathLocal fspathTo pathTo in
+  let arch = Update.updateArchive fspathFrom pf uiFrom in
+  let arch' = Util.convertUnixErrorsToTransient "writing into the packed root" (fun () ->
+    write fspathFrom fspathTo pf pt arch) in
+  Update.replaceArchiveLocal fspathTo pt arch';
+  Files.updateSourceArchive rootFrom (pf, uiFrom, [])
+
+(* A deletion on the packed root keeps the bytes: the member is marked
+   retained and drops out of Unison's view. A whole container is never
+   deleted. *)
+let delete rootFrom pathFrom rootTo pathTo =
+  let fspathTo = snd rootTo in
+  let pt = Update.translatePathLocal fspathTo pathTo in
+  if depth_of pt <> !depth + 1 || container_stat (abs fspathTo (Path.fromString (parent_of pt))) = None then
+    transient "%s: only members are deleted, and they are kept as retained; use nodeletion for the rest"
+      (Path.toString pt);
+  let rel = parent_of pt in
+  (* A plain file beside a container is a kept original: never deleted. *)
+  if member_named fspathTo pt = None then
+    transient "%s is a plain file beside a container (a kept original): never deleted; use nodeletion"
+      (Path.toString pt);
+  let p = abs fspathTo (Path.fromString rel) in
+  let c = Packdir.open_ (p ^ ".sqlar") in
+  let ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+    ignore (Packdir.apply c ~puts:[] ~retain:[name_of pt]); Packdir.members c) in
+  (match container_stat p with
+   | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
+   | None -> ());
+  Hashtbl.replace read_this_run rel ms;
+  (* Both archives drop the path, as Files.delete does, so they stay identical. *)
+  Update.replaceArchiveLocal fspathTo pt Update.NoArchive;
+  Update.replaceArchive rootFrom pathFrom Update.NoArchive
 
 let install fspath n =
   root := Some fspath; depth := n;

@@ -18,6 +18,11 @@ val delete :
 (* to the maximum number of threads                                          *)
 val copyReg : Lwt_util.region ref
 
+(* Record on the source replica what a copy from it took, as Files.copy does
+   after it (used by packed directories, which write their own way). *)
+val updateSourceArchive :
+  Common.root -> Path.local * Common.updateItem * Path.local list -> unit Lwt.t
+
 (* Copy a path in one replica to another path in a second replica.  The copy *)
 (* is performed atomically (or as close to atomically as the os will         *)
 (* support) using temporary files.                                           *)

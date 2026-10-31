@@ -281,9 +281,20 @@ and doAction
   if not !Trace.sendLogMsgsToStderr then
     Trace.statusDetail (Path.toString toPath);
   Remote.Thread.unwindProtect (fun () ->
-    (* Writing into a packed root comes with milestone 3 (docs/packdir-design.md). *)
+    (* A packed root is written by its own writer (docs/packdir-design.md). *)
     if PackdirConfig.is_packed (snd toRoot) then
-      raise (Util.Transient ("packed root: propagation is not built yet; " ^ Path.toString toPath ^ " not written"));
+      match fromContents with
+      | {status = `MovedOut _ | `MovedIn _} ->
+          raise (Util.Transient ("packed root: moves are not supported; " ^ Path.toString toPath))
+      | {typ = `ABSENT} ->
+          logLwtNumbered ("Retaining " ^ Path.toString toPath ^ " (deleted on the other root)\n  in " ^ root2string toRoot)
+            ("Retaining " ^ Path.toString toPath)
+            (fun () -> PackdirSupport.delete fromRoot fromPath toRoot toPath)
+      | {ui = uiFrom} ->
+          logLwtNumbered ("Packing " ^ Path.toString toPath ^ "\n  from " ^ root2string fromRoot ^ "\n  to " ^ root2string toRoot)
+            ("Packing " ^ Path.toString toPath)
+            (fun () -> PackdirSupport.copy fromRoot fromPath uiFrom toRoot toPath)
+    else
     match fromContents, toContents with
         | {status = `MovedOut _ | `MovedIn _}, _
         | _, {status = `MovedOut _ | `MovedIn _} ->

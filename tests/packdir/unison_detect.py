@@ -61,24 +61,24 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-detect-') as td:
     check('old.lrfprev' in out and 'Deleting' not in out, 'the Ten-only kept original is not deleted:\n' + out)
     check(digest_tree(ten) == ten_before, 'Ten untouched by an identical run')
 
-    # A changed and an added file on Quasar: detected, and stopped at the milestone-3 gate.
+    # A changed and an added file on Quasar: detected, and held back from Ten by noupdate/nocreation.
     changed = sorted((quasar / 'a/0a00').iterdir())[0]
     changed.write_bytes(b'new bytes'); os.utime(changed, ns=(1_800_000_000_000_000_000,) * 2)
     (quasar / '0/0000/new_2048').write_bytes(b'a new level')
-    rc, out = unison()
+    hold = ['-noupdate', str(ten), '-nocreation', str(ten)]
+    rc, out = unison(*hold)
     check('a/0a00/' + changed.name in out and '0/0000/new_2048' in out, 'both changes detected:\n' + out)
-    check('propagation is not built yet' in out, 'stopped at the gate, not written:\n' + out)
-    failed = sorted(l.strip() for l in out.splitlines() if l.strip().startswith('failed:'))
-    check(failed == ['failed: 0/0000/new_2048', 'failed: a/0a00/' + changed.name] and 'Error in digesting' not in out,
-          'exactly the two changes reach the gate, no digest errors:\n' + out)
-    check(digest_tree(ten) == ten_before, 'Ten untouched while propagation is not built')
+    held = sorted(l.strip().split(' (')[0] for l in out.splitlines() if l.strip().startswith('skipped:') and 'old.lrfprev' not in l)
+    check(held == ['skipped: 0/0000/new_2048', 'skipped: a/0a00/' + changed.name] and 'Error' not in out,
+          'exactly the two changes detected and held back, no digest errors:\n' + out)
+    check(digest_tree(ten) == ten_before, 'Ten untouched while writes are held back')
 
     # An unchanged container is not opened: unreadable, the run still sees it as before.
     locked = ten / '0/0001.sqlar'; locked.chmod(0)
-    rc, out = unison()
-    failed = sorted(l.strip() for l in out.splitlines() if l.strip().startswith('failed:'))
+    rc, out = unison(*hold)
+    held = sorted(l.strip().split(' (')[0] for l in out.splitlines() if l.strip().startswith('skipped:') and 'old.lrfprev' not in l)
     check('Permission denied' not in out and 'Error' not in out and
-          failed == ['failed: 0/0000/new_2048', 'failed: a/0a00/' + changed.name],
+          held == ['skipped: 0/0000/new_2048', 'skipped: a/0a00/' + changed.name],
           'unchanged container left unopened, the same two pending changes:\n' + out)
     locked.chmod(0o644)
 
