@@ -105,7 +105,8 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     out_v = tool('verify', victim, rc=1)
     check('SHA-256 mismatch' in out_v, 'flipped blob byte detected: ' + out_v)
 
-    # A plain directory beside a container stays as it is; a colliding name is not packed.
+    # A plain directory beside a container stays as it is; identical names are present-plain,
+    # differing ones are kept updated in the container.
     keep = out / 'a/00a1'; keep.mkdir()
     first = sorted((src / 'a/00a1').iterdir())[0].name
     (keep / first).write_bytes(b'original preserved preview'); (keep / 'face.lrfprev').write_bytes(b'face')
@@ -113,9 +114,15 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     second = sorted((src / 'a/00a1').iterdir())[1]
     shutil.copy2(second, keep / second.name)  # the migration's byte-identical copy
     o = tool('pack-tree', src, out)
-    check('collision: a/00a1/' + first in o, 'colliding name reported: ' + o)
-    check('present-plain: a/00a1/' + second.name in o and 'collision: a/00a1/' + second.name not in o,
-          'identical same-name plain file is present-plain, not a collision: ' + o)
+    check('packed-beside-plain: a/00a1/' + first in o, 'differing same-name file reported: ' + o)
+    check(any(l.startswith(first + '\t') for l in tool('list', out / 'a/00a1.sqlar').splitlines()), 'and kept in the container')
+    tool('restore', out / 'a/00a1.sqlar', t / 'beside')
+    check((t / 'beside' / first).read_bytes() == b'new bytes for a colliding name', 'the container holds the newer bytes')
+    (src / 'a/00a1' / first).write_bytes(b'newer still'); tool('pack-tree', src, out)
+    tool('restore', out / 'a/00a1.sqlar', t / 'beside2')
+    check((t / 'beside2' / first).read_bytes() == b'newer still', 'and keeps updating them')
+    check('present-plain: a/00a1/' + second.name in o and 'packed-beside-plain: a/00a1/' + second.name not in o,
+          'identical same-name plain file is present-plain: ' + o)
     check((keep / first).read_bytes() == b'original preserved preview' and (keep / 'face.lrfprev').is_file(),
           'plain directory beside the container untouched')
 

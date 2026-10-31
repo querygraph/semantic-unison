@@ -30,22 +30,24 @@ let pack_tree root out ~depth ~journal ~batch_bytes =
   let containers = ref 0 and stored = ref 0 and retained = ref 0 and bytes = ref 0 in
   List.iter (fun rel ->
     let target = Filename.concat out rel ^ ".sqlar" in
-    (* A plain directory beside the container is pre-existing content: never
-       touched, and a file named like one of its files is reported, not packed. *)
+    (* A plain directory beside the container is pre-existing content, never
+       touched. A file named like one of its files is not packed while the
+       bytes are the same (present-plain); once they differ, the newer bytes
+       are kept updated in the container beside the plain original (user,
+       2026-10-31). *)
     let plain = Filename.concat out rel in
-    let skip = if Sys.file_exists plain && Sys.is_directory plain then begin
+    let same = if Sys.file_exists plain && Sys.is_directory plain then begin
         Printf.printf "note: plain %s/ beside %s.sqlar is left as it is\n" rel rel;
-        List.filter (fun n -> Sys.file_exists (Filename.concat (Filename.concat root rel) n))
+        List.filter (fun n ->
+          let mine = Filename.concat (Filename.concat root rel) n and theirs = Filename.concat plain n in
+          let module N = Dng_archive.Native in
+          Sys.file_exists mine && not (Sys.is_directory theirs) &&
+          if (N.stat mine).N.size = (N.stat theirs).N.size && N.sha_file mine = N.sha_file theirs then
+            (Printf.printf "present-plain: %s/%s\n" rel n; true)
+          else (Printf.printf "packed-beside-plain: %s/%s (the plain original differs and stays)\n" rel n; false))
           (Array.to_list (Sys.readdir plain))
       end else [] in
-    (* Same size and SHA-256: the plain copy already holds it (present-plain);
-       different bytes under the same name: a collision. Neither is packed. *)
-    List.iter (fun n ->
-      let mine = Filename.concat (Filename.concat root rel) n and theirs = Filename.concat plain n in
-      let module N = Dng_archive.Native in
-      if (N.stat mine).N.size = (N.stat theirs).N.size && N.sha_file mine = N.sha_file theirs then
-        Printf.printf "present-plain: %s/%s\n" rel n
-      else Printf.printf "collision: %s/%s exists as a plain file with other bytes; not packed\n" rel n) skip;
+    let skip = same in
     Dng_archive.Native.mkdir_p (Filename.dirname target);
     let c = Packdir.open_ ~journal target in
     Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->

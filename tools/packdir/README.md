@@ -18,8 +18,9 @@ sqlite3 C.sqlar -AxC OUT_DIR      # stock restore: bytes, mode, mtime to the sec
   `<H>/<HHHH>`) as `OUT/<rel>.sqlar`, one container at a time. It prints a JSON line with
   containers, files, bytes, seconds, MiB/s and files/s. A rerun stores only new and changed
   files, by size and nanosecond mtime, and marks files gone from `ROOT` as retained. A plain
-  `OUT/<rel>/` directory beside a container is left as it is, and a file named like one of its
-  files is reported as a collision and not packed.
+  `OUT/<rel>/` directory beside a container is left as it is. A file named like one of its files
+  isn't packed while the bytes are the same (`present-plain`). Once they differ, it's packed and
+  kept updated (`packed-beside-plain`).
 - **Each container** uses a 64 KiB page size, incremental auto-vacuum, a `DELETE` rollback journal
   (`--wal` for comparison), `synchronous = FULL` and `fullfsync = ON`. Every batch of at most
   `--batch-mib` is one transaction that bumps the container's epoch. Blobs are stored raw, and

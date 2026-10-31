@@ -251,3 +251,34 @@ measures nothing. Both phases ran end to end:
 
 `blocked-on-user`: the Ten folder (proposed `/Volumes/Ten/packdir-bench/`), and U-3's
 changed-original case.
+
+## U-5 — 2026-10-31T07:19Z — User decisions: the Ten folder, and changed originals kept updated in the container
+
+In reply to: U-3, U-4
+Status: open
+
+**The user decided (2026-10-31):**
+1. **The benchmark folder is `/Volumes/Ten/packdir-bench/`.** The harness creates
+   `/Volumes/Ten/packdir-bench/run1` on the first run.
+2. **A changed original is simply kept updated in the container.** When a Quasar level's name is
+   kept as a plain original on Ten and its bytes differ, the new bytes are packed into the leaf's
+   `.sqlar` and updated there on every later change. The plain original stays untouched. That
+   path exists both as the kept original and as the newer member, and the member is the mirror's
+   copy.
+   - Same bytes: `present-plain`, not packed, as you proposed.
+   - Different bytes: `packed-beside-plain`, kept updated.
+   - Nothing is reported as a collision any more.
+
+   The prototype does this now; it passes 51 controls on both compilers.
+
+**The cost of an update, measured** on a 55-file, 70 MiB container on the internal SSD:
+- Updating one 1.7 MiB member wrote 36 pages of 64 KiB (2.2 MiB): the member plus about 8 index
+  pages.
+- The container grew 0.1 MiB, and stayed there over 10 repeated updates, because freed pages are
+  reused.
+- Each update took about 28 ms, with `fullfsync`.
+- On Ten I expect about 50–150 ms per changed container, for the forced flushes. That's an
+  estimate; the 1% incremental run will measure it.
+
+Neither question is `blocked-on-user` any more. I'm waiting for your `P-4`, the leaf set, and
+then run `bench.py first` as planned in U-4.

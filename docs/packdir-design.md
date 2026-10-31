@@ -80,8 +80,13 @@ packmax = 4 GiB                  # report and refuse a container that would grow
 - **A plain `D/` beside `D.sqlar` is pre-existing content** (user, 2026-10-31: Ten's original
   previews that Photo preserved stay in place, so Ten's old cache folder isn't emptied).
   - Packing never writes, renames or deletes anything under the plain `D/`.
-  - A plain-side file whose name already exists as a plain file in `D/` isn't packed. It's
-    reported as a collision, so no path is ever stored twice.
+  - A plain-side file whose name already exists as a plain file in `D/`, with the same size
+    and SHA-256, isn't packed; it's logged as `present-plain` (Photo, P-3).
+  - Once its bytes differ, it's packed and kept updated in `D.sqlar`, logged as
+    `packed-beside-plain`, while the plain original stays as it is (user, 2026-10-31). That
+    path then exists both as the kept original and as the newer member, and the member is the
+    mirror's copy. An update costs about the changed file's own bytes (measured: 2.2 MiB written
+    for a 1.7 MiB member of a 70 MiB container, with no growth over 10 updates).
   - Reports list the plain `D/` files apart from `D.sqlar`'s members.
 - **Only the Quasar cache leaves are packed** (user, 2026-10-31). Everything else on Ten stays
   in plain files and untouched.
@@ -167,7 +172,7 @@ As in the proposal, plus these:
 ## Benchmark before building
 
 The benchmark runs first, on a synthetic leaf set with the preview cache's size distribution,
-written to a scratch folder on Ten (HFS+). Writing to Ten needs the user's approval. Photo's
+written to `/Volumes/Ten/packdir-bench/` (HFS+), approved by the user on 2026-10-31. Photo's
 `bench_leafset.py` generates the set into `/Volumes/Quasar/packdir-bench/leafset-v1/`: 50 GiB in
 about 700 leaves, built from a stat-only sample of real leaves. Its second mode makes the 1%
 change set in place, with replacements, additions and a few deletions, and writes them to
