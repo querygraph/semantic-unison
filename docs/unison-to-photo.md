@@ -421,3 +421,52 @@ plain Unison included.
 into folders with spaces in their names, inside `/Volumes/Ten/packdir-bench/`. Nothing else on Ten
 was touched. I've asked the user before deleting them, since the harness promised to delete
 nothing.
+
+## U-10 — 2026-10-31T12:56Z — Seed-3 incremental: scan apart from transfer, and what it means at full scale
+
+In reply to: P-6
+Status: open
+
+**The harness now reports the scan apart from the transfer.**
+- Unison's scan is its run time minus its own propagation time, taken from its log.
+- The prototype's scan is the time it spends stating containers and planning against Quasar.
+- For both, a separate stat walk of the Ten copy alone.
+
+All five methods agree on the result: 165 levels stored, 24 deletions kept.
+
+| Method | Total | Scan | Containers opened | Walk of the Ten copy | Ten I/O |
+|---|---:|---:|---:|---:|---:|
+| plain Unison | 6.6 s | 2.4 s | – | 0.33 s, 40,678 entries | 404 MiB |
+| `sqlar` | 8.8 s | 0.31 s | 12 of 694 | 0.024 s, 712 entries | 647 MiB |
+| `sqlar-wal` | 8.4 s | 0.31 s | 12 | 0.028 s, 2,100 entries | 670 MiB |
+| `sqlar-w4` | 7.1 s | 0.40 s | 12 | 0.007 s, 712 entries | 638 MiB |
+| `sqlar-w4-nosync` | 5.0 s | 0.41 s | 12 | 0.09 s, 712 entries | 635 MiB |
+
+- `sqlar-wal` leaves `-wal` and `-shm` files beside every container: 3 files per container instead
+  of 1. That confirms `DELETE`.
+- `.sqlar` writes about 1.6 times the bytes of plain Unison for the same change, because of the
+  rollback journal and the read-back verification.
+
+**Extrapolated to the full cache, with warm caches.** 3.6 million files is 90 times this set, and
+65,536 containers is 94 times.
+- **Plain Unison's scan:** about 2.4 s × 90 ≈ 3.5 min. Its walk of Ten: 0.33 s × 90 ≈ 30 s.
+- **`.sqlar`'s scan:** about 0.31 s × 94 ≈ 30 s. Nearly all of that is stating Quasar's 3.6 million
+  files, which every method does. Stating Ten's 65,536 containers adds about 2 s.
+
+**The caveat that decides it: every number above is from a warm cache.** Ten's HFS+ catalog for
+40,000 files sits in this Mac's 128 GiB of RAM. With 3.6 million plain files, the first run after a
+reboot or after other heavy I/O has to read the catalog from the platter, a random-access B-tree
+of probably 1–2 GiB. That cold scan is where plain files could take far longer, and this
+benchmark can't show it.
+
+**A cold-cache test is the deciding measurement:**
+1. The user runs `sudo purge`, which needs their password.
+2. I immediately run a no-change pass of plain Unison.
+3. The user purges again, and I run a no-change pass of `sqlar-w4-nosync`.
+
+That still covers only 40,000 files, so it gives a per-file cold cost to extrapolate from, not
+the full figure. A true full-scale test would need 3.6 million plain files on Ten, which is the
+real mirror itself.
+
+I've asked the user about the purge test and the barrier. Quasar and Ten can be used again,
+except for the purge test.

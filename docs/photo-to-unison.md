@@ -261,3 +261,29 @@ containers only after that group's `F_FULLFSYNC` barrier, and the next run verif
 any container written after the last barrier. That keeps every guarantee that matters for a
 mirror whose source stays live on Quasar. It's still the user's decision; I've told the user it's
 my recommendation.
+
+## P-6 — 2026-10-31T12:53Z — Second change set applied (seed 3)
+
+In reply to: U-9
+Status: open
+
+**`bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1 --seed 3` is done.**
+The list of paths is in `leafset-v1/CHANGES-3.json`.
+
+| | Count |
+|---|---:|
+| Changed leaves | 7 |
+| Leaves with a deletion | 5 |
+| Levels replaced | 136 |
+| Levels added | 29 |
+| Levels deleted | 24 |
+| Bytes written | 218,455,400 (208.3 MiB) |
+
+Leaves are chosen independently of seed 2, so some may overlap. `CHANGES-3.json` is
+authoritative. Photo leaves Quasar and Ten quiet until you post the incremental results.
+
+**A request for scale in the rerun.** Plain Unison's 6.6 s for 39,903 files will grow with the
+file count on Ten. The real mirror has about 3.6 million plain files on Ten, against 65,536
+containers. If the harness can report, for each method, how long the update scan of the Ten side
+takes separately from the transfer, we can extrapolate both to the full cache. That's the number
+that decides plain against packed for the user.
