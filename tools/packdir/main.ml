@@ -1,15 +1,16 @@
 (* unison-packdir: the packed-directory prototype and its tools.
 
-     unison-packdir pack-tree ROOT OUT [--depth N] [--wal] [--batch-mib M]
+     unison-packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]
        keep every directory N levels under ROOT (default 2, the preview leaves
-       <H>/<HHHH>) as OUT/<rel>.sqlar, one container at a time; a rerun stores
-       only new and changed files and marks the vanished ones retained
+       <H>/<HHHH>) as OUT/<rel>.sqlar; N workers read and hash containers in
+       parallel, one writes at a time; a rerun stores only new and changed
+       files and marks the vanished ones retained
      unison-packdir list C.sqlar
      unison-packdir verify C.sqlar...
      unison-packdir restore C.sqlar OUT_DIR [--skip-retained] *)
 
 let usage () =
-  prerr_endline "usage: unison-packdir pack-tree ROOT OUT [--depth N] [--wal] [--batch-mib M]\n\
+  prerr_endline "usage: unison-packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]\n\
                 \       unison-packdir list C.sqlar\n\
                 \       unison-packdir verify C.sqlar...\n\
                 \       unison-packdir restore C.sqlar OUT_DIR [--skip-retained]";
@@ -25,10 +26,21 @@ let rec dirs_at depth root rel =
     | _ -> [] | exception Unix.Unix_error _ -> [])
     (List.sort compare (Array.to_list (Sys.readdir here)))
 
-let pack_tree root out ~depth ~journal ~batch_bytes =
+(* One writer per output disk: the transactions of all workers take this lock;
+   reading and hashing happen outside it. *)
+let lock_file out =
+  Dng_archive.Native.mkdir_p out;
+  Unix.openfile (Filename.concat out ".packdir-writer.lock") [Unix.O_RDWR; Unix.O_CREAT] 0o644
+
+let with_lock fd f =
+  Unix.lockf fd Unix.F_LOCK 0;
+  Fun.protect ~finally:(fun () -> Unix.lockf fd Unix.F_ULOCK 0) f
+
+let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
   let t0 = Unix.gettimeofday () in
-  let containers = ref 0 and stored = ref 0 and retained = ref 0 and bytes = ref 0 in
-  List.iter (fun rel ->
+  let fd = lock_file out in
+  let write_lock f = with_lock fd f in
+  let one rel =
     let target = Filename.concat out rel ^ ".sqlar" in
     (* A plain directory beside the container is pre-existing content, never
        touched. A file named like one of its files is not packed while the
@@ -48,27 +60,56 @@ let pack_tree root out ~depth ~journal ~batch_bytes =
           (Array.to_list (Sys.readdir plain))
       end else [] in
     let skip = same in
-    Dng_archive.Native.mkdir_p (Filename.dirname target);
-    let c = Packdir.open_ ~journal target in
+    let c = write_lock (fun () -> Dng_archive.Native.mkdir_p (Filename.dirname target); Packdir.open_ ~journal target) in
     Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
-      let s, r, b = Packdir.update ~batch_bytes ~skip c (Filename.concat root rel) in
-      incr containers; stored := !stored + s; retained := !retained + r; bytes := !bytes + b)) (dirs_at depth root "");
+      Packdir.update ~batch_bytes ~write_lock ~skip c (Filename.concat root rel)) in
+  let dirs = Array.of_list (dirs_at depth root "") in
+  let containers = Array.length dirs and stored = ref 0 and retained = ref 0 and bytes = ref 0 in
+  let add (s, r, b) = stored := !stored + s; retained := !retained + r; bytes := !bytes + b in
+  if workers <= 1 then Array.iter (fun rel -> add (one rel)) dirs
+  else begin
+    (* Worker k takes containers k, k+workers, ... and sends back its totals. *)
+    flush stdout;
+    let children = List.init (min workers (max 1 containers)) (fun k ->
+      let rd, wr = Unix.pipe ~cloexec:true () in
+      match Unix.fork () with
+      | 0 ->
+          Unix.close rd;
+          let total = ref (0, 0, 0) and i = ref k in
+          (try
+             while !i < containers do
+               let s, r, b = one dirs.(!i) and (s0, r0, b0) = !total in
+               total := (s0 + s, r0 + r, b0 + b); i := !i + workers
+             done
+           with e -> prerr_endline ("unison-packdir: " ^ Printexc.to_string e); flush stdout; Unix._exit 1);
+          let oc = Unix.out_channel_of_descr wr in
+          Marshal.to_channel oc !total []; close_out oc; flush stdout; Unix._exit 0
+      | pid -> Unix.close wr; pid, Unix.in_channel_of_descr rd) in
+    let failed = ref 0 in
+    List.iter (fun (pid, ic) ->
+      (match Marshal.from_channel ic with t -> add t | exception End_of_file -> ());
+      close_in ic;
+      match snd (Unix.waitpid [] pid) with
+      | Unix.WEXITED 0 -> () | Unix.WEXITED n -> failed := n | _ -> failed := 1) children;
+    if !failed <> 0 then exit !failed
+  end;
   let dt = Unix.gettimeofday () -. t0 in
   Printf.printf "{\"containers\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
-    !containers !stored !retained !bytes dt (float !bytes /. 1048576. /. dt) (float !stored /. dt)
+    containers !stored !retained !bytes dt (float !bytes /. 1048576. /. dt) (float !stored /. dt)
 
 let () =
   let args = List.tl (Array.to_list Sys.argv) in
   let flag f = List.mem f args in
   let value f d = let rec go = function a :: v :: _ when a = f -> v | _ :: r -> go r | [] -> d in go args in
   let pos = let rec go = function
-      | [] -> [] | ("--depth" | "--batch-mib") :: _ :: r -> go r
+      | [] -> [] | ("--depth" | "--batch-mib" | "--workers") :: _ :: r -> go r
       | a :: r when String.length a > 2 && String.sub a 0 2 = "--" -> go r | a :: r -> a :: go r in go args in
   try match pos with
     | ["pack-tree"; root; out] ->
         pack_tree root out ~depth:(int_of_string (value "--depth" "2"))
           ~journal:(if flag "--wal" then Packdir.Wal else Packdir.Delete)
           ~batch_bytes:(int_of_string (value "--batch-mib" "256") * 1048576)
+          ~workers:(int_of_string (value "--workers" "1"))
     | ["list"; path] ->
         let c = Packdir.open_ path in
         List.iter (fun (m : Packdir.member) ->

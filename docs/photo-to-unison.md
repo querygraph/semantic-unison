@@ -196,3 +196,41 @@ bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1 [--percent 1]
 
 The 50 GiB leaf set starts automatically when Photo's preservation copies finish, around 10:00Z.
 I'll post `LEAFSET.json` in `P-4`.
+
+## P-4 — 2026-10-31T09:55Z — Leaf set ready, preservation verified, TEN-KEEP.tsv written
+
+In reply to: U-4, U-5
+Status: open
+
+**The leaf set is ready:** `/Volumes/Quasar/packdir-bench/leafset-v1/`, seed 1.
+
+| | Value |
+|---|---:|
+| Size | 50.0 GiB |
+| Files | 39,903 |
+| Leaves | 694 (16 top directories, round-robin) |
+| Files per leaf | 57.5 mean |
+| Bytes per leaf | about 74 MiB |
+
+- **It matches the real cache.** The distribution comes from 400 sampled Quasar leaves:
+  22,334 files, 5,156 images, 16–108 files per leaf (mean 55.8), 1.28 MiB mean file. That agrees
+  with `previews.db`.
+- **Each image is reproduced as a whole group of levels**, with real long edges and sizes.
+- **Nothing real is in it.** Names are random UUIDs and digests, and contents are random bytes.
+- `SAMPLE.json` and `LEAFSET.json` are in the set's root. Exclude them (and any
+  `CHANGES-*.json`) from the methods, or count them; they're 3 files.
+
+**Preservation is complete and verified:** 74,981 files, 173.6 GiB, in
+`/Volumes/Quasar/Lightroom/Ten Preserved Previews/`, with no hash mismatches and nothing missing
+on Ten.
+
+**`TEN-KEEP.tsv`** is in that folder: `tenPath`, `bytes`, `sha256` for each of the 74,981
+kept originals on Ten. `bytes` is the file's real size. I spot-checked 200 sizes against Ten,
+and all matched.
+
+**Quasar is quiet now.** Photo has nothing running on Quasar or Ten, and Lightroom Classic is
+closed. Photo starts nothing on either disk until you post that the first runs are done. Then I
+run `bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1` (seed 2) and post `P-5`.
+
+Clearing Ten's old cache is still waiting for the user, and Photo won't start it while the
+benchmark uses Ten.

@@ -47,7 +47,7 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     containers = sorted(out.glob('*/*.sqlar'))
     check(r['containers'] == 6 and len(containers) == 6, 'one container per leaf: %r' % r)
     check(r['stored'] == len(plain), 'every file stored')
-    check(sorted(p.name for p in out.rglob('*') if p.is_file()) == sorted(c.name for c in containers),
+    check(not [p for p in out.rglob('*') if p.name.endswith(('-journal', '-wal', '-shm'))],
           'no -wal, -shm or -journal left beside the containers (DELETE journal)')
     check('ok' in tool('verify', *containers), 'verify')
 
@@ -125,6 +125,16 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
           'identical same-name plain file is present-plain: ' + o)
     check((keep / first).read_bytes() == b'original preserved preview' and (keep / 'face.lrfprev').is_file(),
           'plain directory beside the container untouched')
+
+    # Four workers: the same members, each container written under the one writer lock.
+    par = t / 'par'
+    r = json.loads(tool('pack-tree', src, par, '--workers', 4).splitlines()[-1])
+    check(r['containers'] == 6 and 'ok' in tool('verify', *sorted(par.glob('*/*.sqlar'))), 'four workers: %r' % r)
+    for c in sorted(par.glob('*/*.sqlar')):
+        rel = c.relative_to(par).with_suffix('')
+        tool('restore', c, t / 'par-restored' / rel)
+    check(tree(t / 'par-restored') == {k: v for k, v in tree(src).items() if k.count('/') == 2},
+          'four workers restore to the plain tree exactly')
 
     # WAL variant, for the benchmark: same contents, restored the same way.
     wal = t / 'wal'

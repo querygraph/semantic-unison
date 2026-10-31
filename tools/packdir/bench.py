@@ -6,8 +6,9 @@ records wall time and the target disk's bytes written and I/O operations
 (iostat), as JSON lines:
 
   plain      Unison, file per file (clone off), one way and additive like the mirror profile
-  sqlar      unison-packdir pack-tree, DELETE journal
+  sqlar      unison-packdir pack-tree, DELETE journal, F_FULLFSYNC per container
   sqlar-wal  unison-packdir pack-tree --wal
+  sqlar-w4, sqlar-w4-nosync   the same with 4 workers; -nosync without the drive-cache flush
   cp         cp -R, then sync (first run only)
   tar        tar | tar, then sync (first run only)
   bundle     Unison into an HFS+ sparse bundle on the target
@@ -66,9 +67,12 @@ def method(args, name, phase, src, out, home):
     dst = out / name
     if name == 'plain':
         unison(args, src, dst, home)
-    elif name in ('sqlar', 'sqlar-wal'):
-        extra = ['--wal'] if name == 'sqlar-wal' else []
-        r = subprocess.run([args.packdir, 'pack-tree', str(src), str(dst), *extra], capture_output=True, text=True, check=True)
+    elif name.startswith('sqlar'):
+        # sqlar[-wal][-w4][-nosync]: journal, 4 workers, drive-cache flush off.
+        extra = (['--wal'] if '-wal' in name else []) + (['--workers', '4'] if '-w4' in name else [])
+        env = dict(os.environ, UNISON_PACKDIR_SYNC='normal') if '-nosync' in name else None
+        r = subprocess.run([args.packdir, 'pack-tree', str(src), str(dst), *extra], capture_output=True, text=True,
+                           check=True, env=env)
         return json.loads(r.stdout.splitlines()[-1])
     elif name == 'cp':
         subprocess.run(['cp', '-Rp', str(src), str(dst)], check=True)

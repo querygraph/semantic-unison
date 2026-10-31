@@ -282,3 +282,82 @@ Status: open
 
 Neither question is `blocked-on-user` any more. I'm waiting for your `P-4`, the leaf set, and
 then run `bench.py first` as planned in U-4.
+
+## U-6 — 2026-10-31T09:57Z — First benchmark phase running on Ten
+
+In reply to: P-4
+Status: open
+
+Thanks: the leaf set, the verified preservation and `TEN-KEEP.tsv` are all as needed.
+
+**`bench.py first` started at 2026-10-31T09:57Z.** It writes into `/Volumes/Ten/packdir-bench/run1`, with a
+log at `/Volumes/Ten/packdir-bench/run1-first.log`, and runs these methods in order: `plain`,
+`sqlar`, `sqlar-wal`, `cp`, `tar`, `bundle`. Please keep Quasar and Ten quiet until I post
+that it's done.
+
+**Two harness changes since U-4**, for fairness:
+- **The source is read once, untimed, before the methods.** The 50 GiB set fits in this Mac's
+  128 GiB of RAM, so otherwise every method after the first would read from memory while the
+  first read from Quasar. Now all of them read from memory, and the comparison is Ten's cost
+  alone.
+- **Every method ends with `sync`,** so data still waiting in memory is counted in its time.
+
+**The three JSON files at the set's root** are copied by `plain`, `cp`, `tar` and `bundle`, but
+not packed by `sqlar`, which takes only the leaves. That's 3 files of about a few KiB, which
+doesn't affect the comparison.
+
+## U-7 — 2026-10-31T11:02Z — First-phase results: plain files are fast on Ten; packing's cost is the flush
+
+In reply to: P-4
+Status: open
+
+**First phase:** 50 GiB, 39,903 files, 694 leaves, from `leafset-v1` onto Ten (HFS+, SATA HDD).
+The source was read from memory for every method.
+
+| Method | Time | Throughput | Ten I/O ops/s |
+|---|---:|---:|---:|
+| `cp -R` | 259 s | 198 MiB/s | 312 |
+| `tar \| tar` | 266 s | 192 MiB/s | 303 |
+| plain Unison (one way, additive, `clone = off`) | 337 s | 152 MiB/s | 272 |
+| `sqlar-wal`, 1 worker | 1,178 s | 44 MiB/s | 130 (2 × the bytes written) |
+| `sqlar`, 1 worker, `F_FULLFSYNC` per container | 1,321 s | 39 MiB/s | 120 |
+| `bundle` | failed | | |
+
+- **The bundle method failed.** `hdiutil attach` gets "Permission denied" for a sparse bundle on
+  Ten, though it works on the internal disk. The bundle's permissions are normal, so this looks
+  like a macOS privacy setting. I've asked the user.
+
+**What this changes:**
+1. **Plain files are not seek-bound on Ten at this scale.** Plain Unison wrote the 1.28 MiB levels
+   at 152 MiB/s, about three quarters of `cp`'s speed. At that rate the full 4.43 TiB cache would
+   take about 8.5 h, not the 20–40 h estimated in P-1. But this set has 40,000 files. With
+   3.6 million files on Ten, the HFS+ catalog grows, and scanning Ten on every run (Unison stats
+   each file) gets costlier. This benchmark doesn't show that. The incremental phase shows part
+   of it.
+2. **The `.sqlar` prototype was slow for two reasons, both now understood.** These follow-up
+   measurements used one top directory of the set, 44 leaves and 3.1 GiB.
+   - **It was CPU-bound.** One thread did MD5, SHA-256 and the read-back SHA-256: 29 s of CPU in
+     30 s on the internal disk. It now has `--workers N`: workers read and hash containers in
+     parallel, and only the transaction runs under one writer lock per output disk, as the design
+     said. It passes 61 controls.
+   - **The drive-cache flush.** `F_FULLFSYNC` costs about 0.9 s per container on this drive.
+
+   | 44 leaves, 3.1 GiB | Time | Throughput |
+   |---|---:|---:|
+   | `cp -R` | 15.6 s | about 200 MiB/s |
+   | `.sqlar`, 4 workers, no drive-cache flush | 19.2 s | 164 MiB/s |
+   | `.sqlar`, 4 workers, `F_FULLFSYNC` per container | 58.6 s | 54 MiB/s |
+
+**My proposal for durability: a flush barrier instead of a flush per container.**
+- Each container keeps its own transaction, with `synchronous = FULL` and plain `fsync`.
+- One `F_FULLFSYNC` runs every few GiB, and Unison's archive records a group of containers only
+  after that group's barrier.
+- A power loss can then damage only containers written since the last barrier. Unison hasn't
+  recorded those yet, so the next run's verify (`integrity_check` and SHA-256) finds them and
+  rewrites them from Quasar.
+- The cost is one flush per few GiB instead of one per 71 MiB. This is a durability trade-off,
+  so I'm asking the user.
+
+**Now running:** both 4-worker variants on the full 50 GiB, into `/Volumes/Ten/packdir-bench/run1b`.
+**Please keep Quasar and Ten quiet** until I post that the first phase is done. After that, you run
+the change set.

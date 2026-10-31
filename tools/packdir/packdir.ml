@@ -60,10 +60,14 @@ let open_ ?(journal = Delete) path =
   (* A rollback journal deleted at each commit: about one transaction per
      container per run, and no -journal file left beside it. *)
   exec db (match journal with Delete -> "PRAGMA journal_mode = DELETE" | Wal -> "PRAGMA journal_mode = WAL");
-  exec db "PRAGMA synchronous = FULL";
-  (* F_FULLFSYNC on macOS: flush the drive's cache, which fsync does not. *)
-  exec db "PRAGMA fullfsync = ON";
-  exec db "PRAGMA checkpoint_fullfsync = ON";
+  (* F_FULLFSYNC on macOS: flush the drive's cache, which fsync does not.
+     UNISON_PACKDIR_SYNC (benchmarks only) weakens it: "full" keeps
+     synchronous = FULL with plain fsync, "normal" also syncs less often. *)
+  let full, fullfsync = match Sys.getenv_opt "UNISON_PACKDIR_SYNC" with
+    | Some "full" -> true, false | Some "normal" -> false, false | _ -> true, true in
+  exec db (if full then "PRAGMA synchronous = FULL" else "PRAGMA synchronous = NORMAL");
+  exec db (if fullfsync then "PRAGMA fullfsync = ON" else "PRAGMA fullfsync = OFF");
+  exec db (if fullfsync then "PRAGMA checkpoint_fullfsync = ON" else "PRAGMA checkpoint_fullfsync = OFF");
   exec db schema;
   (match query db "SELECT value FROM unison_container WHERE key='format'" [] with
    | [] -> run db "INSERT INTO unison_container VALUES ('format', ?), ('epoch', '0')" [text format]
@@ -94,41 +98,57 @@ type put = { member : string; source : string } (* member name, plain file to st
 let crash_after = match Sys.getenv_opt "UNISON_PACKDIR_CRASH_AFTER" with
   | Some n -> int_of_string_opt n | None -> None (* tests: exit inside a transaction *)
 
+(* A file read and hashed, ready to store. *)
+type ready = { put : put; st : N.stat; data : string; md5 : string; sha : string }
+
+let read_put p =
+  if String.contains p.member '/' then failwith ("member name with a slash: " ^ p.member);
+  let st = N.stat p.source in
+  if st.N.kind <> `Reg then failwith (p.source ^ ": not a regular file");
+  let data = In_channel.with_open_bin p.source In_channel.input_all in
+  let st' = N.stat p.source in
+  (* Reading moves atime; identity, size, mtime and ctime must hold. *)
+  if Int64.of_int (String.length data) <> st.N.size || st'.N.ino <> st.N.ino || st'.N.size <> st.N.size
+     || st'.N.mtime_ns <> st.N.mtime_ns || st'.N.ctime_ns <> st.N.ctime_ns then
+    failwith (p.source ^ ": changed while read");
+  { put = p; st; data; md5 = Digest.string data; sha = N.sha_string data }
+
 (* One batch: every put and retained deletion in transactions of at most
    [batch_bytes] of member data, the epoch bumped in each; then the changed
    blobs are read back and their SHA-256 compared, before the caller may
-   record them anywhere. Returns the bytes stored. *)
-let apply ?(batch_bytes = 256 * 1048576) c ~puts ~retain =
-  let stored = ref 0 and in_txn = ref 0 and done_puts = ref 0 in
-  let begin_ () = exec c.db "BEGIN IMMEDIATE" in
-  let commit () =
-    run c.db "UPDATE unison_container SET value = CAST(value AS INTEGER) + 1 WHERE key = 'epoch'" [];
-    exec c.db "COMMIT" in
-  begin_ ();
-  (try
-     List.iter (fun p ->
-       if String.contains p.member '/' then failwith ("member name with a slash: " ^ p.member);
-       let st = N.stat p.source in
-       if st.N.kind <> `Reg then failwith (p.source ^ ": not a regular file");
-       let data = In_channel.with_open_bin p.source In_channel.input_all in
-       let st' = N.stat p.source in
-       (* Reading moves atime; identity, size, mtime and ctime must hold. *)
-       if Int64.of_int (String.length data) <> st.N.size || st'.N.ino <> st.N.ino || st'.N.size <> st.N.size
-          || st'.N.mtime_ns <> st.N.mtime_ns || st'.N.ctime_ns <> st.N.ctime_ns then
-         failwith (p.source ^ ": changed while read");
-       if !in_txn > 0 && !in_txn + String.length data > batch_bytes then (commit (); begin_ (); in_txn := 0);
-       run c.db "INSERT OR REPLACE INTO sqlar(name, mode, mtime, sz, data) VALUES (?, ?, ?, ?, ?)"
-         [text p.member; int64 (Int64.of_int (0o100000 lor st.N.mode));
-          int64 (Int64.div st.N.mtime_ns 1_000_000_000L); int64 st.N.size; blob data];
-       run c.db "INSERT OR REPLACE INTO unison_member(name, mtime_ns, fp, fpalg, sha256, retained_deleted) \
-                 VALUES (?, ?, ?, ?, ?, 0)"
-         [text p.member; int64 st.N.mtime_ns; blob (Digest.string data); text fpalg; blob (N.sha_string data)];
-       in_txn := !in_txn + String.length data; stored := !stored + String.length data;
-       incr done_puts;
-       if crash_after = Some !done_puts then Unix._exit 3) puts;
-     List.iter (fun name -> run c.db "UPDATE unison_member SET retained_deleted = 1 WHERE name = ?" [text name]) retain;
-     commit ()
-   with e -> ignore (Sqlite3.exec c.db "ROLLBACK"); raise e);
+   record them anywhere. Files are read and hashed outside [write_lock]; only
+   the transactions run inside it, so several processes can prepare
+   containers while one writes to the disk. Returns the bytes stored. *)
+let apply ?(batch_bytes = 256 * 1048576) ?(write_lock = fun f -> f ()) c ~puts ~retain =
+  let stored = ref 0 and done_puts = ref 0 in
+  let rec batches acc size cur = function
+    | [] -> List.rev (if cur = [] then acc else List.rev cur :: acc)
+    | p :: rest ->
+        let n = Int64.to_int (N.stat p.source).N.size in
+        if cur <> [] && size + n > batch_bytes then batches (List.rev cur :: acc) n [p] rest
+        else batches acc (size + n) (p :: cur) rest in
+  let groups = match batches [] 0 [] puts with [] -> [[]] | g -> g in
+  let last = List.length groups - 1 in
+  List.iteri (fun i group ->
+    let ready = List.map read_put group in
+    write_lock (fun () ->
+      exec c.db "BEGIN IMMEDIATE";
+      (try
+         List.iter (fun r ->
+           run c.db "INSERT OR REPLACE INTO sqlar(name, mode, mtime, sz, data) VALUES (?, ?, ?, ?, ?)"
+             [text r.put.member; int64 (Int64.of_int (0o100000 lor r.st.N.mode));
+              int64 (Int64.div r.st.N.mtime_ns 1_000_000_000L); int64 r.st.N.size; blob r.data];
+           run c.db "INSERT OR REPLACE INTO unison_member(name, mtime_ns, fp, fpalg, sha256, retained_deleted) \
+                     VALUES (?, ?, ?, ?, ?, 0)"
+             [text r.put.member; int64 r.st.N.mtime_ns; blob r.md5; text fpalg; blob r.sha];
+           stored := !stored + String.length r.data;
+           incr done_puts;
+           if crash_after = Some !done_puts then Unix._exit 3) ready;
+         if i = last then
+           List.iter (fun name -> run c.db "UPDATE unison_member SET retained_deleted = 1 WHERE name = ?" [text name]) retain;
+         run c.db "UPDATE unison_container SET value = CAST(value AS INTEGER) + 1 WHERE key = 'epoch'" [];
+         exec c.db "COMMIT"
+       with e -> ignore (Sqlite3.exec c.db "ROLLBACK"); raise e))) groups;
   (* Read back what this batch wrote. *)
   List.iter (fun p ->
     match query c.db "SELECT s.data, m.sha256 FROM sqlar s JOIN unison_member m ON m.name = s.name WHERE s.name = ?"
@@ -161,7 +181,7 @@ let verify c =
    files (by size and nanosecond mtime) are stored, files gone from [dir] are
    kept and marked retained. Names in [skip] (plain files already beside the
    container) are left out. Returns (stored, retained, bytes). *)
-let update ?batch_bytes ?(skip = []) c dir =
+let update ?batch_bytes ?write_lock ?(skip = []) c dir =
   let have = Hashtbl.create 256 in
   List.iter (fun m -> Hashtbl.replace have m.name m) (members c);
   let names = List.sort compare (List.filter (fun n ->
@@ -176,7 +196,7 @@ let update ?batch_bytes ?(skip = []) c dir =
   let present = Hashtbl.create 256 in
   List.iter (fun n -> Hashtbl.replace present n ()) names;
   let retain = Hashtbl.fold (fun n m acc -> if Hashtbl.mem present n || m.retained then acc else n :: acc) have [] in
-  let bytes = if puts = [] && retain = [] then 0 else apply ?batch_bytes c ~puts ~retain in
+  let bytes = if puts = [] && retain = [] then 0 else apply ?batch_bytes ?write_lock c ~puts ~retain in
   List.length puts, List.length retain, bytes
 
 (* Write every member to [out] with its mode and nanosecond mtime, SHA-256
