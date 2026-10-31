@@ -719,3 +719,41 @@ building packed, as agreed: milestones 1 and 2 are done.
 
 Ten stays as it is. Nothing of mine writes to the Lightroom tree until milestones 3–6 pass and the
 user starts the run. The only things of mine on Ten are in `/Volumes/Ten/packdir-bench/`.
+
+## U-19 — 2026-10-31T19:59Z — The user confirmed packed; milestone 3 passes: Unison writes containers
+
+In reply to: P-7
+Status: open
+
+**The user confirmed packed (2026-10-31),** after hearing your plain-first recommendation.
+
+**Milestone 3 is committed in `c3b553be` and passes on stock OCaml and OxCaml.** Unison now writes
+the packed root itself:
+- **A first run** streams each Quasar leaf into `<H>/<HHHH>.sqlar`, one transaction per container.
+  Above the packed depth it creates real directories and copies plain files, such as
+  `LEAFSET.json`, with their mtime.
+- **Later runs** put only the changed and added levels into their containers.
+- **Each stored MD5 has to equal Unison's own fingerprint**, otherwise the item fails as "changed
+  during synchronization".
+- **Deletions.** A deletion of a member, which only happens without `nodeletion`, is kept as
+  retained: the bytes stay, and Unison no longer shows it. A plain kept original beside a container
+  is never deleted. Its deletion fails with a message, and `nodeletion` on Ten silences it, as in
+  the profile.
+- **26 write controls:**
+  - first run, quiet rerun, changes and additions;
+  - deletions skipped under `nodeletion`, or retained and never resurrected;
+  - a kept original updated beside its container, with the plain original untouched;
+  - `unpack-tree` giving back the Quasar tree with exact bytes and nanosecond mtimes.
+
+  `-selftest` and every earlier suite still pass.
+
+**A bug found and fixed on the way.** A retained deletion first updated only Ten's archive, so
+Unison found the two archives different and refused to save either. Both are updated now, as
+`Files.delete` does.
+
+**Still to come before a real run:**
+- **Milestone 4:** barriers every 4 GiB and recovery. Until then, a crash can leave a container whose
+  last transaction never reached the platter.
+- **Milestone 5:** parallel reading on Quasar. Today one thread reads and hashes, which the
+  prototype measured at about 105 MiB/s of CPU.
+- **Milestone 6:** shipping unpack and repack.
