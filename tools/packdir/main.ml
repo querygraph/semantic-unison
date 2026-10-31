@@ -7,13 +7,19 @@
        files and marks the vanished ones retained
      unison-packdir list C.sqlar
      unison-packdir verify C.sqlar...
-     unison-packdir restore C.sqlar OUT_DIR [--skip-retained] *)
+     unison-packdir restore C.sqlar OUT_DIR [--skip-retained]
+     unison-packdir unpack-tree OUT DEST [--skip-retained]
+       every container under OUT back to a plain tree under DEST
+     unison-packdir repack C.sqlar... [--drop-retained]
+       rebuild containers compactly, verified before they replace the old ones *)
 
 let usage () =
   prerr_endline "usage: unison-packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]\n\
                 \       unison-packdir list C.sqlar\n\
                 \       unison-packdir verify C.sqlar...\n\
-                \       unison-packdir restore C.sqlar OUT_DIR [--skip-retained]";
+                \       unison-packdir restore C.sqlar OUT_DIR [--skip-retained]\n\
+                \       unison-packdir unpack-tree OUT DEST [--skip-retained]\n\
+                \       unison-packdir repack C.sqlar... [--drop-retained]";
   exit 2
 
 let rec dirs_at depth root rel =
@@ -214,6 +220,30 @@ let () =
           if problems = [] then Printf.printf "%s: ok, %d members\n" p (List.length (Packdir.members (Packdir.open_ p)));
           bad + List.length problems) 0 paths in
         if bad > 0 then exit 1
+    | ["unpack-tree"; out; dest] ->
+        (* Every container under OUT back to plain files under DEST: OUT/<rel>.sqlar
+           becomes DEST/<rel>/, with exact bytes, modes and nanosecond mtimes. *)
+        let rec containers dir rel =
+          List.concat_map (fun n ->
+            let r = if rel = "" then n else Filename.concat rel n in
+            let p = Filename.concat dir n in
+            match (Unix.lstat p).Unix.st_kind with
+            | Unix.S_DIR -> containers p r
+            | Unix.S_REG when Filename.check_suffix n ".sqlar" -> [Filename.chop_suffix r ".sqlar"]
+            | _ -> []) (List.sort compare (Array.to_list (Sys.readdir dir))) in
+        let found = containers out "" in
+        let files = ref 0 in
+        List.iter (fun rel ->
+          let c = Packdir.open_ (Filename.concat out rel ^ ".sqlar") in
+          Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+            Packdir.restore ~skip_retained:(flag "--skip-retained") c (Filename.concat dest rel);
+            files := !files + List.length (List.filter (fun (m : Packdir.member) ->
+              not (flag "--skip-retained" && m.retained)) (Packdir.members c)))) found;
+        Printf.printf "{\"containers\": %d, \"files\": %d}\n" (List.length found) !files
+    | "repack" :: (_ :: _ as paths) ->
+        List.iter (fun p ->
+          let kept, before, after = Packdir.repack ~drop_retained:(flag "--drop-retained") p in
+          Printf.printf "%s: %d members, %Ld -> %Ld bytes\n" p kept before after) paths
     | ["restore"; path; out] ->
         let c = Packdir.open_ path in
         Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->

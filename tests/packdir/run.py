@@ -151,6 +151,27 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     check(tree(t / 'par-restored') == {k: v for k, v in tree(src).items() if k.count('/') == 2},
           'four workers restore to the plain tree exactly')
 
+    # Unpack: every container back to the plain tree it came from.
+    r = json.loads(tool('unpack-tree', par, t / 'unpacked').splitlines()[-1])
+    check(tree(t / 'unpacked') == {k: v for k, v in tree(src).items() if k.count('/') == 2},
+          'unpack-tree restores the whole tree exactly: %r' % r)
+
+    # Repack: same members and bytes, no growth, retained deletions dropped on request.
+    c0 = out / '0/0000.sqlar'
+    tool('restore', c0, t / 'before-repack')
+    size0 = c0.stat().st_size
+    o = tool('repack', c0)
+    check('ok' in tool('verify', c0) and c0.stat().st_size <= size0, 'repack verifies and does not grow: ' + o)
+    tool('restore', c0, t / 'after-repack')
+    check(tree(t / 'after-repack') == tree(t / 'before-repack'), 'repack keeps every member exactly')
+    retained = [l.split('\t')[0] for l in tool('list', c0).splitlines() if l.endswith('retained')]
+    check(retained, 'container has retained members to drop')
+    tool('repack', c0, '--drop-retained')
+    check(not any(l.endswith('retained') for l in tool('list', c0).splitlines()), '--drop-retained drops them')
+    (out / '0/0000.sqlar.repack').write_bytes(b'left by an interrupted repack')
+    tool('repack', c0, rc=1)
+    check((out / '0/0000.sqlar.repack').read_bytes() == b'left by an interrupted repack', 'a leftover .repack is refused, not overwritten')
+
     # WAL variant, for the benchmark: same contents, restored the same way.
     wal = t / 'wal'
     tool('pack-tree', src, wal, '--wal')

@@ -235,3 +235,39 @@ let restore ?(skip_retained = false) c out =
        | _ -> ());
       N.utimens target m.mtime_ns m.mtime_ns
     end) (members c)
+
+(* Rebuild [path] into a fresh container: the same members (retained ones too
+   unless [drop_retained]), no free pages, the epoch carried on. The new file
+   is verified and flushed to the platter before it replaces the old one, so
+   a crash leaves one or the other whole. Returns (members kept, bytes before,
+   bytes after). *)
+let repack ?(drop_retained = false) ?(journal = Delete) path =
+  let fresh = path ^ ".repack" in
+  if Sys.file_exists fresh then failwith (fresh ^ " exists: an earlier repack was interrupted; check and remove it");
+  let before = (N.stat path).N.size in
+  let old = open_ ~journal path in
+  let kept = Fun.protect ~finally:(fun () -> close old) (fun () ->
+    let problems = verify old in
+    if problems <> [] then failwith (path ^ ": " ^ String.concat "; " problems ^ "; not repacked");
+    let c = open_ ~journal fresh in
+    Fun.protect ~finally:(fun () -> close c) (fun () ->
+      let keep = List.filter (fun m -> not (drop_retained && m.retained)) (members old) in
+      exec c.db "BEGIN IMMEDIATE";
+      (try
+         List.iter (fun m ->
+           (match query old.db "SELECT mode, mtime, sz, data FROM sqlar WHERE name = ?" [text m.name] with
+            | [ [| mode; mtime; sz; data |] ] ->
+                run c.db "INSERT INTO sqlar(name, mode, mtime, sz, data) VALUES (?, ?, ?, ?, ?)" [text m.name; mode; mtime; sz; data]
+            | _ -> failwith (m.name ^ ": no data"));
+           run c.db "INSERT INTO unison_member(name, mtime_ns, fp, fpalg, sha256, retained_deleted) VALUES (?, ?, ?, ?, ?, ?)"
+             [text m.name; int64 m.mtime_ns; blob m.fp; text m.fpalg; blob m.sha256; int64 (if m.retained then 1L else 0L)]) keep;
+         run c.db "UPDATE unison_container SET value = ? WHERE key = 'epoch'" [text (string_of_int (epoch old + 1))];
+         exec c.db "COMMIT"
+       with e -> ignore (Sqlite3.exec c.db "ROLLBACK"); raise e);
+      let problems = verify c in
+      if problems <> [] then failwith (fresh ^ ": " ^ String.concat "; " problems);
+      List.length keep)) in
+  barrier fresh;
+  Sys.rename fresh path;
+  kept, before, (N.stat path).N.size
+

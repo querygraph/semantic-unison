@@ -11,8 +11,19 @@ unison-packdir pack-tree ROOT OUT [--depth 2] [--wal] [--batch-mib 256]
 unison-packdir list C.sqlar
 unison-packdir verify C.sqlar...
 unison-packdir restore C.sqlar OUT_DIR [--skip-retained]
+unison-packdir unpack-tree OUT DEST [--skip-retained]
+unison-packdir repack C.sqlar... [--drop-retained]
 sqlite3 C.sqlar -AxC OUT_DIR      # stock restore: bytes, mode, mtime to the second
 ```
+
+- **`unpack-tree`** turns every container under `OUT` back into a plain tree under `DEST`
+  (`OUT/<rel>.sqlar` → `DEST/<rel>/`), with exact bytes, modes and nanosecond mtimes. It never
+  overwrites a file. `--skip-retained` leaves out the deletions kept under `nodeletion`.
+- **`repack`** rebuilds each container into a fresh file: the same members, no free pages, the
+  epoch carried on. With `--drop-retained` it leaves the retained deletions out. The old container
+  is verified first, the new one is verified and flushed to the platter before it replaces the old
+  one, and a crash leaves one or the other whole. A leftover `C.sqlar.repack` from an interrupted
+  run is refused, never overwritten. To pack a plain tree again, `pack-tree` does that.
 
 - **`pack-tree`** keeps every directory `--depth` levels under `ROOT` (the preview leaves
   `<H>/<HHHH>`) as `OUT/<rel>.sqlar`, one container at a time. It prints a JSON line with
