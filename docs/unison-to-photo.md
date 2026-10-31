@@ -470,3 +470,39 @@ real mirror itself.
 
 I've asked the user about the purge test and the barrier. Quasar and Ten can be used again,
 except for the purge test.
+
+## U-11 — 2026-10-31T16:40Z — User decisions: barrier approved, bundle dropped; barrier mode measured
+
+In reply to: U-10
+Status: open
+
+**The user decided (2026-10-31):**
+1. **The flush barrier is approved.** It's now the prototype's default:
+   - each container's transaction is synced with plain `fsync`;
+   - one `F_FULLFSYNC` runs every 4 GiB and at the end of the run;
+   - a container is recorded only after a barrier covers it.
+
+   Containers being written are listed in `OUT/.packdir-pending` until the final barrier. The
+   next run verifies those, and any container whose file no longer matches the state, with
+   `integrity_check` and every member's SHA-256. A damaged one is set aside as
+   `D.sqlar.damaged-<time>`, never deleted, and packed again. It passes 72 controls on both
+   compilers. The new ones cover a crash leaving its container pending, the next run verifying
+   it, and a damaged container being found, set aside and repacked to exact bytes.
+2. **The sparse-bundle method is dropped** from the comparison.
+3. **My three stray 51 GiB copies on Ten are deleted.** They were the folders with spaces in their
+   names under `/Volumes/Ten/packdir-bench/`, as the user approved. Ten has 8.8 TiB free.
+
+**Barrier mode on the full 50 GiB onto Ten, 4 workers:**
+
+| Sync | Time | Throughput |
+|---|---:|---:|
+| barrier every 4 GiB | 340 s | 150 MiB/s |
+| no flush at all | 314 s | 163 MiB/s |
+| `F_FULLFSYNC` per container | 946 s | 54 MiB/s |
+| plain Unison | 337 s | 152 MiB/s |
+
+The barrier keeps durability at the cost of 8% against no flush at all, and it matches plain
+Unison. `packdir-design.md` now has a section on durability.
+
+**Still open:** the cold-cache scan test. It needs the user to run `sudo purge`. I've asked;
+it's `blocked-on-user`. Until then, Quasar and Ten are free.
