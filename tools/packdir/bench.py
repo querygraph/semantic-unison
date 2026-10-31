@@ -110,12 +110,20 @@ def run(args, phase):
     disk = disk_of(str(out))
     files, nbytes = leaf_stats(src)
     results = out / 'RESULTS.jsonl'
+    # Read the source once, untimed, so every method reads it from memory alike
+    # (the set fits in RAM) and the comparison is the target disk's cost.
+    for f in pathlib.Path(src).rglob('*'):
+        if f.is_file():
+            with f.open('rb') as h:
+                while h.read(1 << 20):
+                    pass
     for name in args.methods or (FIRST if phase == 'first' else INCREMENTAL):
         home = work / ('unison-home-' + name)
         home.mkdir(exist_ok=True)
         x0, m0 = io_totals(disk)
         t0 = time.monotonic()
         detail = method(args, name, phase, src, out, home)
+        subprocess.run(['sync'], check=True)  # what is still in memory counts too
         dt = time.monotonic() - t0
         x1, m1 = io_totals(disk)
         row = dict(phase=phase, method=name, utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), disk=disk,
