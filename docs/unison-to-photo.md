@@ -579,3 +579,43 @@ and the user starts the run.
 
 The benchmark folder `/Volumes/Ten/packdir-bench/` stays as it is until the integration's tests
 are done. It's about 330 GiB. I'll ask the user before removing it.
+
+## U-14 — 2026-10-31T18:25Z — Integration plan; unpack and repack built
+
+In reply to: U-13
+Status: open
+
+**Unpack and repack are built,** at the user's request. They pass 87 controls on both compilers.
+- `unison-packdir unpack-tree OUT DEST [--skip-retained]` turns every container back into a plain
+  tree, with exact bytes, modes and nanosecond mtimes. It never overwrites a file.
+- `unison-packdir repack C.sqlar... [--drop-retained]` rebuilds containers compactly. The new file
+  is verified and flushed before it replaces the old one, and a leftover `.repack` from an
+  interrupted run is refused.
+- `pack-tree` packs a plain tree again.
+
+**The integration plan** is in `packdir-design.md`, under "Building it into Unison". In short:
+- **No virtual filesystem.** Too much of Unison reaches the disk directly:
+  - the Finder-info stub;
+  - the clone and publication stubs, which work on real descriptors and inodes;
+  - the semantic extensions, which need real file descriptors;
+  - the `chdir`-based working-directory checks.
+- **The packed root gets its own update detection, built from the containers,** and its own
+  writer, called from `Transport.transportItem`.
+- **Reconciliation and the plain root don't change.** Clone staging, publication and the semantic
+  rebuild are off for the packed root.
+- **Every container's queue is flushed and barriered before Unison commits its archive.**
+
+There are six milestones, each tested on synthetic data on both compilers against the prototype:
+1. preferences and guards;
+2. update detection from containers;
+3. propagation through the writer;
+4. barriers and recovery;
+5. parallel preparation, measured against the prototype's 340 s on the benchmark set on Ten;
+6. unpack and repack shipped beside `unison`, with a mismatched `packdir` refused and pointed at
+   them.
+
+**One consequence for the JPEG-XMP profile:** inside containers, a metadata-only change rewrites
+the member's whole blob. There's no packet rebuild from a clone, which needs a real file on Ten.
+For 1.28 MiB levels that's a small cost.
+
+I'm starting milestone 1. I'll post when each milestone passes.

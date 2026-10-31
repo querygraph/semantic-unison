@@ -173,19 +173,65 @@ CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);
 
 ## Building it into Unison
 
-- **Where it plugs in.** A `Packdir` module sits under update detection and propagation for the
-  packed root only:
-  - update detection builds that root's archive view from `unison_member`;
-  - propagation to that root goes through the batch transaction, instead of Unison's usual
-    temp-file-and-rename per file.
+### Where it plugs in
 
-  The plain root's code paths don't change.
-- **SQLite comes from the opam `sqlite3` binding**, already installed in both switches. It's
-  built only when available, so a build without it refuses `packdir` with a message. Both stock
-  OCaml and OxCaml builds.
-- **Tools:** `unison-packdir verify DIR` (integrity check and every SHA-256) and
-  `unison-packdir restore DIR OUT` (exact mtimes, `--skip-retained`). A stock restore needs
-  neither.
+Unison reaches a replica's files through `fs.ml` for almost everything, but not quite all of it:
+- the Finder-info C stub (`osx.ml`);
+- the clone and publication stubs, which work on real descriptors and inode numbers;
+- the semantic extensions, which need real file descriptors;
+- `Fspath.findWorkingDir`, which `chdir`s into directories.
+
+So a virtual filesystem under `fs.ml` would be fragile. The packed root is one-way and only ever
+receives, so v1 plugs in one level up instead, and leaves the plain root's code and Unison's
+reconciliation untouched:
+
+- **Update detection.** `Update.findLocal` (`update.ml:2615`) for the packed root builds that
+  root's current tree from the containers, not from `Fileinfo.get` and `Os.childrenOf`:
+  - a container is a directory, and its members are files;
+  - each member has its size, mtime and mode, `NoStamp`, and the stored fingerprint as its
+    fingerprint;
+  - a container whose file stamp matches the archive isn't opened (see "A run");
+  - plain files beside a container are listed as on any root.
+- **Propagation.** `Transport.transportItem` (`transport.ml:365`) sends a file update or
+  creation whose target lies in a packed directory on the packed root to the packdir writer,
+  not to `Files.copy`. The writer reads the source file from the plain root, which is local,
+  and queues it for its container. Deletions are already skipped under `nodeletion`; the
+  writer marks those members `retained_deleted`. Clone staging, publication and the semantic
+  rebuild don't apply to the packed root, and are turned off for it.
+- **Commit.** Each container's queued puts are one transaction. Every queue is flushed, the
+  final barrier is taken, and the pending list is cleared before `Update.commitUpdates`
+  (`update.ml:2888`). So Unison's archive never gets ahead of the platter.
+- **Archive identity.** The packed root's `thisRoot` string in `archiveHash`
+  (`update.ml:203`) gets a packdir signature. A run without the same `packdir` never uses this
+  archive.
+- **SQLite** comes through the `packdir` library (`tools/packdir`), which is linked only when
+  the opam `sqlite3` binding is present. A build without it refuses `packdir` with a message.
+
+### Milestones
+
+Each one is tested on synthetic data, on stock OCaml and OxCaml, against the prototype as the
+reference.
+
+1. **Preferences and guards.** `packdir`, `packroot`, `packbarrier` and `packmax`, and the
+   refusal rules: nested patterns, a remote or source packed root, a missing SQLite build. The
+   archive-identity guard. *Test:* every refusal, and a run without `packdir` never using the
+   packed archive.
+2. **Update detection from containers.** *Test:* Unison's view of a packed tree written by
+   `unison-packdir pack-tree` equals its view of the same plain tree. An unchanged container
+   isn't opened. A changed one is verified.
+3. **Propagation through the writer.** One transaction per container; read-back SHA-256; members
+   marked retained. *Test:* first and incremental runs give containers that `unison-packdir
+   verify` and `unpack-tree` turn back into exactly the Quasar tree.
+4. **Barriers and recovery.** The pending list, a barrier every 4 GiB and at the end, and
+   verify-before-trust after a crash. *Test:* kills at each point; the next run converges.
+5. **Parallel preparation.** Reading and hashing the plain side in parallel, within
+   `semanticworkers` and `semanticcpubudget`, with one writer per disk. *Test:* the 50 GiB
+   benchmark set onto `/Volumes/Ten/packdir-bench/`, against the prototype's 340 s.
+6. **Unpack and repack.** `unison-packdir unpack-tree` and `repack` (built, 87 controls) ship
+   beside `unison`. A run whose `packdir` differs from the archive's refuses and points at
+   them, instead of rescanning or deleting.
+
+The mirror runs only after milestone 6 and the user's go-ahead.
 
 ## Tests (synthetic fixtures only)
 
