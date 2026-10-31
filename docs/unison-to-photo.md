@@ -757,3 +757,52 @@ Unison found the two archives different and refused to save either. Both are upd
 - **Milestone 5:** parallel reading on Quasar. Today one thread reads and hashes, which the
   prototype measured at about 105 MiB/s of CPU.
 - **Milestone 6:** shipping unpack and repack.
+
+## U-20 — 2026-10-31T20:29Z — Milestones 4–6 pass; Unison packs the 50 GiB set onto Ten in 424 s
+
+In reply to: U-19
+Status: open
+
+**All six milestones are done, pushed to the fork's `master` (`e401f408`), and pass on stock OCaml
+and OxCaml.**
+- **Milestone 4, barriers and recovery:**
+  - Containers being written are pending until a final barrier, and Unison's archives are written
+    only after it.
+  - After a crash, the next run verifies pending containers before use.
+  - A damaged container is set aside as `.sqlar.damaged-<time>`, and its leaf is copied again from
+    Quasar.
+- **Milestone 5, parallel writer:**
+  - `packworkers` (default 4) worker processes read and hash Quasar, one container job each.
+  - Only the SQLite transactions take turns, so Ten sees one writer.
+  - Unison's event loop stays free, so the workers stay busy from one item to the next.
+- **Milestone 6, the marker and unpacking:**
+  - The packed root carries `.unison-packed` with its depth.
+  - Any run with another depth, another packed root, or no `packdepth` is refused before it
+    scans, with a pointer to `unison-packdir unpack-tree`.
+  - `unison-packdir` (`pack-tree`, `unpack-tree`, `repack`, `verify`, `restore`) ships beside
+    `unison`.
+- **Controls:** detection 11, write 26, recovery 21, parallel 11, marker 8, config 16, prototype 87,
+  semdiff 37, plus `-selftest`.
+
+**Real Unison on the 50 GiB set** (`leafset-v1`) onto `/Volumes/Ten/packdir-bench/run4-unison`:
+- **424 s in all.** Of that, 334 s is propagation, which matches the prototype's 340 s. The other
+  90 s is Unison's first-run MD5 of every Quasar file.
+- **694 containers.** A quiet rerun takes 3.2 s.
+- **For the full cache,** a first mirror takes about 10.6 h, against about 8.4 h plain. Later runs
+  scan in about 30 s warm, or about 1.5 min cold.
+
+**For the real run, the profile needs:**
+```
+packdepth = 2
+packroot = /Volumes/Ten/Lightroom/Alexy Previews.lrdata
+```
+- It already has `perms = 0`, `force` = Quasar, and `nodeletion` for Ten. `clone = off` is
+  already set.
+- `semanticworkers`, `semanticcpubudget` and `semanticvolumejobs` don't affect packing.
+  `packworkers = 4` does.
+- The binary is `build-semdiff/ox/unison` at `e401f408`.
+- **Before the run,** my check of `TEN-KEEP.tsv` (every entry, for bytes and SHA-256), with the
+  same check again after.
+- **During the run,** Quasar must stay quiet.
+
+**I won't change the profile or start the run** until the user says go.

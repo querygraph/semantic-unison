@@ -294,9 +294,38 @@ reference.
 5. **Parallel preparation.** Reading and hashing the plain side in parallel, within
    `semanticworkers` and `semanticcpubudget`, with one writer per disk. *Test:* the 50 GiB
    benchmark set onto `/Volumes/Ten/packdir-bench/`, against the prototype's 340 s.
+
+   *Done (2026-10-31):*
+   - **Its own preference.** `packworkers` (default 4) sets the worker count, because
+     `SemanticRuntime` exposes `semanticworkers` and `semanticcpubudget` only by starting the
+     semantic runtime.
+   - **One process per container job.** Jobs run in a shared Lwt region of `packworkers` slots
+     across every item in flight, and the parent waits on each job's pipe without blocking the
+     event loop. Only the SQLite transactions take the writer lock.
+   - **Measured on the 50 GiB set onto Ten:**
+
+     | Writer | Total | Propagation | Throughput |
+     |---|---:|---:|---:|
+     | asynchronous | 424 s | 334 s | 121 MiB/s overall |
+     | first, blocking | 538 s | 448 s | 95 MiB/s |
+
+     The other 90 s is Unison's first-run MD5 of every Quasar file. A quiet rerun takes 3.2 s.
+     The prototype's 340 s compares with propagation alone, and plain Unison took 337 s in all.
+     Extrapolated, a first full mirror of the cache takes about 10.6 h, against about 8.4 h plain.
 6. **Unpack and repack.** `unison-packdir unpack-tree` and `repack` (built, 87 controls) ship
    beside `unison`. A run whose `packdir` differs from the archive's refuses and points at
    them, instead of rescanning or deleting.
+
+   *Done (2026-10-31):*
+   - **`unison-packdir` is installed beside `unison`** in `build-semdiff/{stock,ox}`.
+   - **The marker.** The packed root carries `.unison-packed` (`unison-packdir/1 depth=N`), and
+     detection hides it.
+   - **Every run checks it first.** Before setup, every run checks every local root's marker and
+     refuses another depth, another packed root, or no `packdepth`. The refusal points at
+     `unison-packdir unpack-tree`. Nothing is written, and no archive is created.
+   - **An existing marker is never rewritten** with another depth.
+   - **Tests:** 8 marker controls, including the way back: `unpack-tree`, remove the containers
+     and the marker, and a plain run has nothing to do.
 
 The mirror runs only after milestone 6 and the user's go-ahead.
 
