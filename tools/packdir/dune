@@ -4,6 +4,7 @@
  (name packdir)
  (modules packdir)
  (optional)
+ (foreign_stubs (language c) (names packdir_stubs))
  (libraries sqlite3 dng-archive unix))
 
 (executable

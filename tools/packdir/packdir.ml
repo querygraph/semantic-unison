@@ -60,11 +60,13 @@ let open_ ?(journal = Delete) path =
   (* A rollback journal deleted at each commit: about one transaction per
      container per run, and no -journal file left beside it. *)
   exec db (match journal with Delete -> "PRAGMA journal_mode = DELETE" | Wal -> "PRAGMA journal_mode = WAL");
-  (* F_FULLFSYNC on macOS: flush the drive's cache, which fsync does not.
-     UNISON_PACKDIR_SYNC (benchmarks only) weakens it: "full" keeps
-     synchronous = FULL with plain fsync, "normal" also syncs less often. *)
+  (* Each transaction is synced with plain fsync (synchronous = FULL); the
+     drive's own cache is flushed by [barrier] every few GiB, and a container
+     counts as kept only once a barrier covers it (user, 2026-10-31).
+     UNISON_PACKDIR_SYNC, for benchmarks only: "fullfsync" flushes the drive
+     cache on every commit, "normal" syncs less often. *)
   let full, fullfsync = match Sys.getenv_opt "UNISON_PACKDIR_SYNC" with
-    | Some "full" -> true, false | Some "normal" -> false, false | _ -> true, true in
+    | Some "fullfsync" -> true, true | Some "normal" -> false, false | _ -> true, false in
   exec db (if full then "PRAGMA synchronous = FULL" else "PRAGMA synchronous = NORMAL");
   exec db (if fullfsync then "PRAGMA fullfsync = ON" else "PRAGMA fullfsync = OFF");
   exec db (if fullfsync then "PRAGMA checkpoint_fullfsync = ON" else "PRAGMA checkpoint_fullfsync = OFF");
@@ -74,6 +76,14 @@ let open_ ?(journal = Delete) path =
    | [ [| Sqlite3.Data.TEXT f |] ] when f = format -> ()
    | _ -> ignore (Sqlite3.db_close db); failwith (path ^ ": not a " ^ format ^ " container"));
   { db; path; journal }
+
+external fullfsync_fd : Unix.file_descr -> unit = "packdir_fullfsync"
+
+(* One drive-cache flush for everything written to [path]'s disk so far:
+   F_FULLFSYNC empties the whole drive's write cache, not just one file's. *)
+let barrier path =
+  let fd = Unix.openfile path [Unix.O_RDONLY] 0 in
+  Fun.protect ~finally:(fun () -> Unix.close fd) (fun () -> fullfsync_fd fd)
 
 let close c =
   if c.journal = Wal then exec c.db "PRAGMA wal_checkpoint(TRUNCATE)";

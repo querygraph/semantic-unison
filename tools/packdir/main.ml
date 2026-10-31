@@ -48,9 +48,30 @@ let save_state out state =
   Out_channel.with_open_bin temp (fun oc -> Marshal.to_channel oc state []);
   Sys.rename temp (state_file out)
 
-let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
+(* OUT/.packdir-pending: containers written since the last barrier. Each is
+   added before its first write and the list is cleared only after the
+   run's final barrier and state save, so after a crash or power loss the next
+   run verifies exactly the containers that may not have reached the platter. *)
+let pending_file out = Filename.concat out ".packdir-pending"
+let load_pending out =
+  let t = Hashtbl.create 64 in
+  (try List.iter (fun l -> if l <> "" then Hashtbl.replace t l ())
+         (In_channel.with_open_bin (pending_file out) In_channel.input_lines)
+   with Sys_error _ -> ());
+  t
+let add_pending out rel =
+  Out_channel.with_open_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o644 (pending_file out) (fun oc ->
+    output_string oc (rel ^ "\n"); flush oc; Unix.fsync (Unix.descr_of_out_channel oc))
+let clear_pending out =
+  Out_channel.with_open_bin (pending_file out ^ ".tmp") (fun _ -> ());
+  Sys.rename (pending_file out ^ ".tmp") (pending_file out)
+
+let pack_tree root out ~depth ~journal ~batch_bytes ~workers ~barrier_bytes =
   let t0 = Unix.gettimeofday () in
   let state = load_state out in
+  let suspect = load_pending out in
+  let since_barrier = ref 0 and barriers = ref 0 in
+  let barrier () = Packdir.barrier (Filename.concat out ".packdir-writer.lock"); incr barriers; since_barrier := 0 in
   let opened = ref 0 and scan_seconds = ref 0. in
   let fd = lock_file out in
   let write_lock f = with_lock fd f in
@@ -83,16 +104,35 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
     let src = Filename.concat root rel in
     (* The scan: this container's stamp, and its plan against the plain side. *)
     let t = Unix.gettimeofday () in
-    let unchanged = match Hashtbl.find_opt state rel with
+    (* Written since the last barrier of an earlier run, or changed outside
+       the tool: verified before it is trusted. *)
+    let suspicious = Sys.file_exists target &&
+      (Hashtbl.mem suspect rel || match Hashtbl.find_opt state rel with
+        | Some (st, _) -> Some st <> stamp () | None -> false) in
+    let unchanged = not suspicious && match Hashtbl.find_opt state rel with
       | Some (st, known) -> Some st = stamp () && Packdir.plan ~skip known src = ([], [])
       | None -> false in
     scan_seconds := !scan_seconds +. (Unix.gettimeofday () -. t);
     if unchanged then (0, 0, 0), None
     else begin
         incr opened;
+        if suspicious then begin
+          let problems = let c = Packdir.open_ ~journal target in
+            Fun.protect ~finally:(fun () -> Packdir.close c) (fun () -> Packdir.verify c) in
+          if problems <> [] then begin
+            (* Never deleted: set aside, and the leaf packed again from the plain side. *)
+            let aside = Printf.sprintf "%s.damaged-%.0f" target (Unix.time ()) in
+            write_lock (fun () -> Sys.rename target aside);
+            Printf.printf "damaged: %s (%s); set aside as %s and packed again\n%!" rel (String.concat "; " problems) aside
+          end
+        end;
+        write_lock (fun () -> add_pending out rel);
         let c = write_lock (fun () -> Dng_archive.Native.mkdir_p (Filename.dirname target); Packdir.open_ ~journal target) in
         let result, members = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
           let r = Packdir.update ~batch_bytes ~write_lock ~skip c src in r, Packdir.members c) in
+        let _, _, b = result in
+        since_barrier := !since_barrier + b;
+        if !since_barrier >= barrier_bytes then write_lock barrier;
         result, Option.map (fun st -> rel, (st, members)) (stamp ())
     end in
   let dirs = Array.of_list (dirs_at depth root "") in
@@ -118,32 +158,39 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
              done
            with e -> prerr_endline ("unison-packdir: " ^ Printexc.to_string e); flush stdout; Unix._exit 1);
           let oc = Unix.out_channel_of_descr wr in
-          Marshal.to_channel oc (!total, !opened, !scan_seconds) []; close_out oc; flush stdout; Unix._exit 0
+          Marshal.to_channel oc (!total, !opened, !scan_seconds, !barriers) []; close_out oc; flush stdout; Unix._exit 0
       | pid -> Unix.close wr; pid, Unix.in_channel_of_descr rd) in
     let failed = ref 0 in
     List.iter (fun (pid, ic) ->
       (match Marshal.from_channel ic with
-       | ((t, us), o, sc) -> add (t, None); updates := us @ !updates; opened := !opened + o; scan_seconds := !scan_seconds +. sc
+       | ((t, us), o, sc, b) ->
+           add (t, None); updates := us @ !updates; opened := !opened + o;
+           scan_seconds := !scan_seconds +. sc; barriers := !barriers + b
        | exception End_of_file -> ());
       close_in ic;
       match snd (Unix.waitpid [] pid) with
       | Unix.WEXITED 0 -> () | Unix.WEXITED n -> failed := n | _ -> failed := 1) children;
     if !failed <> 0 then exit !failed
   end;
+  (* The final barrier, then the state; only then are the pending containers
+     known to be on the platter. *)
+  write_lock barrier;
   List.iter (fun (rel, e) -> Hashtbl.replace state rel e) !updates;
   save_state out state;
+  write_lock barrier;
+  clear_pending out;
   let dt = Unix.gettimeofday () -. t0 in
   (* scan_seconds is summed over workers: the time spent stating containers
      and planning against the plain side, apart from opening and writing. *)
-  Printf.printf "{\"containers\": %d, \"opened\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"scan_seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
-    containers !opened !stored !retained !bytes dt !scan_seconds (float !bytes /. 1048576. /. dt) (float !stored /. dt)
+  Printf.printf "{\"barriers\": %d, \"containers\": %d, \"opened\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"scan_seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
+    !barriers containers !opened !stored !retained !bytes dt !scan_seconds (float !bytes /. 1048576. /. dt) (float !stored /. dt)
 
 let () =
   let args = List.tl (Array.to_list Sys.argv) in
   let flag f = List.mem f args in
   let value f d = let rec go = function a :: v :: _ when a = f -> v | _ :: r -> go r | [] -> d in go args in
   let pos = let rec go = function
-      | [] -> [] | ("--depth" | "--batch-mib" | "--workers") :: _ :: r -> go r
+      | [] -> [] | ("--depth" | "--batch-mib" | "--workers" | "--barrier-gib") :: _ :: r -> go r
       | a :: r when String.length a > 2 && String.sub a 0 2 = "--" -> go r | a :: r -> a :: go r in go args in
   try match pos with
     | ["pack-tree"; root; out] ->
@@ -151,6 +198,7 @@ let () =
           ~journal:(if flag "--wal" then Packdir.Wal else Packdir.Delete)
           ~batch_bytes:(int_of_string (value "--batch-mib" "256") * 1048576)
           ~workers:(int_of_string (value "--workers" "1"))
+          ~barrier_bytes:(int_of_string (value "--barrier-gib" "4") * 1073741824)
     | ["list"; path] ->
         let c = Packdir.open_ path in
         List.iter (fun (m : Packdir.member) ->

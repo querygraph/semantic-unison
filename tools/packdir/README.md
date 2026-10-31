@@ -22,9 +22,15 @@ sqlite3 C.sqlar -AxC OUT_DIR      # stock restore: bytes, mode, mtime to the sec
   isn't packed while the bytes are the same (`present-plain`). Once they differ, it's packed and
   kept updated (`packed-beside-plain`).
 - **Each container** uses a 64 KiB page size, incremental auto-vacuum, a `DELETE` rollback journal
-  (`--wal` for comparison), `synchronous = FULL` and `fullfsync = ON`. Every batch of at most
-  `--batch-mib` is one transaction that bumps the container's epoch. Blobs are stored raw, and
-  read back and SHA-256-checked after each commit.
+  (`--wal` for comparison) and `synchronous = FULL`. Every batch of at most `--batch-mib` is one
+  transaction that bumps the container's epoch. Blobs are stored raw, and read back and
+  SHA-256-checked after each commit.
+- **Durability comes from barriers.** One `F_FULLFSYNC` runs every `--barrier-gib` (default 4)
+  and at the end. Containers being written are listed in `OUT/.packdir-pending` until the final
+  barrier. The next run verifies those, and any container whose file doesn't match
+  `OUT/.packdir-state`. A damaged one is set aside as `D.sqlar.damaged-<time>` and packed again.
+- **Unchanged containers aren't opened.** `OUT/.packdir-state` holds each container file's stamp
+  and members, the role Unison's archive takes in the integration.
 - **`verify`** runs `PRAGMA integrity_check`, then checks every member's SHA-256 and fingerprint,
   and that both tables pair up.
 - **`restore`** writes every member with its mode and nanosecond mtime, SHA-256 checked.

@@ -29,7 +29,7 @@ are listed first, then the design as a whole.
    end of the file, and a rollback journal saves only the old contents of pages it changes, so
    new pages are written once. WAL writes every page twice, once to `-wal` and again at the
    checkpoint, which doubles the write volume on the one disk that limits the run. Keep
-   `synchronous = FULL` and `fullfsync = ON`.
+   `synchronous = FULL`; the drive cache is flushed by barriers (see "Durability").
 
    This replaces U-1's `TRUNCATE`. The prototype's tests showed that `TRUNCATE` leaves an empty
    `D.sqlar-journal` beside every container, which would double the file count on Ten. A run
@@ -100,7 +100,7 @@ created:
 
 ```sql
 PRAGMA page_size = 65536;  PRAGMA auto_vacuum = INCREMENTAL;
-PRAGMA journal_mode = DELETE;  PRAGMA synchronous = FULL;  PRAGMA fullfsync = ON;
+PRAGMA journal_mode = DELETE;  PRAGMA synchronous = FULL;  PRAGMA fullfsync = OFF;  -- barriers flush
 CREATE TABLE sqlar(name TEXT PRIMARY KEY, mode INT, mtime INT, sz INT, data BLOB);
 CREATE TABLE unison_member(name TEXT PRIMARY KEY REFERENCES sqlar(name),
   mtime_ns INT NOT NULL, fp BLOB NOT NULL, fpalg TEXT NOT NULL, sha256 BLOB NOT NULL,
@@ -141,10 +141,34 @@ CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);
    several transactions.
 4. **Verify, then record.** After `COMMIT`:
    - read the changed blobs back and compare their SHA-256;
-   - only then update Unison's archive for those members.
+   - only after the next barrier (below) update Unison's archive for those members.
 
    A crash before `COMMIT` rolls the container back. A crash after it leaves Unison's archive
-   behind the container, so the next run finds the members already right and only records them.
+   behind the container, so the next run verifies the container, finds the members already right
+   and only records them.
+
+### Durability: barriers, not a flush per container (user, 2026-10-31)
+
+- **Each container's transaction is synced with plain `fsync`** (`synchronous = FULL`,
+  `fullfsync = OFF`). That orders the writes as far as the drive, but not past the drive's own
+  write cache.
+- **A barrier is one `F_FULLFSYNC`** after every 4 GiB written, and at the end of the run. It
+  empties the whole drive's cache.
+- **Unison's archive records a container only after a barrier covers it.** Before its first
+  write, a container is added to a pending list. The list is cleared only after the final
+  barrier and the archive update.
+- **After a crash or power loss,** the next run verifies every pending container, and every
+  container whose file doesn't match the archive, with `integrity_check` and every member's
+  SHA-256. A damaged one is set aside (`D.sqlar.damaged-<time>`), never deleted, and packed again
+  from Quasar.
+- **Measured on Ten, 50 GiB, 4 workers:**
+
+  | Sync | Time | Throughput |
+  |---|---:|---:|
+  | barrier every 4 GiB | 340 s | 150 MiB/s |
+  | no flush at all | 314 s | 163 MiB/s |
+  | `F_FULLFSYNC` per container | 946 s | 54 MiB/s |
+  | plain Unison | 337 s | 152 MiB/s |
 5. **Free space.** `incremental_vacuum` runs only on request, never during a mirror run.
 
 ## Building it into Unison
@@ -186,7 +210,7 @@ change set in place, with replacements, additions and a few deletions, and write
 | Run | Measures |
 | --- | --- |
 | plain Unison (today's build, `clone = off`) | the baseline |
-| prototype `.sqlar` writer, one container per leaf, `DELETE` journal and `fullfsync` | the design |
+| prototype `.sqlar` writer, one container per leaf, `DELETE` journal, barriers | the design |
 | the same with WAL | the journal choice |
 | `cp -R` and `tar \| tar` | the streaming limit |
 | sparse bundle (HFS+ inside) | the no-code alternative |

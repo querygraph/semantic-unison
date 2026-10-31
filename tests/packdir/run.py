@@ -45,6 +45,7 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     # First run: one container per leaf, every member intact.
     r = json.loads(tool('pack-tree', src, out).splitlines()[-1])
     containers = sorted(out.glob('*/*.sqlar'))
+    check(r['barriers'] >= 1 and (out / '.packdir-pending').read_text() == '', 'a barrier, then the pending list cleared: %r' % r)
     check(r['containers'] == 6 and len(containers) == 6, 'one container per leaf: %r' % r)
     check(r['stored'] == len(plain), 'every file stored')
     check(not [p for p in out.rglob('*') if p.name.endswith(('-journal', '-wal', '-shm'))],
@@ -96,10 +97,12 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     (leaf / 'crash_a').write_bytes(b'a' * 1000); (leaf / 'crash_b').write_bytes(b'b' * 1000)
     image = (out / '0/0000.sqlar').read_bytes()
     tool('pack-tree', src, out, rc=3, env=dict(os.environ, UNISON_PACKDIR_CRASH_AFTER='1'))
+    check('0/0000' in (out / '.packdir-pending').read_text().split(), 'the interrupted container is pending')
     check('ok' in tool('verify', out / '0/0000.sqlar'), 'container verifies after the crash')
     check('crash_a' not in tool('list', out / '0/0000.sqlar'), 'the interrupted batch was rolled back')
-    r = json.loads(tool('pack-tree', src, out).splitlines()[-1])
-    check(r['stored'] == 2, 'the rerun stores the interrupted batch: %r' % r)
+    o = tool('pack-tree', src, out); r = json.loads(o.splitlines()[-1])
+    check(r['stored'] == 2 and 'damaged' not in o, 'the rerun verifies the pending container and stores the batch: %r' % r)
+    check((out / '.packdir-pending').read_text() == '', 'pending list cleared after the rerun')
 
     # Corruption: a flipped byte inside a blob is caught by its SHA-256.
     victim = out / 'a/0a22.sqlar'
@@ -109,6 +112,13 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     data[i] ^= 1; victim.write_bytes(bytes(data))
     out_v = tool('verify', victim, rc=1)
     check('SHA-256 mismatch' in out_v, 'flipped blob byte detected: ' + out_v)
+    o = tool('pack-tree', src, out)
+    aside = list(victim.parent.glob('0a22.sqlar.damaged-*'))
+    check('damaged: a/0a22' in o and len(aside) == 1, 'the next run finds the damaged container and sets it aside: ' + o)
+    check('ok' in tool('verify', victim), 'and packs the leaf again')
+    tool('restore', victim, t / 'repacked')
+    check(tree(t / 'repacked') == {k.split('/', 2)[2]: v for k, v in tree(src).items() if k.startswith('a/0a22/')},
+          'the repacked container restores exactly')
 
     # A plain directory beside a container stays as it is; identical names are present-plain,
     # differing ones are kept updated in the container.
