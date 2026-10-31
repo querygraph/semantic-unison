@@ -51,6 +51,7 @@ let save_state out state =
 let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
   let t0 = Unix.gettimeofday () in
   let state = load_state out in
+  let opened = ref 0 and scan_seconds = ref 0. in
   let fd = lock_file out in
   let write_lock f = with_lock fd f in
   let one rel =
@@ -80,14 +81,20 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
       | s -> Some (s.Dng_archive.Native.ino, s.Dng_archive.Native.size, s.Dng_archive.Native.mtime_ns)
       | exception Unix.Unix_error _ -> None in
     let src = Filename.concat root rel in
-    match Hashtbl.find_opt state rel with
-    | Some (st, known) when Some st = stamp () && Packdir.plan ~skip known src = ([], []) ->
-        (0, 0, 0), None
-    | _ ->
+    (* The scan: this container's stamp, and its plan against the plain side. *)
+    let t = Unix.gettimeofday () in
+    let unchanged = match Hashtbl.find_opt state rel with
+      | Some (st, known) -> Some st = stamp () && Packdir.plan ~skip known src = ([], [])
+      | None -> false in
+    scan_seconds := !scan_seconds +. (Unix.gettimeofday () -. t);
+    if unchanged then (0, 0, 0), None
+    else begin
+        incr opened;
         let c = write_lock (fun () -> Dng_archive.Native.mkdir_p (Filename.dirname target); Packdir.open_ ~journal target) in
         let result, members = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
           let r = Packdir.update ~batch_bytes ~write_lock ~skip c src in r, Packdir.members c) in
-        result, Option.map (fun st -> rel, (st, members)) (stamp ()) in
+        result, Option.map (fun st -> rel, (st, members)) (stamp ())
+    end in
   let dirs = Array.of_list (dirs_at depth root "") in
   let containers = Array.length dirs and stored = ref 0 and retained = ref 0 and bytes = ref 0 in
   let updates = ref [] in
@@ -111,12 +118,12 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
              done
            with e -> prerr_endline ("unison-packdir: " ^ Printexc.to_string e); flush stdout; Unix._exit 1);
           let oc = Unix.out_channel_of_descr wr in
-          Marshal.to_channel oc !total []; close_out oc; flush stdout; Unix._exit 0
+          Marshal.to_channel oc (!total, !opened, !scan_seconds) []; close_out oc; flush stdout; Unix._exit 0
       | pid -> Unix.close wr; pid, Unix.in_channel_of_descr rd) in
     let failed = ref 0 in
     List.iter (fun (pid, ic) ->
       (match Marshal.from_channel ic with
-       | (t, us) -> add (t, None); updates := us @ !updates
+       | ((t, us), o, sc) -> add (t, None); updates := us @ !updates; opened := !opened + o; scan_seconds := !scan_seconds +. sc
        | exception End_of_file -> ());
       close_in ic;
       match snd (Unix.waitpid [] pid) with
@@ -126,8 +133,10 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
   List.iter (fun (rel, e) -> Hashtbl.replace state rel e) !updates;
   save_state out state;
   let dt = Unix.gettimeofday () -. t0 in
-  Printf.printf "{\"containers\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
-    containers !stored !retained !bytes dt (float !bytes /. 1048576. /. dt) (float !stored /. dt)
+  (* scan_seconds is summed over workers: the time spent stating containers
+     and planning against the plain side, apart from opening and writing. *)
+  Printf.printf "{\"containers\": %d, \"opened\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"scan_seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
+    containers !opened !stored !retained !bytes dt !scan_seconds (float !bytes /. 1048576. /. dt) (float !stored /. dt)
 
 let () =
   let args = List.tl (Array.to_list Sys.argv) in

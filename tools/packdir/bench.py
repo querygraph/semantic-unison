@@ -63,6 +63,28 @@ def unison(args, src, dst, home):
         sys.exit('unison exited %d; see %s' % (r.returncode, home / 'unison.out'))
 
 
+def propagation_seconds(home):
+    """Unison's own time for its last propagation, from its log."""
+    try:
+        lines = (home / 'unison.log').read_text(errors='replace').splitlines()
+    except OSError:
+        return None
+    for l in reversed(lines):
+        m = re.search(r'finished propagating changes at .*, ([0-9.]+) s', l)
+        if m:
+            return float(m.group(1))
+    return None
+
+
+def walk(path):
+    """Stat every entry under path: the scan cost of the target side alone."""
+    t0, n = time.monotonic(), 0
+    for root, dirs, files in os.walk(path):
+        for f in dirs + files:
+            os.lstat(os.path.join(root, f)); n += 1
+    return round(time.monotonic() - t0, 3), n
+
+
 def method(args, name, phase, src, out, home):
     dst = out / name
     if name == 'plain':
@@ -130,6 +152,14 @@ def run(args, phase):
         subprocess.run(['sync'], check=True)  # what is still in memory counts too
         dt = time.monotonic() - t0
         x1, m1 = io_totals(disk)
+        # Scan apart from transfer: Unison's propagation time from its log; the
+        # prototype's own scan time; and a stat walk of the target copy alone.
+        target = out / ('bundle.sparsebundle' if name == 'bundle' else name)
+        if name in ('plain', 'bundle'):
+            prop = propagation_seconds(home)
+            detail = dict(propagation_seconds=prop, scan_seconds=round(dt - prop, 3) if prop is not None else None)
+        walk_seconds, entries = walk(target)
+        detail = dict(detail or {}, target_walk_seconds=walk_seconds, target_entries=entries)
         row = dict(phase=phase, method=name, utc=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), disk=disk,
                    source_files=files, source_bytes=nbytes, seconds=round(dt, 3),
                    disk_mib=round(m1 - m0, 1), disk_ios=int(x1 - x0), iops=round((x1 - x0) / dt, 1) if dt else None,
