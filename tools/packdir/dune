@@ -1,0 +1,13 @@
+; Packed-directory containers (.sqlar), see docs/packdir-design.md. Optional:
+; skipped when the opam sqlite3 binding or dng-archive is not installed.
+(library
+ (name packdir)
+ (modules packdir)
+ (optional)
+ (libraries sqlite3 dng-archive unix))
+
+(executable
+ (name main)
+ (modules main)
+ (optional)
+ (libraries packdir unix))
