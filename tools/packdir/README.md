@@ -39,3 +39,22 @@ python3 tests/packdir/run.py --packdir _build/default/tools/packdir/main.exe
 
 `UNISON_PACKDIR_CRASH_AFTER=N` exits inside a transaction after N stored files; it's for the
 tests.
+
+## Benchmark harness
+
+`bench.py` copies one leaf set to a target disk by each method, and appends wall time and the
+target disk's bytes written and I/O operations (from `iostat`) to `OUT/RESULTS.jsonl`. The
+methods are:
+- `plain`: Unison, one way and additive like the mirror profile, `clone = off`;
+- `sqlar` and `sqlar-wal`;
+- `cp` and `tar`, first runs only;
+- `bundle`: Unison into an HFS+ sparse bundle.
+
+```sh
+python3 tools/packdir/bench.py first SRC /Volumes/Ten/packdir-bench/run1 --unison U --packdir P
+python3 tools/packdir/bench.py incremental SRC /Volumes/Ten/packdir-bench/run1 --unison U --packdir P
+python3 tools/packdir/bench.py sample DIR --gib 0.5     # small synthetic set for a dry run
+```
+
+`OUT` must be new for `first`, and its path must contain `packdir-bench`. The harness writes
+nothing outside `OUT` and its sibling `OUT.work`, and it never deletes anything.
