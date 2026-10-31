@@ -370,9 +370,12 @@ let packdirSetup () =
   (match Recon.lookupPreferredRoot () with
    | d, `Force when d = toward -> ()
    | _ -> raise (Util.Fatal ("packroot only receives: set force = " ^ other)));
+  if Prefs.read Props.syncXattrs || Prefs.read Props.syncACL then
+    raise (Util.Fatal "packed roots keep no extended attributes or ACLs: turn off xattrs and acl");
+  if Prefs.read Props.permMask <> 0 then
+    raise (Util.Fatal "packed roots compare no permissions: set perms = 0");
   PackdirConfig.packed := Some packed_path;
-  raise (Util.Fatal "packdepth: the Unison integration is not complete yet (milestone 1 of 6); \
-                     use unison-packdir for now")
+  PackdirSupport.install packed_path (Prefs.read PackdirConfig.depth)
 
 let runTestsPrefName = "selftest"
 let runtests =

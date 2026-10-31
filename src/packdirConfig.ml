@@ -43,8 +43,11 @@ let packed : Fspath.t option ref = ref None
 
 let is_packed fspath = match !packed with Some p -> p = fspath | None -> false
 
-(* Mixed into the packed root's archive identity, so that a run without the
-   same packdir setting never reads this archive: it would see no member files
-   and take them all for deletions. *)
-let signature fspath =
-  if is_packed fspath then Printf.sprintf ";packdir=depth%d" (Prefs.read depth) else ""
+(* Mixed into both roots' archive identities whenever a root is packed, so
+   that a run without the same packdir setting never reads these archives: it
+   would see no member files on the packed root and take them all for
+   deletions, and it would rewrite the plain root's archive under it. *)
+let signature (_ : Fspath.t) =
+  match !packed with
+  | Some p -> Printf.sprintf ";packdir=depth%d:%s" (Prefs.read depth) (Fspath.toString p)
+  | None -> ""

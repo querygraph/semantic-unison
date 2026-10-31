@@ -224,6 +224,23 @@ reference.
 2. **Update detection from containers.** *Test:* Unison's view of a packed tree written by
    `unison-packdir pack-tree` equals its view of the same plain tree. An unchanged container
    isn't opened. A changed one is verified.
+
+   *Done (2026-10-31):*
+   - **The hooks.** `PackdirHook` holds three, which the SQLite build of `PackdirSupport`
+     installs for the packed root only. `Fileinfo.getAux` and `Osx.getFileInfos` ask `stat`.
+     `Os.childrenOf` asks `children`. `Fingerprint.file` asks `fingerprint`, which returns the
+     stored MD5. Every other root, and every path a container doesn't own, uses the real
+     filesystem.
+   - **What Unison sees.** A container is shown as its directory and members as its files. Plain
+     files beside a container are listed with its members, and a member wins for a name in both.
+   - **The state file.** Container stamps and members persist across runs in `pd<hash>` in the
+     Unison directory, so an unchanged container isn't opened.
+   - **Packed roots require** `perms = 0`, and `xattrs` and `acl` off.
+   - **Both roots' archive identities** carry `;packdir=depthN:<packed root>`.
+   - **Writing into the packed root** stops each item with "propagation is not built yet" until
+     milestone 3.
+   - **Tests:** 11 detection controls (`tests/packdir/unison_detect.py`) and 17 config controls,
+     on stock OCaml and OxCaml. Unison's `-selftest` still passes on both.
 3. **Propagation through the writer.** One transaction per container; read-back SHA-256; members
    marked retained. *Test:* first and incremental runs give containers that `unison-packdir
    verify` and `unpack-tree` turn back into exactly the Quasar tree.

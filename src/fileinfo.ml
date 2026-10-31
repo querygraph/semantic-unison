@@ -113,6 +113,14 @@ let getAux fromRoot fspath path getProps =
   "querying file information"
     (fun () ->
        try
+         match !PackdirHook.stat fspath path with
+         | Some stats ->
+             (* A container or a member: no Finder info, no extended data. *)
+             let typ = if stats.Unix.LargeFile.st_kind = Unix.S_DIR then `DIRECTORY else `FILE in
+             let osxInfos = Osx.defaultInfos typ in
+             { typ; inode = stats.Unix.LargeFile.st_ino land 0x3FFFFFFF;
+               desc = getProps fspath path stats osxInfos; osX = osxInfos }
+         | None ->
          let stats = statFn fromRoot fspath path in
          debugV (fun () ->
                    Util.msg "%s: %b %f %f\n"

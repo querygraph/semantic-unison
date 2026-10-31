@@ -108,6 +108,9 @@ let allChildrenOf fspath path =
 (* Assumes that (fspath, path) is a directory, and returns the list of       *)
 (* children, except for temporary files and AppleDouble files.               *)
 let rec childrenOf fspath path =
+  match !PackdirHook.children fspath path with
+  | Some names -> List.map Name.fromString names
+  | None ->
   List.filter
     (fun filename ->
        let file = Name.toString filename in

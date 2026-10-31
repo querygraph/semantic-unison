@@ -31,6 +31,9 @@ let ispseudo f = Util.startswith f pseudo_prefix
 (* Assumes that (fspath, path) is a file and gives its ``digest '', that is  *)
 (* a short string of cryptographic quality representing it.                  *)
 let file fspath path =
+  match !PackdirHook.fingerprint fspath path with
+  | Some d -> d (* a member of a packed directory: its stored MD5 *)
+  | None ->
   let f = Fspath.concat fspath path in
   Util.convertUnixErrorsToTransient
     ("digesting " ^ Fspath.toPrintString f)

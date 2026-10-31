@@ -281,6 +281,9 @@ and doAction
   if not !Trace.sendLogMsgsToStderr then
     Trace.statusDetail (Path.toString toPath);
   Remote.Thread.unwindProtect (fun () ->
+    (* Writing into a packed root comes with milestone 3 (docs/packdir-design.md). *)
+    if PackdirConfig.is_packed (snd toRoot) then
+      raise (Util.Transient ("packed root: propagation is not built yet; " ^ Path.toString toPath ^ " not written"));
     match fromContents, toContents with
         | {status = `MovedOut _ | `MovedIn _}, _
         | _, {status = `MovedOut _ | `MovedIn _} ->

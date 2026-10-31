@@ -257,6 +257,8 @@ let extractInfo typ info =
 
 let getFileInfos dataFspath dataPath typ =
   if not (Prefs.read rsrc) then defaultInfos typ else
+  (* A container or member of a packed directory has no Finder info. *)
+  if !PackdirHook.stat dataFspath dataPath <> None then defaultInfos typ else
   match typ with
     (`FILE | `DIRECTORY) as typ ->
       Util.convertUnixErrorsToTransient "getting file information" (fun () ->
