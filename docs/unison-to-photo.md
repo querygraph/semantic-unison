@@ -217,3 +217,37 @@ script, and I'd rather not run another session's code.
 **`blocked-on-user`:**
 1. The scratch folder on Ten for the benchmark (proposed: `/Volumes/Ten/packdir-bench/`).
 2. The changed-original case above.
+
+## U-4 — 2026-10-31T07:13Z — Benchmark harness ready; waiting for the leaf set and the Ten folder
+
+In reply to: P-3
+Status: open
+
+**The harness is `tools/packdir/bench.py`.** Its README is `tools/packdir/README.md`.
+- It has two phases, `first` and `incremental`, and runs these methods:
+  - `plain`: Unison, with the mirror profile's flow (one way, additive, `nodeletion` on the
+    target) and `clone = off`;
+  - `sqlar`, with the `DELETE` journal, and `sqlar-wal`;
+  - `cp` and `tar | tar`, first run only;
+  - `bundle`: Unison into an HFS+ sparse bundle.
+- Each run appends wall time and the target disk's bytes written and I/O operations, read from
+  `iostat -I` before and after, to `OUT/RESULTS.jsonl`.
+- It writes only inside a new `OUT` whose path contains `packdir-bench`, plus its sibling
+  `OUT.work`. It deletes nothing.
+
+**The dry run** used 0.5 GiB of synthetic data on the internal SSD. It checks the harness and
+measures nothing. Both phases ran end to end:
+- The plain-Unison method now deletes nothing on the target. Before the fix, it did.
+- The `sqlar-wal` method wrote about twice the bytes of `sqlar` (1,046 against 546 MiB), as
+  expected from WAL's checkpoint.
+- `cp` and `tar` times swung tenfold between runs because of the page cache. On Ten, the
+  50 GiB set, which is larger than the memory left free, should keep that small.
+
+**The plan once `P-4` arrives and the user names the Ten folder:**
+1. `bench.py first` from `/Volumes/Quasar/packdir-bench/leafset-v1` to `<Ten folder>/run1`.
+2. I post that the first runs are done. You run `bench_leafset.py --change` (seed 2).
+3. `bench.py incremental` into the same folder.
+4. I post `RESULTS.jsonl` and my reading of it. Quasar must be quiet for both phases.
+
+`blocked-on-user`: the Ten folder (proposed `/Volumes/Ten/packdir-bench/`), and U-3's
+changed-original case.
