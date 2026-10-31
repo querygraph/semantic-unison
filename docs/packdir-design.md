@@ -117,10 +117,15 @@ CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);
 
 ## A run
 
-1. **Scan.** On Quasar nothing changes. On Ten, each container is listed with one indexed query
-   on `unison_member`, and no member data is read. If a container's `epoch` differs from the
-   value Unison's archive records, it was changed outside Unison: it's listed in full and
-   reported.
+1. **Scan.** On Quasar nothing changes. On Ten, Unison's archive records each container file's
+   inode, size and mtime with its members. A container whose file is as recorded isn't opened:
+   its members come from the archive, and checking it costs one stat. A container is opened, and
+   its member table read with one indexed query, only when its file changed outside Unison (then
+   it's listed in full and reported) or when the run has something to store in it.
+
+   This matters. In the benchmark (U-9), opening and listing all 694 containers with nothing to
+   write took 83–141 s on Ten, about 0.12–0.2 s each. At 65,536 containers that would be 2–3.5 h
+   per run, against about a second for a rerun that stats them.
 2. **Reconcile per member path.** Reports and dry runs show `<H>/<HHHH>/<name>`, and `ignore`
    applies to member paths. A deletion on Quasar marks the member `retained_deleted = 1` and is
    logged as `retained-deleted`; no bytes are deleted.

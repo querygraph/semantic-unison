@@ -86,6 +86,11 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-') as td:
     check(not (t / 'skip' / gone).exists() and (t / 'skip/added_1024').is_file(), 'restore --skip-retained')
     r = json.loads(tool('pack-tree', src, out).splitlines()[-1])
     check(r['stored'] == 0 and r['retained'] == 0, 'a rerun with nothing new writes nothing: %r' % r)
+    # Unchanged containers are not even opened: an unreadable one doesn't stop the rerun.
+    locked = out / 'a/0a22.sqlar'; locked.chmod(0)
+    r = json.loads(tool('pack-tree', src, out).splitlines()[-1])
+    check(r['stored'] == 0, 'unchanged container left unopened: %r' % r)
+    locked.chmod(0o644)
 
     # A crash inside a transaction leaves the container as it was; the rerun converges.
     (leaf / 'crash_a').write_bytes(b'a' * 1000); (leaf / 'crash_b').write_bytes(b'b' * 1000)

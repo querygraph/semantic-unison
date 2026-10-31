@@ -36,8 +36,21 @@ let with_lock fd f =
   Unix.lockf fd Unix.F_LOCK 0;
   Fun.protect ~finally:(fun () -> Unix.lockf fd Unix.F_ULOCK 0) f
 
+(* OUT/.packdir-state: for each container, its file's (inode, size, mtime)
+   after the last run and its members then. A prototype's stand-in for
+   Unison's archive; losing it only costs a full re-read. *)
+let state_file out = Filename.concat out ".packdir-state"
+let load_state out : (string, (int64 * int64 * int64) * Packdir.member list) Hashtbl.t =
+  try In_channel.with_open_bin (state_file out) (fun ic -> Marshal.from_channel ic)
+  with Sys_error _ | End_of_file | Failure _ -> Hashtbl.create 1024
+let save_state out state =
+  let temp = state_file out ^ ".tmp" in
+  Out_channel.with_open_bin temp (fun oc -> Marshal.to_channel oc state []);
+  Sys.rename temp (state_file out)
+
 let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
   let t0 = Unix.gettimeofday () in
+  let state = load_state out in
   let fd = lock_file out in
   let write_lock f = with_lock fd f in
   let one rel =
@@ -60,12 +73,27 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
           (Array.to_list (Sys.readdir plain))
       end else [] in
     let skip = same in
-    let c = write_lock (fun () -> Dng_archive.Native.mkdir_p (Filename.dirname target); Packdir.open_ ~journal target) in
-    Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
-      Packdir.update ~batch_bytes ~write_lock ~skip c (Filename.concat root rel)) in
+    (* A container whose file is as recorded after the last run needs no
+       opening: its members come from the state, the role Unison's archive
+       plays. Only containers with something to store are opened. *)
+    let stamp () = match Dng_archive.Native.stat target with
+      | s -> Some (s.Dng_archive.Native.ino, s.Dng_archive.Native.size, s.Dng_archive.Native.mtime_ns)
+      | exception Unix.Unix_error _ -> None in
+    let src = Filename.concat root rel in
+    match Hashtbl.find_opt state rel with
+    | Some (st, known) when Some st = stamp () && Packdir.plan ~skip known src = ([], []) ->
+        (0, 0, 0), None
+    | _ ->
+        let c = write_lock (fun () -> Dng_archive.Native.mkdir_p (Filename.dirname target); Packdir.open_ ~journal target) in
+        let result, members = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+          let r = Packdir.update ~batch_bytes ~write_lock ~skip c src in r, Packdir.members c) in
+        result, Option.map (fun st -> rel, (st, members)) (stamp ()) in
   let dirs = Array.of_list (dirs_at depth root "") in
   let containers = Array.length dirs and stored = ref 0 and retained = ref 0 and bytes = ref 0 in
-  let add (s, r, b) = stored := !stored + s; retained := !retained + r; bytes := !bytes + b in
+  let updates = ref [] in
+  let add ((s, r, b), u) =
+    stored := !stored + s; retained := !retained + r; bytes := !bytes + b;
+    Option.iter (fun u -> updates := u :: !updates) u in
   if workers <= 1 then Array.iter (fun rel -> add (one rel)) dirs
   else begin
     (* Worker k takes containers k, k+workers, ... and sends back its totals. *)
@@ -75,11 +103,11 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
       match Unix.fork () with
       | 0 ->
           Unix.close rd;
-          let total = ref (0, 0, 0) and i = ref k in
+          let total = ref ((0, 0, 0), []) and i = ref k in
           (try
              while !i < containers do
-               let s, r, b = one dirs.(!i) and (s0, r0, b0) = !total in
-               total := (s0 + s, r0 + r, b0 + b); i := !i + workers
+               let (s, r, b), u = one dirs.(!i) and ((s0, r0, b0), us) = !total in
+               total := ((s0 + s, r0 + r, b0 + b), Option.to_list u @ us); i := !i + workers
              done
            with e -> prerr_endline ("unison-packdir: " ^ Printexc.to_string e); flush stdout; Unix._exit 1);
           let oc = Unix.out_channel_of_descr wr in
@@ -87,12 +115,16 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers =
       | pid -> Unix.close wr; pid, Unix.in_channel_of_descr rd) in
     let failed = ref 0 in
     List.iter (fun (pid, ic) ->
-      (match Marshal.from_channel ic with t -> add t | exception End_of_file -> ());
+      (match Marshal.from_channel ic with
+       | (t, us) -> add (t, None); updates := us @ !updates
+       | exception End_of_file -> ());
       close_in ic;
       match snd (Unix.waitpid [] pid) with
       | Unix.WEXITED 0 -> () | Unix.WEXITED n -> failed := n | _ -> failed := 1) children;
     if !failed <> 0 then exit !failed
   end;
+  List.iter (fun (rel, e) -> Hashtbl.replace state rel e) !updates;
+  save_state out state;
   let dt = Unix.gettimeofday () -. t0 in
   Printf.printf "{\"containers\": %d, \"stored\": %d, \"retained\": %d, \"bytes\": %d, \"seconds\": %.3f, \"mib_per_s\": %.1f, \"files_per_s\": %.1f}\n"
     containers !stored !retained !bytes dt (float !bytes /. 1048576. /. dt) (float !stored /. dt)

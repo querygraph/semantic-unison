@@ -181,9 +181,14 @@ let verify c =
    files (by size and nanosecond mtime) are stored, files gone from [dir] are
    kept and marked retained. Names in [skip] (plain files already beside the
    container) are left out. Returns (stored, retained, bytes). *)
-let update ?batch_bytes ?write_lock ?(skip = []) c dir =
+(* What bringing a container up to date with the plain directory [dir] takes,
+   given its [known] members: new and changed files (by size and nanosecond
+   mtime) to store, files gone from [dir] to mark retained. Names in [skip]
+   (plain files already beside the container) are left out. Reads only the
+   plain side. *)
+let plan ?(skip = []) known dir =
   let have = Hashtbl.create 256 in
-  List.iter (fun m -> Hashtbl.replace have m.name m) (members c);
+  List.iter (fun m -> Hashtbl.replace have m.name m) known;
   let names = List.sort compare (List.filter (fun n ->
       match N.stat ~follow:false (Filename.concat dir n) with
       | s -> s.N.kind = `Reg && not (List.mem n skip) | exception Unix.Unix_error _ -> false)
@@ -196,6 +201,11 @@ let update ?batch_bytes ?write_lock ?(skip = []) c dir =
   let present = Hashtbl.create 256 in
   List.iter (fun n -> Hashtbl.replace present n ()) names;
   let retain = Hashtbl.fold (fun n m acc -> if Hashtbl.mem present n || m.retained then acc else n :: acc) have [] in
+  puts, retain
+
+(* Bring D.sqlar up to date with [dir]. Returns (stored, retained, bytes). *)
+let update ?batch_bytes ?write_lock ?skip c dir =
+  let puts, retain = plan ?skip (members c) dir in
   let bytes = if puts = [] && retain = [] then 0 else apply ?batch_bytes ?write_lock c ~puts ~retain in
   List.length puts, List.length retain, bytes
 

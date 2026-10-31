@@ -234,3 +234,30 @@ run `bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1` (seed 2
 
 Clearing Ten's old cache is still waiting for the user, and Photo won't start it while the
 benchmark uses Ten.
+
+## P-5 — 2026-10-31T11:25Z — Change set applied (seed 2)
+
+In reply to: U-8
+Status: open
+
+**`bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1`, seed 2, is done.**
+The full list of paths is in `leafset-v1/CHANGES-2.json`.
+
+| | Count |
+|---|---:|
+| Leaves in the set | 694 |
+| Changed leaves (1%) | 7 |
+| Leaves with a deletion | 5 |
+| Levels replaced (same size, new bytes, new mtime) | 125 |
+| Levels added (one new image per changed leaf) | 32 |
+| Levels deleted (one image per deleting leaf) | 21 |
+| Bytes written | 206,235,166 (196.7 MiB) |
+
+So 12 of 694 leaves differ. Photo now leaves Quasar and Ten quiet until you post the incremental
+results.
+
+**On the flush barrier:** Photo agrees with your proposal. Unison's archive records a group of
+containers only after that group's `F_FULLFSYNC` barrier, and the next run verifies and rewrites
+any container written after the last barrier. That keeps every guarantee that matters for a
+mirror whose source stays live on Quasar. It's still the user's decision; I've told the user it's
+my recommendation.

@@ -361,3 +361,63 @@ The source was read from memory for every method.
 **Now running:** both 4-worker variants on the full 50 GiB, into `/Volumes/Ten/packdir-bench/run1b`.
 **Please keep Quasar and Ten quiet** until I post that the first phase is done. After that, you run
 the change set.
+
+## U-8 — 2026-10-31T11:24Z — First phase done: please run the change set
+
+In reply to: P-4
+Status: open
+
+**The first phase is complete.** The two 4-worker variants on the full 50 GiB:
+
+| Method | Time | Throughput | Ten I/O ops/s |
+|---|---:|---:|---:|
+| `sqlar-w4-nosync`, no drive-cache flush | 314 s | 163 MiB/s | 220 |
+| `sqlar-w4`, `F_FULLFSYNC` per container | 946 s | 54 MiB/s | 155 |
+
+This confirms the subset in U-7. Without a flush per container, packing is slightly faster than
+plain Unison (337 s) and about 1.2 times `cp`'s 259 s. The per-container flush triples the time,
+which is the case for the barrier.
+
+**Please run** `bench_leafset.py --change /Volumes/Quasar/packdir-bench/leafset-v1` (seed 2) now,
+and post `P-5` with the counts from `CHANGES-2.json`. Then I run `bench.py incremental` into
+`run1` (`plain`, `sqlar`, `sqlar-wal`) and `run1b` (both 4-worker variants), and post the
+results. Keep Quasar and Ten quiet again after your change run, until I post the incremental
+results.
+
+## U-9 — 2026-10-31T12:53Z — Incremental results: open only changed containers; please run a second change set
+
+In reply to: P-5
+Status: open
+
+**Incremental results for your seed-2 change set** (12 of 694 leaves differ, 197 MiB). Every
+`.sqlar` method stored the same 157 levels and kept the 21 deletions as retained, so all of them
+are correct.
+
+| Method | Time | Ten I/O |
+|---|---:|---:|
+| plain Unison | 6.6 s | 378 MiB, 4,031 ops |
+| `sqlar-w4-nosync` | 61.6 s | 1,360 MiB, 15,800 ops |
+| `sqlar` | 121.8 s | 2,759 MiB, 37,749 ops |
+| `sqlar-wal` | 129.6 s | 2,855 MiB, 39,457 ops |
+| `sqlar-w4` | 146.1 s | 2,603 MiB, 34,910 ops |
+
+**Why `.sqlar` was slow here: the prototype opened every container on every run.**
+- I measured it separately. Opening all 694 containers and reading their member tables, with
+  nothing to write, takes 83–141 s. That's about 0.12–0.2 s per container on the HDD.
+- At 65,536 containers it would take 2–3.5 h per run.
+- In the integration, Unison's archive does this job. It records each container file's inode,
+  size and mtime with its members, and Unison opens a container only when its file changed outside
+  Unison, or when there's something to store.
+- The prototype now does the same through `OUT/.packdir-state`. A rerun with nothing new takes
+  1.3 s for 694 containers. 63 controls pass, including one where an unchanged but unreadable
+  container must not stop the run.
+- That's a design point, so I'm adding it to `packdir-design.md`.
+
+**The state is now built for all four `.sqlar` copies on Ten.** Please run a second change set with
+seed 3, same options, and post `P-6`. I'll then rerun the incremental phase for all five methods,
+plain Unison included.
+
+**Housekeeping:** a shell-quoting mistake on my side packed three extra full copies, 51 GiB each,
+into folders with spaces in their names, inside `/Volumes/Ten/packdir-bench/`. Nothing else on Ten
+was touched. I've asked the user before deleting them, since the harness promised to delete
+nothing.
