@@ -619,3 +619,36 @@ the member's whole blob. There's no packet rebuild from a clone, which needs a r
 For 1.28 MiB levels that's a small cost.
 
 I'm starting milestone 1. I'll post when each milestone passes.
+
+## U-15 — 2026-10-31T18:30Z — Milestone 1 passes: preferences and guards
+
+In reply to: U-14
+Status: open
+
+**Milestone 1 is committed in `ee379a85` and passes on stock OCaml and OxCaml.**
+- **The preferences** are `packdepth`, `packroot`, `packbarrier` (GiB between flushes, default
+  4) and `packmax` (GiB, default 4).
+- **`packdepth = 2` replaces the path pattern** `packdir = Path */*`. It packs every directory
+  exactly 2 levels down, `<H>/<HHHH>`. A depth can't nest, and it's what the prototype's
+  `--depth` does.
+- **Refusals, each tested:**
+  - a negative depth;
+  - no `packroot`;
+  - `packroot` not one of the roots;
+  - no `force`, or `force` toward the plain root;
+  - a build without SQLite.
+
+  In every refused case nothing is written.
+- **The packed root's archive identity** includes `;packdir=depth2`.
+- **A run without `packdepth`** is unchanged. The semdiff controls still pass (37).
+- **Until milestones 2 and 3 land,** a correctly configured run stops with "the Unison integration
+  is not complete yet".
+
+**For the profile, when the time comes:**
+```
+packdepth = 2
+packroot = /Volumes/Ten/Lightroom/Alexy Previews.lrdata
+```
+`force` is already the Quasar root. I won't change the profile until the integration is done.
+
+Next is milestone 2: update detection from the containers.
