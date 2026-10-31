@@ -37,6 +37,14 @@ let max_gib =
     "largest container, in GiB; a container that would grow past it is refused"
     "Guards against a pattern that packs far more than intended."
 
+let workers =
+  Prefs.createInt "packworkers" 4 ~local:true
+    ~category:(`Advanced `General)
+    "processes reading and hashing the plain side for a packed root"
+    "Each reads, hashes and packs whole containers; only their SQLite \
+     transactions take turns, so the packed disk sees one writer at a time. \
+     4 measured best on the Quasar to Ten benchmark (docs/packdir-design.md)."
+
 let enabled () = Prefs.read depth > 0
 
 (* The packed root's fspath, set by Uicommon once the roots are checked. *)
@@ -58,3 +66,17 @@ let signature (_ : Fspath.t) =
    platter), [after_commit] once they are (the pending list is cleared). *)
 let before_commit : (unit -> unit) ref = ref (fun () -> ())
 let after_commit : (unit -> unit) ref = ref (fun () -> ())
+
+(* The marker a packed root carries at its top, with its depth, so that a run
+   with another packdir setting (or none) refuses it instead of treating its
+   containers as foreign files and copying everything again beside them. *)
+let marker = ".unison-packed"
+let marker_text n = Printf.sprintf "unison-packdir/1 depth=%d\n" n
+
+(* The depth a local root was packed with, if it carries the marker. *)
+let marked_depth fspath =
+  let p = Fspath.toString (Fspath.concat fspath (Path.fromString marker)) in
+  match In_channel.with_open_bin p In_channel.input_all with
+  | text -> (match Scanf.sscanf text "unison-packdir/1 depth=%d" (fun d -> d) with
+             | d -> Some d | exception _ -> Some (-1))
+  | exception Sys_error _ -> None

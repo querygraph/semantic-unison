@@ -61,6 +61,7 @@ let save_state () =
 let pending_path () = !state_path ^ ".pending"
 let suspects : (string, unit) Hashtbl.t = Hashtbl.create 64
 let pending_this_run : (string, unit) Hashtbl.t = Hashtbl.create 1024
+let failed_this_run : (string, unit) Hashtbl.t = Hashtbl.create 64
 let since_barrier = ref 0
 let last_written = ref ""
 
@@ -95,11 +96,16 @@ let before_commit () =
   (* Tests: stop after the barrier, before Unison's archives are written. *)
   if Sys.getenv_opt "UNISON_PACKDIR_CRASH_BEFORE_COMMIT" <> None then Unix._exit 4
 
+(* After the commit, only containers whose job failed stay pending: the next
+   run verifies them before use. *)
 let after_commit () =
   if Hashtbl.length pending_this_run > 0 || Hashtbl.length suspects > 0 then begin
-    Out_channel.with_open_bin (pending_path () ^ ".tmp") (fun _ -> ());
+    Out_channel.with_open_bin (pending_path () ^ ".tmp") (fun oc ->
+      Hashtbl.iter (fun rel () -> output_string oc (rel ^ "\n")) failed_this_run;
+      flush oc; Unix.fsync (Unix.descr_of_out_channel oc));
     Sys.rename (pending_path () ^ ".tmp") (pending_path ());
-    Hashtbl.reset pending_this_run; Hashtbl.reset suspects
+    Hashtbl.reset pending_this_run; Hashtbl.reset suspects;
+    Hashtbl.iter (fun rel () -> Hashtbl.replace suspects rel ()) failed_this_run
   end
 
 let set_aside rel p problems =
@@ -185,8 +191,11 @@ let children fspath path =
   if not (owns fspath) then None else
   let d = depth_of path in
   let p = abs fspath path in
-  if d = !depth - 1 then begin
-    let names = plain_names p in
+  if d = 0 && !depth > 1 then
+    (* The root: everything but the packed marker. *)
+    Some (List.sort compare (List.filter (fun n -> n <> PackdirConfig.marker) (plain_names p)))
+  else if d = !depth - 1 then begin
+    let names = List.filter (fun n -> d > 0 || n <> PackdirConfig.marker) (plain_names p) in
     if not (List.exists packdir_file names) then None else
     let containers = List.filter_map (fun n ->
       if Filename.check_suffix n ".sqlar" then Some (Filename.chop_suffix n ".sqlar") else None) names in
@@ -212,18 +221,26 @@ let fingerprint fspath path =
 
 let transient fmt = Printf.ksprintf (fun m -> raise (Util.Transient ("packed root: " ^ m))) fmt
 
-(* Store [files] (name, source path, Unison's fingerprint from update
-   detection) as members of the container for [rel]; a source whose bytes
-   no longer match its fingerprint changed during synchronization. *)
-let put_members fspathTo rel files =
+(* One container's work: store [files] (name, source path, Unison's
+   fingerprint from update detection) as members of the container for [rel].
+   Reading and hashing happen outside [write_lock]; only the transaction runs
+   inside it. Returns the bytes stored and the members after. *)
+type locker = { lock : 'a. (unit -> 'a) -> 'a }
+
+let pack_job ~(write_lock : locker) fspathTo (rel, files) =
   let p = abs fspathTo (Path.fromString rel) in
   N.mkdir_p (Filename.dirname p);
-  mark_pending rel;
-  let c = Packdir.open_ (p ^ ".sqlar") in
-  let bytes, ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+  let c = write_lock.lock (fun () -> Packdir.open_ (p ^ ".sqlar")) in
+  Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
     let puts = List.map (fun (name, source, _) -> { Packdir.member = name; source }) files in
-    let bytes = Packdir.apply c ~puts ~retain:[] in
-    bytes, Packdir.members c) in
+    let bytes = Packdir.apply ~write_lock:(fun f -> write_lock.lock f) c ~puts ~retain:[] in
+    bytes, Packdir.members c)
+
+(* Record a finished job: barrier accounting, the state, this run's view, and
+   the fingerprint check: a source whose stored bytes no longer match the
+   fingerprint update detection took changed during synchronization. *)
+let record fspathTo (rel, files) (bytes, ms) =
+  let p = abs fspathTo (Path.fromString rel) in
   wrote (p ^ ".sqlar") bytes;
   (match container_stat p with
    | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
@@ -235,6 +252,64 @@ let put_members fspathTo rel files =
     let stored = Os.data_only_fingerprint (Fingerprint.file fspathTo (Path.fromString (rel ^ "/" ^ name))) in
     if not (Os.fullfingerprintEqual stored fp) then
       transient "%s/%s changed during synchronization; stored as found, will be compared again" rel name) files
+
+(* The writer lock, in the Unison directory: every worker's transaction takes
+   it, so the packed disk sees one writer at a time. *)
+let lock_fd = lazy (Unix.openfile (!state_path ^ ".writer") [Unix.O_RDWR; Unix.O_CREAT] 0o600)
+let with_lock f =
+  let fd = Lazy.force lock_fd in
+  Unix.lockf fd Unix.F_LOCK 0;
+  Fun.protect ~finally:(fun () -> Unix.lockf fd Unix.F_ULOCK 0) f
+
+(* Run the jobs, each in its own forked process, at most packworkers at a
+   time across every item Unison propagates at once (one shared region), so
+   the workers stay busy from one item to the next; the parent waits on each
+   job's pipe without blocking Unison's event loop. With packworkers = 1 the
+   jobs run in this process, one after another. A job whose process dies
+   fails its item; its container stays pending and is verified next run. *)
+let region = lazy (Lwt_util.make_region (max 1 (Prefs.read PackdirConfig.workers)))
+
+let run_in_child fspathTo job =
+  let rd, wr = Unix.pipe ~cloexec:true () in
+  flush_all ();
+  match Unix.fork () with
+  | 0 ->
+      Unix.close rd;
+      let r = try Ok (pack_job ~write_lock:{ lock = with_lock } fspathTo job)
+        with Failure e | Sys_error e -> Error e
+           | Unix.Unix_error (e, f, a) -> Error (Printf.sprintf "%s: %s %s" f (Unix.error_message e) a) in
+      let oc = Unix.out_channel_of_descr wr in
+      Marshal.to_channel oc r []; close_out oc; Unix._exit 0
+  | pid ->
+      Unix.close wr;
+      let fd = Lwt_unix.of_unix_file_descr rd in
+      let buf = Buffer.create 4096 and chunk = Bytes.create 65536 in
+      let rec drain () =
+        Lwt.bind (Lwt_unix.read fd chunk 0 65536) (fun n ->
+          if n = 0 then Lwt.return () else (Buffer.add_subbytes buf chunk 0 n; drain ())) in
+      Lwt.bind (drain ()) (fun () ->
+        Lwt_unix.close fd;
+        ignore (Unix.waitpid [] pid);
+        Lwt.return (if Buffer.length buf = 0 then Error "its worker stopped"
+                    else (Marshal.from_string (Buffer.contents buf) 0 : (int * Packdir.member list, string) result)))
+
+let run_jobs fspathTo jobs =
+  List.iter (fun (rel, _) -> mark_pending rel) jobs;
+  let one ((rel, _) as job) =
+    if Prefs.read PackdirConfig.workers <= 1 then
+      Lwt.return (rel, try Ok (pack_job ~write_lock:{ lock = (fun f -> f ()) } fspathTo job)
+                       with Failure e | Sys_error e -> Error e)
+    else Lwt_util.run_in_region (Lazy.force region) 1 (fun () ->
+      Lwt.bind (run_in_child fspathTo job) (fun r -> Lwt.return (rel, r))) in
+  Lwt.bind (Lwt_util.map one jobs) (fun results ->
+    (* Record in job order; the first problem fails the item, after everything
+       that did arrive is recorded. *)
+    let first = ref None in
+    List.iter2 (fun job (rel, r) ->
+      match r with
+      | Ok r -> (try record fspathTo job r with Util.Transient m -> if !first = None then first := Some m)
+      | Error e -> Hashtbl.replace failed_this_run rel (); if !first = None then first := Some (rel ^ ": " ^ e)) jobs results;
+    match !first with Some m -> Lwt.fail (Util.Transient m) | None -> Lwt.return ())
 
 (* What the target now holds, for Unison's archive: read back through the
    same hooks update detection uses, so the next run sees what was recorded. *)
@@ -257,44 +332,53 @@ let plain_copy source target mtime_ns =
 let name_of pt = Filename.basename (Path.toString pt)
 let parent_of pt = Filename.dirname (Path.toString pt)
 
-let rec write fspathFrom fspathTo pf pt arch =
+(* Prepare: create directories and copy plain files above the packed depth,
+   and collect one job per container to write. *)
+let rec prepare fspathFrom fspathTo pf pt arch jobs =
   let d = depth_of pt in
   let source = abs fspathFrom pf in
   match arch with
-  | Update.ArchiveFile (desc, fp, _, _) when d = !depth + 1 ->
-      put_members fspathTo (parent_of pt) [(name_of pt, source, fp)];
-      file_arch fspathTo pt desc fp
-  | Update.ArchiveFile (desc, fp, _, _) when d <= !depth ->
-      plain_copy source (abs fspathTo pt) (N.stat source).N.mtime_ns;
-      file_arch fspathTo pt desc fp
-  | Update.ArchiveDir (desc, children) when d = !depth ->
+  | Update.ArchiveFile (_, fp, _, _) when d = !depth + 1 ->
+      (parent_of pt, [(name_of pt, source, fp)]) :: jobs
+  | Update.ArchiveFile _ when d <= !depth ->
+      plain_copy source (abs fspathTo pt) (N.stat source).N.mtime_ns; jobs
+  | Update.ArchiveDir (_, children) when d = !depth ->
       let files = Update.NameMap.fold (fun name child acc -> match child with
         | Update.ArchiveFile (_, fp, _, _) -> (Name.toString name, abs fspathFrom (Path.child pf name), fp) :: acc
         | _ -> transient "%s/%s: a packed directory holds files only" (Path.toString pt) (Name.toString name))
         children [] in
-      if files <> [] then put_members fspathTo (Path.toString pt) files;
-      let children' = Update.NameMap.mapi (fun name child -> match child with
-        | Update.ArchiveFile (cdesc, fp, _, _) -> file_arch fspathTo (Path.child pt name) cdesc fp
-        | a -> a) children in
-      Update.ArchiveDir (desc, children')
-  | Update.ArchiveDir (desc, children) when d < !depth ->
+      if files = [] then jobs else (Path.toString pt, List.rev files) :: jobs
+  | Update.ArchiveDir (_, children) when d < !depth ->
       let target = abs fspathTo pt in
       if not (is_dir target) then Unix.mkdir target 0o755;
-      Update.ArchiveDir (desc, Update.NameMap.mapi (fun name child ->
-        write fspathFrom fspathTo (Path.child pf name) (Path.child pt name) child) children)
+      Update.NameMap.fold (fun name child jobs ->
+        prepare fspathFrom fspathTo (Path.child pf name) (Path.child pt name) child jobs) children jobs
   | Update.ArchiveDir _ -> transient "%s: directories below the packed depth are not supported" (Path.toString pt)
   | Update.ArchiveSymlink _ -> transient "%s: symbolic links are not supported" (Path.toString pt)
   | Update.ArchiveFile _ | Update.NoArchive -> transient "%s: nothing to write" (Path.toString pt)
+
+(* The archive for what the target now holds, read back through the hooks. *)
+let rec archive_of fspathTo pt arch =
+  match arch with
+  | Update.ArchiveFile (desc, fp, _, _) -> file_arch fspathTo pt desc fp
+  | Update.ArchiveDir (desc, children) ->
+      Update.ArchiveDir (desc, Update.NameMap.mapi (fun name child -> archive_of fspathTo (Path.child pt name) child) children)
+  | a -> a
+
+let write fspathFrom fspathTo pf pt arch =
+  let jobs = Util.convertUnixErrorsToTransient "writing into the packed root" (fun () ->
+    List.rev (prepare fspathFrom fspathTo pf pt arch [])) in
+  Lwt.bind (run_jobs fspathTo jobs) (fun () ->
+    Lwt.return (Util.convertUnixErrorsToTransient "reading back the packed root" (fun () -> archive_of fspathTo pt arch)))
 
 let copy rootFrom pathFrom uiFrom rootTo pathTo =
   let fspathFrom = snd rootFrom and fspathTo = snd rootTo in
   let pf = Update.translatePathLocal fspathFrom pathFrom in
   let pt = Update.translatePathLocal fspathTo pathTo in
   let arch = Update.updateArchive fspathFrom pf uiFrom in
-  let arch' = Util.convertUnixErrorsToTransient "writing into the packed root" (fun () ->
-    write fspathFrom fspathTo pf pt arch) in
-  Update.replaceArchiveLocal fspathTo pt arch';
-  Files.updateSourceArchive rootFrom (pf, uiFrom, [])
+  Lwt.bind (write fspathFrom fspathTo pf pt arch) (fun arch' ->
+    Update.replaceArchiveLocal fspathTo pt arch';
+    Files.updateSourceArchive rootFrom (pf, uiFrom, []))
 
 (* A deletion on the packed root keeps the bytes: the member is marked
    retained and drops out of Unison's view. A whole container is never
@@ -329,6 +413,16 @@ let install fspath n =
   state_path := Util.fileInUnisonDir ("pd" ^ Digest.to_hex (Digest.string (Fspath.toString fspath)));
   load_state ();
   load_pending ();
+  (* The marker that makes any other packdir setting refuse this root. *)
+  let m = abs fspath (Path.fromString PackdirConfig.marker) in
+  (match PackdirConfig.marked_depth fspath with
+   | Some d when d <> n -> raise (Util.Fatal (Printf.sprintf "%s: packed with packdepth = %d, not %d" (Fspath.toPrintString fspath) d n))
+   | _ -> ());
+  if PackdirConfig.marked_depth fspath = None then begin
+    Out_channel.with_open_bin (m ^ ".tmp") (fun oc ->
+      output_string oc (PackdirConfig.marker_text n); flush oc; Unix.fsync (Unix.descr_of_out_channel oc));
+    Sys.rename (m ^ ".tmp") m
+  end;
   at_exit save_state;
   PackdirConfig.before_commit := before_commit;
   PackdirConfig.after_commit := after_commit;

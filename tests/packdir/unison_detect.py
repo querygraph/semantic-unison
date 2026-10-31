@@ -18,8 +18,9 @@ def check(ok, message):
     checks += 1
 
 def digest_tree(root):
+    # The packed marker is written by the first packed run; everything else must stay as it was.
     return {str(f.relative_to(root)): hashlib.sha256(f.read_bytes()).hexdigest() + str(f.stat().st_mtime_ns)
-            for f in sorted(root.rglob('*')) if f.is_file()}
+            for f in sorted(root.rglob('*')) if f.is_file() and f.name != '.unison-packed'}
 
 rng = random.Random(7)
 with tempfile.TemporaryDirectory(prefix='unison-packdir-detect-') as td:
@@ -82,11 +83,12 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-detect-') as td:
           'unchanged container left unopened, the same two pending changes:\n' + out)
     locked.chmod(0o644)
 
-    # Archive identity: a run without packdepth uses other archives for both roots.
-    before = {f.name for f in udir.iterdir() if f.name.startswith('ar')}
+    # A run without packdepth: refused by the packed marker before it scans; no archive is touched.
+    before = {f.name: f.stat().st_mtime_ns for f in udir.iterdir() if f.name.startswith('ar')}
     rc, out = unison('-noupdate', str(ten), '-nocreation', str(ten), packed=False)
-    after = {f.name for f in udir.iterdir() if f.name.startswith('ar')}
-    check(len(before) == 2 and len(after - before) == 2, 'separate archives without packdepth: %r -> %r' % (before, after))
-    check(digest_tree(ten) == ten_before, 'Ten untouched by the plain run')
+    after = {f.name: f.stat().st_mtime_ns for f in udir.iterdir() if f.name.startswith('ar')}
+    check(rc != 0 and 'is packed (packdepth = 2' in out, 'a run without packdepth is refused:\n' + out)
+    check(len(before) == 2 and after == before, 'no archive created or changed: %r -> %r' % (before, after))
+    check(digest_tree(ten) == ten_before, 'Ten untouched by the refused run')
 
 print('PASS%d packdir detection controls' % checks)

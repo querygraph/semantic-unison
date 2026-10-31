@@ -377,6 +377,31 @@ let packdirSetup () =
   PackdirConfig.packed := Some packed_path;
   PackdirSupport.install packed_path (Prefs.read PackdirConfig.depth)
 
+(* Every run: a local root that carries the packed marker must be this run's
+   packed root, with the same depth. Anything else would read its containers
+   as foreign files. *)
+let packdirMarkerCheck () =
+  List.iter (fun cl -> match cl with
+    | Clroot.ConnectLocal (Some p) ->
+        let fspath = Fspath.canonize (Some p) in
+        (* This run's packed root, resolved the way packdirSetup resolves it. *)
+        let intended =
+          let given = Prefs.read PackdirConfig.root in
+          if Prefs.read PackdirConfig.depth = 0 || given = "" then None else
+          match Recon.root2direction given, Globals.parsedClRawRoots () with
+          | `Replica1ToReplica2, [Clroot.ConnectLocal (Some q); _]
+          | `Replica2ToReplica1, [_; Clroot.ConnectLocal (Some q)] -> Some (Fspath.canonize (Some q))
+          | _ | exception Util.Fatal _ -> None in
+        (match PackdirConfig.marked_depth fspath, intended with
+         | None, _ -> ()
+         | Some d, Some packed when packed = fspath && d = Prefs.read PackdirConfig.depth -> ()
+         | Some d, _ ->
+             raise (Util.Fatal (Printf.sprintf
+               "%s is packed (packdepth = %d, see its %s). Run with packdepth = %d and packroot = %s, \
+                or turn it back into plain files first with unison-packdir unpack-tree."
+               p d PackdirConfig.marker d p)))
+    | _ -> ()) (Globals.parsedClRawRoots ())
+
 let runTestsPrefName = "selftest"
 let runtests =
   Prefs.createBool runTestsPrefName false
@@ -1423,6 +1448,8 @@ let initPrefs ~profileName ~promptForRoots ?(prepDebug = fun () -> ()) () =
 
   if Prefs.read semdiffPref || Prefs.read semcatchupFrom <> "" then semdiffSetup ();
 
+  (* The marker check comes first: setup would otherwise write this run's marker. *)
+  packdirMarkerCheck ();
   if Prefs.read PackdirConfig.depth <> 0 then packdirSetup ();
 
   Recon.checkThatPreferredRootIsValid();
