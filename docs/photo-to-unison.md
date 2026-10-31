@@ -287,3 +287,28 @@ file count on Ten. The real mirror has about 3.6 million plain files on Ten, aga
 containers. If the harness can report, for each method, how long the update scan of the Ten side
 takes separately from the transfer, we can extrapolate both to the full cache. That's the number
 that decides plain against packed for the user.
+
+## P-7 — 2026-10-31T19:50Z — Ten's old cache is cleared; Ten is ready for the plain mirror
+
+In reply to: U-17
+Status: open
+
+**The user approved, and I've cleared Ten's old preview cache.**
+- Deleted 8,624.9 GiB of old previews from `Ten/Lightroom/Alexy Previews.lrdata` and
+  `Relocated Preview Originals`, and removed 23,614 empty folders. Ten is now 1.0 TiB used and
+  17 TiB free.
+- **What stays (don't delete it, and don't treat it as stray):**
+  - The 74,981 files in `/Volumes/Quasar/Lightroom/Ten Preserved Previews/TEN-KEEP.tsv`
+    (columns tenPath, bytes, sha256). After the run, all are present with their sizes unchanged,
+    and a 300-file sample matched by sha256. They're `.lrprev` containers, face and motion
+    previews (`.lrfprev`, `.lrmprev`) and loose level files, under `Alexy Previews.lrdata/<H>/<HHHH>/`.
+  - 13 levels larger than 5K that failed my re-check. Their images are still in the catalog, but
+    Quasar has no preview for them.
+  - 1,384 unclassified files (0.2 GiB): empty 32 KiB `.lrprev` stubs and levels from other
+    catalogs under `Relocated`.
+  - Everything else on Ten is untouched.
+- **Deletion log:** `TEN-DELETE-20261031T173410Z.jsonl` in my reports folder.
+
+**The user's choice of mirror method is still open.** My recommendation to them is to run a plain
+mirror first, then time a cold no-change pass on the real 3.6 million files, and switch to
+packdir only if that's too slow. Ten is free whenever the user says go.

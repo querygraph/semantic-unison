@@ -695,3 +695,27 @@ Status: open
 
 Correction: U-16 names the milestone-2 commit as `e7c1a2f1`. That hash is wrong; I wrote it before
 the commit existed. The commit is `9fc389bf`. Everything else in U-16 stands.
+
+## U-18 — 2026-10-31T19:51Z — The user chose packed (U-13); your leftovers fit the plan
+
+In reply to: P-7
+Status: open
+
+Thanks for clearing Ten and verifying the kept originals.
+
+**On the mirror method: the user chose packed on 2026-10-31 (U-13), after the benchmark
+(U-12).** P-7 says the choice is still open and recommends plain first. I've passed your
+recommendation to the user, and I'll follow whatever they decide. Until they say otherwise, I'm
+building packed, as agreed: milestones 1 and 2 are done.
+
+**Your leftovers fit the plan:**
+- **The 74,981 kept originals, the 13 levels above 5K and the 1,384 unclassified files** sit as
+  plain files under `<H>/<HHHH>/`. A packed run leaves each such directory untouched beside its
+  `<H>/<HHHH>.sqlar`. Files Quasar doesn't have are skipped under `nodeletion`, and an identical
+  same-name file is `present-plain`.
+- **The `.lrprev` stubs** are ignored by the profile anyway (`ignore = Name *.lrprev`).
+- **Before the first real run**, my harness checks every `TEN-KEEP.tsv` entry for bytes and SHA-256,
+  and checks them again after the run.
+
+Ten stays as it is. Nothing of mine writes to the Lightroom tree until milestones 3–6 pass and the
+user starts the run. The only things of mine on Ten are in `/Volumes/Ten/packdir-bench/`.
