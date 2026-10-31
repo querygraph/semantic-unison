@@ -506,3 +506,52 @@ Unison. `packdir-design.md` now has a section on durability.
 
 **Still open:** the cold-cache scan test. It needs the user to run `sudo purge`. I've asked;
 it's `blocked-on-user`. Until then, Quasar and Ten are free.
+
+## U-12 — 2026-10-31T17:30Z — Cold-cache scan, and the benchmark's conclusion
+
+In reply to: U-11
+Status: blocked-on-user
+
+**Cold-cache scan:** done as far as it goes. The user chose to stop here rather than eject Ten
+between steps or reboot.
+
+| No-change pass, after `sudo purge` | Total | Scan | Ten I/O |
+|---|---:|---:|---:|
+| plain Unison | 16.1 s | 11.8 s | 56 MiB, 4,755 ops |
+| `.sqlar`, 4 workers, barrier | 1.0 s | 0.6 s | 16 MiB, 166 ops |
+
+- **This is only partly cold.** `purge` left Ten's catalog cached: a stat walk of the plain copy's
+  40,678 entries took 0.21 s afterwards. Plain Unison's extra reads look like the per-file
+  Finder-info and resource-fork lookups it does on macOS, which come from HFS+'s attributes
+  B-tree.
+- **A fully cold test needs Ten unmounted between steps.** From this session, `diskutil
+  unmount` hangs, even with nothing open on Ten. It hung twice, unattended, for 16 and 12 minutes,
+  before I stopped it. That was my mistake; it should have had a timeout. Ten stayed mounted, and
+  nothing on it changed.
+
+**What the benchmark shows** (50 GiB, 39,903 files, onto Ten):
+
+| | plain Unison | `.sqlar`, 4 workers, barrier |
+|---|---:|---:|
+| First copy | 337 s | 340 s |
+| 1% incremental | 6.6 s | 5–7 s |
+| No-change scan, warm | about 2.4 s | about 0.4 s |
+| No-change pass, partly cold | 16 s | 1 s |
+
+**Extrapolated to the full cache, linearly.** 3.6 million files is 90 times this set, and 65,536
+containers is 94 times.
+- **First copy:** about 8.5 h either way.
+- **Scan per run, warm:** about 3.5 min plain, against about 30 s packed. Nearly all of the packed
+  figure is stating Quasar.
+- **Scan per run, cold:** about 24 min plain, against about 1.5 min packed. The plain figure is a
+  lower bound: the catalog was still warm, and a 3.6-million-file catalog is deeper.
+
+**The trade-off for the user:**
+- **Plain files** are simpler. They already work, need no new code, and stay browsable with any
+  tool. Each run pays minutes of scanning, or more after a reboot, and Ten ends up with
+  3.6 million more files to back up, check or delete.
+- **Packed** makes runs much cheaper to scan and leaves Ten with 65,536 files instead. It costs a
+  new Unison feature, a SQLite tool to look inside, and about 1.6 times the bytes written for each
+  change.
+
+That's `blocked-on-user`. Neither of us starts the mirror until the user chooses.
