@@ -28,7 +28,8 @@ let barrier_gib =
     "GiB written between drive-cache flushes on the packed root"
     "Containers are synced with fsync; one F_FULLFSYNC every this many GiB and \
      at the end of a run empties the drive's cache, and the archive records a \
-     container only after a flush covers it."
+     container only after a flush covers it. 0 flushes after every container \
+     write."
 
 let max_gib =
   Prefs.createInt "packmax" 4 ~local:true
@@ -51,3 +52,9 @@ let signature (_ : Fspath.t) =
   match !packed with
   | Some p -> Printf.sprintf ";packdir=depth%d:%s" (Prefs.read depth) (Fspath.toString p)
   | None -> ""
+
+(* Called by Update.commitUpdates: [before_commit] before Unison's archives are
+   written (the final drive-cache barrier, so they never get ahead of the
+   platter), [after_commit] once they are (the pending list is cleared). *)
+let before_commit : (unit -> unit) ref = ref (fun () -> ())
+let after_commit : (unit -> unit) ref = ref (fun () -> ())

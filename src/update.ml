@@ -2886,6 +2886,7 @@ let prepareCommitOnRoot =
    the checksum on all archives are equal, finally flip scratch to main.  In
    the event of checksum mismatch, dump archives on all roots and fail *)
 let commitUpdates () =
+  !PackdirConfig.before_commit ();
   Lwt_unix.run
     (debug (fun() -> Util.msg "Updating archives\n");
      lockArchives () >>= (fun () ->
@@ -2930,7 +2931,8 @@ let commitUpdates () =
                    ))))
           end))
        (fun _ -> unlockArchives ()) >>= (fun () ->
-     unlockArchives ())))
+     unlockArchives ())));
+  !PackdirConfig.after_commit ()
 
 (*****************************************************************************)
 (*                            MARKING UPDATES                                *)

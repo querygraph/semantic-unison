@@ -272,6 +272,25 @@ reference.
      Detection (10), config (16), prototype (87), semdiff (37) and `-selftest` all still pass.
 4. **Barriers and recovery.** The pending list, a barrier every 4 GiB and at the end, and
    verify-before-trust after a crash. *Test:* kills at each point; the next run converges.
+
+   *Done (2026-10-31):*
+   - **The pending list** is `pd<hash>.pending` in the Unison directory. Each container is listed,
+     and the list fsynced, before its first write in a run.
+   - **Barriers.** One `F_FULLFSYNC` every `packbarrier` GiB, where 0 means after every container,
+     and one more, with the state saved, in `PackdirConfig.before_commit`. `Update.commitUpdates`
+     calls that before it writes Unison's archives. `after_commit` clears the list.
+   - **Recovery.** On the next run, a pending container, or one whose file no longer matches the
+     state, is verified (`integrity_check` and every SHA-256) before use. A damaged one is set aside
+     as `.sqlar.damaged-<time>`, so its leaf reads as missing and `force` copies it again.
+   - **Tests:** 21 recovery controls (`tests/packdir/unison_recover.py`):
+     - barriers after every container, and the pending list cleared;
+     - a crash inside a transaction;
+     - a crash after the final barrier and before the commit;
+     - a damaged container found, set aside and replaced exactly.
+
+     `-debug packdir` shows each barrier.
+   - **Limit:** silent bit rot in a container whose file is unchanged is caught only by
+     `unison-packdir verify`, run as a periodic scrub.
 5. **Parallel preparation.** Reading and hashing the plain side in parallel, within
    `semanticworkers` and `semanticcpubudget`, with one writer per disk. *Test:* the 50 GiB
    benchmark set onto `/Volumes/Ten/packdir-bench/`, against the prototype's 340 s.

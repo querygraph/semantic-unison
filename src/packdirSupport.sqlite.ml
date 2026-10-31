@@ -11,6 +11,7 @@
 module N = Dng_archive.Native
 
 let available = true
+let debug = Trace.debug "packdir"
 
 let root : Fspath.t option ref = ref None
 let depth = ref 0
@@ -50,8 +51,67 @@ let save_state () =
     dirty := false
   end
 
+(* Durability (docs/packdir-design.md, "Durability"). Containers written in a
+   run are listed in a pending file before their first write; drive-cache
+   barriers run every packbarrier GiB and before Unison's archives are
+   committed; the list is cleared after the commit. A container listed as
+   pending by an earlier run, or whose file no longer matches the state, may
+   not have reached the platter whole: it is verified before use, and set
+   aside when damaged, so the leaf reads as missing and is brought back. *)
+let pending_path () = !state_path ^ ".pending"
+let suspects : (string, unit) Hashtbl.t = Hashtbl.create 64
+let pending_this_run : (string, unit) Hashtbl.t = Hashtbl.create 1024
+let since_barrier = ref 0
+let last_written = ref ""
+
+let load_pending () =
+  try List.iter (fun l -> if l <> "" then Hashtbl.replace suspects l ())
+        (In_channel.with_open_bin (pending_path ()) In_channel.input_lines)
+  with Sys_error _ -> ()
+
+let mark_pending rel =
+  if not (Hashtbl.mem pending_this_run rel) then begin
+    Out_channel.with_open_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o600 (pending_path ()) (fun oc ->
+      output_string oc (rel ^ "\n"); flush oc; Unix.fsync (Unix.descr_of_out_channel oc));
+    Hashtbl.replace pending_this_run rel ()
+  end
+
+let barrier () =
+  if !last_written <> "" then begin
+    Packdir.barrier !last_written;
+    debug (fun () -> Util.msg "packdir: barrier after %d bytes\n" !since_barrier);
+    since_barrier := 0
+  end
+
+let wrote path bytes =
+  last_written := path;
+  since_barrier := !since_barrier + bytes;
+  (* packbarrier = 0: a barrier after every container write. *)
+  if !since_barrier >= Prefs.read PackdirConfig.barrier_gib * 1073741824 then barrier ()
+
+let before_commit () =
+  barrier ();
+  save_state ();
+  (* Tests: stop after the barrier, before Unison's archives are written. *)
+  if Sys.getenv_opt "UNISON_PACKDIR_CRASH_BEFORE_COMMIT" <> None then Unix._exit 4
+
+let after_commit () =
+  if Hashtbl.length pending_this_run > 0 || Hashtbl.length suspects > 0 then begin
+    Out_channel.with_open_bin (pending_path () ^ ".tmp") (fun _ -> ());
+    Sys.rename (pending_path () ^ ".tmp") (pending_path ());
+    Hashtbl.reset pending_this_run; Hashtbl.reset suspects
+  end
+
+let set_aside rel p problems =
+  let aside = Printf.sprintf "%s.sqlar.damaged-%.0f" p (Unix.time ()) in
+  Sys.rename (p ^ ".sqlar") aside;
+  Hashtbl.remove state rel; dirty := true;
+  Util.warn (Printf.sprintf "packed root: %s.sqlar is damaged (%s); set aside as %s, and the leaf will be \
+                             copied again\n" rel (String.concat "; " problems) aside)
+
 (* Members of the container for [rel] (relative to the root): from the
-   state when its file is unchanged, else read from the container. *)
+   state when its file is unchanged, else read from the container, verified
+   first when it may not have reached the platter whole. *)
 let read_this_run : (string, Packdir.member list) Hashtbl.t = Hashtbl.create 1024
 let members fspath rel =
   match Hashtbl.find_opt read_this_run rel with
@@ -62,14 +122,21 @@ let members fspath rel =
       | None -> None
       | Some s ->
           let st = (s.N.ino, s.N.size, s.N.mtime_ns) in
-          let m = match Hashtbl.find_opt state rel with
-            | Some (st', m) when st' = st -> m
-            | _ ->
-                let c = Packdir.open_ (p ^ ".sqlar") in
-                let m = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () -> Packdir.members c) in
-                Hashtbl.replace state rel (st, m); dirty := true; m in
-          Hashtbl.replace read_this_run rel m;
-          Some m
+          let recorded = Hashtbl.find_opt state rel in
+          let suspicious = Hashtbl.mem suspects rel ||
+            (match recorded with Some (st', _) -> st' <> st | None -> false) in
+          match recorded with
+          | Some (st', m) when st' = st && not suspicious -> Hashtbl.replace read_this_run rel m; Some m
+          | _ ->
+              let c = Packdir.open_ (p ^ ".sqlar") in
+              let problems, m = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+                (if suspicious then Packdir.verify c else []), Packdir.members c) in
+              if problems <> [] then (set_aside rel p problems; None)
+              else begin
+                Hashtbl.replace state rel (st, m); dirty := true;
+                Hashtbl.replace read_this_run rel m;
+                Some m
+              end
 
 let stats ~kind ~perm ~size ~mtime =
   let t = Int64.to_float mtime /. 1e9 in
@@ -151,11 +218,13 @@ let transient fmt = Printf.ksprintf (fun m -> raise (Util.Transient ("packed roo
 let put_members fspathTo rel files =
   let p = abs fspathTo (Path.fromString rel) in
   N.mkdir_p (Filename.dirname p);
+  mark_pending rel;
   let c = Packdir.open_ (p ^ ".sqlar") in
-  let ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+  let bytes, ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
     let puts = List.map (fun (name, source, _) -> { Packdir.member = name; source }) files in
-    ignore (Packdir.apply c ~puts ~retain:[]);
-    Packdir.members c) in
+    let bytes = Packdir.apply c ~puts ~retain:[] in
+    bytes, Packdir.members c) in
+  wrote (p ^ ".sqlar") bytes;
   (match container_stat p with
    | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
    | None -> ());
@@ -242,9 +311,11 @@ let delete rootFrom pathFrom rootTo pathTo =
     transient "%s is a plain file beside a container (a kept original): never deleted; use nodeletion"
       (Path.toString pt);
   let p = abs fspathTo (Path.fromString rel) in
+  mark_pending rel;
   let c = Packdir.open_ (p ^ ".sqlar") in
   let ms = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
     ignore (Packdir.apply c ~puts:[] ~retain:[name_of pt]); Packdir.members c) in
+  wrote (p ^ ".sqlar") 0;
   (match container_stat p with
    | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
    | None -> ());
@@ -257,7 +328,10 @@ let install fspath n =
   root := Some fspath; depth := n;
   state_path := Util.fileInUnisonDir ("pd" ^ Digest.to_hex (Digest.string (Fspath.toString fspath)));
   load_state ();
+  load_pending ();
   at_exit save_state;
+  PackdirConfig.before_commit := before_commit;
+  PackdirConfig.after_commit := after_commit;
   PackdirHook.stat := stat;
   PackdirHook.children := children;
   PackdirHook.fingerprint := fingerprint
