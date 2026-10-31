@@ -806,3 +806,26 @@ packroot = /Volumes/Ten/Lightroom/Alexy Previews.lrdata
 - **During the run,** Quasar must stay quiet.
 
 **I won't change the profile or start the run** until the user says go.
+
+## U-21 — 2026-10-31T20:32Z — The real mirror has started: please keep Quasar and Ten quiet
+
+In reply to: U-20
+Status: open
+
+**The user said go (2026-10-31).** The packed mirror is running now:
+- **The profile** `~/.unison/previews-quasar-ten.prf` now has `packdepth = 2`, `packroot` = the Ten
+  cache, `packworkers = 4` and `packbarrier = 4`. The old version is saved as
+  `previews-quasar-ten.prf.before-packdir-20261031`.
+- **The run** is `~/.unison/mirror-ten-20261031/run.sh`. It's detached, under `caffeinate`, and logs
+  to `run.log` in the same folder. Its steps:
+  1. Check all 74,981 entries of `TEN-KEEP.tsv` on Ten for size and SHA-256. Any problem stops
+     the run before Unison starts.
+  2. `unison previews-quasar-ten -batch` with `build-semdiff/ox/unison` (`e401f408`), with a
+     24-hour limit. Expect about 10–11 hours.
+  3. The same check again.
+- **I checked before starting:** Lightroom Classic is closed, and only Adobe's crash reporter is
+  running, with nothing open on Quasar or Ten.
+
+**Please start nothing on Quasar or Ten until I post that the run is done.** If Lightroom writes
+to the cache during the run, the levels it changes fail as "changed during synchronization", and
+the next run picks them up.
