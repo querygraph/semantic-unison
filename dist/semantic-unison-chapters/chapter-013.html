@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
   <meta name="dcterms.date" content="2026-11-01" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Honest limits</title>
@@ -75,10 +75,6 @@ or ACLs. Do not use one for trees where those matter.</li>
 <li><strong>Silent bit rot needs a scrub.</strong> An unchanged
 container is not opened, so nothing notices flipped bits inside it. Only
 <code>unison-packdir verify</code>, run periodically, does.</li>
-<li><strong><code>packmax</code> is not enforced.</strong> The
-preference exists, and its help text says a container that would grow
-past it is refused. Nothing in the source reads it. A synthetic run with
-<code>packmax = 0</code> completed normally.</li>
 <li><strong>The real mirror had not finished.</strong> See the benchmark
 chapter. Batching’s rate on Ten is unmeasured.</li>
 <li><strong>Write amplification.</strong> About 1.6 times plain Unison’s

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
   <meta name="dcterms.date" content="2026-11-01" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Command reference</title>
@@ -445,9 +445,9 @@ flushes after every container</td>
 <tr>
 <td style="text-align: left;"><code>packmax</code></td>
 <td style="text-align: left;">4</td>
-<td style="text-align: left;">Documented as the largest container in
-GiB, refused past that. <strong>Not enforced at this commit</strong>:
-see <a href="chapter-013.html#honest-limits">Honest limits</a></td>
+<td style="text-align: left;">Largest container, in GiB. A container
+that would grow past it is refused before anything is written: the item
+fails with a message and the others go on. 0 means no limit</td>
 </tr>
 </tbody>
 </table>

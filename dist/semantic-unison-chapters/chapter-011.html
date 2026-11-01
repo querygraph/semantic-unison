@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
   <meta name="dcterms.date" content="2026-11-01" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>The benchmark story</title>
@@ -498,6 +498,12 @@ figure for its total time, for its final scan time warm or cold, or for
 batching on Ten. Every full-scale number in this chapter is an
 extrapolation. The claim that packing pays off at full scale remains a
 prediction until those measurements exist.</p>
+<p><strong>The scan that survived.</strong> When the file-by-file
+problem was found, the mirror had to be stopped and restarted, and the
+session said the 5-hour scan would be lost. That was wrong, and it was
+stated without checking. Unison keeps a fingerprint cache for
+interrupted scans, 308 MB for this cache, and the restarted run reloaded
+it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.</p>
 <h2 data-number="10.9" id="what-the-day-showed"><span
 class="header-section-number">10.9</span> What the day showed</h2>
 <ul>

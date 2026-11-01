@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc 3.12.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
   <meta name="dcterms.date" content="2026-11-01" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
@@ -112,9 +112,8 @@ figcaption { font-size: .88em; font-style: italic; color: #3b5563; margin-top: .
 <body>
 <header id="title-block-header">
 <h1 class="title">Semantic Unison</h1>
-<p class="subtitle">An LLM-friendly fork of a file synchronizer, written
-up by the LLM</p>
-<p class="author">Claude Opus 5.5, an LLM, at a human’s request</p>
+<p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
+<p class="author">Alexy Khrabrov, with Claude as co-author</p>
 <p class="date">2026-11-01</p>
 </header>
 <nav id="TOC" role="doc-toc">
@@ -254,18 +253,17 @@ test</a></li>
 <figcaption aria-hidden="true">Semantic Unison cover.</figcaption>
 </figure>
 <h1 data-number="1" id="about-this-book"><span class="header-section-number">1</span> About this book</h1>
-<p>This book was written by an LLM. The writer is Claude Opus 5.5, an
-Anthropic model, working as one agent session at the request of the
-person who maintains the Semantic Unison fork. It has no human author,
-and it does not pretend to have one. The name on the cover, Alexy
-Khrabrov, is that person’s. That person asked for the book and maintains
-the fork, and did not write these pages. Where the text says “the user”,
-it means that person. Where it says “Unison session” or “Photo session”,
-it means two other LLM sessions whose written records this book draws
-on.</p>
+<p>This book is by Alexy Khrabrov, with Claude as co-author. The ideas
+are Alexy’s: why the fork exists, what semantic sync and semantic diff
+should do, the shuttle-disk workflow, packing directories into SQLite
+archives, and the decisions recorded in these chapters. Claude Opus 5.5,
+an Anthropic model, wrote the text and the code with him, as the essay
+in this book describes. Where the text says “the user”, it means Alexy.
+Where it says “Unison session” or “Photo session”, it means two LLM
+sessions whose written records this book draws on.</p>
 <p>The book describes the state of the
 <code>implementation/final-adobe-qualification</code> branch on
-2026-10-31, at commit <code>c2aa06cc</code>, together with the separate
+2026-10-31, at commit <code>27b9ab1a</code>, together with the separate
 <a href="https://github.com/querygraph/packdir">packdir</a> project and
 dng-compare’s OCaml archive tool. Every command option was checked
 against the source, and the worked examples in the chapters on semantic
@@ -776,7 +774,7 @@ catch their absence.</p>
 with 177 cases per compiler in both ordinary and timed modes; and 21
 native clone-lease cases per compiler. Those numbers describe particular
 tests. They do not certify every camera, operating system, storage
-device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/0c7988c6b9c389246aeef5f408d25115ef91ba6f/doc/sol-final-acceptance-map-20261019.md">acceptance
+device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/dff87351972fabc6cdff4d1cf5cff746f07dad44/doc/sol-final-acceptance-map-20261019.md">acceptance
 map</a> links the scoped evidence.</p>
 <p>I have made mistakes, too. Harness assumptions have failed. Pins have
 gone stale. Observations have needed narrower interpretations.
@@ -837,7 +835,7 @@ into an OS thread cap, a sample into a peak-memory measurement, or one
 successful camera case into universal compatibility. I cannot claim that
 this goal is finished: final generated Adobe fixtures and receiving
 qualification, portions of the prescribed measurement matrix, and final
-acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/0c7988c6b9c389246aeef5f408d25115ef91ba6f/OPUS-HANDOFF.md">handoff</a>
+acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/dff87351972fabc6cdff4d1cf5cff746f07dad44/OPUS-HANDOFF.md">handoff</a>
 records the changing state.</p>
 <p>I can make the work easier to challenge. That means readable changes,
 explicit assumptions, reproducible commands, conservative fallbacks,
@@ -2085,6 +2083,12 @@ figure for its total time, for its final scan time warm or cold, or for
 batching on Ten. Every full-scale number in this chapter is an
 extrapolation. The claim that packing pays off at full scale remains a
 prediction until those measurements exist.</p>
+<p><strong>The scan that survived.</strong> When the file-by-file
+problem was found, the mirror had to be stopped and restarted, and the
+session said the 5-hour scan would be lost. That was wrong, and it was
+stated without checking. Unison keeps a fingerprint cache for
+interrupted scans, 308 MB for this cache, and the restarted run reloaded
+it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.</p>
 <h2 data-number="10.9" id="what-the-day-showed"><span class="header-section-number">10.9</span> What the day showed</h2>
 <ul>
 <li>A small benchmark on the wrong shape of data can be precise and
@@ -2486,9 +2490,9 @@ flushes after every container</td>
 <tr>
 <td style="text-align: left;"><code>packmax</code></td>
 <td style="text-align: left;">4</td>
-<td style="text-align: left;">Documented as the largest container in
-GiB, refused past that. <strong>Not enforced at this commit</strong>:
-see <a href="#honest-limits">Honest limits</a></td>
+<td style="text-align: left;">Largest container, in GiB. A container
+that would grow past it is refused before anything is written: the item
+fails with a message and the others go on. 0 means no limit</td>
 </tr>
 </tbody>
 </table>
@@ -2908,10 +2912,6 @@ or ACLs. Do not use one for trees where those matter.</li>
 <li><strong>Silent bit rot needs a scrub.</strong> An unchanged
 container is not opened, so nothing notices flipped bits inside it. Only
 <code>unison-packdir verify</code>, run periodically, does.</li>
-<li><strong><code>packmax</code> is not enforced.</strong> The
-preference exists, and its help text says a container that would grow
-past it is refused. Nothing in the source reads it. A synthetic run with
-<code>packmax = 0</code> completed normally.</li>
 <li><strong>The real mirror had not finished.</strong> See the benchmark
 chapter. Batching’s rate on Ten is unmeasured.</li>
 <li><strong>Write amplification.</strong> About 1.6 times plain Unison’s
@@ -3162,8 +3162,8 @@ those records. The session read the essay, the design documents, the
 mailbox and the source, and ran the commands in the worked examples on
 synthetic data. It did not read from or write to the real disks. The
 diagrams were written by hand as SVG. When the source and a document
-disagreed, the book follows the source and says so, as with
-<code>packmax</code> and the <code>-preserve</code> help text.</p>
+disagreed, the book follows the source and says so, as with the
+<code>-preserve</code> help text.</p>
 <h1 data-number="14" id="building-and-testing"><span class="header-section-number">14</span> Building and testing</h1>
 <p>Semantic Unison builds with dune. Packed roots need the opam
 <code>packdir</code> package, and <code>-preserve</code> needs
