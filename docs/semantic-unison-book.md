@@ -1,8 +1,8 @@
 # About this book
 
-This book was written by an LLM. The writer is Claude Opus 5.5, an Anthropic model, working as one agent session at the request of the person who maintains the Semantic Unison fork. It has no human author, and it does not pretend to have one. The name on the cover, Alexy Khrabrov, is that person's. That person asked for the book and maintains the fork, and did not write these pages. Where the text says "the user", it means that person. Where it says "Unison session" or "Photo session", it means two other LLM sessions whose written records this book draws on.
+This book is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's: why the fork exists, what semantic sync and semantic diff should do, the shuttle-disk workflow, packing directories into SQLite archives, and the decisions recorded in these chapters. Claude Opus 5.5, an Anthropic model, wrote the text and the code with him, as the essay in this book describes. Where the text says "the user", it means Alexy. Where it says "Unison session" or "Photo session", it means two LLM sessions whose written records this book draws on.
 
-The book describes the state of the `implementation/final-adobe-qualification` branch on 2026-10-31, at commit `c2aa06cc`, together with the separate [packdir](https://github.com/querygraph/packdir) project and dng-compare's OCaml archive tool. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
+The book describes the state of the `implementation/final-adobe-qualification` branch on 2026-10-31, at commit `27b9ab1a`, together with the separate [packdir](https://github.com/querygraph/packdir) project and dng-compare's OCaml archive tool. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
 
 Three kinds of statement appear below, and they are kept apart:
 
@@ -896,6 +896,8 @@ The fix was commit `5c95d940`, per-container queues. On the internal disk the ra
 
 **The state of the mirror.** When this was written, the real mirror of 3.6 million files had not finished. There is no measured figure for its total time, for its final scan time warm or cold, or for batching on Ten. Every full-scale number in this chapter is an extrapolation. The claim that packing pays off at full scale remains a prediction until those measurements exist.
 
+**The scan that survived.** When the file-by-file problem was found, the mirror had to be stopped and restarted, and the session said the 5-hour scan would be lost. That was wrong, and it was stated without checking. Unison keeps a fingerprint cache for interrupted scans, 308 MB for this cache, and the restarted run reloaded it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.
+
 ## What the day showed
 
 - A small benchmark on the wrong shape of data can be precise and still miss the main cost. This one was careful about file sizes and missed the state of the target.
@@ -996,7 +998,7 @@ Verdicts are `mergeable`, `xmp-unsupported`, `declined` and `error`. The exit st
 | `packroot` | none | The root that stores containers. One of the two roots, as given or by a unique prefix or suffix, like `force` |
 | `packworkers` | 4 | Processes that read and hash the plain side. Their transactions take turns |
 | `packbarrier` | 4 | GiB written between drive-cache flushes. 0 flushes after every container |
-| `packmax` | 4 | Documented as the largest container in GiB, refused past that. **Not enforced at this commit**: see [Honest limits](#honest-limits) |
+| `packmax` | 4 | Largest container, in GiB. A container that would grow past it is refused before anything is written: the item fails with a message and the others go on. 0 means no limit |
 
 A run with `packdepth` needs all of the following, and each is refused with a message otherwise:
 
@@ -1114,7 +1116,6 @@ This chapter lists what the tools do not do, or do not yet do. All of it was tru
 - **No moves, symlinks or nested directories.** A move, a symbolic link, or a directory below the packed depth fails its item with a message.
 - **`perms = 0`, no `xattrs`, no ACLs.** Members keep a mode in the `sqlar` table, but a packed root compares no permissions and stores no extended attributes or ACLs. Do not use one for trees where those matter.
 - **Silent bit rot needs a scrub.** An unchanged container is not opened, so nothing notices flipped bits inside it. Only `unison-packdir verify`, run periodically, does.
-- **`packmax` is not enforced.** The preference exists, and its help text says a container that would grow past it is refused. Nothing in the source reads it. A synthetic run with `packmax = 0` completed normally.
 - **The real mirror had not finished.** See the benchmark chapter. Batching's rate on Ten is unmeasured.
 - **Write amplification.** About 1.6 times plain Unison's bytes for the same change, as measured.
 - **Metadata-only changes rewrite the member.** Inside a container there is no packet rebuild from a clone. For 1.28 MiB files this is a small cost, but the semantic transfer path does not apply.
@@ -1208,7 +1209,7 @@ These are recorded in the mailbox because the rule of that channel, and of the f
 
 ## What this book is
 
-This book was written in one session, after all of the above, from those records. The session read the essay, the design documents, the mailbox and the source, and ran the commands in the worked examples on synthetic data. It did not read from or write to the real disks. The diagrams were written by hand as SVG. When the source and a document disagreed, the book follows the source and says so, as with `packmax` and the `-preserve` help text.
+This book was written in one session, after all of the above, from those records. The session read the essay, the design documents, the mailbox and the source, and ran the commands in the worked examples on synthetic data. It did not read from or write to the real disks. The diagrams were written by hand as SVG. When the source and a document disagreed, the book follows the source and says so, as with the `-preserve` help text.
 
 # Building and testing
 

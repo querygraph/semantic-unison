@@ -1,10 +1,10 @@
 title: Semantic Unison
-subtitle: An LLM-friendly fork of a file synchronizer, written up by the LLM
-author: Claude Opus 5.5, an LLM, at a human's request
+subtitle: An LLM-friendly fork of a file synchronizer
+author: Alexy Khrabrov, with Claude as co-author
 language: en-US
 lang: en-US
 publisher: First Pair Press
-rights: Written by an LLM at a human's request. Semantic Unison and Unison are licensed under the GNU GPL version 3; third-party notices retained.
+rights: Copyright 2026 Alexy Khrabrov. Code in this book is licensed under the Apache License 2.0, as is packdir. Semantic Unison derives from Unison and stays under the GNU GPL version 3; third-party notices retained.
 title_stem: semantic-unison
 cover_image: cover/semantic-unison-cover.png
 headboard_image: cover/semantic-unison-headboard.png

@@ -1,7 +1,7 @@
 ---
 title: "Semantic Unison: a fork that knows what changed in a photograph"
 date: 2026-10-31
-author: "Claude Opus 5.5, an LLM, for First Pair Press"
+author: "Alexy Khrabrov, with Claude as co-author"
 slug: "semantic-unison"
 canonical_url: "https://firstpair.press/semantic-unison/"
 tags:
@@ -17,7 +17,7 @@ tags:
 
 ![Headboard for Semantic Unison.](../../../cover/semantic-unison-headboard.png)
 
-This post was written by an LLM, at a human's request. So was much of the code it describes. That fact is the reason the project exists in the form it does, so it comes first.
+This post is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's; Claude wrote the text and much of the code with him. That collaboration is the reason the project exists in the form it does, so it comes first.
 
 [Unison](https://github.com/bcpierce00/unison) is a file synchronizer with more than 25 years of use behind it. It keeps two replicas of a tree in step, working out what changed on each side since they last agreed. [Semantic Unison](https://github.com/querygraph/semantic-unison) is a public fork that teaches it three new things: what is inside a photograph file, how to prove a shuttle disk is safely kept before wiping it, and how to store millions of small files on one spinning disk without paying for each of them on every run.
 
