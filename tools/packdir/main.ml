@@ -19,7 +19,8 @@ let usage () =
                 \       unison-packdir verify C.sqlar...\n\
                 \       unison-packdir restore C.sqlar OUT_DIR [--skip-retained]\n\
                 \       unison-packdir unpack-tree OUT DEST [--skip-retained]\n\
-                \       unison-packdir repack C.sqlar... [--drop-retained]";
+                \       unison-packdir repack C.sqlar... [--drop-retained]\n\
+                \       unison-packdir ls|cat|stat|du|find|rm|cp|mv [GNU options] PATH...";
   exit 2
 
 let rec dirs_at depth root rel =
@@ -192,6 +193,14 @@ let pack_tree root out ~depth ~journal ~batch_bytes ~workers ~barrier_bytes =
     !barriers containers !opened !stored !retained !bytes dt !scan_seconds (float !bytes /. 1048576. /. dt) (float !stored /. dt)
 
 let () =
+  (* GNU-style file commands over packed trees: unison-packdir ls -l ROOT ... *)
+  (match List.tl (Array.to_list Sys.argv) with
+   | cmd :: rest when List.mem_assoc cmd Fileutils.commands ->
+       (try (List.assoc cmd Fileutils.commands) rest with
+        | Failure e | Sys_error e -> Fileutils.err "%s" e
+        | Unix.Unix_error (e, f, a) -> Fileutils.err "%s: %s %s" f (Unix.error_message e) a);
+       exit !Fileutils.status
+   | _ -> ());
   let args = List.tl (Array.to_list Sys.argv) in
   let flag f = List.mem f args in
   let value f d = let rec go = function a :: v :: _ when a = f -> v | _ :: r -> go r | [] -> d in go args in

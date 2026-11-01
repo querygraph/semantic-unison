@@ -9,6 +9,6 @@
 
 (executable
  (name main)
- (modules main)
+ (modules main fileutils)
  (optional)
  (libraries packdir unix))

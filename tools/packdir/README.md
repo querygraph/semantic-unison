@@ -76,3 +76,31 @@ python3 tools/packdir/bench.py sample DIR --gib 0.5     # small synthetic set fo
 
 `OUT` must be new for `first`, and its path must contain `packdir-bench`. The harness writes
 nothing outside `OUT` and its sibling `OUT.work`, and it never deletes anything.
+
+## File commands
+
+`unison-packdir` also has GNU-style file commands that see a packed tree as plain files. A path
+`ROOT/A/B/name` reads through `ROOT/A/B.sqlar` when it isn't a plain file, and a member wins over
+a plain file of the same name beside its container, as in Unison.
+
+| Command | Options |
+| --- | --- |
+| `ls` | `-l -1 -a -A -h -R -r -t -S -U -d -g -n`, `--full-time`, `--sort=`, `--time-style=full-iso`, and `--retained` to show retained deletions |
+| `cat` | `-n -b`, `-` for standard input |
+| `stat` | `-c FORMAT`, `--printf FORMAT`: `%n %s %a %A %y %Y %F %U %G %u %g %h`, with widths such as `%04a` |
+| `du` | `-a -b -s -h -c -d N`; sizes are apparent sizes, as with GNU's `--apparent-size` |
+| `find` | `-name GLOB -type f\|d\|l -maxdepth N -mindepth N` |
+| `rm` | `-f -r -R -d -v` |
+| `cp` | `-p -a -r -R -n -v -t DIR` |
+| `mv` | `-n -v -t DIR`; renames inside a container, otherwise copies then removes |
+
+- **Output and messages match GNU coreutils 9 under `LC_ALL=C`.** `tests/packdir/fileutils.py` (45
+  controls) runs each command on a packed tree and the GNU command on the same tree unpacked, and
+  compares them. A few things can't match:
+  - `ls -l`'s `total` line and directory lines;
+  - `du`'s directory sizes, since members have no blocks of their own;
+  - the order of `du` and `find` output, which is sorted here and in directory order in GNU.
+- **Changes are recorded for Unison.** `rm`, `mv` and `cp` into a container change it in one
+  transaction that bumps its epoch, so Unison's next run sees the change.
+- **`rm -r` on a packed directory removes its container.**
+- **Don't run them on a tree while Unison is writing to it.**

@@ -271,3 +271,37 @@ let repack ?(drop_retained = false) ?(journal = Delete) path =
   Sys.rename fresh path;
   kept, before, (N.stat path).N.size
 
+
+(* Name -> mode of every member, from the sqlar table (for ls -l and stat). *)
+let modes c =
+  let t = Hashtbl.create 64 in
+  List.iter (fun r -> match r with
+    | [| Sqlite3.Data.TEXT n; Sqlite3.Data.INT m |] -> Hashtbl.replace t n (Int64.to_int m)
+    | _ -> ()) (query c.db "SELECT name, mode FROM sqlar" []);
+  t
+
+(* One transaction that changes the member set, bumping the epoch so that
+   Unison sees the container changed outside it. *)
+let change ?(write_lock = fun f -> f ()) c f =
+  write_lock (fun () ->
+    exec c.db "BEGIN IMMEDIATE";
+    (try
+       f ();
+       run c.db "UPDATE unison_container SET value = CAST(value AS INTEGER) + 1 WHERE key = 'epoch'" [];
+       exec c.db "COMMIT"
+     with e -> ignore (Sqlite3.exec c.db "ROLLBACK"); raise e))
+
+(* Delete members, bytes and all (rm). *)
+let remove ?write_lock c names =
+  change ?write_lock c (fun () ->
+    List.iter (fun n ->
+      run c.db "DELETE FROM unison_member WHERE name = ?" [text n];
+      run c.db "DELETE FROM sqlar WHERE name = ?" [text n]) names)
+
+(* Rename a member within its container (mv); refuses an existing target. *)
+let rename ?write_lock c ~src ~dst =
+  if String.contains dst '/' then failwith ("member name with a slash: " ^ dst);
+  change ?write_lock c (fun () ->
+    if query c.db "SELECT 1 FROM sqlar WHERE name = ?" [text dst] <> [] then failwith (dst ^ " exists");
+    run c.db "UPDATE sqlar SET name = ? WHERE name = ?" [text dst; text src];
+    run c.db "UPDATE unison_member SET name = ? WHERE name = ?" [text dst; text src])
