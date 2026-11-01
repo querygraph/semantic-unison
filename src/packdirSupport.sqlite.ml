@@ -234,6 +234,16 @@ type locker = { lock : 'a. (unit -> 'a) -> 'a }
 
 let pack_job ~(write_lock : locker) fspathTo (rel, files) =
   let p = abs fspathTo (Path.fromString rel) in
+  (* packmax: refuse, before anything is written, a container that would grow
+     past it (0: no limit). Space freed by replaced members is not counted. *)
+  let limit = Prefs.read PackdirConfig.max_gib in
+  if limit > 0 then begin
+    let existing = match container_stat p with Some s -> s.N.size | None -> 0L in
+    let adding = List.fold_left (fun t (_, source, _) -> Int64.add t (N.stat source).N.size) 0L files in
+    let total = Int64.add existing adding in
+    if total > Int64.mul (Int64.of_int limit) 1073741824L then
+      failwith (Printf.sprintf "would grow to %.1f GiB, past packmax = %d" (Int64.to_float total /. 1073741824.) limit)
+  end;
   N.mkdir_p (Filename.dirname p);
   let c = write_lock.lock (fun () -> Packdir.open_ (p ^ ".sqlar")) in
   Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->

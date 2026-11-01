@@ -124,4 +124,15 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-write-') as td:
     rc, out = unison()
     check('Packing' not in out, 'then quiet: the member wins over the plain original:\n' + out)
 
+    # 6. packmax: a container that would pass the limit is refused before anything is written.
+    big = quasar / 'b/0b00'; big.mkdir(parents=True)
+    with open(big / 'huge_4320', 'wb') as f:
+        f.truncate(1200 * 1024 * 1024)                          # sparse: quick to write, read and hash
+    (quasar / 'c/0c00').mkdir(parents=True); (quasar / 'c/0c00/small_320').write_bytes(b'still packed')
+    rc, out = unison('-packmax', '1')
+    check('past packmax = 1' in out and not (ten / 'b/0b00.sqlar').exists(), 'the oversized leaf is refused, unwritten:\n' + out[-900:])
+    check((ten / 'c/0c00.sqlar').is_file(), 'the other leaves go on:\n' + out[-900:])
+    rc, out = unison('-packmax', '0')
+    check(rc in (0, 1) and (ten / 'b/0b00.sqlar').is_file(), 'packmax = 0 is no limit:\n' + out[-900:])
+
 print('PASS%d packdir write controls' % checks)

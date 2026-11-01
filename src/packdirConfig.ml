@@ -34,8 +34,9 @@ let barrier_gib =
 let max_gib =
   Prefs.createInt "packmax" 4 ~local:true
     ~category:(`Advanced `General)
-    "largest container, in GiB; a container that would grow past it is refused"
-    "Guards against a pattern that packs far more than intended."
+    "largest container, in GiB; a container that would grow past it is refused (0: no limit)"
+    "A guard against a directory far larger than intended: its files are not \
+     written, the item fails with a message, and the other containers go on."
 
 let workers =
   Prefs.createInt "packworkers" 4 ~local:true
