@@ -290,6 +290,11 @@ let run_in_child fspathTo job =
   match Unix.fork () with
   | 0 ->
       Unix.close rd;
+      (* The child inherits Unison's whole heap, gigabytes on a large root, and
+         would spend most of its time marking it while it allocates file
+         contents. It lives for one job and its memory goes with it, so it
+         needs no collector to speak of (measured 2026-11-01). *)
+      Gc.set { (Gc.get ()) with Gc.space_overhead = 1000000 };
       let r = try Ok (pack_job ~write_lock:{ lock = with_lock } fspathTo job)
         with Failure e | Sys_error e -> Error e
            | Unix.Unix_error (e, f, a) -> Error (Printf.sprintf "%s: %s %s" f (Unix.error_message e) a) in

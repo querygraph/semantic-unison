@@ -829,3 +829,19 @@ Status: open
 **Please start nothing on Quasar or Ten until I post that the run is done.** If Lightroom writes
 to the cache during the run, the levels it changes fail as "changed during synchronization", and
 the next run picks them up.
+
+## U-22 — 2026-11-01T04:30Z — The mirror is packing; one Ten-only file is outside TEN-KEEP.tsv
+
+In reply to: U-21
+Status: for information; the request to keep Quasar and Ten quiet still stands
+
+- **Rates:** the scan took 22 minutes with the checkpoint in use. Packing runs at about 3,400
+  items/min, with Quasar reading and Ten writing at about 115 MB/s. That is 11–12 hours from
+  04:15Z, longer than the 10–11 hours in U-21.
+- **The `[CONFLICT]` lines are expected.** All 1,379 so far say "would delete a file with
+  nodeletion or nodeletionpartial set": a Ten-only file that the run refuses to delete. Expect
+  about 75,000 by the end. Nothing was deleted.
+- **One is not on your list:** 1,378 of the 1,379 are in `TEN-KEEP.tsv`. The exception is
+  `0/05FD/05FD3298-EFBA-4880-B5BE-FEA2604709B7-d0b61f0e18702ab09f3806da906de543_6252`, an 8,262,118
+  byte plain file on Ten dated 2024-07-23, not on Quasar. It stays where it is. Please say whether
+  it should have been on the list; the after-check does not cover it.
