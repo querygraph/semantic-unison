@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" width="1000" height="620" role="img" aria-labelledby="t d" font-family="Helvetica, Arial, sans-serif" fill="#172c35">
+  <title id="t">The writer and its barriers</title>
+  <desc id="d">Worker processes read and hash the plain side in parallel. Only SQLite transactions take the one writer lock. Each transaction is synced with fsync. An F_FULLFSYNC barrier runs every packbarrier GiB. Before Unison commits its archives, every queue is flushed, a final barrier runs and the state is saved; after the commit the pending list is cleared.</desc>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#3b5563"/></marker></defs>
+  <rect width="1000" height="620" fill="#ffffff"/>
+  <text x="20" y="32" font-size="18" font-weight="700" fill="#153e51">One container job, repeated</text>
+  <rect x="20" y="48" width="150" height="172" rx="4" fill="#eaf1f4" stroke="#7fa6b7" stroke-width="1.5"/>
+  <text x="95" y="124" font-size="17" font-weight="700" text-anchor="middle">Plain root</text>
+  <text x="95" y="148" font-size="15" text-anchor="middle">the source,</text><text x="95" y="170" font-size="15" text-anchor="middle">read only</text>
+  <g fill="#e7f3ec" stroke="#6ea58a" stroke-width="1.5">
+    <rect x="214" y="48" width="190" height="50" rx="4"/><rect x="214" y="108" width="190" height="50" rx="4"/><rect x="214" y="168" width="190" height="50" rx="4"/>
+  </g>
+  <g font-size="15.5" text-anchor="middle">
+    <text x="309" y="78">worker: read, hash</text><text x="309" y="138">worker: read, hash</text><text x="309" y="198">worker: read, hash</text>
+  </g>
+  <text x="309" y="240" font-size="15" text-anchor="middle" fill="#3b5563">packworkers (default 4) forked jobs</text>
+  <rect x="456" y="88" width="120" height="90" rx="4" fill="#f9e9e7" stroke="#c07a70" stroke-width="1.5"/>
+  <text x="516" y="124" font-size="16" font-weight="700" text-anchor="middle">writer</text><text x="516" y="148" font-size="16" font-weight="700" text-anchor="middle">lock</text>
+  <text x="516" y="240" font-size="15" text-anchor="middle" fill="#3b5563">one at a time</text>
+  <rect x="628" y="48" width="170" height="172" rx="4" fill="#f6f0e2" stroke="#c0a15a" stroke-width="1.5"/>
+  <text x="713" y="82" font-size="16" font-weight="700" text-anchor="middle">SQLite transaction</text>
+  <g font-size="15" text-anchor="middle"><text x="713" y="110">insert blobs and</text><text x="713" y="132">member rows,</text><text x="713" y="154">bump epoch, COMMIT</text><text x="713" y="176">in D.sqlar</text><text x="713" y="202" font-weight="700">fsync</text></g>
+  <rect x="834" y="88" width="146" height="90" rx="4" fill="#efeaf4" stroke="#9483ad" stroke-width="1.5"/>
+  <text x="907" y="116" font-size="15.5" font-weight="700" text-anchor="middle">State, this run</text>
+  <text x="907" y="140" font-size="14.5" text-anchor="middle">stamp, members,</text><text x="907" y="160" font-size="14.5" text-anchor="middle">MD5 re-checked</text>
+  <g fill="none" stroke="#3b5563" stroke-width="1.8">
+    <path d="M170 73 H212" marker-end="url(#a)"/><path d="M170 133 H212" marker-end="url(#a)"/><path d="M170 193 H212" marker-end="url(#a)"/>
+    <path d="M404 73 Q432 73 454 110" marker-end="url(#a)"/><path d="M404 133 H454" marker-end="url(#a)"/><path d="M404 193 Q432 193 454 156" marker-end="url(#a)"/>
+    <path d="M576 133 H626" marker-end="url(#a)"/><path d="M798 133 H832" marker-end="url(#a)"/>
+  </g>
+
+  <text x="20" y="292" font-size="18" font-weight="700" fill="#153e51">One run, along time</text>
+  <line x1="40" y1="372" x2="960" y2="372" stroke="#3b5563" stroke-width="2" marker-end="url(#a)"/>
+  <g stroke="#075b82" stroke-width="3">
+    <line x1="290" y1="352" x2="290" y2="392"/><line x1="500" y1="352" x2="500" y2="392"/><line x1="680" y1="352" x2="680" y2="392"/>
+  </g>
+  <g font-size="14.5" fill="#075b82" text-anchor="middle">
+    <text x="290" y="344">barrier</text><text x="500" y="344">barrier</text><text x="680" y="344" font-weight="700">final barrier</text>
+  </g>
+  <g font-size="14.5" text-anchor="middle" fill="#3b5563">
+    <text x="165" y="360">transactions</text><text x="395" y="360">transactions</text><text x="590" y="360">queues flushed</text>
+  </g>
+  <rect x="706" y="350" width="120" height="44" rx="4" fill="#efeaf4" stroke="#9483ad"/>
+  <text x="766" y="370" font-size="14.5" text-anchor="middle">state saved,</text><text x="766" y="387" font-size="14.5" text-anchor="middle">Unison archives</text>
+  <rect x="842" y="350" width="104" height="44" rx="4" fill="#e7f3ec" stroke="#6ea58a"/>
+  <text x="894" y="378" font-size="14.5" text-anchor="middle">list cleared</text>
+  <rect x="60" y="414" width="782" height="24" rx="3" fill="#f6f0e2" stroke="#c0a15a"/>
+  <text x="451" y="431" font-size="14.5" text-anchor="middle">each container is on the pending list, fsynced, from before its first write until after the commit</text>
+
+  <text x="20" y="478" font-size="18" font-weight="700" fill="#153e51">If it stops</text>
+  <g font-size="15.5">
+    <text x="20" y="508">Inside a transaction: SQLite rolls the container back.</text>
+    <text x="20" y="534">After COMMIT, before the archives: the container is pending, so the next run verifies it and only records it.</text>
+    <text x="20" y="560">Container damaged: set aside as D.sqlar.damaged-TIME, never deleted, and the leaf is copied again.</text>
+    <text x="20" y="586">Worker died: its item fails, and its container stays on the list for the next run.</text>
+  </g>
+</svg>

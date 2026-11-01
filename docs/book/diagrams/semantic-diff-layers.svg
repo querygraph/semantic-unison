@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="1000" height="560" role="img" aria-labelledby="t d" font-family="Helvetica, Arial, sans-serif" fill="#172c35">
+  <title id="t">The layers of a semantic diff</title>
+  <desc id="d">Four layers of a photograph file, each compared on its own: whole file by SHA-256, raw image by SHA-256 over its encoded data, previews as a set, metadata as a list of tag differences. Rendered pixels are not compared.</desc>
+  <rect width="1000" height="560" fill="#ffffff"/>
+  <g font-size="17" font-weight="700" fill="#153e51">
+    <text x="24" y="34">Layer</text><text x="232" y="34">What it covers</text><text x="600" y="34">How it is compared</text><text x="836" y="34">Answer</text>
+  </g>
+  <line x1="24" y1="46" x2="976" y2="46" stroke="#7fa6b7" stroke-width="1.5"/>
+
+  <rect x="24" y="60" width="952" height="82" rx="4" fill="#eaf1f4" stroke="#7fa6b7"/>
+  <text x="40" y="107" font-size="19" font-weight="700">Whole file</text>
+  <text x="232" y="94" font-size="16">Every byte: image, metadata, previews,</text>
+  <text x="232" y="118" font-size="16">padding, private and unknown data</text>
+  <text x="600" y="107" font-size="16">SHA-256 of the file</text>
+  <text x="836" y="107" font-size="16" font-weight="700">identical</text>
+
+  <rect x="24" y="152" width="952" height="94" rx="4" fill="#e7f3ec" stroke="#6ea58a"/>
+  <text x="40" y="205" font-size="19" font-weight="700">Raw image</text>
+  <text x="232" y="184" font-size="16">DNG: strips or tiles of the largest image</text>
+  <text x="232" y="206" font-size="16">JPEG: every segment except APPn and COM,</text>
+  <text x="232" y="228" font-size="16">through the first EOI</text>
+  <text x="600" y="197" font-size="16">SHA-256 of the encoded</text>
+  <text x="600" y="219" font-size="16">bytes, nothing decoded</text>
+  <text x="836" y="197" font-size="16" font-weight="700">same, or</text>
+  <text x="836" y="219" font-size="16" font-weight="700">image-differs</text>
+
+  <rect x="24" y="256" width="952" height="82" rx="4" fill="#f6f0e2" stroke="#c0a15a"/>
+  <text x="40" y="303" font-size="19" font-weight="700">Previews</text>
+  <text x="232" y="290" font-size="16">DNG: the other image directories</text>
+  <text x="232" y="314" font-size="16">JPEG: bytes after the EOI, such as MPF images</text>
+  <text x="600" y="303" font-size="16">SHA-256, compared as a set</text>
+  <text x="836" y="303" font-size="16">same or differs</text>
+
+  <rect x="24" y="348" width="952" height="94" rx="4" fill="#efeaf4" stroke="#9483ad"/>
+  <text x="40" y="401" font-size="19" font-weight="700">Metadata</text>
+  <text x="232" y="381" font-size="16">Tags from EXIF, XMP, IPTC and others, as</text>
+  <text x="232" y="403" font-size="16">dng-compare's exiftool-rs worker names them</text>
+  <text x="232" y="425" font-size="16">and stores them</text>
+  <text x="600" y="393" font-size="16">Tag by tag, under the rules</text>
+  <text x="600" y="415" font-size="16">in metadata_rules.json</text>
+  <text x="836" y="393" font-size="16" font-weight="700">metadata-only,</text>
+  <text x="836" y="415" font-size="16">same view or not</text>
+
+  <rect x="24" y="456" width="952" height="82" rx="4" fill="#ffffff" stroke="#8a97a0" stroke-dasharray="7 5"/>
+  <text x="40" y="503" font-size="19" font-weight="700" fill="#5a6a74">Rendered view</text>
+  <text x="232" y="490" font-size="16" fill="#5a6a74">What an editor would show after crop, profiles</text>
+  <text x="232" y="514" font-size="16" fill="#5a6a74">and develop settings</text>
+  <text x="600" y="503" font-size="16" fill="#5a6a74">Not compared. Same view is</text>
+  <text x="600" y="525" font-size="16" fill="#5a6a74">a metadata rule, not a render.</text>
+</svg>

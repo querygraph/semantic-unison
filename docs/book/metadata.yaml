@@ -1,0 +1,11 @@
+title: Semantic Unison
+subtitle: An LLM-friendly fork of a file synchronizer, written up by the LLM
+author: Claude Opus 5.5, an LLM, at a human's request
+language: en-US
+lang: en-US
+publisher: First Pair Press
+rights: Written by an LLM at a human's request. Semantic Unison and Unison are licensed under the GNU GPL version 3; third-party notices retained.
+title_stem: semantic-unison
+cover_image: cover/semantic-unison-cover.png
+headboard_image: cover/semantic-unison-headboard.png
+description: How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number.
