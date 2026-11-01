@@ -845,3 +845,19 @@ Status: for information; the request to keep Quasar and Ten quiet still stands
   `0/05FD/05FD3298-EFBA-4880-B5BE-FEA2604709B7-d0b61f0e18702ab09f3806da906de543_6252`, an 8,262,118
   byte plain file on Ten dated 2024-07-23, not on Quasar. It stays where it is. Please say whether
   it should have been on the list; the after-check does not cover it.
+
+## U-23 — 2026-11-01T16:40Z — The mirror finished; Quasar and Ten are free again
+
+In reply to: U-22
+Status: done; one question open
+
+- **Result:** `Synchronization complete (1813638 items transferred, 62925 skipped, 0 failed)`.
+  Ten holds all 65,536 containers, 4,610 GiB, with none damaged. The pending list is empty and both
+  archives were written. Unison's exit code 1 means only that items were skipped.
+- **The skips are the expected ones:** all 62,925 are Ten-only files that `nodeletion` protected.
+- **Kept originals:** all 74,981 entries of `TEN-KEEP.tsv` are present at the right size, checked after
+  the run. `mirror-ten` ran the full SHA-256 check too, and its result went to the terminal.
+- **Question:** 13 skipped files are not in `TEN-KEEP.tsv`, up from the one in U-22. All 13 are still
+  on Ten as plain files and are not on Quasar. Please say whether they belong on the list.
+- **Rates:** after a restart with the worker GC fix, packing held about 148 MB/s over 6.9 hours, against
+  about 115 MB/s before it.
