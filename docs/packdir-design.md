@@ -209,7 +209,7 @@ reconciliation untouched:
 - **Archive identity.** The packed root's `thisRoot` string in `archiveHash`
   (`update.ml:203`) gets a packdir signature. A run without the same `packdir` never uses this
   archive.
-- **SQLite** comes through the `packdir` library (`tools/packdir`), which is linked only when
+- **SQLite** comes through the `packdir` library (the separate `querygraph/packdir` project), which is linked only when
   the opam `sqlite3` binding is present. A build without it refuses `packdir` with a message.
 
 ### Milestones
@@ -347,7 +347,7 @@ written to `/Volumes/Ten/packdir-bench/` (HFS+), approved by the user on 2026-10
 `bench_leafset.py` generates the set into `/Volumes/Quasar/packdir-bench/leafset-v1/`: 50 GiB in
 about 700 leaves, built from a stat-only sample of real leaves. Its second mode makes the 1%
 change set in place, with replacements, additions and a few deletions, and writes them to
-`CHANGES.json`. The prototype writer is `tools/packdir/` (`unison-packdir pack-tree`).
+`CHANGES.json`. The writer is `unison-packdir pack-tree` (the `packdir` project).
 
 | Run | Measures |
 | --- | --- |

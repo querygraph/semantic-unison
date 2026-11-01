@@ -62,7 +62,7 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-recover-') as td:
 
     # 2. A crash inside a transaction: rolled back, pending, verified and redone by the next run.
     make_leaf('a/0a01'); make_leaf('0/0000', 2)
-    rc, out = unison(env_extra={'UNISON_PACKDIR_CRASH_AFTER': '1'})
+    rc, out = unison(env_extra={'PACKDIR_CRASH_AFTER': '1'})
     # In one process the hook ends Unison (3); in a worker it ends the worker, and the item fails (2).
     check(rc in (2, 3), 'the crash hook stops a transaction (rc %d):\n%s' % (rc, out))
     check(pending() != [], 'the interrupted container is pending')

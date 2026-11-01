@@ -59,7 +59,7 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-parallel-') as td:
     print('timing: 1 worker %.2f s, 4 workers %.2f s (synthetic, internal disk)' % (s1, s4))
 
     # A worker crash: its item fails, the other workers' containers stay, the next run converges.
-    rc, out, _ = run(t / 'tenc', t / 'uc', 4, {'UNISON_PACKDIR_CRASH_AFTER': '3'})
+    rc, out, _ = run(t / 'tenc', t / 'uc', 4, {'PACKDIR_CRASH_AFTER': '3'})
     check(rc == 2 and 'its worker stopped' in out, 'a crashed worker fails its item (rc %d):\n%s' % (rc, out[-1500:]))
     rc, out, _ = run(t / 'tenc', t / 'uc', 4)
     check(rc == 0, 'the next run completes (rc %d):\n%s' % (rc, out[-1500:]))

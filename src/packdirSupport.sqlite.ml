@@ -1,5 +1,5 @@
-(* Built with the packdir library (tools/packdir, SQLite through the opam
-   sqlite3 binding): packed roots are supported.
+(* Built with the packdir library (querygraph/packdir, SQLite through the
+   opam sqlite3 binding): packed roots are supported.
 
    Update detection on the packed root goes through PackdirHook. A
    container X.sqlar, with no plain X/ beside it, is the directory X; its
@@ -8,7 +8,8 @@
    run, and not at all while its file is as a state file in the Unison
    directory records it. *)
 
-module N = Dng_archive.Native
+module N = Packdir.Native
+module Packdir = Packdir.Container
 
 let available = true
 let debug = Trace.debug "packdir"
