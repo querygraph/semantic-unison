@@ -162,8 +162,8 @@ CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);
 - **Unison's archive records a container only after a barrier covers it.** Before its first
   write, a container is added to a pending list. The list is cleared only after the final
   barrier and the archive update.
-- **After a crash or power loss,** the next run verifies every pending container, and every
-  container whose file doesn't match the archive, with `integrity_check` and every member's
+- **After a crash or power loss,** the next run verifies every container no barrier has covered,
+  and every container whose file doesn't match the archive, with `integrity_check` and every member's
   SHA-256. A damaged one is set aside (`D.sqlar.damaged-<time>`), never deleted, and packed again
   from Quasar.
 - **Measured on Ten, 50 GiB, 4 workers:**
@@ -275,7 +275,10 @@ reference.
 
    *Done (2026-10-31):*
    - **The pending list** is `pd<hash>.pending` in the Unison directory. Each container is listed,
-     and the list fsynced, before its first write in a run.
+     and the list fsynced, before its first write in a run. A finished job adds a `done` line and
+     a barrier adds a `barrier` line, so an entry stops being pending once its job finished before a
+     barrier. Jobs still in flight write through a barrier, so listing alone proves nothing. Before
+     this (2026-11-01), a restart of a large run re-verified everything it had written: 1.2 TiB.
    - **Barriers.** One `F_FULLFSYNC` every `packbarrier` GiB, where 0 means after every container,
      and one more, with the state saved, in `PackdirConfig.before_commit`. `Update.commitUpdates`
      calls that before it writes Unison's archives. `after_commit` clears the list.

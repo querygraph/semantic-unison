@@ -68,6 +68,7 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-recover-') as td:
     check(pending() != [], 'the interrupted container is pending')
     rc, out = unison()
     check(rc == 0 and 'damaged' not in out, 'the next run verifies, finds nothing damaged, and completes (rc %d):\n%s' % (rc, out))
+    check('packdir: verifying' in out, 'the interrupted container is verified, not trusted:\n' + out)
     check(pending() == [] and unpacked('2') == leaves(), 'converged after the crash')
 
     # 3. A crash after the final barrier, before Unison's archives are written: the next run converges.
@@ -76,7 +77,25 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-recover-') as td:
     check(rc == 4 and (ten / 'a/0a02.sqlar').is_file(), 'stopped after the barrier, container written (rc %d):\n%s' % (rc, out))
     rc, out = unison()
     check(rc == 0 and 'Packing a/0a02' not in out, 'the next run finds the container already right:\n' + out)
+    check('packdir: verifying' not in out, 'what a barrier covered is not verified again:\n' + out)
     check(pending() == [] and unpacked('3') == leaves(), 'converged after the uncommitted run')
+
+    # A run cut short: only what no barrier covers is verified again. Other jobs write through
+    # a barrier, so an entry counts as covered only if its job finished before that barrier.
+    def verified_after(*lines):
+        files = list(udir.glob('pd*.pending'))
+        (files[0] if files else udir / (next(udir.glob('pd*')).name.split('.')[0] + '.pending')).write_text(''.join(l + '\n' for l in lines))
+        rc, out = unison()
+        check(rc == 0 and pending() == [], 'run after a pending list (rc %d):\n%s' % (rc, out))
+        return sorted(l.split()[-1] for l in out.splitlines() if 'packdir: verifying' in l)
+    D, B = '\tdone ', '\tbarrier'
+    check(verified_after('0/0000', D + '0/0000', B) == [], 'finished, then a barrier: trusted')
+    check(verified_after('0/0000', D + '0/0000') == ['0/0000'], 'finished, no barrier yet: verified')
+    check(verified_after('0/0000') == ['0/0000'], 'an old list, or a job that never finished: verified')
+    check(verified_after('0/0001', '0/0000', D + '0/0000', B) == ['0/0001'], 'in flight across a barrier: verified')
+    check(verified_after('0/0000', D + '0/0000', B, '0/0000') == ['0/0000'], 'written again after the barrier: verified')
+    check(verified_after('0/0000', D + '0/0000', '0/0000', B) == ['0/0000'], 'listed again before the barrier: verified')
+    check(verified_after('0/0000', D + '0/0000', B, '0/0001', D + '0/0001', B) == [], 'each covered by its own barrier')
 
     # 4. A damaged container: found by the next run, set aside, and the leaf brought back from Quasar.
     victim = ten / '0/0001.sqlar'

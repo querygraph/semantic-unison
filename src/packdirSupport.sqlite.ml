@@ -55,10 +55,19 @@ let save_state () =
 (* Durability (docs/packdir-design.md, "Durability"). Containers written in a
    run are listed in a pending file before their first write; drive-cache
    barriers run every packbarrier GiB and before Unison's archives are
-   committed; the list is cleared after the commit. A container listed as
-   pending by an earlier run, or whose file no longer matches the state, may
-   not have reached the platter whole: it is verified before use, and set
-   aside when damaged, so the leaf reads as missing and is brought back. *)
+   committed; the list is cleared after the commit. A finished job adds a
+   done line and a barrier adds a barrier line, so that a run cut short need
+   not distrust what it already flushed: only a container whose job finished
+   before a barrier is covered by it, since other jobs write through a
+   barrier. A container still pending from an earlier run, or whose file no
+   longer matches the state, may not have reached the platter whole: it is
+   verified before use, and set aside when damaged, so the leaf reads as
+   missing and is brought back. The list is one line per event:
+     <rel>             about to write
+     <tab>done <rel>   its job finished
+     <tab>barrier      everything done so far is on the platter
+   Losing a done or barrier line only costs a verification, so they are not
+   synced; a <rel> line must be there before the write. *)
 let pending_path () = !state_path ^ ".pending"
 let suspects : (string, unit) Hashtbl.t = Hashtbl.create 64
 let pending_this_run : (string, unit) Hashtbl.t = Hashtbl.create 1024
@@ -66,21 +75,48 @@ let failed_this_run : (string, unit) Hashtbl.t = Hashtbl.create 64
 let since_barrier = ref 0
 let last_written = ref ""
 
+let listed = ref false
+let done_marker = "\tdone "
+let barrier_marker = "\tbarrier"
+
 let load_pending () =
-  try List.iter (fun l -> if l <> "" then Hashtbl.replace suspects l ())
-        (In_channel.with_open_bin (pending_path ()) In_channel.input_lines)
+  let covered = Hashtbl.create 1024 in
+  try List.iter (fun l ->
+      listed := true;
+      if l = barrier_marker then begin
+        Hashtbl.iter (fun rel () -> Hashtbl.remove suspects rel) covered;
+        Hashtbl.reset covered
+      end else if String.starts_with ~prefix:done_marker l then begin
+        let n = String.length done_marker in
+        Hashtbl.replace covered (String.sub l n (String.length l - n)) ()
+      end else if l <> "" && l.[0] <> '\t' then begin
+        Hashtbl.remove covered l;
+        Hashtbl.replace suspects l ()
+      end)
+      (In_channel.with_open_bin (pending_path ()) In_channel.input_lines)
   with Sys_error _ -> ()
+
+let append_pending line ~sync =
+  Out_channel.with_open_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o600 (pending_path ()) (fun oc ->
+    output_string oc (line ^ "\n"); flush oc;
+    if sync then Unix.fsync (Unix.descr_of_out_channel oc));
+  listed := true
 
 let mark_pending rel =
   if not (Hashtbl.mem pending_this_run rel) then begin
-    Out_channel.with_open_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o600 (pending_path ()) (fun oc ->
-      output_string oc (rel ^ "\n"); flush oc; Unix.fsync (Unix.descr_of_out_channel oc));
+    append_pending rel ~sync:true;
     Hashtbl.replace pending_this_run rel ()
   end
+
+(* A later write to the same container must list it again. *)
+let mark_done rel =
+  append_pending (done_marker ^ rel) ~sync:false;
+  Hashtbl.remove pending_this_run rel
 
 let barrier () =
   if !last_written <> "" then begin
     Packdir.barrier !last_written;
+    append_pending barrier_marker ~sync:false;
     debug (fun () -> Util.msg "packdir: barrier after %d bytes\n" !since_barrier);
     since_barrier := 0
   end
@@ -104,13 +140,14 @@ let before_commit () =
 (* After the commit, only containers whose job failed stay pending: the next
    run verifies them before use. *)
 let after_commit () =
-  if Hashtbl.length pending_this_run > 0 || Hashtbl.length suspects > 0 then begin
+  if !listed then begin
     Out_channel.with_open_bin (pending_path () ^ ".tmp") (fun oc ->
       Hashtbl.iter (fun rel () -> output_string oc (rel ^ "\n")) failed_this_run;
       flush oc; Unix.fsync (Unix.descr_of_out_channel oc));
     Sys.rename (pending_path () ^ ".tmp") (pending_path ());
     Hashtbl.reset pending_this_run; Hashtbl.reset suspects;
-    Hashtbl.iter (fun rel () -> Hashtbl.replace suspects rel ()) failed_this_run
+    Hashtbl.iter (fun rel () -> Hashtbl.replace suspects rel ()) failed_this_run;
+    listed := Hashtbl.length failed_this_run > 0
   end
 
 let set_aside rel p problems =
@@ -141,7 +178,10 @@ let members fspath rel =
           | _ ->
               let c = Packdir.open_ (p ^ ".sqlar") in
               let problems, m = Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
-                (if suspicious then Packdir.verify c else []), Packdir.members c) in
+                (if suspicious then begin
+                   debug (fun () -> Util.msg "packdir: verifying %s\n" rel);
+                   Packdir.verify c
+                 end else []), Packdir.members c) in
               if problems <> [] then (set_aside rel p problems; None)
               else begin
                 Hashtbl.replace state rel (st, m); dirty := true;
@@ -256,6 +296,7 @@ let pack_job ~(write_lock : locker) fspathTo (rel, files) =
    fingerprint update detection took changed during synchronization. *)
 let record fspathTo (rel, files) (bytes, ms) =
   let p = abs fspathTo (Path.fromString rel) in
+  mark_done rel;
   wrote (p ^ ".sqlar") bytes;
   (match container_stat p with
    | Some s -> Hashtbl.replace state rel ((s.N.ino, s.N.size, s.N.mtime_ns), ms); dirty := true
