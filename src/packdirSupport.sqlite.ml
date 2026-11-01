@@ -90,7 +90,11 @@ let wrote path bytes =
   (* packbarrier = 0: a barrier after every container write. *)
   if !since_barrier >= Prefs.read PackdirConfig.barrier_gib * 1073741824 then barrier ()
 
+(* Set by the writer below: finish every queued container. *)
+let finish_writes : (unit -> unit) ref = ref (fun () -> ())
+
 let before_commit () =
+  !finish_writes ();
   barrier ();
   save_state ();
   (* Tests: stop after the barrier, before Unison's archives are written. *)
@@ -371,14 +375,76 @@ let write fspathFrom fspathTo pf pt arch =
   Lwt.bind (run_jobs fspathTo jobs) (fun () ->
     Lwt.return (Util.convertUnixErrorsToTransient "reading back the packed root" (fun () -> archive_of fspathTo pt arch)))
 
-let copy rootFrom pathFrom uiFrom rootTo pathTo =
+(* Unison sends a leaf with a plain directory on the target (kept originals)
+   file by file, and runs only maxthreads items at once. So a member item only
+   joins its container's queue and returns; the queue becomes one job, one
+   transaction, when items move on to another container, or at the commit.
+   The archives are updated when the job succeeds, so a failed file stays
+   unrecorded and is retried by the next run. *)
+type queued = {
+  q_root : Common.root; q_pf : Path.local; q_ui : Common.updateItem; q_pt : Path.local;
+  q_source : string; q_desc : Props.t; q_fp : Os.fullfingerprint; q_id : Uutil.File.t;
+}
+let queues : (string, queued list) Hashtbl.t = Hashtbl.create 64
+let filling = ref ""
+let flushes : unit Lwt.t list ref = ref []
+let not_stored = ref 0
+
+let flush_queue fspathTo rel =
+  match Hashtbl.find_opt queues rel with
+  | None -> ()
+  | Some rev_items ->
+      Hashtbl.remove queues rel;
+      let items = List.rev rev_items in
+      let job = (rel, List.map (fun q -> (name_of q.q_pt, q.q_source, q.q_fp)) items) in
+      let t = Lwt.try_bind (fun () -> run_jobs fspathTo [job])
+        (fun () -> Lwt_util.iter (fun q ->
+           Update.replaceArchiveLocal fspathTo q.q_pt (file_arch fspathTo q.q_pt q.q_desc q.q_fp);
+           Uutil.showProgress q.q_id (Props.length q.q_desc) "pack";
+           Files.updateSourceArchive q.q_root (q.q_pf, q.q_ui, [])) items)
+        (fun e ->
+           not_stored := !not_stored + List.length items;
+           Hashtbl.replace failed_this_run rel ();
+           Util.warn (Printf.sprintf "packed root: %s: %d files not stored, retried next run: %s\n"
+                        rel (List.length items) (Util.printException e));
+           Lwt.return ()) in
+      flushes := t :: !flushes
+
+let rec total_size = function
+  | Update.ArchiveFile (desc, _, _, _) -> Props.length desc
+  | Update.ArchiveDir (_, children) ->
+      Update.NameMap.fold (fun _ c n -> Uutil.Filesize.add n (total_size c)) children Uutil.Filesize.zero
+  | _ -> Uutil.Filesize.zero
+
+let copy rootFrom pathFrom uiFrom rootTo pathTo id =
   let fspathFrom = snd rootFrom and fspathTo = snd rootTo in
   let pf = Update.translatePathLocal fspathFrom pathFrom in
   let pt = Update.translatePathLocal fspathTo pathTo in
   let arch = Update.updateArchive fspathFrom pf uiFrom in
-  Lwt.bind (write fspathFrom fspathTo pf pt arch) (fun arch' ->
-    Update.replaceArchiveLocal fspathTo pt arch';
-    Files.updateSourceArchive rootFrom (pf, uiFrom, []))
+  match arch with
+  | Update.ArchiveFile (desc, fp, _, _) when depth_of pt = !depth + 1 ->
+      let rel = parent_of pt in
+      if !filling <> "" && !filling <> rel then flush_queue fspathTo !filling;
+      filling := rel;
+      let q = { q_root = rootFrom; q_pf = pf; q_ui = uiFrom; q_pt = pt; q_source = abs fspathFrom pf;
+                q_desc = desc; q_fp = fp; q_id = id } in
+      Hashtbl.replace queues rel (q :: Option.value (Hashtbl.find_opt queues rel) ~default:[]);
+      Lwt.return ()
+  | _ ->
+      Lwt.bind (write fspathFrom fspathTo pf pt arch) (fun arch' ->
+        Update.replaceArchiveLocal fspathTo pt arch';
+        Uutil.showProgress id (total_size arch) "pack";
+        Files.updateSourceArchive rootFrom (pf, uiFrom, []))
+
+let () = finish_writes := (fun () ->
+  match !root with
+  | None -> ()
+  | Some fspathTo ->
+      List.iter (flush_queue fspathTo) (Hashtbl.fold (fun rel _ l -> rel :: l) queues []);
+      Lwt_unix.run (Lwt_util.join !flushes);
+      flushes := [];
+      if !not_stored > 0 then
+        Util.warn (Printf.sprintf "packed root: %d files were not stored; run Unison again\n" !not_stored))
 
 (* A deletion on the packed root keeps the bytes: the member is marked
    retained and drops out of Unison's view. A whole container is never

@@ -293,7 +293,7 @@ and doAction
       | {ui = uiFrom} ->
           logLwtNumbered ("Packing " ^ Path.toString toPath ^ "\n  from " ^ root2string fromRoot ^ "\n  to " ^ root2string toRoot)
             ("Packing " ^ Path.toString toPath)
-            (fun () -> PackdirSupport.copy fromRoot fromPath uiFrom toRoot toPath)
+            (fun () -> PackdirSupport.copy fromRoot fromPath uiFrom toRoot toPath id)
     else
     match fromContents, toContents with
         | {status = `MovedOut _ | `MovedIn _}, _

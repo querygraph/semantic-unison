@@ -76,6 +76,14 @@ with tempfile.TemporaryDirectory(prefix='unison-packdir-write-') as td:
     check(not [p for p in ten.rglob('*') if p.is_dir() and p.relative_to(ten).as_posix() in ('0/0000', 'a/0a00', 'a/0a01')],
           'no plain leaf directories created')
 
+    # A leaf with a plain directory on Ten arrives file by file: still one transaction.
+    import sqlite3
+    db = sqlite3.connect(ten / '0/0001.sqlar')
+    epoch = db.execute("SELECT value FROM unison_container WHERE key='epoch'").fetchone()[0]
+    db.close()
+    check(epoch == '1', 'file-by-file items share one transaction: epoch %s' % epoch)
+    check(' 0 B of' not in out.split('Propagating')[-1], 'progress counts bytes:\n' + out[-600:])
+
     # 2. Nothing changed: nothing written.
     before = tree(ten)
     rc, out = unison()
