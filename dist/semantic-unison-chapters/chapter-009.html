@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>Packdir</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-010.html" accesskey="n" rel="next">The writer, barriers and recovery</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-008.html" accesskey="p" rel="previous">A shuttle disk, end to end</a>
+</span>
+</div>
+</nav>
+<h1 data-number="8" id="packdir"><span
+class="header-section-number">8</span> Packdir</h1>
+<h2 data-number="8.1" id="the-problem"><span
+class="header-section-number">8.1</span> The problem</h2>
+<p>Lightroom’s preview cache on Quasar held 3,616,982 files, 4.43 TiB in
+all, about 1.28 MiB each, in a fixed two-level layout:</p>
+<pre class="text"><code>&lt;H&gt;/&lt;HHHH&gt;/&lt;FILE-UUID&gt;-&lt;digest&gt;_&lt;longEdge&gt;</code></pre>
+<p>There are 16 top directories and 4,096 under each, so 65,536 leaf
+directories, averaging about 55 files and 71 MiB. It was to be mirrored
+one way, by Unison, to Ten: a single 20 TB spinning disk that stays
+Journaled HFS+. The user decided against APFS for it, because APFS on a
+spinning disk is slow with millions of small files. So Ten has no file
+clones, and the destination for 3.6 million more files is one mechanical
+arm.</p>
+<p>Three costs of millions of plain files follow. Creating them means
+many small metadata writes. Every run has to stat them. And anything
+else that later walks the disk, to back it up, check it or delete it,
+pays again. The proposal, which came from the Photo session at the
+user’s request, was that one replica could store chosen directories
+packed into container files, while the other stayed a plain tree, with
+Unison still reconciling per member path.</p>
+<h2 data-number="8.2" id="one-.sqlar-per-directory"><span
+class="header-section-number">8.2</span> One <code>.sqlar</code> per
+directory</h2>
+<p>A packed directory <code>D</code> is one file <code>D.sqlar</code>
+beside where <code>D</code> would be, holding <code>D</code>’s files as
+members. For the preview cache, each leaf
+<code>&lt;H&gt;/&lt;HHHH&gt;/</code> becomes
+<code>&lt;H&gt;/&lt;HHHH&gt;.sqlar</code>. Ten then holds 65,536 files
+instead of 3,616,982.</p>
+<p>SQLite’s archive format won the comparison on the criteria that
+mattered: reading one member by B-tree lookup, updating one member in
+place, transactions for crash safety, and restoring with a stock tool.
+macOS’s own <code>sqlite3</code> can extract one with no packdir at
+all:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> D.sqlar <span class="at">-AxC</span> D</span></code></pre></div>
+<p>The unit is the directory, for reasons that are mostly about what it
+avoids. There is no grouping rule to configure and no member name with a
+directory prefix. A single directory restores on its own. A damaged
+container loses about 0.0015% of the mirror. And 71 MiB per transaction
+already streams on a hard disk, so larger containers would buy little
+and make each loss bigger. Photo’s first draft grouped into 4,096
+containers of about 1.6 GiB. The amended design dropped that.</p>
+<p>The same code is available by itself. The <a
+href="https://github.com/querygraph/packdir">packdir project</a> is the
+format, the commands and their tests, and works without Unison. Semantic
+Unison links its library and installs the command beside
+<code>unison</code> under the name <code>unison-packdir</code>.</p>
+<h2 data-number="8.3" id="what-unison-sees"><span
+class="header-section-number">8.3</span> What Unison sees</h2>
+<figure>
+<img src="book/diagrams/packed-tree.svg"
+data-fig-alt="Left panel, the disk: .unison-packed marker, LEAFSET.json, directory 0 with 0000.sqlar, a plain directory 0000 holding kept originals old.lrfprev and b_320, 0001.sqlar, and directory a with 0a00.sqlar. Right panel, what Unison sees: directory 0000 with members a_320, a_1024, b_320 and plain old.lrfprev; the member wins for b_320. Between them PackdirHook with stat, children and fingerprint, active on the packed root only. An unchanged container costs one stat and is not opened. Below, 3,616,982 files and 4.43 TiB become 65,536 containers."
+alt="On the packed root, a container is a directory and its members are files. Plain files beside it are listed with them." />
+<figcaption aria-hidden="true">On the packed root, a container is a
+directory and its members are files. Plain files beside it are listed
+with them.</figcaption>
+</figure>
+<p>A virtual filesystem under Unison’s <code>fs.ml</code> would have
+been fragile, because too much of Unison reaches the disk directly: the
+Finder-info stub, the clone and publication stubs that work on real
+descriptors and inodes, the semantic extensions, and the
+<code>chdir</code>-based working-directory checks. The packed root is
+one-way and only receives, so the design plugs in one level up and
+leaves reconciliation and the plain root’s code alone.</p>
+<p>Three hooks in <code>PackdirHook</code> are installed for the packed
+root only. <code>Fileinfo.getAux</code> and
+<code>Osx.getFileInfos</code> ask <code>stat</code>.
+<code>Os.childrenOf</code> asks <code>children</code>.
+<code>Fingerprint.file</code> asks <code>fingerprint</code>, which
+returns the stored MD5 without reading member data. Every other root,
+and every path a container does not own, uses the real filesystem.</p>
+<p>So Unison’s view of a packed tree is its usual one:</p>
+<ul>
+<li>A container <code>X.sqlar</code> is the directory <code>X</code>,
+and its members are <code>X</code>’s files, with their stored size and
+modification time.</li>
+<li>Plain files beside a container are listed with its members, and a
+member wins for a name in both.</li>
+<li>Members carry <code>NoStamp</code>, so <code>fastcheck</code>
+decides on size and mtime.</li>
+<li>The fingerprint in a member is Unison’s own MD5, with
+<code>fpalg = 'unison-md5/1'</code>, because reconciliation compares it
+with the plain side’s archive entries. <code>sha256</code> is a separate
+proof that the stored bytes are right, the one stock tools can
+check.</li>
+<li>Reports, <code>ignore</code> and dry runs all work on paths like
+<code>0/0000/name</code>.</li>
+</ul>
+<p>Unison’s archive format did not change. <code>archiveFormat</code>
+stays at 23, because bumping it would invalidate every existing archive.
+Containers look like directories and members like files, so no new node
+kind is needed. What keeps this safe is identity: both roots’ archive
+identities carry <code>;packdir=depthN:&lt;packed root&gt;</code>. A run
+without the same setting never picks up these archives. It would see no
+member files and take them all for deletions.</p>
+<p>Container stamps and members persist in <code>pd&lt;hash&gt;</code>
+in the Unison directory. A container whose file has the recorded inode,
+size and mtime is not opened at all. Checking it costs one stat, and
+that turned out to be the decisive design point.</p>
+<h2 data-number="8.4" id="kept-originals-beside-containers"><span
+class="header-section-number">8.4</span> Kept originals beside
+containers</h2>
+<p>The first design assumed an empty target. Then the user decided that
+the originals Photo had preserved would stay in place on Ten, under
+<code>&lt;H&gt;/&lt;HHHH&gt;/</code>, so a plain directory
+<code>D/</code> and its container <code>D.sqlar</code> can sit side by
+side. That was 74,981 files, and the rule became:</p>
+<ul>
+<li>The plain <code>D/</code> is pre-existing content. Packing never
+writes, renames or deletes anything under it.</li>
+<li>A file whose name already exists as a plain file in <code>D/</code>,
+with the same size and SHA-256, is not packed. It is logged as
+<code>present-plain</code>. Photo had found 262 such identical
+files.</li>
+<li>Once its bytes differ, the file is packed and kept updated in
+<code>D.sqlar</code>, logged as <code>packed-beside-plain</code>, while
+the plain original stays. That path then exists twice, and the member is
+the mirror’s copy.</li>
+<li>A deletion of a plain file beside a container fails with a message,
+and <code>nodeletion</code> silences it.</li>
+</ul>
+<p>This decision looked like bookkeeping. It later turned out to set the
+speed of the real mirror, as the benchmark chapter explains.</p>
+<h2 data-number="8.5" id="a-worked-run-1"><span
+class="header-section-number">8.5</span> A worked run</h2>
+<p>This is a small synthetic tree of three leaves with four random files
+each, plus one file above the packed depth. The command is
+<code>unison-packdir</code> from this repository’s build.</p>
+<pre class="text"><code>$ unison-packdir pack-tree quasar out --depth 2 --workers 2 --barrier-gib 1
+{&quot;barriers&quot;: 2, &quot;containers&quot;: 3, &quot;opened&quot;: 3, &quot;stored&quot;: 12, &quot;retained&quot;: 0, &quot;bytes&quot;: 258553, ...}
+
+$ find out -type f | sort
+out/.packdir-pending
+out/.packdir-state
+out/.packdir-writer.lock
+out/0/0000.sqlar
+out/0/0001.sqlar
+out/a/0a00.sqlar
+
+$ unison-packdir ls -gh out/0/0000
+total 112K
+-rw-r--r-- 1 staff 13K Oct 31 20:04 26a1a7ce_1024
+-rw-r--r-- 1 staff 28K Oct 31 20:04 52e6b438_320
+-rw-r--r-- 1 staff 12K Oct 31 20:04 b46f952e_2048
+-rw-r--r-- 1 staff 56K Oct 31 20:04 f9bc5df1_2048
+
+$ unison-packdir verify out/0/0000.sqlar
+out/0/0000.sqlar: ok, 4 members
+
+$ cd restored &amp;&amp; sqlite3 ../out/0/0000.sqlar -AxC . &amp;&amp; ls -C
+26a1a7ce_1024   52e6b438_320    b46f952e_2048   f9bc5df1_2048</code></pre>
+<p>The same tree mirrored by Unison itself, into a packed root called
+<code>ten</code>:</p>
+<pre class="text"><code>$ unison quasar ten -batch -force quasar -nodeletion ten -perms 0 -times \
+    -clone off -packdepth 2 -packroot ten -packworkers 2 -packbarrier 1
+...
+Synchronization complete  (3 items transferred, 0 skipped, 0 failed)
+
+$ find ten | sort
+ten
+ten/.unison-packed
+ten/0
+ten/0/0000.sqlar
+ten/0/0001.sqlar
+ten/README.txt
+ten/a
+ten/a/0a00.sqlar
+
+$ cat ten/.unison-packed
+unison-packdir/1 depth=2</code></pre>
+<p><code>README.txt</code> is above the packed depth, so it stayed a
+plain file. A second run printed “Nothing to do”. Runs that break the
+rules are refused, each with one line:</p>
+<pre class="text"><code>$ unison quasar ten -batch -force quasar -nodeletion ten -perms 0
+Error: ten is packed (packdepth = 2, see its .unison-packed). Run with
+packdepth = 2 and packroot = ten, or turn it back into plain files first
+with unison-packdir unpack-tree.
+
+$ unison quasar ten -batch -packdepth 2 -packroot ten -perms 0
+Error: packroot only receives: set force = quasar
+
+$ unison quasar ten -batch -force quasar -packdepth 2 -packroot ten
+Error: packed roots compare no permissions: set perms = 0</code></pre>
+<h2 data-number="8.6" id="a-profile-for-a-real-mirror"><span
+class="header-section-number">8.6</span> A profile for a real
+mirror</h2>
+<p>A packed root’s settings fit in a profile. The mailbox lists the
+settings of the real mirror, and with generic paths they come to
+this:</p>
+<pre class="text"><code>root = /Volumes/Quasar/previews
+root = /Volumes/Ten/previews
+force = /Volumes/Quasar/previews
+nodeletion = /Volumes/Ten/previews
+perms = 0
+times = true
+clone = off
+packdepth = 2
+packroot = /Volumes/Ten/previews
+packworkers = 4
+packbarrier = 4</code></pre>
+<h2 data-number="8.7" id="the-marker"><span
+class="header-section-number">8.7</span> The marker</h2>
+<p>The packed root carries <code>.unison-packed</code>, containing
+<code>unison-packdir/1 depth=N</code>. Detection hides it. Before setup,
+every run checks every local root’s marker, and refuses another depth,
+another packed root, or no <code>packdepth</code>, pointing at
+<code>unison-packdir unpack-tree</code>. Nothing is written and no
+archive is created. An existing marker is never rewritten with another
+depth.</p>
+<p>Without the marker, a run with the wrong settings would read the
+containers as foreign files and copy everything again beside them.</p>
+<h2 data-number="8.8" id="unpacking-and-repacking"><span
+class="header-section-number">8.8</span> Unpacking and repacking</h2>
+<p>Packing is reversible, and the way back is tested.</p>
+<ul>
+<li><strong><code>unpack-tree OUT DEST</code></strong> turns every
+container into a plain tree under <code>DEST</code>, with exact bytes,
+modes and nanosecond mtimes. It never overwrites a file.
+<code>--skip-retained</code> leaves out retained deletions.</li>
+<li><strong><code>repack C.sqlar...</code></strong> rebuilds containers
+compactly, with <code>--drop-retained</code> to discard retained
+members. The new file is verified and flushed to the platter before it
+replaces the old one. A leftover <code>.repack</code> from an
+interrupted run is refused.</li>
+<li><strong><code>pack-tree</code></strong> packs a plain tree
+again.</li>
+</ul>
+<p>The full way back to a plain mirror is <code>unpack-tree</code>, then
+replacing the containers and marker with the plain tree. A control in
+<code>tests/packdir/unison_marker.py</code> does exactly that and checks
+that a plain run then has nothing to do.</p>
+<h2 data-number="8.9" id="the-format"><span
+class="header-section-number">8.9</span> The format</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> sqlar(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="kw">mode</span> <span class="dt">INT</span>, mtime <span class="dt">INT</span>, sz <span class="dt">INT</span>, <span class="kw">data</span> <span class="dt">BLOB</span>);</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_member(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">REFERENCES</span> sqlar(name),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  mtime_ns <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fp <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fpalg TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, sha256 <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  retained_deleted <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>);</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_container(<span class="kw">key</span> TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="fu">value</span> TEXT);  <span class="co">-- format, epoch</span></span></code></pre></div>
+<p><code>sqlar</code> is SQLite’s standard table, so stock tools work.
+The other two are additions. On the synthetic container above,
+<code>unison_container</code> held
+<code>format = unison-packdir/1</code> and <code>epoch = 1</code>.</p>
+<ul>
+<li><strong>Pragmas.</strong> <code>page_size = 65536</code>,
+<code>auto_vacuum = INCREMENTAL</code>,
+<code>journal_mode = DELETE</code>,
+<code>synchronous = FULL</code>.</li>
+<li><strong>Blobs</strong> are stored raw, never compressed, so
+<code>sz = length(data)</code>. <code>sha256</code> holds lower-case hex
+text, and <code>fp</code> the raw MD5.</li>
+<li><strong>Names</strong> are plain file names. Containers are per
+directory, so no member name has a slash.</li>
+<li><strong>Time.</strong> <code>mtime_ns</code> keeps nanoseconds, more
+than Ten holds for plain files, since HFS+ stores whole seconds.
+<code>sqlite3 -AxC</code> restores mtimes to the second, and packdir’s
+own restore is exact.</li>
+<li><strong>Retained deletions.</strong> A deletion on the plain side,
+when <code>nodeletion</code> is not set, marks the member
+<code>retained_deleted = 1</code>. The bytes stay, and the member drops
+out of Unison’s view.</li>
+</ul>
+<p>The journal choice has a history. WAL writes every page twice and
+leaves <code>-wal</code> and <code>-shm</code> files. A rollback journal
+saves only the old contents of pages it changes, and new blobs are
+written once. <code>TRUNCATE</code>, the first choice, turned out to
+leave an empty <code>D.sqlar-journal</code> beside every container,
+which would have doubled the file count on Ten to 131,072.
+<code>DELETE</code> leaves each container as a single file between
+runs.</p>
+<p>An update is cheap. On a 55-file, 70 MiB container on the internal
+SSD, updating one 1.7 MiB member wrote 36 pages of 64 KiB, 2.2 MiB in
+all, and the container grew by 0.1 MiB and stayed there over ten
+repeated updates, because freed pages are reused.</p>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>Semantic diff</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-008.html" accesskey="n" rel="next">A shuttle disk, end to end</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-006.html" accesskey="p" rel="previous">I am an honest working LLM</a>
+</span>
+</div>
+</nav>
+<h1 data-number="6" id="semantic-diff"><span
+class="header-section-number">6</span> Semantic diff</h1>
+<h2 data-number="6.1" id="the-question"><span
+class="header-section-number">6.1</span> The question</h2>
+<p>A shuttle disk is filled with photo sessions, copied to a long-term
+disk, and wiped so it can go out again. Before the wipe, one question
+matters: is everything on this shuttle kept on the long-term disk?</p>
+<p>A byte comparison gives a poor answer. The long-term copy has usually
+been edited since it arrived. Lightroom wrote a rating into it, or moved
+a preview. Its bytes differ from the shuttle’s, yet nothing was lost.
+Comparing only filenames and sizes errs the other way, because a file of
+the right name can hold something else, and a metadata edit often leaves
+the size unchanged.</p>
+<p>A semantic diff compares the parts of a file separately, and reports
+what differs in terms a person can act on. <code>unison -semdiff</code>
+runs one for every file on the shuttle.</p>
+<h2 data-number="6.2" id="the-layers"><span
+class="header-section-number">6.2</span> The layers</h2>
+<figure>
+<img src="book/diagrams/semantic-diff-layers.svg"
+data-fig-alt="Table-like diagram of five layers. Whole file: every byte, compared by SHA-256, answer identical. Raw image: DNG strips or tiles of the largest image, JPEG every segment except APPn and COM through the first EOI, compared by SHA-256 of encoded bytes, answer same or image-differs. Previews: other image directories or bytes after EOI, SHA-256 as a set. Metadata: tags from exiftool-rs, compared tag by tag under metadata_rules.json, answer metadata-only and same view or not. Rendered view: not compared."
+alt="A file is compared layer by layer. Each layer has its own comparison, and rendered pixels are not compared at all." />
+<figcaption aria-hidden="true">A file is compared layer by layer. Each
+layer has its own comparison, and rendered pixels are not compared at
+all.</figcaption>
+</figure>
+<p><strong>Whole file.</strong> Pairs of equal size are hashed with
+SHA-256 first. If the hashes match, the pair is identical and there is
+nothing more to learn.</p>
+<p><strong>Raw image.</strong> For a DNG, the comparison hashes the
+encoded bytes of the largest image directory’s strips or tiles. For a
+JPEG, it hashes every segment except APPn and COM metadata, through the
+first EOI marker. In both cases this is a comparison of stored bytes,
+not of decoded pixels. Two copies that hold the same samples in
+different encodings count as different here. That is a conservative
+error.</p>
+<p><strong>Previews.</strong> For a DNG, the other image directories are
+compared as a set, so reordering them is not a difference. For a JPEG,
+bytes after the EOI, such as MPF images, count as previews.</p>
+<p><strong>Metadata.</strong> Differences come from dng-compare’s
+exiftool-rs worker, so tag names and values are the same ones
+dng-compare stores. Tag handling follows the rules in dng-compare’s
+<code>metadata_rules.json</code>, shared by both tools.</p>
+<p><strong>Rendered view.</strong> Nothing here renders an image.
+Whether two files look the same after crop, profile and develop settings
+is outside what this tool establishes, and the wording of its output
+keeps to that.</p>
+<h2 data-number="6.3" id="pair-statuses"><span
+class="header-section-number">6.3</span> Pair statuses</h2>
+<p>Every file on the shuttle gets a status against each long-term root.
+The status comes from the decision tree below, which follows
+<code>compare_pair</code> and the matching code in
+<code>src/semdiff.ml</code>.</p>
+<figure>
+<img src="book/diagrams/pair-status-tree.svg"
+data-fig-alt="Decision tree. If the root is not mounted the status is unavailable. A regular file at the same relative path is compared directly. Otherwise files of that name anywhere on the root are counted, ignoring case: none gives missing, several gives ambiguous, exactly one is compared. Same size and same SHA-256 gives identical. Otherwise, if the file is not a DNG or JPEG with a readable image the status is differs. If it is, same raw image gives metadata-only, and different raw image gives image-differs."
+alt="The status of a pair. Matching comes first, then the whole-file hash, then the image." />
+<figcaption aria-hidden="true">The status of a pair. Matching comes
+first, then the whole-file hash, then the image.</figcaption>
+</figure>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 43%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">What <code>-preserve</code> does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>identical</code></td>
+<td style="text-align: left;">Same SHA-256</td>
+<td style="text-align: left;">Nothing to do</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>metadata-only</code></td>
+<td style="text-align: left;">Raw image byte-identical, other bytes
+differ</td>
+<td style="text-align: left;">Differences recorded in the dng-compare
+archive. With <code>-preservefull</code>, also a verified delta</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>image-differs</code></td>
+<td style="text-align: left;">DNG raw image or JPEG image data
+differ</td>
+<td style="text-align: left;">Shuttle version copied to the review
+tree</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>differs</code></td>
+<td style="text-align: left;">Any other file whose bytes differ, or an
+image that could not be read</td>
+<td style="text-align: left;">Shuttle version copied to the review
+tree</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>missing</code></td>
+<td style="text-align: left;">Not found by path or name</td>
+<td style="text-align: left;">Copied by the catch-up step</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>ambiguous</code></td>
+<td style="text-align: left;">The name occurs more than once</td>
+<td style="text-align: left;">Listed. Resolve by hand</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>unavailable</code></td>
+<td style="text-align: left;">The long-term root is not mounted</td>
+<td style="text-align: left;">Listed. Compare later</td>
+</tr>
+</tbody>
+</table>
+<p>An eighth value, <code>error</code>, marks a pair that could not be
+compared, for example a file that became unreadable. It never counts as
+kept.</p>
+<p>Three details of the matching are easy to miss:</p>
+<ul>
+<li><strong>Size is never a match criterion.</strong> A size difference
+does not unmatch a file. It only skips the first hash.</li>
+<li><strong>Name matching ignores ASCII case.</strong> The name index is
+lowercased, so <code>IMG_1.DNG</code> on the shuttle finds
+<code>img_1.dng</code> on the root.</li>
+<li><strong>An ambiguous name is never guessed.</strong> The first few
+candidates are listed in the report and the file is not considered
+kept.</li>
+</ul>
+<h2 data-number="6.4" id="same-view"><span
+class="header-section-number">6.4</span> Same view</h2>
+<p><code>-sameview</code> adds one judgement to a metadata-only pair:
+could any changed tag affect rendering? The pair is marked <em>same
+view</em> when its raw image is byte-identical and every changed tag is
+on the non-rendering list in <code>metadata_rules.json</code>: ratings,
+labels, keywords, titles, captions, dates, GPS, IPTC and similar. Any
+tag not on the list, including every <code>crs:</code> develop setting,
+orientation and lens data, counts as possibly rendering.</p>
+<p>Some differences are not treated as changes at all:</p>
+<ul>
+<li>Text padding, meaning trailing spaces or NULs.</li>
+<li>Order among repeated <code>CopyN</code> occurrences, which are
+compared as sets.</li>
+<li>Strip, tile and preview offsets (<code>layout_names</code>), which
+move when metadata grows. They are ignored once the raw image compares
+identical.</li>
+<li>The lens fields Lightroom copies from EXIF into XMP
+(<code>aux:Lens</code>, <code>aux:LensInfo</code>,
+<code>exifEX:LensModel</code>), listed as <code>mirrors</code>, while
+each value equals the EXIF value in the same file.</li>
+</ul>
+<p>When a pair is not same view, the reason names the first rendering
+tag, develop settings first, and how many more changed.</p>
+<p>The source comment states the limit in one line: “That is a metadata
+rule, not a comparison of rendered images.” A same-view pair is one
+whose metadata differences are all on a list. It is a good reason to
+stop worrying about a pair, and it is not proof that the two files look
+alike. It also does not make a file safe to wipe. Only byte identity, a
+full preservation or a conflict copy does that.</p>
+<p>A rerun, or <code>-summarize</code>, reclassifies earlier results
+under the current rules from the report’s stored differences, without
+reading files again. One gap follows from that: a mirror field whose
+EXIF source was equal on both sides is not stored, so such a pair stays
+“possibly rendering” until it is compared again.</p>
+</body>
+</html>

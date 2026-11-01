@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 410" width="1000" height="410" role="img" aria-labelledby="t d" font-family="Helvetica, Arial, sans-serif" fill="#172c35">
+  <title id="t">Where a differing file is kept</title>
+  <desc id="d">Two placements for the shuttle's version of a file whose content differs. By default it goes into a review tree beside the long-term root, under the root's own name and the same relative path. With -suffix it goes next to the long-term file as NAME_2.EXT, or NAME_SUF.EXT with -suffix=SUF.</desc>
+  <rect width="1000" height="410" fill="#ffffff"/>
+  <rect x="20" y="20" width="470" height="370" rx="4" fill="#eaf1f4" stroke="#7fa6b7" stroke-width="1.5"/>
+  <rect x="510" y="20" width="470" height="370" rx="4" fill="#f6f0e2" stroke="#c0a15a" stroke-width="1.5"/>
+  <text x="36" y="52" font-size="18" font-weight="700" fill="#153e51">Default, or -tree TREE</text>
+  <text x="526" y="52" font-size="18" font-weight="700" fill="#153e51">-suffix or -suffix=SUF</text>
+  <g font-family="Menlo, Consolas, monospace" font-size="16">
+    <text x="36" y="90">/Volumes/Photo/</text>
+    <text x="60" y="118">foto/2026/April/S/</text>
+    <text x="84" y="146">F.DNG</text><text x="190" y="146" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">untouched</text>
+    <text x="60" y="184" font-weight="700">review/</text>
+    <text x="84" y="212">foto/2026/April/S/</text>
+    <text x="108" y="240" font-weight="700" fill="#075b82">F.DNG</text><text x="190" y="240" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">the shuttle's version</text>
+    <text x="84" y="268">jpg/...</text><text x="190" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">roots side by side never collide</text>
+    <text x="60" y="306">dng-compare/Kolobok-foto/</text>
+    <text x="526" y="90">/Volumes/Photo/</text>
+    <text x="550" y="118">foto/2026/April/S/</text>
+    <text x="574" y="146">F.DNG</text><text x="680" y="146" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">untouched</text>
+    <text x="574" y="174" font-weight="700" fill="#075b82">F_2.DNG</text><text x="680" y="174" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">-suffix numbers the copies</text>
+    <text x="574" y="202" font-weight="700" fill="#075b82">F_3.DNG</text><text x="680" y="202" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">the next differing version</text>
+    <text x="574" y="230" font-weight="700" fill="#075b82">F_kolobok.DNG</text><text x="710" y="230" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">-suffix=kolobok</text>
+  </g>
+  <g font-size="15" fill="#3b5563">
+    <text x="36" y="344">Every copy is verified by SHA-256 against the shuttle</text>
+    <text x="36" y="366">file and never replaces an existing file.</text>
+    <text x="526" y="344">Same rule. The copies sit inside the root, so a later</text>
+    <text x="526" y="366">scan of the root sees them as ordinary files.</text>
+  </g>
+</svg>

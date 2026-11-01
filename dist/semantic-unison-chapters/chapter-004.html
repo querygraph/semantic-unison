@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>What Semantic Unison adds</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-005.html" accesskey="n" rel="next">Why the fork exists</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-003.html" accesskey="p" rel="previous">What plain Unison does</a>
+</span>
+</div>
+</nav>
+<h1 data-number="3" id="what-semantic-unison-adds"><span
+class="header-section-number">3</span> What Semantic Unison adds</h1>
+<p><a href="https://github.com/querygraph/semantic-unison">Semantic
+Unison</a> is, in its README’s words, an “LLM-friendly fork of Unison
+with semantic extensions for efficient, trustworthy file
+synchronization.” The README lists six goals:</p>
+<ul>
+<li><strong>Semantic hashing:</strong> distinguish image payloads,
+standard metadata, previews and private fields while preserving unknown
+bytes exactly.</li>
+<li><strong>Gradual camera understanding:</strong> grow DNG and
+MakerNote coverage through composable, versioned plugins and incremental
+refinement of component hashes.</li>
+<li><strong>Precise updates and merges:</strong> transfer bounded
+metadata changes and merge compatible edits while verifying the exact
+resulting file.</li>
+<li><strong>APFS clone updates:</strong> reuse the receiver’s existing
+data in a private clone, for ordinary files as well as photographs.</li>
+<li><strong>Optional Adobe validation:</strong> check DNG structure,
+decoding and raw digests through explicitly configured policies.</li>
+<li><strong>Coordinated parallelism:</strong> use OCaml and OxCaml
+workers with explicit ownership, cancellation and shared resource
+budgets.</li>
+</ul>
+<p>Later work added two tools this book covers at length:
+<code>-semdiff</code>, which proves a shuttle disk is kept on long-term
+storage, and packed roots, which store directories of small files as
+SQLite archives.</p>
+<h2 data-number="3.1" id="three-identities"><span
+class="header-section-number">3.1</span> Three identities</h2>
+<p>The design document starts from a distinction that everything else
+depends on. Three different identities must stay separate:</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 43%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Identity</th>
+<th style="text-align: left;">What it covers</th>
+<th style="text-align: left;">What it authorizes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Byte identity</td>
+<td style="text-align: left;">The entire data fork, plus Unison’s
+separate fork and property handling</td>
+<td style="text-align: left;">Convergence. Exact reconstruction stays
+the contract.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Preserved identity</td>
+<td style="text-align: left;">Strong, offset-bound hashes over every
+byte outside explicitly editable regions</td>
+<td style="text-align: left;">Keeping the destination’s bytes while
+replacing metadata</td>
+</tr>
+<tr>
+<td style="text-align: left;">Semantic identity</td>
+<td style="text-align: left;">Profile-specific identities for raw
+samples, rendering instructions, descriptive metadata and opaque
+content</td>
+<td style="text-align: left;">Explaining changes, and reconciliation
+when explicitly enabled. Never a stand-in for byte identity.</td>
+</tr>
+</tbody>
+</table>
+<p>The same document warns against the obvious shortcut: “Changing XMP
+can change the rendered photograph.” DNG is not immutable pixels plus
+harmless descriptive text, because XMP can hold develop settings, and a
+raw-image digest does not prove that previews, camera profiles, maker
+data or unknown tags can be thrown away.</p>
+<h2 data-number="3.2" id="format-extensions-and-profiles"><span
+class="header-section-number">3.2</span> Format extensions and
+profiles</h2>
+<p>A format extension is a compiled OCaml module with a versioned
+profile name and an inspector. The inspector describes bounded editable
+byte regions in a file. The transfer core does not take its word for
+anything: it hashes the entire file, the protected complement of those
+regions, and the editable contents, and classifies a pair of proofs as
+exact bytes, editable metadata, or other bytes. Anything unsupported
+declines the optimization and falls back to ordinary exact copying.</p>
+<p>An extension cannot override the expected target bytes. A plan binds
+the profile, the basis, the preserved complement, the metadata extents
+and the exact target hash. The module is trusted code, not a sandboxed
+plugin, and no plugin code is ever received from a peer.</p>
+<p>These profiles are registered:</p>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 48%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Profile</th>
+<th style="text-align: left;">Scope</th>
+<th style="text-align: left;">Selected by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>org.firstpair.dng-xmp/0</code></td>
+<td style="text-align: left;">One out-of-line TIFF tag 700 packet of up
+to 1 MiB in classic TIFF, with a finite tag allow-list</td>
+<td style="text-align: left;"><code>semanticdng</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>org.firstpair.dng-xmp/1</code></td>
+<td style="text-align: left;">The same contract, plus BigTIFF and
+embedded camera profiles</td>
+<td style="text-align: left;"><code>semanticdng</code></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><code>org.firstpair.dng-layout/0</code></td>
+<td style="text-align: left;">Layout-only fallback that preserves exact
+donor bytes and has no metadata-merge authority</td>
+<td style="text-align: left;"><code>semanticdng</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>org.firstpair.dng-xmp/2</code></td>
+<td style="text-align: left;">Merge-only: the <code>/1</code> grammar
+plus opaque fields such as MakerNote. Local, never offered to a
+peer</td>
+<td style="text-align: left;">The built-in merge</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>org.firstpair.jpeg-xmp/0</code></td>
+<td style="text-align: left;">One standard APP1 XMP packet before the
+first scan</td>
+<td style="text-align: left;"><code>semanticprofile</code></td>
+</tr>
+</tbody>
+</table>
+<p>The contract for all the transfer profiles is narrow on purpose.
+Source and destination must have the same length and the same packet
+offset and length, and every byte outside the packet must match. When
+the XMP grows or moves, the profile declines and Unison copies the file
+normally. In <code>dng-xmp/0</code>, a MakerNote,
+<code>DNGPrivateData</code> or an unknown tag also declines, because
+“merely preserving the bytes of an unparsed pointer does not establish
+that its referent is outside XMP.”</p>
+<h2 data-number="3.3" id="what-a-semantic-transfer-does"><span
+class="header-section-number">3.3</span> What a semantic transfer
+does</h2>
+<p>With <code>semanticdng = true</code>, a one-sided metadata edit no
+longer needs the whole file. In outline:</p>
+<ol type="1">
+<li>Both sides advertise the profile and inspect their own opened
+files.</li>
+<li>The source checks that the layouts match and that the preserved
+identities are equal, and sends the new packet bound to the receiver’s
+base.</li>
+<li>The receiver makes a private candidate in the destination’s
+directory. On APFS that is a clone of its own existing file, so image
+blocks stay shared until written.</li>
+<li>Only the authorized range of the clone is written. The live file is
+never opened for writing.</li>
+<li>The complete candidate is verified against the source’s full-file
+SHA-256, then published through the normal rename and archive
+lifecycle.</li>
+</ol>
+<p>Readers of the old file and hard links keep the old contents, because
+rename replaces the name and not the inode. A missing proof is a
+fallback. A failed verification is an error, and fallback may not hide
+it. Clone behaviour is governed by the <code>clone</code> preference
+(<code>auto</code>, <code>off</code> or <code>require</code>), which
+applies to ordinary files too.</p>
+<p>The design document is careful about what these savings mean. The
+application can promise that it issues writes only to chosen logical
+ranges. It cannot promise a physical block size or a particular amount
+of SSD wear. Logical bytes preserved are not a measurement of physical
+writes.</p>
+<h2 data-number="3.4" id="merging-ratings-and-labels"><span
+class="header-section-number">3.4</span> Merging ratings and labels</h2>
+<p>Transfer only needs to know that a change is bounded. Merging needs
+more: an opinion on what two changes mean together. The fork has one
+such opinion, off by default, with these two rules in a profile:</p>
+<pre class="text"><code>backupcurrent = Name *.dng
+merge = Name *.dng -&gt; unison:dng-xmp-scalars/0</code></pre>
+<p>When the same DNG has changed on both replicas to different contents,
+this built-in policy can merge the supported Rating and Label forms. A
+rating on one machine and a colour label on the other become one file.
+The result is byte-exact, deterministic, and sent to both sides through
+Unison’s normal guarded commit. Competing values, deletion, packet
+growth, changes to rendering or unknown fields, and changed image
+payloads all fail conservatively and leave the conflict as it was.</p>
+<p>The base for the three-way merge comes from Unison’s previous archive
+entries and is located among saved versions by full fingerprint. No base
+is guessed from either changed replica. If it is missing or stale, the
+merge refuses and both live files stay. An opt-in compact cache
+(<code>semanticmergebasecache</code>) can keep just the XMP packet and
+protected identities instead of a full saved file.</p>
+<p>The table from the design document is worth repeating, because it
+answers a common worry. The merge never rewrites the XMP of a file that
+was not edited on both sides.</p>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Situation</th>
+<th style="text-align: left;">What Unison does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Unchanged on both sides, the bulk of a
+library</td>
+<td style="text-align: left;">Nothing. The file is not opened or
+hashed.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Changed on both sides to identical
+bytes</td>
+<td style="text-align: left;">Equal fingerprints are recorded. No
+merge.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Edited on one side only</td>
+<td style="text-align: left;">Ordinary one-way propagation. With
+<code>semanticdng</code>, only the changed XMP bytes travel.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Edited on both sides differently</td>
+<td style="text-align: left;">The only case where the built-in merge
+writes a packet.</td>
+</tr>
+</tbody>
+</table>
+<p>Real camera files carry fields the strict profiles decline. The
+merge-only profile <code>dng-xmp/2</code> treats a camera MakerNote as
+an opaque blob: its bytes must be identical in base, left and right, and
+must not overlap the packet. The merged packet keeps its exact length
+and position, so nothing a MakerNote might point to moves. Unknown
+simple fields can be admitted after review with
+<code>dngmergeadmit = Exif:TAG:TYPE</code>. <code>unison-dngscan</code>
+surveys a library read-only and reports which files would merge and
+which unknown fields stand in the way.</p>
+<p>The fork’s records include a manual check of this path: a real DNG
+from an iPhone 7 Plus went through the built-in merge, and the user
+opened the result in a scratch Lightroom Classic catalog, where it
+imported cleanly and showed the merged metadata. One file on one camera
+is one check, and the record says no more than that.</p>
+<h2 data-number="3.5" id="jpeg"><span
+class="header-section-number">3.5</span> JPEG</h2>
+<p>JPEG support is a second profile on the same machinery.
+<code>org.firstpair.jpeg-xmp/0</code> locates one nonempty standard XMP
+packet in APP1 before the first scan and allows same-offset, same-length
+packet edits. It is enabled explicitly:</p>
+<pre class="text"><code>semanticprofile = org.firstpair.jpeg-xmp/0</code></pre>
+<p>It is a metadata locator, not a JPEG decoder or validator. Extended
+XMP, duplicate packets and malformed framing decline the profile.
+Changed EXIF, ICC, entropy data or trailers cannot be hidden, because
+all bytes outside the packet must match. This profile does not merge
+JPEG metadata, and <code>unison:dng-xmp-scalars/0</code> does not apply
+to JPEG.</p>
+<h2 data-number="3.6" id="adobe-validation"><span
+class="header-section-number">3.6</span> Adobe validation</h2>
+<p><code>adobevalidate</code> (<code>off</code>, <code>warn</code> or
+<code>require</code>) runs a qualified, hash-pinned Adobe SDK driver on
+each received DNG before commit, independently of whether the transfer
+used a semantic profile. <code>require</code> blocks a failed or
+unavailable validation. <code>adobevalidatescope = all-scanned</code>
+extends this to selected unchanged files through isolated private
+snapshots. A valid structure, a successful decode or a verified raw
+digest each establish a limited fact. None of them proves rendering
+fidelity. Proprietary SDK sources do not belong in this fork’s public
+data.</p>
+<h2 data-number="3.7" id="workers-and-budgets"><span
+class="header-section-number">3.7</span> Workers and budgets</h2>
+<p>Inspection and hashing run on OCaml or OxCaml workers, under one
+shared budget. The event-loop owner keeps all mutable synchronization
+state, and workers receive bounded jobs and independently owned readers.
+<code>semanticworkers</code>, <code>semanticcpubudget</code>,
+<code>semanticpayloadbudget</code>,
+<code>semanticdescriptorbudget</code> and
+<code>semanticvolumejobs</code> set the budgets. They are admission
+credits, not operating-system caps, and their help text says so. Stock
+OCaml and OxCaml builds are kept separate, and claims about one do not
+carry to the other.</p>
+</body>
+</html>

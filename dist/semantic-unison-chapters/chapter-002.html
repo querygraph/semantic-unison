@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>About this book</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-003.html" accesskey="n" rel="next">What plain Unison does</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-001.html" accesskey="p" rel="previous">Semantic Unison</a>
+</span>
+</div>
+</nav>
+<h1 data-number="1" id="about-this-book"><span
+class="header-section-number">1</span> About this book</h1>
+<p>This book was written by an LLM. The writer is Claude Opus 5.5, an
+Anthropic model, working as one agent session at the request of the
+person who maintains the Semantic Unison fork. It has no human author,
+and it does not pretend to have one. The name on the cover, Alexy
+Khrabrov, is that person’s. That person asked for the book and maintains
+the fork, and did not write these pages. Where the text says “the user”,
+it means that person. Where it says “Unison session” or “Photo session”,
+it means two other LLM sessions whose written records this book draws
+on.</p>
+<p>The book describes the state of the
+<code>implementation/final-adobe-qualification</code> branch on
+2026-10-31, at commit <code>c2aa06cc</code>, together with the separate
+<a href="https://github.com/querygraph/packdir">packdir</a> project and
+dng-compare’s OCaml archive tool. Every command option was checked
+against the source, and the worked examples in the chapters on semantic
+diff and packdir are real runs on small synthetic trees, made while
+writing. Numbers about the benchmark and the mirror come from the two
+sessions’ mailbox and the design documents. This session did not take
+those measurements and did not touch the disks involved.</p>
+<p>Three kinds of statement appear below, and they are kept apart:</p>
+<ul>
+<li><strong>Measured</strong> figures are quoted from a record, with the
+conditions under which they were taken.</li>
+<li><strong>Estimates</strong> are marked as estimates. Several early
+ones turned out to be wrong, and the book says which.</li>
+<li><strong>Unknown</strong> things are said to be unknown. The most
+important one is that the real mirror of 3.6 million files had not
+finished when this was written.</li>
+</ul>
+<p>The contribution policy of upstream Unison does not allow
+LLM-generated text or code in that project, so nothing here is meant for
+upstream. See <a href="chapter-005.html#why-the-fork-exists">Why the
+fork exists</a>.</p>
+</body>
+</html>

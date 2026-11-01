@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>The writer, barriers and recovery</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-011.html" accesskey="n" rel="next">The benchmark story</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-009.html" accesskey="p" rel="previous">Packdir</a>
+</span>
+</div>
+</nav>
+<h1 data-number="9" id="the-writer-barriers-and-recovery"><span
+class="header-section-number">9</span> The writer, barriers and
+recovery</h1>
+<h2 data-number="9.1" id="the-pipeline"><span
+class="header-section-number">9.1</span> The pipeline</h2>
+<figure>
+<img src="book/diagrams/writer-barrier.svg"
+data-fig-alt="Top: plain root feeds three workers that read and hash, which pass through one writer lock into a SQLite transaction in D.sqlar synced with fsync, then into this run&#39;s state. Middle: a timeline of transactions and barriers, then queues flushed, a final barrier, state saved and Unison archives written, and the pending list cleared. Each container stays on the pending list from before its first write until after the commit. Bottom: what happens if it stops inside a transaction, after COMMIT, on a damaged container, or when a worker dies."
+alt="Workers read and hash in parallel. One writer at a time reaches the disk, and Unison’s archive never gets ahead of the platter." />
+<figcaption aria-hidden="true">Workers read and hash in parallel. One
+writer at a time reaches the disk, and Unison’s archive never gets ahead
+of the platter.</figcaption>
+</figure>
+<p><code>Transport.doAction</code> sends every action whose target is
+the packed root to <code>PackdirSupport</code>, not to
+<code>Files</code>. Clone staging, publication and the semantic rebuild
+do not apply there. A file becomes a member of its leaf’s container, a
+new leaf becomes one container in one transaction, and above the packed
+depth directories are created and files are copied plain, with their
+mtime.</p>
+<h2 data-number="9.2" id="workers-and-the-writer-lock"><span
+class="header-section-number">9.2</span> Workers and the writer
+lock</h2>
+<p>Hashing is where the CPU goes. The prototype’s one thread did MD5,
+SHA-256 and the read-back SHA-256, and spent 29 s of CPU in a 30 s run.
+So reading and hashing are parallel, and writing is not.</p>
+<p><code>packworkers</code> (default 4) sets the number of jobs. Each
+job runs in its own forked process and handles one whole container,
+reading, hashing and packing. Jobs share one Lwt region across every
+item Unison propagates at once, so workers stay busy from one item to
+the next, and the parent waits on each job’s pipe without blocking
+Unison’s event loop. Only the SQLite transactions take the writer lock,
+a file lock in the Unison directory. So the packed disk sees one writer
+at a time.</p>
+<p>With <code>packworkers = 1</code>, jobs run in the Unison process,
+one after another. <code>semanticworkers</code>,
+<code>semanticcpubudget</code> and <code>semanticvolumejobs</code> do
+not affect packing, because <code>SemanticRuntime</code> exposes those
+only by starting the semantic runtime. <code>packworkers</code> is its
+own preference.</p>
+<p>A container whose member data would exceed 256 MiB in one batch is
+split into several transactions.</p>
+<h2 data-number="9.3" id="per-container-batching"><span
+class="header-section-number">9.3</span> Per-container batching</h2>
+<p>Unison’s natural item is a path. A new leaf arrives as one directory
+item, which maps neatly to one job and one transaction. A leaf with a
+plain directory on the target does not. The directory already exists on
+both sides, so Unison sends each file as its own item, and it runs only
+<code>maxthreads</code> items at once.</p>
+<p>Commit <code>5c95d940</code> added queues for this case. A member
+item joins its container’s queue and returns at once. The queue becomes
+one job, one transaction, when items move on to another container, or at
+the commit. Archives are updated when the job succeeds, so a failed file
+stays unrecorded and is retried by the next run. The control for it
+reads the container’s <code>epoch</code> and requires exactly 1, which
+proves all the file-by-file items shared one transaction.</p>
+<h2 data-number="9.4" id="checking-what-was-stored"><span
+class="header-section-number">9.4</span> Checking what was stored</h2>
+<p>A file is not trusted because it was written. After a transaction the
+changed blobs are read back and their SHA-256 compared. Then each stored
+MD5 must equal the fingerprint update detection took. If it does not,
+the file changed under Unison’s feet, the item fails as “changed during
+synchronization”, and the next run picks it up. Unison’s archives are
+updated on both roots from what the target now holds, read back through
+the same detection hooks, so the next run sees exactly what was
+recorded.</p>
+<h2 data-number="9.5" id="barriers"><span
+class="header-section-number">9.5</span> Barriers</h2>
+<p><code>fsync</code> orders writes as far as the drive, but on macOS it
+does not reach past the drive’s own write cache.
+<code>F_FULLFSYNC</code> does, and on this drive it costs about 0.9 s.
+One per container would triple the time of a first copy, as the next
+chapter shows.</p>
+<p>The design that the user approved separates the two:</p>
+<ul>
+<li>Each container’s transaction is synced with plain <code>fsync</code>
+(<code>synchronous = FULL</code>, <code>fullfsync = OFF</code>).</li>
+<li>A barrier is one <code>F_FULLFSYNC</code> every
+<code>packbarrier</code> GiB, default 4, and at the end of the run.
+<code>packbarrier = 0</code> means after every container.</li>
+<li>Unison’s archive records a container only after a barrier covers
+it.</li>
+</ul>
+<p><code>PackdirConfig.before_commit</code> runs inside
+<code>Update.commitUpdates</code>, before the archives are written: it
+finishes every queue, takes the final barrier and saves the state.
+<code>after_commit</code> then clears the pending list. Unison’s archive
+therefore never gets ahead of the platter.</p>
+<h2 data-number="9.6" id="the-pending-list-and-recovery"><span
+class="header-section-number">9.6</span> The pending list and
+recovery</h2>
+<p><code>pd&lt;hash&gt;.pending</code> in the Unison directory lists
+each container, fsynced, before its first write in a run. After a crash
+or power loss, the list names everything that might not have reached the
+platter whole.</p>
+<p>On the next run, a pending container, or one whose file no longer
+matches the state, is verified before use with
+<code>PRAGMA integrity_check</code> and every member’s SHA-256.</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">What happened</th>
+<th style="text-align: left;">What the next run does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Stopped inside a transaction</td>
+<td style="text-align: left;">SQLite rolled the container back. It is
+pending, is verified, and the work is redone.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Stopped after <code>COMMIT</code>, before
+the archives</td>
+<td style="text-align: left;">Pending, verified, found right. The
+members are only recorded, not rewritten.</td>
+</tr>
+<tr>
+<td style="text-align: left;">A container is damaged</td>
+<td style="text-align: left;">Set aside as
+<code>D.sqlar.damaged-&lt;time&gt;</code>, never deleted. Its leaf reads
+as missing, and <code>force</code> copies it again.</td>
+</tr>
+<tr>
+<td style="text-align: left;">A worker process died</td>
+<td style="text-align: left;">Its item failed. Its container stays on
+the list and is verified. Other workers’ containers stand.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Lightroom changed a source file during the
+run</td>
+<td style="text-align: left;">That item fails the MD5 check and the next
+run picks it up.</td>
+</tr>
+</tbody>
+</table>
+<p>There is one thing this does not catch. Silent bit rot in a container
+whose file is unchanged is seen only by
+<code>unison-packdir verify</code>, run as a periodic scrub. An
+unchanged stamp means the container is not opened, which is the point of
+the design, and it also means nobody looks inside.
+<code>-debug packdir</code> shows each barrier.</p>
+</body>
+</html>

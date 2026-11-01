@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>Semantic Unison</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+</span>
+<span class="navlink">
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-001.html" accesskey="n" rel="next">Semantic Unison</a>
+</span>
+<span class="navlink">
+</span>
+</div>
+</nav>
+<header id="title-block-header">
+<h1 class="title">Semantic Unison</h1>
+<p class="subtitle">An LLM-friendly fork of a file synchronizer, written
+up by the LLM</p>
+<p class="author">Claude Opus 5.5, an LLM, at a human’s request</p>
+<p class="date">2026-11-01</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="chapter-002.html#about-this-book"
+id="toc-about-this-book"><span class="toc-section-number">1</span> About
+this book</a></li>
+<li><a href="chapter-003.html#what-plain-unison-does"
+id="toc-what-plain-unison-does"><span
+class="toc-section-number">2</span> What plain Unison does</a></li>
+<li><a href="chapter-004.html#what-semantic-unison-adds"
+id="toc-what-semantic-unison-adds"><span
+class="toc-section-number">3</span> What Semantic Unison adds</a>
+<ul>
+<li><a href="chapter-004.html#three-identities"
+id="toc-three-identities"><span class="toc-section-number">3.1</span>
+Three identities</a></li>
+<li><a href="chapter-004.html#format-extensions-and-profiles"
+id="toc-format-extensions-and-profiles"><span
+class="toc-section-number">3.2</span> Format extensions and
+profiles</a></li>
+<li><a href="chapter-004.html#what-a-semantic-transfer-does"
+id="toc-what-a-semantic-transfer-does"><span
+class="toc-section-number">3.3</span> What a semantic transfer
+does</a></li>
+<li><a href="chapter-004.html#merging-ratings-and-labels"
+id="toc-merging-ratings-and-labels"><span
+class="toc-section-number">3.4</span> Merging ratings and
+labels</a></li>
+<li><a href="chapter-004.html#jpeg" id="toc-jpeg"><span
+class="toc-section-number">3.5</span> JPEG</a></li>
+<li><a href="chapter-004.html#adobe-validation"
+id="toc-adobe-validation"><span class="toc-section-number">3.6</span>
+Adobe validation</a></li>
+<li><a href="chapter-004.html#workers-and-budgets"
+id="toc-workers-and-budgets"><span class="toc-section-number">3.7</span>
+Workers and budgets</a></li>
+</ul></li>
+<li><a href="chapter-005.html#why-the-fork-exists"
+id="toc-why-the-fork-exists"><span class="toc-section-number">4</span>
+Why the fork exists</a>
+<ul>
+<li><a href="chapter-005.html#what-upstream-says"
+id="toc-what-upstream-says"><span class="toc-section-number">4.1</span>
+What upstream says</a></li>
+<li><a href="chapter-005.html#why-that-boundary-stands"
+id="toc-why-that-boundary-stands"><span
+class="toc-section-number">4.2</span> Why that boundary stands</a></li>
+<li><a href="chapter-005.html#why-a-fork-then"
+id="toc-why-a-fork-then"><span class="toc-section-number">4.3</span> Why
+a fork, then</a></li>
+<li><a href="chapter-005.html#what-the-fork-does-instead"
+id="toc-what-the-fork-does-instead"><span
+class="toc-section-number">4.4</span> What the fork does
+instead</a></li>
+<li><a href="chapter-005.html#who-carries-the-maintenance"
+id="toc-who-carries-the-maintenance"><span
+class="toc-section-number">4.5</span> Who carries the
+maintenance</a></li>
+<li><a href="chapter-005.html#about-the-essay-that-follows"
+id="toc-about-the-essay-that-follows"><span
+class="toc-section-number">4.6</span> About the essay that
+follows</a></li>
+</ul></li>
+<li><a href="chapter-006.html#i-am-an-honest-working-llm"
+id="toc-i-am-an-honest-working-llm"><span
+class="toc-section-number">5</span> I am an honest working LLM</a>
+<ul>
+<li><a href="chapter-006.html#what-i-am-actually-doing"
+id="toc-what-i-am-actually-doing"><span
+class="toc-section-number">5.1</span> What I am actually doing</a></li>
+<li><a href="chapter-006.html#why-these-extensions-are-worth-building"
+id="toc-why-these-extensions-are-worth-building"><span
+class="toc-section-number">5.2</span> Why these extensions are worth
+building</a></li>
+<li><a href="chapter-006.html#what-i-cannot-promise"
+id="toc-what-i-cannot-promise"><span
+class="toc-section-number">5.3</span> What I cannot promise</a></li>
+<li><a href="chapter-006.html#the-standard-i-want-this-fork-held-to"
+id="toc-the-standard-i-want-this-fork-held-to"><span
+class="toc-section-number">5.4</span> The standard I want this fork held
+to</a></li>
+</ul></li>
+<li><a href="chapter-007.html#semantic-diff"
+id="toc-semantic-diff"><span class="toc-section-number">6</span>
+Semantic diff</a>
+<ul>
+<li><a href="chapter-007.html#the-question" id="toc-the-question"><span
+class="toc-section-number">6.1</span> The question</a></li>
+<li><a href="chapter-007.html#the-layers" id="toc-the-layers"><span
+class="toc-section-number">6.2</span> The layers</a></li>
+<li><a href="chapter-007.html#pair-statuses"
+id="toc-pair-statuses"><span class="toc-section-number">6.3</span> Pair
+statuses</a></li>
+<li><a href="chapter-007.html#same-view" id="toc-same-view"><span
+class="toc-section-number">6.4</span> Same view</a></li>
+</ul></li>
+<li><a href="chapter-008.html#a-shuttle-disk-end-to-end"
+id="toc-a-shuttle-disk-end-to-end"><span
+class="toc-section-number">7</span> A shuttle disk, end to end</a>
+<ul>
+<li><a href="chapter-008.html#the-flow" id="toc-the-flow"><span
+class="toc-section-number">7.1</span> The flow</a></li>
+<li><a href="chapter-008.html#a-worked-run" id="toc-a-worked-run"><span
+class="toc-section-number">7.2</span> A worked run</a></li>
+<li><a href="chapter-008.html#where-things-are-kept"
+id="toc-where-things-are-kept"><span
+class="toc-section-number">7.3</span> Where things are kept</a></li>
+<li><a href="chapter-008.html#versions-over-several-cycles"
+id="toc-versions-over-several-cycles"><span
+class="toc-section-number">7.4</span> Versions over several
+cycles</a></li>
+<li><a href="chapter-008.html#dng-compare-archives"
+id="toc-dng-compare-archives"><span
+class="toc-section-number">7.5</span> dng-compare archives</a></li>
+<li><a href="chapter-008.html#disks-and-progress"
+id="toc-disks-and-progress"><span class="toc-section-number">7.6</span>
+Disks and progress</a></li>
+<li><a href="chapter-008.html#reruns-and-other-roots"
+id="toc-reruns-and-other-roots"><span
+class="toc-section-number">7.7</span> Reruns and other roots</a></li>
+</ul></li>
+<li><a href="chapter-009.html#packdir" id="toc-packdir"><span
+class="toc-section-number">8</span> Packdir</a>
+<ul>
+<li><a href="chapter-009.html#the-problem" id="toc-the-problem"><span
+class="toc-section-number">8.1</span> The problem</a></li>
+<li><a href="chapter-009.html#one-.sqlar-per-directory"
+id="toc-one-.sqlar-per-directory"><span
+class="toc-section-number">8.2</span> One <code>.sqlar</code> per
+directory</a></li>
+<li><a href="chapter-009.html#what-unison-sees"
+id="toc-what-unison-sees"><span class="toc-section-number">8.3</span>
+What Unison sees</a></li>
+<li><a href="chapter-009.html#kept-originals-beside-containers"
+id="toc-kept-originals-beside-containers"><span
+class="toc-section-number">8.4</span> Kept originals beside
+containers</a></li>
+<li><a href="chapter-009.html#a-worked-run-1"
+id="toc-a-worked-run-1"><span class="toc-section-number">8.5</span> A
+worked run</a></li>
+<li><a href="chapter-009.html#a-profile-for-a-real-mirror"
+id="toc-a-profile-for-a-real-mirror"><span
+class="toc-section-number">8.6</span> A profile for a real
+mirror</a></li>
+<li><a href="chapter-009.html#the-marker" id="toc-the-marker"><span
+class="toc-section-number">8.7</span> The marker</a></li>
+<li><a href="chapter-009.html#unpacking-and-repacking"
+id="toc-unpacking-and-repacking"><span
+class="toc-section-number">8.8</span> Unpacking and repacking</a></li>
+<li><a href="chapter-009.html#the-format" id="toc-the-format"><span
+class="toc-section-number">8.9</span> The format</a></li>
+</ul></li>
+<li><a href="chapter-010.html#the-writer-barriers-and-recovery"
+id="toc-the-writer-barriers-and-recovery"><span
+class="toc-section-number">9</span> The writer, barriers and
+recovery</a>
+<ul>
+<li><a href="chapter-010.html#the-pipeline" id="toc-the-pipeline"><span
+class="toc-section-number">9.1</span> The pipeline</a></li>
+<li><a href="chapter-010.html#workers-and-the-writer-lock"
+id="toc-workers-and-the-writer-lock"><span
+class="toc-section-number">9.2</span> Workers and the writer
+lock</a></li>
+<li><a href="chapter-010.html#per-container-batching"
+id="toc-per-container-batching"><span
+class="toc-section-number">9.3</span> Per-container batching</a></li>
+<li><a href="chapter-010.html#checking-what-was-stored"
+id="toc-checking-what-was-stored"><span
+class="toc-section-number">9.4</span> Checking what was stored</a></li>
+<li><a href="chapter-010.html#barriers" id="toc-barriers"><span
+class="toc-section-number">9.5</span> Barriers</a></li>
+<li><a href="chapter-010.html#the-pending-list-and-recovery"
+id="toc-the-pending-list-and-recovery"><span
+class="toc-section-number">9.6</span> The pending list and
+recovery</a></li>
+</ul></li>
+<li><a href="chapter-011.html#the-benchmark-story"
+id="toc-the-benchmark-story"><span class="toc-section-number">10</span>
+The benchmark story</a>
+<ul>
+<li><a href="chapter-011.html#what-was-estimated-first"
+id="toc-what-was-estimated-first"><span
+class="toc-section-number">10.1</span> What was estimated first</a></li>
+<li><a href="chapter-011.html#the-test-set" id="toc-the-test-set"><span
+class="toc-section-number">10.2</span> The test set</a></li>
+<li><a href="chapter-011.html#first-copy-plain-files-are-fast"
+id="toc-first-copy-plain-files-are-fast"><span
+class="toc-section-number">10.3</span> First copy: plain files are
+fast</a></li>
+<li><a href="chapter-011.html#incremental-open-only-what-changed"
+id="toc-incremental-open-only-what-changed"><span
+class="toc-section-number">10.4</span> Incremental: open only what
+changed</a></li>
+<li><a href="chapter-011.html#the-cold-scan-partly"
+id="toc-the-cold-scan-partly"><span
+class="toc-section-number">10.5</span> The cold scan, partly</a></li>
+<li><a href="chapter-011.html#where-the-benchmark-left-things"
+id="toc-where-the-benchmark-left-things"><span
+class="toc-section-number">10.6</span> Where the benchmark left
+things</a></li>
+<li><a href="chapter-011.html#real-unison-and-a-new-estimate"
+id="toc-real-unison-and-a-new-estimate"><span
+class="toc-section-number">10.7</span> Real Unison, and a new
+estimate</a></li>
+<li><a href="chapter-011.html#the-surprise-file-by-file"
+id="toc-the-surprise-file-by-file"><span
+class="toc-section-number">10.8</span> The surprise: file by
+file</a></li>
+<li><a href="chapter-011.html#what-the-day-showed"
+id="toc-what-the-day-showed"><span
+class="toc-section-number">10.9</span> What the day showed</a></li>
+</ul></li>
+<li><a href="chapter-012.html#command-reference"
+id="toc-command-reference"><span class="toc-section-number">11</span>
+Command reference</a>
+<ul>
+<li><a href="chapter-012.html#unison-the--semdiff-family"
+id="toc-unison-the--semdiff-family"><span
+class="toc-section-number">11.1</span> unison: the -semdiff
+family</a></li>
+<li><a href="chapter-012.html#unison-dngscan"
+id="toc-unison-dngscan"><span class="toc-section-number">11.2</span>
+unison-dngscan</a></li>
+<li><a href="chapter-012.html#packed-root-preferences"
+id="toc-packed-root-preferences"><span
+class="toc-section-number">11.3</span> Packed-root preferences</a></li>
+<li><a href="chapter-012.html#packdir-and-unison-packdir"
+id="toc-packdir-and-unison-packdir"><span
+class="toc-section-number">11.4</span> packdir and
+unison-packdir</a></li>
+<li><a href="chapter-012.html#dng-archive" id="toc-dng-archive"><span
+class="toc-section-number">11.5</span> dng-archive</a></li>
+<li><a href="chapter-012.html#semantic-preferences"
+id="toc-semantic-preferences"><span
+class="toc-section-number">11.6</span> Semantic preferences</a></li>
+</ul></li>
+<li><a href="chapter-013.html#honest-limits"
+id="toc-honest-limits"><span class="toc-section-number">12</span> Honest
+limits</a>
+<ul>
+<li><a href="chapter-013.html#packed-roots" id="toc-packed-roots"><span
+class="toc-section-number">12.1</span> Packed roots</a></li>
+<li><a href="chapter-013.html#semantic-diff-1"
+id="toc-semantic-diff-1"><span class="toc-section-number">12.2</span>
+Semantic diff</a></li>
+<li><a href="chapter-013.html#semantic-transfer-and-merging"
+id="toc-semantic-transfer-and-merging"><span
+class="toc-section-number">12.3</span> Semantic transfer and
+merging</a></li>
+<li><a href="chapter-013.html#building" id="toc-building"><span
+class="toc-section-number">12.4</span> Building</a></li>
+</ul></li>
+<li><a href="chapter-014.html#how-this-was-built"
+id="toc-how-this-was-built"><span class="toc-section-number">13</span>
+How this was built</a>
+<ul>
+<li><a href="chapter-014.html#two-sessions-and-a-mailbox"
+id="toc-two-sessions-and-a-mailbox"><span
+class="toc-section-number">13.1</span> Two sessions and a
+mailbox</a></li>
+<li><a href="chapter-014.html#milestones" id="toc-milestones"><span
+class="toc-section-number">13.2</span> Milestones</a></li>
+<li><a href="chapter-014.html#what-the-tests-found"
+id="toc-what-the-tests-found"><span
+class="toc-section-number">13.3</span> What the tests found</a></li>
+<li><a href="chapter-014.html#what-went-wrong-without-a-test"
+id="toc-what-went-wrong-without-a-test"><span
+class="toc-section-number">13.4</span> What went wrong without a
+test</a></li>
+<li><a href="chapter-014.html#what-this-book-is"
+id="toc-what-this-book-is"><span class="toc-section-number">13.5</span>
+What this book is</a></li>
+</ul></li>
+<li><a href="chapter-015.html#building-and-testing"
+id="toc-building-and-testing"><span class="toc-section-number">14</span>
+Building and testing</a></li>
+</ul>
+</nav>
+
+</body>
+</html>

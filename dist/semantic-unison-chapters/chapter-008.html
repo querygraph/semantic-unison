@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>A shuttle disk, end to end</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-009.html" accesskey="n" rel="next">Packdir</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-007.html" accesskey="p" rel="previous">Semantic diff</a>
+</span>
+</div>
+</nav>
+<h1 data-number="7" id="a-shuttle-disk-end-to-end"><span
+class="header-section-number">7</span> A shuttle disk, end to end</h1>
+<h2 data-number="7.1" id="the-flow"><span
+class="header-section-number">7.1</span> The flow</h2>
+<p>The one command to remember is this one:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Kolobok/foto /Volumes/Photo/foto <span class="at">-semdiff</span> <span class="at">-sameview</span> <span class="at">-preservefull</span> <span class="at">-v</span></span></code></pre></div>
+<p>The first root is the shuttle and the second is the long-term root.
+Both must be local. The run has the following shape.</p>
+<figure>
+<img src="book/diagrams/shuttle-flow.svg"
+data-fig-alt="Flow of four boxes: Compare, Keep, Catch up, Compare again. After the last, either safe to wipe with exit 0 when all files are kept and unchanged, or not safe with reasons by folder and exit 1. A dashed line shows that a rerun reuses results. A note says the shuttle is never written, the long-term root only gains missing files, and the archive and conflict copies are kept beside the root."
+alt="The shuttle flow. The shuttle is only read, and the long-term root only gains files that were missing." />
+<figcaption aria-hidden="true">The shuttle flow. The shuttle is only
+read, and the long-term root only gains files that were
+missing.</figcaption>
+</figure>
+<p><strong>Compare.</strong> <code>unison-dngscan -semdiff</code> walks
+the shuttle and matches each file on the long-term root. Only the
+shuttle is walked. The long-term root is listed, not read, except for
+matched files.</p>
+<p><strong>Keep.</strong> With <code>-preserve</code>, the differences
+are kept beside the long-term root, never inside it.</p>
+<p><strong>Catch up.</strong> Unison copies the files missing on the
+long-term root, and only those, with creation only: no update, no
+deletion on either root, and no Unison archive. This is what makes the
+workflow safe across shuttle cycles. A wiped and refilled shuttle cannot
+delete or overwrite anything on the long-term root, because this run has
+no memory of a previous state to reconcile against. A session folder
+absent on the root is copied as one directory, unless one of its files
+was already found there by name.</p>
+<p><strong>Compare again.</strong> If the catch-up copied anything, the
+comparison runs once more, reusing every earlier result, so the copied
+files are checked too and the last summary printed is the final one.</p>
+<p><strong>Safe to wipe.</strong> Every file must be byte-identical on
+the long-term root, preserved in full, or kept as a conflict copy, and
+unchanged since it was compared. Anything else is listed by reason and
+session folder, and the run exits 1.</p>
+<h2 data-number="7.2" id="a-worked-run"><span
+class="header-section-number">7.2</span> A worked run</h2>
+<p>This run used synthetic files: seven small files under a scratch
+directory, built to hit each status. Paths below are shortened to
+<code>/D</code>. The first command is the scanner alone, with no
+catch-up and nothing kept.</p>
+<pre class="text"><code>$ unison-dngscan -semdiff /D/photo/foto -sameview -o r.jsonl /D/shuttle
+
+/D/photo/foto:
+         2  identical
+         1  metadata-only (1 same view)
+         1  image-differs
+         1  differs
+         1  missing
+         1  ambiguous
+
+safe to wipe: 2 of 7 files (2 byte-identical, 0 preserved in full, 0 kept as conflict copies)
+  not safe: 1 missing on every long-term root, in 2026/A
+  not safe: 1 content differs (-preserve keeps a copy), in 2026/A
+  not safe: 1 metadata differs (same view; -preservefull keeps it), in 2026/A
+  not safe: 1 name ambiguous, in 2026/A
+  not safe: 1 image differs (-preserve keeps a copy), in 2026/A
+
+catch-up for /D/photo/foto: 1 files missing, 1 paths written to r.jsonl.catchup</code></pre>
+<p>One of the two identical files had moved to another folder on the
+root. It matched by name. The next command is the whole flow with
+<code>-preserve</code>, through Unison, which wrote the archive and
+copied the conflicts and the one missing file:</p>
+<pre class="text"><code>$ unison /D/shuttle /D/photo/foto -semdiff -preserve -batch
+
+semdiff: 7 files under /D/shuttle in 0s (3 directories read, 0 from cache)
+semdiff: 5 results reused, comparing 2 files with 8 workers
+
+dng-compare archive /D/photo/dng-compare/disk-shuttle: 1 rows added ...
+files whose content differs: 0 copied to /D/photo/review/foto, 2 already there, 0 not kept
+
+/D/photo/foto:
+         3  identical
+         1  metadata-only
+         1  image-differs
+         1  differs
+         1  ambiguous
+
+safe to wipe: 5 of 7 files (3 byte-identical, 0 preserved in full, 2 kept as conflict copies)
+  not safe: 1 metadata differs (-preservefull keeps it), in 2026/A
+  not safe: 1 name ambiguous, in 2026/A</code></pre>
+<p>The exit status was 1, correctly, and two reasons remained. The
+metadata-only file needs <code>-preservefull</code>. The ambiguous file
+needs a person. The output above is the final check. Each run also
+prints the exact scanner command it starts, so what happened can be
+reproduced directly. Afterwards the disk held the shuttle unchanged,
+plus these changes under <code>/D/photo</code>:</p>
+<pre class="text"><code>foto/2026/A/new.txt            the one missing file, created
+review/foto/2026/A/note.txt    the shuttle&#39;s version of a differing file
+review/foto/2026/A/pix.jpg     the shuttle&#39;s version of a differing image
+dng-compare/disk-shuttle/      the archive</code></pre>
+<p>Nothing that was already in <code>foto/</code> changed.</p>
+<h2 data-number="7.3" id="where-things-are-kept"><span
+class="header-section-number">7.3</span> Where things are kept</h2>
+<figure>
+<img src="book/diagrams/review-placement.svg"
+data-fig-alt="Two panels. Left, default or -tree: under /Volumes/Photo, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle&#39;s version; a jpg root gets its own subtree, and dng-compare/Kolobok-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG."
+alt="Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original." />
+<figcaption aria-hidden="true">Placement of a differing file: a review
+tree beside the root by default, or a suffixed copy beside the
+original.</figcaption>
+</figure>
+<p>Next to the long-term root <code>R</code>, for example
+<code>/Volumes/Photo/foto</code>:</p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Option</th>
+<th style="text-align: left;">Kept in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>-preserve</code></td>
+<td style="text-align: left;"><code>R/../dng-compare/SHUTTLE</code>, a
+dng-compare archive whose rows are only ever added</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-preservedb DIR</code></td>
+<td style="text-align: left;">That archive instead. Implies
+<code>-preserve</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-preservefull</code></td>
+<td style="text-align: left;">Implies <code>-preserve</code>. The same
+archive also holds each metadata-only file as a VCDIFF delta, verified
+to rebuild the exact file</td>
+</tr>
+<tr>
+<td style="text-align: left;">Conflicts, default</td>
+<td style="text-align: left;"><code>R/../review/NAME/</code> with the
+same relative path, where NAME is R’s own name, so
+<code>review/foto/</code> and <code>review/jpg/</code> never
+collide</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-tree TREE</code></td>
+<td style="text-align: left;"><code>R/../TREE/NAME/</code> instead</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-suffix</code></td>
+<td style="text-align: left;">Beside the long-term file as
+<code>NAME_2.EXT</code>, <code>NAME_3.EXT</code>, and so on</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-suffix=SUF</code></td>
+<td style="text-align: left;">Beside the long-term file as
+<code>NAME_SUF.EXT</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>SHUTTLE</code> is built from the left root’s last two path
+components, so <code>/Volumes/Kolobok/foto</code> gives
+<code>Kolobok-foto</code>. <code>-suffix</code> with a value must be
+written <code>-suffix=SUF</code>, because Unison would otherwise take a
+separate word as a root or profile name.</p>
+<p>Conflict copies are verified by SHA-256 against the shuttle file and
+never replace an existing file. An identical copy from an earlier run is
+reused.</p>
+<h2 data-number="7.4" id="versions-over-several-cycles"><span
+class="header-section-number">7.4</span> Versions over several
+cycles</h2>
+<p>The archive records each shuttle file once per version, meaning size
+and modification time. When a later shuttle cycle brings new contents at
+a path already recorded, its differences are added as a new dng-compare
+file version, stamped with the run.</p>
+<p><code>-preservefull</code> keeps one full-file record per path, so it
+does not replace an earlier version. Such files are listed as already
+holding another version and stay “not safe” until handled by hand.</p>
+<h2 data-number="7.5" id="dng-compare-archives"><span
+class="header-section-number">7.5</span> dng-compare archives</h2>
+<p>The archive is dng-compare’s format, not one invented for this tool.
+A dng-compare archive holds a metadata index and a lossless preservation
+store. In the worked run it looked like this:</p>
+<pre class="text"><code>dng-compare/disk-shuttle/
+  metadata/batches/*.jsonl.gz       one gzip batch per run, rows only added
+  metadata/differences.sqlite3      the searchable index
+  provenance.json
+  runs.jsonl</code></pre>
+<p>A <code>-preservefull</code> run adds records in
+<code>recovery.sqlite3</code> and delta files under
+<code>deltas/</code>. A delta is computed by <code>xdelta3</code>
+against the matching file on the long-term root, so it holds only the
+bytes that differ, and it needs that reference file to rebuild the
+original. If the root has moved,
+<code>dng-archive restore --reference-root DIR</code> says where it is
+now.</p>
+<p><code>-preserve</code> and <code>-preservefull</code> run
+dng-compare’s OCaml command <code>dng-archive</code>. No Python runs.
+<code>dng-archive</code> builds on stock OCaml 5 and on OxCaml, and
+reads and writes the same files as dng-compare’s Python tools. Its index
+has the same schema and rows and keys each stored value by the SHA-256
+of the same canonical JSON, so either tool can add batches to an index
+the other built, and each restores what the other preserved.
+dng-compare’s <code>test_dng_archive.py</code> checks this against the
+Python modules.</p>
+<p>It differs from the Python tools in four ways. <code>preserve</code>
+works on listed pairs only. The final identity check covers the files of
+this run, so records from earlier runs whose sources are gone, such as
+files on a wiped shuttle, do not fail it. It handles SQLite only, and
+refuses an archive moved to the Turso engine rather than writing behind
+its marker. Workers are forked processes that each get an equal share of
+<code>--rate-mib</code>.</p>
+<p>To get a preserved file back, restore it into a new location:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
+<h2 data-number="7.6" id="disks-and-progress"><span
+class="header-section-number">7.6</span> Disks and progress</h2>
+<p>A root on a disk that <code>diskutil</code> does not report as solid
+state, either a spinning disk or an enclosure that does not say, is read
+by one stream at a time across all workers, so it never seeks between
+files. Solid-state roots are read in parallel. Both files of a pair are
+read at the same time.</p>
+<p><code>-hdd PATH</code> marks PATH’s disk as spinning, and
+<code>-ssd PATH</code> as solid state, whatever <code>diskutil</code>
+reports. Both are recorded on the disk itself, as
+<code>disk = hdd</code> or <code>disk = ssd</code> in
+<code>MOUNT-POINT/.semantic-unison</code>, so they are given once and
+hold for every later run on any Mac. A spinning disk is read by one
+stream at a time unless <code>-readers N</code> is given with
+<code>-hdd</code>, which records <code>readers = N</code> the same
+way.</p>
+<p>A progress line every minute gives files and bytes compared, MiB/s,
+files/s, the time left and the counts so far. Time left is fitted over
+the last 15 minutes with a cost per file and a cost per byte, so it
+holds through stretches of small sidecars and large DNGs.
+<code>-v</code> adds listing progress, a line for each file that is not
+identical, and dng-compare’s preservation output. <code>^C</code> is
+safe: rerun the same command and finished comparisons are reused.</p>
+<h2 data-number="7.7" id="reruns-and-other-roots"><span
+class="header-section-number">7.7</span> Reruns and other roots</h2>
+<ul>
+<li><strong>Reports.</strong> The report lives in the Unison directory
+as <code>semdiff-HASH.jsonl</code>, next to its <code>.walk</code>
+listing cache and <code>.catchup</code> list. A pair is compared again
+only if either file changed. Missing, ambiguous and unavailable files
+are always looked at again.</li>
+<li><strong><code>-review</code></strong> reruns only on the conflicts
+in the previous report, keeping them as <code>-tree</code> or
+<code>-suffix</code> says, and scans or synchronizes nothing else.</li>
+<li><strong><code>-semdiffroot ROOT</code></strong> adds another
+long-term root that counts for “safe to wipe”. Only the second Unison
+root is caught up.</li>
+<li><strong><code>unison-dngscan -summarize</code></strong> combines
+reports from different days and disks. A file is safe if any report
+shows it kept and it has not changed since.</li>
+</ul>
+</body>
+</html>

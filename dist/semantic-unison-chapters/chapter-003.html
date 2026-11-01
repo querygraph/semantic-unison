@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>What plain Unison does</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-004.html" accesskey="n" rel="next">What Semantic Unison adds</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-002.html" accesskey="p" rel="previous">About this book</a>
+</span>
+</div>
+</nav>
+<h1 data-number="2" id="what-plain-unison-does"><span
+class="header-section-number">2</span> What plain Unison does</h1>
+<p>Unison is a file synchronizer. Upstream’s README describes it as a
+tool that “allows two replicas of a collection of files and directories
+to be stored on different hosts (or different disks on the same host),
+modified separately, and then brought up to date by propagating the
+changes in each replica to the other.” It says Unison “has been in use
+for over 25 years and many people use it to synchronize data they care
+about.”</p>
+<p>The important word is <em>replicas</em>. A mirror tool copies one
+side over the other. Unison treats two sides as equals and works out
+what happened on each since they last agreed. A run has three
+stages:</p>
+<ol type="1">
+<li><strong>Update detection.</strong> Unison keeps an archive for each
+pair of roots: a record of what was on each side after the last
+successful run, with a fingerprint for every file. It walks both roots
+and compares them with the archive. A file whose inode, size and
+modification time are unchanged needs no reading on most systems,
+because of the <code>fastcheck</code> shortcut.</li>
+<li><strong>Reconciliation.</strong> Each changed path is classified. A
+change on one side only propagates to the other. A change on both sides
+to the same bytes needs no copy. A change on both sides to different
+bytes is a conflict, shown to the user and left alone in batch
+mode.</li>
+<li><strong>Propagation.</strong> Files are copied to a temporary name
+and renamed into place. The archives are written at the end, in a way
+designed to survive a crash, so a stopped run can be run again.</li>
+</ol>
+<p>This design has held up. Its model of a file is deliberately simple:
+a file is a path with a fingerprint and some properties. If one byte
+differs, the file differs. That is the right default, and Semantic
+Unison keeps it. Exact bytes remain the convergence contract throughout
+the fork.</p>
+<p>The simple model has a cost that photographers feel. A large raw file
+is mostly image data that never changes. A new rating in Lightroom
+rewrites a few hundred bytes of XMP inside it. To plain Unison, that is
+a changed file, and if it changed on both sides, a conflict. The next
+chapter is about what can safely be done with more knowledge of the
+file.</p>
+</body>
+</html>

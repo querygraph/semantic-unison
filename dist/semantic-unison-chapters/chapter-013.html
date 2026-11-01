@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Claude Opus 5.5, an LLM, at a human’s request" />
+  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
+  <title>Honest limits</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="book.css" />
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="chapter-001.html" accesskey="u" rel="up">Semantic Unison</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Semantic Unison</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-014.html" accesskey="n" rel="next">How this was built</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="chapter-012.html" accesskey="p" rel="previous">Command reference</a>
+</span>
+</div>
+</nav>
+<h1 data-number="12" id="honest-limits"><span
+class="header-section-number">12</span> Honest limits</h1>
+<p>This chapter lists what the tools do not do, or do not yet do. All of
+it was true at commit <code>c2aa06cc</code>.</p>
+<h2 data-number="12.1" id="packed-roots"><span
+class="header-section-number">12.1</span> Packed roots</h2>
+<ul>
+<li><strong>One-way and local.</strong> A packed root must be local and
+must only receive. It can never be a source, so Unison reads members
+back only to verify them. Two-way packed sync and packed replicas over
+ssh are later work.</li>
+<li><strong>No moves, symlinks or nested directories.</strong> A move, a
+symbolic link, or a directory below the packed depth fails its item with
+a message.</li>
+<li><strong><code>perms = 0</code>, no <code>xattrs</code>, no
+ACLs.</strong> Members keep a mode in the <code>sqlar</code> table, but
+a packed root compares no permissions and stores no extended attributes
+or ACLs. Do not use one for trees where those matter.</li>
+<li><strong>Silent bit rot needs a scrub.</strong> An unchanged
+container is not opened, so nothing notices flipped bits inside it. Only
+<code>unison-packdir verify</code>, run periodically, does.</li>
+<li><strong><code>packmax</code> is not enforced.</strong> The
+preference exists, and its help text says a container that would grow
+past it is refused. Nothing in the source reads it. A synthetic run with
+<code>packmax = 0</code> completed normally.</li>
+<li><strong>The real mirror had not finished.</strong> See the benchmark
+chapter. Batching’s rate on Ten is unmeasured.</li>
+<li><strong>Write amplification.</strong> About 1.6 times plain Unison’s
+bytes for the same change, as measured.</li>
+<li><strong>Metadata-only changes rewrite the member.</strong> Inside a
+container there is no packet rebuild from a clone. For 1.28 MiB files
+this is a small cost, but the semantic transfer path does not
+apply.</li>
+<li><strong>Space is not reclaimed automatically.</strong>
+<code>incremental_vacuum</code> runs only on request, and retained
+deletions keep their bytes until
+<code>repack --drop-retained</code>.</li>
+<li><strong>One format.</strong> Only <code>sqlar</code> is built. ZIP,
+tar and pack formats stayed benchmark comparisons. The backend interface
+is narrow so that one could be added later.</li>
+</ul>
+<h2 data-number="12.2" id="semantic-diff-1"><span
+class="header-section-number">12.2</span> Semantic diff</h2>
+<ul>
+<li><strong>Same view is a rule.</strong> It is a list of tags, not a
+rendering comparison.</li>
+<li><strong>Identical raw image means identical stored bytes.</strong>
+Files that decode to the same samples from different encodings are
+reported as <code>image-differs</code>.</li>
+<li><strong>Unknown file types get <code>differs</code>.</strong> They
+have no image layer to compare.</li>
+<li><strong><code>-preservefull</code> keeps one full record per
+path.</strong> A second version at the same path stays “not safe” until
+handled by hand.</li>
+<li><strong>Local roots only.</strong> <code>-semdiff</code> and
+<code>-semcatchupfrom</code> need exactly two local roots.</li>
+<li><strong>Disk detection uses <code>diskutil</code>,</strong> so it is
+macOS behaviour. <code>-hdd</code> and <code>-ssd</code> override
+it.</li>
+<li><strong>Stale help text.</strong> The <code>-preserve</code> help in
+Unison still says the default archive is
+<code>ROOT2/.dng-compare/NAME-OF-ROOT1</code>. The code uses
+<code>ROOT2/../dng-compare/SHUTTLE</code>, as this book describes.</li>
+</ul>
+<h2 data-number="12.3" id="semantic-transfer-and-merging"><span
+class="header-section-number">12.3</span> Semantic transfer and
+merging</h2>
+<ul>
+<li><strong>Narrow by design.</strong> A grown or moved packet falls
+back to a normal copy. So does anything the profile does not
+recognize.</li>
+<li><strong>Ratings and labels only.</strong> The merge handles the
+supported Rating and Label forms. General RDF structures and relocated
+packets are separate work.</li>
+<li><strong>Declined files are conflicts.</strong> A file the merge
+cannot prove safe stays a normal conflict, and both replicas are
+preserved.</li>
+<li><strong>Second-receiver failure.</strong> There is no distributed
+atomic rename. A rejection at the second receiver can leave the first
+committed. Retry generates the same exact result, if the saved base is
+still available.</li>
+<li><strong>Fixtures are mostly synthetic.</strong> Generated containers
+qualify the sync contract, not Adobe decoding or rendering across real
+cameras. No claim covers every camera, operating system or storage
+device.</li>
+<li><strong>Adobe validation needs a qualified driver.</strong> The
+stock <code>dng_validate</code> command alone does not implement the
+protocol, and SDK sources are not in this repository.</li>
+<li><strong>The overall goal is open.</strong> The handoff of 2026-10-20
+recorded it as active and incomplete. The state moves, and
+<code>OPUS-HANDOFF.md</code> is where it is tracked.</li>
+</ul>
+<h2 data-number="12.4" id="building"><span
+class="header-section-number">12.4</span> Building</h2>
+<ul>
+<li><strong>The <code>make</code> build is broken at a module unrelated
+to this work.</strong> It stops at <code>directoryOwner.cmx</code>, with
+“Could not find the .cmi file for interface” for
+<code>directoryOwner.mli</code>. The Unison session found this during
+milestone 1, and confirmed it on a clean copy of the commit before its
+own changes. The binaries in use are built with dune, which is fine.
+<code>src/Makefile.OCaml</code> also takes the packdir stub, so a
+<code>make</code> build could not have packed roots even when
+fixed.</li>
+<li><strong>Packed roots need the opam <code>packdir</code>
+package.</strong> Without it, dune selects the stub and
+<code>packdepth</code> is refused.</li>
+<li><strong>Platform.</strong> All evidence recorded here is from macOS
+on Intel, with HFS+ and APFS volumes. <code>F_FULLFSYNC</code> is a
+macOS call. Nothing here claims behaviour on other systems.</li>
+</ul>
+</body>
+</html>
