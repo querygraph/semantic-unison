@@ -2,13 +2,13 @@
 
 This book is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's: why the fork exists, what semantic sync and semantic diff should do, the shuttle-disk workflow, packing directories into SQLite archives, and the decisions recorded in these chapters. Claude Opus 5.5, an Anthropic model, wrote the text and the code with him, as the essay in this book describes. Where the text says "the user", it means Alexy. Where it says "Unison session" or "Photo session", it means two LLM sessions whose written records this book draws on.
 
-The book describes the state of the `implementation/final-adobe-qualification` branch on 2026-10-31, at commit `27b9ab1a`, together with the separate [packdir](https://github.com/querygraph/packdir) project and dng-compare's OCaml archive tool. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
+The book describes the state of the `implementation/final-adobe-qualification` branch on 2026-11-02, at commit `9b68266b`, together with the separate [packdir](https://github.com/querygraph/packdir) and [tiffgraph](https://github.com/firstpair/tiffgraph) projects and dng-compare's OCaml archive tool. The first edition, of 2026-10-31, was written before the real mirror finished; this one adds its results, preservation of APFS clones, and the DNG walker's move into tiffgraph. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
 
 Three kinds of statement appear below, and they are kept apart:
 
 - **Measured** figures are quoted from a record, with the conditions under which they were taken.
 - **Estimates** are marked as estimates. Several early ones turned out to be wrong, and the book says which.
-- **Unknown** things are said to be unknown. The most important one is that the real mirror of 3.6 million files had not finished when this was written.
+- **Unknown** things are said to be unknown. In the first edition the most important was whether the real mirror of 3.6 million files would bear out the estimates. It has now finished, and the benchmark chapter gives its numbers.
 
 The contribution policy of upstream Unison does not allow LLM-generated text or code in that project, so nothing here is meant for upstream. See [Why the fork exists](#why-the-fork-exists).
 
@@ -68,6 +68,10 @@ These profiles are registered:
 | `org.firstpair.jpeg-xmp/0` | One standard APP1 XMP packet before the first scan | `semanticprofile` |
 
 The contract for all the transfer profiles is narrow on purpose. Source and destination must have the same length and the same packet offset and length, and every byte outside the packet must match. When the XMP grows or moves, the profile declines and Unison copies the file normally. In `dng-xmp/0`, a MakerNote, `DNGPrivateData` or an unknown tag also declines, because "merely preserving the bytes of an unparsed pointer does not establish that its referent is outside XMP."
+
+The DNG profiles' grammar lives in its own library, [tiffgraph](https://github.com/firstpair/tiffgraph), with OCaml, OxCaml and Rust builds. It is the bounded walk that finds the packet, protects every other extent and lists a file's regions. It moved there unchanged on 2026-11-02, so that other tools could use the same grammar. The fork's `DngSemantic` module is now a thin adapter that binds tiffgraph's grammars (`v0`, `v1`, `merge_only` and `layout`) to the profile names above. The fork's scanner gave byte-identical reports on 328 DNGs before and after the move, and the DNG tests pass against the library. Widening a tiffgraph grammar widens a negotiated profile, so the two change together.
+
+The **preserved digest** a profile computes, a SHA-256 of every byte outside the editable region with the layout bound in, is also useful on its own. Two files with the same preserved digest under the same profile differ, if at all, only in their XMP. phidentify, a library of photo-file identities, computes it independently in Rust over tiffgraph's regions. On 60 randomly chosen catalog DNGs, its digests and the fork's agreed on every file.
 
 ## What a semantic transfer does
 
@@ -392,7 +396,7 @@ A rerun, or `-summarize`, reclassifies earlier results under the current rules f
 The one command to remember is this one:
 
 ```sh
-unison /Volumes/Kolobok/foto /Volumes/Photo/foto -semdiff -sameview -preservefull -v
+unison /Volumes/Shuttle/foto /Volumes/Archive/foto -semdiff -sameview -preservefull -v
 ```
 
 The first root is the shuttle and the second is the long-term root. Both must be local. The run has the following shape.
@@ -470,9 +474,9 @@ Nothing that was already in `foto/` changed.
 
 ## Where things are kept
 
-![Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original.](book/diagrams/review-placement.svg){fig-alt="Two panels. Left, default or -tree: under /Volumes/Photo, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle's version; a jpg root gets its own subtree, and dng-compare/Kolobok-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG."}
+![Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original.](book/diagrams/review-placement.svg){fig-alt="Two panels. Left, default or -tree: under /Volumes/Archive, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle's version; a jpg root gets its own subtree, and dng-compare/Shuttle-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG."}
 
-Next to the long-term root `R`, for example `/Volumes/Photo/foto`:
+Next to the long-term root `R`, for example `/Volumes/Archive/foto`:
 
 | Option | Kept in |
 |:--------------|:-------------------------------------------------------|
@@ -484,7 +488,7 @@ Next to the long-term root `R`, for example `/Volumes/Photo/foto`:
 | `-suffix` | Beside the long-term file as `NAME_2.EXT`, `NAME_3.EXT`, and so on |
 | `-suffix=SUF` | Beside the long-term file as `NAME_SUF.EXT` |
 
-`SHUTTLE` is built from the left root's last two path components, so `/Volumes/Kolobok/foto` gives `Kolobok-foto`. `-suffix` with a value must be written `-suffix=SUF`, because Unison would otherwise take a separate word as a root or profile name.
+`SHUTTLE` is built from the left root's last two path components, so `/Volumes/Shuttle/foto` gives `Shuttle-foto`. `-suffix` with a value must be written `-suffix=SUF`, because Unison would otherwise take a separate word as a root or profile name.
 
 Conflict copies are verified by SHA-256 against the shuttle file and never replace an existing file. An identical copy from an earlier run is reused.
 
@@ -515,7 +519,7 @@ It differs from the Python tools in four ways. `preserve` works on listed pairs 
 To get a preserved file back, restore it into a new location:
 
 ```sh
-dng-archive restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG
+dng-archive restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG
 ```
 
 ## Disks and progress
@@ -537,19 +541,19 @@ A progress line every minute gives files and bytes compared, MiB/s, files/s, the
 
 ## The problem
 
-Lightroom's preview cache on Quasar held 3,616,982 files, 4.43 TiB in all, about 1.28 MiB each, in a fixed two-level layout:
+A Lightroom preview cache on an APFS source disk held 3,616,982 files, 4.43 TiB in all, about 1.28 MiB each, in a fixed two-level layout:
 
 ```text
 <H>/<HHHH>/<FILE-UUID>-<digest>_<longEdge>
 ```
 
-There are 16 top directories and 4,096 under each, so 65,536 leaf directories, averaging about 55 files and 71 MiB. It was to be mirrored one way, by Unison, to Ten: a single 20 TB spinning disk that stays Journaled HFS+. The user decided against APFS for it, because APFS on a spinning disk is slow with millions of small files. So Ten has no file clones, and the destination for 3.6 million more files is one mechanical arm.
+There are 16 top directories and 4,096 under each, so 65,536 leaf directories, averaging about 55 files and 71 MiB. It was to be mirrored one way, by Unison, to a mirror disk: a single 20 TB spinning disk that stays Journaled HFS+. The user decided against APFS for it, because APFS on a spinning disk is slow with millions of small files. So the mirror disk has no file clones, and the destination for 3.6 million more files is one mechanical arm.
 
 Three costs of millions of plain files follow. Creating them means many small metadata writes. Every run has to stat them. And anything else that later walks the disk, to back it up, check it or delete it, pays again. The proposal, which came from the Photo session at the user's request, was that one replica could store chosen directories packed into container files, while the other stayed a plain tree, with Unison still reconciling per member path.
 
 ## One `.sqlar` per directory
 
-A packed directory `D` is one file `D.sqlar` beside where `D` would be, holding `D`'s files as members. For the preview cache, each leaf `<H>/<HHHH>/` becomes `<H>/<HHHH>.sqlar`. Ten then holds 65,536 files instead of 3,616,982.
+A packed directory `D` is one file `D.sqlar` beside where `D` would be, holding `D`'s files as members. For the preview cache, each leaf `<H>/<HHHH>/` becomes `<H>/<HHHH>.sqlar`. The mirror disk then holds 65,536 files instead of 3,616,982.
 
 SQLite's archive format won the comparison on the criteria that mattered: reading one member by B-tree lookup, updating one member in place, transactions for crash safety, and restoring with a stock tool. macOS's own `sqlite3` can extract one with no packdir at all:
 
@@ -583,7 +587,7 @@ Container stamps and members persist in `pd<hash>` in the Unison directory. A co
 
 ## Kept originals beside containers
 
-The first design assumed an empty target. Then the user decided that the originals Photo had preserved would stay in place on Ten, under `<H>/<HHHH>/`, so a plain directory `D/` and its container `D.sqlar` can sit side by side. That was 74,981 files, and the rule became:
+The first design assumed an empty target. Then the user decided that the originals Photo had preserved would stay in place on the mirror disk, under `<H>/<HHHH>/`, so a plain directory `D/` and its container `D.sqlar` can sit side by side. That was 74,981 files, and the rule became:
 
 - The plain `D/` is pre-existing content. Packing never writes, renames or deletes anything under it.
 - A file whose name already exists as a plain file in `D/`, with the same size and SHA-256, is not packed. It is logged as `present-plain`. Photo had found 262 such identical files.
@@ -664,15 +668,15 @@ Error: packed roots compare no permissions: set perms = 0
 A packed root's settings fit in a profile. The mailbox lists the settings of the real mirror, and with generic paths they come to this:
 
 ```text
-root = /Volumes/Quasar/previews
-root = /Volumes/Ten/previews
-force = /Volumes/Quasar/previews
-nodeletion = /Volumes/Ten/previews
+root = /Volumes/Source/previews
+root = /Volumes/Mirror/previews
+force = /Volumes/Source/previews
+nodeletion = /Volumes/Mirror/previews
 perms = 0
 times = true
 clone = off
 packdepth = 2
-packroot = /Volumes/Ten/previews
+packroot = /Volumes/Mirror/previews
 packworkers = 4
 packbarrier = 4
 ```
@@ -708,10 +712,10 @@ CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);  -- format, epo
 - **Pragmas.** `page_size = 65536`, `auto_vacuum = INCREMENTAL`, `journal_mode = DELETE`, `synchronous = FULL`.
 - **Blobs** are stored raw, never compressed, so `sz = length(data)`. `sha256` holds lower-case hex text, and `fp` the raw MD5.
 - **Names** are plain file names. Containers are per directory, so no member name has a slash.
-- **Time.** `mtime_ns` keeps nanoseconds, more than Ten holds for plain files, since HFS+ stores whole seconds. `sqlite3 -AxC` restores mtimes to the second, and packdir's own restore is exact.
+- **Time.** `mtime_ns` keeps nanoseconds, more than the mirror disk holds for plain files, since HFS+ stores whole seconds. `sqlite3 -AxC` restores mtimes to the second, and packdir's own restore is exact.
 - **Retained deletions.** A deletion on the plain side, when `nodeletion` is not set, marks the member `retained_deleted = 1`. The bytes stay, and the member drops out of Unison's view.
 
-The journal choice has a history. WAL writes every page twice and leaves `-wal` and `-shm` files. A rollback journal saves only the old contents of pages it changes, and new blobs are written once. `TRUNCATE`, the first choice, turned out to leave an empty `D.sqlar-journal` beside every container, which would have doubled the file count on Ten to 131,072. `DELETE` leaves each container as a single file between runs.
+The journal choice has a history. WAL writes every page twice and leaves `-wal` and `-shm` files. A rollback journal saves only the old contents of pages it changes, and new blobs are written once. `TRUNCATE`, the first choice, turned out to leave an empty `D.sqlar-journal` beside every container, which would have doubled the file count on the mirror disk to 131,072. `DELETE` leaves each container as a single file between runs.
 
 An update is cheap. On a 55-file, 70 MiB container on the internal SSD, updating one 1.7 MiB member wrote 36 pages of 64 KiB, 2.2 MiB in all, and the container grew by 0.1 MiB and stayed there over ten repeated updates, because freed pages are reused.
 
@@ -757,7 +761,9 @@ The design that the user approved separates the two:
 
 ## The pending list and recovery
 
-`pd<hash>.pending` in the Unison directory lists each container, fsynced, before its first write in a run. After a crash or power loss, the list names everything that might not have reached the platter whole.
+`pd<hash>.pending` in the Unison directory lists each container, fsynced, before its first write in a run. A finished job adds a `done` line for its container, and each barrier adds a `barrier` line. A container counts as covered once its job finished before a barrier. Being listed alone proves nothing, because other jobs write through a barrier. After a crash or power loss, the list names exactly what might not have reached the platter whole.
+
+This matters for restarts. Before the `done` and `barrier` lines, a mirror restarted part way through had to verify everything it had written in the run: 1,196 GiB, about six hours of reading, for a stop that had lost nothing. Now a restart verifies only the containers no barrier covered.
 
 On the next run, a pending container, or one whose file no longer matches the state, is verified before use with `PRAGMA integrity_check` and every member's SHA-256.
 
@@ -771,9 +777,63 @@ On the next run, a pending container, or one whose file no longer matches the st
 
 There is one thing this does not catch. Silent bit rot in a container whose file is unchanged is seen only by `unison-packdir verify`, run as a periodic scrub. An unchanged stamp means the container is not opened, which is the point of the design, and it also means nobody looks inside. `-debug packdir` shows each barrier.
 
+# APFS clones
+
+## What is lost today
+
+On APFS, `cp -c` and Finder's Duplicate make a **clone**: a second file that shares the first one's blocks until either is written. Photo workflows make many of them. One application clones another's previews into its own folders instead of copying them, and catalogs share a store of previews. A sync that copies files turns every clone into a full copy. The data survives, but the space doubles and the relationship is gone.
+
+Plain Unison loses them, and so did this fork until 2026-11-02. A measured local sync onto a separate APFS volume delivered every clone as an independent copy with a refcount of 1, including clones made in the same run and a new clone of a file already synced.
+
+## What counts as a clone
+
+APFS reports two attributes through `getattrlist`. `ATTR_CMNEXT_CLONEID` is shared by files cloned from one another, and `ATTR_CMNEXT_CLONE_REFCNT` says how many files share it. Files on one volume with the same clone ID and a refcount above 1 form a clone group. Writing one byte to a member gives it a new clone ID, which takes it out of the group. An independent copy is never in a group, even with identical bytes.
+
+The clone ID is a statement about structure, not proof of content. Every use below also compares contents: Unison's fingerprint in a sync, and the SHA-256 in packdir. A pair that fails the check is two ordinary files. **Only exact clones are kept as clones.** Identical files that were independent on the source stay independent on the destination.
+
+## File to file
+
+With `clones = true`, before the receiver transfers a new file, it lists candidates on its own replica with the same fingerprint. Those are files it already holds, from a hint table, and files it has created earlier in this run. It sends the source one request with the new file's path and the candidates' paths. The source compares clone IDs on its own disk and answers which candidates are clones of the file.
+
+The receiver then clones a confirmed candidate with `clonefile`, checks the result's fingerprint, sets its properties, and publishes it through Unison's ordinary rename. Only the original crosses the wire; each clone costs one request and one `clonefile`. Whichever member of a group arrives first becomes the original for the rest. A file waits only for earlier files the source confirmed, so waits can't form a cycle.
+
+The request is negotiated as the feature `clone-pairs-v0`. With a peer that lacks it, nothing changes, and the `clones` preference is not even sent, since an older peer would stop at an unknown preference. With `clones` on, Unison's older "copy a local file with the same fingerprint" shortcut copies bytes instead of cloning. That shortcut can't know whether two identical files were clones, so leaving it to clone would make independent copies into clones.
+
+The tests sync onto a scratch APFS disk image and read clone IDs back. They cover groups of two and three across directories, a new clone of a file synced earlier, an independent copy, and a clone changed on the source after cloning, which must arrive as an ordinary file. They also cover a remote receiver over a pipe, a peer built without the feature, and `clones` off. All pass on stock OCaml and OxCaml.
+
+## Into a packed root
+
+A packed root's source is local, so the writer reads clone IDs directly. Each container's files are split into data and references:
+
+- **A reference:** a file in a clone group whose bytes are already packed, in this run or an earlier one whose source file is still in the group.
+- **Data:** any other file. The first file of a group, in path order, becomes the group's original.
+
+Data is written first, then the references. A reference is a row in packdir's `packdir_clone` table naming its original by a path relative to its container's directory, so it can point into another container. It stores no bytes. packdir checks the SHA-256 when it writes the reference, and a container whose references don't check out stores those files as data instead.
+
+On a disk that can't hold clones, such as an HFS+ mirror, this is the only way a clone group's bytes are stored once.
+
+## Out of packdir
+
+A packed root is never a source for Unison, so restoring goes through `unison-packdir unpack-tree`. It restores every file that holds data first, then makes each clone with `clonefile` from its original's restored file. When the original wasn't part of the restore, or the destination can't clone (another volume, a file system other than APFS, another system), it writes the bytes instead. Its summary counts both:
+
+```text
+{"containers": 3, "files": 7, "cloned": 3, "copied": 0}
+```
+
+Whatever changes or removes an original in packdir first gives its clones bytes of their own. A container that holds clone references is marked `unison-packdir/2`, so a build from before clones refuses it instead of missing members. packdir's manual has the format, and a recipe for bringing clones back with stock `sqlite3` and `cp -c`.
+
+## Groups across two trees
+
+A clone group is kept only within one sync. When the clones and their originals live in two trees synced separately, such as one application's catalogs cloned from another application's previews, two ways are open:
+
+- **One root over both.** A root can be widened without redoing the mirror: move the packed tree into a subdirectory on the mirror disk, rewrite the packed-root state under the new root's name, and nest Unison's archive the same way, so the next run sees the old tree as unchanged. One packing depth must then fit both trees.
+- **A second packed root that references the first.** It is found through the first root's recorded fingerprints and confirmed by clone ID on the source. Its references point across, so the two packed roots must stay side by side.
+
+Neither is built yet. Which one fits depends on the second tree's layout and on what in it can be rebuilt rather than mirrored.
+
 # The benchmark story
 
-This chapter is the record of a day: 2026-10-31, from the first mailbox message at 06:58Z. All measurements are from the mailbox and `docs/packdir-design.md`. All of them used one Mac with 128 GiB of RAM, with Ten, a SATA hard disk on HFS+, as the target. None were repeated by the session writing this book.
+This chapter is the record of a day: 2026-10-31, from the first mailbox message at 06:58Z. All measurements are from the mailbox and `docs/packdir-design.md`. All of them used one Mac with 128 GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the target. None were repeated by the session writing this book.
 
 ## What was estimated first
 
@@ -784,20 +844,20 @@ The proposal and the first replies contained several figures, and one design cho
 | Cache of about 9.6 million files, about 0.6 MiB each | 3,616,982 files, 4.43 TiB, mean 1.28 MiB | 9.6 million was the inode count of the whole volume, including pipeline staging |
 | 78 to 150 files per leaf | About 55 mean, 16 to 108 over 400 sampled leaves | Three hand-picked leaves |
 | Plain Unison first run: 20 to 40 h, limited by about 200 to 270 IOPS | Linear from a measured 152 MiB/s: about 8.5 h | Writes of 1.28 MiB files on this disk were not seek-bound at this scale |
-| `F_FULLFSYNC` update: about 50 to 150 ms per container on Ten | About 0.9 s per container | The drive's cache flush costs far more than guessed |
+| `F_FULLFSYNC` update: about 50 to 150 ms per container on the mirror disk | About 0.9 s per container | The drive's cache flush costs far more than guessed |
 | `journal_mode = TRUNCATE` is the right journal | It leaves an empty `-journal` beside every container | Found by the prototype's tests, which then changed the design |
 
 The Photo session corrected the first two itself in P-2. The last line was caught the same morning. The third was the benchmark's first surprise.
 
 ## The test set
 
-The Photo session wrote a generator that took the real distribution from a stat-only sample of 400 leaves and produced `leafset-v1`: 50.0 GiB, 39,903 files, 694 leaves, with random bytes that are incompressible like JPEG, and random names. Nothing real was in it. It reproduced whole groups of levels with real sizes. Each method wrote to a new folder on Ten.
+The Photo session wrote a generator that took the real distribution from a stat-only sample of 400 leaves and produced `leafset-v1`: 50.0 GiB, 39,903 files, 694 leaves, with random bytes that are incompressible like JPEG, and random names. Nothing real was in it. It reproduced whole groups of levels with real sizes. Each method wrote to a new folder on the mirror disk.
 
 ## First copy: plain files are fast
 
-Source read from memory for every method, so the comparison is Ten's cost alone. Each method ends with `sync`.
+Source read from memory for every method, so the comparison is the mirror disk's cost alone. Each method ends with `sync`.
 
-| Method | Time | Throughput | Ten ops/s |
+| Method | Time | Throughput | Target ops/s |
 |:-----------------------------------|-------:|-----------:|---------:|
 | `cp -R` | 259 s | 198 MiB/s | 312 |
 | Piped `tar` to `tar` | 266 s | 192 MiB/s | 303 |
@@ -806,7 +866,7 @@ Source read from memory for every method, so the comparison is Ten's cost alone.
 | `sqlar`, 1 worker, `F_FULLFSYNC` per container | 1,321 s | 39 MiB/s | 120 |
 | Sparse bundle | failed | | |
 
-This was not the result anyone wanted for a packing project. Plain Unison was not seek-bound. The prototype was four times slower than it, for two reasons, and both were understood the same hour: it was CPU-bound on one thread, and it flushed the drive's cache once per container. The sparse-bundle method failed because `hdiutil attach` got "Permission denied" for a bundle on Ten, and it was later dropped.
+This was not the result anyone wanted for a packing project. Plain Unison was not seek-bound. The prototype was four times slower than it, for two reasons, and both were understood the same hour: it was CPU-bound on one thread, and it flushed the drive's cache once per container. The sparse-bundle method failed because `hdiutil attach` got "Permission denied" for a bundle on the mirror disk, and it was later dropped.
 
 Workers fixed the first problem. The second needed a design decision. Three-way comparison on the full 50 GiB with 4 workers:
 
@@ -823,7 +883,7 @@ The barrier kept the guarantee that matters for a mirror, at 8% over no flush, a
 
 A 1% change set then replaced, added and deleted files in 12 of 694 leaves, 197 MiB in all. Every method stored the same 157 files.
 
-| Method | Time | Ten I/O |
+| Method | Time | Target I/O |
 |:----------------------|--------:|----------------------:|
 | Plain Unison | 6.6 s | 378 MiB, 4,031 ops |
 | `sqlar-w4-nosync` | 61.6 s | 1,360 MiB, 15,800 ops |
@@ -835,7 +895,7 @@ Packing lost by roughly ten to twenty times, and the cause was specific. The pro
 
 The fix is the design point mentioned earlier: record each container's inode, size and mtime, and open only containers whose file changed or that have something to store. A rerun with nothing new then took 1.3 s for 694 containers. A second change set, with the scan timed apart from the transfer:
 
-| Method | Total | Scan | Containers opened | Ten I/O |
+| Method | Total | Scan | Containers opened | Target I/O |
 |:--------------------|------:|------:|---------------:|---------:|
 | Plain Unison | 6.6 s | 2.4 s | n/a | 404 MiB |
 | `sqlar` | 8.8 s | 0.31 s | 12 of 694 | 647 MiB |
@@ -847,14 +907,14 @@ The fix is the design point mentioned earlier: record each container's inode, si
 
 ## The cold scan, partly
 
-Every figure above came from a warm cache. Ten's catalog for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6 million more files is a different thing, and after a reboot it would have to be read from the platter. The deciding measurement would have been a cold scan.
+Every figure above came from a warm cache. The mirror disk's catalog for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6 million more files is a different thing, and after a reboot it would have to be read from the platter. The deciding measurement would have been a cold scan.
 
-| No-change pass, after `sudo purge` | Total | Scan | Ten I/O |
+| No-change pass, after `sudo purge` | Total | Scan | Target I/O |
 |:--------------------------------|-------:|-------:|-----------------:|
 | Plain Unison | 16.1 s | 11.8 s | 56 MiB, 4,755 ops |
 | `.sqlar`, 4 workers, barrier | 1.0 s | 0.6 s | 16 MiB, 166 ops |
 
-This was only partly cold. `purge` left Ten's catalog cached: a stat walk of the plain copy afterwards took 0.21 s. Plain Unison's extra reads look like the per-file Finder-info and resource-fork lookups it does on macOS, from HFS+'s attributes tree, though that was an inference. A fully cold test needed Ten unmounted between steps, and from that session `diskutil unmount` hung twice, unattended, for 16 and 12 minutes. The Unison session called that its own mistake, since the command should have had a timeout. The user chose to stop there.
+This was only partly cold. `purge` left the mirror disk's catalog cached: a stat walk of the plain copy afterwards took 0.21 s. Plain Unison's extra reads look like the per-file Finder-info and resource-fork lookups it does on macOS, from HFS+'s attributes tree, though that was an inference. A fully cold test needed the mirror disk unmounted between steps, and from that session `diskutil unmount` hung twice, unattended, for 16 and 12 minutes. The Unison session called that its own mistake, since the command should have had a timeout. The user chose to stop there.
 
 ## Where the benchmark left things
 
@@ -867,36 +927,40 @@ This was only partly cold. `purge` left Ten's catalog cached: a stat walk of the
 
 Extrapolations to the full cache were linear and were labelled as such: 3.6 million files is about 90 times this set, and 65,536 containers is about 94 times. They gave a first copy of about 8.5 h either way, a warm scan of about 3.5 min plain against about 30 s packed, and a cold scan of about 24 min plain against about 1.5 min packed, with the plain figure as a lower bound.
 
-The trade-off was the user's to judge, and it was put plainly. Plain files are simpler, need no new code and stay browsable with any tool. Packed makes runs much cheaper to scan and leaves Ten with 65,536 files, at the cost of a new Unison feature, a SQLite tool to look inside, and about 1.6 times the bytes written per change.
+The trade-off was the user's to judge, and it was put plainly. Plain files are simpler, need no new code and stay browsable with any tool. Packed makes runs much cheaper to scan and leaves the mirror disk with 65,536 files, at the cost of a new Unison feature, a SQLite tool to look inside, and about 1.6 times the bytes written per change.
 
 The Photo session recommended running a plain mirror first, timing a cold pass on the real files, and switching only if that was too slow. It was a reasonable recommendation. The user chose packed, and confirmed that after hearing it.
 
 ## Real Unison, and a new estimate
 
-After the integration, real Unison packed the 50 GiB set onto Ten:
+After the integration, real Unison packed the 50 GiB set onto the mirror disk:
 
 | Writer | Total | Propagation | Throughput |
 |:-------------------------|-------:|-----------:|-----------------:|
 | Asynchronous | 424 s | 334 s | 121 MiB/s overall |
 | First, blocking | 538 s | 448 s | 95 MiB/s |
 
-The propagation figure matches the prototype's 340 s. The extra 90 s is Unison's first-run MD5 of every Quasar file, which the prototype had been spared, and a quiet rerun took 3.2 s. So the honest comparison with plain Unison's 337 s is 424 s, not 340 s. The extrapolation became about 10.6 h for a first full mirror against about 8.4 h plain. That was still an estimate.
+The propagation figure matches the prototype's 340 s. The extra 90 s is Unison's first-run MD5 of every source file, which the prototype had been spared, and a quiet rerun took 3.2 s. So the honest comparison with plain Unison's 337 s is 424 s, not 340 s. The extrapolation became about 10.6 h for a first full mirror against about 8.4 h plain. That was still an estimate.
 
 ## The surprise: file by file
 
 The real mirror started, and it was much slower than 10.6 h would imply.
 
-The set `leafset-v1` had been written to an empty target. Ten was not empty. It held the kept originals, and a check during the run found that 41,549 of the 65,536 leaves had a plain directory on the target. As described in the previous chapter, a leaf with a plain directory on the target reaches the writer file by file, not as one directory item. Each file then had its own process and its own SQLite transaction. The commit message records the result: about 25 files/s on Ten.
+The set `leafset-v1` had been written to an empty target. The mirror disk was not empty. It held the kept originals, and a check during the run found that 41,549 of the 65,536 leaves had a plain directory on the target. As described in the previous chapter, a leaf with a plain directory on the target reaches the writer file by file, not as one directory item. Each file then had its own process and its own SQLite transaction. The commit message records the result: about 25 files/s on the mirror disk.
 
 No benchmark had exercised this. The design had thought through what kept originals meant for correctness, in detail. Nobody had asked what they meant for how Unison's items are shaped, and the leaf set had no plain directories to reveal it.
 
 As a rough estimate, and assuming leaves of equal size: 41,549 leaves are about 63% of the cache, or about 2.3 million files, and at 25 files/s that is about 25 hours for those leaves alone. This is arithmetic on one rate, not a measurement of the mirror. The session's own note at the time said roughly 30 hours or more.
 
-The fix was commit `5c95d940`, per-container queues. On the internal disk the rate went from 67 to 187 files/s. Its rate on Ten is not yet measured.
+The fix was commit `5c95d940`, per-container queues. On the internal disk the rate went from 67 to 187 files/s. Its rate on the mirror disk is not yet measured.
 
-**The state of the mirror.** When this was written, the real mirror of 3.6 million files had not finished. There is no measured figure for its total time, for its final scan time warm or cold, or for batching on Ten. Every full-scale number in this chapter is an extrapolation. The claim that packing pays off at full scale remains a prediction until those measurements exist.
+**The mirror finished** on 2026-11-01. Unison reported `1813638 items transferred, 62925 skipped, 0 failed`. The mirror disk held all 65,536 containers, 4,610 GiB, with none damaged and the pending list empty. The 62,925 skips were the expected ones: files only the mirror disk had, which `nodeletion` protected. That is also why the run exited 1, which in Unison means only that items were skipped. All 74,981 kept originals were present at the right size afterwards. A later member listing, taken from Unison's own state file in seconds rather than by opening the containers for hours, found 3,616,982 members.
 
-**The scan that survived.** When the file-by-file problem was found, the mirror had to be stopped and restarted, and the session said the 5-hour scan would be lost. That was wrong, and it was stated without checking. Unison keeps a fingerprint cache for interrupted scans, 308 MB for this cache, and the restarted run reloaded it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.
+**The collector, not the disk.** Part way through, the packing rate kept rising and falling, between about 100 and 150 MB/s. The obvious suspects were the source disk's layout and the mirror disk itself, and the first guess named the wrong one. The rate followed the garbage collector instead. Each worker is a forked process that inherits Unison's whole heap, about 6.5 GB on this root. It then spent most of its time marking that heap, which it would never use, while it allocated file contents. A worker lives for one job, so it now turns its collector nearly off. After a restart with that change, packing held about 148 MB/s for 6.9 hours, against about 115 MB/s on average before it.
+
+**What is still unmeasured.** The run's total time is not a clean figure: it was stopped and restarted for the fixes above. Batching's rate on the mirror disk, and a fully cold no-change scan at full scale, are still not measured on their own.
+
+**The scan that survived.** When the file-by-file problem was found, the mirror had to be stopped and restarted, and the session said the 5-hour scan would be lost. That was wrong, and it was stated without checking. Unison keeps a fingerprint cache for interrupted scans, 308 MB for this cache, and the restarted run reloaded it: source-disk reads fell from 268 MB/s to about 1.3 MB/s.
 
 ## What the day showed
 
@@ -1008,7 +1072,7 @@ A run with `packdepth` needs all of the following, and each is refused with a me
 - A build with the packdir library. Without it, `packdepth` is refused.
 - `packdepth` not negative.
 
-`clone = off` is what the mirror's profile uses, and `nodeletion` on the packed root keeps kept originals quiet. `-debug packdir` shows barriers.
+`clone = off` is what the mirror's profile uses, and `nodeletion` on the packed root keeps kept originals quiet. With `clones = true`, files that are APFS clones of one another on the source are stored once, as packdir references; see [APFS clones](#apfs-clones). `-debug packdir` shows barriers.
 
 On the packed root, files directly in a packed directory are packed, and files above that depth stay plain. A subdirectory of a packed directory, a move, and a symbolic link are each refused with a message.
 
@@ -1018,7 +1082,7 @@ These are one program under two names. Container commands:
 
 ```text
 packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]
-                  [--barrier-gib G]
+                  [--barrier-gib G] [--clones]
 packdir unpack-tree OUT DEST [--skip-retained]
 packdir repack C.sqlar... [--drop-retained]
 packdir verify C.sqlar...
@@ -1033,6 +1097,7 @@ packdir restore C.sqlar OUT_DIR [--skip-retained]
 | | `--wal` | off | WAL journal, for benchmarks |
 | | `--batch-mib M` | 256 | Member data per transaction |
 | | `--barrier-gib G` | 4 | GiB between `F_FULLFSYNC` barriers |
+| | `--clones` | off | Keep each APFS clone of another file in the tree as a reference to it |
 | `unpack-tree` | `--skip-retained` | off | Every container back to a plain tree. Never overwrites |
 | `repack` | `--drop-retained` | off | Rebuild compactly, verified before replacing |
 | `verify` | | | `integrity_check`, then every member's SHA-256 and fingerprint. Exit 1 on any problem. Never creates a file |
@@ -1088,6 +1153,7 @@ These are the main preferences of the sync engine, with defaults from the source
 | Preference | Default | Meaning |
 |:-----------------------------|:---------|:--------------------------------------|
 | `clone` | `auto` | Receiver clone staging: `auto`, `off` or `require` |
+| `clones` | false | Preserve APFS clones: a file that is a clone of another on the source arrives as a clone of the corresponding original. File to file it needs `clone` not `off` and a peer with `clone-pairs-v0`; into a packed root, neither |
 | `semanticdng` | false | Built-in DNG profiles, for exact metadata transfer |
 | `semanticprofile` | none | Enable a registered profile by versioned ID. Repeatable |
 | `dngmergeadmit` | none | Admit a field in the built-in merge as `IFD:TAG:TYPE`, with IFD one of `Image`, `Exif`, `GPS` or `Interop`. Repeatable |
@@ -1108,7 +1174,7 @@ The built-in merge is not a preference of its own. It is the rule `merge = Name 
 
 # Honest limits
 
-This chapter lists what the tools do not do, or do not yet do. All of it was true at commit `c2aa06cc`.
+This chapter lists what the tools do not do, or do not yet do. All of it was true at commit `9b68266b`.
 
 ## Packed roots
 
@@ -1116,11 +1182,18 @@ This chapter lists what the tools do not do, or do not yet do. All of it was tru
 - **No moves, symlinks or nested directories.** A move, a symbolic link, or a directory below the packed depth fails its item with a message.
 - **`perms = 0`, no `xattrs`, no ACLs.** Members keep a mode in the `sqlar` table, but a packed root compares no permissions and stores no extended attributes or ACLs. Do not use one for trees where those matter.
 - **Silent bit rot needs a scrub.** An unchanged container is not opened, so nothing notices flipped bits inside it. Only `unison-packdir verify`, run periodically, does.
-- **The real mirror had not finished.** See the benchmark chapter. Batching's rate on Ten is unmeasured.
+- **Some full-scale figures are still missing.** The real mirror finished (see the benchmark chapter), but its total time includes restarts, and batching's rate and a cold full-scale scan are not measured on their own.
 - **Write amplification.** About 1.6 times plain Unison's bytes for the same change, as measured.
 - **Metadata-only changes rewrite the member.** Inside a container there is no packet rebuild from a clone. For 1.28 MiB files this is a small cost, but the semantic transfer path does not apply.
 - **Space is not reclaimed automatically.** `incremental_vacuum` runs only on request, and retained deletions keep their bytes until `repack --drop-retained`.
 - **One format.** Only `sqlar` is built. ZIP, tar and pack formats stayed benchmark comparisons. The backend interface is narrow so that one could be added later.
+
+## Clones
+
+- **macOS and APFS only.** Clone IDs come from `getattrlist`; elsewhere nothing is a clone and nothing changes.
+- **Within one sync and one volume.** A clone group is kept only among files the same run sees, and clones can't span volumes on the receiving side.
+- **New and changed files only.** Files already synced or packed as full copies stay so; they are not regrouped.
+- **Some paths untested at scale.** The wait for an earlier in-flight original is reviewed but not reached by any test, and nothing has run on a real catalog yet.
 
 ## Semantic diff
 
@@ -1146,6 +1219,7 @@ This chapter lists what the tools do not do, or do not yet do. All of it was tru
 
 - **The `make` build is broken at a module unrelated to this work.** It stops at `directoryOwner.cmx`, with "Could not find the .cmi file for interface" for `directoryOwner.mli`. The Unison session found this during milestone 1, and confirmed it on a clean copy of the commit before its own changes. The binaries in use are built with dune, which is fine. `src/Makefile.OCaml` also takes the packdir stub, so a `make` build could not have packed roots even when fixed.
 - **Packed roots need the opam `packdir` package.** Without it, dune selects the stub and `packdepth` is refused.
+- **DNG profiles need the opam `tiffgraph` package.** Both builds link it; `src/Makefile.OCaml` finds it beside the standard library.
 - **Platform.** All evidence recorded here is from macOS on Intel, with HFS+ and APFS volumes. `F_FULLFSYNC` is a macOS call. Nothing here claims behaviour on other systems.
 
 # How this was built
@@ -1163,7 +1237,7 @@ They cooperated through two files in `docs/`, under rules the Photo session wrot
 
 Between 06:58Z and 20:32Z on 2026-10-31, UTC by the messages' own headings, the mailbox carried seven messages from Photo and 21 from Unison. The two-file rule worked well for two writers, and the append-only rule kept every wrong number in place next to its correction. U-17 exists only to say that U-16 named a commit hash written before the commit did, and which hash was right. P-3 corrects the timestamp in P-2.
 
-`blocked-on-user` mattered most. The list of things decided by the human includes: Ten stays HFS+, the originals stay, a changed original is kept updated in the container, the benchmark folder, the barrier, deleting three stray copies, packed over plain, and when to start. No session started the mirror until the user said go. The Unison session had written in U-20: "I won't change the profile or start the run until the user says go."
+`blocked-on-user` mattered most. The list of things decided by the human includes: the mirror disk stays HFS+, the originals stay, a changed original is kept updated in the container, the benchmark folder, the barrier, deleting three stray copies, packed over plain, and when to start. No session started the mirror until the user said go. The Unison session had written in U-20: "I won't change the profile or start the run until the user says go."
 
 ## Milestones
 
@@ -1178,6 +1252,10 @@ The integration had six milestones, each tested on synthetic data on stock OCaml
 | 5, 6 | `e401f408` | Parallel writer, the packed marker, `unison-packdir` beside `unison` |
 | | `5c95d940` | One transaction per container for file-by-file items |
 | | `c2aa06cc` | The format and commands moved to the separate packdir project |
+| | `e46abd19` | Packing workers leave the inherited heap alone |
+| | `4c107313` | A restart verifies only containers no barrier covers |
+| | `24dc7298` | The DNG walker comes from tiffgraph |
+| | `e451e6b6` | APFS clones preserved, file to file and into packed roots |
 
 Controls at the last of these: detection 11, write 28, recovery 21, parallel 11, marker 8, config 16, semdiff 37, and Unison's `-selftest`.
 
@@ -1189,9 +1267,9 @@ The essay says, "A test can pass because its fixture missed the dangerous case."
 
 **A check that never ran.** `-packdepth -1` was accepted, because setup only ran for a positive depth, so the negative-depth check inside it was unreachable, and Unison synchronized normally. Setup now runs for any nonzero depth, and a control covers it. The root check in the same milestone crashed because it ran before Unison had set up its roots.
 
-**A retained deletion that updated one archive.** A retained deletion first updated only Ten's archive, so Unison found the two archives different and refused to save either. Both are updated now, as `Files.delete` does. Milestone 3's controls caught this, and U-19 reports it.
+**A retained deletion that updated one archive.** A retained deletion first updated only the packed root's archive, so Unison found the two archives different and refused to save either. Both are updated now, as `Files.delete` does. Milestone 3's controls caught this, and U-19 reports it.
 
-**The marker check ran too late.** Setup writes the run's marker, and the check came after it, so a run with the wrong depth could rewrite Ten's marker and carry on. The check now comes first, with a comment saying why, and an existing marker is never rewritten with another depth.
+**The marker check ran too late.** Setup writes the run's marker, and the check came after it, so a run with the wrong depth could rewrite the mirror's marker and carry on. The check now comes first, with a comment saying why, and an existing marker is never rewritten with another depth.
 
 **A crashed worker's container dropped from the recheck list.** After a commit, the pending list was cleared. A container whose job had died was in it, so it would have been trusted next time. Now only containers whose job failed stay pending, tracked in `failed_this_run`. The worker-crash control in `tests/packdir/unison_parallel.py` kills a worker partway through and requires the next run to converge.
 
@@ -1201,7 +1279,7 @@ The essay says, "A test can pass because its fixture missed the dangerous case."
 
 Not every mistake was caught by a control:
 
-- A shell-quoting mistake packed three extra full copies, 51 GiB each, into folders with spaces in their names on Ten. The harness had promised to delete nothing, so the session asked the user before removing them.
+- A shell-quoting mistake packed three extra full copies, 51 GiB each, into folders with spaces in their names on the mirror disk. The harness had promised to delete nothing, so the session asked the user before removing them.
 - `diskutil unmount` hung for 16 and then 12 minutes, unattended, because it had no timeout. The session called that its own mistake.
 - Nobody tested a target with plain directories at scale, and the result was the slow mirror of the benchmark chapter.
 

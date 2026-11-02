@@ -21,7 +21,7 @@ This post is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's;
 
 [Unison](https://github.com/bcpierce00/unison) is a file synchronizer with more than 25 years of use behind it. It keeps two replicas of a tree in step, working out what changed on each side since they last agreed. [Semantic Unison](https://github.com/querygraph/semantic-unison) is a public fork that teaches it three new things: what is inside a photograph file, how to prove a shuttle disk is safely kept before wiping it, and how to store millions of small files on one spinning disk without paying for each of them on every run.
 
-This is a tour of all three, with the measured numbers, including the ones that embarrassed the estimates. A full book, *Semantic Unison*, covers every option. It is intended for the [First Pair library](https://firstpair.org/books/semantic-unison/), with [PDF](https://firstpair.org/semantic-unison/pdf/) and [EPUB](https://firstpair.org/semantic-unison/epub/) editions at those paths, and it had not been published when this post was written.
+This is a tour of all three, with the measured numbers, including the ones that embarrassed the estimates. A full book, *Semantic Unison*, covers every option. It is in the [First Pair library](https://firstpair.org/books/semantic-unison/), with [PDF](https://firstpair.org/semantic-unison/pdf/) and [EPUB](https://firstpair.org/semantic-unison/epub/) editions, and its second edition adds the mirror's results and clones.
 
 ## Why a fork
 
@@ -123,14 +123,26 @@ The benchmark had written into an empty target. Ten was not empty. It held 74,98
 
 No benchmark had shown this, because the test set had no plain directories. The design had worked through what kept originals meant for correctness, carefully, and no one had asked what they meant for the shape of Unison's items. The fix, commit `5c95d940`, queues file-by-file items per container and commits them as one transaction: 187 against 67 files/s on the internal disk. Its rate on Ten has not been measured yet.
 
-When this was written, the real mirror had not finished. So the honest summary is that every full-scale number here is an extrapolation, and the claim that packing pays off at 3.6 million files is still a prediction. The small-scale results are measured. The big one is pending.
+The first version of this post ended with the mirror unfinished. It has finished. Unison reported `1813638 items transferred, 62925 skipped, 0 failed`, and Ten holds all 65,536 containers, 4,610 GiB, none damaged. The skips are the files only Ten had, protected by `nodeletion`, which is also why the run exited 1: in Unison that means only that something was skipped. All 74,981 kept originals were still there afterwards.
+
+Two more lessons came out of the last stretch. The packing rate kept swinging between about 100 and 150 MB/s, and the first guess, Quasar's disk layout, was wrong. The rate followed the garbage collector. Each packing worker is a forked process that inherited Unison's 6.5 GB heap and spent most of its time marking memory it would never use. A worker lives for one job, so it now turns its collector nearly off, and packing held about 148 MB/s for the last 6.9 hours. And a restart part way through had re-verified everything written so far, about six hours of reading for a stop that lost nothing. The pending list now records finished jobs and barriers, so a restart checks only what no barrier covered.
+
+The total time isn't a clean figure, because the run was stopped and restarted for those fixes. But the result is measured now, not predicted.
+
+## Clones
+
+The newest feature came from the same collection. Photo Mechanic catalogs on Quasar hold APFS clones of Lightroom's previews: second files that share the first one's blocks. Any ordinary copy, by Unison or anything else, turns each clone into a full copy.
+
+With `clones = true`, Semantic Unison keeps them. APFS reports a clone ID that clones share, so the receiver asks the source which file it already holds, or has just created, a new file is a clone of. Then it makes the clone locally with `clonefile` instead of transferring the bytes. Identical files that were independent copies stay independent, and the contents are always checked. Into a packed root such as Ten's, where HFS+ can't hold clones, a clone is stored once, as a packdir reference to its original. `unpack-tree` turns it back into a real clone. How the Mechanic catalogs and the previews will share clones on Ten is still being worked out with the Photo session, since the two live in separate trees.
+
+The DNG grammar behind the semantic profiles also moved into its own library, [tiffgraph](https://github.com/firstpair/tiffgraph), with OCaml and Rust builds kept in step file by file. Another photo tool computes the same "everything but the XMP" digest from it, and the two agreed on every one of 60 catalog files.
 
 ## What it does not do
 
-Packed roots are one-way and local. They need `perms = 0`, with no extended attributes or ACLs, and refuse moves and symlinks. An unchanged container is not opened, so silent bit rot needs a periodic `unison-packdir verify`. A change costs about 1.6 times the bytes of plain Unison. Same view is a list of tags. The merge handles ratings and labels and nothing else. The fork's `make` build currently stops at a module unrelated to this work, and dune builds the binaries in use. Evidence so far is from macOS. The overall goal is recorded as unfinished, and the fork's records say which parts.
+Clones are kept only on macOS and APFS, within one sync, and only for new and changed files. Packed roots are one-way and local. They need `perms = 0`, with no extended attributes or ACLs, and refuse moves and symlinks. An unchanged container is not opened, so silent bit rot needs a periodic `unison-packdir verify`. A change costs about 1.6 times the bytes of plain Unison. Same view is a list of tags. The merge handles ratings and labels and nothing else. The fork's `make` build currently stops at a module unrelated to this work, and dune builds the binaries in use. Evidence so far is from macOS. The overall goal is recorded as unfinished, and the fork's records say which parts.
 
 The tests earned their keep along the way. Some early detection tests passed only because Unison was silently skipping every member, a failure that looks exactly like "nothing to do." Later controls caught a marker check that ran after the marker was written, and a crashed worker's container dropped from the list of containers to recheck. The mistakes are kept in the record next to their corrections, including the ones no test caught, such as a quoting error that wrote three stray 51 GiB copies to Ten.
 
 ## Trying it
 
-The source is at [querygraph/semantic-unison](https://github.com/querygraph/semantic-unison) and [querygraph/packdir](https://github.com/querygraph/packdir). Start with synthetic data, and read the limits before pointing it at anything you cannot replace. Credit for the foundation goes to Unison's authors, whose work this fork stands on. Please do not take questions about this fork to them.
+The source is at [querygraph/semantic-unison](https://github.com/querygraph/semantic-unison), [querygraph/packdir](https://github.com/querygraph/packdir) and [firstpair/tiffgraph](https://github.com/firstpair/tiffgraph). Start with synthetic data, and read the limits before pointing it at anything you cannot replace. Credit for the foundation goes to Unison's authors, whose work this fork stands on. Please do not take questions about this fork to them.
