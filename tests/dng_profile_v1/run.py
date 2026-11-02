@@ -26,7 +26,7 @@ from shared_io_pool import uncertainty_records
 from dng_profile_v1.fixtures import (Layout, PROFILE, PRIMARY, XMP, XMP_LENGTH, SIZE,
                       valid_fixtures, invalid_fixtures)
 
-WALKER = ("phidentify_tiff.mli", "phidentify_tiff.ml")
+WALKER = ("tiffgraph.mli", "tiffgraph.ml")
 MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge",
            "dngSemantic", "dngExtended", "semanticDelta")
 INPUTS = tuple("src/" + name + suffix for name in MODULES for suffix in (".mli", ".ml")) + (
@@ -214,12 +214,12 @@ def main():
         env.pop(key, None)
     env["PATH"] = str(Path(compiler).parent) + os.pathsep + env.get("PATH", "")
     original = {relative: (ROOT / relative).read_bytes() for relative in INPUTS}
-    # The /1 graph walker lives in the phidentify-tiff opam package, installed
+    # The /1 graph walker lives in the tiffgraph opam package, installed
     # beside this compiler's standard library; the mutations below target it.
     walker = Path(subprocess.run([compiler, "-where"], env=env, capture_output=True, text=True,
-                                  check=True, timeout=30).stdout.strip()).parent / "phidentify-tiff"
+                                  check=True, timeout=30).stdout.strip()).parent / "tiffgraph"
     for name in WALKER:
-        original["phidentify-tiff/" + name] = (walker / name).read_bytes()
+        original["tiffgraph/" + name] = (walker / name).read_bytes()
     work = Path(tempfile.mkdtemp(prefix="unison-dng-profile-v1-", dir="/private/tmp"))
     print("Private synthetic artifacts", work, flush=True)
     for relative, data in original.items():
@@ -259,8 +259,8 @@ def main():
             if relative.startswith("src/"):
                 (build / Path(relative).name).write_bytes(data)
         for name in WALKER:
-            (build / name).write_bytes(original["phidentify-tiff/" + name])
-        (build / "phidentify_tiff.ml").write_text(mutate(original["phidentify-tiff/phidentify_tiff.ml"].decode(), mode))
+            (build / name).write_bytes(original["tiffgraph/" + name])
+        (build / "tiffgraph.ml").write_text(mutate(original["tiffgraph/tiffgraph.ml"].decode(), mode))
         for name in ("test.ml", "fs.c"):
             (build / name).write_bytes(original["tests/dng_profile_v1/" + name])
         argv = [compiler, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c", "semanticFile_stubs.c", "fs.c"]
@@ -300,7 +300,7 @@ def main():
         compiled = {path.name: sha_file(path) for path in sorted(build.iterdir()) if path.is_file()}
         record["runs"].append({"mode": mode, "compile": built, "test": run,
                               "compiled_files_sha256": compiled})
-    record["current_sources_match_snapshot"] = all((walker / relative[len("phidentify-tiff/"):] if relative.startswith("phidentify-tiff/") else ROOT / relative).read_bytes() == data
+    record["current_sources_match_snapshot"] = all((walker / relative[len("tiffgraph/"):] if relative.startswith("tiffgraph/") else ROOT / relative).read_bytes() == data
                                                     for relative, data in original.items())
     assert record["current_sources_match_snapshot"], "qualification source changed while building"
     manifest_path = work / "artifact-manifest.json"

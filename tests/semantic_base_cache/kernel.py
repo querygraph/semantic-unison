@@ -40,7 +40,7 @@ def bad(name,position,reseal=True):
 bad('bad-checksum',-1,False);bad('bad-version',7);bad('bad-policy',16);bad('bad-nonce',16+len(policy)+8+8)
 bad('bad-parsed',len(payload)-1);bad('bad-packet',16+len(policy)+8+len(request)+8)
 (work/'truncated.sdb').write_bytes(valid[:-1]);(work/'oversized.sdb').write_bytes(bytes(1048576+8192+257))
-command=[a.compiler,'-I','+unix','-I','+../phidentify-tiff','unix.cmxa','phidentify_tiff.cmxa','semanticHash_stubs.c','semanticFile_stubs.c',*[module+suffix for module in mods for suffix in ['.mli','.ml']],'kernel.ml','-o','kernel']
+command=[a.compiler,'-I','+unix','-I','+../tiffgraph','unix.cmxa','tiffgraph.cmxa','semanticHash_stubs.c','semanticFile_stubs.c',*[module+suffix for module in mods for suffix in ['.mli','.ml']],'kernel.ml','-o','kernel']
 for kind,command in [('compile',command),('test',[str(work/'kernel')])]:
  result=subprocess.run(command,cwd=work,capture_output=True,text=True);(work/(kind+'.log')).write_text(result.stdout+result.stderr);assert result.returncode==0,result.stderr
  print(result.stdout,end='')

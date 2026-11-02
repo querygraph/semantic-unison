@@ -94,10 +94,10 @@ def main():
   order.remove("tests/fd_ownership/fault.ml");order.insert(order.index("src/semanticFile.mli"),"tests/fd_ownership/fault.ml")
   commands=[]
   for name in order:
-   r=command([compiler,"-I","+unix","-I","+../phidentify-tiff","-c",Path(name).name],build,env,build/(Path(name).name+".compile.log"));commands.append(r)
+   r=command([compiler,"-I","+unix","-I","+../tiffgraph","-c",Path(name).name],build,env,build/(Path(name).name+".compile.log"));commands.append(r)
    if r["exit"]:raise AssertionError("private production compilation failed")
   objects=[Path(n).stem+(".o" if n.endswith(".c") else ".cmx") for n in order if n.endswith((".c",".ml"))]
-  r=command([compiler,"-I","+unix","-I","+../phidentify-tiff","unix.cmxa","phidentify_tiff.cmxa",*objects,"test.ml","-o","early-fd-test"],build,env,build/"link.log");commands.append(r)
+  r=command([compiler,"-I","+unix","-I","+../tiffgraph","unix.cmxa","tiffgraph.cmxa",*objects,"test.ml","-o","early-fd-test"],build,env,build/"link.log");commands.append(r)
   if r["exit"]:raise AssertionError("private link failed")
   files=build/"files";files.mkdir();case={"fixed":"all","old-file-channel":"semantic-channel","old-pool-pipe":"pool-read-flags","old-submit-listener":"submit-listener"}[mode]
   argv=[str(build/"early-fd-test"),str(files),case]

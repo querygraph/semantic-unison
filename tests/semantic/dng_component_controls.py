@@ -58,7 +58,7 @@ def main():
             shutil.copyfile(ROOT/'src'/name,work/name)
         for name in ('layout_only.ml','private_safety.ml','dng_components.ml','archive_reference_fault.ml','record_fault_stubs.c'):
             shutil.copyfile(ROOT/'tests/semantic'/name,work/name)
-        command=[compiler,'-I','+unix','-I','+../phidentify-tiff','unix.cmxa','phidentify_tiff.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
+        command=[compiler,'-I','+unix','-I','+../tiffgraph','unix.cmxa','tiffgraph.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
         for module in modules:command += [module+'.mli',module+'.ml']
         command += ['private_safety.ml','layout_only.ml','dng_components.ml','-o','dng-component-controls']
         previous=Path.cwd()
@@ -125,7 +125,7 @@ def main():
             # authoritative archive hint. Test-only native shim, never production.
             call([compiler,'-c','record_fault_stubs.c'])
             call([compiler,'-ccopt','-Dfsync=unison_record_control_fsync','-c','semanticFile_stubs.c'])
-            fault=[compiler,'-I','+unix','-I','+../phidentify-tiff','unix.cmxa','phidentify_tiff.cmxa']+[m+'.cmx' for m in modules]
+            fault=[compiler,'-I','+unix','-I','+../tiffgraph','unix.cmxa','tiffgraph.cmxa']+[m+'.cmx' for m in modules]
             fault += ['archive_reference_fault.ml','semanticHash_stubs.o','semanticFile_stubs.o',
                       'record_fault_stubs.o','-o','archive-reference-fault']
             call(fault);call([str(work/'archive-reference-fault')])

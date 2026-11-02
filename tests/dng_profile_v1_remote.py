@@ -118,7 +118,7 @@ class Qualification:
         modules = modules[:modules.index("semanticFormats.cmx") + 1]
         includes = [build, build / "ubase", build / "system", build / "system/generic",
                     build / "lwt", build / "lwt/generic"]
-        flags = [flag for path in includes for flag in ("-I", str(path))] + ["-I", "+unix", "-I", "+str", "-I", "+../phidentify-tiff"]
+        flags = [flag for path in includes for flag in ("-I", str(path))] + ["-I", "+unix", "-I", "+str", "-I", "+../tiffgraph"]
         source = self.work / "preferences.ml"
         source.write_bytes((HERE / "dng_profile_v1_preferences.ml").read_bytes())
         binary = self.work / "preferences"
@@ -127,7 +127,7 @@ class Qualification:
             self.pins[str(path)] = sha(path)
             if path.suffix == ".cmx":
                 self.pins[str(path.with_suffix(".o"))] = sha(path.with_suffix(".o"))
-        command = [str(self.compiler)] + flags + ["unix.cmxa", "str.cmxa", "phidentify_tiff.cmxa"]
+        command = [str(self.compiler)] + flags + ["unix.cmxa", "str.cmxa", "tiffgraph.cmxa"]
         command += [str(build / obj) for obj in modules] + [str(source)]
         command += [str(build / obj) for obj in objects(makefile, "COBJS")]
         command += ["-o", str(binary)]

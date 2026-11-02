@@ -19,7 +19,7 @@ install: [
 ]
 depends: [
   "ocaml" {>= "5.0"}
-  "phidentify-tiff"
+  "tiffgraph"
 ]
 depopts: [
   "host-system-msvc" (* To silence the linter: needed for host-system-msvc:installed *)

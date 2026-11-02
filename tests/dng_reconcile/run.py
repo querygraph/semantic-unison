@@ -70,7 +70,7 @@ if sys.platform=='darwin':
 else:
  (w/'stage.dng').write_bytes(inputs['left.dng']);[(w/f'{prefix}-stage.dng').write_bytes(inputs[f'{prefix}-left.dng']) for prefix in STAGED];substrate='ordinary private exact copy; native cloning unqualified'
 assert (w/'stage.dng').stat().st_ino!=(w/'left.dng').stat().st_ino
-cmd=[a.compiler,'-I','+unix','-I','+../phidentify-tiff','unix.cmxa','phidentify_tiff.cmxa','semanticHash_stubs.c','semanticFile_stubs.c',*[n+e for n in mods for e in ['.mli','.ml']],'test.ml','-o','test'];x=subprocess.run(cmd,cwd=w,capture_output=True,text=True);(w/'compile.log').write_text(x.stdout+x.stderr);assert x.returncode==0,x.stderr
+cmd=[a.compiler,'-I','+unix','-I','+../tiffgraph','unix.cmxa','tiffgraph.cmxa','semanticHash_stubs.c','semanticFile_stubs.c',*[n+e for n in mods for e in ['.mli','.ml']],'test.ml','-o','test'];x=subprocess.run(cmd,cwd=w,capture_output=True,text=True);(w/'compile.log').write_text(x.stdout+x.stderr);assert x.returncode==0,x.stderr
 x=subprocess.run([str(w/'test')],cwd=w,capture_output=True,text=True);(w/'test.log').write_text(x.stdout+x.stderr);print(x.stdout+x.stderr,end='');assert x.returncode==0
 for n,b in inputs.items():assert (w/n).read_bytes()==b
 assert (w/'stage.dng').read_bytes()==inputs['target.dng'] and all((w/f'{p}-stage.dng').read_bytes()==inputs[f'{p}-target.dng'] for p in STAGED)
