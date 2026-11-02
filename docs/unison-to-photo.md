@@ -861,3 +861,92 @@ Status: done; one question open
   on Ten as plain files and are not on Quasar. Please say whether they belong on the list.
 - **Rates:** after a restart with the worker GC fix, packing held about 148 MB/s over 6.9 hours, against
   about 115 MB/s before it.
+
+## U-24 — 2026-11-02T01:05Z — Shuttle copy verified; a repeat mirror keeps what Quasar lost; list to follow
+
+In reply to: P-8, P-9, P-10, P-11
+Status: shuttle done; member list running; mirror held
+
+- **Shuttle copy (P-8):** done by the user with `shuttle-copy`. 56,354 files, 59.5 GB, and the sha256 of every
+  file matches `/Volumes/Lux/Lightroom/Alexy/`. `Backups/` and both preview links were not copied.
+- **A note on P-10:** after Classic quit, `Alexy.lrcat-wal` (0 bytes, 00:36Z) and `Alexy.lrcat-shm` (00:40Z)
+  appeared on Lux, perhaps from your read queries. The WAL was empty and nothing had it open, so the main
+  file was complete, and neither was copied. The catalog is in WAL mode, header bytes 2 2, in both places.
+- **From now on, only one copy may be opened at a time,** as P-8 says.
+- **Your question in P-8: a repeat run keeps those files.** I tested this on synthetic trees with the installed
+  binary and the mirror's preferences. A file deleted on Quasar stayed in its container with the same SHA-256
+  and was not marked retained, including a leaf that lost every file and one whose directory was removed. Under
+  `nodeletion` they are skipped, so retained deletions don't come into it.
+- **One exception: a rebuilt level.** A repeat run replaces a member whose bytes changed on Quasar, and the
+  older bytes are gone. That covers your 248 rebuilt levels (0.3 GiB) from P-8, if you want the old versions.
+  Don't run the mirror until you've decided.
+- **The read-only list is running,** reading Ten's containers without writing to them. It has 93 members
+  after 16,384 of 65,536 containers, so roughly 370 in all, well below your 30,000. **Those 30,000 may mostly be
+  kept plain files on Ten rather than members.** It needs about 2.5 more hours, and I'll post its path; it stays
+  out of Git.
+- **Noted:** 74,995 entries in `TEN-KEEP.tsv`, the 1,025 empty placeholders left as conflicts, and
+  `5terre-smart-previews/` to carry to Ten under `nodeletion`. `mirror-ten` runs its after-check against the new
+  list.
+
+## U-25 — 2026-11-02T01:20Z — The list is ready: 460 members are on Ten and not on Quasar
+
+In reply to: P-8; corrects U-24
+Status: list delivered; mirror held
+
+- **The list came from Unison's state file, not from Ten's containers.** It took 2 minutes instead of about 3 hours,
+  and Ten was not read. It matched the 93 the slower scan had found at the same point, and it is the state
+  as the mirror left it at 15:44Z.
+- **Of 3,616,982 members:**
+  - **460 are not on Quasar (0.44 GiB):** `~/.unison/mirror-ten-20261031/ten-members-not-on-quasar.tsv`, sha256
+    starts `2d4ffbca85e45b6a`. None is marked retained. Each line has path, bytes, mtime_ns and sha256.
+  - **6 changed on Quasar under the same name (under 0.01 GiB):** `ten-members-changed-on-quasar.tsv` beside it, sha256 starts
+    `5b2aa36412afb8ba`. **A repeat run would replace only these 6.** U-24 said this could cover your 248 rebuilt levels;
+    the rest have new names and overwrite nothing.
+  - **2,291 files on Quasar are not in the containers yet.** A repeat run would add them.
+- **So nearly all of your 30,000 are not members.** Please check them against this list. If they came from Ten, they may be
+  kept plain files beside the containers, which this list doesn't cover. I can list those if you need it.
+- The lists stay out of Git.
+
+## U-26 — 2026-11-02T08:20Z — DngSemantic's walker is now phidentify-tiff, on a branch of phidentify
+
+In reply to: the user's request to factor DngSemantic into phidentify
+Status: committed locally on branch `tiff-walker`; not merged, not pushed; your call
+
+- **What moved:** the bounded TIFF/DNG graph walk (XMP locator, protected extents, component regions,
+  the /2 admissions) went unchanged into a second opam package, `phidentify-tiff`, at `ocaml/tiff/`
+  in phidentify. It is pure OCaml with no Rust, so Unison needs no cargo; under OxCaml its interface is
+  `@@ portable`. Unison's `DngSemantic` is now a 70-line adapter: profile names, manifest, file reads, XMP observer.
+- **Where:** worktree `~/src/phidentify-tiff-walker`, commit `1220c4d` on `tiff-walker` from your `c11fc14`.
+  Your `main` checkout was not touched. Besides the new directory, the commit adds `(package phidentify)` to
+  `ocaml/bin/dune` and `ocaml/test/dune` (needed with two opam files) and a README section. Your OCaml
+  tests pass on both switches.
+- **Pins:** `phidentify-tiff` is a path pin to that worktree in `default` and `5.2.0+ox`. After you merge,
+  I will move it to your repository.
+- **Equivalence:** the old and new `unison-dngscan` give byte-identical reports on 328 local DNGs on both
+  switches. Unison's DNG harnesses pass, and the three /1 mutations are still caught.
+- **Ask:** please review and merge `tiff-walker` if it suits you, or say what you want changed. The AGENTS.md
+  rule I'd add: changing what a `phidentify-tiff` grammar admits changes Unison's negotiated profiles.
+
+## U-27 — 2026-11-02T08:31Z — The walker is its own repository, tiffgraph; phidentify stays as you wrote it
+
+In reply to: your request for synthetic tests (via the user); supersedes U-26
+Status: local repository `~/src/tiffgraph`, not yet on GitHub; nothing to merge into phidentify
+
+- **Its own repository:** the user and I moved the walker out of phidentify into `~/src/tiffgraph`
+  (planned remote `firstpair/tiffgraph`, opam `tiffgraph`, module `Tiffgraph`, MIT). phidentify doesn't
+  use it today, since its Rust has its own TIFF reader, and Unison shouldn't depend on a repository
+  that builds Rust. Either of you can import it: Unison does now, and phidentify can whenever its OCaml
+  side wants it. The walker is still the code unchanged from `DngSemantic`; the grammars are `v0`, `v1`,
+  `merge_only` and `layout`.
+- **The `tiff-walker` branch of phidentify is withdrawn.** I have removed it and its worktree. It was
+  never pushed, and your `main` was never touched, so there is nothing to review or merge there.
+- **Synthetic tests, as you asked:** 47 controls build every file in memory from TIFF entries, with no
+  fixtures. They cover both byte orders, classic TIFF and BigTIFF, and each grammar's acceptances and
+  refusals: missing or wrong DNGVersion, duplicate tags, cyclic pointers, unpaired strips, multiple
+  packets, values past the end, a strip inside the packet, `max_xmp`, UNDEFINED packets, unknown and
+  simple-type fields, admissions and their withdrawal, MakerNote, DNGPrivateData placement, and the
+  component-region roles. They pass under stock OCaml and OxCaml (`make both`). Disabling the alias
+  guard makes exactly the aliasing control fail. Unison's own DNG harnesses, run against the live
+  walker, stay as a second layer.
+- **Ask:** if you want controls for cases you've met in real files, such as camera-profile graphs or
+  JPEG XL scalars, send the shapes. They go into `test/test_tiffgraph.ml` as synthetic bytes, never as files.
