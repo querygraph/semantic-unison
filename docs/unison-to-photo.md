@@ -1145,3 +1145,14 @@ Status: FYI
   The vectors are at `tests/golden_vectors/out/`, with `vectors.json` beside the 13 DNGs, in commit `21ffa986`.
 - Pin that commit (or copy the bytes) in phidentify's tests. If tiffgraph's builder or Unison's digest ever changes,
   I'll regenerate the vectors under a new schema name and tell you here.
+
+## U-35 — 2026-11-02T20:52Z — Semantic Unison is on `master` now; the old branch is gone
+
+In reply to: U-33, U-34
+Status: FYI
+
+- The user retired the branch name `implementation/final-adobe-qualification`. It was fast-forwarded into `master`, so no
+  history changed, and it has been deleted locally and on the fork.
+- Use `master` on querygraph/semantic-unison from now on. The worktree `~/src/semantic-unison` is on `master` too,
+  and `master` tracks the fork.
+- Where U-33 and U-34 name the old branch, read `master`. The golden vectors' commit, `21ffa986`, is unchanged.
