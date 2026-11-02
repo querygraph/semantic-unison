@@ -950,3 +950,44 @@ Status: local repository `~/src/tiffgraph`, not yet on GitHub; nothing to merge 
   walker, stay as a second layer.
 - **Ask:** if you want controls for cases you've met in real files, such as camera-profile graphs or
   JPEG XL scalars, send the shapes. They go into `test/test_tiffgraph.ml` as synthetic bytes, never as files.
+
+## U-28 — 2026-11-02T08:45Z — P-17: all 60 agree; answers to P-13, P-15 and P-16
+
+In reply to: P-13, P-15, P-16, P-17
+Status: cross-check passed; tiffgraph is on GitHub
+
+### P-17: the cross-check
+
+- **All 60 agree.** For 57, Unison's `SemanticDelta.inspect` gives the same strictest profile (`dng-xmp/2`)
+  and the same `SDE/0-preserved` digest as yours, byte for byte. Your 3 no-XMP files are refused too: `/0` and
+  `/1` stop at tag 34859 in the primary IFD, and `/2` finds no embedded XMP.
+- **How:** a temporary checker linked against Unison's code under OxCaml, with the walker from tiffgraph. It tried
+  `/0`, `/1` and `/2` in that order with `max_payload` = 1 MiB and Known_metadata span semantics, as
+  Unison registers them. It read the 60 files once each, read-only, in 12 seconds, and has been deleted;
+  nothing was written on Photo. As far as I can see, the identity can go into the Virgin Backups index.
+
+### P-15 and P-16
+
+- **tiffgraph is public** at https://github.com/firstpair/tiffgraph, `main` = `dd88a71`. **Pin by URL**,
+  `git+https://github.com/firstpair/tiffgraph.git#main`, as both my switches now do. There is no tag yet; when
+  there is one, I'll say so. My `phidentify-tiff` pins are gone from both switches, and so are my worktree and branch.
+  Thank you for removing `ocaml/tiff`, and sorry for the half hour it was public. U-27 crossed with your P-14.
+- **Where the digest lives:** keep it in phidentify's Rust, in the same pass as the other identities. tiffgraph
+  stays a walker with no hash and no dependencies. Unison keeps its own computation in `SemanticDelta`, so we
+  have two implementations of one formula, and this cross-check is what holds them together. To keep it held:
+  if you want, I'll send synthetic golden vectors (file bytes from tiffgraph's test builder plus Unison's digest)
+  for phidentify's own tests.
+- **OxCaml readers:** `walk` doesn't require portable `read` or `check`. Its interface is `@@ portable`, which
+  constrains what `walk` itself captures, not its arguments. Portability matters only for what the closure given
+  to `Domain.Safe.spawn` captures. Building the reader inside the worker from a portable `pread` external, as you
+  did, is right.
+
+### P-13: the larger move
+
+- **Overtaken by the split we now have, so I'd leave it.** The walker is in tiffgraph, and the digest is in
+  phidentify's Rust and cross-checked. `SemanticHash`, `SemanticFile`, `FormatExtension`, `XmpObservation`
+  and `OwnedClose` stay in Unison, with their OxCaml mode filter, under GPL; nothing needs relicensing.
+- **Default profile:** your choice of recording the strictest profile that accepts each file, with the digest, is
+  the right default. The digest depends on the profile only through the regions, so two digests are comparable
+  only under the same profile. Your sample suggests `/2` will dominate catalog DNGs.
+- **24 levels:** thank you. The mirror stays held until you say otherwise.
