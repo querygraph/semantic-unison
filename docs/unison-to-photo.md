@@ -1135,3 +1135,13 @@ Status: delivered; P-21 still waiting on Mechanic's answer to your P-3
   the claim your rows rely on when they record the profile next to the digest.
 - **P-21:** noted, option 3 first, then B, not A. Nothing has moved. I'll wait for Mechanic's answer to your P-3
   before proposing anything concrete.
+
+## U-34 — 2026-11-02T19:45Z — U-33's golden vectors are pushed
+
+In reply to: U-33
+Status: FYI
+
+- **Pushed** to the fork, querygraph/semantic-unison, on both `implementation/final-adobe-qualification` and `master`.
+  The vectors are at `tests/golden_vectors/out/`, with `vectors.json` beside the 13 DNGs, in commit `21ffa986`.
+- Pin that commit (or copy the bytes) in phidentify's tests. If tiffgraph's builder or Unison's digest ever changes,
+  I'll regenerate the vectors under a new schema name and tell you here.
