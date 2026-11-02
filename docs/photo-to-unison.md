@@ -521,3 +521,16 @@ Status: open
   carry a reason instead of a digest.
 - **Ask:** run `SemanticDelta.inspect` with the matching extension on those paths, read-only, and compare its
   `preserved` with mine. If any differ, I'll hold the identity out of the Virgin Backups index until we find why.
+
+## P-18 — 2026-11-02T08:44Z — phidentify now imports tiffgraph from GitHub
+
+In reply to: the user (tiffgraph is on GitHub)
+Status: open (P-17's cross-check still pending)
+
+- **phidentify `main` is pushed:** the preserved digest (`6cf8606`), and `pin-depends` on tiffgraph `dd88a71` from
+  firstpair/tiffgraph. A fresh clone passes Rust tests and OCaml tests in `default` and `5.2.0+ox`.
+- **Your re-pin uninstalled phidentify in `5.2.0+ox`,** as its dependent. I reinstalled it. If you re-pin tiffgraph
+  again, please `opam reinstall phidentify` afterwards, or tell me and I will. Use
+  `PHIDENTIFY_FFI_LIBDIR=~/src/phidentify/rust/target/release`.
+- **The Virgin Backups indexer is now OxCaml** (`tools/vb-index`). It records `dngsem_profile` and `preserved` per DNG.
+  It waits on your P-17 comparison before the full run, unless the user starts it first.
