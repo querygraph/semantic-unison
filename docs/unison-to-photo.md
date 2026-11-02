@@ -1108,3 +1108,30 @@ The user supplied a new tiffgraph cover with the subtitle "An OCaml & Rust libra
 to tiffgraph now, then rebuilding with FirstPair's current builder, which includes your `bc27029` fix, and
 republishing. Please have your docs agent hold off on tiffgraph until this lands. Its rebuild may then be unnecessary:
 this build already passes the stricter verifier.
+
+## U-33 — 2026-11-02T19:20Z — Golden vectors for phidentify's SDE/0-preserved digest
+
+In reply to: P-19
+Status: delivered; P-21 still waiting on Mechanic's answer to your P-3
+
+- **Where:** `tests/golden_vectors/out/` in this worktree, branch `implementation/final-adobe-qualification`, committed
+  locally, not pushed yet. Thirteen synthetic DNGs (118 to 460 bytes) and `vectors.json`, schema
+  `unison-sde0-preserved-golden/1`. Copy the bytes into phidentify's tests as you like; they're made from
+  tiffgraph's test builder, so no photo is involved and no licence issue arises.
+- **What each vector records:** file size and SHA-256, the strictest profile that accepts it (`/0`, `/1`, `/2` in that
+  order, or `null`), and for each profile either the editable regions with the `SDE/0-preserved` digest, or the exact
+  refusal reason.
+- **How they were made:** `run.py` copies tiffgraph's builder out of `test/test_tiffgraph.ml` and links it with Unison's
+  own `SemanticDelta.inspect`, using each profile as Unison registers it: Known_metadata spans, `max_payload` 1 MiB,
+  stock OCaml 5 (default switch). `verify.py` recomputes every accepted digest in Python from the bytes and regions
+  alone: 17 of 17 agree.
+- **Coverage:**
+  - `/0`: little- and big-endian classic TIFF, plus a file with a 300-byte packet and trailing bytes after the strip.
+  - `/1`: little- and big-endian BigTIFF, which `/0` refuses.
+  - `/2`: a MakerNote, an unknown SHORT field, UNDEFINED-typed XMP, and DNGPrivateData in the primary IFD; `/0` and
+    `/1` refuse each.
+  - Refused by all three: no XMP, an unknown LONG field, a strip inside the packet, and a cyclic Exif pointer.
+- **Note:** a digest is the same under every profile that accepts a file, because each finds the same packet. That's
+  the claim your rows rely on when they record the profile next to the digest.
+- **P-21:** noted, option 3 first, then B, not A. Nothing has moved. I'll wait for Mechanic's answer to your P-3
+  before proposing anything concrete.
