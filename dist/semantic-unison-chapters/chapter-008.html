@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>A shuttle disk, end to end</title>
   <style>
@@ -124,7 +124,7 @@ class="header-section-number">7</span> A shuttle disk, end to end</h1>
 <h2 data-number="7.1" id="the-flow"><span
 class="header-section-number">7.1</span> The flow</h2>
 <p>The one command to remember is this one:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Kolobok/foto /Volumes/Photo/foto <span class="at">-semdiff</span> <span class="at">-sameview</span> <span class="at">-preservefull</span> <span class="at">-v</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Shuttle/foto /Volumes/Archive/foto <span class="at">-semdiff</span> <span class="at">-sameview</span> <span class="at">-preservefull</span> <span class="at">-v</span></span></code></pre></div>
 <p>The first root is the shuttle and the second is the long-term root.
 Both must be local. The run has the following shape.</p>
 <figure>
@@ -217,14 +217,14 @@ dng-compare/disk-shuttle/      the archive</code></pre>
 class="header-section-number">7.3</span> Where things are kept</h2>
 <figure>
 <img src="book/diagrams/review-placement.svg"
-data-fig-alt="Two panels. Left, default or -tree: under /Volumes/Photo, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle&#39;s version; a jpg root gets its own subtree, and dng-compare/Kolobok-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG."
+data-fig-alt="Two panels. Left, default or -tree: under /Volumes/Archive, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle&#39;s version; a jpg root gets its own subtree, and dng-compare/Shuttle-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG."
 alt="Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original." />
 <figcaption aria-hidden="true">Placement of a differing file: a review
 tree beside the root by default, or a suffixed copy beside the
 original.</figcaption>
 </figure>
 <p>Next to the long-term root <code>R</code>, for example
-<code>/Volumes/Photo/foto</code>:</p>
+<code>/Volumes/Archive/foto</code>:</p>
 <table>
 <colgroup>
 <col style="width: 21%" />
@@ -277,8 +277,8 @@ collide</td>
 </tbody>
 </table>
 <p><code>SHUTTLE</code> is built from the left root’s last two path
-components, so <code>/Volumes/Kolobok/foto</code> gives
-<code>Kolobok-foto</code>. <code>-suffix</code> with a value must be
+components, so <code>/Volumes/Shuttle/foto</code> gives
+<code>Shuttle-foto</code>. <code>-suffix</code> with a value must be
 written <code>-suffix=SUF</code>, because Unison would otherwise take a
 separate word as a root or profile name.</p>
 <p>Conflict copies are verified by SHA-256 against the shuttle file and
@@ -329,7 +329,7 @@ refuses an archive moved to the Turso engine rather than writing behind
 its marker. Workers are forked processes that each get an equal share of
 <code>--rate-mib</code>.</p>
 <p>To get a preserved file back, restore it into a new location:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
 <h2 data-number="7.6" id="disks-and-progress"><span
 class="header-section-number">7.6</span> Disks and progress</h2>
 <p>A root on a disk that <code>diskutil</code> does not report as solid

@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>About this book</title>
   <style>
@@ -66,23 +66,28 @@ Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
 <p>The book describes the state of the
 <code>implementation/final-adobe-qualification</code> branch on
-2026-10-31, at commit <code>27b9ab1a</code>, together with the separate
-<a href="https://github.com/querygraph/packdir">packdir</a> project and
-dng-compare’s OCaml archive tool. Every command option was checked
-against the source, and the worked examples in the chapters on semantic
-diff and packdir are real runs on small synthetic trees, made while
-writing. Numbers about the benchmark and the mirror come from the two
-sessions’ mailbox and the design documents. This session did not take
-those measurements and did not touch the disks involved.</p>
+2026-11-02, at commit <code>9b68266b</code>, together with the separate
+<a href="https://github.com/querygraph/packdir">packdir</a> and <a
+href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects and
+dng-compare’s OCaml archive tool. The first edition, of 2026-10-31, was
+written before the real mirror finished; this one adds its results,
+preservation of APFS clones, and the DNG walker’s move into tiffgraph.
+Every command option was checked against the source, and the worked
+examples in the chapters on semantic diff and packdir are real runs on
+small synthetic trees, made while writing. Numbers about the benchmark
+and the mirror come from the two sessions’ mailbox and the design
+documents. This session did not take those measurements and did not
+touch the disks involved.</p>
 <p>Three kinds of statement appear below, and they are kept apart:</p>
 <ul>
 <li><strong>Measured</strong> figures are quoted from a record, with the
 conditions under which they were taken.</li>
 <li><strong>Estimates</strong> are marked as estimates. Several early
 ones turned out to be wrong, and the book says which.</li>
-<li><strong>Unknown</strong> things are said to be unknown. The most
-important one is that the real mirror of 3.6 million files had not
-finished when this was written.</li>
+<li><strong>Unknown</strong> things are said to be unknown. In the first
+edition the most important was whether the real mirror of 3.6 million
+files would bear out the estimates. It has now finished, and the
+benchmark chapter gives its numbers.</li>
 </ul>
 <p>The contribution policy of upstream Unison does not allow
 LLM-generated text or code in that project, so nothing here is meant for

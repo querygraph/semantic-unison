@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Packdir</title>
   <style>
@@ -123,16 +123,17 @@
 class="header-section-number">8</span> Packdir</h1>
 <h2 data-number="8.1" id="the-problem"><span
 class="header-section-number">8.1</span> The problem</h2>
-<p>Lightroom’s preview cache on Quasar held 3,616,982 files, 4.43 TiB in
-all, about 1.28 MiB each, in a fixed two-level layout:</p>
+<p>A Lightroom preview cache on an APFS source disk held 3,616,982
+files, 4.43 TiB in all, about 1.28 MiB each, in a fixed two-level
+layout:</p>
 <pre class="text"><code>&lt;H&gt;/&lt;HHHH&gt;/&lt;FILE-UUID&gt;-&lt;digest&gt;_&lt;longEdge&gt;</code></pre>
 <p>There are 16 top directories and 4,096 under each, so 65,536 leaf
 directories, averaging about 55 files and 71 MiB. It was to be mirrored
-one way, by Unison, to Ten: a single 20 TB spinning disk that stays
-Journaled HFS+. The user decided against APFS for it, because APFS on a
-spinning disk is slow with millions of small files. So Ten has no file
-clones, and the destination for 3.6 million more files is one mechanical
-arm.</p>
+one way, by Unison, to a mirror disk: a single 20 TB spinning disk that
+stays Journaled HFS+. The user decided against APFS for it, because APFS
+on a spinning disk is slow with millions of small files. So the mirror
+disk has no file clones, and the destination for 3.6 million more files
+is one mechanical arm.</p>
 <p>Three costs of millions of plain files follow. Creating them means
 many small metadata writes. Every run has to stat them. And anything
 else that later walks the disk, to back it up, check it or delete it,
@@ -147,8 +148,8 @@ directory</h2>
 beside where <code>D</code> would be, holding <code>D</code>’s files as
 members. For the preview cache, each leaf
 <code>&lt;H&gt;/&lt;HHHH&gt;/</code> becomes
-<code>&lt;H&gt;/&lt;HHHH&gt;.sqlar</code>. Ten then holds 65,536 files
-instead of 3,616,982.</p>
+<code>&lt;H&gt;/&lt;HHHH&gt;.sqlar</code>. The mirror disk then holds
+65,536 files instead of 3,616,982.</p>
 <p>SQLite’s archive format won the comparison on the criteria that
 mattered: reading one member by B-tree lookup, updating one member in
 place, transactions for crash safety, and restoring with a stock tool.
@@ -223,8 +224,8 @@ that turned out to be the decisive design point.</p>
 class="header-section-number">8.4</span> Kept originals beside
 containers</h2>
 <p>The first design assumed an empty target. Then the user decided that
-the originals Photo had preserved would stay in place on Ten, under
-<code>&lt;H&gt;/&lt;HHHH&gt;/</code>, so a plain directory
+the originals Photo had preserved would stay in place on the mirror
+disk, under <code>&lt;H&gt;/&lt;HHHH&gt;/</code>, so a plain directory
 <code>D/</code> and its container <code>D.sqlar</code> can sit side by
 side. That was 74,981 files, and the rule became:</p>
 <ul>
@@ -309,15 +310,15 @@ mirror</h2>
 <p>A packed root’s settings fit in a profile. The mailbox lists the
 settings of the real mirror, and with generic paths they come to
 this:</p>
-<pre class="text"><code>root = /Volumes/Quasar/previews
-root = /Volumes/Ten/previews
-force = /Volumes/Quasar/previews
-nodeletion = /Volumes/Ten/previews
+<pre class="text"><code>root = /Volumes/Source/previews
+root = /Volumes/Mirror/previews
+force = /Volumes/Source/previews
+nodeletion = /Volumes/Mirror/previews
 perms = 0
 times = true
 clone = off
 packdepth = 2
-packroot = /Volumes/Ten/previews
+packroot = /Volumes/Mirror/previews
 packworkers = 4
 packbarrier = 4</code></pre>
 <h2 data-number="8.7" id="the-marker"><span
@@ -374,9 +375,9 @@ text, and <code>fp</code> the raw MD5.</li>
 <li><strong>Names</strong> are plain file names. Containers are per
 directory, so no member name has a slash.</li>
 <li><strong>Time.</strong> <code>mtime_ns</code> keeps nanoseconds, more
-than Ten holds for plain files, since HFS+ stores whole seconds.
-<code>sqlite3 -AxC</code> restores mtimes to the second, and packdir’s
-own restore is exact.</li>
+than the mirror disk holds for plain files, since HFS+ stores whole
+seconds. <code>sqlite3 -AxC</code> restores mtimes to the second, and
+packdir’s own restore is exact.</li>
 <li><strong>Retained deletions.</strong> A deletion on the plain side,
 when <code>nodeletion</code> is not set, marks the member
 <code>retained_deleted = 1</code>. The bytes stay, and the member drops
@@ -387,7 +388,7 @@ leaves <code>-wal</code> and <code>-shm</code> files. A rollback journal
 saves only the old contents of pages it changes, and new blobs are
 written once. <code>TRUNCATE</code>, the first choice, turned out to
 leave an empty <code>D.sqlar-journal</code> beside every container,
-which would have doubled the file count on Ten to 131,072.
+which would have doubled the file count on the mirror disk to 131,072.
 <code>DELETE</code> leaves each container as a single file between
 runs.</p>
 <p>An update is cheap. On a 55-file, 70 MiB container on the internal

@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>The writer, barriers and recovery</title>
   <style>
@@ -47,7 +47,7 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="chapter-011.html" accesskey="n" rel="next">The benchmark story</a>
+<span class="navlink-label">Next:</span> <a href="chapter-011.html" accesskey="n" rel="next">APFS clones</a>
 </span>
 <span class="navlink">
 <span class="navlink-label">Previous:</span> <a href="chapter-009.html" accesskey="p" rel="previous">Packdir</a>
@@ -146,9 +146,17 @@ therefore never gets ahead of the platter.</p>
 class="header-section-number">9.6</span> The pending list and
 recovery</h2>
 <p><code>pd&lt;hash&gt;.pending</code> in the Unison directory lists
-each container, fsynced, before its first write in a run. After a crash
-or power loss, the list names everything that might not have reached the
-platter whole.</p>
+each container, fsynced, before its first write in a run. A finished job
+adds a <code>done</code> line for its container, and each barrier adds a
+<code>barrier</code> line. A container counts as covered once its job
+finished before a barrier. Being listed alone proves nothing, because
+other jobs write through a barrier. After a crash or power loss, the
+list names exactly what might not have reached the platter whole.</p>
+<p>This matters for restarts. Before the <code>done</code> and
+<code>barrier</code> lines, a mirror restarted part way through had to
+verify everything it had written in the run: 1,196 GiB, about six hours
+of reading, for a stop that had lost nothing. Now a restart verifies
+only the containers no barrier covered.</p>
 <p>On the next run, a pending container, or one whose file no longer
 matches the state, is verified before use with
 <code>PRAGMA integrity_check</code> and every member’s SHA-256.</p>

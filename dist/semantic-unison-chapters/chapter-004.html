@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>What Semantic Unison adds</title>
   <style>
@@ -200,6 +200,25 @@ normally. In <code>dng-xmp/0</code>, a MakerNote,
 <code>DNGPrivateData</code> or an unknown tag also declines, because
 “merely preserving the bytes of an unparsed pointer does not establish
 that its referent is outside XMP.”</p>
+<p>The DNG profiles’ grammar lives in its own library, <a
+href="https://github.com/firstpair/tiffgraph">tiffgraph</a>, with OCaml,
+OxCaml and Rust builds. It is the bounded walk that finds the packet,
+protects every other extent and lists a file’s regions. It moved there
+unchanged on 2026-11-02, so that other tools could use the same grammar.
+The fork’s <code>DngSemantic</code> module is now a thin adapter that
+binds tiffgraph’s grammars (<code>v0</code>, <code>v1</code>,
+<code>merge_only</code> and <code>layout</code>) to the profile names
+above. The fork’s scanner gave byte-identical reports on 328 DNGs before
+and after the move, and the DNG tests pass against the library. Widening
+a tiffgraph grammar widens a negotiated profile, so the two change
+together.</p>
+<p>The <strong>preserved digest</strong> a profile computes, a SHA-256
+of every byte outside the editable region with the layout bound in, is
+also useful on its own. Two files with the same preserved digest under
+the same profile differ, if at all, only in their XMP. phidentify, a
+library of photo-file identities, computes it independently in Rust over
+tiffgraph’s regions. On 60 randomly chosen catalog DNGs, its digests and
+the fork’s agreed on every file.</p>
 <h2 data-number="3.3" id="what-a-semantic-transfer-does"><span
 class="header-section-number">3.3</span> What a semantic transfer
 does</h2>

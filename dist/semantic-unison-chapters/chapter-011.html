@@ -5,9 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
-  <title>The benchmark story</title>
+  <title>APFS clones</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -47,477 +47,126 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="chapter-012.html" accesskey="n" rel="next">Command reference</a>
+<span class="navlink-label">Next:</span> <a href="chapter-012.html" accesskey="n" rel="next">The benchmark story</a>
 </span>
 <span class="navlink">
 <span class="navlink-label">Previous:</span> <a href="chapter-010.html" accesskey="p" rel="previous">The writer, barriers and recovery</a>
 </span>
 </div>
 </nav>
-<h1 data-number="10" id="the-benchmark-story"><span
-class="header-section-number">10</span> The benchmark story</h1>
-<p>This chapter is the record of a day: 2026-10-31, from the first
-mailbox message at 06:58Z. All measurements are from the mailbox and
-<code>docs/packdir-design.md</code>. All of them used one Mac with 128
-GiB of RAM, with Ten, a SATA hard disk on HFS+, as the target. None were
-repeated by the session writing this book.</p>
-<h2 data-number="10.1" id="what-was-estimated-first"><span
-class="header-section-number">10.1</span> What was estimated first</h2>
-<p>The proposal and the first replies contained several figures, and one
-design choice, that later proved wrong. Two sessions wrote them in good
-faith, and the figures were marked as estimates or samples at the
-time.</p>
-<table>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 33%" />
-<col style="width: 32%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Early figure</th>
-<th style="text-align: left;">What was found</th>
-<th style="text-align: left;">Why it was wrong</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Cache of about 9.6 million files, about
-0.6 MiB each</td>
-<td style="text-align: left;">3,616,982 files, 4.43 TiB, mean 1.28
-MiB</td>
-<td style="text-align: left;">9.6 million was the inode count of the
-whole volume, including pipeline staging</td>
-</tr>
-<tr>
-<td style="text-align: left;">78 to 150 files per leaf</td>
-<td style="text-align: left;">About 55 mean, 16 to 108 over 400 sampled
-leaves</td>
-<td style="text-align: left;">Three hand-picked leaves</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison first run: 20 to 40 h,
-limited by about 200 to 270 IOPS</td>
-<td style="text-align: left;">Linear from a measured 152 MiB/s: about
-8.5 h</td>
-<td style="text-align: left;">Writes of 1.28 MiB files on this disk were
-not seek-bound at this scale</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>F_FULLFSYNC</code> update: about 50
-to 150 ms per container on Ten</td>
-<td style="text-align: left;">About 0.9 s per container</td>
-<td style="text-align: left;">The drive’s cache flush costs far more
-than guessed</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>journal_mode = TRUNCATE</code> is
-the right journal</td>
-<td style="text-align: left;">It leaves an empty <code>-journal</code>
-beside every container</td>
-<td style="text-align: left;">Found by the prototype’s tests, which then
-changed the design</td>
-</tr>
-</tbody>
-</table>
-<p>The Photo session corrected the first two itself in P-2. The last
-line was caught the same morning. The third was the benchmark’s first
-surprise.</p>
-<h2 data-number="10.2" id="the-test-set"><span
-class="header-section-number">10.2</span> The test set</h2>
-<p>The Photo session wrote a generator that took the real distribution
-from a stat-only sample of 400 leaves and produced
-<code>leafset-v1</code>: 50.0 GiB, 39,903 files, 694 leaves, with random
-bytes that are incompressible like JPEG, and random names. Nothing real
-was in it. It reproduced whole groups of levels with real sizes. Each
-method wrote to a new folder on Ten.</p>
-<h2 data-number="10.3" id="first-copy-plain-files-are-fast"><span
-class="header-section-number">10.3</span> First copy: plain files are
-fast</h2>
-<p>Source read from memory for every method, so the comparison is Ten’s
-cost alone. Each method ends with <code>sync</code>.</p>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 54%" />
-<col style="width: 12%" />
-<col style="width: 18%" />
-<col style="width: 15%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Throughput</th>
-<th style="text-align: right;">Ten ops/s</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>cp -R</code></td>
-<td style="text-align: right;">259 s</td>
-<td style="text-align: right;">198 MiB/s</td>
-<td style="text-align: right;">312</td>
-</tr>
-<tr>
-<td style="text-align: left;">Piped <code>tar</code> to
-<code>tar</code></td>
-<td style="text-align: right;">266 s</td>
-<td style="text-align: right;">192 MiB/s</td>
-<td style="text-align: right;">303</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison, one way,
-<code>clone = off</code></td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">152 MiB/s</td>
-<td style="text-align: right;">272</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code>, 1 worker</td>
-<td style="text-align: right;">1,178 s</td>
-<td style="text-align: right;">44 MiB/s</td>
-<td style="text-align: right;">130</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code>, 1 worker,
-<code>F_FULLFSYNC</code> per container</td>
-<td style="text-align: right;">1,321 s</td>
-<td style="text-align: right;">39 MiB/s</td>
-<td style="text-align: right;">120</td>
-</tr>
-<tr>
-<td style="text-align: left;">Sparse bundle</td>
-<td style="text-align: right;">failed</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tbody>
-</table>
-<p>This was not the result anyone wanted for a packing project. Plain
-Unison was not seek-bound. The prototype was four times slower than it,
-for two reasons, and both were understood the same hour: it was
-CPU-bound on one thread, and it flushed the drive’s cache once per
-container. The sparse-bundle method failed because
-<code>hdiutil attach</code> got “Permission denied” for a bundle on Ten,
-and it was later dropped.</p>
-<p>Workers fixed the first problem. The second needed a design decision.
-Three-way comparison on the full 50 GiB with 4 workers:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Sync</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Throughput</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Barrier every 4 GiB</td>
-<td style="text-align: right;">340 s</td>
-<td style="text-align: right;">150 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;">No flush at all</td>
-<td style="text-align: right;">314 s</td>
-<td style="text-align: right;">163 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>F_FULLFSYNC</code> per
-container</td>
-<td style="text-align: right;">946 s</td>
-<td style="text-align: right;">54 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison, for reference</td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">152 MiB/s</td>
-</tr>
-</tbody>
-</table>
-<p>The barrier kept the guarantee that matters for a mirror, at 8% over
-no flush, and matched plain Unison.</p>
-<h2 data-number="10.4" id="incremental-open-only-what-changed"><span
-class="header-section-number">10.4</span> Incremental: open only what
-changed</h2>
-<p>A 1% change set then replaced, added and deleted files in 12 of 694
-leaves, 197 MiB in all. Every method stored the same 157 files.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Ten I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">378 MiB, 4,031 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
-<td style="text-align: right;">61.6 s</td>
-<td style="text-align: right;">1,360 MiB, 15,800 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code></td>
-<td style="text-align: right;">121.8 s</td>
-<td style="text-align: right;">2,759 MiB, 37,749 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code></td>
-<td style="text-align: right;">129.6 s</td>
-<td style="text-align: right;">2,855 MiB, 39,457 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4</code></td>
-<td style="text-align: right;">146.1 s</td>
-<td style="text-align: right;">2,603 MiB, 34,910 ops</td>
-</tr>
-</tbody>
-</table>
-<p>Packing lost by roughly ten to twenty times, and the cause was
-specific. The prototype opened every container on every run. Opening all
-694 and reading their member tables, with nothing to write, took 83 to
-141 s, about 0.12 to 0.2 s each on the disk. Linearly, 65,536 containers
-would have taken 2 to 3.5 hours per run, enough to sink the whole
-idea.</p>
-<p>The fix is the design point mentioned earlier: record each
-container’s inode, size and mtime, and open only containers whose file
-changed or that have something to store. A rerun with nothing new then
-took 1.3 s for 694 containers. A second change set, with the scan timed
-apart from the transfer:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Scan</th>
-<th style="text-align: right;">Containers opened</th>
-<th style="text-align: right;">Ten I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">2.4 s</td>
-<td style="text-align: right;">n/a</td>
-<td style="text-align: right;">404 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code></td>
-<td style="text-align: right;">8.8 s</td>
-<td style="text-align: right;">0.31 s</td>
-<td style="text-align: right;">12 of 694</td>
-<td style="text-align: right;">647 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code></td>
-<td style="text-align: right;">8.4 s</td>
-<td style="text-align: right;">0.31 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">670 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4</code></td>
-<td style="text-align: right;">7.1 s</td>
-<td style="text-align: right;">0.40 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">638 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
-<td style="text-align: right;">5.0 s</td>
-<td style="text-align: right;">0.41 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">635 MiB</td>
-</tr>
-</tbody>
-</table>
-<p><code>.sqlar</code> wrote about 1.6 times the bytes of plain Unison
-for the same change, because of the rollback journal and the read-back
-verification. <code>sqlar-wal</code> left three files per container
-instead of one, which confirmed <code>DELETE</code>.</p>
-<h2 data-number="10.5" id="the-cold-scan-partly"><span
-class="header-section-number">10.5</span> The cold scan, partly</h2>
-<p>Every figure above came from a warm cache. Ten’s catalog for 40,000
-files fits easily in 128 GiB of RAM. A catalog for 3.6 million more
-files is a different thing, and after a reboot it would have to be read
-from the platter. The deciding measurement would have been a cold
-scan.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">No-change pass, after
-<code>sudo purge</code></th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Scan</th>
-<th style="text-align: right;">Ten I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">16.1 s</td>
-<td style="text-align: right;">11.8 s</td>
-<td style="text-align: right;">56 MiB, 4,755 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>.sqlar</code>, 4 workers,
-barrier</td>
-<td style="text-align: right;">1.0 s</td>
-<td style="text-align: right;">0.6 s</td>
-<td style="text-align: right;">16 MiB, 166 ops</td>
-</tr>
-</tbody>
-</table>
-<p>This was only partly cold. <code>purge</code> left Ten’s catalog
-cached: a stat walk of the plain copy afterwards took 0.21 s. Plain
-Unison’s extra reads look like the per-file Finder-info and
-resource-fork lookups it does on macOS, from HFS+’s attributes tree,
-though that was an inference. A fully cold test needed Ten unmounted
-between steps, and from that session <code>diskutil unmount</code> hung
-twice, unattended, for 16 and 12 minutes. The Unison session called that
-its own mistake, since the command should have had a timeout. The user
-chose to stop there.</p>
-<h2 data-number="10.6" id="where-the-benchmark-left-things"><span
-class="header-section-number">10.6</span> Where the benchmark left
-things</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Plain Unison</th>
-<th style="text-align: right;"><code>.sqlar</code>, 4 workers,
-barrier</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">First copy, 50 GiB</td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">340 s</td>
-</tr>
-<tr>
-<td style="text-align: left;">1% incremental</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">5 to 7 s</td>
-</tr>
-<tr>
-<td style="text-align: left;">No-change scan, warm</td>
-<td style="text-align: right;">about 2.4 s</td>
-<td style="text-align: right;">about 0.4 s</td>
-</tr>
-<tr>
-<td style="text-align: left;">No-change pass, partly cold</td>
-<td style="text-align: right;">16 s</td>
-<td style="text-align: right;">1 s</td>
-</tr>
-</tbody>
-</table>
-<p>Extrapolations to the full cache were linear and were labelled as
-such: 3.6 million files is about 90 times this set, and 65,536
-containers is about 94 times. They gave a first copy of about 8.5 h
-either way, a warm scan of about 3.5 min plain against about 30 s
-packed, and a cold scan of about 24 min plain against about 1.5 min
-packed, with the plain figure as a lower bound.</p>
-<p>The trade-off was the user’s to judge, and it was put plainly. Plain
-files are simpler, need no new code and stay browsable with any tool.
-Packed makes runs much cheaper to scan and leaves Ten with 65,536 files,
-at the cost of a new Unison feature, a SQLite tool to look inside, and
-about 1.6 times the bytes written per change.</p>
-<p>The Photo session recommended running a plain mirror first, timing a
-cold pass on the real files, and switching only if that was too slow. It
-was a reasonable recommendation. The user chose packed, and confirmed
-that after hearing it.</p>
-<h2 data-number="10.7" id="real-unison-and-a-new-estimate"><span
-class="header-section-number">10.7</span> Real Unison, and a new
-estimate</h2>
-<p>After the integration, real Unison packed the 50 GiB set onto
-Ten:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Writer</th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Propagation</th>
-<th style="text-align: right;">Throughput</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Asynchronous</td>
-<td style="text-align: right;">424 s</td>
-<td style="text-align: right;">334 s</td>
-<td style="text-align: right;">121 MiB/s overall</td>
-</tr>
-<tr>
-<td style="text-align: left;">First, blocking</td>
-<td style="text-align: right;">538 s</td>
-<td style="text-align: right;">448 s</td>
-<td style="text-align: right;">95 MiB/s</td>
-</tr>
-</tbody>
-</table>
-<p>The propagation figure matches the prototype’s 340 s. The extra 90 s
-is Unison’s first-run MD5 of every Quasar file, which the prototype had
-been spared, and a quiet rerun took 3.2 s. So the honest comparison with
-plain Unison’s 337 s is 424 s, not 340 s. The extrapolation became about
-10.6 h for a first full mirror against about 8.4 h plain. That was still
-an estimate.</p>
-<h2 data-number="10.8" id="the-surprise-file-by-file"><span
-class="header-section-number">10.8</span> The surprise: file by
-file</h2>
-<p>The real mirror started, and it was much slower than 10.6 h would
-imply.</p>
-<p>The set <code>leafset-v1</code> had been written to an empty target.
-Ten was not empty. It held the kept originals, and a check during the
-run found that 41,549 of the 65,536 leaves had a plain directory on the
-target. As described in the previous chapter, a leaf with a plain
-directory on the target reaches the writer file by file, not as one
-directory item. Each file then had its own process and its own SQLite
-transaction. The commit message records the result: about 25 files/s on
-Ten.</p>
-<p>No benchmark had exercised this. The design had thought through what
-kept originals meant for correctness, in detail. Nobody had asked what
-they meant for how Unison’s items are shaped, and the leaf set had no
-plain directories to reveal it.</p>
-<p>As a rough estimate, and assuming leaves of equal size: 41,549 leaves
-are about 63% of the cache, or about 2.3 million files, and at 25
-files/s that is about 25 hours for those leaves alone. This is
-arithmetic on one rate, not a measurement of the mirror. The session’s
-own note at the time said roughly 30 hours or more.</p>
-<p>The fix was commit <code>5c95d940</code>, per-container queues. On
-the internal disk the rate went from 67 to 187 files/s. Its rate on Ten
-is not yet measured.</p>
-<p><strong>The state of the mirror.</strong> When this was written, the
-real mirror of 3.6 million files had not finished. There is no measured
-figure for its total time, for its final scan time warm or cold, or for
-batching on Ten. Every full-scale number in this chapter is an
-extrapolation. The claim that packing pays off at full scale remains a
-prediction until those measurements exist.</p>
-<p><strong>The scan that survived.</strong> When the file-by-file
-problem was found, the mirror had to be stopped and restarted, and the
-session said the 5-hour scan would be lost. That was wrong, and it was
-stated without checking. Unison keeps a fingerprint cache for
-interrupted scans, 308 MB for this cache, and the restarted run reloaded
-it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.</p>
-<h2 data-number="10.9" id="what-the-day-showed"><span
-class="header-section-number">10.9</span> What the day showed</h2>
+<h1 data-number="10" id="apfs-clones"><span
+class="header-section-number">10</span> APFS clones</h1>
+<h2 data-number="10.1" id="what-is-lost-today"><span
+class="header-section-number">10.1</span> What is lost today</h2>
+<p>On APFS, <code>cp -c</code> and Finder’s Duplicate make a
+<strong>clone</strong>: a second file that shares the first one’s blocks
+until either is written. Photo workflows make many of them. One
+application clones another’s previews into its own folders instead of
+copying them, and catalogs share a store of previews. A sync that copies
+files turns every clone into a full copy. The data survives, but the
+space doubles and the relationship is gone.</p>
+<p>Plain Unison loses them, and so did this fork until 2026-11-02. A
+measured local sync onto a separate APFS volume delivered every clone as
+an independent copy with a refcount of 1, including clones made in the
+same run and a new clone of a file already synced.</p>
+<h2 data-number="10.2" id="what-counts-as-a-clone"><span
+class="header-section-number">10.2</span> What counts as a clone</h2>
+<p>APFS reports two attributes through <code>getattrlist</code>.
+<code>ATTR_CMNEXT_CLONEID</code> is shared by files cloned from one
+another, and <code>ATTR_CMNEXT_CLONE_REFCNT</code> says how many files
+share it. Files on one volume with the same clone ID and a refcount
+above 1 form a clone group. Writing one byte to a member gives it a new
+clone ID, which takes it out of the group. An independent copy is never
+in a group, even with identical bytes.</p>
+<p>The clone ID is a statement about structure, not proof of content.
+Every use below also compares contents: Unison’s fingerprint in a sync,
+and the SHA-256 in packdir. A pair that fails the check is two ordinary
+files. <strong>Only exact clones are kept as clones.</strong> Identical
+files that were independent on the source stay independent on the
+destination.</p>
+<h2 data-number="10.3" id="file-to-file"><span
+class="header-section-number">10.3</span> File to file</h2>
+<p>With <code>clones = true</code>, before the receiver transfers a new
+file, it lists candidates on its own replica with the same fingerprint.
+Those are files it already holds, from a hint table, and files it has
+created earlier in this run. It sends the source one request with the
+new file’s path and the candidates’ paths. The source compares clone IDs
+on its own disk and answers which candidates are clones of the file.</p>
+<p>The receiver then clones a confirmed candidate with
+<code>clonefile</code>, checks the result’s fingerprint, sets its
+properties, and publishes it through Unison’s ordinary rename. Only the
+original crosses the wire; each clone costs one request and one
+<code>clonefile</code>. Whichever member of a group arrives first
+becomes the original for the rest. A file waits only for earlier files
+the source confirmed, so waits can’t form a cycle.</p>
+<p>The request is negotiated as the feature <code>clone-pairs-v0</code>.
+With a peer that lacks it, nothing changes, and the <code>clones</code>
+preference is not even sent, since an older peer would stop at an
+unknown preference. With <code>clones</code> on, Unison’s older “copy a
+local file with the same fingerprint” shortcut copies bytes instead of
+cloning. That shortcut can’t know whether two identical files were
+clones, so leaving it to clone would make independent copies into
+clones.</p>
+<p>The tests sync onto a scratch APFS disk image and read clone IDs
+back. They cover groups of two and three across directories, a new clone
+of a file synced earlier, an independent copy, and a clone changed on
+the source after cloning, which must arrive as an ordinary file. They
+also cover a remote receiver over a pipe, a peer built without the
+feature, and <code>clones</code> off. All pass on stock OCaml and
+OxCaml.</p>
+<h2 data-number="10.4" id="into-a-packed-root"><span
+class="header-section-number">10.4</span> Into a packed root</h2>
+<p>A packed root’s source is local, so the writer reads clone IDs
+directly. Each container’s files are split into data and references:</p>
 <ul>
-<li>A small benchmark on the wrong shape of data can be precise and
-still miss the main cost. This one was careful about file sizes and
-missed the state of the target.</li>
-<li>Measuring early changed the design four times: the journal, the
-workers, the barrier and the stamp check. Each of those would have been
-far more expensive to find on the real run.</li>
-<li>Estimates written down as estimates did no harm, because everyone
-could see what to replace.</li>
-<li>Two of the largest numbers came from a sample of three, and from a
-figure that described something else. Both were caught by asking where
-the number came from.</li>
+<li><strong>A reference:</strong> a file in a clone group whose bytes
+are already packed, in this run or an earlier one whose source file is
+still in the group.</li>
+<li><strong>Data:</strong> any other file. The first file of a group, in
+path order, becomes the group’s original.</li>
 </ul>
+<p>Data is written first, then the references. A reference is a row in
+packdir’s <code>packdir_clone</code> table naming its original by a path
+relative to its container’s directory, so it can point into another
+container. It stores no bytes. packdir checks the SHA-256 when it writes
+the reference, and a container whose references don’t check out stores
+those files as data instead.</p>
+<p>On a disk that can’t hold clones, such as an HFS+ mirror, this is the
+only way a clone group’s bytes are stored once.</p>
+<h2 data-number="10.5" id="out-of-packdir"><span
+class="header-section-number">10.5</span> Out of packdir</h2>
+<p>A packed root is never a source for Unison, so restoring goes through
+<code>unison-packdir unpack-tree</code>. It restores every file that
+holds data first, then makes each clone with <code>clonefile</code> from
+its original’s restored file. When the original wasn’t part of the
+restore, or the destination can’t clone (another volume, a file system
+other than APFS, another system), it writes the bytes instead. Its
+summary counts both:</p>
+<pre class="text"><code>{&quot;containers&quot;: 3, &quot;files&quot;: 7, &quot;cloned&quot;: 3, &quot;copied&quot;: 0}</code></pre>
+<p>Whatever changes or removes an original in packdir first gives its
+clones bytes of their own. A container that holds clone references is
+marked <code>unison-packdir/2</code>, so a build from before clones
+refuses it instead of missing members. packdir’s manual has the format,
+and a recipe for bringing clones back with stock <code>sqlite3</code>
+and <code>cp -c</code>.</p>
+<h2 data-number="10.6" id="groups-across-two-trees"><span
+class="header-section-number">10.6</span> Groups across two trees</h2>
+<p>A clone group is kept only within one sync. When the clones and their
+originals live in two trees synced separately, such as one application’s
+catalogs cloned from another application’s previews, two ways are
+open:</p>
+<ul>
+<li><strong>One root over both.</strong> A root can be widened without
+redoing the mirror: move the packed tree into a subdirectory on the
+mirror disk, rewrite the packed-root state under the new root’s name,
+and nest Unison’s archive the same way, so the next run sees the old
+tree as unchanged. One packing depth must then fit both trees.</li>
+<li><strong>A second packed root that references the first.</strong> It
+is found through the first root’s recorded fingerprints and confirmed by
+clone ID on the source. Its references point across, so the two packed
+roots must stay side by side.</li>
+</ul>
+<p>Neither is built yet. Which one fits depends on the second tree’s
+layout and on what in it can be rebuilt rather than mirrored.</p>
 </body>
 </html>

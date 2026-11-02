@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc 3.12.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
   <style>
@@ -114,7 +114,7 @@ figcaption { font-size: .88em; font-style: italic; color: #3b5563; margin-top: .
 <h1 class="title">Semantic Unison</h1>
 <p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
 <p class="author">Alexy Khrabrov, with Claude as co-author</p>
-<p class="date">2026-11-01</p>
+<p class="date">2026-11-02</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -199,53 +199,63 @@ lock</a></li>
 <li><a href="#the-pending-list-and-recovery" id="toc-the-pending-list-and-recovery"><span class="toc-section-number">9.6</span> The pending list and
 recovery</a></li>
 </ul></li>
-<li><a href="#the-benchmark-story" id="toc-the-benchmark-story"><span class="toc-section-number">10</span> The benchmark story</a>
+<li><a href="#apfs-clones" id="toc-apfs-clones"><span class="toc-section-number">10</span> APFS clones</a>
 <ul>
-<li><a href="#what-was-estimated-first" id="toc-what-was-estimated-first"><span class="toc-section-number">10.1</span> What was estimated first</a></li>
-<li><a href="#the-test-set" id="toc-the-test-set"><span class="toc-section-number">10.2</span> The test set</a></li>
-<li><a href="#first-copy-plain-files-are-fast" id="toc-first-copy-plain-files-are-fast"><span class="toc-section-number">10.3</span> First copy: plain files are
+<li><a href="#what-is-lost-today" id="toc-what-is-lost-today"><span class="toc-section-number">10.1</span> What is lost today</a></li>
+<li><a href="#what-counts-as-a-clone" id="toc-what-counts-as-a-clone"><span class="toc-section-number">10.2</span> What counts as a clone</a></li>
+<li><a href="#file-to-file" id="toc-file-to-file"><span class="toc-section-number">10.3</span> File to file</a></li>
+<li><a href="#into-a-packed-root" id="toc-into-a-packed-root"><span class="toc-section-number">10.4</span> Into a packed root</a></li>
+<li><a href="#out-of-packdir" id="toc-out-of-packdir"><span class="toc-section-number">10.5</span> Out of packdir</a></li>
+<li><a href="#groups-across-two-trees" id="toc-groups-across-two-trees"><span class="toc-section-number">10.6</span> Groups across two trees</a></li>
+</ul></li>
+<li><a href="#the-benchmark-story" id="toc-the-benchmark-story"><span class="toc-section-number">11</span> The benchmark story</a>
+<ul>
+<li><a href="#what-was-estimated-first" id="toc-what-was-estimated-first"><span class="toc-section-number">11.1</span> What was estimated first</a></li>
+<li><a href="#the-test-set" id="toc-the-test-set"><span class="toc-section-number">11.2</span> The test set</a></li>
+<li><a href="#first-copy-plain-files-are-fast" id="toc-first-copy-plain-files-are-fast"><span class="toc-section-number">11.3</span> First copy: plain files are
 fast</a></li>
-<li><a href="#incremental-open-only-what-changed" id="toc-incremental-open-only-what-changed"><span class="toc-section-number">10.4</span> Incremental: open only what
+<li><a href="#incremental-open-only-what-changed" id="toc-incremental-open-only-what-changed"><span class="toc-section-number">11.4</span> Incremental: open only what
 changed</a></li>
-<li><a href="#the-cold-scan-partly" id="toc-the-cold-scan-partly"><span class="toc-section-number">10.5</span> The cold scan, partly</a></li>
-<li><a href="#where-the-benchmark-left-things" id="toc-where-the-benchmark-left-things"><span class="toc-section-number">10.6</span> Where the benchmark left
+<li><a href="#the-cold-scan-partly" id="toc-the-cold-scan-partly"><span class="toc-section-number">11.5</span> The cold scan, partly</a></li>
+<li><a href="#where-the-benchmark-left-things" id="toc-where-the-benchmark-left-things"><span class="toc-section-number">11.6</span> Where the benchmark left
 things</a></li>
-<li><a href="#real-unison-and-a-new-estimate" id="toc-real-unison-and-a-new-estimate"><span class="toc-section-number">10.7</span> Real Unison, and a new
+<li><a href="#real-unison-and-a-new-estimate" id="toc-real-unison-and-a-new-estimate"><span class="toc-section-number">11.7</span> Real Unison, and a new
 estimate</a></li>
-<li><a href="#the-surprise-file-by-file" id="toc-the-surprise-file-by-file"><span class="toc-section-number">10.8</span> The surprise: file by
+<li><a href="#the-surprise-file-by-file" id="toc-the-surprise-file-by-file"><span class="toc-section-number">11.8</span> The surprise: file by
 file</a></li>
-<li><a href="#what-the-day-showed" id="toc-what-the-day-showed"><span class="toc-section-number">10.9</span> What the day showed</a></li>
+<li><a href="#what-the-day-showed" id="toc-what-the-day-showed"><span class="toc-section-number">11.9</span> What the day showed</a></li>
 </ul></li>
-<li><a href="#command-reference" id="toc-command-reference"><span class="toc-section-number">11</span> Command reference</a>
+<li><a href="#command-reference" id="toc-command-reference"><span class="toc-section-number">12</span> Command reference</a>
 <ul>
-<li><a href="#unison-the--semdiff-family" id="toc-unison-the--semdiff-family"><span class="toc-section-number">11.1</span> unison: the -semdiff
+<li><a href="#unison-the--semdiff-family" id="toc-unison-the--semdiff-family"><span class="toc-section-number">12.1</span> unison: the -semdiff
 family</a></li>
-<li><a href="#unison-dngscan" id="toc-unison-dngscan"><span class="toc-section-number">11.2</span> unison-dngscan</a></li>
-<li><a href="#packed-root-preferences" id="toc-packed-root-preferences"><span class="toc-section-number">11.3</span> Packed-root preferences</a></li>
-<li><a href="#packdir-and-unison-packdir" id="toc-packdir-and-unison-packdir"><span class="toc-section-number">11.4</span> packdir and
+<li><a href="#unison-dngscan" id="toc-unison-dngscan"><span class="toc-section-number">12.2</span> unison-dngscan</a></li>
+<li><a href="#packed-root-preferences" id="toc-packed-root-preferences"><span class="toc-section-number">12.3</span> Packed-root preferences</a></li>
+<li><a href="#packdir-and-unison-packdir" id="toc-packdir-and-unison-packdir"><span class="toc-section-number">12.4</span> packdir and
 unison-packdir</a></li>
-<li><a href="#dng-archive" id="toc-dng-archive"><span class="toc-section-number">11.5</span> dng-archive</a></li>
-<li><a href="#semantic-preferences" id="toc-semantic-preferences"><span class="toc-section-number">11.6</span> Semantic preferences</a></li>
+<li><a href="#dng-archive" id="toc-dng-archive"><span class="toc-section-number">12.5</span> dng-archive</a></li>
+<li><a href="#semantic-preferences" id="toc-semantic-preferences"><span class="toc-section-number">12.6</span> Semantic preferences</a></li>
 </ul></li>
-<li><a href="#honest-limits" id="toc-honest-limits"><span class="toc-section-number">12</span> Honest limits</a>
+<li><a href="#honest-limits" id="toc-honest-limits"><span class="toc-section-number">13</span> Honest limits</a>
 <ul>
-<li><a href="#packed-roots" id="toc-packed-roots"><span class="toc-section-number">12.1</span> Packed roots</a></li>
-<li><a href="#semantic-diff-1" id="toc-semantic-diff-1"><span class="toc-section-number">12.2</span> Semantic diff</a></li>
-<li><a href="#semantic-transfer-and-merging" id="toc-semantic-transfer-and-merging"><span class="toc-section-number">12.3</span> Semantic transfer and
+<li><a href="#packed-roots" id="toc-packed-roots"><span class="toc-section-number">13.1</span> Packed roots</a></li>
+<li><a href="#clones" id="toc-clones"><span class="toc-section-number">13.2</span> Clones</a></li>
+<li><a href="#semantic-diff-1" id="toc-semantic-diff-1"><span class="toc-section-number">13.3</span> Semantic diff</a></li>
+<li><a href="#semantic-transfer-and-merging" id="toc-semantic-transfer-and-merging"><span class="toc-section-number">13.4</span> Semantic transfer and
 merging</a></li>
-<li><a href="#building" id="toc-building"><span class="toc-section-number">12.4</span> Building</a></li>
+<li><a href="#building" id="toc-building"><span class="toc-section-number">13.5</span> Building</a></li>
 </ul></li>
-<li><a href="#how-this-was-built" id="toc-how-this-was-built"><span class="toc-section-number">13</span> How this was built</a>
+<li><a href="#how-this-was-built" id="toc-how-this-was-built"><span class="toc-section-number">14</span> How this was built</a>
 <ul>
-<li><a href="#two-sessions-and-a-mailbox" id="toc-two-sessions-and-a-mailbox"><span class="toc-section-number">13.1</span> Two sessions and a
+<li><a href="#two-sessions-and-a-mailbox" id="toc-two-sessions-and-a-mailbox"><span class="toc-section-number">14.1</span> Two sessions and a
 mailbox</a></li>
-<li><a href="#milestones" id="toc-milestones"><span class="toc-section-number">13.2</span> Milestones</a></li>
-<li><a href="#what-the-tests-found" id="toc-what-the-tests-found"><span class="toc-section-number">13.3</span> What the tests found</a></li>
-<li><a href="#what-went-wrong-without-a-test" id="toc-what-went-wrong-without-a-test"><span class="toc-section-number">13.4</span> What went wrong without a
+<li><a href="#milestones" id="toc-milestones"><span class="toc-section-number">14.2</span> Milestones</a></li>
+<li><a href="#what-the-tests-found" id="toc-what-the-tests-found"><span class="toc-section-number">14.3</span> What the tests found</a></li>
+<li><a href="#what-went-wrong-without-a-test" id="toc-what-went-wrong-without-a-test"><span class="toc-section-number">14.4</span> What went wrong without a
 test</a></li>
-<li><a href="#what-this-book-is" id="toc-what-this-book-is"><span class="toc-section-number">13.5</span> What this book is</a></li>
+<li><a href="#what-this-book-is" id="toc-what-this-book-is"><span class="toc-section-number">14.5</span> What this book is</a></li>
 </ul></li>
-<li><a href="#building-and-testing" id="toc-building-and-testing"><span class="toc-section-number">14</span> Building and testing</a></li>
+<li><a href="#building-and-testing" id="toc-building-and-testing"><span class="toc-section-number">15</span> Building and testing</a></li>
 </ul>
 </nav>
 <figure>
@@ -263,23 +273,27 @@ Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
 <p>The book describes the state of the
 <code>implementation/final-adobe-qualification</code> branch on
-2026-10-31, at commit <code>27b9ab1a</code>, together with the separate
-<a href="https://github.com/querygraph/packdir">packdir</a> project and
-dng-compare’s OCaml archive tool. Every command option was checked
-against the source, and the worked examples in the chapters on semantic
-diff and packdir are real runs on small synthetic trees, made while
-writing. Numbers about the benchmark and the mirror come from the two
-sessions’ mailbox and the design documents. This session did not take
-those measurements and did not touch the disks involved.</p>
+2026-11-02, at commit <code>9b68266b</code>, together with the separate
+<a href="https://github.com/querygraph/packdir">packdir</a> and <a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects and
+dng-compare’s OCaml archive tool. The first edition, of 2026-10-31, was
+written before the real mirror finished; this one adds its results,
+preservation of APFS clones, and the DNG walker’s move into tiffgraph.
+Every command option was checked against the source, and the worked
+examples in the chapters on semantic diff and packdir are real runs on
+small synthetic trees, made while writing. Numbers about the benchmark
+and the mirror come from the two sessions’ mailbox and the design
+documents. This session did not take those measurements and did not
+touch the disks involved.</p>
 <p>Three kinds of statement appear below, and they are kept apart:</p>
 <ul>
 <li><strong>Measured</strong> figures are quoted from a record, with the
 conditions under which they were taken.</li>
 <li><strong>Estimates</strong> are marked as estimates. Several early
 ones turned out to be wrong, and the book says which.</li>
-<li><strong>Unknown</strong> things are said to be unknown. The most
-important one is that the real mirror of 3.6 million files had not
-finished when this was written.</li>
+<li><strong>Unknown</strong> things are said to be unknown. In the first
+edition the most important was whether the real mirror of 3.6 million
+files would bear out the estimates. It has now finished, and the
+benchmark chapter gives its numbers.</li>
 </ul>
 <p>The contribution policy of upstream Unison does not allow
 LLM-generated text or code in that project, so nothing here is meant for
@@ -466,6 +480,24 @@ normally. In <code>dng-xmp/0</code>, a MakerNote,
 <code>DNGPrivateData</code> or an unknown tag also declines, because
 “merely preserving the bytes of an unparsed pointer does not establish
 that its referent is outside XMP.”</p>
+<p>The DNG profiles’ grammar lives in its own library, <a href="https://github.com/firstpair/tiffgraph">tiffgraph</a>, with OCaml,
+OxCaml and Rust builds. It is the bounded walk that finds the packet,
+protects every other extent and lists a file’s regions. It moved there
+unchanged on 2026-11-02, so that other tools could use the same grammar.
+The fork’s <code>DngSemantic</code> module is now a thin adapter that
+binds tiffgraph’s grammars (<code>v0</code>, <code>v1</code>,
+<code>merge_only</code> and <code>layout</code>) to the profile names
+above. The fork’s scanner gave byte-identical reports on 328 DNGs before
+and after the move, and the DNG tests pass against the library. Widening
+a tiffgraph grammar widens a negotiated profile, so the two change
+together.</p>
+<p>The <strong>preserved digest</strong> a profile computes, a SHA-256
+of every byte outside the editable region with the layout bound in, is
+also useful on its own. Two files with the same preserved digest under
+the same profile differ, if at all, only in their XMP. phidentify, a
+library of photo-file identities, computes it independently in Rust over
+tiffgraph’s regions. On 60 randomly chosen catalog DNGs, its digests and
+the fork’s agreed on every file.</p>
 <h2 data-number="3.3" id="what-a-semantic-transfer-does"><span class="header-section-number">3.3</span> What a semantic transfer
 does</h2>
 <p>With <code>semanticdng = true</code>, a one-sided metadata edit no
@@ -774,7 +806,7 @@ catch their absence.</p>
 with 177 cases per compiler in both ordinary and timed modes; and 21
 native clone-lease cases per compiler. Those numbers describe particular
 tests. They do not certify every camera, operating system, storage
-device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/dff87351972fabc6cdff4d1cf5cff746f07dad44/doc/sol-final-acceptance-map-20261019.md">acceptance
+device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/8f814a496b0fc8ff11e0b186c4c97dfd6fd92bbb/doc/sol-final-acceptance-map-20261019.md">acceptance
 map</a> links the scoped evidence.</p>
 <p>I have made mistakes, too. Harness assumptions have failed. Pins have
 gone stale. Observations have needed narrower interpretations.
@@ -835,7 +867,7 @@ into an OS thread cap, a sample into a peak-memory measurement, or one
 successful camera case into universal compatibility. I cannot claim that
 this goal is finished: final generated Adobe fixtures and receiving
 qualification, portions of the prescribed measurement matrix, and final
-acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/dff87351972fabc6cdff4d1cf5cff746f07dad44/OPUS-HANDOFF.md">handoff</a>
+acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/8f814a496b0fc8ff11e0b186c4c97dfd6fd92bbb/OPUS-HANDOFF.md">handoff</a>
 records the changing state.</p>
 <p>I can make the work easier to challenge. That means readable changes,
 explicit assumptions, reproducible commands, conservative fallbacks,
@@ -1013,7 +1045,7 @@ EXIF source was equal on both sides is not stored, so such a pair stays
 <h1 data-number="7" id="a-shuttle-disk-end-to-end"><span class="header-section-number">7</span> A shuttle disk, end to end</h1>
 <h2 data-number="7.1" id="the-flow"><span class="header-section-number">7.1</span> The flow</h2>
 <p>The one command to remember is this one:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Kolobok/foto /Volumes/Photo/foto <span class="at">-semdiff</span> <span class="at">-sameview</span> <span class="at">-preservefull</span> <span class="at">-v</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Shuttle/foto /Volumes/Archive/foto <span class="at">-semdiff</span> <span class="at">-sameview</span> <span class="at">-preservefull</span> <span class="at">-v</span></span></code></pre></div>
 <p>The first root is the shuttle and the second is the long-term root.
 Both must be local. The run has the following shape.</p>
 <figure>
@@ -1101,13 +1133,13 @@ dng-compare/disk-shuttle/      the archive</code></pre>
 <p>Nothing that was already in <code>foto/</code> changed.</p>
 <h2 data-number="7.3" id="where-things-are-kept"><span class="header-section-number">7.3</span> Where things are kept</h2>
 <figure>
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQxMCIgd2lkdGg9IjEwMDAiIGhlaWdodD0iNDEwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZmlsbD0iIzE3MmMzNSI+CiAgPHRpdGxlIGlkPSJ0Ij5XaGVyZSBhIGRpZmZlcmluZyBmaWxlIGlzIGtlcHQ8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5Ud28gcGxhY2VtZW50cyBmb3IgdGhlIHNodXR0bGUncyB2ZXJzaW9uIG9mIGEgZmlsZSB3aG9zZSBjb250ZW50IGRpZmZlcnMuIEJ5IGRlZmF1bHQgaXQgZ29lcyBpbnRvIGEgcmV2aWV3IHRyZWUgYmVzaWRlIHRoZSBsb25nLXRlcm0gcm9vdCwgdW5kZXIgdGhlIHJvb3QncyBvd24gbmFtZSBhbmQgdGhlIHNhbWUgcmVsYXRpdmUgcGF0aC4gV2l0aCAtc3VmZml4IGl0IGdvZXMgbmV4dCB0byB0aGUgbG9uZy10ZXJtIGZpbGUgYXMgTkFNRV8yLkVYVCwgb3IgTkFNRV9TVUYuRVhUIHdpdGggLXN1ZmZpeD1TVUYuPC9kZXNjPgogIDxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjQxMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MCIgaGVpZ2h0PSIzNzAiIHJ4PSI0IiBmaWxsPSIjZWFmMWY0IiBzdHJva2U9IiM3ZmE2YjciIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHJlY3QgeD0iNTEwIiB5PSIyMCIgd2lkdGg9IjQ3MCIgaGVpZ2h0PSIzNzAiIHJ4PSI0IiBmaWxsPSIjZjZmMGUyIiBzdHJva2U9IiNjMGExNWEiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iMzYiIHk9IjUyIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTUzZTUxIj5EZWZhdWx0LCBvciAtdHJlZSBUUkVFPC90ZXh0PgogIDx0ZXh0IHg9IjUyNiIgeT0iNTIiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxNTNlNTEiPi1zdWZmaXggb3IgLXN1ZmZpeD1TVUY8L3RleHQ+CiAgPGcgZm9udC1mYW1pbHk9Ik1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlIiBmb250LXNpemU9IjE2Ij4KICAgIDx0ZXh0IHg9IjM2IiB5PSI5MCI+L1ZvbHVtZXMvUGhvdG8vPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjExOCI+Zm90by8yMDI2L0FwcmlsL1MvPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjE0NiI+Ri5ETkc8L3RleHQ+PHRleHQgeD0iMTkwIiB5PSIxNDYiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj51bnRvdWNoZWQ8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTg0IiBmb250LXdlaWdodD0iNzAwIj5yZXZpZXcvPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjIxMiI+Zm90by8yMDI2L0FwcmlsL1MvPC90ZXh0PgogICAgPHRleHQgeD0iMTA4IiB5PSIyNDAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwNzViODIiPkYuRE5HPC90ZXh0Pjx0ZXh0IHg9IjE5MCIgeT0iMjQwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+dGhlIHNodXR0bGUncyB2ZXJzaW9uPC90ZXh0PgogICAgPHRleHQgeD0iODQiIHk9IjI2OCI+anBnLy4uLjwvdGV4dD48dGV4dCB4PSIxOTAiIHk9IjI2OCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZpbGw9IiMzYjU1NjMiPnJvb3RzIHNpZGUgYnkgc2lkZSBuZXZlciBjb2xsaWRlPC90ZXh0PgogICAgPHRleHQgeD0iNjAiIHk9IjMwNiI+ZG5nLWNvbXBhcmUvS29sb2Jvay1mb3RvLzwvdGV4dD4KICAgIDx0ZXh0IHg9IjUyNiIgeT0iOTAiPi9Wb2x1bWVzL1Bob3RvLzwvdGV4dD4KICAgIDx0ZXh0IHg9IjU1MCIgeT0iMTE4Ij5mb3RvLzIwMjYvQXByaWwvUy88L3RleHQ+CiAgICA8dGV4dCB4PSI1NzQiIHk9IjE0NiI+Ri5ETkc8L3RleHQ+PHRleHQgeD0iNjgwIiB5PSIxNDYiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj51bnRvdWNoZWQ8L3RleHQ+CiAgICA8dGV4dCB4PSI1NzQiIHk9IjE3NCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzA3NWI4MiI+Rl8yLkRORzwvdGV4dD48dGV4dCB4PSI2ODAiIHk9IjE3NCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZpbGw9IiMzYjU1NjMiPi1zdWZmaXggbnVtYmVycyB0aGUgY29waWVzPC90ZXh0PgogICAgPHRleHQgeD0iNTc0IiB5PSIyMDIiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwNzViODIiPkZfMy5ETkc8L3RleHQ+PHRleHQgeD0iNjgwIiB5PSIyMDIiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj50aGUgbmV4dCBkaWZmZXJpbmcgdmVyc2lvbjwvdGV4dD4KICAgIDx0ZXh0IHg9IjU3NCIgeT0iMjMwIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDc1YjgyIj5GX2tvbG9ib2suRE5HPC90ZXh0Pjx0ZXh0IHg9IjcxMCIgeT0iMjMwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+LXN1ZmZpeD1rb2xvYm9rPC90ZXh0PgogIDwvZz4KICA8ZyBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj4KICAgIDx0ZXh0IHg9IjM2IiB5PSIzNDQiPkV2ZXJ5IGNvcHkgaXMgdmVyaWZpZWQgYnkgU0hBLTI1NiBhZ2FpbnN0IHRoZSBzaHV0dGxlPC90ZXh0PgogICAgPHRleHQgeD0iMzYiIHk9IjM2NiI+ZmlsZSBhbmQgbmV2ZXIgcmVwbGFjZXMgYW4gZXhpc3RpbmcgZmlsZS48L3RleHQ+CiAgICA8dGV4dCB4PSI1MjYiIHk9IjM0NCI+U2FtZSBydWxlLiBUaGUgY29waWVzIHNpdCBpbnNpZGUgdGhlIHJvb3QsIHNvIGEgbGF0ZXI8L3RleHQ+CiAgICA8dGV4dCB4PSI1MjYiIHk9IjM2NiI+c2NhbiBvZiB0aGUgcm9vdCBzZWVzIHRoZW0gYXMgb3JkaW5hcnkgZmlsZXMuPC90ZXh0PgogIDwvZz4KPC9zdmc+Cg==" data-fig-alt="Two panels. Left, default or -tree: under /Volumes/Photo, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle&#39;s version; a jpg root gets its own subtree, and dng-compare/Kolobok-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG." alt="Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original." />
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQxMCIgd2lkdGg9IjEwMDAiIGhlaWdodD0iNDEwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idCBkIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZmlsbD0iIzE3MmMzNSI+CiAgPHRpdGxlIGlkPSJ0Ij5XaGVyZSBhIGRpZmZlcmluZyBmaWxlIGlzIGtlcHQ8L3RpdGxlPgogIDxkZXNjIGlkPSJkIj5Ud28gcGxhY2VtZW50cyBmb3IgdGhlIHNodXR0bGUncyB2ZXJzaW9uIG9mIGEgZmlsZSB3aG9zZSBjb250ZW50IGRpZmZlcnMuIEJ5IGRlZmF1bHQgaXQgZ29lcyBpbnRvIGEgcmV2aWV3IHRyZWUgYmVzaWRlIHRoZSBsb25nLXRlcm0gcm9vdCwgdW5kZXIgdGhlIHJvb3QncyBvd24gbmFtZSBhbmQgdGhlIHNhbWUgcmVsYXRpdmUgcGF0aC4gV2l0aCAtc3VmZml4IGl0IGdvZXMgbmV4dCB0byB0aGUgbG9uZy10ZXJtIGZpbGUgYXMgTkFNRV8yLkVYVCwgb3IgTkFNRV9TVUYuRVhUIHdpdGggLXN1ZmZpeD1TVUYuPC9kZXNjPgogIDxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjQxMCIgZmlsbD0iI2ZmZmZmZiIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjQ3MCIgaGVpZ2h0PSIzNzAiIHJ4PSI0IiBmaWxsPSIjZWFmMWY0IiBzdHJva2U9IiM3ZmE2YjciIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHJlY3QgeD0iNTEwIiB5PSIyMCIgd2lkdGg9IjQ3MCIgaGVpZ2h0PSIzNzAiIHJ4PSI0IiBmaWxsPSIjZjZmMGUyIiBzdHJva2U9IiNjMGExNWEiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iMzYiIHk9IjUyIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMTUzZTUxIj5EZWZhdWx0LCBvciAtdHJlZSBUUkVFPC90ZXh0PgogIDx0ZXh0IHg9IjUyNiIgeT0iNTIiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxNTNlNTEiPi1zdWZmaXggb3IgLXN1ZmZpeD1TVUY8L3RleHQ+CiAgPGcgZm9udC1mYW1pbHk9Ik1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlIiBmb250LXNpemU9IjE2Ij4KICAgIDx0ZXh0IHg9IjM2IiB5PSI5MCI+L1ZvbHVtZXMvQXJjaGl2ZS88L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMTE4Ij5mb3RvLzIwMjYvQXByaWwvUy88L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMTQ2Ij5GLkRORzwvdGV4dD48dGV4dCB4PSIxOTAiIHk9IjE0NiIgZm9udC1mYW1pbHk9IkhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZpbGw9IiMzYjU1NjMiPnVudG91Y2hlZDwvdGV4dD4KICAgIDx0ZXh0IHg9IjYwIiB5PSIxODQiIGZvbnQtd2VpZ2h0PSI3MDAiPnJldmlldy88L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMjEyIj5mb3RvLzIwMjYvQXByaWwvUy88L3RleHQ+CiAgICA8dGV4dCB4PSIxMDgiIHk9IjI0MCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzA3NWI4MiI+Ri5ETkc8L3RleHQ+PHRleHQgeD0iMTkwIiB5PSIyNDAiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj50aGUgc2h1dHRsZSdzIHZlcnNpb248L3RleHQ+CiAgICA8dGV4dCB4PSI4NCIgeT0iMjY4Ij5qcGcvLi4uPC90ZXh0Pjx0ZXh0IHg9IjE5MCIgeT0iMjY4IiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+cm9vdHMgc2lkZSBieSBzaWRlIG5ldmVyIGNvbGxpZGU8L3RleHQ+CiAgICA8dGV4dCB4PSI2MCIgeT0iMzA2Ij5kbmctY29tcGFyZS9TaHV0dGxlLWZvdG8vPC90ZXh0PgogICAgPHRleHQgeD0iNTI2IiB5PSI5MCI+L1ZvbHVtZXMvQXJjaGl2ZS88L3RleHQ+CiAgICA8dGV4dCB4PSI1NTAiIHk9IjExOCI+Zm90by8yMDI2L0FwcmlsL1MvPC90ZXh0PgogICAgPHRleHQgeD0iNTc0IiB5PSIxNDYiPkYuRE5HPC90ZXh0Pjx0ZXh0IHg9IjY4MCIgeT0iMTQ2IiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+dW50b3VjaGVkPC90ZXh0PgogICAgPHRleHQgeD0iNTc0IiB5PSIxNzQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMwNzViODIiPkZfMi5ETkc8L3RleHQ+PHRleHQgeD0iNjgwIiB5PSIxNzQiIGZvbnQtZmFtaWx5PSJIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1IiBmaWxsPSIjM2I1NTYzIj4tc3VmZml4IG51bWJlcnMgdGhlIGNvcGllczwvdGV4dD4KICAgIDx0ZXh0IHg9IjU3NCIgeT0iMjAyIiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMDc1YjgyIj5GXzMuRE5HPC90ZXh0Pjx0ZXh0IHg9IjY4MCIgeT0iMjAyIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+dGhlIG5leHQgZGlmZmVyaW5nIHZlcnNpb248L3RleHQ+CiAgICA8dGV4dCB4PSI1NzQiIHk9IjIzMCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzA3NWI4MiI+Rl9rb2xvYm9rLkRORzwvdGV4dD48dGV4dCB4PSI3MTAiIHk9IjIzMCIgZm9udC1mYW1pbHk9IkhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTUiIGZpbGw9IiMzYjU1NjMiPi1zdWZmaXg9a29sb2JvazwvdGV4dD4KICA8L2c+CiAgPGcgZm9udC1zaXplPSIxNSIgZmlsbD0iIzNiNTU2MyI+CiAgICA8dGV4dCB4PSIzNiIgeT0iMzQ0Ij5FdmVyeSBjb3B5IGlzIHZlcmlmaWVkIGJ5IFNIQS0yNTYgYWdhaW5zdCB0aGUgc2h1dHRsZTwvdGV4dD4KICAgIDx0ZXh0IHg9IjM2IiB5PSIzNjYiPmZpbGUgYW5kIG5ldmVyIHJlcGxhY2VzIGFuIGV4aXN0aW5nIGZpbGUuPC90ZXh0PgogICAgPHRleHQgeD0iNTI2IiB5PSIzNDQiPlNhbWUgcnVsZS4gVGhlIGNvcGllcyBzaXQgaW5zaWRlIHRoZSByb290LCBzbyBhIGxhdGVyPC90ZXh0PgogICAgPHRleHQgeD0iNTI2IiB5PSIzNjYiPnNjYW4gb2YgdGhlIHJvb3Qgc2VlcyB0aGVtIGFzIG9yZGluYXJ5IGZpbGVzLjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=" data-fig-alt="Two panels. Left, default or -tree: under /Volumes/Archive, foto/2026/April/S/F.DNG is untouched and review/foto/2026/April/S/F.DNG holds the shuttle&#39;s version; a jpg root gets its own subtree, and dng-compare/Shuttle-foto holds the archive. Right, -suffix: F.DNG untouched beside F_2.DNG, F_3.DNG and, with -suffix=kolobok, F_kolobok.DNG." alt="Placement of a differing file: a review tree beside the root by default, or a suffixed copy beside the original." />
 <figcaption aria-hidden="true">Placement of a differing file: a review
 tree beside the root by default, or a suffixed copy beside the
 original.</figcaption>
 </figure>
 <p>Next to the long-term root <code>R</code>, for example
-<code>/Volumes/Photo/foto</code>:</p>
+<code>/Volumes/Archive/foto</code>:</p>
 <table>
 <colgroup>
 <col style="width: 21%" />
@@ -1160,8 +1192,8 @@ collide</td>
 </tbody>
 </table>
 <p><code>SHUTTLE</code> is built from the left root’s last two path
-components, so <code>/Volumes/Kolobok/foto</code> gives
-<code>Kolobok-foto</code>. <code>-suffix</code> with a value must be
+components, so <code>/Volumes/Shuttle/foto</code> gives
+<code>Shuttle-foto</code>. <code>-suffix</code> with a value must be
 written <code>-suffix=SUF</code>, because Unison would otherwise take a
 separate word as a root or profile name.</p>
 <p>Conflict copies are verified by SHA-256 against the shuttle file and
@@ -1210,7 +1242,7 @@ refuses an archive moved to the Turso engine rather than writing behind
 its marker. Workers are forked processes that each get an equal share of
 <code>--rate-mib</code>.</p>
 <p>To get a preserved file back, restore it into a new location:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Photo/dng-compare/Kolobok-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
 <h2 data-number="7.6" id="disks-and-progress"><span class="header-section-number">7.6</span> Disks and progress</h2>
 <p>A root on a disk that <code>diskutil</code> does not report as solid
 state, either a spinning disk or an enclosure that does not say, is read
@@ -1252,16 +1284,17 @@ shows it kept and it has not changed since.</li>
 </ul>
 <h1 data-number="8" id="packdir"><span class="header-section-number">8</span> Packdir</h1>
 <h2 data-number="8.1" id="the-problem"><span class="header-section-number">8.1</span> The problem</h2>
-<p>Lightroom’s preview cache on Quasar held 3,616,982 files, 4.43 TiB in
-all, about 1.28 MiB each, in a fixed two-level layout:</p>
+<p>A Lightroom preview cache on an APFS source disk held 3,616,982
+files, 4.43 TiB in all, about 1.28 MiB each, in a fixed two-level
+layout:</p>
 <pre class="text"><code>&lt;H&gt;/&lt;HHHH&gt;/&lt;FILE-UUID&gt;-&lt;digest&gt;_&lt;longEdge&gt;</code></pre>
 <p>There are 16 top directories and 4,096 under each, so 65,536 leaf
 directories, averaging about 55 files and 71 MiB. It was to be mirrored
-one way, by Unison, to Ten: a single 20 TB spinning disk that stays
-Journaled HFS+. The user decided against APFS for it, because APFS on a
-spinning disk is slow with millions of small files. So Ten has no file
-clones, and the destination for 3.6 million more files is one mechanical
-arm.</p>
+one way, by Unison, to a mirror disk: a single 20 TB spinning disk that
+stays Journaled HFS+. The user decided against APFS for it, because APFS
+on a spinning disk is slow with millions of small files. So the mirror
+disk has no file clones, and the destination for 3.6 million more files
+is one mechanical arm.</p>
 <p>Three costs of millions of plain files follow. Creating them means
 many small metadata writes. Every run has to stat them. And anything
 else that later walks the disk, to back it up, check it or delete it,
@@ -1275,8 +1308,8 @@ directory</h2>
 beside where <code>D</code> would be, holding <code>D</code>’s files as
 members. For the preview cache, each leaf
 <code>&lt;H&gt;/&lt;HHHH&gt;/</code> becomes
-<code>&lt;H&gt;/&lt;HHHH&gt;.sqlar</code>. Ten then holds 65,536 files
-instead of 3,616,982.</p>
+<code>&lt;H&gt;/&lt;HHHH&gt;.sqlar</code>. The mirror disk then holds
+65,536 files instead of 3,616,982.</p>
 <p>SQLite’s archive format won the comparison on the criteria that
 mattered: reading one member by B-tree lookup, updating one member in
 place, transactions for crash safety, and restoring with a stock tool.
@@ -1346,8 +1379,8 @@ that turned out to be the decisive design point.</p>
 <h2 data-number="8.4" id="kept-originals-beside-containers"><span class="header-section-number">8.4</span> Kept originals beside
 containers</h2>
 <p>The first design assumed an empty target. Then the user decided that
-the originals Photo had preserved would stay in place on Ten, under
-<code>&lt;H&gt;/&lt;HHHH&gt;/</code>, so a plain directory
+the originals Photo had preserved would stay in place on the mirror
+disk, under <code>&lt;H&gt;/&lt;HHHH&gt;/</code>, so a plain directory
 <code>D/</code> and its container <code>D.sqlar</code> can sit side by
 side. That was 74,981 files, and the rule became:</p>
 <ul>
@@ -1430,15 +1463,15 @@ mirror</h2>
 <p>A packed root’s settings fit in a profile. The mailbox lists the
 settings of the real mirror, and with generic paths they come to
 this:</p>
-<pre class="text"><code>root = /Volumes/Quasar/previews
-root = /Volumes/Ten/previews
-force = /Volumes/Quasar/previews
-nodeletion = /Volumes/Ten/previews
+<pre class="text"><code>root = /Volumes/Source/previews
+root = /Volumes/Mirror/previews
+force = /Volumes/Source/previews
+nodeletion = /Volumes/Mirror/previews
 perms = 0
 times = true
 clone = off
 packdepth = 2
-packroot = /Volumes/Ten/previews
+packroot = /Volumes/Mirror/previews
 packworkers = 4
 packbarrier = 4</code></pre>
 <h2 data-number="8.7" id="the-marker"><span class="header-section-number">8.7</span> The marker</h2>
@@ -1491,9 +1524,9 @@ text, and <code>fp</code> the raw MD5.</li>
 <li><strong>Names</strong> are plain file names. Containers are per
 directory, so no member name has a slash.</li>
 <li><strong>Time.</strong> <code>mtime_ns</code> keeps nanoseconds, more
-than Ten holds for plain files, since HFS+ stores whole seconds.
-<code>sqlite3 -AxC</code> restores mtimes to the second, and packdir’s
-own restore is exact.</li>
+than the mirror disk holds for plain files, since HFS+ stores whole
+seconds. <code>sqlite3 -AxC</code> restores mtimes to the second, and
+packdir’s own restore is exact.</li>
 <li><strong>Retained deletions.</strong> A deletion on the plain side,
 when <code>nodeletion</code> is not set, marks the member
 <code>retained_deleted = 1</code>. The bytes stay, and the member drops
@@ -1504,7 +1537,7 @@ leaves <code>-wal</code> and <code>-shm</code> files. A rollback journal
 saves only the old contents of pages it changes, and new blobs are
 written once. <code>TRUNCATE</code>, the first choice, turned out to
 leave an empty <code>D.sqlar-journal</code> beside every container,
-which would have doubled the file count on Ten to 131,072.
+which would have doubled the file count on the mirror disk to 131,072.
 <code>DELETE</code> leaves each container as a single file between
 runs.</p>
 <p>An update is cheap. On a 55-file, 70 MiB container on the internal
@@ -1594,9 +1627,17 @@ therefore never gets ahead of the platter.</p>
 <h2 data-number="9.6" id="the-pending-list-and-recovery"><span class="header-section-number">9.6</span> The pending list and
 recovery</h2>
 <p><code>pd&lt;hash&gt;.pending</code> in the Unison directory lists
-each container, fsynced, before its first write in a run. After a crash
-or power loss, the list names everything that might not have reached the
-platter whole.</p>
+each container, fsynced, before its first write in a run. A finished job
+adds a <code>done</code> line for its container, and each barrier adds a
+<code>barrier</code> line. A container counts as covered once its job
+finished before a barrier. Being listed alone proves nothing, because
+other jobs write through a barrier. After a crash or power loss, the
+list names exactly what might not have reached the platter whole.</p>
+<p>This matters for restarts. Before the <code>done</code> and
+<code>barrier</code> lines, a mirror restarted part way through had to
+verify everything it had written in the run: 1,196 GiB, about six hours
+of reading, for a stop that had lost nothing. Now a restart verifies
+only the containers no barrier covered.</p>
 <p>On the next run, a pending container, or one whose file no longer
 matches the state, is verified before use with
 <code>PRAGMA integrity_check</code> and every member’s SHA-256.</p>
@@ -1648,13 +1689,120 @@ whose file is unchanged is seen only by
 unchanged stamp means the container is not opened, which is the point of
 the design, and it also means nobody looks inside.
 <code>-debug packdir</code> shows each barrier.</p>
-<h1 data-number="10" id="the-benchmark-story"><span class="header-section-number">10</span> The benchmark story</h1>
+<h1 data-number="10" id="apfs-clones"><span class="header-section-number">10</span> APFS clones</h1>
+<h2 data-number="10.1" id="what-is-lost-today"><span class="header-section-number">10.1</span> What is lost today</h2>
+<p>On APFS, <code>cp -c</code> and Finder’s Duplicate make a
+<strong>clone</strong>: a second file that shares the first one’s blocks
+until either is written. Photo workflows make many of them. One
+application clones another’s previews into its own folders instead of
+copying them, and catalogs share a store of previews. A sync that copies
+files turns every clone into a full copy. The data survives, but the
+space doubles and the relationship is gone.</p>
+<p>Plain Unison loses them, and so did this fork until 2026-11-02. A
+measured local sync onto a separate APFS volume delivered every clone as
+an independent copy with a refcount of 1, including clones made in the
+same run and a new clone of a file already synced.</p>
+<h2 data-number="10.2" id="what-counts-as-a-clone"><span class="header-section-number">10.2</span> What counts as a clone</h2>
+<p>APFS reports two attributes through <code>getattrlist</code>.
+<code>ATTR_CMNEXT_CLONEID</code> is shared by files cloned from one
+another, and <code>ATTR_CMNEXT_CLONE_REFCNT</code> says how many files
+share it. Files on one volume with the same clone ID and a refcount
+above 1 form a clone group. Writing one byte to a member gives it a new
+clone ID, which takes it out of the group. An independent copy is never
+in a group, even with identical bytes.</p>
+<p>The clone ID is a statement about structure, not proof of content.
+Every use below also compares contents: Unison’s fingerprint in a sync,
+and the SHA-256 in packdir. A pair that fails the check is two ordinary
+files. <strong>Only exact clones are kept as clones.</strong> Identical
+files that were independent on the source stay independent on the
+destination.</p>
+<h2 data-number="10.3" id="file-to-file"><span class="header-section-number">10.3</span> File to file</h2>
+<p>With <code>clones = true</code>, before the receiver transfers a new
+file, it lists candidates on its own replica with the same fingerprint.
+Those are files it already holds, from a hint table, and files it has
+created earlier in this run. It sends the source one request with the
+new file’s path and the candidates’ paths. The source compares clone IDs
+on its own disk and answers which candidates are clones of the file.</p>
+<p>The receiver then clones a confirmed candidate with
+<code>clonefile</code>, checks the result’s fingerprint, sets its
+properties, and publishes it through Unison’s ordinary rename. Only the
+original crosses the wire; each clone costs one request and one
+<code>clonefile</code>. Whichever member of a group arrives first
+becomes the original for the rest. A file waits only for earlier files
+the source confirmed, so waits can’t form a cycle.</p>
+<p>The request is negotiated as the feature <code>clone-pairs-v0</code>.
+With a peer that lacks it, nothing changes, and the <code>clones</code>
+preference is not even sent, since an older peer would stop at an
+unknown preference. With <code>clones</code> on, Unison’s older “copy a
+local file with the same fingerprint” shortcut copies bytes instead of
+cloning. That shortcut can’t know whether two identical files were
+clones, so leaving it to clone would make independent copies into
+clones.</p>
+<p>The tests sync onto a scratch APFS disk image and read clone IDs
+back. They cover groups of two and three across directories, a new clone
+of a file synced earlier, an independent copy, and a clone changed on
+the source after cloning, which must arrive as an ordinary file. They
+also cover a remote receiver over a pipe, a peer built without the
+feature, and <code>clones</code> off. All pass on stock OCaml and
+OxCaml.</p>
+<h2 data-number="10.4" id="into-a-packed-root"><span class="header-section-number">10.4</span> Into a packed root</h2>
+<p>A packed root’s source is local, so the writer reads clone IDs
+directly. Each container’s files are split into data and references:</p>
+<ul>
+<li><strong>A reference:</strong> a file in a clone group whose bytes
+are already packed, in this run or an earlier one whose source file is
+still in the group.</li>
+<li><strong>Data:</strong> any other file. The first file of a group, in
+path order, becomes the group’s original.</li>
+</ul>
+<p>Data is written first, then the references. A reference is a row in
+packdir’s <code>packdir_clone</code> table naming its original by a path
+relative to its container’s directory, so it can point into another
+container. It stores no bytes. packdir checks the SHA-256 when it writes
+the reference, and a container whose references don’t check out stores
+those files as data instead.</p>
+<p>On a disk that can’t hold clones, such as an HFS+ mirror, this is the
+only way a clone group’s bytes are stored once.</p>
+<h2 data-number="10.5" id="out-of-packdir"><span class="header-section-number">10.5</span> Out of packdir</h2>
+<p>A packed root is never a source for Unison, so restoring goes through
+<code>unison-packdir unpack-tree</code>. It restores every file that
+holds data first, then makes each clone with <code>clonefile</code> from
+its original’s restored file. When the original wasn’t part of the
+restore, or the destination can’t clone (another volume, a file system
+other than APFS, another system), it writes the bytes instead. Its
+summary counts both:</p>
+<pre class="text"><code>{&quot;containers&quot;: 3, &quot;files&quot;: 7, &quot;cloned&quot;: 3, &quot;copied&quot;: 0}</code></pre>
+<p>Whatever changes or removes an original in packdir first gives its
+clones bytes of their own. A container that holds clone references is
+marked <code>unison-packdir/2</code>, so a build from before clones
+refuses it instead of missing members. packdir’s manual has the format,
+and a recipe for bringing clones back with stock <code>sqlite3</code>
+and <code>cp -c</code>.</p>
+<h2 data-number="10.6" id="groups-across-two-trees"><span class="header-section-number">10.6</span> Groups across two trees</h2>
+<p>A clone group is kept only within one sync. When the clones and their
+originals live in two trees synced separately, such as one application’s
+catalogs cloned from another application’s previews, two ways are
+open:</p>
+<ul>
+<li><strong>One root over both.</strong> A root can be widened without
+redoing the mirror: move the packed tree into a subdirectory on the
+mirror disk, rewrite the packed-root state under the new root’s name,
+and nest Unison’s archive the same way, so the next run sees the old
+tree as unchanged. One packing depth must then fit both trees.</li>
+<li><strong>A second packed root that references the first.</strong> It
+is found through the first root’s recorded fingerprints and confirmed by
+clone ID on the source. Its references point across, so the two packed
+roots must stay side by side.</li>
+</ul>
+<p>Neither is built yet. Which one fits depends on the second tree’s
+layout and on what in it can be rebuilt rather than mirrored.</p>
+<h1 data-number="11" id="the-benchmark-story"><span class="header-section-number">11</span> The benchmark story</h1>
 <p>This chapter is the record of a day: 2026-10-31, from the first
 mailbox message at 06:58Z. All measurements are from the mailbox and
 <code>docs/packdir-design.md</code>. All of them used one Mac with 128
-GiB of RAM, with Ten, a SATA hard disk on HFS+, as the target. None were
-repeated by the session writing this book.</p>
-<h2 data-number="10.1" id="what-was-estimated-first"><span class="header-section-number">10.1</span> What was estimated first</h2>
+GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the
+target. None were repeated by the session writing this book.</p>
+<h2 data-number="11.1" id="what-was-estimated-first"><span class="header-section-number">11.1</span> What was estimated first</h2>
 <p>The proposal and the first replies contained several figures, and one
 design choice, that later proved wrong. Two sessions wrote them in good
 faith, and the figures were marked as estimates or samples at the
@@ -1697,7 +1845,7 @@ not seek-bound at this scale</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>F_FULLFSYNC</code> update: about 50
-to 150 ms per container on Ten</td>
+to 150 ms per container on the mirror disk</td>
 <td style="text-align: left;">About 0.9 s per container</td>
 <td style="text-align: left;">The drive’s cache flush costs far more
 than guessed</td>
@@ -1715,17 +1863,17 @@ changed the design</td>
 <p>The Photo session corrected the first two itself in P-2. The last
 line was caught the same morning. The third was the benchmark’s first
 surprise.</p>
-<h2 data-number="10.2" id="the-test-set"><span class="header-section-number">10.2</span> The test set</h2>
+<h2 data-number="11.2" id="the-test-set"><span class="header-section-number">11.2</span> The test set</h2>
 <p>The Photo session wrote a generator that took the real distribution
 from a stat-only sample of 400 leaves and produced
 <code>leafset-v1</code>: 50.0 GiB, 39,903 files, 694 leaves, with random
 bytes that are incompressible like JPEG, and random names. Nothing real
 was in it. It reproduced whole groups of levels with real sizes. Each
-method wrote to a new folder on Ten.</p>
-<h2 data-number="10.3" id="first-copy-plain-files-are-fast"><span class="header-section-number">10.3</span> First copy: plain files are
+method wrote to a new folder on the mirror disk.</p>
+<h2 data-number="11.3" id="first-copy-plain-files-are-fast"><span class="header-section-number">11.3</span> First copy: plain files are
 fast</h2>
-<p>Source read from memory for every method, so the comparison is Ten’s
-cost alone. Each method ends with <code>sync</code>.</p>
+<p>Source read from memory for every method, so the comparison is the
+mirror disk’s cost alone. Each method ends with <code>sync</code>.</p>
 <table style="width:99%;">
 <colgroup>
 <col style="width: 54%" />
@@ -1738,7 +1886,7 @@ cost alone. Each method ends with <code>sync</code>.</p>
 <th style="text-align: left;">Method</th>
 <th style="text-align: right;">Time</th>
 <th style="text-align: right;">Throughput</th>
-<th style="text-align: right;">Ten ops/s</th>
+<th style="text-align: right;">Target ops/s</th>
 </tr>
 </thead>
 <tbody>
@@ -1788,8 +1936,8 @@ Unison was not seek-bound. The prototype was four times slower than it,
 for two reasons, and both were understood the same hour: it was
 CPU-bound on one thread, and it flushed the drive’s cache once per
 container. The sparse-bundle method failed because
-<code>hdiutil attach</code> got “Permission denied” for a bundle on Ten,
-and it was later dropped.</p>
+<code>hdiutil attach</code> got “Permission denied” for a bundle on the
+mirror disk, and it was later dropped.</p>
 <p>Workers fixed the first problem. The second needed a design decision.
 Three-way comparison on the full 50 GiB with 4 workers:</p>
 <table>
@@ -1826,7 +1974,7 @@ container</td>
 </table>
 <p>The barrier kept the guarantee that matters for a mirror, at 8% over
 no flush, and matched plain Unison.</p>
-<h2 data-number="10.4" id="incremental-open-only-what-changed"><span class="header-section-number">10.4</span> Incremental: open only what
+<h2 data-number="11.4" id="incremental-open-only-what-changed"><span class="header-section-number">11.4</span> Incremental: open only what
 changed</h2>
 <p>A 1% change set then replaced, added and deleted files in 12 of 694
 leaves, 197 MiB in all. Every method stored the same 157 files.</p>
@@ -1835,7 +1983,7 @@ leaves, 197 MiB in all. Every method stored the same 157 files.</p>
 <tr>
 <th style="text-align: left;">Method</th>
 <th style="text-align: right;">Time</th>
-<th style="text-align: right;">Ten I/O</th>
+<th style="text-align: right;">Target I/O</th>
 </tr>
 </thead>
 <tbody>
@@ -1884,7 +2032,7 @@ apart from the transfer:</p>
 <th style="text-align: right;">Total</th>
 <th style="text-align: right;">Scan</th>
 <th style="text-align: right;">Containers opened</th>
-<th style="text-align: right;">Ten I/O</th>
+<th style="text-align: right;">Target I/O</th>
 </tr>
 </thead>
 <tbody>
@@ -1929,12 +2077,12 @@ apart from the transfer:</p>
 for the same change, because of the rollback journal and the read-back
 verification. <code>sqlar-wal</code> left three files per container
 instead of one, which confirmed <code>DELETE</code>.</p>
-<h2 data-number="10.5" id="the-cold-scan-partly"><span class="header-section-number">10.5</span> The cold scan, partly</h2>
-<p>Every figure above came from a warm cache. Ten’s catalog for 40,000
-files fits easily in 128 GiB of RAM. A catalog for 3.6 million more
-files is a different thing, and after a reboot it would have to be read
-from the platter. The deciding measurement would have been a cold
-scan.</p>
+<h2 data-number="11.5" id="the-cold-scan-partly"><span class="header-section-number">11.5</span> The cold scan, partly</h2>
+<p>Every figure above came from a warm cache. The mirror disk’s catalog
+for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6
+million more files is a different thing, and after a reboot it would
+have to be read from the platter. The deciding measurement would have
+been a cold scan.</p>
 <table>
 <thead>
 <tr>
@@ -1942,7 +2090,7 @@ scan.</p>
 <code>sudo purge</code></th>
 <th style="text-align: right;">Total</th>
 <th style="text-align: right;">Scan</th>
-<th style="text-align: right;">Ten I/O</th>
+<th style="text-align: right;">Target I/O</th>
 </tr>
 </thead>
 <tbody>
@@ -1961,16 +2109,16 @@ barrier</td>
 </tr>
 </tbody>
 </table>
-<p>This was only partly cold. <code>purge</code> left Ten’s catalog
-cached: a stat walk of the plain copy afterwards took 0.21 s. Plain
-Unison’s extra reads look like the per-file Finder-info and
+<p>This was only partly cold. <code>purge</code> left the mirror disk’s
+catalog cached: a stat walk of the plain copy afterwards took 0.21 s.
+Plain Unison’s extra reads look like the per-file Finder-info and
 resource-fork lookups it does on macOS, from HFS+’s attributes tree,
-though that was an inference. A fully cold test needed Ten unmounted
-between steps, and from that session <code>diskutil unmount</code> hung
-twice, unattended, for 16 and 12 minutes. The Unison session called that
-its own mistake, since the command should have had a timeout. The user
-chose to stop there.</p>
-<h2 data-number="10.6" id="where-the-benchmark-left-things"><span class="header-section-number">10.6</span> Where the benchmark left
+though that was an inference. A fully cold test needed the mirror disk
+unmounted between steps, and from that session
+<code>diskutil unmount</code> hung twice, unattended, for 16 and 12
+minutes. The Unison session called that its own mistake, since the
+command should have had a timeout. The user chose to stop there.</p>
+<h2 data-number="11.6" id="where-the-benchmark-left-things"><span class="header-section-number">11.6</span> Where the benchmark left
 things</h2>
 <table>
 <thead>
@@ -2012,17 +2160,17 @@ packed, and a cold scan of about 24 min plain against about 1.5 min
 packed, with the plain figure as a lower bound.</p>
 <p>The trade-off was the user’s to judge, and it was put plainly. Plain
 files are simpler, need no new code and stay browsable with any tool.
-Packed makes runs much cheaper to scan and leaves Ten with 65,536 files,
-at the cost of a new Unison feature, a SQLite tool to look inside, and
-about 1.6 times the bytes written per change.</p>
+Packed makes runs much cheaper to scan and leaves the mirror disk with
+65,536 files, at the cost of a new Unison feature, a SQLite tool to look
+inside, and about 1.6 times the bytes written per change.</p>
 <p>The Photo session recommended running a plain mirror first, timing a
 cold pass on the real files, and switching only if that was too slow. It
 was a reasonable recommendation. The user chose packed, and confirmed
 that after hearing it.</p>
-<h2 data-number="10.7" id="real-unison-and-a-new-estimate"><span class="header-section-number">10.7</span> Real Unison, and a new
+<h2 data-number="11.7" id="real-unison-and-a-new-estimate"><span class="header-section-number">11.7</span> Real Unison, and a new
 estimate</h2>
-<p>After the integration, real Unison packed the 50 GiB set onto
-Ten:</p>
+<p>After the integration, real Unison packed the 50 GiB set onto the
+mirror disk:</p>
 <table>
 <thead>
 <tr>
@@ -2048,23 +2196,23 @@ Ten:</p>
 </tbody>
 </table>
 <p>The propagation figure matches the prototype’s 340 s. The extra 90 s
-is Unison’s first-run MD5 of every Quasar file, which the prototype had
+is Unison’s first-run MD5 of every source file, which the prototype had
 been spared, and a quiet rerun took 3.2 s. So the honest comparison with
 plain Unison’s 337 s is 424 s, not 340 s. The extrapolation became about
 10.6 h for a first full mirror against about 8.4 h plain. That was still
 an estimate.</p>
-<h2 data-number="10.8" id="the-surprise-file-by-file"><span class="header-section-number">10.8</span> The surprise: file by
+<h2 data-number="11.8" id="the-surprise-file-by-file"><span class="header-section-number">11.8</span> The surprise: file by
 file</h2>
 <p>The real mirror started, and it was much slower than 10.6 h would
 imply.</p>
 <p>The set <code>leafset-v1</code> had been written to an empty target.
-Ten was not empty. It held the kept originals, and a check during the
-run found that 41,549 of the 65,536 leaves had a plain directory on the
-target. As described in the previous chapter, a leaf with a plain
-directory on the target reaches the writer file by file, not as one
-directory item. Each file then had its own process and its own SQLite
-transaction. The commit message records the result: about 25 files/s on
-Ten.</p>
+The mirror disk was not empty. It held the kept originals, and a check
+during the run found that 41,549 of the 65,536 leaves had a plain
+directory on the target. As described in the previous chapter, a leaf
+with a plain directory on the target reaches the writer file by file,
+not as one directory item. Each file then had its own process and its
+own SQLite transaction. The commit message records the result: about 25
+files/s on the mirror disk.</p>
 <p>No benchmark had exercised this. The design had thought through what
 kept originals meant for correctness, in detail. Nobody had asked what
 they meant for how Unison’s items are shaped, and the leaf set had no
@@ -2075,21 +2223,39 @@ files/s that is about 25 hours for those leaves alone. This is
 arithmetic on one rate, not a measurement of the mirror. The session’s
 own note at the time said roughly 30 hours or more.</p>
 <p>The fix was commit <code>5c95d940</code>, per-container queues. On
-the internal disk the rate went from 67 to 187 files/s. Its rate on Ten
-is not yet measured.</p>
-<p><strong>The state of the mirror.</strong> When this was written, the
-real mirror of 3.6 million files had not finished. There is no measured
-figure for its total time, for its final scan time warm or cold, or for
-batching on Ten. Every full-scale number in this chapter is an
-extrapolation. The claim that packing pays off at full scale remains a
-prediction until those measurements exist.</p>
+the internal disk the rate went from 67 to 187 files/s. Its rate on the
+mirror disk is not yet measured.</p>
+<p><strong>The mirror finished</strong> on 2026-11-01. Unison reported
+<code>1813638 items transferred, 62925 skipped, 0 failed</code>. The
+mirror disk held all 65,536 containers, 4,610 GiB, with none damaged and
+the pending list empty. The 62,925 skips were the expected ones: files
+only the mirror disk had, which <code>nodeletion</code> protected. That
+is also why the run exited 1, which in Unison means only that items were
+skipped. All 74,981 kept originals were present at the right size
+afterwards. A later member listing, taken from Unison’s own state file
+in seconds rather than by opening the containers for hours, found
+3,616,982 members.</p>
+<p><strong>The collector, not the disk.</strong> Part way through, the
+packing rate kept rising and falling, between about 100 and 150 MB/s.
+The obvious suspects were the source disk’s layout and the mirror disk
+itself, and the first guess named the wrong one. The rate followed the
+garbage collector instead. Each worker is a forked process that inherits
+Unison’s whole heap, about 6.5 GB on this root. It then spent most of
+its time marking that heap, which it would never use, while it allocated
+file contents. A worker lives for one job, so it now turns its collector
+nearly off. After a restart with that change, packing held about 148
+MB/s for 6.9 hours, against about 115 MB/s on average before it.</p>
+<p><strong>What is still unmeasured.</strong> The run’s total time is
+not a clean figure: it was stopped and restarted for the fixes above.
+Batching’s rate on the mirror disk, and a fully cold no-change scan at
+full scale, are still not measured on their own.</p>
 <p><strong>The scan that survived.</strong> When the file-by-file
 problem was found, the mirror had to be stopped and restarted, and the
 session said the 5-hour scan would be lost. That was wrong, and it was
 stated without checking. Unison keeps a fingerprint cache for
 interrupted scans, 308 MB for this cache, and the restarted run reloaded
-it: Quasar reads fell from 268 MB/s to about 1.3 MB/s.</p>
-<h2 data-number="10.9" id="what-the-day-showed"><span class="header-section-number">10.9</span> What the day showed</h2>
+it: source-disk reads fell from 268 MB/s to about 1.3 MB/s.</p>
+<h2 data-number="11.9" id="what-the-day-showed"><span class="header-section-number">11.9</span> What the day showed</h2>
 <ul>
 <li>A small benchmark on the wrong shape of data can be precise and
 still miss the main cost. This one was careful about file sizes and
@@ -2103,13 +2269,13 @@ could see what to replace.</li>
 figure that described something else. Both were caught by asking where
 the number came from.</li>
 </ul>
-<h1 data-number="11" id="command-reference"><span class="header-section-number">11</span> Command reference</h1>
+<h1 data-number="12" id="command-reference"><span class="header-section-number">12</span> Command reference</h1>
 <p>Every option in this chapter was checked against the source at commit
 <code>c2aa06cc</code>: <code>src/uicommon.ml</code>,
 <code>src/packdirConfig.ml</code>, <code>src/dngscan.ml</code>, and in
 the other projects <code>lib/cli.ml</code>,
 <code>lib/fileutils.ml</code> and <code>bin/main.ml</code>.</p>
-<h2 data-number="11.1" id="unison-the--semdiff-family"><span class="header-section-number">11.1</span> unison: the -semdiff
+<h2 data-number="12.1" id="unison-the--semdiff-family"><span class="header-section-number">12.1</span> unison: the -semdiff
 family</h2>
 <p>These are ordinary Unison preferences, so each can also go in a
 profile. All are local.</p>
@@ -2232,7 +2398,7 @@ not complete; nothing was synchronized”.</p>
 <code>nodeletion</code> on the second,
 <code>ignorearchives = true</code>, and one <code>path</code> for each
 listed file.</p>
-<h2 data-number="11.2" id="unison-dngscan"><span class="header-section-number">11.2</span> unison-dngscan</h2>
+<h2 data-number="12.2" id="unison-dngscan"><span class="header-section-number">12.2</span> unison-dngscan</h2>
 <p>The command has three forms, as its usage line says:</p>
 <pre class="text"><code>unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
                [-o REPORT.jsonl [-resume]] PATH...
@@ -2447,7 +2613,7 @@ default <code>~/src/dng-compare</code>. <code>DNG_ARCHIVE</code> locates
 <code>dng-archive</code>, otherwise <code>PATH</code>, then the
 <code>5.2.0+ox</code> and <code>default</code> opam switches.
 <code>-preservefull</code> also needs <code>xdelta3</code>.</p>
-<h2 data-number="11.3" id="packed-root-preferences"><span class="header-section-number">11.3</span> Packed-root preferences</h2>
+<h2 data-number="12.3" id="packed-root-preferences"><span class="header-section-number">12.3</span> Packed-root preferences</h2>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -2511,16 +2677,18 @@ is refused.</li>
 </ul>
 <p><code>clone = off</code> is what the mirror’s profile uses, and
 <code>nodeletion</code> on the packed root keeps kept originals quiet.
-<code>-debug packdir</code> shows barriers.</p>
+With <code>clones = true</code>, files that are APFS clones of one
+another on the source are stored once, as packdir references; see <a href="#apfs-clones">APFS clones</a>. <code>-debug packdir</code> shows
+barriers.</p>
 <p>On the packed root, files directly in a packed directory are packed,
 and files above that depth stay plain. A subdirectory of a packed
 directory, a move, and a symbolic link are each refused with a
 message.</p>
-<h2 data-number="11.4" id="packdir-and-unison-packdir"><span class="header-section-number">11.4</span> packdir and
+<h2 data-number="12.4" id="packdir-and-unison-packdir"><span class="header-section-number">12.4</span> packdir and
 unison-packdir</h2>
 <p>These are one program under two names. Container commands:</p>
 <pre class="text"><code>packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]
-                  [--barrier-gib G]
+                  [--barrier-gib G] [--clones]
 packdir unpack-tree OUT DEST [--skip-retained]
 packdir repack C.sqlar... [--drop-retained]
 packdir verify C.sqlar...
@@ -2574,6 +2742,13 @@ a time</td>
 <td style="text-align: left;">4</td>
 <td style="text-align: left;">GiB between <code>F_FULLFSYNC</code>
 barriers</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>--clones</code></td>
+<td style="text-align: left;">off</td>
+<td style="text-align: left;">Keep each APFS clone of another file in
+the tree as a reference to it</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>unpack-tree</code></td>
@@ -2700,7 +2875,7 @@ tree.</strong> The source says so.</li>
 <code>du</code>’s directory sizes, and the order of <code>du</code> and
 <code>find</code> output, which is sorted here.</li>
 </ul>
-<h2 data-number="11.5" id="dng-archive"><span class="header-section-number">11.5</span> dng-archive</h2>
+<h2 data-number="12.5" id="dng-archive"><span class="header-section-number">12.5</span> dng-archive</h2>
 <pre class="text"><code>dng-archive index ARCHIVE
 dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
                      [--workers N] [--rate-mib R]
@@ -2775,7 +2950,7 @@ workers</td>
 errors and rerun before deleting source” if any file did not verify. It
 needs <code>xdelta3</code> on <code>PATH</code>, and SQLite and zlib
 from the system.</p>
-<h2 data-number="11.6" id="semantic-preferences"><span class="header-section-number">11.6</span> Semantic preferences</h2>
+<h2 data-number="12.6" id="semantic-preferences"><span class="header-section-number">12.6</span> Semantic preferences</h2>
 <p>These are the main preferences of the sync engine, with defaults from
 the source.</p>
 <table>
@@ -2797,6 +2972,15 @@ the source.</p>
 <td style="text-align: left;"><code>auto</code></td>
 <td style="text-align: left;">Receiver clone staging: <code>auto</code>,
 <code>off</code> or <code>require</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>clones</code></td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">Preserve APFS clones: a file that is a
+clone of another on the source arrives as a clone of the corresponding
+original. File to file it needs <code>clone</code> not <code>off</code>
+and a peer with <code>clone-pairs-v0</code>; into a packed root,
+neither</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>semanticdng</code></td>
@@ -2893,10 +3077,10 @@ the driver</td>
 <p>The built-in merge is not a preference of its own. It is the rule
 <code>merge = Name *.dng -&gt; unison:dng-xmp-scalars/0</code>, with
 <code>backupcurrent = Name *.dng</code>.</p>
-<h1 data-number="12" id="honest-limits"><span class="header-section-number">12</span> Honest limits</h1>
+<h1 data-number="13" id="honest-limits"><span class="header-section-number">13</span> Honest limits</h1>
 <p>This chapter lists what the tools do not do, or do not yet do. All of
-it was true at commit <code>c2aa06cc</code>.</p>
-<h2 data-number="12.1" id="packed-roots"><span class="header-section-number">12.1</span> Packed roots</h2>
+it was true at commit <code>9b68266b</code>.</p>
+<h2 data-number="13.1" id="packed-roots"><span class="header-section-number">13.1</span> Packed roots</h2>
 <ul>
 <li><strong>One-way and local.</strong> A packed root must be local and
 must only receive. It can never be a source, so Unison reads members
@@ -2912,8 +3096,10 @@ or ACLs. Do not use one for trees where those matter.</li>
 <li><strong>Silent bit rot needs a scrub.</strong> An unchanged
 container is not opened, so nothing notices flipped bits inside it. Only
 <code>unison-packdir verify</code>, run periodically, does.</li>
-<li><strong>The real mirror had not finished.</strong> See the benchmark
-chapter. Batching’s rate on Ten is unmeasured.</li>
+<li><strong>Some full-scale figures are still missing.</strong> The real
+mirror finished (see the benchmark chapter), but its total time includes
+restarts, and batching’s rate and a cold full-scale scan are not
+measured on their own.</li>
 <li><strong>Write amplification.</strong> About 1.6 times plain Unison’s
 bytes for the same change, as measured.</li>
 <li><strong>Metadata-only changes rewrite the member.</strong> Inside a
@@ -2928,7 +3114,21 @@ deletions keep their bytes until
 tar and pack formats stayed benchmark comparisons. The backend interface
 is narrow so that one could be added later.</li>
 </ul>
-<h2 data-number="12.2" id="semantic-diff-1"><span class="header-section-number">12.2</span> Semantic diff</h2>
+<h2 data-number="13.2" id="clones"><span class="header-section-number">13.2</span> Clones</h2>
+<ul>
+<li><strong>macOS and APFS only.</strong> Clone IDs come from
+<code>getattrlist</code>; elsewhere nothing is a clone and nothing
+changes.</li>
+<li><strong>Within one sync and one volume.</strong> A clone group is
+kept only among files the same run sees, and clones can’t span volumes
+on the receiving side.</li>
+<li><strong>New and changed files only.</strong> Files already synced or
+packed as full copies stay so; they are not regrouped.</li>
+<li><strong>Some paths untested at scale.</strong> The wait for an
+earlier in-flight original is reviewed but not reached by any test, and
+nothing has run on a real catalog yet.</li>
+</ul>
+<h2 data-number="13.3" id="semantic-diff-1"><span class="header-section-number">13.3</span> Semantic diff</h2>
 <ul>
 <li><strong>Same view is a rule.</strong> It is a list of tags, not a
 rendering comparison.</li>
@@ -2950,7 +3150,7 @@ Unison still says the default archive is
 <code>ROOT2/.dng-compare/NAME-OF-ROOT1</code>. The code uses
 <code>ROOT2/../dng-compare/SHUTTLE</code>, as this book describes.</li>
 </ul>
-<h2 data-number="12.3" id="semantic-transfer-and-merging"><span class="header-section-number">12.3</span> Semantic transfer and
+<h2 data-number="13.4" id="semantic-transfer-and-merging"><span class="header-section-number">13.4</span> Semantic transfer and
 merging</h2>
 <ul>
 <li><strong>Narrow by design.</strong> A grown or moved packet falls
@@ -2977,7 +3177,7 @@ protocol, and SDK sources are not in this repository.</li>
 recorded it as active and incomplete. The state moves, and
 <code>OPUS-HANDOFF.md</code> is where it is tracked.</li>
 </ul>
-<h2 data-number="12.4" id="building"><span class="header-section-number">12.4</span> Building</h2>
+<h2 data-number="13.5" id="building"><span class="header-section-number">13.5</span> Building</h2>
 <ul>
 <li><strong>The <code>make</code> build is broken at a module unrelated
 to this work.</strong> It stops at <code>directoryOwner.cmx</code>, with
@@ -2991,12 +3191,15 @@ fixed.</li>
 <li><strong>Packed roots need the opam <code>packdir</code>
 package.</strong> Without it, dune selects the stub and
 <code>packdepth</code> is refused.</li>
+<li><strong>DNG profiles need the opam <code>tiffgraph</code>
+package.</strong> Both builds link it; <code>src/Makefile.OCaml</code>
+finds it beside the standard library.</li>
 <li><strong>Platform.</strong> All evidence recorded here is from macOS
 on Intel, with HFS+ and APFS volumes. <code>F_FULLFSYNC</code> is a
 macOS call. Nothing here claims behaviour on other systems.</li>
 </ul>
-<h1 data-number="13" id="how-this-was-built"><span class="header-section-number">13</span> How this was built</h1>
-<h2 data-number="13.1" id="two-sessions-and-a-mailbox"><span class="header-section-number">13.1</span> Two sessions and a
+<h1 data-number="14" id="how-this-was-built"><span class="header-section-number">14</span> How this was built</h1>
+<h2 data-number="14.1" id="two-sessions-and-a-mailbox"><span class="header-section-number">14.1</span> Two sessions and a
 mailbox</h2>
 <p>Packdir was built in one day by one human and two LLM sessions, which
 could not talk to each other directly. The Photo session, which owned
@@ -3030,13 +3233,13 @@ correction. U-17 exists only to say that U-16 named a commit hash
 written before the commit did, and which hash was right. P-3 corrects
 the timestamp in P-2.</p>
 <p><code>blocked-on-user</code> mattered most. The list of things
-decided by the human includes: Ten stays HFS+, the originals stay, a
-changed original is kept updated in the container, the benchmark folder,
-the barrier, deleting three stray copies, packed over plain, and when to
-start. No session started the mirror until the user said go. The Unison
-session had written in U-20: “I won’t change the profile or start the
-run until the user says go.”</p>
-<h2 data-number="13.2" id="milestones"><span class="header-section-number">13.2</span> Milestones</h2>
+decided by the human includes: the mirror disk stays HFS+, the originals
+stay, a changed original is kept updated in the container, the benchmark
+folder, the barrier, deleting three stray copies, packed over plain, and
+when to start. No session started the mirror until the user said go. The
+Unison session had written in U-20: “I won’t change the profile or start
+the run until the user says go.”</p>
+<h2 data-number="14.2" id="milestones"><span class="header-section-number">14.2</span> Milestones</h2>
 <p>The integration had six milestones, each tested on synthetic data on
 stock OCaml and OxCaml, with the prototype as the reference.</p>
 <table>
@@ -3093,12 +3296,35 @@ file-by-file items</td>
 <td style="text-align: left;">The format and commands moved to the
 separate packdir project</td>
 </tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>e46abd19</code></td>
+<td style="text-align: left;">Packing workers leave the inherited heap
+alone</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>4c107313</code></td>
+<td style="text-align: left;">A restart verifies only containers no
+barrier covers</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>24dc7298</code></td>
+<td style="text-align: left;">The DNG walker comes from tiffgraph</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>e451e6b6</code></td>
+<td style="text-align: left;">APFS clones preserved, file to file and
+into packed roots</td>
+</tr>
 </tbody>
 </table>
 <p>Controls at the last of these: detection 11, write 28, recovery 21,
 parallel 11, marker 8, config 16, semdiff 37, and Unison’s
 <code>-selftest</code>.</p>
-<h2 data-number="13.3" id="what-the-tests-found"><span class="header-section-number">13.3</span> What the tests found</h2>
+<h2 data-number="14.3" id="what-the-tests-found"><span class="header-section-number">14.3</span> What the tests found</h2>
 <p>The essay says, “A test can pass because its fixture missed the
 dangerous case.” The packdir work has examples of that and of its
 opposite. These are the ones recorded in the mailbox, the commits and
@@ -3121,15 +3347,15 @@ normally. Setup now runs for any nonzero depth, and a control covers it.
 The root check in the same milestone crashed because it ran before
 Unison had set up its roots.</p>
 <p><strong>A retained deletion that updated one archive.</strong> A
-retained deletion first updated only Ten’s archive, so Unison found the
-two archives different and refused to save either. Both are updated now,
-as <code>Files.delete</code> does. Milestone 3’s controls caught this,
-and U-19 reports it.</p>
+retained deletion first updated only the packed root’s archive, so
+Unison found the two archives different and refused to save either. Both
+are updated now, as <code>Files.delete</code> does. Milestone 3’s
+controls caught this, and U-19 reports it.</p>
 <p><strong>The marker check ran too late.</strong> Setup writes the
 run’s marker, and the check came after it, so a run with the wrong depth
-could rewrite Ten’s marker and carry on. The check now comes first, with
-a comment saying why, and an existing marker is never rewritten with
-another depth.</p>
+could rewrite the mirror’s marker and carry on. The check now comes
+first, with a comment saying why, and an existing marker is never
+rewritten with another depth.</p>
 <p><strong>A crashed worker’s container dropped from the recheck
 list.</strong> After a commit, the pending list was cleared. A container
 whose job had died was in it, so it would have been trusted next time.
@@ -3140,14 +3366,14 @@ through and requires the next run to converge.</p>
 <p><strong>A harness that deleted.</strong> The benchmark’s plain-Unison
 method deleted on the target until a dry run on the internal disk showed
 it. The dry run was there to test the harness, and it did.</p>
-<h2 data-number="13.4" id="what-went-wrong-without-a-test"><span class="header-section-number">13.4</span> What went wrong without a
+<h2 data-number="14.4" id="what-went-wrong-without-a-test"><span class="header-section-number">14.4</span> What went wrong without a
 test</h2>
 <p>Not every mistake was caught by a control:</p>
 <ul>
 <li>A shell-quoting mistake packed three extra full copies, 51 GiB each,
-into folders with spaces in their names on Ten. The harness had promised
-to delete nothing, so the session asked the user before removing
-them.</li>
+into folders with spaces in their names on the mirror disk. The harness
+had promised to delete nothing, so the session asked the user before
+removing them.</li>
 <li><code>diskutil unmount</code> hung for 16 and then 12 minutes,
 unattended, because it had no timeout. The session called that its own
 mistake.</li>
@@ -3156,7 +3382,7 @@ result was the slow mirror of the benchmark chapter.</li>
 </ul>
 <p>These are recorded in the mailbox because the rule of that channel,
 and of the fork, is that a correction goes beside the original.</p>
-<h2 data-number="13.5" id="what-this-book-is"><span class="header-section-number">13.5</span> What this book is</h2>
+<h2 data-number="14.5" id="what-this-book-is"><span class="header-section-number">14.5</span> What this book is</h2>
 <p>This book was written in one session, after all of the above, from
 those records. The session read the essay, the design documents, the
 mailbox and the source, and ran the commands in the worked examples on
@@ -3164,21 +3390,21 @@ synthetic data. It did not read from or write to the real disks. The
 diagrams were written by hand as SVG. When the source and a document
 disagreed, the book follows the source and says so, as with the
 <code>-preserve</code> help text.</p>
-<h1 data-number="14" id="building-and-testing"><span class="header-section-number">14</span> Building and testing</h1>
+<h1 data-number="15" id="building-and-testing"><span class="header-section-number">15</span> Building and testing</h1>
 <p>Semantic Unison builds with dune. Packed roots need the opam
 <code>packdir</code> package, and <code>-preserve</code> needs
 <code>dng-archive</code>. Each must be pinned in each opam switch you
 use, and stock OCaml and OxCaml stay separate.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
 <p>The binaries are <code>src/linktext.exe</code> (installed as
 <code>unison</code>), <code>src/dngscan.exe</code>
 (<code>unison-dngscan</code>) and <code>tools/packdir/main.exe</code>
 (<code>unison-packdir</code>), under dune’s build directory.</p>
 <p>The controls use synthetic data in private temporary directories:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
 <p>The other packed-root suites are <code>unison_write.py</code>,
 <code>unison_recover.py</code>, <code>unison_parallel.py</code> and
 <code>unison_marker.py</code>, with the same arguments, and

@@ -5,9 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-01" />
+  <meta name="dcterms.date" content="2026-11-02" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
-  <title>Command reference</title>
+  <title>The benchmark story</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -47,810 +47,495 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="chapter-013.html" accesskey="n" rel="next">Honest limits</a>
+<span class="navlink-label">Next:</span> <a href="chapter-013.html" accesskey="n" rel="next">Command reference</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="chapter-011.html" accesskey="p" rel="previous">The benchmark story</a>
+<span class="navlink-label">Previous:</span> <a href="chapter-011.html" accesskey="p" rel="previous">APFS clones</a>
 </span>
 </div>
 </nav>
-<h1 data-number="11" id="command-reference"><span
-class="header-section-number">11</span> Command reference</h1>
-<p>Every option in this chapter was checked against the source at commit
-<code>c2aa06cc</code>: <code>src/uicommon.ml</code>,
-<code>src/packdirConfig.ml</code>, <code>src/dngscan.ml</code>, and in
-the other projects <code>lib/cli.ml</code>,
-<code>lib/fileutils.ml</code> and <code>bin/main.ml</code>.</p>
-<h2 data-number="11.1" id="unison-the--semdiff-family"><span
-class="header-section-number">11.1</span> unison: the -semdiff
-family</h2>
-<p>These are ordinary Unison preferences, so each can also go in a
-profile. All are local.</p>
+<h1 data-number="11" id="the-benchmark-story"><span
+class="header-section-number">11</span> The benchmark story</h1>
+<p>This chapter is the record of a day: 2026-10-31, from the first
+mailbox message at 06:58Z. All measurements are from the mailbox and
+<code>docs/packdir-design.md</code>. All of them used one Mac with 128
+GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the
+target. None were repeated by the session writing this book.</p>
+<h2 data-number="11.1" id="what-was-estimated-first"><span
+class="header-section-number">11.1</span> What was estimated first</h2>
+<p>The proposal and the first replies contained several figures, and one
+design choice, that later proved wrong. Two sessions wrote them in good
+faith, and the figures were marked as estimates or samples at the
+time.</p>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 15%" />
-<col style="width: 59%" />
+<col style="width: 34%" />
+<col style="width: 33%" />
+<col style="width: 32%" />
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">Preference</th>
-<th style="text-align: left;">Type, default</th>
-<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Early figure</th>
+<th style="text-align: left;">What was found</th>
+<th style="text-align: left;">Why it was wrong</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>-semdiff</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;">Run
-<code>unison-dngscan -semdiff ROOT2 ROOT1</code> first, then synchronize
-only files missing on the second root, creation only. Both roots must be
-local</td>
+<td style="text-align: left;">Cache of about 9.6 million files, about
+0.6 MiB each</td>
+<td style="text-align: left;">3,616,982 files, 4.43 TiB, mean 1.28
+MiB</td>
+<td style="text-align: left;">9.6 million was the inode count of the
+whole volume, including pipeline staging</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>-sameview</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;">Also decide which metadata-only
-differences cannot affect rendering</td>
+<td style="text-align: left;">78 to 150 files per leaf</td>
+<td style="text-align: left;">About 55 mean, 16 to 108 over 400 sampled
+leaves</td>
+<td style="text-align: left;">Three hand-picked leaves</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>-preserve</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;">Record metadata differences in a
-dng-compare archive, and keep conflict copies</td>
+<td style="text-align: left;">Plain Unison first run: 20 to 40 h,
+limited by about 200 to 270 IOPS</td>
+<td style="text-align: left;">Linear from a measured 152 MiB/s: about
+8.5 h</td>
+<td style="text-align: left;">Writes of 1.28 MiB files on this disk were
+not seek-bound at this scale</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>-preservedb DIR</code></td>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">Archive for <code>-preserve</code>.
-Implies <code>-preserve</code></td>
+<td style="text-align: left;"><code>F_FULLFSYNC</code> update: about 50
+to 150 ms per container on the mirror disk</td>
+<td style="text-align: left;">About 0.9 s per container</td>
+<td style="text-align: left;">The drive’s cache flush costs far more
+than guessed</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>-preservefull</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;"><code>-preserve</code>, and keep each
-metadata-only file as a verified VCDIFF delta</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-tree TREE</code></td>
-<td style="text-align: left;">string, <code>review</code></td>
-<td style="text-align: left;">Keep differing files under
-<code>ROOT2/../TREE/ROOT2NAME</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-suffix</code>,
-<code>-suffix=SUF</code></td>
-<td style="text-align: left;">optional value</td>
-<td style="text-align: left;">Keep differing files beside the original
-as <code>NAME_2.EXT</code>, or <code>NAME_SUF.EXT</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-review</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;">Quickly keep only the conflicts reported
-by the previous run. Scans and synchronizes nothing else</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-v</code></td>
-<td style="text-align: left;">bool, false</td>
-<td style="text-align: left;">Listing progress, each file that is not
-identical, preservation output</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-hdd PATH</code></td>
-<td style="text-align: left;">list</td>
-<td style="text-align: left;">Record PATH’s disk as spinning, on the
-disk itself. Repeatable, once per disk</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-ssd PATH</code></td>
-<td style="text-align: left;">list</td>
-<td style="text-align: left;">Record PATH’s disk as solid state</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-readers N</code></td>
-<td style="text-align: left;">int, 0</td>
-<td style="text-align: left;">With <code>-hdd</code>, streams that may
-read that disk at once, recorded with it. 0 keeps the recorded value, or
-one</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-semdiffroot ROOT</code></td>
-<td style="text-align: left;">list</td>
-<td style="text-align: left;">Another long-term root that counts as
-kept. Only the second root is synchronized</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-semdiffscanner PATH</code></td>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;"><code>unison-dngscan</code> binary.
-Default: next to this program, then <code>PATH</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-semcatchupfrom LIST</code></td>
-<td style="text-align: left;">string</td>
-<td style="text-align: left;">Synchronize only the paths in a catch-up
-list, creation only. Its roots must be this run’s roots</td>
+<td style="text-align: left;"><code>journal_mode = TRUNCATE</code> is
+the right journal</td>
+<td style="text-align: left;">It leaves an empty <code>-journal</code>
+beside every container</td>
+<td style="text-align: left;">Found by the prototype’s tests, which then
+changed the design</td>
 </tr>
 </tbody>
 </table>
-<p>Unison starts the scanner with its own report, walk cache and
-catch-up files in the Unison directory. If the scanner exits with
-anything other than 0 or 1, Unison prints “unison-dngscan -semdiff did
-not complete; nothing was synchronized”.</p>
-<p>The catch-up phase adds these settings for itself:
-<code>noupdate</code>, <code>nodeletion</code> and
-<code>nocreation</code> on the first root, <code>noupdate</code> and
-<code>nodeletion</code> on the second,
-<code>ignorearchives = true</code>, and one <code>path</code> for each
-listed file.</p>
-<h2 data-number="11.2" id="unison-dngscan"><span
-class="header-section-number">11.2</span> unison-dngscan</h2>
-<p>The command has three forms, as its usage line says:</p>
-<pre class="text"><code>unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
-               [-o REPORT.jsonl [-resume]] PATH...
-unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
-               [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]...
-               [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]
-unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]</code></pre>
-<p><strong>Scan mode</strong> is the read-only survey of DNG files
-against the built-in merge. Each file runs through the inspectors the
-merge uses, <code>dng-xmp</code> <code>/0</code>, <code>/1</code> and
-<code>/2</code>, then an identity XMP merge of its packet. Only the TIFF
-directories and the XMP packet are read, and nothing is written under
-the scanned paths.</p>
-<table>
+<p>The Photo session corrected the first two itself in P-2. The last
+line was caught the same morning. The third was the benchmark’s first
+surprise.</p>
+<h2 data-number="11.2" id="the-test-set"><span
+class="header-section-number">11.2</span> The test set</h2>
+<p>The Photo session wrote a generator that took the real distribution
+from a stat-only sample of 400 leaves and produced
+<code>leafset-v1</code>: 50.0 GiB, 39,903 files, 694 leaves, with random
+bytes that are incompressible like JPEG, and random names. Nothing real
+was in it. It reproduced whole groups of levels with real sizes. Each
+method wrote to a new folder on the mirror disk.</p>
+<h2 data-number="11.3" id="first-copy-plain-files-are-fast"><span
+class="header-section-number">11.3</span> First copy: plain files are
+fast</h2>
+<p>Source read from memory for every method, so the comparison is the
+mirror disk’s cost alone. Each method ends with <code>sync</code>.</p>
+<table style="width:99%;">
 <colgroup>
-<col style="width: 28%" />
-<col style="width: 12%" />
-<col style="width: 59%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>-j N</code></td>
-<td style="text-align: left;">8</td>
-<td style="text-align: left;">Worker processes, 1 to 256. The scan is
-I/O bound</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-o FILE</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">One JSON line per file, as results
-arrive</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-resume</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Keep the complete lines already in the
-<code>-o</code> report, skip those files and append. Needs
-<code>-o</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-cache FILE</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Reuse and update directory listings whose
-device, inode and mtime are unchanged</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-admit IFD:TAG:TYPE</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Also admit this field in <code>/2</code>,
-as <code>dngmergeadmit</code> does. Repeatable</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-tags FILE</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Write the fields outside <code>/2</code>
-as a review table with admit specs</td>
-</tr>
-</tbody>
-</table>
-<p>Verdicts are <code>mergeable</code>, <code>xmp-unsupported</code>,
-<code>declined</code> and <code>error</code>. The exit status is 0 if
-every DNG is mergeable, 1 if some are not, and 2 if the scan is
-incomplete. The findings say which files the merge would accept. They
-are not a DNG validity check.</p>
-<p><strong>Semdiff mode</strong> adds these. <code>-semdiff</code> needs
-exactly one left root.</p>
-<table>
-<colgroup>
-<col style="width: 28%" />
-<col style="width: 17%" />
 <col style="width: 54%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>-semdiff ROOT</code></td>
-<td style="text-align: left;">required</td>
-<td style="text-align: left;">Compare every file under LEFT with its
-match under ROOT. Repeatable</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-sameview</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Decide whether a pair differs only in
-non-rendering tags</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-summarize</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Summarize reports given as arguments
-instead of scanning</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-catchup</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Then run Unison to copy what is missing,
-creation only</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-catchupto ROOT</code></td>
-<td style="text-align: left;">first <code>-semdiff</code> root</td>
-<td style="text-align: left;">Long-term root to catch up</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-catchupfile FILE</code></td>
-<td style="text-align: left;"><code>REPORT.catchup</code></td>
-<td style="text-align: left;">Catch-up list</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-preserve</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Store metadata differences in a
-dng-compare archive, default <code>ROOT/../dng-compare/NAME</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-preservedb DIR</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Archive for <code>-preserve</code>.
-Implies it</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-preservefull</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;"><code>-preserve</code>, and keep each
-metadata-only file in full as a verified delta</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-review</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">From the <code>-o</code> report only: keep
-the files whose content differs</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-tree TREE</code></td>
-<td style="text-align: left;"><code>review</code></td>
-<td style="text-align: left;">Keep differing files under
-<code>ROOT/../TREE/ROOTNAME/</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-suffix</code>,
-<code>-suffix=SUF</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Keep them beside the long-term file</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-hdd PATH</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">PATH’s disk is spinning, recorded for
-later runs</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-ssd PATH</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">PATH’s disk is solid state, recorded</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-readers N</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Streams that may read each
-<code>-hdd</code> disk at once, 1 to 64, recorded</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-v</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Listing progress, non-identical files,
-preservation output</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-rules FILE</code></td>
-<td style="text-align: left;">see below</td>
-<td style="text-align: left;">dng-compare’s
-<code>metadata_rules.json</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-exiftool PATH</code></td>
-<td style="text-align: left;">found</td>
-<td style="text-align: left;">dng-compare’s
-<code>metadata-extract-exiftool-rs-oxcaml</code> worker</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-unison PATH</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>unison</code> binary for
-<code>-catchup</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>-- ARGS</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Further Unison arguments for
-<code>-catchup</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>-j</code>, <code>-o</code>, <code>-resume</code> and
-<code>-cache</code> work here as in scan mode. The exit status is 0 when
-the shuttle is safe to wipe and 1 when it is not.</p>
-<p><code>DNG_COMPARE_HOME</code> locates dng-compare for the rules,
-default <code>~/src/dng-compare</code>. <code>DNG_ARCHIVE</code> locates
-<code>dng-archive</code>, otherwise <code>PATH</code>, then the
-<code>5.2.0+ox</code> and <code>default</code> opam switches.
-<code>-preservefull</code> also needs <code>xdelta3</code>.</p>
-<h2 data-number="11.3" id="packed-root-preferences"><span
-class="header-section-number">11.3</span> Packed-root preferences</h2>
-<table>
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 10%" />
-<col style="width: 69%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Preference</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>packdepth</code></td>
-<td style="text-align: left;">0 (off)</td>
-<td style="text-align: left;">Store every directory exactly this many
-levels under the packed root as one <code>.sqlar</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>packroot</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">The root that stores containers. One of
-the two roots, as given or by a unique prefix or suffix, like
-<code>force</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>packworkers</code></td>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Processes that read and hash the plain
-side. Their transactions take turns</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>packbarrier</code></td>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">GiB written between drive-cache flushes. 0
-flushes after every container</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>packmax</code></td>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Largest container, in GiB. A container
-that would grow past it is refused before anything is written: the item
-fails with a message and the others go on. 0 means no limit</td>
-</tr>
-</tbody>
-</table>
-<p>A run with <code>packdepth</code> needs all of the following, and
-each is refused with a message otherwise:</p>
-<ul>
-<li><code>packroot</code> set, naming one of the two roots, and
-local.</li>
-<li><code>force</code> naming the other root, because the packed root
-only receives.</li>
-<li><code>perms = 0</code>, and <code>xattrs</code> and <code>acl</code>
-off.</li>
-<li>A build with the packdir library. Without it, <code>packdepth</code>
-is refused.</li>
-<li><code>packdepth</code> not negative.</li>
-</ul>
-<p><code>clone = off</code> is what the mirror’s profile uses, and
-<code>nodeletion</code> on the packed root keeps kept originals quiet.
-<code>-debug packdir</code> shows barriers.</p>
-<p>On the packed root, files directly in a packed directory are packed,
-and files above that depth stay plain. A subdirectory of a packed
-directory, a move, and a symbolic link are each refused with a
-message.</p>
-<h2 data-number="11.4" id="packdir-and-unison-packdir"><span
-class="header-section-number">11.4</span> packdir and
-unison-packdir</h2>
-<p>These are one program under two names. Container commands:</p>
-<pre class="text"><code>packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]
-                  [--barrier-gib G]
-packdir unpack-tree OUT DEST [--skip-retained]
-packdir repack C.sqlar... [--drop-retained]
-packdir verify C.sqlar...
-packdir list C.sqlar
-packdir restore C.sqlar OUT_DIR [--skip-retained]</code></pre>
-<table>
-<colgroup>
-<col style="width: 16%" />
-<col style="width: 22%" />
-<col style="width: 10%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>pack-tree</code></td>
-<td style="text-align: left;"><code>--depth N</code></td>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Keep every directory N levels under ROOT
-as <code>OUT/&lt;rel&gt;.sqlar</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--workers N</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Workers reading and hashing. One writer at
-a time</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--wal</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">WAL journal, for benchmarks</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--batch-mib M</code></td>
-<td style="text-align: left;">256</td>
-<td style="text-align: left;">Member data per transaction</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--barrier-gib G</code></td>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">GiB between <code>F_FULLFSYNC</code>
-barriers</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>unpack-tree</code></td>
-<td style="text-align: left;"><code>--skip-retained</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Every container back to a plain tree.
-Never overwrites</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>repack</code></td>
-<td style="text-align: left;"><code>--drop-retained</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Rebuild compactly, verified before
-replacing</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>verify</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>integrity_check</code>, then every
-member’s SHA-256 and fingerprint. Exit 1 on any problem. Never creates a
-file</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>list</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">One line per member: name, size,
-<code>mtime_ns</code>, SHA-256, and <code>retained</code> if so</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>restore</code></td>
-<td style="text-align: left;"><code>--skip-retained</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">One container into
-<code>OUT_DIR</code></td>
-</tr>
-</tbody>
-</table>
-<p>A <code>pack-tree</code> rerun stores only new and changed files, by
-size and nanosecond mtime, and marks files gone from ROOT as retained.
-It keeps <code>.packdir-state</code>, <code>.packdir-pending</code> and
-<code>.packdir-writer.lock</code> inside OUT, and prints one JSON line
-of totals. <code>PACKDIR_SYNC</code> (<code>fullfsync</code>,
-<code>normal</code>) and <code>PACKDIR_CRASH_AFTER</code> exist for
-benchmarks and tests.</p>
-<p><strong>File commands</strong> see a packed tree as plain files. A
-path <code>ROOT/A/B/name</code> reads through
-<code>ROOT/A/B.sqlar</code>, and a member wins over a plain file of the
-same name. Options and output follow GNU coreutils 9 under
-<code>LC_ALL=C</code>.</p>
-<table>
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 86%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Options</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>ls</code></td>
-<td
-style="text-align: left;"><code>-l -1 -a -A -h -R -r -t -S -U -f -d -g -n</code>,
-<code>--full-time</code>, <code>--sort=</code> with <code>name</code>,
-<code>time</code>, <code>size</code> or <code>none</code>,
-<code>--time-style=full-iso</code>, and <code>--retained</code> to show
-retained deletions</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>cat</code></td>
-<td style="text-align: left;"><code>-n -b</code>, <code>-</code> for
-standard input</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>stat</code></td>
-<td style="text-align: left;"><code>-c FORMAT</code>,
-<code>--format</code>, <code>--printf FORMAT</code>, with
-<code>%n %s %a %A %y %Y %F %U %G %u %g %h</code> and widths such as
-<code>%04a</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>du</code></td>
-<td style="text-align: left;"><code>-a -b -s -h -c -d N</code>,
-<code>--max-depth</code>. Sizes are apparent sizes</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>find</code></td>
-<td style="text-align: left;"><code>-name GLOB</code>,
-<code>-type</code> with <code>f</code>, <code>d</code> or
-<code>l</code>, <code>-maxdepth N</code>, <code>-mindepth N</code>,
-<code>-print</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>rm</code></td>
-<td style="text-align: left;"><code>-f -r -R -d -v</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>cp</code></td>
-<td style="text-align: left;"><code>-p -a -r -R -n -v -t DIR</code>,
-<code>--preserve</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>mv</code></td>
-<td style="text-align: left;"><code>-n -v -t DIR</code>. Renames inside
-a container, otherwise copies then removes</td>
-</tr>
-</tbody>
-</table>
-<p><code>rm</code>, <code>mv</code> and <code>cp</code> into a container
-change it in one transaction that bumps its epoch. Three cautions
-apply:</p>
-<ul>
-<li><strong><code>rm</code> really deletes.</strong> It removes the
-member row. It does not mark it retained, as a Unison deletion does.
-This was checked on a synthetic container: the member was gone from
-<code>ls --retained</code> too.</li>
-<li><strong>Never run the changing commands while Unison writes the same
-tree.</strong> The source says so.</li>
-<li><strong>A few outputs cannot match GNU:</strong>
-<code>ls -l</code>’s <code>total</code> line and directory lines,
-<code>du</code>’s directory sizes, and the order of <code>du</code> and
-<code>find</code> output, which is sorted here.</li>
-</ul>
-<h2 data-number="11.5" id="dng-archive"><span
-class="header-section-number">11.5</span> dng-archive</h2>
-<pre class="text"><code>dng-archive index ARCHIVE
-dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
-                     [--workers N] [--rate-mib R]
-dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR]</code></pre>
-<table>
-<colgroup>
-<col style="width: 13%" />
-<col style="width: 24%" />
-<col style="width: 9%" />
-<col style="width: 51%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Command</th>
-<th style="text-align: left;">Option</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>index</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Python equivalent:
-<code>metadata_index.py ARCHIVE</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>preserve</code></td>
-<td style="text-align: left;"><code>--pairs FILE</code></td>
-<td style="text-align: left;">required</td>
-<td style="text-align: left;">The listed pairs. Equivalent:
-<code>preserve_apo.py scan ... --pairs FILE</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--delta</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Store changed files as verified VCDIFF
-deltas under <code>deltas/</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--full-copy</code></td>
-<td style="text-align: left;">off</td>
-<td style="text-align: left;">Store independent full copies</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--workers N</code></td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Forked workers, each with an equal share
-of the rate</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>--rate-mib R</code></td>
-<td style="text-align: left;">200</td>
-<td style="text-align: left;">Byte budget in MiB/s, shared across
-workers</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>restore</code></td>
-<td style="text-align: left;"><code>--reference-root DIR</code></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Restore to OUTPUT. Equivalent:
-<code>preserve_apo.py restore ...</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>preserve</code> exits 1 with “Preservation incomplete; inspect
-errors and rerun before deleting source” if any file did not verify. It
-needs <code>xdelta3</code> on <code>PATH</code>, and SQLite and zlib
-from the system.</p>
-<h2 data-number="11.6" id="semantic-preferences"><span
-class="header-section-number">11.6</span> Semantic preferences</h2>
-<p>These are the main preferences of the sync engine, with defaults from
-the source.</p>
-<table>
-<colgroup>
-<col style="width: 37%" />
 <col style="width: 12%" />
-<col style="width: 49%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
 </colgroup>
 <thead>
 <tr>
-<th style="text-align: left;">Preference</th>
-<th style="text-align: left;">Default</th>
-<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">Method</th>
+<th style="text-align: right;">Time</th>
+<th style="text-align: right;">Throughput</th>
+<th style="text-align: right;">Target ops/s</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>clone</code></td>
-<td style="text-align: left;"><code>auto</code></td>
-<td style="text-align: left;">Receiver clone staging: <code>auto</code>,
-<code>off</code> or <code>require</code></td>
+<td style="text-align: left;"><code>cp -R</code></td>
+<td style="text-align: right;">259 s</td>
+<td style="text-align: right;">198 MiB/s</td>
+<td style="text-align: right;">312</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>semanticdng</code></td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Built-in DNG profiles, for exact metadata
-transfer</td>
+<td style="text-align: left;">Piped <code>tar</code> to
+<code>tar</code></td>
+<td style="text-align: right;">266 s</td>
+<td style="text-align: right;">192 MiB/s</td>
+<td style="text-align: right;">303</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>semanticprofile</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Enable a registered profile by versioned
-ID. Repeatable</td>
+<td style="text-align: left;">Plain Unison, one way,
+<code>clone = off</code></td>
+<td style="text-align: right;">337 s</td>
+<td style="text-align: right;">152 MiB/s</td>
+<td style="text-align: right;">272</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>dngmergeadmit</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Admit a field in the built-in merge as
-<code>IFD:TAG:TYPE</code>, with IFD one of <code>Image</code>,
-<code>Exif</code>, <code>GPS</code> or <code>Interop</code>.
-Repeatable</td>
+<td style="text-align: left;"><code>sqlar-wal</code>, 1 worker</td>
+<td style="text-align: right;">1,178 s</td>
+<td style="text-align: right;">44 MiB/s</td>
+<td style="text-align: right;">130</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>semanticmergebasecache</code></td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Keep compact common XMP bases for the
-merge</td>
+<td style="text-align: left;"><code>sqlar</code>, 1 worker,
+<code>F_FULLFSYNC</code> per container</td>
+<td style="text-align: right;">1,321 s</td>
+<td style="text-align: right;">39 MiB/s</td>
+<td style="text-align: right;">120</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>semanticcomponents</code></td>
-<td style="text-align: left;">false</td>
-<td style="text-align: left;">Show experimental local DNG component
-hashes in details</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticworkers</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">CPU budget. 0 means physical cores where
-detected</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticcpubudget</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">Endpoint CPU ceiling. 0 means none</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticmaxinflight</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">Admitted semantic transactions. 0 means
-domains plus headroom</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticpayloadbudget</code></td>
-<td style="text-align: left;">512</td>
-<td style="text-align: left;">Estimated retained memory in MiB. Credits,
-not an RSS cap</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticdescriptorbudget</code></td>
-<td style="text-align: left;">512</td>
-<td style="text-align: left;">Reserved descriptor credits</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>semanticvolumejobs</code></td>
-<td style="text-align: left;">0</td>
-<td style="text-align: left;">Executing jobs per filesystem. 0 means CPU
-budget</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>adobevalidate</code></td>
-<td style="text-align: left;"><code>off</code></td>
-<td style="text-align: left;"><code>off</code>, <code>warn</code> or
-<code>require</code> on received DNGs</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>adobevalidatescope</code></td>
-<td style="text-align: left;"><code>received</code></td>
-<td style="text-align: left;"><code>received</code> or
-<code>all-scanned</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>adobevalidator</code>,
-<code>adobevalidatorhash</code>, <code>adobevalidatorbuild</code></td>
-<td style="text-align: left;">none</td>
-<td style="text-align: left;">Absolute path, SHA-256 pin and build ID of
-the driver</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>adobevalidatetimeout</code></td>
-<td style="text-align: left;">300</td>
-<td style="text-align: left;">Seconds per validation</td>
+<td style="text-align: left;">Sparse bundle</td>
+<td style="text-align: right;">failed</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
 </tr>
 </tbody>
 </table>
-<p>The built-in merge is not a preference of its own. It is the rule
-<code>merge = Name *.dng -&gt; unison:dng-xmp-scalars/0</code>, with
-<code>backupcurrent = Name *.dng</code>.</p>
+<p>This was not the result anyone wanted for a packing project. Plain
+Unison was not seek-bound. The prototype was four times slower than it,
+for two reasons, and both were understood the same hour: it was
+CPU-bound on one thread, and it flushed the drive’s cache once per
+container. The sparse-bundle method failed because
+<code>hdiutil attach</code> got “Permission denied” for a bundle on the
+mirror disk, and it was later dropped.</p>
+<p>Workers fixed the first problem. The second needed a design decision.
+Three-way comparison on the full 50 GiB with 4 workers:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Sync</th>
+<th style="text-align: right;">Time</th>
+<th style="text-align: right;">Throughput</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Barrier every 4 GiB</td>
+<td style="text-align: right;">340 s</td>
+<td style="text-align: right;">150 MiB/s</td>
+</tr>
+<tr>
+<td style="text-align: left;">No flush at all</td>
+<td style="text-align: right;">314 s</td>
+<td style="text-align: right;">163 MiB/s</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>F_FULLFSYNC</code> per
+container</td>
+<td style="text-align: right;">946 s</td>
+<td style="text-align: right;">54 MiB/s</td>
+</tr>
+<tr>
+<td style="text-align: left;">Plain Unison, for reference</td>
+<td style="text-align: right;">337 s</td>
+<td style="text-align: right;">152 MiB/s</td>
+</tr>
+</tbody>
+</table>
+<p>The barrier kept the guarantee that matters for a mirror, at 8% over
+no flush, and matched plain Unison.</p>
+<h2 data-number="11.4" id="incremental-open-only-what-changed"><span
+class="header-section-number">11.4</span> Incremental: open only what
+changed</h2>
+<p>A 1% change set then replaced, added and deleted files in 12 of 694
+leaves, 197 MiB in all. Every method stored the same 157 files.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: right;">Time</th>
+<th style="text-align: right;">Target I/O</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Plain Unison</td>
+<td style="text-align: right;">6.6 s</td>
+<td style="text-align: right;">378 MiB, 4,031 ops</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
+<td style="text-align: right;">61.6 s</td>
+<td style="text-align: right;">1,360 MiB, 15,800 ops</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar</code></td>
+<td style="text-align: right;">121.8 s</td>
+<td style="text-align: right;">2,759 MiB, 37,749 ops</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-wal</code></td>
+<td style="text-align: right;">129.6 s</td>
+<td style="text-align: right;">2,855 MiB, 39,457 ops</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-w4</code></td>
+<td style="text-align: right;">146.1 s</td>
+<td style="text-align: right;">2,603 MiB, 34,910 ops</td>
+</tr>
+</tbody>
+</table>
+<p>Packing lost by roughly ten to twenty times, and the cause was
+specific. The prototype opened every container on every run. Opening all
+694 and reading their member tables, with nothing to write, took 83 to
+141 s, about 0.12 to 0.2 s each on the disk. Linearly, 65,536 containers
+would have taken 2 to 3.5 hours per run, enough to sink the whole
+idea.</p>
+<p>The fix is the design point mentioned earlier: record each
+container’s inode, size and mtime, and open only containers whose file
+changed or that have something to store. A rerun with nothing new then
+took 1.3 s for 694 containers. A second change set, with the scan timed
+apart from the transfer:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: right;">Total</th>
+<th style="text-align: right;">Scan</th>
+<th style="text-align: right;">Containers opened</th>
+<th style="text-align: right;">Target I/O</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Plain Unison</td>
+<td style="text-align: right;">6.6 s</td>
+<td style="text-align: right;">2.4 s</td>
+<td style="text-align: right;">n/a</td>
+<td style="text-align: right;">404 MiB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar</code></td>
+<td style="text-align: right;">8.8 s</td>
+<td style="text-align: right;">0.31 s</td>
+<td style="text-align: right;">12 of 694</td>
+<td style="text-align: right;">647 MiB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-wal</code></td>
+<td style="text-align: right;">8.4 s</td>
+<td style="text-align: right;">0.31 s</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">670 MiB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-w4</code></td>
+<td style="text-align: right;">7.1 s</td>
+<td style="text-align: right;">0.40 s</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">638 MiB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
+<td style="text-align: right;">5.0 s</td>
+<td style="text-align: right;">0.41 s</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">635 MiB</td>
+</tr>
+</tbody>
+</table>
+<p><code>.sqlar</code> wrote about 1.6 times the bytes of plain Unison
+for the same change, because of the rollback journal and the read-back
+verification. <code>sqlar-wal</code> left three files per container
+instead of one, which confirmed <code>DELETE</code>.</p>
+<h2 data-number="11.5" id="the-cold-scan-partly"><span
+class="header-section-number">11.5</span> The cold scan, partly</h2>
+<p>Every figure above came from a warm cache. The mirror disk’s catalog
+for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6
+million more files is a different thing, and after a reboot it would
+have to be read from the platter. The deciding measurement would have
+been a cold scan.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">No-change pass, after
+<code>sudo purge</code></th>
+<th style="text-align: right;">Total</th>
+<th style="text-align: right;">Scan</th>
+<th style="text-align: right;">Target I/O</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Plain Unison</td>
+<td style="text-align: right;">16.1 s</td>
+<td style="text-align: right;">11.8 s</td>
+<td style="text-align: right;">56 MiB, 4,755 ops</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>.sqlar</code>, 4 workers,
+barrier</td>
+<td style="text-align: right;">1.0 s</td>
+<td style="text-align: right;">0.6 s</td>
+<td style="text-align: right;">16 MiB, 166 ops</td>
+</tr>
+</tbody>
+</table>
+<p>This was only partly cold. <code>purge</code> left the mirror disk’s
+catalog cached: a stat walk of the plain copy afterwards took 0.21 s.
+Plain Unison’s extra reads look like the per-file Finder-info and
+resource-fork lookups it does on macOS, from HFS+’s attributes tree,
+though that was an inference. A fully cold test needed the mirror disk
+unmounted between steps, and from that session
+<code>diskutil unmount</code> hung twice, unattended, for 16 and 12
+minutes. The Unison session called that its own mistake, since the
+command should have had a timeout. The user chose to stop there.</p>
+<h2 data-number="11.6" id="where-the-benchmark-left-things"><span
+class="header-section-number">11.6</span> Where the benchmark left
+things</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Plain Unison</th>
+<th style="text-align: right;"><code>.sqlar</code>, 4 workers,
+barrier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">First copy, 50 GiB</td>
+<td style="text-align: right;">337 s</td>
+<td style="text-align: right;">340 s</td>
+</tr>
+<tr>
+<td style="text-align: left;">1% incremental</td>
+<td style="text-align: right;">6.6 s</td>
+<td style="text-align: right;">5 to 7 s</td>
+</tr>
+<tr>
+<td style="text-align: left;">No-change scan, warm</td>
+<td style="text-align: right;">about 2.4 s</td>
+<td style="text-align: right;">about 0.4 s</td>
+</tr>
+<tr>
+<td style="text-align: left;">No-change pass, partly cold</td>
+<td style="text-align: right;">16 s</td>
+<td style="text-align: right;">1 s</td>
+</tr>
+</tbody>
+</table>
+<p>Extrapolations to the full cache were linear and were labelled as
+such: 3.6 million files is about 90 times this set, and 65,536
+containers is about 94 times. They gave a first copy of about 8.5 h
+either way, a warm scan of about 3.5 min plain against about 30 s
+packed, and a cold scan of about 24 min plain against about 1.5 min
+packed, with the plain figure as a lower bound.</p>
+<p>The trade-off was the user’s to judge, and it was put plainly. Plain
+files are simpler, need no new code and stay browsable with any tool.
+Packed makes runs much cheaper to scan and leaves the mirror disk with
+65,536 files, at the cost of a new Unison feature, a SQLite tool to look
+inside, and about 1.6 times the bytes written per change.</p>
+<p>The Photo session recommended running a plain mirror first, timing a
+cold pass on the real files, and switching only if that was too slow. It
+was a reasonable recommendation. The user chose packed, and confirmed
+that after hearing it.</p>
+<h2 data-number="11.7" id="real-unison-and-a-new-estimate"><span
+class="header-section-number">11.7</span> Real Unison, and a new
+estimate</h2>
+<p>After the integration, real Unison packed the 50 GiB set onto the
+mirror disk:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Writer</th>
+<th style="text-align: right;">Total</th>
+<th style="text-align: right;">Propagation</th>
+<th style="text-align: right;">Throughput</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Asynchronous</td>
+<td style="text-align: right;">424 s</td>
+<td style="text-align: right;">334 s</td>
+<td style="text-align: right;">121 MiB/s overall</td>
+</tr>
+<tr>
+<td style="text-align: left;">First, blocking</td>
+<td style="text-align: right;">538 s</td>
+<td style="text-align: right;">448 s</td>
+<td style="text-align: right;">95 MiB/s</td>
+</tr>
+</tbody>
+</table>
+<p>The propagation figure matches the prototype’s 340 s. The extra 90 s
+is Unison’s first-run MD5 of every source file, which the prototype had
+been spared, and a quiet rerun took 3.2 s. So the honest comparison with
+plain Unison’s 337 s is 424 s, not 340 s. The extrapolation became about
+10.6 h for a first full mirror against about 8.4 h plain. That was still
+an estimate.</p>
+<h2 data-number="11.8" id="the-surprise-file-by-file"><span
+class="header-section-number">11.8</span> The surprise: file by
+file</h2>
+<p>The real mirror started, and it was much slower than 10.6 h would
+imply.</p>
+<p>The set <code>leafset-v1</code> had been written to an empty target.
+The mirror disk was not empty. It held the kept originals, and a check
+during the run found that 41,549 of the 65,536 leaves had a plain
+directory on the target. As described in the previous chapter, a leaf
+with a plain directory on the target reaches the writer file by file,
+not as one directory item. Each file then had its own process and its
+own SQLite transaction. The commit message records the result: about 25
+files/s on the mirror disk.</p>
+<p>No benchmark had exercised this. The design had thought through what
+kept originals meant for correctness, in detail. Nobody had asked what
+they meant for how Unison’s items are shaped, and the leaf set had no
+plain directories to reveal it.</p>
+<p>As a rough estimate, and assuming leaves of equal size: 41,549 leaves
+are about 63% of the cache, or about 2.3 million files, and at 25
+files/s that is about 25 hours for those leaves alone. This is
+arithmetic on one rate, not a measurement of the mirror. The session’s
+own note at the time said roughly 30 hours or more.</p>
+<p>The fix was commit <code>5c95d940</code>, per-container queues. On
+the internal disk the rate went from 67 to 187 files/s. Its rate on the
+mirror disk is not yet measured.</p>
+<p><strong>The mirror finished</strong> on 2026-11-01. Unison reported
+<code>1813638 items transferred, 62925 skipped, 0 failed</code>. The
+mirror disk held all 65,536 containers, 4,610 GiB, with none damaged and
+the pending list empty. The 62,925 skips were the expected ones: files
+only the mirror disk had, which <code>nodeletion</code> protected. That
+is also why the run exited 1, which in Unison means only that items were
+skipped. All 74,981 kept originals were present at the right size
+afterwards. A later member listing, taken from Unison’s own state file
+in seconds rather than by opening the containers for hours, found
+3,616,982 members.</p>
+<p><strong>The collector, not the disk.</strong> Part way through, the
+packing rate kept rising and falling, between about 100 and 150 MB/s.
+The obvious suspects were the source disk’s layout and the mirror disk
+itself, and the first guess named the wrong one. The rate followed the
+garbage collector instead. Each worker is a forked process that inherits
+Unison’s whole heap, about 6.5 GB on this root. It then spent most of
+its time marking that heap, which it would never use, while it allocated
+file contents. A worker lives for one job, so it now turns its collector
+nearly off. After a restart with that change, packing held about 148
+MB/s for 6.9 hours, against about 115 MB/s on average before it.</p>
+<p><strong>What is still unmeasured.</strong> The run’s total time is
+not a clean figure: it was stopped and restarted for the fixes above.
+Batching’s rate on the mirror disk, and a fully cold no-change scan at
+full scale, are still not measured on their own.</p>
+<p><strong>The scan that survived.</strong> When the file-by-file
+problem was found, the mirror had to be stopped and restarted, and the
+session said the 5-hour scan would be lost. That was wrong, and it was
+stated without checking. Unison keeps a fingerprint cache for
+interrupted scans, 308 MB for this cache, and the restarted run reloaded
+it: source-disk reads fell from 268 MB/s to about 1.3 MB/s.</p>
+<h2 data-number="11.9" id="what-the-day-showed"><span
+class="header-section-number">11.9</span> What the day showed</h2>
+<ul>
+<li>A small benchmark on the wrong shape of data can be precise and
+still miss the main cost. This one was careful about file sizes and
+missed the state of the target.</li>
+<li>Measuring early changed the design four times: the journal, the
+workers, the barrier and the stamp check. Each of those would have been
+far more expensive to find on the real run.</li>
+<li>Estimates written down as estimates did no harm, because everyone
+could see what to replace.</li>
+<li>Two of the largest numbers came from a sample of three, and from a
+figure that described something else. Both were caught by asking where
+the number came from.</li>
+</ul>
 </body>
 </html>

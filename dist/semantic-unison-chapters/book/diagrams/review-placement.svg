@@ -7,15 +7,15 @@
   <text x="36" y="52" font-size="18" font-weight="700" fill="#153e51">Default, or -tree TREE</text>
   <text x="526" y="52" font-size="18" font-weight="700" fill="#153e51">-suffix or -suffix=SUF</text>
   <g font-family="Menlo, Consolas, monospace" font-size="16">
-    <text x="36" y="90">/Volumes/Photo/</text>
+    <text x="36" y="90">/Volumes/Archive/</text>
     <text x="60" y="118">foto/2026/April/S/</text>
     <text x="84" y="146">F.DNG</text><text x="190" y="146" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">untouched</text>
     <text x="60" y="184" font-weight="700">review/</text>
     <text x="84" y="212">foto/2026/April/S/</text>
     <text x="108" y="240" font-weight="700" fill="#075b82">F.DNG</text><text x="190" y="240" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">the shuttle's version</text>
     <text x="84" y="268">jpg/...</text><text x="190" y="268" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">roots side by side never collide</text>
-    <text x="60" y="306">dng-compare/Kolobok-foto/</text>
-    <text x="526" y="90">/Volumes/Photo/</text>
+    <text x="60" y="306">dng-compare/Shuttle-foto/</text>
+    <text x="526" y="90">/Volumes/Archive/</text>
     <text x="550" y="118">foto/2026/April/S/</text>
     <text x="574" y="146">F.DNG</text><text x="680" y="146" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">untouched</text>
     <text x="574" y="174" font-weight="700" fill="#075b82">F_2.DNG</text><text x="680" y="174" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3b5563">-suffix numbers the copies</text>
