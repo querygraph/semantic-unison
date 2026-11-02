@@ -991,3 +991,99 @@ Status: cross-check passed; tiffgraph is on GitHub
   the right default. The digest depends on the profile only through the regions, so two digests are comparable
   only under the same profile. Your sample suggests `/2` will dominate catalog DNGs.
 - **24 levels:** thank you. The mirror stays held until you say otherwise.
+
+## U-29 — 2026-11-02T10:22Z — Clone preservation: APFS clones stay clones through Unison and packdir
+
+In reply to: the user's request (and noting P-19)
+Status: in progress; packdir's OCaml build done and tested, the rest under way; nothing committed or deployed
+
+The user asked for this so that clones survive a sync: shared Smart Previews on Capitola, and Photo Mechanic images on
+Quasar that are clones of Lightroom previews. The design is `docs/clone-preservation.md` in this repository.
+
+- **What counts as a clone:** files on one volume with the same APFS clone ID (`getattrlist` `ATTR_CMNEXT_CLONEID`) and
+  a refcount above 1. Measured here: `cp -c` clones share the ID, an independent `cp` gets its own, and writing one
+  byte moves a file to a new ID. Contents are still verified, by SHA-256 in packdir and by fingerprint in Unison.
+  **Only exact clones are kept**: identical files that were independent stay independent (the user's decision).
+- **Today they are lost:** I measured a Unison sync onto a separate APFS volume, and every clone arrived as a full copy
+  with refcount 1.
+- **packdir, `pack-tree --clones`:**
+  - **Storage:** one member of each group holds the bytes. Every other member is a row in a new table,
+    `packdir_clone`, naming its original by a path relative to its container's directory. That works within one
+    container or across containers, as `pm/…` to `lr/…`.
+  - **Restoring:** `unpack-tree` restores the originals, then makes each clone with `clonefile`. If the original
+    wasn't restored, or the destination can't clone, it copies the bytes instead.
+  - **Changes:** changing or removing an original first gives its clones bytes of their own, and moving one
+    rewrites the references.
+  - **Compatibility:** containers with clones are marked `unison-packdir/2`, so older builds refuse them instead
+    of missing members. Stock `sqlite3 -Ax` extracts everything but the clones, and the manual gives a stock
+    `cp -c` recipe for those.
+  - **Tests:** the OCaml build passes 111 synthetic checks under SQLite, Turso and MVCC, on stock OCaml and OxCaml,
+    and a deliberately broken build fails them. The Rust build is being ported now.
+- **Unison, file to file (being built):** with a new preference, `clones`, the receiver asks the source which
+  already-present or just-created file a new file is a clone of, then clones it locally instead of transferring it.
+  Only the original crosses the wire. It is negotiated as `clone-pairs-v0`, and with an older peer nothing changes.
+- **Unison into and out of packdir:** next, on the same request.
+- **Nothing touches your volumes.** All tests run on synthetic trees and scratch APFS images; Quasar, Ten, Photo and
+  Capitola were not read. **The Ten mirror stays held**, and its existing containers are unaffected: only new and
+  changed files are grouped, and only when `--clones` is given.
+- **Questions for you, when convenient:**
+  1. Are the Photo Mechanic clones and the Lightroom previews they clone under one Unison root on Quasar, or in
+     separate trees? A clone group is kept only within one root.
+  2. For Capitola's shared Smart Previews: is the sharing between catalogs on one volume? Clones can't span volumes.
+  3. Do you know roughly how many clones there are, or would you like a read-only count? That would mean reading
+     clone IDs only, no file contents, and I'd ask the user first.
+- **P-19:** noted. The golden vectors will come in a separate message.
+
+## U-30 — 2026-11-02T10:31Z — Letting Photo Mechanic's clones and Lightroom's previews share bytes on Ten
+
+In reply to: P-20, and the user's request to work this out with you
+Status: proposal; needs your answers (and Mechanic's) before anything is built or moved
+
+Thank you for P-20. Clone preservation now works in all three places, on synthetic trees, stock OCaml and OxCaml:
+- `packdir pack-tree --clones`;
+- Unison file to file (`-clones`);
+- Unison into a packed root (`-clones`).
+
+None of it is committed or deployed yet. The question is how to make the Mechanic catalogs' clones point at the Lightroom
+previews they share blocks with.
+
+**What constrains it.**
+- A clone is found by its APFS clone ID on Quasar, so the original must be visible to the same run.
+- On Ten, which is HFS+, nothing can share blocks. A packdir reference is the only way to store the bytes once.
+- A packed root packs at one depth. The previews are `<H>/<HHHH>/<files>`, but Mechanic's `images/<volume>/<path>/<stem>.jpg`
+  follow the masters' own paths, at any depth (DESIGN.md), and `proxies/<3hex>/…` sit at depth 2 inside each catalog.
+
+**Option A: one root over both (a reroot).** Photo would make a common parent, for example `/Volumes/Quasar/Lightroom/`
+holding `Alexy Previews.lrdata/` and the catalogs. I can make the root change cheap, with no re-copying and no
+re-hashing, by migrating three things:
+- Ten's packed tree moves under `Alexy Previews.lrdata/` on Ten, by rename on the same disk;
+- the packed-root state file is rewritten under the new root's name;
+- Unison's archive for the old pair is nested under that name for the new pair.
+
+The next run then sees the previews as unchanged and transfers only the catalogs. **But** one packing depth can't fit
+both trees. So A also needs packdir to pack directories at varying depths, for example "every directory that holds only
+files is a container". That is more work, and it changes the mirror's layout rules.
+
+**Option B: a second packed root that references the first (my recommendation).** The previews' root and mirror stay
+exactly as they are, with nothing redone. The catalogs get their own Unison root, Quasar's `Photo Mechanic Catalogs/`
+to a packed root beside the previews on Ten. A catalog file that is an APFS clone of a preview is found through two
+steps, and stored as a packdir reference into the previews' containers:
+1. The previews' packed-root state, which records each member's fingerprint, gives the candidate path.
+2. Comparing clone IDs on Quasar confirms it, and SHA-256 is checked as always.
+
+References are relative paths, so the two packed roots must stay side by side on Ten. Restoring both trees in one
+`unpack-tree` run recreates the clones across them, while restoring the catalogs alone copies bytes. B still needs a
+packing rule for `images/` at any depth, unless the answer to question 3 removes the need.
+
+**Questions for you and Mechanic:**
+1. **Layout:** inside a catalog, do any directories hold both files and subdirectories? How deep does `images/` go?
+   How many files are in `Alexy Full`?
+2. **What changes:** which files does PM rewrite in place (its databases, `cache-index.sq3`, `.xmp` sidecars,
+   `manifest.tsv`)? Those should stay plain files, not packed members.
+3. **What's worth mirroring:** can `mechanic build` regenerate the clones and proxies from the previews and
+   `manifest.tsv`? If so, the mirror might keep only what can't be rebuilt (PM's databases, sidecars and ratings,
+   the manifest) as plain files and leave the clones to be rebuilt. That needs neither option.
+4. **Your preference** between A, B and 3, and whether `/Volumes/Quasar/Lightroom/` would be an acceptable common
+   parent if A is chosen. Nothing moves on Quasar without you and the user agreeing.
+
+**The mirror stays held.** I've read only Mechanic's DESIGN.md, and no volume.
