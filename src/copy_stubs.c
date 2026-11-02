@@ -916,3 +916,65 @@ CAMLprim value unison_clone_stage_sized_handles(value source, value destination,
   CAMLreturn(unison_clone_stage_status(source, destination));
 }
 #endif
+
+
+/* Clone identity of a regular file: Some (clone id, refcount) when the
+   filesystem reports both (APFS), None otherwise. The id is a hint only;
+   callers verify contents separately. Symlinks are not followed. */
+
+#if defined(__APPLE__)
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <sys/attr.h>
+#include <unistd.h>
+#ifndef FSOPT_ATTR_CMN_EXTENDED
+#define FSOPT_ATTR_CMN_EXTENDED 0x00000020
+#endif
+#ifndef ATTR_CMNEXT_CLONEID
+#define ATTR_CMNEXT_CLONEID 0x00000100
+#endif
+#ifndef ATTR_CMNEXT_CLONE_REFCNT
+#define ATTR_CMNEXT_CLONE_REFCNT 0x00001000
+#endif
+
+CAMLprim value unison_clone_identity(value path)
+{
+  CAMLparam1(path);
+  CAMLlocal2(result, pair);
+  struct attrlist request;
+  struct { uint32_t length; attribute_set_t returned;
+           uint64_t clone_id; uint32_t refcount; } __attribute__((packed, aligned(4))) reply;
+  char *name;
+  int status;
+
+  memset(&request, 0, sizeof request);
+  memset(&reply, 0, sizeof reply);
+  request.bitmapcount = ATTR_BIT_MAP_COUNT;
+  request.commonattr = ATTR_CMN_RETURNED_ATTRS;
+  request.forkattr = ATTR_CMNEXT_CLONEID | ATTR_CMNEXT_CLONE_REFCNT;
+  name = strdup(String_val(path));
+  if (name == NULL) CAMLreturn(Val_int(0));
+  caml_release_runtime_system();
+  status = getattrlist(name, &request, &reply, sizeof reply,
+                       FSOPT_NOFOLLOW | FSOPT_ATTR_CMN_EXTENDED);
+  free(name);
+  caml_acquire_runtime_system();
+  if (status != 0 || reply.length < sizeof reply ||
+      (reply.returned.forkattr & (ATTR_CMNEXT_CLONEID | ATTR_CMNEXT_CLONE_REFCNT))
+        != (ATTR_CMNEXT_CLONEID | ATTR_CMNEXT_CLONE_REFCNT))
+    CAMLreturn(Val_int(0));
+  pair = caml_alloc_tuple(2);
+  Store_field(pair, 0, caml_copy_int64((int64_t)reply.clone_id));
+  Store_field(pair, 1, Val_long(reply.refcount));
+  result = caml_alloc_small(1, 0);
+  Field(result, 0) = pair;
+  CAMLreturn(result);
+}
+#else
+CAMLprim value unison_clone_identity(value path)
+{
+  CAMLparam1(path);
+  CAMLreturn(Val_int(0));
+}
+#endif

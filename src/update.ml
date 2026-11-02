@@ -1921,7 +1921,7 @@ let rec buildUpdateChildren
 
   if unchangedChildren then begin
     if skip then begin
-      if Prefs.read Xferhint.xferbycopying then
+      if Prefs.read Xferhint.xferbycopying || Prefs.read Xferhint.clones then
         NameMap.iter
           (fun nm archive ->
              match archive with

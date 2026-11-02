@@ -19,3 +19,9 @@ val insertEntry: Fspath.t -> Path.local -> Os.fullfingerprint -> unit
 
 (* Delete an entry *)
 val deleteEntry: handle -> unit
+
+(* Clone preservation: the [clones] preference and up to a few hinted paths
+   with a fingerprint, kept whenever [clones] is set. *)
+val clones: bool Prefs.t
+val clonesEnabled: unit -> bool  (* [clones] set and clone-pairs-v0 negotiated *)
+val cloneCandidates: Os.fullfingerprint -> (Fspath.t * Path.local) list

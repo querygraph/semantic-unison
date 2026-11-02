@@ -26,6 +26,10 @@ type clone_path_cleanup_failure = {
 }
 exception Clone_path_cleanup_failed of clone_path_cleanup_failure
 
+val clone_identity : Fspath.t -> (int64 * int) option
+(** APFS clone id and clone refcount of a file, not following a final
+    symlink; [None] where the filesystem does not report them. A hint only. *)
+
 val clone_path_status : expected_length:int64 -> Fspath.t -> Fspath.t -> clone_path_result
 (** Exclusive regular-file named creation using the caller's ordinary followed
     source/parent resolution policy, not legacy CLONE_NOFOLLOW symlink cloning.

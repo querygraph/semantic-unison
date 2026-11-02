@@ -418,6 +418,83 @@ let rec prepare fspathFrom fspathTo pf pt arch jobs =
   | Update.ArchiveSymlink _ -> transient "%s: symbolic links are not supported" (Path.toString pt)
   | Update.ArchiveFile _ | Update.NoArchive -> transient "%s: nothing to write" (Path.toString pt)
 
+(* Clones (Xferhint.clones; docs/clone-preservation.md). The source of a
+   packed root is local, so a file's APFS clone id is read directly. Each
+   container's files are split: a file in a clone group whose bytes are
+   already packed (this run, or an earlier one whose source is still in the
+   group) becomes a reference to that member; any other file is stored as
+   data, and the first of a group becomes its original. Data is written
+   first, then the references, through packdir's apply_clones, which checks
+   the SHA-256; references that don't check out are stored as data. *)
+let clone_originals : (int64 * int64, string) Hashtbl.t = Hashtbl.create 64
+
+(* The packed file holding a member's bytes: itself, or its clone's original. *)
+let original_of fspathTo pt =
+  let p = abs fspathTo (Path.fromString (parent_of pt)) in
+  if not (Sys.file_exists (p ^ ".sqlar")) then None else
+  let c = Packdir.open_ ~create:false ~read_only:true (p ^ ".sqlar") in
+  Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+    match Packdir.clone_of c (name_of pt) with
+    | Some (original, _) -> Some (Packdir.normalize (Filename.concat p original))
+    | None -> Some (Filename.concat p (name_of pt)))
+
+(* An original packed by an earlier run: a hinted path with this fingerprint,
+   current on the packed root, whose source file is still in the group. *)
+let packed_original fspathFrom fspathTo key fp pt size =
+  List.find_map (fun (fsp, path) ->
+    if Fspath.toString fsp <> Fspath.toString fspathTo || Path.toString path = Path.toString pt then None
+    else match member_named fspathTo path with
+      | Some m when m.Packdir.size = size
+                    && Os.fullfingerprintEqual (Os.data_only_fingerprint (Fingerprint.file fspathTo path)) fp
+                    && N.clone_key (abs fspathFrom path) = Some key -> original_of fspathTo path
+      | _ -> None) (Xferhint.cloneCandidates fp)
+
+(* One container's files (name, source, fp): (data, references). *)
+let split_clones fspathFrom fspathTo (rel, files) =
+  if not (Xferhint.clonesEnabled ()) then files, [] else
+  let p = abs fspathTo (Path.fromString rel) in
+  let data, refs = List.fold_left (fun (data, refs) ((name, source, fp) as f) ->
+    match N.clone_key source with
+    | None -> f :: data, refs
+    | Some key ->
+        let self = Filename.concat p name in
+        let original = match Hashtbl.find_opt clone_originals key with
+          | Some o -> Some o
+          | None -> packed_original fspathFrom fspathTo key fp (Path.fromString (rel ^ "/" ^ name)) (N.stat source).N.size in
+        match original with
+        | Some o when o <> self -> data, (f, o) :: refs
+        | _ -> Hashtbl.replace clone_originals key self; f :: data, refs) ([], [])
+    (List.sort (fun (a, _, _) (b, _, _) -> compare a b) files) in
+  List.rev data, List.rev refs
+
+(* Store [refs] in [rel]'s container as references; [false] when they don't
+   check out, and nothing of them was stored. *)
+let store_refs fspathTo rel refs =
+  let p = abs fspathTo (Path.fromString rel) in
+  mark_pending rel;
+  match
+    N.mkdir_p (Filename.dirname p);
+    let c = with_lock (fun () -> Packdir.open_ (p ^ ".sqlar")) in
+    Fun.protect ~finally:(fun () -> Packdir.close c) (fun () ->
+      ignore (Packdir.apply_clones ~write_lock:with_lock c
+        (List.map (fun ((name, source, _), original) ->
+           { Packdir.clone = name; file = source; original = Packdir.relative ~from:p original }) refs));
+      Packdir.members c)
+  with
+  | ms -> record fspathTo (rel, List.map fst refs) (0, ms); true
+  | exception (Failure e | Sys_error e) ->
+      debug (fun () -> Util.msg "packdir: clones in %s stored as data (%s)\n" rel e); false
+
+(* Data jobs, then each container's references; references that don't check
+   out become data jobs too. *)
+let run_with_clones fspathFrom fspathTo jobs =
+  let split = List.map (fun ((rel, _) as job) -> rel, split_clones fspathFrom fspathTo job) jobs in
+  let data = List.filter_map (fun (rel, (d, _)) -> if d = [] then None else Some (rel, d)) split in
+  Lwt.bind (if data = [] then Lwt.return () else run_jobs fspathTo data) (fun () ->
+    let fallback = List.filter_map (fun (rel, (_, refs)) ->
+      if refs = [] || store_refs fspathTo rel refs then None else Some (rel, List.map fst refs)) split in
+    if fallback = [] then Lwt.return () else run_jobs fspathTo fallback)
+
 (* The archive for what the target now holds, read back through the hooks. *)
 let rec archive_of fspathTo pt arch =
   match arch with
@@ -429,7 +506,7 @@ let rec archive_of fspathTo pt arch =
 let write fspathFrom fspathTo pf pt arch =
   let jobs = Util.convertUnixErrorsToTransient "writing into the packed root" (fun () ->
     List.rev (prepare fspathFrom fspathTo pf pt arch [])) in
-  Lwt.bind (run_jobs fspathTo jobs) (fun () ->
+  Lwt.bind (run_with_clones fspathFrom fspathTo jobs) (fun () ->
     Lwt.return (Util.convertUnixErrorsToTransient "reading back the packed root" (fun () -> archive_of fspathTo pt arch)))
 
 (* Unison sends a leaf with a plain directory on the target (kept originals)
@@ -454,7 +531,8 @@ let flush_queue fspathTo rel =
       Hashtbl.remove queues rel;
       let items = List.rev rev_items in
       let job = (rel, List.map (fun q -> (name_of q.q_pt, q.q_source, q.q_fp)) items) in
-      let t = Lwt.try_bind (fun () -> run_jobs fspathTo [job])
+      let fspathFrom = match items with q :: _ -> snd q.q_root | [] -> fspathTo in
+      let t = Lwt.try_bind (fun () -> run_with_clones fspathFrom fspathTo [job])
         (fun () -> Lwt_util.iter (fun q ->
            Update.replaceArchiveLocal fspathTo q.q_pt (file_arch fspathTo q.q_pt q.q_desc q.q_fp);
            Uutil.showProgress q.q_id (Props.length q.q_desc) "pack";

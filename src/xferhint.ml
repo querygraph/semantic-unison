@@ -56,7 +56,46 @@ let lookup fp =
   with Not_found ->
     None
 
+(* Clone preservation keeps a few receiver paths per fingerprint, independent
+   of xferbycopying (which local syncs turn off). Entries are hints only: the
+   source confirms clone identity and the receiver rechecks the fingerprint. *)
+let clonePairsFeature =
+  Features.register "clone-pairs-v0" ~arcFormatChange:false None
+
+(* Sent only to a peer that offers clone-pairs-v0, so an older peer never
+   sees the preference and behaves as before. *)
+let clones =
+  Prefs.createBool "clones" false
+    ~send:(fun () -> Features.enabled clonePairsFeature)
+    ~category:(`Advanced `General)
+    "recreate APFS clones as clones on the target"
+    ("When this preference is set and both hosts support it, a new file that \
+      is an exact APFS clone of another file on the source is recreated on \
+      the target as a clone of the corresponding file there, after checking \
+      its contents, instead of being transferred.  Identical files that are \
+      not clones stay independent.  The default value is \\texttt{false}.")
+
+let clonesEnabled () = Prefs.read clones && Features.enabled clonePairsFeature
+
+let cloneHintLimit = 16
+let cloneHints = FPMap.create 1000
+
+let cloneCandidates fp =
+  if not (Prefs.read clones) then [] else
+  try FPMap.find cloneHints fp with Not_found -> []
+
+let insertCloneHint fspath path fp =
+  if Prefs.read clones && not (Os.isPseudoFingerprint fp) then begin
+    let known = try FPMap.find cloneHints fp with Not_found -> [] in
+    let same (fspath', path') =
+      Fspath.toString fspath' = Fspath.toString fspath && Path.toString path' = Path.toString path in
+    if not (List.exists same known) then
+      FPMap.replace cloneHints fp
+        ((fspath, path) :: List.filteri (fun i _ -> i < cloneHintLimit - 1) known)
+  end
+
 let insertEntry fspath path fp =
+  insertCloneHint fspath path fp;
   if Prefs.read xferbycopying && not (Os.isPseudoFingerprint fp) then begin
     debug (fun () ->
       Util.msg "insertEntry: fspath=%s, path=%s, fp=%s\n"

@@ -1064,9 +1064,9 @@ let copyByPath ?producer ~expected_length fspathFrom pathFrom fspathTo pathTo =
    code. For this reason only, it is better to include the fds in this
    function in the fd cleanup scheme (done automatically by [openFile*] and
    [closeFile*] functions). *)
-let copyContents ?producer fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
+let copyContents ?producer ?(byPath=true) fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
   let use_id f = match ido with Some id -> f id | None -> () in
-  if fileKind = `DATA && copyByPath ?producer
+  if fileKind = `DATA && byPath && copyByPath ?producer
     ~expected_length:(Uutil.Filesize.toInt64 fileLength)
     fspathFrom pathFrom fspathTo pathTo then
     use_id (fun id -> Uutil.showProgress id fileLength "l")
@@ -1202,7 +1202,7 @@ let copyLocalCloned ?producer source basisPath fspathTo pathTo fileLength ido =
         Util.msg "Local receiver clone preserved %Ld logical bytes\n" !skipped);
       copied
 
-let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido =
+let localFileContents ?producer ?basis ?byPath fspathFrom pathFrom fspathTo pathTo desc ressLength ido =
   Util.convertUnixErrorsToTransient
     "copying locally"
     (fun () ->
@@ -1227,7 +1227,7 @@ let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc 
               copyLocalCloned ?producer (Fspath.concat fspathFrom pathFrom)
                 (Fspath.concat fspathTo previous) fspathTo pathTo (Props.length desc) ido
         | _ -> false in
-      if not cloned then copyContents ?producer
+      if not cloned then copyContents ?producer ?byPath
         fspathFrom pathFrom fspathTo pathTo `DATA (Props.length desc) ido;
       if ressLength > Uutil.Filesize.zero then
         copyContents ?producer
@@ -1321,7 +1321,8 @@ let tryCopyMovedFile connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
             info.Fileinfo.typ <> `ABSENT &&
             Props.length info.Fileinfo.desc = Props.length desc
           then begin
-            localFileContents candidateFspath candidatePath fspathTo pathTo desc
+            localFileContents ~byPath:(not (Xferhint.clonesEnabled ()))
+              candidateFspath candidatePath fspathTo pathTo desc
               (Osx.ressLength ress) (Some id);
             propsWithExtData connFrom fspathFrom pathFrom desc >>= fun desc ->
             setFileinfo fspathTo pathTo realPathTo update desc;
@@ -1382,7 +1383,8 @@ let tryCopyMovedFileBound producer connFrom fspathFrom pathFrom fspathTo pathTo
         Lwt.return None
       end else begin
         checkProducer producer;
-        localFileContents ?producer candidateFspath candidatePath fspathTo pathTo
+        localFileContents ?producer ~byPath:(not (Xferhint.clonesEnabled ()))
+          candidateFspath candidatePath fspathTo pathTo
           desc (Osx.ressLength ress) (Some id);
         BorrowedWork.bind (fun () -> propsWithExtData connFrom fspathFrom pathFrom desc) (fun desc ->
         checkProducer producer;
@@ -1395,6 +1397,173 @@ let tryCopyMovedFileBound producer connFrom fspathFrom pathFrom fspathTo pathTo
           (Fspath.toPrintString candidateFspath) (Path.toString candidatePath) in
         Lwt.return (Some (status, msg))))
       end
+
+(****)
+
+(* Clone preservation ([clones], feature clone-pairs-v0). Before producing a
+   new file, the receiver lists files on its own replica that may hold the
+   same contents: hinted paths with the fingerprint and files it creates
+   itself in this run. The source answers which of them are APFS clones of
+   the file it sends. The receiver clones a confirmed candidate after
+   rechecking its fingerprint, and paranoidCheck verifies the result. Every
+   creation registers a sequence number before producing and settles when
+   done; a file waits only for earlier registrations the source confirmed,
+   so waits cannot form a cycle, and whichever finishes first serves. *)
+
+let clonePairsLimit = 32
+
+let clonePairsLocal fspathFrom (pathFrom, candidates) =
+  let identity path =
+    try Fs.clone_identity (Fspath.concat fspathFrom path) with _ -> None in
+  match identity pathFrom with
+  | Some (cloneId, count) when count > 1 ->
+      let rec confirm index acc = function
+        | [] -> List.rev acc
+        | candidate :: rest ->
+            let acc = match identity candidate with
+              | Some (cloneId', count') when cloneId' = cloneId && count' > 1 &&
+                  Path.toString candidate <> Path.toString pathFrom -> index :: acc
+              | _ -> acc in
+            confirm (index + 1) acc rest in
+      confirm 0 [] (List.filteri (fun i _ -> i < clonePairsLimit) candidates)
+  | _ -> []
+
+let clonePairsOnHost = Remote.registerServerCmd "clonePairsV0"
+  Umarshal.(prod2 Fspath.m (prod2 Path.mlocal (list Path.mlocal) id id) id id)
+  Umarshal.(list int)
+  (fun _ (fspathFrom, request) -> Lwt.return (clonePairsLocal fspathFrom request))
+
+let clonePairsWanted desc fp ress =
+  Xferhint.clonesEnabled () &&
+  receiverCloneEnabled () && not (Os.isPseudoFingerprint fp) &&
+  Osx.ressLength ress = Uutil.Filesize.zero &&
+  Props.length desc > Uutil.Filesize.zero
+
+type cloneOrigin = {
+  originSeq : int; originSource : Path.local; originDir : Fspath.t;
+  originStage : Path.local; originFinal : Path.local;
+  mutable originSettled : bool; mutable originUsable : bool;
+  originDone : unit Lwt.t;
+}
+
+let cloneOrigins = Hashtbl.create 101
+let cloneOriginSeq = ref 0
+
+let withCloneOrigin fp pathFrom fspathTo pathTo realPathTo usable work =
+  incr cloneOriginSeq;
+  let originDone = Lwt.wait () in
+  let origin = { originSeq = !cloneOriginSeq; originSource = pathFrom;
+    originDir = fspathTo; originStage = pathTo; originFinal = realPathTo;
+    originSettled = false; originUsable = false; originDone } in
+  let known () = try Hashtbl.find cloneOrigins fp with Not_found -> [] in
+  Hashtbl.replace cloneOrigins fp (origin :: known ());
+  let settle ok =
+    if not origin.originSettled then begin
+      origin.originSettled <- true; origin.originUsable <- ok;
+      if not ok then begin
+        match List.filter (fun o -> o != origin) (known ()) with
+        | [] -> Hashtbl.remove cloneOrigins fp
+        | rest -> Hashtbl.replace cloneOrigins fp rest
+      end;
+      Lwt.wakeup origin.originDone ()
+    end in
+  BorrowedWork.try_bind (fun () -> work origin)
+    (fun result -> settle (usable result); Lwt.return result)
+    (fun error -> settle false; Lwt.fail error)
+
+let cloneFromCandidate ?producer ~props fspathTo pathTo realPathTo update desc fp ress id
+      (directory, path) =
+  let qualified =
+    try
+      let info = Fileinfo.getBasic false directory path in
+      info.Fileinfo.typ = `FILE &&
+      Props.length info.Fileinfo.desc = Props.length desc &&
+      Os.fingerprint directory path info.Fileinfo.typ = fp
+    with Util.Transient _ | Unix.Unix_error _ -> false in
+  if not qualified then Lwt.return None else
+  let legacy = match producer with None | Some { legacy = true; _ } -> true | Some _ -> false in
+  let cloned =
+    try
+      Util.convertUnixErrorsToTransient "cloning a confirmed clone" (fun () ->
+        checkProducer producer;
+        removeOldTempFile ?producer fspathTo pathTo;
+        checkProducer producer;
+        copyByPath ?producer ~expected_length:(Uutil.Filesize.toInt64 (Props.length desc))
+          directory path fspathTo pathTo)
+    with Util.Transient reason when legacy ->
+      debug (fun () -> Util.msg "clonePairs: clone from %s declined [%s]\n"
+        (Path.toString path) reason);
+      false in
+  if not cloned then Lwt.return None else begin
+    Uutil.showProgress id (Props.length desc) "l";
+    BorrowedWork.bind (fun () -> props desc) (fun desc ->
+    checkProducer producer;
+    setFileinfo fspathTo pathTo realPathTo update desc;
+    checkProducer producer;
+    BorrowedWork.bind (fun () -> paranoidCheck ?producer fspathTo pathTo realPathTo desc fp ress)
+      (fun status ->
+    match status with
+    | TransferFailed _ when legacy -> Lwt.return None
+    | _ ->
+        let msg = Printf.sprintf "Shortcut: cloned %s/%s from local clone %s/%s\n"
+          (Fspath.toPrintString fspathTo) (Path.toString realPathTo)
+          (Fspath.toPrintString directory) (Path.toString path) in
+        Lwt.return (Some (status, msg))))
+  end
+
+let tryClonePair ?producer ~query ~props origin fspathTo pathTo realPathTo
+      update desc fp ress id =
+  let here = Fspath.toString fspathTo in
+  let created = List.rev (List.filter
+    (fun o -> o.originSeq < origin.originSeq && (o.originUsable || not o.originSettled))
+    (try Hashtbl.find cloneOrigins fp with Not_found -> [])) in
+  let hinted = List.filter (fun (fspath, path) ->
+      Fspath.toString fspath = here &&
+      Path.toString path <> Path.toString pathTo &&
+      Path.toString path <> Path.toString realPathTo)
+    (Xferhint.cloneCandidates fp) in
+  let candidates = List.filteri (fun i _ -> i < clonePairsLimit)
+    (List.map (fun o -> (o.originSource, `Created o)) created @
+     List.map (fun (fspath, path) -> (path, `Present (fspath, path))) hinted) in
+  if candidates = [] then Lwt.return None else
+  BorrowedWork.bind
+    (fun () -> Lwt.catch (fun () -> query (List.map fst candidates))
+       (fun error ->
+          debug (fun () -> Util.msg "clonePairs: query failed [%s]\n" (Printexc.to_string error));
+          Lwt.return []))
+    (fun confirmed ->
+  debug (fun () -> Util.msg "clonePairs: %s: %d candidates, %d confirmed\n"
+    (Path.toString realPathTo) (List.length candidates) (List.length confirmed));
+  let confirmed = List.map snd (List.filteri (fun i _ -> List.mem i confirmed) candidates) in
+  let attempt location =
+    cloneFromCandidate ?producer ~props fspathTo pathTo realPathTo update desc fp ress id location in
+  let rec choose pending = function
+    | [] ->
+        if pending = [] then Lwt.return None else
+        let pending = List.rev pending in
+        BorrowedWork.bind (fun () -> Lwt.choose (List.map (fun o -> o.originDone) pending))
+          (fun () -> choose [] (List.map (fun o -> `Created o) pending))
+    | `Present location :: rest ->
+        BorrowedWork.bind (fun () -> attempt location) (function
+          | Some result -> Lwt.return (Some result)
+          | None -> choose pending rest)
+    | `Created o :: rest when not o.originSettled -> choose (o :: pending) rest
+    | `Created o :: rest when not o.originUsable -> choose pending rest
+    | `Created o :: rest ->
+        BorrowedWork.bind (fun () -> attempt (o.originDir, o.originStage)) (function
+          | Some result -> Lwt.return (Some result)
+          | None ->
+              BorrowedWork.bind (fun () -> attempt (o.originDir, o.originFinal)) (function
+                | Some result -> Lwt.return (Some result)
+                | None -> choose pending rest)) in
+  choose [] confirmed)
+
+let tryCloneLocal ?producer fspathFrom pathFrom origin fspathTo pathTo realPathTo
+      update desc fp ress id =
+  tryClonePair ?producer
+    ~query:(fun candidates -> Lwt.return (clonePairsLocal fspathFrom (pathFrom, candidates)))
+    ~props:(fun desc -> Lwt.return (snd (propsWithExtDataLocal fspathFrom (`Local pathFrom) desc)))
+    origin fspathTo pathTo realPathTo update desc fp ress id
 
 (****)
 
@@ -2147,8 +2316,9 @@ let transferFileLocalWithProducer ?producer connFrom
   end else
     registerFileTransfer pathTo fp
       (fun () ->
+       let transfer origin =
          checkProducer producer;
-         let reuse () = match producer with
+         let copied () = match producer with
            | Some state when state.adopted && not state.legacy -> Lwt.return None
            | Some { legacy = false; _ } ->
                tryCopyMovedFileBound producer connFrom fspathFrom pathFrom
@@ -2157,6 +2327,14 @@ let transferFileLocalWithProducer ?producer connFrom
                fspathTo pathTo realPathTo update desc fp ress id)
                (fun result -> Lwt.return (match result with
                  | None -> None | Some (info, msg) -> Some (TransferSucceeded info, msg))) in
+         let reuse () = match origin, producer with
+           | None, _ | _, Some { adopted = true; legacy = false; _ } -> copied ()
+           | Some origin, _ ->
+               BorrowedWork.bind (fun () -> tryClonePair ?producer
+                 ~query:(fun candidates -> clonePairsOnHost connFrom (fspathFrom, (pathFrom, candidates)))
+                 ~props:(propsWithExtData connFrom fspathFrom pathFrom)
+                 origin fspathTo pathTo realPathTo update desc fp ress id)
+                 (function Some result -> Lwt.return (Some result) | None -> copied ()) in
          BorrowedWork.bind reuse (function
          | Some (status, msg) ->
              (* Transfer was performed by copying *)
@@ -2174,7 +2352,11 @@ let transferFileLocalWithProducer ?producer connFrom
                  update desc fp ress id tempInfo) (fun status ->
                Xferhint.insertEntry fspathTo pathTo fp;
                Lwt.return (`DONE (status, None)))
-             end))
+             end) in
+       if not (clonePairsWanted desc fp ress) then transfer None else
+       withCloneOrigin fp pathFrom fspathTo pathTo realPathTo
+         (function `DONE (TransferSucceeded _, _) -> true | _ -> false)
+         (fun origin -> transfer (Some origin)))
 
 let transferFileLocal connFrom args = transferFileLocalWithProducer connFrom args
 
@@ -2335,10 +2517,18 @@ let file rootFrom pathFrom rootTo fspathTo pathTo realPathTo update desc fp stam
   let timer = Trace.startTimer "Transmitting file" in
   BorrowedWork.bind (fun () -> match rootFrom, rootTo with
     (Common.Local, fspathFrom), (Common.Local, realFspathTo) ->
-      BorrowedWork.bind (fun () -> localFileAsync
+      let ordinary () = BorrowedWork.bind (fun () -> localFileAsync
         fspathFrom pathFrom fspathTo pathTo realPathTo
         update desc (Osx.ressLength ress) (Some id)) (fun () ->
-        paranoidCheck fspathTo pathTo realPathTo desc fp ress)
+        paranoidCheck fspathTo pathTo realPathTo desc fp ress) in
+      if not (clonePairsWanted desc fp ress) then ordinary () else
+      withCloneOrigin fp pathFrom fspathTo pathTo realPathTo
+        (function TransferSucceeded _ -> true | _ -> false)
+        (fun origin -> BorrowedWork.bind
+          (fun () -> tryCloneLocal fspathFrom pathFrom origin fspathTo pathTo realPathTo
+             update desc fp ress id)
+          (function Some (status, msg) -> Trace.log msg; Lwt.return status
+                  | None -> ordinary ()))
   | _ ->
       transferFile
         rootFrom pathFrom rootTo fspathTo pathTo realPathTo
@@ -2352,11 +2542,24 @@ let fileBound ~token ~local_path rootFrom pathFrom rootTo fspathTo pathTo realPa
   let timer = Trace.startTimer "Transmitting bound file" in
   let transfer () = match rootFrom, rootTo with
     | (Common.Local, fspathFrom), (Common.Local, root) ->
-        withProducer None root local_path fspathTo pathTo realPathTo token
+        let produce origin = withProducer None root local_path fspathTo pathTo realPathTo token
           (fun producer ->
-            BorrowedWork.bind (fun () -> localFileAsync ~producer fspathFrom pathFrom fspathTo pathTo realPathTo
-              update desc (Osx.ressLength ress) (Some id)) (fun () ->
-            paranoidCheck ~producer fspathTo pathTo realPathTo desc fp ress))
+            let ordinary () =
+              BorrowedWork.bind (fun () -> localFileAsync ~producer fspathFrom pathFrom fspathTo pathTo realPathTo
+                update desc (Osx.ressLength ress) (Some id)) (fun () ->
+              paranoidCheck ~producer fspathTo pathTo realPathTo desc fp ress) in
+            match origin with
+            | None -> ordinary ()
+            | Some origin ->
+                BorrowedWork.bind
+                  (fun () -> tryCloneLocal ~producer fspathFrom pathFrom origin fspathTo pathTo realPathTo
+                     update desc fp ress id)
+                  (function Some (status, msg) -> Trace.log msg; Lwt.return status
+                          | None -> ordinary ())) in
+        if not (clonePairsWanted desc fp ress) then produce None else
+        withCloneOrigin fp pathFrom fspathTo pathTo realPathTo
+          (function (TransferSucceeded _, _) -> true | _ -> false)
+          (fun origin -> produce (Some origin))
     | _ -> transferFileBound ~token ~local_path rootFrom pathFrom rootTo
         fspathTo pathTo realPathTo update desc fp ress id in
   BorrowedWork.bind transfer (fun (status, completion) ->

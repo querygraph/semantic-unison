@@ -225,6 +225,10 @@ let clone_path_status ~expected_length source destination =
           result
     with error -> fail error
 
+external clone_identity_raw : string -> (int64 * int) option = "unison_clone_identity"
+
+let clone_identity p = try clone_identity_raw (path p) with _ -> None
+
 type clone_stage_decline =
   | Platform_unavailable
   | Non_regular_source
