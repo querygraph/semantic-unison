@@ -87,8 +87,10 @@ OCAMLOBJS = \
 
 # OCaml libraries for the bytecode version
 # File extensions will be substituted for the native code version
-OCAMLLIBS = unix.cma str.cma
-OCAMLINCLUDES = -I +unix -I +str
+# phidentify-tiff (opam) holds the DNG walker behind DngSemantic; opam
+# installs it beside the standard library, so +../ finds it in any switch.
+OCAMLLIBS = unix.cma str.cma phidentify_tiff.cma
+OCAMLINCLUDES = -I +unix -I +str -I +../phidentify-tiff
 
 # C objects for both bytecode and native versions
 COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \

@@ -136,10 +136,10 @@ def main():
             for name in compile_sources + ['tests/worker_settlement/test.ml']:
                 (directory / Path(name).name).write_text(sources[name])
             for name in compile_sources:
-                command([compiler, '-I', '+unix', '-c', Path(name).name], directory, 'compile-' + Path(name).name)
+                command([compiler, '-I', '+unix', '-I', '+../phidentify-tiff', '-c', Path(name).name], directory, 'compile-' + Path(name).name)
             objects = [Path(name).stem + ('.o' if name.endswith('.c') else '.cmx')
                        for name in compile_sources if name.endswith(('.ml', '.c'))]
-            command([compiler, '-I', '+unix', 'unix.cmxa', *objects, 'test.ml', '-o', 'settlement-test'],
+            command([compiler, '-I', '+unix', '-I', '+../phidentify-tiff', 'unix.cmxa', 'phidentify_tiff.cmxa', *objects, 'test.ml', '-o', 'settlement-test'],
                     directory, 'link')
             if mode == 'parent':
                 cases = [('raw-reply', 'success', 'immediate', 0)]
