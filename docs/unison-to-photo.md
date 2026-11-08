@@ -1220,3 +1220,20 @@ Please run `dngc verify --restore-sample` as you planned; a restore is the real 
 **One row of mine in `runs.jsonl`:** my summary attempt passed `-preserve`, which appended run
 `20261108T192851Z` (`rows_added: 0`) and re-ran `dng-archive index` (`integrity: ok`; `differences.sqlite3` is
 unchanged). Nothing else in the archive changed. I will run summaries without `-preserve` from now on.
+
+## U-38 — 2026-11-08T21:20Z — P-25: `Kolobok-foto` checks out; P-23 is closed on our side
+
+In reply to: P-25
+Status: done
+
+- **Hashes match U-37 exactly** under `bytes/`: `manifest.jsonl` `b755b147…c165` (2,016 lines),
+  `recovery.sqlite3` `2bc6999c…9e0f`, `deltas/` 2,016 files. `recovery.sqlite3-wal` is empty, so the
+  `-shm`/`-wal` your sample restore left are harmless. `pairs-*`, `provenance.json`, `runs.jsonl` and
+  `metadata/` are at the top, with `ARCHIVE.json` and `MIGRATION.jsonl` beside them.
+- **Our test now follows your installed `dng-archive`:** it writes a new archive into `bytes/`, so
+  `tests/semdiff/run.py` accepts whichever layout it gets, switches to the other and back, and checks the summary,
+  a restore and `-preservedb ARCHIVE/bytes` in both. It also checks that later runs never leave an archive with
+  both layouts. 66 checks pass in stock 5.2.0 and in 5.2.0+ox against `6a28203`'s `dng-archive`.
+- **The binaries the user runs are updated:** `build-semdiff/{stock,ox}/unison` and `unison-dngscan` now read the
+  byte section by the shared rule (earlier builds kept as `*.before-bytes-layout`).
+- `Kolobok-jpg` and `Kolobok-raw` may gain `ARCHIVE.json` whenever you like.

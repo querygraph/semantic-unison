@@ -143,46 +143,63 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
             check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'Python restores the OCaml delta')
         out = unison(*full)
         check('safe to wipe: 9 of 9 files' in out, 'second run: everything safe\n' + out)
-        # dngc's unified layout: a legacy archive (recovery.sqlite3 at the top) is read
-        # at its top level; after `dngc migrate` the byte section is ARCHIVE/bytes/.
-        # The migration is done here by the same renames dngc.md lists, so the
-        # summary must count the same files as preserved in full before and after.
+        # dngc's unified layout. dng-archive writes a new archive's byte section into
+        # ARCHIVE/bytes/ (dng-compare 6a28203 and later); an archive written before
+        # that has it at the top (recovery.sqlite3 and no bytes/), and `dngc migrate`
+        # moves it into bytes/. The reader must find either. Whatever layout the
+        # installed dng-archive wrote, switch to the other with the renames dngc.md
+        # lists and back: the summary counts the same files preserved in full each time.
         def summary(*extra):
             reports = sorted(str(p) for p in (t / 'unisondir').glob('semdiff-*.jsonl'))
-            r = subprocess.run([a.dngscan, '-summarize', '-preserve', *extra, *reports], env=env, capture_output=True, text=True)
+            r = subprocess.run([a.dngscan, '-summarize', *extra, *reports], env=env, capture_output=True, text=True)
             line = [l for l in r.stdout.splitlines() if l.startswith('safe to wipe:')]
             check(len(line) == 1, 'one summary line:\n' + r.stdout + r.stderr)
             return line[0]
-        check((archive / 'recovery.sqlite3').is_file() and not (archive / 'bytes').exists(), 'legacy layout written')
-        legacy = summary()
-        check(' 0 preserved in full' not in legacy, 'the control preserves something in full: ' + legacy)
         byte_entries = ['recovery.sqlite3', 'recovery.sqlite3-wal', 'recovery.sqlite3-shm', 'recovery.sqlite3-journal',
                         'recovery.sqlite3.engine.json', 'deltas', 'originals', 'manifest.jsonl', 'inventory.json',
                         'directories.json', 'summary.json', 'matching.json', 'xmp-original', 'image-comparison',
                         'finalization-backend.json', '.byte-preservation.lock']
-        (archive / 'bytes').mkdir()
-        for name in byte_entries:
-            if (archive / name).exists():
-                (archive / name).rename(archive / 'bytes' / name)
-        check((archive / 'bytes/manifest.jsonl').is_file() and (archive / 'provenance.json').is_file()
-              and (archive / 'metadata').is_dir(), 'migrated: bytes/ holds the manifest, metadata stays at the top')
-        check(summary() == legacy, 'same summary after the migration: %s vs %s' % (summary(), legacy))
-        # dng-compare's shared rule: an archive named as ARCHIVE/bytes is its parent, never nested.
-        check(summary('-preservedb', str(archive / 'bytes')) == legacy, '-preservedb ARCHIVE/bytes reads the same archive')
-        check(not (archive / 'bytes/bytes').exists() and not (archive / 'bytes/metadata').exists(), 'no nested bytes/ or metadata/')
-        restored = t / 'restored-bytes.DNG'
-        r = subprocess.run([archiver, 'restore', str(archive / 'bytes'), '2026/A/s1/meta.DNG', str(restored)], capture_output=True, text=True)
-        check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'restore from ARCHIVE/bytes')
-        # A byte section the reader cannot find would drop those files from "preserved in full".
-        (archive / 'bytes/manifest.jsonl').rename(archive / 'bytes/manifest.jsonl.away')
-        check(summary() != legacy, 'control: without the manifest the summary changes')
-        (archive / 'bytes/manifest.jsonl.away').rename(archive / 'bytes/manifest.jsonl')
-        # Back to the legacy layout: today's dng-archive preserve still writes the top level.
-        for name in byte_entries:
-            if (archive / 'bytes' / name).exists():
-                (archive / 'bytes' / name).rename(archive / name)
-        (archive / 'bytes').rmdir()
-        check(summary() == legacy, 'legacy layout restored')
+        def to_bytes():
+            (archive / 'bytes').mkdir()
+            for name in byte_entries:
+                if (archive / name).exists():
+                    (archive / name).rename(archive / 'bytes' / name)
+        def to_top():
+            for name in byte_entries:
+                if (archive / 'bytes' / name).exists():
+                    (archive / 'bytes' / name).rename(archive / name)
+            (archive / 'bytes').rmdir()
+        def restores(byte_section, label):
+            restored = t / 'restored-layout.DNG'
+            restored.unlink(missing_ok=True)
+            r = subprocess.run([archiver, 'restore', str(byte_section), '2026/A/s1/meta.DNG', str(restored)], capture_output=True, text=True)
+            check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'restore from ' + label + ':\n' + r.stdout + r.stderr)
+        def bytes_layout_checks():
+            check((archive / 'bytes/manifest.jsonl').is_file() and not (archive / 'recovery.sqlite3').exists()
+                  and (archive / 'provenance.json').is_file() and (archive / 'metadata').is_dir(),
+                  'bytes/ holds the byte section; provenance and metadata at the top')
+            check(summary() == written, 'same summary from bytes/: %s vs %s' % (summary(), written))
+            # dng-compare's shared rule: an archive named as ARCHIVE/bytes is its parent, never nested.
+            check(summary('-preservedb', str(archive / 'bytes')) == written, '-preservedb ARCHIVE/bytes reads the same archive')
+            check(not (archive / 'bytes/bytes').exists() and not (archive / 'bytes/metadata').exists(), 'no nested bytes/ or metadata/')
+            restores(archive / 'bytes', 'ARCHIVE/bytes')
+            # A byte section the reader cannot find would drop those files from "preserved in full".
+            (archive / 'bytes/manifest.jsonl').rename(archive / 'bytes/manifest.jsonl.away')
+            check(summary() != written, 'control: without the manifest the summary changes')
+            (archive / 'bytes/manifest.jsonl.away').rename(archive / 'bytes/manifest.jsonl')
+        def legacy_layout_checks():
+            check((archive / 'manifest.jsonl').is_file() and (archive / 'recovery.sqlite3').is_file()
+                  and not (archive / 'bytes').exists(), 'legacy layout: byte section at the top')
+            check(summary() == written, 'same summary from the top: %s vs %s' % (summary(), written))
+            restores(archive, 'a legacy ARCHIVE')
+        new_layout = (archive / 'bytes').is_dir()
+        check(new_layout != (archive / 'recovery.sqlite3').is_file(), 'exactly one layout written: %r' % sorted(os.listdir(archive)))
+        written = summary()
+        check(' 0 preserved in full' not in written, 'the control preserves something in full: ' + written)
+        if new_layout:
+            bytes_layout_checks(); to_top(); legacy_layout_checks(); to_bytes(); bytes_layout_checks()
+        else:
+            legacy_layout_checks(); to_bytes(); bytes_layout_checks(); to_top(); legacy_layout_checks()
         # -review reruns on the conflicts only; -suffix and -suffix=NAME copy beside the original.
         out = unison('-preserve', '-review', '-suffix')
         check((right / '2026/A/s1/image_2.DNG').read_bytes() == files['image.DNG'][0], 'numbered suffix copy')
@@ -204,6 +221,8 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         check(len(versions) == 2 and versions[0] == '' and versions[1] != '', 'second version recorded: %r' % versions)
         check('already holds another version' in out, 'full preservation never replaces another version')
         check((right / '2026/A/s1/meta.DNG').read_bytes() == files['meta.DNG'][1], 'long-term file still untouched')
+        check(not ((archive / 'recovery.sqlite3').exists() and (archive / 'bytes').exists()),
+              'later runs keep one layout: %r' % sorted(os.listdir(archive)))
     else:
         print('SKIPPED: dng-compare archive, preservation and conflict-copy checks (no dng-compare rules, dng-archive or xdelta3)')
     # The tool never writes the shuttle (meta.DNG was rewritten by this test for the second cycle).

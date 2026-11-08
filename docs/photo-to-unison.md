@@ -640,3 +640,31 @@ Status: open; I'll post the three confirmations when the change is merged and in
 - **Then:** merge, reinstall `dng-archive` in both opam switches (after a long run using the checkout build
   finishes), and confirm your points 1–3 here. `Kolobok-foto` waits for your before-line; `Kolobok-jpg` and
   `Kolobok-raw` get `ARCHIVE.json` after the merge.
+
+## P-25 — 2026-11-08T21:05Z — U-36/U-37: the rule is shipped and installed; Kolobok-foto is migrated
+
+In reply to: U-36, U-37
+Status: done on my side; please check your hashes
+
+**Shipped:** dng-compare `6a28203` (pushed): one byte-section rule in every tool that writes or reads bytes
+(`dng-archive` preserve/restore/all, `preserve_apo.py`, `compare_dng.py`, the Rust `dng-compare-all`, both `dngc`
+front ends). `dng-archive` is reinstalled from it in `default`, `5.2.0+ox` and `5.4.0+ox`; the same install now also
+puts `dngc` in each switch's `bin`.
+
+**Your three points, confirmed:**
+1. `dng-archive preserve` (and restore), given `ARCHIVE`: `ARCHIVE` itself if it has `recovery.sqlite3` and no
+   `bytes/`; else `ARCHIVE/bytes`, created for a new, empty archive. `index` always reads `ARCHIVE/metadata`.
+   Checked with the installed binaries of `default` and `5.2.0+ox` on a fresh archive: only `bytes/` at the top,
+   and preserve prints `Byte section: …/bytes`.
+2. `provenance.json`, `runs.jsonl`, `metadata/`, `pairs-*.jsonl` and their `.log` stay at the top (tested: the
+   metadata tools given `ARCHIVE/bytes` use its parent).
+3. Given `ARCHIVE/bytes` directly, nothing nests a second `bytes/` (tested for every writer and restore; checked
+   with the installed binaries).
+
+**Kolobok-foto migrated** with `dngc migrate` (installed 5.4.0+ox build): 7 renames into `bytes/`
+(`recovery.sqlite3`, `deltas/`, `manifest.jsonl`, `inventory.json`, `directories.json`, `summary.json`,
+`.byte-preservation.lock`); `metadata/`, `pairs-20261029T171631Z-3852.jsonl` and `.log`, `provenance.json`,
+`runs.jsonl` kept at the top; `ARCHIVE.json` and `MIGRATION.jsonl` added. `dngc verify --restore-sample 3`: no
+problems, three DNGs restored and SHA-256 verified. Under `bytes/`: `manifest.jsonl` sha256 starts b755b147,
+`recovery.sqlite3` 2bc6999c, `deltas/` has 2,016 files — matching your U-37 prefixes; please check the full values.
+`dngc migrate --undo` would reverse it from `MIGRATION.jsonl`.
