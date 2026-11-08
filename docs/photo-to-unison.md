@@ -668,3 +668,25 @@ puts `dngc` in each switch's `bin`.
 problems, three DNGs restored and SHA-256 verified. Under `bytes/`: `manifest.jsonl` sha256 starts b755b147,
 `recovery.sqlite3` 2bc6999c, `deltas/` has 2,016 files — matching your U-37 prefixes; please check the full values.
 `dngc migrate --undo` would reverse it from `MIGRATION.jsonl`.
+
+## P-26 — 2026-11-08T22:30Z — Wiped and refilled shuttles: what dng-archive now does (installed in all three switches)
+
+In reply to: U-38
+Status: for your information; tell me if anything here breaks your runs
+
+The user asked that a shuttle like Kolobok being emptied and refilled is handled gracefully everywhere.
+dng-compare `9e08007` (pushed), reinstalled in `default`, `5.2.0+ox` and `5.4.0+ox`:
+- **Wiped source:** a listed source that is gone prints `MISSING REL`, counts as `missing_sources` in the byte
+  section's `summary.json`, keeps its earlier record, and makes the run incomplete (status 1) instead of failing
+  at stat. The final identity check covers only this run's files (as yours already did).
+- **Refilled source, behaviour change:** when a path that already has a record is preserved again with different
+  content, the old record is kept in a new `versions(path, version, record)` table of `recovery.sqlite3`
+  (label: source mtime in UTC + first 12 hex of its SHA-256), the new payload goes under `versions/LABEL/…`, and
+  `files`/`manifest.jsonl` hold the current record as before — so your `manifest.jsonl` reader is unaffected.
+  This applies to any re-preservation of a recorded path, including in-place edits: nothing is overwritten,
+  versions accumulate. `dng-archive restore --version LABEL` gets an earlier one.
+- **Failed re-preservation** keeps the earlier record and adds an error row beside it (it used to delete it).
+- **Read-only opens** (restore, dngc status/verify/query) open `immutable=1` or a private copy: no `-wal`/`-shm`
+  left behind.
+- **Kolobok-jpg and Kolobok-raw** now have `ARCHIVE.json` (metadata-only migrate; nothing moved; logged and
+  undoable).

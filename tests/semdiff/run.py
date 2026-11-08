@@ -216,10 +216,37 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         # A later shuttle cycle brings new contents at an old path: a new version row, nothing replaced.
         (left / '2026/A/s1').mkdir(parents=True)
         (left / '2026/A/s1/meta.DNG').write_bytes(dng(5)); os.utime(left / '2026/A/s1/meta.DNG', (1e9, 1e9))
+        # A dng-archive that keeps no versions (its usage lacks restore's --version
+        # LABEL) would replace the earlier record: that path is not preserved again.
+        old_archiver = t / 'dng-archive-without-versions'
+        old_archiver.write_text('#!/bin/sh\nif [ "$1" = --help ]; then "%s" --help 2>&1 | sed "s/ \\[--version LABEL\\]//"; exit 0; fi\n'
+                                'echo "$@" >> "%s.calls"; exec "%s" "$@"\n' % (archiver, old_archiver, archiver))
+        old_archiver.chmod(0o755)
+        env['DNG_ARCHIVE'] = str(old_archiver)
         out = unison(*full, rc=1)  # not safe to wipe: exit 1
+        env['DNG_ARCHIVE'] = archiver
         versions = [v for v, in db.execute("SELECT version FROM files WHERE path='2026/A/s1/meta.DNG' ORDER BY version")]
         check(len(versions) == 2 and versions[0] == '' and versions[1] != '', 'second version recorded: %r' % versions)
-        check('already holds another version' in out, 'full preservation never replaces another version')
+        check('already holds another version' in out and 'keeps no versions' in out,
+              'a dng-archive without versions never replaces another version\n' + out)
+        calls = pathlib.Path(str(old_archiver) + '.calls')
+        check(not calls.exists() or 'preserve' not in calls.read_text(), 'nothing preserved by it: ' + (calls.read_text() if calls.exists() else ''))
+        # With versions (dng-compare 992eff7 on), the refill is preserved: the earlier
+        # record stays restorable by its label, and the shuttle is safe to wipe again.
+        sections = [archive / 'bytes', archive]
+        section = next(d for d in sections if (d / 'recovery.sqlite3').is_file())
+        out = unison(*full)
+        check('preserving 1 files again' in out and 'safe to wipe: 2 of 2 files' in out, 'refill preserved as a new version\n' + out)
+        rdb = sqlite3.connect(section / 'recovery.sqlite3')
+        labels = [v for v, in rdb.execute("SELECT version FROM versions WHERE path='2026/A/s1/meta.DNG'")]
+        rdb.close()
+        check(len(labels) == 1, 'one earlier version kept: %r' % labels)
+        for label, want in ((None, dng(5)), (labels[0], files['meta.DNG'][0])):
+            restored = t / 'restored-version.DNG'
+            restored.unlink(missing_ok=True)
+            r = subprocess.run([archiver, 'restore', str(archive), '2026/A/s1/meta.DNG', str(restored)]
+                               + (['--version', label] if label else []), capture_output=True, text=True)
+            check(r.returncode == 0 and restored.read_bytes() == want, 'restore %s:\n%s%s' % (label or 'current', r.stdout, r.stderr))
         check((right / '2026/A/s1/meta.DNG').read_bytes() == files['meta.DNG'][1], 'long-term file still untouched')
         check(not ((archive / 'recovery.sqlite3').exists() and (archive / 'bytes').exists()),
               'later runs keep one layout: %r' % sorted(os.listdir(archive)))

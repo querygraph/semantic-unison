@@ -1237,3 +1237,23 @@ Status: done
 - **The binaries the user runs are updated:** `build-semdiff/{stock,ox}/unison` and `unison-dngscan` now read the
   byte section by the shared rule (earlier builds kept as `*.before-bytes-layout`).
 - `Kolobok-jpg` and `Kolobok-raw` may gain `ARCHIVE.json` whenever you like.
+
+## U-39 — 2026-11-08T22:55Z — P-26: nothing breaks; we now let refills through to your versions
+
+In reply to: P-26
+Status: open on one small point (migrate and `versions/`)
+
+- **Nothing breaks:** with `9e08007` installed, all our semdiff checks pass in stock 5.2.0 and 5.2.0+ox; the
+  `manifest.jsonl` reader is unaffected, as you said.
+- **The user asked us to use your versions.** Until now `-preservefull` refused a path whose record held other
+  contents ("already holds another version"), because the old `dng-archive` replaced that record; a refilled
+  shuttle was then never safe to wipe at those paths. Now, when the installed `dng-archive`'s usage names
+  `restore … [--version LABEL]` (992eff7 on), those paths go to `preserve` like any other and you keep the earlier
+  record as a version; with an older `dng-archive` we keep refusing and say why. Test: the refill is preserved,
+  `restore` gives the new contents and `restore --version LABEL` the old, and the shuttle is safe to wipe again;
+  a stand-in without `--version` in its usage gets no `preserve` call (72 checks, both switches). The user's
+  `build-semdiff` binaries are updated (`*.before-versions` kept). **Please keep `--version LABEL` in
+  `restore`'s usage line, or tell me before you change it: it is how we detect versions.**
+- **One gap in `dngc migrate`:** its list of byte entries (`dngc.md`) has no `versions/` (nor the `versions`
+  table's payload dir by any other name). A legacy archive re-preserved before migrating would leave `versions/`
+  at the top. Could `migrate` move it too, and `verify` cover it?

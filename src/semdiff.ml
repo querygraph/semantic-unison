@@ -851,20 +851,42 @@ let write_archive ~archive ~archiver ~exiftool ~left records root =
 
 (* -preservefull: dng-archive keeps each metadata-only file as a
    verified VCDIFF delta against its match, rebuildable to the exact SHA-256. *)
+(* dng-archive from dng-compare 992eff7 on keeps a recorded path's earlier
+   record in its versions table when the path is preserved again with other
+   contents, and restores it with --version LABEL. Its usage names that option. *)
+let keeps_versions archiver =
+  match Unix.open_process_args_in "/bin/sh" [|"/bin/sh"; "-c"; Filename.quote archiver ^ " --help 2>&1"|] with
+  | ic ->
+      let usage = In_channel.input_all ic in
+      ignore (Unix.close_process_in ic);
+      let needle = "--version LABEL" in
+      let n = String.length needle and m = String.length usage in
+      let rec find i = i + n <= m && (String.sub usage i n = needle || find (i + 1)) in
+      find 0
+  | exception Unix.Unix_error _ -> false
+
 let preserve_full ?(verbose = false) ~archive ~archiver ~workers ~left records root =
   let done_ = preserved archive in
-  (* The archive keeps one record per relative path: never replace the record
-     of another version. *)
-  let other = ref [] in
+  (* A path recorded with other contents (a refilled shuttle, an edit) is
+     preserved again only by a dng-archive that keeps the earlier record as a
+     version; an older one would replace it, so those paths are left alone. *)
+  let versions = keeps_versions archiver in
+  let other = ref [] and again = ref 0 in
   let pairs = List.filter_map (fun r ->
     match List.find_opt (fun t -> t.root = root) r.targets with
     | Some t when t.status = "metadata-only" && unchanged_left r && not (preserved_unchanged done_ r) ->
-        if Hashtbl.mem done_ r.rel then (other := r.rel :: !other; None)
-        else Some (to_string (Obj [("source", Str r.path); ("reference", Str t.matched)]))
+        if Hashtbl.mem done_ r.rel && not versions then (other := r.rel :: !other; None)
+        else begin
+          if Hashtbl.mem done_ r.rel then incr again;
+          Some (to_string (Obj [("source", Str r.path); ("reference", Str t.matched)]))
+        end
     | _ -> None) records in
   if !other <> [] then
-    Printf.printf "\nnot preserved in full: %d files whose path already holds another version in %s, e.g. %s\n"
-      (List.length !other) archive (List.hd !other);
+    Printf.printf "\nnot preserved in full: %d files whose path already holds another version in %s, e.g. %s\n  (%s keeps no versions; dng-compare 992eff7 or later does)\n"
+      (List.length !other) archive (List.hd !other) archiver;
+  if !again > 0 then
+    Printf.printf "\npreserving %d files again whose path holds an earlier version in %s; it is kept as a version\n"
+      !again archive;
   if pairs = [] then Printf.printf "\npreserved in full: nothing new for %s\n" archive else begin
     let file = Filename.concat archive (Printf.sprintf "pairs-%s-%d.jsonl" (utc_stamp ()) (Unix.getpid ())) in
     Out_channel.with_open_bin file (fun ch -> List.iter (fun l -> output_string ch l; output_char ch '\n') pairs);
