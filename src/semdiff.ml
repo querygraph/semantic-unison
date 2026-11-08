@@ -541,11 +541,20 @@ let utc_stamp () =
   let t = Unix.gmtime (Unix.time ()) in
   Printf.sprintf "%04d%02d%02dT%02d%02d%02dZ" (t.tm_year + 1900) (t.tm_mon + 1) t.tm_mday t.tm_hour t.tm_min t.tm_sec
 
+(* An archive's byte section, by dngc's rule (dng-compare dngc_cli.ml): an
+   archive written before dngc has recovery.sqlite3 at the top and no bytes/,
+   and its top level is the byte section; any other archive keeps it in
+   bytes/, which is where new archives are written. *)
+let byte_section archive =
+  let bytes = Filename.concat archive "bytes" in
+  if Sys.file_exists (Filename.concat archive "recovery.sqlite3") && not (Sys.file_exists bytes)
+  then archive else bytes
+
 (* The preservation manifest, written by dng-archive or by dng-compare's
    preserve_apo: relative path -> [ino, size, mtime_ns, ctime_ns]. *)
 let preserved archive =
   let t = Hashtbl.create 256 in
-  let manifest = Filename.concat archive "manifest.jsonl" in
+  let manifest = Filename.concat (byte_section archive) "manifest.jsonl" in
   if Sys.file_exists manifest then
     In_channel.with_open_bin manifest (fun ch ->
       let rec loop () = match In_channel.input_line ch with

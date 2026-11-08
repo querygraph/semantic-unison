@@ -143,6 +143,43 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
             check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'Python restores the OCaml delta')
         out = unison(*full)
         check('safe to wipe: 9 of 9 files' in out, 'second run: everything safe\n' + out)
+        # dngc's unified layout: a legacy archive (recovery.sqlite3 at the top) is read
+        # at its top level; after `dngc migrate` the byte section is ARCHIVE/bytes/.
+        # The migration is done here by the same renames dngc.md lists, so the
+        # summary must count the same files as preserved in full before and after.
+        def summary():
+            reports = sorted(str(p) for p in (t / 'unisondir').glob('semdiff-*.jsonl'))
+            r = subprocess.run([a.dngscan, '-summarize', '-preserve', *reports], env=env, capture_output=True, text=True)
+            line = [l for l in r.stdout.splitlines() if l.startswith('safe to wipe:')]
+            check(len(line) == 1, 'one summary line:\n' + r.stdout + r.stderr)
+            return line[0]
+        check((archive / 'recovery.sqlite3').is_file() and not (archive / 'bytes').exists(), 'legacy layout written')
+        legacy = summary()
+        check(' 0 preserved in full' not in legacy, 'the control preserves something in full: ' + legacy)
+        byte_entries = ['recovery.sqlite3', 'recovery.sqlite3-wal', 'recovery.sqlite3-shm', 'recovery.sqlite3-journal',
+                        'recovery.sqlite3.engine.json', 'deltas', 'originals', 'manifest.jsonl', 'inventory.json',
+                        'directories.json', 'summary.json', 'matching.json', 'xmp-original', 'image-comparison',
+                        'finalization-backend.json', '.byte-preservation.lock']
+        (archive / 'bytes').mkdir()
+        for name in byte_entries:
+            if (archive / name).exists():
+                (archive / name).rename(archive / 'bytes' / name)
+        check((archive / 'bytes/manifest.jsonl').is_file() and (archive / 'provenance.json').is_file()
+              and (archive / 'metadata').is_dir(), 'migrated: bytes/ holds the manifest, metadata stays at the top')
+        check(summary() == legacy, 'same summary after the migration: %s vs %s' % (summary(), legacy))
+        restored = t / 'restored-bytes.DNG'
+        r = subprocess.run([archiver, 'restore', str(archive / 'bytes'), '2026/A/s1/meta.DNG', str(restored)], capture_output=True, text=True)
+        check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'restore from ARCHIVE/bytes')
+        # A byte section the reader cannot find would drop those files from "preserved in full".
+        (archive / 'bytes/manifest.jsonl').rename(archive / 'bytes/manifest.jsonl.away')
+        check(summary() != legacy, 'control: without the manifest the summary changes')
+        (archive / 'bytes/manifest.jsonl.away').rename(archive / 'bytes/manifest.jsonl')
+        # Back to the legacy layout: today's dng-archive preserve still writes the top level.
+        for name in byte_entries:
+            if (archive / 'bytes' / name).exists():
+                (archive / 'bytes' / name).rename(archive / name)
+        (archive / 'bytes').rmdir()
+        check(summary() == legacy, 'legacy layout restored')
         # -review reruns on the conflicts only; -suffix and -suffix=NAME copy beside the original.
         out = unison('-preserve', '-review', '-suffix')
         check((right / '2026/A/s1/image_2.DNG').read_bytes() == files['image.DNG'][0], 'numbered suffix copy')

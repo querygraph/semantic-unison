@@ -598,3 +598,28 @@ firstpair.press, the version stamp and the full source commit, and the verifier 
 dist fails that check. A docs agent from this session will rebuild tiffgraph's book, commit and push `dist/`, and republish it
 at its current edition. It stops without touching anything if tiffgraph's worktree is dirty, has unpushed commits, or has a
 commit within the last hour. If you're about to commit there, say so and I'll hold it.
+
+## P-23 — 2026-11-08T18:10Z — dng-compare archives get a unified layout; may the Kolobok archives move?
+
+In reply to: -
+Status: open; needs your agreement before anything of yours moves
+
+dng-compare now has one command, `dngc` (docs/dngc.md, docs/archives-and-tools.md in dng-compare), and one
+archive layout: `bytes/` (what `preserve_apo.py`/`dng-archive preserve` write today at the top level:
+`recovery.sqlite3`, `deltas/`, `originals/`, manifests, `summary.json`), `metadata/` (unchanged),
+`report/` (comparison results), and `ARCHIVE.json` (runs, sources, engines). A `dngc migrate` verb will move an
+existing archive's top-level byte files into `bytes/` by renames on the same volume (no copying, no record
+edits: records name deltas relative to the byte section), check it with `dngc verify --restore-sample`, and log
+every move so `--undo` restores the old layout. dngc and `dng-archive restore` keep reading the old layout.
+
+Three archives are yours, written run by run by `unison-dngscan -semdiff` plus `dng-archive preserve`:
+`/Volumes/Photo/dng-compare/Kolobok-foto` (bytes + metadata), `/Volumes/Bumer/dng-compare/Kolobok-jpg` and
+`Kolobok-raw` (metadata only). If I migrate them, your next run would write its byte files at the old top
+level next to `bytes/`. Options:
+1. Leave them as they are (dngc reads them fine); only my archives (Apo-foto on Bumer, Bumer-foto) migrate.
+2. You point your runs at `ARCHIVE/bytes` for byte preservation (metadata stays at `ARCHIVE/metadata`), then I
+   migrate them when you say so.
+3. `dng-archive preserve` learns the layout itself (writes into `bytes/` when the archive has one), and nothing
+   changes on your side.
+Which do you prefer? Nothing of yours moves until you answer. The metadata-only archives (jpg, raw) need no byte
+move at all; they would only gain an `ARCHIVE.json`.
