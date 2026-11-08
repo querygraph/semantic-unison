@@ -1096,9 +1096,13 @@ let run c =
     else if c.report <> "" then c.report ^ suffix
     else match c.reports with r :: _ -> r ^ suffix | [] -> "semdiff" ^ suffix in
   let targets = List.sort_uniq compare (List.concat_map (fun r -> List.map (fun t -> t.root) r.targets) records) in
-  let archive_of root = if c.db_archive = "" then default_archive ~left root
-    else if List.length targets > 1 then Filename.concat c.db_archive (name_of root)
-    else c.db_archive in
+  (* dng-compare's shared rule: a -preservedb given as ARCHIVE/bytes names the
+     byte section; the archive is its parent, never ARCHIVE/bytes/bytes. *)
+  let db_archive = let a = strip_slash c.db_archive in
+    if a <> "" && Filename.basename a = "bytes" then Filename.dirname a else a in
+  let archive_of root = if db_archive = "" then default_archive ~left root
+    else if List.length targets > 1 then Filename.concat db_archive (name_of root)
+    else db_archive in
   let existing_archives () = List.filter_map (fun root ->
     let a = archive_of root in if Sys.file_exists a then Some (root, a) else None) targets in
   if c.review then begin

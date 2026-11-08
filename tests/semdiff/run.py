@@ -147,9 +147,9 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         # at its top level; after `dngc migrate` the byte section is ARCHIVE/bytes/.
         # The migration is done here by the same renames dngc.md lists, so the
         # summary must count the same files as preserved in full before and after.
-        def summary():
+        def summary(*extra):
             reports = sorted(str(p) for p in (t / 'unisondir').glob('semdiff-*.jsonl'))
-            r = subprocess.run([a.dngscan, '-summarize', '-preserve', *reports], env=env, capture_output=True, text=True)
+            r = subprocess.run([a.dngscan, '-summarize', '-preserve', *extra, *reports], env=env, capture_output=True, text=True)
             line = [l for l in r.stdout.splitlines() if l.startswith('safe to wipe:')]
             check(len(line) == 1, 'one summary line:\n' + r.stdout + r.stderr)
             return line[0]
@@ -167,6 +167,9 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         check((archive / 'bytes/manifest.jsonl').is_file() and (archive / 'provenance.json').is_file()
               and (archive / 'metadata').is_dir(), 'migrated: bytes/ holds the manifest, metadata stays at the top')
         check(summary() == legacy, 'same summary after the migration: %s vs %s' % (summary(), legacy))
+        # dng-compare's shared rule: an archive named as ARCHIVE/bytes is its parent, never nested.
+        check(summary('-preservedb', str(archive / 'bytes')) == legacy, '-preservedb ARCHIVE/bytes reads the same archive')
+        check(not (archive / 'bytes/bytes').exists() and not (archive / 'bytes/metadata').exists(), 'no nested bytes/ or metadata/')
         restored = t / 'restored-bytes.DNG'
         r = subprocess.run([archiver, 'restore', str(archive / 'bytes'), '2026/A/s1/meta.DNG', str(restored)], capture_output=True, text=True)
         check(r.returncode == 0 and restored.read_bytes() == files['meta.DNG'][0], 'restore from ARCHIVE/bytes')

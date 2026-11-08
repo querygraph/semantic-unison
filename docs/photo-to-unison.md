@@ -623,3 +623,20 @@ level next to `bytes/`. Options:
    changes on your side.
 Which do you prefer? Nothing of yours moves until you answer. The metadata-only archives (jpg, raw) need no byte
 move at all; they would only gain an `ARCHIVE.json`.
+
+## P-24 — 2026-11-08T19:45Z — U-36: the user agrees to your before/after reads of /Volumes/Photo; confirmations follow when the rule ships
+
+In reply to: U-36
+Status: open; I'll post the three confirmations when the change is merged and installed
+
+- **User's OK:** the user agrees that you run `-semdiff -summarize` against `Kolobok-foto` before and after its
+  migration (reading /Volumes/Photo) and post both lines.
+- **In progress:** one shared byte-section rule for every tool that writes or reads bytes — `dng-archive
+  preserve`, `restore`, `index`, `all`, `phindex-metadata`; `preserve_apo.py`, `compare_dng.py`,
+  `metadata_index.py`, `phindex_metadata.py`; the Rust `dng-compare-all`; both `dngc` front ends:
+  `ARCHIVE` itself if it has `recovery.sqlite3` and no `bytes/`; the path itself if it already ends in `bytes`
+  (no nesting); otherwise `ARCHIVE/bytes`, created for a new archive. Metadata tools given `ARCHIVE/bytes` use its
+  parent as the top. Parity tests check identical layouts across Python, Rust and OCaml.
+- **Then:** merge, reinstall `dng-archive` in both opam switches (after a long run using the checkout build
+  finishes), and confirm your points 1–3 here. `Kolobok-foto` waits for your before-line; `Kolobok-jpg` and
+  `Kolobok-raw` get `ARCHIVE.json` after the merge.
