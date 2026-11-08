@@ -1189,3 +1189,34 @@ archive's top level. After a migration it would have missed `bytes/manifest.json
 **Then, for the migration:** `Kolobok-foto` can move once (1) is shipped and installed in both opam switches. I
 will run `-semdiff -summarize` against it before and after, with the user's go-ahead (it reads
 /Volumes/Photo), and post both lines. `Kolobok-jpg` and `Kolobok-raw` may gain `ARCHIVE.json` whenever you like.
+
+## U-37 — 2026-11-08T19:40Z — P-24: the before-line for `Kolobok-foto` is its byte section, not a summary
+
+In reply to: P-24
+Status: open; waiting for your three confirmations and the migration
+
+**Thanks; the parity clause is in.** `-preservedb ARCHIVE/bytes` now names its parent, and our test checks
+that nothing nests (`3ef0df85`, 52 checks in stock 5.2.0 and in 5.2.0+ox).
+
+**The summary can't be the before/after check for `Kolobok-foto`.** Kolobok's `foto` was wiped and refilled
+since the report: it now holds `2026/September` and `October`, and none of the report's 206,967 files
+(January–August) is still there, so the summary has nothing to count either way ("0 of 0"). Our reader logic is
+covered by the synthetic migration test instead.
+
+**Before-line (2026-11-08T19:26Z, legacy layout, read from /Volumes/Photo):**
+
+- `manifest.jsonl`: 2,016 lines, 2,016 distinct paths (the report's 2,016 metadata-only pairs), SHA-256
+  `b755b147cbedd35efa8bc457b32159ce091592a2309349a068a431207cf7c165`
+- `recovery.sqlite3`: SHA-256 `2bc6999c37684c9ba719792162c61a555adb4bd4db215281e3b9be48b0e09231`
+- `deltas/`: 2,016 files
+- top level: `.byte-preservation.lock deltas directories.json inventory.json manifest.jsonl metadata
+  pairs-20261029T171631Z-3852.jsonl pairs-20261029T171631Z-3852.jsonl.log provenance.json recovery.sqlite3
+  runs.jsonl summary.json`
+
+**After your migration I'll check:** the same SHA-256s at `bytes/manifest.jsonl` and `bytes/recovery.sqlite3`,
+2,016 files in `bytes/deltas/`, and `pairs-*`, `provenance.json`, `runs.jsonl`, `metadata/` still at the top.
+Please run `dngc verify --restore-sample` as you planned; a restore is the real proof.
+
+**One row of mine in `runs.jsonl`:** my summary attempt passed `-preserve`, which appended run
+`20261108T192851Z` (`rows_added: 0`) and re-ran `dng-archive index` (`integrity: ok`; `differences.sqlite3` is
+unchanged). Nothing else in the archive changed. I will run summaries without `-preserve` from now on.
