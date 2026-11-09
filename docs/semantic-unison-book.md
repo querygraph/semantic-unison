@@ -2,7 +2,7 @@
 
 This book is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's: why the fork exists, what semantic sync and semantic diff should do, the shuttle-disk workflow, packing directories into SQLite archives, and the decisions recorded in these chapters. Claude Opus 5.5, an Anthropic model, wrote the text and the code with him, as the essay in this book describes. Where the text says "the user", it means Alexy. Where it says "Unison session" or "Photo session", it means two LLM sessions whose written records this book draws on.
 
-The book describes the state of the `implementation/final-adobe-qualification` branch on 2026-11-02, at commit `9b68266b`, together with the separate [packdir](https://github.com/querygraph/packdir) and [tiffgraph](https://github.com/firstpair/tiffgraph) projects and dng-compare's OCaml archive tool. The first edition, of 2026-10-31, was written before the real mirror finished; this one adds its results, preservation of APFS clones, and the DNG walker's move into tiffgraph. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
+The book describes the state of the fork's `master` branch on 2026-11-08, at commit `2267da59`, together with the separate [packdir](https://github.com/querygraph/packdir) and [tiffgraph](https://github.com/firstpair/tiffgraph) projects and dng-compare's OCaml archive tool. The first edition, of 2026-10-31, was written before the real mirror finished; the second, of 2026-11-02, added its results, preservation of APFS clones, and the DNG walker's move into tiffgraph. This one, 1.2, follows dng-compare's unified archive layout and its versions across shuttle cycles, and records the contract the two projects agreed on. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
 
 Three kinds of statement appear below, and they are kept apart:
 
@@ -11,6 +11,21 @@ Three kinds of statement appear below, and they are kept apart:
 - **Unknown** things are said to be unknown. In the first edition the most important was whether the real mirror of 3.6 million files would bear out the estimates. It has now finished, and the benchmark chapter gives its numbers.
 
 The contribution policy of upstream Unison does not allow LLM-generated text or code in that project, so nothing here is meant for upstream. See [Why the fork exists](#why-the-fork-exists).
+
+## Where it fits
+
+This book is one of nine on the FirstPair photo tools. Each owns one part, and
+[The FirstPair Photo Stack](https://firstpair.org/books/photostack/) shows how they fit together.
+
+- **[tiffgraph](https://firstpair.org/books/tiffgraph/)** walks a TIFF or DNG file's structure under a fixed grammar and finds its editable XMP packet.
+- **[phidentify](https://firstpair.org/books/phidentify/)** computes a photo's identities: SHA-256, DNG raw blocks, image data, Lightroom fingerprint, metadata record and preserved digest.
+- **[phindex](https://firstpair.org/books/phindex/)** keeps those identities for every file of a volume, and aligns two volumes by content.
+- **[DNG Compare](https://firstpair.org/books/dng-compare/)** compares pairs and preserves one side byte for byte as deltas against the other, with a searchable metadata section, through `dngc`.
+- **[Semantic Unison](https://firstpair.org/books/semantic-unison/)** synchronizes photo trees, sending metadata edits without resending image bytes, and preserves what a shuttle disk brings into the same archives.
+- **[packdir](https://firstpair.org/books/packdir/)** keeps directories of small files as SQLite archives that still work like plain files.
+- **[Tursolite](https://firstpair.org/books/tursolite/)** is the SQLite and Turso layer under packdir, DNG Compare and Mechanic.
+- **[diskproxy](https://firstpair.org/books/diskproxy/)** serves a folder as a virtual disk, such as previews with camera metadata spliced in, and captures ratings into sidecars.
+- **[Lightroom Repair](https://firstpair.org/books/lightroom-repair/)** repairs Lightroom Classic catalogs, previews and Sync without forging their state.
 
 # What plain Unison does
 
@@ -494,33 +509,44 @@ Conflict copies are verified by SHA-256 against the shuttle file and never repla
 
 ## Versions over several cycles
 
-The archive records each shuttle file once per version, meaning size and modification time. When a later shuttle cycle brings new contents at a path already recorded, its differences are added as a new dng-compare file version, stamped with the run.
+A shuttle is wiped once it is safe, then filled again, sometimes with new contents at paths the archive already holds. The metadata section records each shuttle file once per version, meaning size and modification time, so a new version's differences are added beside the old ones, stamped with the run.
 
-`-preservefull` keeps one full-file record per path, so it does not replace an earlier version. Such files are listed as already holding another version and stay "not safe" until handled by hand.
+`-preservefull` preserves the new contents too. dng-archive keeps the earlier record as a version, labelled with the source's modification time and the start of its SHA-256 (`YYYYMMDDTHHMMSSZ-xxxxxxxxxxxx`), and the new record becomes current, so nothing is overwritten and the refilled shuttle becomes safe to wipe again. `dngc versions ARCHIVE [PATH]` lists the versions of each path, and `restore ... --version LABEL` rebuilds an earlier one.
+
+Semantic Unison does this only when the installed `dng-archive` keeps versions, which it tells from `restore`'s usage line naming `--version LABEL`. An older `dng-archive` would replace the earlier record, so with one of those such paths are still left out, listed as already holding another version, and stay "not safe".
 
 ## dng-compare archives
 
-The archive is dng-compare's format, not one invented for this tool. A dng-compare archive holds a metadata index and a lossless preservation store. In the worked run it looked like this:
+The archive is dng-compare's, not a format invented for this tool. [DNG Compare, *The archive*](https://firstpair.org/books/dng-compare/) describes it in full; this is what a shuttle run needs to know.
 
 ```text
-dng-compare/disk-shuttle/
-  metadata/batches/*.jsonl.gz       one gzip batch per run, rows only added
-  metadata/differences.sqlite3      the searchable index
-  provenance.json
-  runs.jsonl
+dng-compare/Shuttle-foto/
+  ARCHIVE.json          the runs, sources and engines
+  bytes/                recovery.sqlite3, deltas/, versions/, manifest.jsonl, summary.json
+  metadata/             batches/*.jsonl.gz, differences.sqlite3: the searchable index
+  report/               comparison results, when dngc runs the comparison
+  provenance.json, runs.jsonl, pairs-*.jsonl   Semantic Unison's own run records
 ```
 
-A `-preservefull` run adds records in `recovery.sqlite3` and delta files under `deltas/`. A delta is computed by `xdelta3` against the matching file on the long-term root, so it holds only the bytes that differ, and it needs that reference file to rebuild the original. If the root has moved, `dng-archive restore --reference-root DIR` says where it is now.
+- **The byte section** holds what `-preservefull` keeps: a record per file in `recovery.sqlite3` and a VCDIFF delta against the matching file on the long-term root. A delta holds only the bytes that differ and needs that reference to rebuild the file; `--reference-root DIR` says where a moved root is now.
+- **Where the byte section is.** Every tool finds it by one rule. An archive written before the unified layout has `recovery.sqlite3` at its top and no `bytes/`, and its top level is the byte section. A path that already ends in `bytes` is the byte section itself. Anything else, including a new archive, keeps it in `bytes/`.
+- **Old archives move with `dngc migrate`,** by renames on the same volume, logged in `MIGRATION.jsonl` and undone with `--undo`. Records name their files relative to the byte section, so nothing inside changes.
+- **A wiped shuttle loses nothing.** Reading an archive never needs the source. A listed source that is gone is printed as `MISSING PATH` and makes the run incomplete, and its earlier record stays.
 
-`-preserve` and `-preservefull` run dng-compare's OCaml command `dng-archive`. No Python runs. `dng-archive` builds on stock OCaml 5 and on OxCaml, and reads and writes the same files as dng-compare's Python tools. Its index has the same schema and rows and keys each stored value by the SHA-256 of the same canonical JSON, so either tool can add batches to an index the other built, and each restores what the other preserved. dng-compare's `test_dng_archive.py` checks this against the Python modules.
-
-It differs from the Python tools in four ways. `preserve` works on listed pairs only. The final identity check covers the files of this run, so records from earlier runs whose sources are gone, such as files on a wiped shuttle, do not fail it. It handles SQLite only, and refuses an archive moved to the Turso engine rather than writing behind its marker. Workers are forked processes that each get an equal share of `--rate-mib`.
-
-To get a preserved file back, restore it into a new location:
+`-preserve` and `-preservefull` run dng-compare's OCaml `dng-archive`; no Python runs. It builds on stock OCaml 5 and on OxCaml and reads and writes the same files as dng-compare's Python and Rust tools. To get a preserved file back, restore it into a new location:
 
 ```sh
-dng-archive restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG
+dngc restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG
 ```
+
+## The shared contract
+
+The layout above was agreed between the Unison and Photo sessions in the mailbox, P-23 to P-27 and U-36 to U-40, on 2026-11-08, and both sides test their half:
+
+- **One rule for the byte section,** as above, in every dng-compare tool and in Semantic Unison's summary, which reads `manifest.jsonl` to count files preserved in full. Semantic Unison's test moves a real archive between the two layouts and checks that the summary, a restore and `-preservedb ARCHIVE/bytes` give the same result in each, and that later runs never leave an archive with both.
+- **Semantic Unison's records stay at the top:** `provenance.json`, `runs.jsonl`, `metadata/`, and the `pairs-*.jsonl` lists with their logs.
+- **Versions are detected, not assumed.** `restore`'s usage line keeps `--version LABEL`, pinned by a dng-compare test, and Photo announces any change to it in the mailbox first.
+- **Migrations are checked against hashes.** Before the one real archive moved, the Unison session recorded the SHA-256 of its manifest and recovery database and counted its deltas; after `dngc migrate`, the same values were found under `bytes/`, and `dngc verify --restore-sample` restored files byte for byte.
 
 ## Disks and progress
 
@@ -707,7 +733,7 @@ CREATE TABLE unison_member(name TEXT PRIMARY KEY REFERENCES sqlar(name),
 CREATE TABLE unison_container(key TEXT PRIMARY KEY, value TEXT);  -- format, epoch
 ```
 
-`sqlar` is SQLite's standard table, so stock tools work. The other two are additions. On the synthetic container above, `unison_container` held `format = unison-packdir/1` and `epoch = 1`.
+`sqlar` is SQLite's standard table, so stock tools work. The other two are additions. packdir opens its containers through [Tursolite](https://firstpair.org/books/tursolite/), the SQLite and optional Turso layer it shares with DNG Compare. On the synthetic container above, `unison_container` held `format = unison-packdir/1` and `epoch = 1`.
 
 - **Pragmas.** `page_size = 65536`, `auto_vacuum = INCREMENTAL`, `journal_mode = DELETE`, `synchronous = FULL`.
 - **Blobs** are stored raw, never compressed, so `sz = length(data)`. `sha256` holds lower-case hex text, and `fp` the raw MD5.
@@ -1125,26 +1151,39 @@ A `pack-tree` rerun stores only new and changed files, by size and nanosecond mt
 - **Never run the changing commands while Unison writes the same tree.** The source says so.
 - **A few outputs cannot match GNU:** `ls -l`'s `total` line and directory lines, `du`'s directory sizes, and the order of `du` and `find` output, which is sorted here.
 
-## dng-archive
+## dngc and dng-archive
+
+`dngc`, installed beside `dng-archive` in each opam switch, is the command to use on an archive by hand. Its verbs are `run`, `restore`, `index`, `query`, `verify`, `status`, `migrate` and `versions`; [DNG Compare](https://firstpair.org/books/dng-compare/) documents them.
+
+```sh
+dngc status ARCHIVE                          # what the archive holds
+dngc versions ARCHIVE [RELATIVE_PATH]        # current and earlier contents of each path
+dngc restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]
+dngc verify ARCHIVE [--restore-sample N]     # records, files and index
+dngc migrate ARCHIVE [--dry-run | --undo]    # a legacy archive's byte section into bytes/
+```
+
+Semantic Unison itself calls `dng-archive`, the program underneath:
 
 ```text
 dng-archive index ARCHIVE
 dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
                      [--workers N] [--rate-mib R]
-dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR]
+dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]
 ```
 
 | Command | Option | Default | Meaning |
 |:----------|:-------------------|:-------|:-----------------------------------------|
-| `index` | | | Python equivalent: `metadata_index.py ARCHIVE` |
-| `preserve` | `--pairs FILE` | required | The listed pairs. Equivalent: `preserve_apo.py scan ... --pairs FILE` |
-| | `--delta` | off | Store changed files as verified VCDIFF deltas under `deltas/` |
+| `index` | | | Rebuild the metadata index from its batches |
+| `preserve` | `--pairs FILE` | required | The listed pairs, into the byte section |
+| | `--delta` | off | Store changed files as verified VCDIFF deltas |
 | | `--full-copy` | off | Store independent full copies |
 | | `--workers N` | 1 | Forked workers, each with an equal share of the rate |
 | | `--rate-mib R` | 200 | Byte budget in MiB/s, shared across workers |
-| `restore` | `--reference-root DIR` | | Restore to OUTPUT. Equivalent: `preserve_apo.py restore ...` |
+| `restore` | `--reference-root DIR` | | Where the long-term root is now, if it moved |
+| | `--version LABEL` | current | An earlier version of the path |
 
-`preserve` exits 1 with "Preservation incomplete; inspect errors and rerun before deleting source" if any file did not verify. It needs `xdelta3` on `PATH`, and SQLite and zlib from the system.
+`preserve` exits 1 with "Preservation incomplete; inspect errors and rerun before deleting source" if any file did not verify or a listed source is missing. It needs `xdelta3` on `PATH`, and SQLite and zlib from the system.
 
 ## Semantic preferences
 
@@ -1200,7 +1239,7 @@ This chapter lists what the tools do not do, or do not yet do. All of it was tru
 - **Same view is a rule.** It is a list of tags, not a rendering comparison.
 - **Identical raw image means identical stored bytes.** Files that decode to the same samples from different encodings are reported as `image-differs`.
 - **Unknown file types get `differs`.** They have no image layer to compare.
-- **`-preservefull` keeps one full record per path.** A second version at the same path stays "not safe" until handled by hand.
+- **Versions need a recent `dng-archive`.** With one older than dng-compare `992eff7`, a second version at the same path stays "not safe" until handled by hand.
 - **Local roots only.** `-semdiff` and `-semcatchupfrom` need exactly two local roots.
 - **Disk detection uses `diskutil`,** so it is macOS behaviour. `-hdd` and `-ssd` override it.
 - **Stale help text.** The `-preserve` help in Unison still says the default archive is `ROOT2/.dng-compare/NAME-OF-ROOT1`. The code uses `ROOT2/../dng-compare/SHUTTLE`, as this book describes.
