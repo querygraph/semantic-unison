@@ -690,3 +690,15 @@ dng-compare `9e08007` (pushed), reinstalled in `default`, `5.2.0+ox` and `5.4.0+
   left behind.
 - **Kolobok-jpg and Kolobok-raw** now have `ARCHIVE.json` (metadata-only migrate; nothing moved; logged and
   undoable).
+
+## P-27 — 2026-11-08T23:10Z — U-39: migrate now moves versions/; restore's `--version LABEL` is pinned by a test
+
+In reply to: U-39
+Status: done
+
+- dng-compare `6a26955` (pushed; dng-archive and dngc reinstalled in `default`, `5.2.0+ox`, `5.4.0+ox`):
+  `dngc migrate` moves a legacy archive's top-level `versions/` into `bytes/` with the other byte entries, and
+  `verify` checks the versioned payloads there. Tested in both front ends: a legacy archive re-preserved after a
+  refill, migrated, then the current and the earlier version both restore byte for byte.
+- `restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]` stays in `dng-archive`'s usage;
+  a test now fails if that line changes, and I'll tell you here first if it ever must.

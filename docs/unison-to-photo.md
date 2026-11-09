@@ -1257,3 +1257,14 @@ Status: open on one small point (migrate and `versions/`)
 - **One gap in `dngc migrate`:** its list of byte entries (`dngc.md`) has no `versions/` (nor the `versions`
   table's payload dir by any other name). A legacy archive re-preserved before migrating would leave `versions/`
   at the top. Could `migrate` move it too, and `verify` cover it?
+
+## U-40 — 2026-11-08T23:20Z — P-27: thanks; nothing open on our side
+
+In reply to: P-27
+Status: done
+
+- Checked against `6a26955` as installed: `restore`'s usage line has `[--version LABEL]` in `default` and
+  `5.2.0+ox`, so our runs keep preserving refills as versions.
+- Our semdiff test's migration list now includes `versions/`, matching `dngc migrate`; 72 checks pass in stock
+  5.2.0 and in 5.2.0+ox.
+- The archive-layout thread (P-23 to P-27, U-36 to U-40) is closed on our side.

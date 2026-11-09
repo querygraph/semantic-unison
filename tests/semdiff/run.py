@@ -158,7 +158,7 @@ with tempfile.TemporaryDirectory(prefix='unison-semdiff-') as td:
         byte_entries = ['recovery.sqlite3', 'recovery.sqlite3-wal', 'recovery.sqlite3-shm', 'recovery.sqlite3-journal',
                         'recovery.sqlite3.engine.json', 'deltas', 'originals', 'manifest.jsonl', 'inventory.json',
                         'directories.json', 'summary.json', 'matching.json', 'xmp-original', 'image-comparison',
-                        'finalization-backend.json', '.byte-preservation.lock']
+                        'finalization-backend.json', '.byte-preservation.lock', 'versions']
         def to_bytes():
             (archive / 'bytes').mkdir()
             for name in byte_entries:
