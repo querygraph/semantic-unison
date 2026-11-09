@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-02" />
+  <meta name="dcterms.date" content="2026-11-09" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Packdir</title>
   <style>
@@ -361,8 +361,10 @@ class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#c
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  retained_deleted <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>);</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_container(<span class="kw">key</span> TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="fu">value</span> TEXT);  <span class="co">-- format, epoch</span></span></code></pre></div>
 <p><code>sqlar</code> is SQLite’s standard table, so stock tools work.
-The other two are additions. On the synthetic container above,
-<code>unison_container</code> held
+The other two are additions. packdir opens its containers through <a
+href="https://firstpair.org/books/tursolite/">Tursolite</a>, the SQLite
+and optional Turso layer it shares with DNG Compare. On the synthetic
+container above, <code>unison_container</code> held
 <code>format = unison-packdir/1</code> and <code>epoch = 1</code>.</p>
 <ul>
 <li><strong>Pragmas.</strong> <code>page_size = 65536</code>,

@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc 3.12.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-02" />
+  <meta name="dcterms.date" content="2026-11-09" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
   <style>
@@ -114,11 +114,14 @@ figcaption { font-size: .88em; font-style: italic; color: #3b5563; margin-top: .
 <h1 class="title">Semantic Unison</h1>
 <p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
 <p class="author">Alexy Khrabrov, with Claude as co-author</p>
-<p class="date">2026-11-02</p>
+<p class="date">2026-11-09</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
-<li><a href="#about-this-book" id="toc-about-this-book"><span class="toc-section-number">1</span> About this book</a></li>
+<li><a href="#about-this-book" id="toc-about-this-book"><span class="toc-section-number">1</span> About this book</a>
+<ul>
+<li><a href="#where-it-fits" id="toc-where-it-fits"><span class="toc-section-number">1.1</span> Where it fits</a></li>
+</ul></li>
 <li><a href="#what-plain-unison-does" id="toc-what-plain-unison-does"><span class="toc-section-number">2</span> What plain Unison does</a></li>
 <li><a href="#what-semantic-unison-adds" id="toc-what-semantic-unison-adds"><span class="toc-section-number">3</span> What Semantic Unison adds</a>
 <ul>
@@ -169,8 +172,9 @@ to</a></li>
 <li><a href="#versions-over-several-cycles" id="toc-versions-over-several-cycles"><span class="toc-section-number">7.4</span> Versions over several
 cycles</a></li>
 <li><a href="#dng-compare-archives" id="toc-dng-compare-archives"><span class="toc-section-number">7.5</span> dng-compare archives</a></li>
-<li><a href="#disks-and-progress" id="toc-disks-and-progress"><span class="toc-section-number">7.6</span> Disks and progress</a></li>
-<li><a href="#reruns-and-other-roots" id="toc-reruns-and-other-roots"><span class="toc-section-number">7.7</span> Reruns and other roots</a></li>
+<li><a href="#the-shared-contract" id="toc-the-shared-contract"><span class="toc-section-number">7.6</span> The shared contract</a></li>
+<li><a href="#disks-and-progress" id="toc-disks-and-progress"><span class="toc-section-number">7.7</span> Disks and progress</a></li>
+<li><a href="#reruns-and-other-roots" id="toc-reruns-and-other-roots"><span class="toc-section-number">7.8</span> Reruns and other roots</a></li>
 </ul></li>
 <li><a href="#packdir" id="toc-packdir"><span class="toc-section-number">8</span> Packdir</a>
 <ul>
@@ -233,7 +237,7 @@ family</a></li>
 <li><a href="#packed-root-preferences" id="toc-packed-root-preferences"><span class="toc-section-number">12.3</span> Packed-root preferences</a></li>
 <li><a href="#packdir-and-unison-packdir" id="toc-packdir-and-unison-packdir"><span class="toc-section-number">12.4</span> packdir and
 unison-packdir</a></li>
-<li><a href="#dng-archive" id="toc-dng-archive"><span class="toc-section-number">12.5</span> dng-archive</a></li>
+<li><a href="#dngc-and-dng-archive" id="toc-dngc-and-dng-archive"><span class="toc-section-number">12.5</span> dngc and dng-archive</a></li>
 <li><a href="#semantic-preferences" id="toc-semantic-preferences"><span class="toc-section-number">12.6</span> Semantic preferences</a></li>
 </ul></li>
 <li><a href="#honest-limits" id="toc-honest-limits"><span class="toc-section-number">13</span> Honest limits</a>
@@ -271,19 +275,21 @@ an Anthropic model, wrote the text and the code with him, as the essay
 in this book describes. Where the text says “the user”, it means Alexy.
 Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
-<p>The book describes the state of the
-<code>implementation/final-adobe-qualification</code> branch on
-2026-11-02, at commit <code>9b68266b</code>, together with the separate
-<a href="https://github.com/querygraph/packdir">packdir</a> and <a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects and
-dng-compare’s OCaml archive tool. The first edition, of 2026-10-31, was
-written before the real mirror finished; this one adds its results,
-preservation of APFS clones, and the DNG walker’s move into tiffgraph.
-Every command option was checked against the source, and the worked
-examples in the chapters on semantic diff and packdir are real runs on
-small synthetic trees, made while writing. Numbers about the benchmark
-and the mirror come from the two sessions’ mailbox and the design
-documents. This session did not take those measurements and did not
-touch the disks involved.</p>
+<p>The book describes the state of the fork’s <code>master</code> branch
+on 2026-11-08, at commit <code>2267da59</code>, together with the
+separate <a href="https://github.com/querygraph/packdir">packdir</a> and
+<a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects
+and dng-compare’s OCaml archive tool. The first edition, of 2026-10-31,
+was written before the real mirror finished; the second, of 2026-11-02,
+added its results, preservation of APFS clones, and the DNG walker’s
+move into tiffgraph. This one, 1.2, follows dng-compare’s unified
+archive layout and its versions across shuttle cycles, and records the
+contract the two projects agreed on. Every command option was checked
+against the source, and the worked examples in the chapters on semantic
+diff and packdir are real runs on small synthetic trees, made while
+writing. Numbers about the benchmark and the mirror come from the two
+sessions’ mailbox and the design documents. This session did not take
+those measurements and did not touch the disks involved.</p>
 <p>Three kinds of statement appear below, and they are kept apart:</p>
 <ul>
 <li><strong>Measured</strong> figures are quoted from a record, with the
@@ -299,6 +305,40 @@ benchmark chapter gives its numbers.</li>
 LLM-generated text or code in that project, so nothing here is meant for
 upstream. See <a href="#why-the-fork-exists">Why the fork
 exists</a>.</p>
+<h2 data-number="1.1" id="where-it-fits"><span class="header-section-number">1.1</span> Where it fits</h2>
+<p>This book is one of nine on the FirstPair photo tools. Each owns one
+part, and <a href="https://firstpair.org/books/photostack/">The
+FirstPair Photo Stack</a> shows how they fit together.</p>
+<ul>
+<li><strong><a href="https://firstpair.org/books/tiffgraph/">tiffgraph</a></strong>
+walks a TIFF or DNG file’s structure under a fixed grammar and finds its
+editable XMP packet.</li>
+<li><strong><a href="https://firstpair.org/books/phidentify/">phidentify</a></strong>
+computes a photo’s identities: SHA-256, DNG raw blocks, image data,
+Lightroom fingerprint, metadata record and preserved digest.</li>
+<li><strong><a href="https://firstpair.org/books/phindex/">phindex</a></strong> keeps
+those identities for every file of a volume, and aligns two volumes by
+content.</li>
+<li><strong><a href="https://firstpair.org/books/dng-compare/">DNG
+Compare</a></strong> compares pairs and preserves one side byte for byte
+as deltas against the other, with a searchable metadata section, through
+<code>dngc</code>.</li>
+<li><strong><a href="https://firstpair.org/books/semantic-unison/">Semantic
+Unison</a></strong> synchronizes photo trees, sending metadata edits
+without resending image bytes, and preserves what a shuttle disk brings
+into the same archives.</li>
+<li><strong><a href="https://firstpair.org/books/packdir/">packdir</a></strong> keeps
+directories of small files as SQLite archives that still work like plain
+files.</li>
+<li><strong><a href="https://firstpair.org/books/tursolite/">Tursolite</a></strong> is
+the SQLite and Turso layer under packdir, DNG Compare and Mechanic.</li>
+<li><strong><a href="https://firstpair.org/books/diskproxy/">diskproxy</a></strong>
+serves a folder as a virtual disk, such as previews with camera metadata
+spliced in, and captures ratings into sidecars.</li>
+<li><strong><a href="https://firstpair.org/books/lightroom-repair/">Lightroom
+Repair</a></strong> repairs Lightroom Classic catalogs, previews and
+Sync without forging their state.</li>
+</ul>
 <h1 data-number="2" id="what-plain-unison-does"><span class="header-section-number">2</span> What plain Unison does</h1>
 <p>Unison is a file synchronizer. Upstream’s README describes it as a
 tool that “allows two replicas of a collection of files and directories
@@ -806,7 +846,7 @@ catch their absence.</p>
 with 177 cases per compiler in both ordinary and timed modes; and 21
 native clone-lease cases per compiler. Those numbers describe particular
 tests. They do not certify every camera, operating system, storage
-device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/8f814a496b0fc8ff11e0b186c4c97dfd6fd92bbb/doc/sol-final-acceptance-map-20261019.md">acceptance
+device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/4419ca9b06cf2b73c45681723aeed63802c94803/doc/sol-final-acceptance-map-20261019.md">acceptance
 map</a> links the scoped evidence.</p>
 <p>I have made mistakes, too. Harness assumptions have failed. Pins have
 gone stale. Observations have needed narrower interpretations.
@@ -867,7 +907,7 @@ into an OS thread cap, a sample into a peak-memory measurement, or one
 successful camera case into universal compatibility. I cannot claim that
 this goal is finished: final generated Adobe fixtures and receiving
 qualification, portions of the prescribed measurement matrix, and final
-acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/8f814a496b0fc8ff11e0b186c4c97dfd6fd92bbb/OPUS-HANDOFF.md">handoff</a>
+acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/4419ca9b06cf2b73c45681723aeed63802c94803/OPUS-HANDOFF.md">handoff</a>
 records the changing state.</p>
 <p>I can make the work easier to challenge. That means readable changes,
 explicit assumptions, reproducible commands, conservative fallbacks,
@@ -1201,49 +1241,91 @@ never replace an existing file. An identical copy from an earlier run is
 reused.</p>
 <h2 data-number="7.4" id="versions-over-several-cycles"><span class="header-section-number">7.4</span> Versions over several
 cycles</h2>
-<p>The archive records each shuttle file once per version, meaning size
-and modification time. When a later shuttle cycle brings new contents at
-a path already recorded, its differences are added as a new dng-compare
-file version, stamped with the run.</p>
-<p><code>-preservefull</code> keeps one full-file record per path, so it
-does not replace an earlier version. Such files are listed as already
-holding another version and stay “not safe” until handled by hand.</p>
+<p>A shuttle is wiped once it is safe, then filled again, sometimes with
+new contents at paths the archive already holds. The metadata section
+records each shuttle file once per version, meaning size and
+modification time, so a new version’s differences are added beside the
+old ones, stamped with the run.</p>
+<p><code>-preservefull</code> preserves the new contents too.
+dng-archive keeps the earlier record as a version, labelled with the
+source’s modification time and the start of its SHA-256
+(<code>YYYYMMDDTHHMMSSZ-xxxxxxxxxxxx</code>), and the new record becomes
+current, so nothing is overwritten and the refilled shuttle becomes safe
+to wipe again. <code>dngc versions ARCHIVE [PATH]</code> lists the
+versions of each path, and <code>restore ... --version LABEL</code>
+rebuilds an earlier one.</p>
+<p>Semantic Unison does this only when the installed
+<code>dng-archive</code> keeps versions, which it tells from
+<code>restore</code>’s usage line naming <code>--version LABEL</code>.
+An older <code>dng-archive</code> would replace the earlier record, so
+with one of those such paths are still left out, listed as already
+holding another version, and stay “not safe”.</p>
 <h2 data-number="7.5" id="dng-compare-archives"><span class="header-section-number">7.5</span> dng-compare archives</h2>
-<p>The archive is dng-compare’s format, not one invented for this tool.
-A dng-compare archive holds a metadata index and a lossless preservation
-store. In the worked run it looked like this:</p>
-<pre class="text"><code>dng-compare/disk-shuttle/
-  metadata/batches/*.jsonl.gz       one gzip batch per run, rows only added
-  metadata/differences.sqlite3      the searchable index
-  provenance.json
-  runs.jsonl</code></pre>
-<p>A <code>-preservefull</code> run adds records in
-<code>recovery.sqlite3</code> and delta files under
-<code>deltas/</code>. A delta is computed by <code>xdelta3</code>
-against the matching file on the long-term root, so it holds only the
-bytes that differ, and it needs that reference file to rebuild the
-original. If the root has moved,
-<code>dng-archive restore --reference-root DIR</code> says where it is
-now.</p>
+<p>The archive is dng-compare’s, not a format invented for this tool. <a href="https://firstpair.org/books/dng-compare/">DNG Compare, <em>The
+archive</em></a> describes it in full; this is what a shuttle run needs
+to know.</p>
+<pre class="text"><code>dng-compare/Shuttle-foto/
+  ARCHIVE.json          the runs, sources and engines
+  bytes/                recovery.sqlite3, deltas/, versions/, manifest.jsonl, summary.json
+  metadata/             batches/*.jsonl.gz, differences.sqlite3: the searchable index
+  report/               comparison results, when dngc runs the comparison
+  provenance.json, runs.jsonl, pairs-*.jsonl   Semantic Unison&#39;s own run records</code></pre>
+<ul>
+<li><strong>The byte section</strong> holds what
+<code>-preservefull</code> keeps: a record per file in
+<code>recovery.sqlite3</code> and a VCDIFF delta against the matching
+file on the long-term root. A delta holds only the bytes that differ and
+needs that reference to rebuild the file;
+<code>--reference-root DIR</code> says where a moved root is now.</li>
+<li><strong>Where the byte section is.</strong> Every tool finds it by
+one rule. An archive written before the unified layout has
+<code>recovery.sqlite3</code> at its top and no <code>bytes/</code>, and
+its top level is the byte section. A path that already ends in
+<code>bytes</code> is the byte section itself. Anything else, including
+a new archive, keeps it in <code>bytes/</code>.</li>
+<li><strong>Old archives move with <code>dngc migrate</code>,</strong>
+by renames on the same volume, logged in <code>MIGRATION.jsonl</code>
+and undone with <code>--undo</code>. Records name their files relative
+to the byte section, so nothing inside changes.</li>
+<li><strong>A wiped shuttle loses nothing.</strong> Reading an archive
+never needs the source. A listed source that is gone is printed as
+<code>MISSING PATH</code> and makes the run incomplete, and its earlier
+record stays.</li>
+</ul>
 <p><code>-preserve</code> and <code>-preservefull</code> run
-dng-compare’s OCaml command <code>dng-archive</code>. No Python runs.
-<code>dng-archive</code> builds on stock OCaml 5 and on OxCaml, and
-reads and writes the same files as dng-compare’s Python tools. Its index
-has the same schema and rows and keys each stored value by the SHA-256
-of the same canonical JSON, so either tool can add batches to an index
-the other built, and each restores what the other preserved.
-dng-compare’s <code>test_dng_archive.py</code> checks this against the
-Python modules.</p>
-<p>It differs from the Python tools in four ways. <code>preserve</code>
-works on listed pairs only. The final identity check covers the files of
-this run, so records from earlier runs whose sources are gone, such as
-files on a wiped shuttle, do not fail it. It handles SQLite only, and
-refuses an archive moved to the Turso engine rather than writing behind
-its marker. Workers are forked processes that each get an equal share of
-<code>--rate-mib</code>.</p>
-<p>To get a preserved file back, restore it into a new location:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dng-archive</span> restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
-<h2 data-number="7.6" id="disks-and-progress"><span class="header-section-number">7.6</span> Disks and progress</h2>
+dng-compare’s OCaml <code>dng-archive</code>; no Python runs. It builds
+on stock OCaml 5 and on OxCaml and reads and writes the same files as
+dng-compare’s Python and Rust tools. To get a preserved file back,
+restore it into a new location:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore /Volumes/Archive/dng-compare/Shuttle-foto 2026/April/S/F.DNG /tmp/F.DNG</span></code></pre></div>
+<h2 data-number="7.6" id="the-shared-contract"><span class="header-section-number">7.6</span> The shared contract</h2>
+<p>The layout above was agreed between the Unison and Photo sessions in
+the mailbox, P-23 to P-27 and U-36 to U-40, on 2026-11-08, and both
+sides test their half:</p>
+<ul>
+<li><strong>One rule for the byte section,</strong> as above, in every
+dng-compare tool and in Semantic Unison’s summary, which reads
+<code>manifest.jsonl</code> to count files preserved in full. Semantic
+Unison’s test moves a real archive between the two layouts and checks
+that the summary, a restore and <code>-preservedb ARCHIVE/bytes</code>
+give the same result in each, and that later runs never leave an archive
+with both.</li>
+<li><strong>Semantic Unison’s records stay at the top:</strong>
+<code>provenance.json</code>, <code>runs.jsonl</code>,
+<code>metadata/</code>, and the <code>pairs-*.jsonl</code> lists with
+their logs.</li>
+<li><strong>Versions are detected, not assumed.</strong>
+<code>restore</code>’s usage line keeps <code>--version LABEL</code>,
+pinned by a dng-compare test, and Photo announces any change to it in
+the mailbox first.</li>
+<li><strong>Migrations are checked against hashes.</strong> Before the
+one real archive moved, the Unison session recorded the SHA-256 of its
+manifest and recovery database and counted its deltas; after
+<code>dngc migrate</code>, the same values were found under
+<code>bytes/</code>, and <code>dngc verify --restore-sample</code>
+restored files byte for byte.</li>
+</ul>
+<h2 data-number="7.7" id="disks-and-progress"><span class="header-section-number">7.7</span> Disks and progress</h2>
 <p>A root on a disk that <code>diskutil</code> does not report as solid
 state, either a spinning disk or an enclosure that does not say, is read
 by one stream at a time across all workers, so it never seeks between
@@ -1265,7 +1347,7 @@ holds through stretches of small sidecars and large DNGs.
 <code>-v</code> adds listing progress, a line for each file that is not
 identical, and dng-compare’s preservation output. <code>^C</code> is
 safe: rerun the same command and finished comparisons are reused.</p>
-<h2 data-number="7.7" id="reruns-and-other-roots"><span class="header-section-number">7.7</span> Reruns and other roots</h2>
+<h2 data-number="7.8" id="reruns-and-other-roots"><span class="header-section-number">7.8</span> Reruns and other roots</h2>
 <ul>
 <li><strong>Reports.</strong> The report lives in the Unison directory
 as <code>semdiff-HASH.jsonl</code>, next to its <code>.walk</code>
@@ -1510,8 +1592,9 @@ that a plain run then has nothing to do.</p>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  retained_deleted <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>);</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_container(<span class="kw">key</span> TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="fu">value</span> TEXT);  <span class="co">-- format, epoch</span></span></code></pre></div>
 <p><code>sqlar</code> is SQLite’s standard table, so stock tools work.
-The other two are additions. On the synthetic container above,
-<code>unison_container</code> held
+The other two are additions. packdir opens its containers through <a href="https://firstpair.org/books/tursolite/">Tursolite</a>, the SQLite
+and optional Turso layer it shares with DNG Compare. On the synthetic
+container above, <code>unison_container</code> held
 <code>format = unison-packdir/1</code> and <code>epoch = 1</code>.</p>
 <ul>
 <li><strong>Pragmas.</strong> <code>page_size = 65536</code>,
@@ -2875,11 +2958,24 @@ tree.</strong> The source says so.</li>
 <code>du</code>’s directory sizes, and the order of <code>du</code> and
 <code>find</code> output, which is sorted here.</li>
 </ul>
-<h2 data-number="12.5" id="dng-archive"><span class="header-section-number">12.5</span> dng-archive</h2>
+<h2 data-number="12.5" id="dngc-and-dng-archive"><span class="header-section-number">12.5</span> dngc and dng-archive</h2>
+<p><code>dngc</code>, installed beside <code>dng-archive</code> in each
+opam switch, is the command to use on an archive by hand. Its verbs are
+<code>run</code>, <code>restore</code>, <code>index</code>,
+<code>query</code>, <code>verify</code>, <code>status</code>,
+<code>migrate</code> and <code>versions</code>; <a href="https://firstpair.org/books/dng-compare/">DNG Compare</a>
+documents them.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> status ARCHIVE                          <span class="co"># what the archive holds</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> versions ARCHIVE <span class="pp">[</span><span class="ss">RELATIVE_PATH</span><span class="pp">]</span>        <span class="co"># current and earlier contents of each path</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> verify ARCHIVE [--restore-sample N]     <span class="co"># records, files and index</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> migrate ARCHIVE [--dry-run <span class="kw">|</span> <span class="ex">--undo]</span>    <span class="co"># a legacy archive&#39;s byte section into bytes/</span></span></code></pre></div>
+<p>Semantic Unison itself calls <code>dng-archive</code>, the program
+underneath:</p>
 <pre class="text"><code>dng-archive index ARCHIVE
 dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
                      [--workers N] [--rate-mib R]
-dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR]</code></pre>
+dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]</code></pre>
 <table>
 <colgroup>
 <col style="width: 13%" />
@@ -2900,22 +2996,22 @@ dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR]</code></
 <td style="text-align: left;"><code>index</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Python equivalent:
-<code>metadata_index.py ARCHIVE</code></td>
+<td style="text-align: left;">Rebuild the metadata index from its
+batches</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>preserve</code></td>
 <td style="text-align: left;"><code>--pairs FILE</code></td>
 <td style="text-align: left;">required</td>
-<td style="text-align: left;">The listed pairs. Equivalent:
-<code>preserve_apo.py scan ... --pairs FILE</code></td>
+<td style="text-align: left;">The listed pairs, into the byte
+section</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>--delta</code></td>
 <td style="text-align: left;">off</td>
 <td style="text-align: left;">Store changed files as verified VCDIFF
-deltas under <code>deltas/</code></td>
+deltas</td>
 </tr>
 <tr>
 <td style="text-align: left;"></td>
@@ -2941,15 +3037,21 @@ workers</td>
 <td style="text-align: left;"><code>restore</code></td>
 <td style="text-align: left;"><code>--reference-root DIR</code></td>
 <td style="text-align: left;"></td>
-<td style="text-align: left;">Restore to OUTPUT. Equivalent:
-<code>preserve_apo.py restore ...</code></td>
+<td style="text-align: left;">Where the long-term root is now, if it
+moved</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>--version LABEL</code></td>
+<td style="text-align: left;">current</td>
+<td style="text-align: left;">An earlier version of the path</td>
 </tr>
 </tbody>
 </table>
 <p><code>preserve</code> exits 1 with “Preservation incomplete; inspect
-errors and rerun before deleting source” if any file did not verify. It
-needs <code>xdelta3</code> on <code>PATH</code>, and SQLite and zlib
-from the system.</p>
+errors and rerun before deleting source” if any file did not verify or a
+listed source is missing. It needs <code>xdelta3</code> on
+<code>PATH</code>, and SQLite and zlib from the system.</p>
 <h2 data-number="12.6" id="semantic-preferences"><span class="header-section-number">12.6</span> Semantic preferences</h2>
 <p>These are the main preferences of the sync engine, with defaults from
 the source.</p>
@@ -3137,9 +3239,9 @@ Files that decode to the same samples from different encodings are
 reported as <code>image-differs</code>.</li>
 <li><strong>Unknown file types get <code>differs</code>.</strong> They
 have no image layer to compare.</li>
-<li><strong><code>-preservefull</code> keeps one full record per
-path.</strong> A second version at the same path stays “not safe” until
-handled by hand.</li>
+<li><strong>Versions need a recent <code>dng-archive</code>.</strong>
+With one older than dng-compare <code>992eff7</code>, a second version
+at the same path stays “not safe” until handled by hand.</li>
 <li><strong>Local roots only.</strong> <code>-semdiff</code> and
 <code>-semcatchupfrom</code> need exactly two local roots.</li>
 <li><strong>Disk detection uses <code>diskutil</code>,</strong> so it is
@@ -3395,16 +3497,16 @@ disagreed, the book follows the source and says so, as with the
 <code>packdir</code> package, and <code>-preserve</code> needs
 <code>dng-archive</code>. Each must be pinned in each opam switch you
 use, and stock OCaml and OxCaml stay separate.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
 <p>The binaries are <code>src/linktext.exe</code> (installed as
 <code>unison</code>), <code>src/dngscan.exe</code>
 (<code>unison-dngscan</code>) and <code>tools/packdir/main.exe</code>
 (<code>unison-packdir</code>), under dune’s build directory.</p>
 <p>The controls use synthetic data in private temporary directories:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
 <p>The other packed-root suites are <code>unison_write.py</code>,
 <code>unison_recover.py</code>, <code>unison_parallel.py</code> and
 <code>unison_marker.py</code>, with the same arguments, and

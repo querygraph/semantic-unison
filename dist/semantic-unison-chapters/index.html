@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-02" />
+  <meta name="dcterms.date" content="2026-11-09" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
   <style>
@@ -55,13 +55,18 @@
 <h1 class="title">Semantic Unison</h1>
 <p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
 <p class="author">Alexy Khrabrov, with Claude as co-author</p>
-<p class="date">2026-11-02</p>
+<p class="date">2026-11-09</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="chapter-002.html#about-this-book"
 id="toc-about-this-book"><span class="toc-section-number">1</span> About
-this book</a></li>
+this book</a>
+<ul>
+<li><a href="chapter-002.html#where-it-fits"
+id="toc-where-it-fits"><span class="toc-section-number">1.1</span> Where
+it fits</a></li>
+</ul></li>
 <li><a href="chapter-003.html#what-plain-unison-does"
 id="toc-what-plain-unison-does"><span
 class="toc-section-number">2</span> What plain Unison does</a></li>
@@ -170,12 +175,15 @@ cycles</a></li>
 <li><a href="chapter-008.html#dng-compare-archives"
 id="toc-dng-compare-archives"><span
 class="toc-section-number">7.5</span> dng-compare archives</a></li>
+<li><a href="chapter-008.html#the-shared-contract"
+id="toc-the-shared-contract"><span class="toc-section-number">7.6</span>
+The shared contract</a></li>
 <li><a href="chapter-008.html#disks-and-progress"
-id="toc-disks-and-progress"><span class="toc-section-number">7.6</span>
+id="toc-disks-and-progress"><span class="toc-section-number">7.7</span>
 Disks and progress</a></li>
 <li><a href="chapter-008.html#reruns-and-other-roots"
 id="toc-reruns-and-other-roots"><span
-class="toc-section-number">7.7</span> Reruns and other roots</a></li>
+class="toc-section-number">7.8</span> Reruns and other roots</a></li>
 </ul></li>
 <li><a href="chapter-009.html#packdir" id="toc-packdir"><span
 class="toc-section-number">8</span> Packdir</a>
@@ -307,8 +315,9 @@ class="toc-section-number">12.3</span> Packed-root preferences</a></li>
 id="toc-packdir-and-unison-packdir"><span
 class="toc-section-number">12.4</span> packdir and
 unison-packdir</a></li>
-<li><a href="chapter-013.html#dng-archive" id="toc-dng-archive"><span
-class="toc-section-number">12.5</span> dng-archive</a></li>
+<li><a href="chapter-013.html#dngc-and-dng-archive"
+id="toc-dngc-and-dng-archive"><span
+class="toc-section-number">12.5</span> dngc and dng-archive</a></li>
 <li><a href="chapter-013.html#semantic-preferences"
 id="toc-semantic-preferences"><span
 class="toc-section-number">12.6</span> Semantic preferences</a></li>

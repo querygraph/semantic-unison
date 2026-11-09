@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-02" />
+  <meta name="dcterms.date" content="2026-11-09" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Honest limits</title>
   <style>
@@ -118,9 +118,9 @@ Files that decode to the same samples from different encodings are
 reported as <code>image-differs</code>.</li>
 <li><strong>Unknown file types get <code>differs</code>.</strong> They
 have no image layer to compare.</li>
-<li><strong><code>-preservefull</code> keeps one full record per
-path.</strong> A second version at the same path stays “not safe” until
-handled by hand.</li>
+<li><strong>Versions need a recent <code>dng-archive</code>.</strong>
+With one older than dng-compare <code>992eff7</code>, a second version
+at the same path stays “not safe” until handled by hand.</li>
 <li><strong>Local roots only.</strong> <code>-semdiff</code> and
 <code>-semcatchupfrom</code> need exactly two local roots.</li>
 <li><strong>Disk detection uses <code>diskutil</code>,</strong> so it is

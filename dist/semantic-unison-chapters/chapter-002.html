@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-02" />
+  <meta name="dcterms.date" content="2026-11-09" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>About this book</title>
   <style>
@@ -64,20 +64,21 @@ an Anthropic model, wrote the text and the code with him, as the essay
 in this book describes. Where the text says “the user”, it means Alexy.
 Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
-<p>The book describes the state of the
-<code>implementation/final-adobe-qualification</code> branch on
-2026-11-02, at commit <code>9b68266b</code>, together with the separate
-<a href="https://github.com/querygraph/packdir">packdir</a> and <a
-href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects and
-dng-compare’s OCaml archive tool. The first edition, of 2026-10-31, was
-written before the real mirror finished; this one adds its results,
-preservation of APFS clones, and the DNG walker’s move into tiffgraph.
-Every command option was checked against the source, and the worked
-examples in the chapters on semantic diff and packdir are real runs on
-small synthetic trees, made while writing. Numbers about the benchmark
-and the mirror come from the two sessions’ mailbox and the design
-documents. This session did not take those measurements and did not
-touch the disks involved.</p>
+<p>The book describes the state of the fork’s <code>master</code> branch
+on 2026-11-08, at commit <code>2267da59</code>, together with the
+separate <a href="https://github.com/querygraph/packdir">packdir</a> and
+<a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects
+and dng-compare’s OCaml archive tool. The first edition, of 2026-10-31,
+was written before the real mirror finished; the second, of 2026-11-02,
+added its results, preservation of APFS clones, and the DNG walker’s
+move into tiffgraph. This one, 1.2, follows dng-compare’s unified
+archive layout and its versions across shuttle cycles, and records the
+contract the two projects agreed on. Every command option was checked
+against the source, and the worked examples in the chapters on semantic
+diff and packdir are real runs on small synthetic trees, made while
+writing. Numbers about the benchmark and the mirror come from the two
+sessions’ mailbox and the design documents. This session did not take
+those measurements and did not touch the disks involved.</p>
 <p>Three kinds of statement appear below, and they are kept apart:</p>
 <ul>
 <li><strong>Measured</strong> figures are quoted from a record, with the
@@ -93,5 +94,48 @@ benchmark chapter gives its numbers.</li>
 LLM-generated text or code in that project, so nothing here is meant for
 upstream. See <a href="chapter-005.html#why-the-fork-exists">Why the
 fork exists</a>.</p>
+<h2 data-number="1.1" id="where-it-fits"><span
+class="header-section-number">1.1</span> Where it fits</h2>
+<p>This book is one of nine on the FirstPair photo tools. Each owns one
+part, and <a href="https://firstpair.org/books/photostack/">The
+FirstPair Photo Stack</a> shows how they fit together.</p>
+<ul>
+<li><strong><a
+href="https://firstpair.org/books/tiffgraph/">tiffgraph</a></strong>
+walks a TIFF or DNG file’s structure under a fixed grammar and finds its
+editable XMP packet.</li>
+<li><strong><a
+href="https://firstpair.org/books/phidentify/">phidentify</a></strong>
+computes a photo’s identities: SHA-256, DNG raw blocks, image data,
+Lightroom fingerprint, metadata record and preserved digest.</li>
+<li><strong><a
+href="https://firstpair.org/books/phindex/">phindex</a></strong> keeps
+those identities for every file of a volume, and aligns two volumes by
+content.</li>
+<li><strong><a href="https://firstpair.org/books/dng-compare/">DNG
+Compare</a></strong> compares pairs and preserves one side byte for byte
+as deltas against the other, with a searchable metadata section, through
+<code>dngc</code>.</li>
+<li><strong><a
+href="https://firstpair.org/books/semantic-unison/">Semantic
+Unison</a></strong> synchronizes photo trees, sending metadata edits
+without resending image bytes, and preserves what a shuttle disk brings
+into the same archives.</li>
+<li><strong><a
+href="https://firstpair.org/books/packdir/">packdir</a></strong> keeps
+directories of small files as SQLite archives that still work like plain
+files.</li>
+<li><strong><a
+href="https://firstpair.org/books/tursolite/">Tursolite</a></strong> is
+the SQLite and Turso layer under packdir, DNG Compare and Mechanic.</li>
+<li><strong><a
+href="https://firstpair.org/books/diskproxy/">diskproxy</a></strong>
+serves a folder as a virtual disk, such as previews with camera metadata
+spliced in, and captures ratings into sidecars.</li>
+<li><strong><a
+href="https://firstpair.org/books/lightroom-repair/">Lightroom
+Repair</a></strong> repairs Lightroom Classic catalogs, previews and
+Sync without forging their state.</li>
+</ul>
 </body>
 </html>
