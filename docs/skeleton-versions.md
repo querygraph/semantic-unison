@@ -125,6 +125,7 @@ kept blocks.
 
 ```
 STORE/ROOTKEY/root                 the root's path, for people
+STORE/ROOTKEY/lock                 locked by the process changing this root's store
 STORE/ROOTKEY/pending/PATHKEY      one small file per pending item, naming its path
 STORE/ROOTKEY/p/PA/PATHKEY/index   the chain of one path
                          N.full    version N's record
@@ -138,7 +139,8 @@ STORE/ROOTKEY/p/PA/PATHKEY/index   the chain of one path
 root's canonical path and of the path inside the root. The index is a text
 file with one line per kept version, oldest first: number, time, size, SHA-256
 of the content, kind, format, SHA-256 and size of the record, how the record
-is stored, and stored bytes. Every file is written under a temporary name,
+is stored, and stored bytes, then the word `lost` for a version found to
+need a block that no file holds and the store did not keep. Every file is written under a temporary name,
 flushed and renamed; the index is written after the files it names, and files
 the index does not name are removed afterwards.
 
@@ -172,22 +174,38 @@ times, extended attributes or resource forks, and only of regular files.
   current file. If the current file is then edited *on this replica* in a way
   that destroys a block (an application regenerating an embedded preview, for
   instance) before Unison next replaces it, the versions that need that block
-  can no longer be rebuilt here: nothing saw the block go. `verify` reports
-  them and `restore` refuses. The replica that *receives* such an edit through
-  Unison saves the block at that moment, as described above. A local edit that
-  only rewrites metadata does no harm.
+  can no longer be rebuilt here: nothing saw the block go. Unison cannot
+  prevent this, but it does not stay silent. The next time it replaces the
+  file it checks every earlier version against what is left, logs a warning
+  for each one that has become unrebuildable, and marks it `lost` in the
+  chain, once. `unison-skeleton list` shows the mark, `verify` reports the
+  version and `restore` refuses it. The replica that *receives* such an edit
+  through Unison saves the block at that moment, as described above, so the
+  other replica's store usually still has the version. A local edit that only
+  rewrites metadata does no harm. After running an application that rewrites
+  previews or pixels in place, `unison-skeleton verify ROOT` says at once what
+  was lost.
 - **Cost of a replacement.** The outgoing file is read once and the new file's
-  matching blocks once or twice. Where the filesystem has no clones and the
-  store is on another volume or filesystem type, the pending item is a full
-  temporary copy of the outgoing file.
-- **One writer.** The store has no lock of its own. Two synchronizations of
-  the same root running at once could interleave their changes to one path's
-  chain; `unison-skeleton` only reads, and reports a chain that changes under
-  it as an error to be retried.
+  matching blocks once or twice. Where the filesystem has no clones, or the
+  store is on another volume, the pending item is a full temporary copy of the
+  outgoing file. That path has been run with the store on a separate HFS+
+  volume and with the receiving root itself on HFS+.
+- **One writer at a time.** Each change to the store is made while holding a
+  lock on the file `lock` of the root's directory in the store, so two
+  synchronizations that share a root cannot interleave their changes. The lock
+  is waited for and is released when the process ends, however it ends.
+  `unison-skeleton` only reads, and reports a chain that changes under it as
+  an error to be retried. Two synchronizations that replace *the same path* of
+  the same root at once are still a conflict between them: the store stays
+  sound, but only one of the two outgoing contents becomes a version.
 - **Roots are named by path.** Moving or renaming a root starts a new
   subdirectory of the store. The earlier versions stay under the old name and
   can be read by giving `unison-skeleton` the old root path, but skeleton
-  versions then find no current file to take blocks from.
+  versions then find no current file to take blocks from, so only those kept
+  whole or as their own skeleton restore. Before moving a root, restore what
+  you want to keep, or keep the old path available (a symbolic link does)
+  until the versions have aged out. A store that follows a moved root is not
+  built; `TODO.md` records it.
 - Classic TIFF and JPEG only. BigTIFF, HEIF, video and other containers are
   kept whole (or as their own skeleton up to 1 MiB).
 
@@ -213,5 +231,15 @@ a chain of five edits with three versions kept; a replaced block; a change in
 the middle of a block; a version made to fail its check; sidecars; pending
 items; deletion; large files without a walker; damage to the store; and a real
 synchronization of two local roots followed by `unison-skeleton list`,
-`verify` and `restore`. The built-in self-test (`unison -selftest`) has a
-"skeleton versions" case as well.
+`verify` and `restore`; an edit made outside a synchronization that destroys
+a block, found and marked lost; and the root's lock held against a second
+process. The built-in self-test (`unison -selftest`) has a "skeleton versions"
+case as well.
+
+Beyond those, the feature has been run on real DNG and JPEG files edited by
+Lightroom Classic and Photo Mechanic: between two local roots, with the
+receiving root served by a second Unison process over the remote protocol
+(through a stand-in for `ssh` on one machine, not across a network), with the
+store on a separate HFS+ volume, and with the receiving root on HFS+. It
+builds and passes its tests with stock OCaml 5.2.0 and with OxCaml 5.2.0+ox
+and 5.4.0+ox.

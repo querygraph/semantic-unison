@@ -30,6 +30,7 @@ type version = {
   record_bytes : int;
   stored : stored;
   stored_bytes : int;   (* bytes of N.full, N.delta or N.whole *)
+  lost : bool;          (* a block it needs is in no file and not kept: see [on_lost] *)
 }
 
 type chain = {
@@ -136,11 +137,11 @@ let write_index loc (chain : chain) =
    | Some (seq, time) -> Printf.bprintf b "pending %d %.6f\n" seq time
    | None -> ());
   List.iter (fun v ->
-    Printf.bprintf b "version %d %.6f %d %s %s %s %s %d %s %d\n" v.seq v.time v.size v.sha256
+    Printf.bprintf b "version %d %.6f %d %s %s %s %s %d %s %d%s\n" v.seq v.time v.size v.sha256
       (match v.kind with Skel -> "skeleton" | Whole -> "whole")
       v.format v.record_sha256 v.record_bytes
       (match v.stored with Full -> "full" | Delta base -> Printf.sprintf "delta:%d" base | File -> "file")
-      v.stored_bytes) chain.versions;
+      v.stored_bytes (if v.lost then " lost" else "")) chain.versions;
   mkdir_p loc.dir;
   write_string_atomic (loc.dir // "index") (Buffer.contents b)
 
@@ -161,7 +162,8 @@ let read_index loc =
               { chain with path = (try Scanf.unescaped escaped with _ -> bad ()) }
           | [ "next"; n ] -> { chain with next = num n }
           | [ "pending"; seq; t ] -> { chain with pending = Some (num seq, time t) }
-          | [ "version"; seq; t; size; sha256; kind; format; rsha; rbytes; stored; sbytes ] ->
+          | "version" :: seq :: t :: size :: sha256 :: kind :: format :: rsha :: rbytes :: stored :: sbytes :: flags
+            when flags = [] || flags = [ "lost" ] ->
               let kind = match kind with "skeleton" -> Skel | "whole" -> Whole | _ -> bad () in
               let stored = match stored with
                 | "full" -> Full
@@ -171,7 +173,7 @@ let read_index loc =
                 | _ -> bad () in
               let v = { seq = num seq; time = time t; size = num size; sha256; kind; format;
                         record_sha256 = rsha; record_bytes = num rbytes; stored;
-                        stored_bytes = num sbytes } in
+                        stored_bytes = num sbytes; lost = flags <> [] } in
               { chain with versions = chain.versions @ [ v ] }
           | _ -> bad ())
           { path = loc.lpath; next = 1; pending = None; versions = [] } lines
@@ -396,6 +398,50 @@ let sweep loc chain =
 let rec drop_oldest depth versions =
   if List.length versions > max depth 0 then drop_oldest depth (List.tl versions) else versions
 
+(* ---- One writer at a time ---- *)
+
+(* [f] while this process holds the root's lock in the store: a lock on the
+   file [lock] of the root's directory, waited for, and released when [f]
+   returns or the process dies.  It makes each change to the store whole
+   against another synchronization of the same root running at once. *)
+let with_lock rootdir f =
+  mkdir_p rootdir;
+  let fd = Unix.openfile (rootdir // "lock") [Unix.O_RDWR; Unix.O_CREAT; Unix.O_CLOEXEC] 0o600 in
+  Fun.protect ~finally:(fun () -> try Unix.close fd with Unix.Unix_error _ -> ())
+    (fun () ->
+      let rec wait () =
+        try Unix.lockf fd Unix.F_LOCK 0 with Unix.Unix_error (Unix.EINTR, _, _) -> wait () in
+      wait ();
+      f ())
+
+(* ---- Versions whose blocks have gone ---- *)
+
+(* Called with a path, a version and the reason when a kept version is found
+   to need a block that no file holds and the store did not keep: the file was
+   edited in place, outside a synchronization, in a way that destroyed the
+   block.  The version is marked lost in the index, once. *)
+let on_lost : (string -> version -> string -> unit) ref = ref (fun _ _ _ -> ())
+
+(* [versions] with each skeleton version that can no longer be rebuilt marked
+   lost.  A record that cannot be read is damage to the store, which verify
+   reports; it is not marked. *)
+let mark_lost loc chain sources versions =
+  let chain = { chain with versions } in
+  List.map (fun v ->
+    if v.kind <> Skel || v.lost then v
+    else
+      match
+        List.find_opt (fun x -> find_block loc sources ~exact:true x = None) (load_record loc chain v).blocks
+      with
+      | None -> v
+      | Some x ->
+          let why = Printf.sprintf "block %s (%d bytes) is in no later version and not kept"
+              x.b.Skeleton.role x.b.Skeleton.len in
+          let v = { v with lost = true } in
+          !on_lost chain.path v why;
+          v
+      | exception (Failure _ | Sys_error _ | Unix.Unix_error _) -> v) versions
+
 (* ---- Settling a pending replaced file ---- *)
 
 type outcome =
@@ -503,7 +549,7 @@ let settle_loc loc ~live ~gone ~depth =
             (* The check that counts: rebuild it from what will remain. *)
             let v = { seq; time; size = psize; sha256 = psha; kind = Skel; format = r.format;
                       record_sha256 = hex_of text; record_bytes = String.length text;
-                      stored = Full; stored_bytes = String.length text } in
+                      stored = Full; stored_bytes = String.length text; lost = false } in
             let probe = { chain with pending = None; versions = chain.versions @ [ v ] } in
             (try !before_check (); produce loc probe sources v ~write:(fun _ _ _ -> ()) ~reset:(fun () -> ())
              with Failure m | Missing m -> raise (Whole_instead ("its skeleton did not rebuild it: " ^ m)));
@@ -532,9 +578,16 @@ let settle_loc loc ~live ~gone ~depth =
                 remove_noerr (file_of loc seq "full");
                 Unix.rename pfile (file_of loc seq "whole");
                 let v = { seq; time; size = psize; sha256 = psha; kind = Whole; format = "-";
-                          record_sha256 = "-"; record_bytes = 0; stored = File; stored_bytes = psize } in
+                          record_sha256 = "-"; record_bytes = 0; stored = File; stored_bytes = psize;
+                          lost = false } in
                 chain.versions @ [ v ], Kept_whole (seq, why) in
-          let chain = { chain with pending = None; versions = drop_oldest depth versions } in
+          let versions = drop_oldest depth versions in
+          (* Earlier versions take their blocks from the file now at the path,
+             from whole versions and from kept blocks.  One whose block was
+             destroyed by an edit Unison did not make is marked lost. *)
+          let sources = { sources with files = source_files loc { chain with pending = None; versions } ~live ~with_pending:false } in
+          let versions = mark_lost loc chain sources versions in
+          let chain = { chain with pending = None; versions } in
           write_index loc chain;
           sweep loc chain;
           remove_marker loc;
@@ -543,7 +596,8 @@ let settle_loc loc ~live ~gone ~depth =
       end
 
 let settle ~store ~root ~path ~live ?(gone = false) ~depth () =
-  settle_loc (locate ~store ~root ~path) ~live ~gone ~depth
+  let loc = locate ~store ~root ~path in
+  with_lock loc.rootdir (fun () -> settle_loc loc ~live ~gone ~depth)
 
 (* ---- Stashing a file that is about to be replaced or deleted ---- *)
 
@@ -560,6 +614,7 @@ let note_root ~store ~root =
    run is settled first.  Returns whether the file was moved away. *)
 let stash ~store ~root ~path ~file ~how ?(clone = fun _ _ -> false) ~depth () =
   let loc = locate ~store ~root ~path in
+  with_lock loc.rootdir @@ fun () ->
   ignore (settle_loc loc ~live:file ~gone:false ~depth);
   note_root ~store ~root;
   let chain = read_index loc in

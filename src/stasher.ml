@@ -308,6 +308,15 @@ let stashSkeletons fspath path finalDisposition ~keepSource =
     visit true path
   end
 
+(* A kept version that an edit outside Unison has made unrebuildable: said
+   once, when the store finds it. *)
+let () =
+  SkeletonStore.on_lost := (fun path (v : SkeletonStore.version) why ->
+    Trace.log (Printf.sprintf
+      "Warning: skeleton version %d of %s can no longer be rebuilt (%s): the file was edited in place, \
+       outside a synchronization, in a way that destroyed it.  The other replica may still have it.\n"
+      v.SkeletonStore.seq path why))
+
 let skeletonOutcome path = function
   | SkeletonStore.Kept_whole (seq, why) ->
       debug (fun () -> Util.msg "skeleton version %d of %s kept whole: %s\n" seq path why)

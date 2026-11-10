@@ -327,6 +327,54 @@ let test_lost_block () =
   check "the block goes when no kept version needs it" (seqs path = [ 3; 4; 5 ] && kept_blocks path = 0);
   check "what is left still restores" (all_ok path)
 
+(* An edit made in place, outside a synchronization, that destroys a block:
+   nothing saw the block go, so the versions that need it are found lost at
+   the next replacement, said once, and marked. *)
+let test_local_edit () =
+  section "an edit outside a synchronization";
+  let lost = ref [] in
+  SkeletonStore.on_lost := (fun path (v : SkeletonStore.version) _ -> lost := (path, v.SkeletonStore.seq) :: !lost);
+  let path = "local.dng" in
+  write_file (root // path) (photo 0);
+  ignore (replace path (photo 1));
+  (* A metadata edit in place does no harm. *)
+  write_file (root // path) (photo 2);
+  ignore (replace path (photo 3));
+  check "a metadata edit in place loses nothing" (!lost = [] && all_ok path && seqs path = [ 1; 2 ]);
+  check "both versions restore" (restored path 1 = Ok (photo 0) && restored path 2 = Ok (photo 2));
+  (* An application regenerates the embedded preview in place. *)
+  let fresh = noise 6100 77 in
+  write_file (root // path) (photo ~preview:fresh 3);
+  check "verify already reports the versions that need the old preview" (not (all_ok path));
+  ignore (replace path (photo ~preview:fresh 4));
+  check "the next replacement finds them lost, once each"
+    (List.sort compare !lost = [ (path, 1); (path, 2) ]);
+  let flags = List.map (fun (v : SkeletonStore.version) -> v.SkeletonStore.seq, v.SkeletonStore.lost) (versions path) in
+  check "they are marked in the chain, and the new version is not" (flags = [ (1, true); (2, true); (3, false) ]);
+  check "the version taken after the edit restores" (restored path 3 = Ok (photo ~preview:fresh 3));
+  check "a lost version refuses to restore" (match restored path 1 with Error _ -> true | Ok _ -> false);
+  ignore (replace path (photo ~preview:fresh 5));
+  check "it is not said again" (List.length !lost = 2);
+  SkeletonStore.on_lost := (fun _ _ _ -> ())
+
+(* The root's lock: a change to the store waits for another process's. *)
+let test_lock () =
+  section "one writer at a time";
+  let dir = SkeletonStore.root_dir ~store ~root in
+  let mark = top // "lock-held" in
+  match Unix.fork () with
+  | 0 ->
+      (try SkeletonStore.with_lock dir (fun () -> write_file (top // "lock-taken") ""; Unix.sleepf 0.8; write_file mark "")
+       with _ -> ());
+      Unix._exit 0
+  | child ->
+      let rec wait n = if n > 0 && not (Sys.file_exists (top // "lock-taken")) then (Unix.sleepf 0.02; wait (n - 1)) in
+      wait 200;
+      let seen = SkeletonStore.with_lock dir (fun () -> Sys.file_exists mark) in
+      ignore (Unix.waitpid [] child);
+      check "a second process waits for the first to finish" seen;
+      check "and the lock is free again" (SkeletonStore.with_lock dir (fun () -> true))
+
 let test_middle_change () =
   section "an edit that changes the middle of a block";
   let path = "middle.dng" in
@@ -592,6 +640,8 @@ let () =
         test_delta ();
         test_chain ();
         test_lost_block ();
+        test_local_edit ();
+        test_lock ();
         test_middle_change ();
         test_sidecar ();
         test_pending ();

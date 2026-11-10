@@ -57,3 +57,11 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    - repeat with a Lightroom-converted DNG.
 2. If the merge declines, its message says why. That decides what to widen
    next: the date fields, packet growth, or 50740.
+3. **Skeleton versions that follow a moved root** (not built). The skeleton
+   store names a replica root by its path (`docs/skeleton-versions.md`,
+   Limits), so moving or renaming a root orphans its versions: they stay
+   under the old name with no current file to take blocks from. A fix would
+   name a root by something that survives a move, such as an identifier kept
+   in a file of the store with a command to re-point it, or the archive
+   name Unison already derives for the root pair. Until then: restore what
+   matters before moving a root, or keep the old path reachable.

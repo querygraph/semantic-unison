@@ -1638,7 +1638,10 @@ Skeleton versions are independent of backups: a path that matches both
 \verb|skeleton| and \verb|backup| gets both.  A version takes its blocks from
 the current file; if that file is edited locally in a way that destroys a
 block before Unison next replaces it, the version can no longer be rebuilt on
-that replica, and \verb|unison-skeleton verify| reports it.  The design and
+that replica, and \verb|unison-skeleton verify| reports it.  The next time
+Unison replaces the file it logs a warning for each such version and marks it
+lost.  Changes to the store are made under a lock per root, so two
+synchronizations that share a root do not interleave them.  The design and
 its limits are described in \verb|docs/skeleton-versions.md|.
 
 

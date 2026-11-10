@@ -18,6 +18,7 @@ type version = {
   record_bytes : int;
   stored : stored;
   stored_bytes : int;
+  lost : bool;          (** it needs a block no file holds and the store did not keep *)
 }
 
 type chain = {
@@ -81,6 +82,16 @@ val verify :
 (** Rebuild every kept version to nowhere; [None] for one that is exact. *)
 
 val sha_of_file : string -> string
+
+val on_lost : (string -> version -> string -> unit) ref
+(** Called with a path, a version and the reason when settling finds that a
+    kept version can no longer be rebuilt: the file at the path was edited in
+    place, outside a synchronization, in a way that destroyed a block the
+    version needs.  The version is marked [lost] in its chain, once. *)
+
+val with_lock : string -> (unit -> 'a) -> 'a
+(** [with_lock (root_dir ~store ~root) f]: [f] while this process holds the
+    root's lock in the store.  [stash] and [settle] take it themselves. *)
 
 val before_check : (unit -> unit) ref
 (** For tests: called before a new skeleton version is rebuilt and checked. *)

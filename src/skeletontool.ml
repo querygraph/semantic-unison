@@ -58,9 +58,11 @@ let list ~store ~root path =
     | Some chain ->
         Printf.printf "%s\n" (if path = "" then "(the root itself)" else path);
         List.iter (fun (v : SkeletonStore.version) ->
-          Printf.printf "  version %d  %s  %d bytes  sha256 %s  %s, %d bytes stored\n"
+          Printf.printf "  version %d  %s  %d bytes  sha256 %s  %s, %d bytes stored%s\n"
             v.SkeletonStore.seq (stamp v.SkeletonStore.time) v.SkeletonStore.size
-            v.SkeletonStore.sha256 (how v) v.SkeletonStore.stored_bytes) chain.SkeletonStore.versions;
+            v.SkeletonStore.sha256 (how v) v.SkeletonStore.stored_bytes
+            (if v.SkeletonStore.lost then "  LOST: a block it needs was destroyed by an edit outside Unison" else ""))
+          chain.SkeletonStore.versions;
         (match chain.SkeletonStore.pending with
          | Some (seq, time) ->
              Printf.printf "  pending %d  %s  a replaced file kept whole until the next synchronization settles it\n"
