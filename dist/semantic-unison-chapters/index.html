@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-09" />
+  <meta name="dcterms.date" content="2026-11-10" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
   <style>
@@ -55,7 +55,7 @@
 <h1 class="title">Semantic Unison</h1>
 <p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
 <p class="author">Alexy Khrabrov, with Claude as co-author</p>
-<p class="date">2026-11-09</p>
+<p class="date">2026-11-10</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -261,108 +261,144 @@ of packdir</a></li>
 id="toc-groups-across-two-trees"><span
 class="toc-section-number">10.6</span> Groups across two trees</a></li>
 </ul></li>
-<li><a href="chapter-012.html#the-benchmark-story"
-id="toc-the-benchmark-story"><span class="toc-section-number">11</span>
+<li><a href="chapter-012.html#skeleton-versions"
+id="toc-skeleton-versions"><span class="toc-section-number">11</span>
+Skeleton versions</a>
+<ul>
+<li><a href="chapter-012.html#what-a-backup-costs"
+id="toc-what-a-backup-costs"><span
+class="toc-section-number">11.1</span> What a backup costs</a></li>
+<li><a href="chapter-012.html#blocks-and-the-skeleton"
+id="toc-blocks-and-the-skeleton"><span
+class="toc-section-number">11.2</span> Blocks and the skeleton</a></li>
+<li><a href="chapter-012.html#turning-it-on"
+id="toc-turning-it-on"><span class="toc-section-number">11.3</span>
+Turning it on</a></li>
+<li><a href="chapter-012.html#what-happens-when-a-file-is-replaced"
+id="toc-what-happens-when-a-file-is-replaced"><span
+class="toc-section-number">11.4</span> What happens when a file is
+replaced</a></li>
+<li><a href="chapter-012.html#versions-are-additive"
+id="toc-versions-are-additive"><span
+class="toc-section-number">11.5</span> Versions are additive</a></li>
+<li><a href="chapter-012.html#reading-the-store"
+id="toc-reading-the-store"><span class="toc-section-number">11.6</span>
+Reading the store</a></li>
+<li><a href="chapter-012.html#one-writer-and-edits-unison-did-not-make"
+id="toc-one-writer-and-edits-unison-did-not-make"><span
+class="toc-section-number">11.7</span> One writer, and edits Unison did
+not make</a></li>
+</ul></li>
+<li><a href="chapter-013.html#the-benchmark-story"
+id="toc-the-benchmark-story"><span class="toc-section-number">12</span>
 The benchmark story</a>
 <ul>
-<li><a href="chapter-012.html#what-was-estimated-first"
+<li><a href="chapter-013.html#what-was-estimated-first"
 id="toc-what-was-estimated-first"><span
-class="toc-section-number">11.1</span> What was estimated first</a></li>
-<li><a href="chapter-012.html#the-test-set" id="toc-the-test-set"><span
-class="toc-section-number">11.2</span> The test set</a></li>
-<li><a href="chapter-012.html#first-copy-plain-files-are-fast"
+class="toc-section-number">12.1</span> What was estimated first</a></li>
+<li><a href="chapter-013.html#the-test-set" id="toc-the-test-set"><span
+class="toc-section-number">12.2</span> The test set</a></li>
+<li><a href="chapter-013.html#first-copy-plain-files-are-fast"
 id="toc-first-copy-plain-files-are-fast"><span
-class="toc-section-number">11.3</span> First copy: plain files are
+class="toc-section-number">12.3</span> First copy: plain files are
 fast</a></li>
-<li><a href="chapter-012.html#incremental-open-only-what-changed"
+<li><a href="chapter-013.html#incremental-open-only-what-changed"
 id="toc-incremental-open-only-what-changed"><span
-class="toc-section-number">11.4</span> Incremental: open only what
+class="toc-section-number">12.4</span> Incremental: open only what
 changed</a></li>
-<li><a href="chapter-012.html#the-cold-scan-partly"
+<li><a href="chapter-013.html#the-cold-scan-partly"
 id="toc-the-cold-scan-partly"><span
-class="toc-section-number">11.5</span> The cold scan, partly</a></li>
-<li><a href="chapter-012.html#where-the-benchmark-left-things"
+class="toc-section-number">12.5</span> The cold scan, partly</a></li>
+<li><a href="chapter-013.html#where-the-benchmark-left-things"
 id="toc-where-the-benchmark-left-things"><span
-class="toc-section-number">11.6</span> Where the benchmark left
+class="toc-section-number">12.6</span> Where the benchmark left
 things</a></li>
-<li><a href="chapter-012.html#real-unison-and-a-new-estimate"
+<li><a href="chapter-013.html#real-unison-and-a-new-estimate"
 id="toc-real-unison-and-a-new-estimate"><span
-class="toc-section-number">11.7</span> Real Unison, and a new
+class="toc-section-number">12.7</span> Real Unison, and a new
 estimate</a></li>
-<li><a href="chapter-012.html#the-surprise-file-by-file"
+<li><a href="chapter-013.html#the-surprise-file-by-file"
 id="toc-the-surprise-file-by-file"><span
-class="toc-section-number">11.8</span> The surprise: file by
+class="toc-section-number">12.8</span> The surprise: file by
 file</a></li>
-<li><a href="chapter-012.html#what-the-day-showed"
+<li><a href="chapter-013.html#what-the-day-showed"
 id="toc-what-the-day-showed"><span
-class="toc-section-number">11.9</span> What the day showed</a></li>
+class="toc-section-number">12.9</span> What the day showed</a></li>
 </ul></li>
-<li><a href="chapter-013.html#command-reference"
-id="toc-command-reference"><span class="toc-section-number">12</span>
+<li><a href="chapter-014.html#command-reference"
+id="toc-command-reference"><span class="toc-section-number">13</span>
 Command reference</a>
 <ul>
-<li><a href="chapter-013.html#unison-the--semdiff-family"
+<li><a href="chapter-014.html#unison-the--semdiff-family"
 id="toc-unison-the--semdiff-family"><span
-class="toc-section-number">12.1</span> unison: the -semdiff
+class="toc-section-number">13.1</span> unison: the -semdiff
 family</a></li>
-<li><a href="chapter-013.html#unison-dngscan"
-id="toc-unison-dngscan"><span class="toc-section-number">12.2</span>
+<li><a href="chapter-014.html#unison-dngscan"
+id="toc-unison-dngscan"><span class="toc-section-number">13.2</span>
 unison-dngscan</a></li>
-<li><a href="chapter-013.html#packed-root-preferences"
+<li><a href="chapter-014.html#packed-root-preferences"
 id="toc-packed-root-preferences"><span
-class="toc-section-number">12.3</span> Packed-root preferences</a></li>
-<li><a href="chapter-013.html#packdir-and-unison-packdir"
+class="toc-section-number">13.3</span> Packed-root preferences</a></li>
+<li><a href="chapter-014.html#packdir-and-unison-packdir"
 id="toc-packdir-and-unison-packdir"><span
-class="toc-section-number">12.4</span> packdir and
+class="toc-section-number">13.4</span> packdir and
 unison-packdir</a></li>
-<li><a href="chapter-013.html#dngc-and-dng-archive"
+<li><a
+href="chapter-014.html#unison-skeleton-and-the-skeleton-preferences"
+id="toc-unison-skeleton-and-the-skeleton-preferences"><span
+class="toc-section-number">13.5</span> unison-skeleton and the skeleton
+preferences</a></li>
+<li><a href="chapter-014.html#dngc-and-dng-archive"
 id="toc-dngc-and-dng-archive"><span
-class="toc-section-number">12.5</span> dngc and dng-archive</a></li>
-<li><a href="chapter-013.html#semantic-preferences"
+class="toc-section-number">13.6</span> dngc and dng-archive</a></li>
+<li><a href="chapter-014.html#semantic-preferences"
 id="toc-semantic-preferences"><span
-class="toc-section-number">12.6</span> Semantic preferences</a></li>
+class="toc-section-number">13.7</span> Semantic preferences</a></li>
 </ul></li>
-<li><a href="chapter-014.html#honest-limits"
-id="toc-honest-limits"><span class="toc-section-number">13</span> Honest
+<li><a href="chapter-015.html#honest-limits"
+id="toc-honest-limits"><span class="toc-section-number">14</span> Honest
 limits</a>
 <ul>
-<li><a href="chapter-014.html#packed-roots" id="toc-packed-roots"><span
-class="toc-section-number">13.1</span> Packed roots</a></li>
-<li><a href="chapter-014.html#clones" id="toc-clones"><span
-class="toc-section-number">13.2</span> Clones</a></li>
-<li><a href="chapter-014.html#semantic-diff-1"
-id="toc-semantic-diff-1"><span class="toc-section-number">13.3</span>
+<li><a href="chapter-015.html#packed-roots" id="toc-packed-roots"><span
+class="toc-section-number">14.1</span> Packed roots</a></li>
+<li><a href="chapter-015.html#clones" id="toc-clones"><span
+class="toc-section-number">14.2</span> Clones</a></li>
+<li><a href="chapter-015.html#semantic-diff-1"
+id="toc-semantic-diff-1"><span class="toc-section-number">14.3</span>
 Semantic diff</a></li>
-<li><a href="chapter-014.html#semantic-transfer-and-merging"
+<li><a href="chapter-015.html#semantic-transfer-and-merging"
 id="toc-semantic-transfer-and-merging"><span
-class="toc-section-number">13.4</span> Semantic transfer and
+class="toc-section-number">14.4</span> Semantic transfer and
 merging</a></li>
-<li><a href="chapter-014.html#building" id="toc-building"><span
-class="toc-section-number">13.5</span> Building</a></li>
+<li><a href="chapter-015.html#skeleton-versions-1"
+id="toc-skeleton-versions-1"><span
+class="toc-section-number">14.5</span> Skeleton versions</a></li>
+<li><a href="chapter-015.html#building" id="toc-building"><span
+class="toc-section-number">14.6</span> Building</a></li>
 </ul></li>
-<li><a href="chapter-015.html#how-this-was-built"
-id="toc-how-this-was-built"><span class="toc-section-number">14</span>
+<li><a href="chapter-016.html#how-this-was-built"
+id="toc-how-this-was-built"><span class="toc-section-number">15</span>
 How this was built</a>
 <ul>
-<li><a href="chapter-015.html#two-sessions-and-a-mailbox"
+<li><a href="chapter-016.html#two-sessions-and-a-mailbox"
 id="toc-two-sessions-and-a-mailbox"><span
-class="toc-section-number">14.1</span> Two sessions and a
+class="toc-section-number">15.1</span> Two sessions and a
 mailbox</a></li>
-<li><a href="chapter-015.html#milestones" id="toc-milestones"><span
-class="toc-section-number">14.2</span> Milestones</a></li>
-<li><a href="chapter-015.html#what-the-tests-found"
+<li><a href="chapter-016.html#milestones" id="toc-milestones"><span
+class="toc-section-number">15.2</span> Milestones</a></li>
+<li><a href="chapter-016.html#what-the-tests-found"
 id="toc-what-the-tests-found"><span
-class="toc-section-number">14.3</span> What the tests found</a></li>
-<li><a href="chapter-015.html#what-went-wrong-without-a-test"
+class="toc-section-number">15.3</span> What the tests found</a></li>
+<li><a href="chapter-016.html#what-went-wrong-without-a-test"
 id="toc-what-went-wrong-without-a-test"><span
-class="toc-section-number">14.4</span> What went wrong without a
+class="toc-section-number">15.4</span> What went wrong without a
 test</a></li>
-<li><a href="chapter-015.html#what-this-book-is"
-id="toc-what-this-book-is"><span class="toc-section-number">14.5</span>
+<li><a href="chapter-016.html#what-this-book-is"
+id="toc-what-this-book-is"><span class="toc-section-number">15.5</span>
 What this book is</a></li>
 </ul></li>
-<li><a href="chapter-016.html#building-and-testing"
-id="toc-building-and-testing"><span class="toc-section-number">15</span>
+<li><a href="chapter-017.html#building-and-testing"
+id="toc-building-and-testing"><span class="toc-section-number">16</span>
 Building and testing</a></li>
 </ul>
 </nav>

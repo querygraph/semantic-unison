@@ -5,9 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-09" />
+  <meta name="dcterms.date" content="2026-11-10" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
-  <title>Building and testing</title>
+  <title>How this was built</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -32,71 +32,6 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { color: #008000; } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { color: #008000; font-weight: bold; } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="book.css" />
 </head>
@@ -112,41 +47,210 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
+<span class="navlink-label">Next:</span> <a href="chapter-017.html" accesskey="n" rel="next">Building and testing</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="chapter-015.html" accesskey="p" rel="previous">How this was built</a>
+<span class="navlink-label">Previous:</span> <a href="chapter-015.html" accesskey="p" rel="previous">Honest limits</a>
 </span>
 </div>
 </nav>
-<h1 data-number="15" id="building-and-testing"><span
-class="header-section-number">15</span> Building and testing</h1>
-<p>Semantic Unison builds with dune. Packed roots need the opam
-<code>packdir</code> package, and <code>-preserve</code> needs
-<code>dng-archive</code>. Each must be pinned in each opam switch you
-use, and stock OCaml and OxCaml stay separate.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
-<p>The binaries are <code>src/linktext.exe</code> (installed as
-<code>unison</code>), <code>src/dngscan.exe</code>
-(<code>unison-dngscan</code>) and <code>tools/packdir/main.exe</code>
-(<code>unison-packdir</code>), under dune’s build directory.</p>
-<p>The controls use synthetic data in private temporary directories:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
-<p>The other packed-root suites are <code>unison_write.py</code>,
-<code>unison_recover.py</code>, <code>unison_parallel.py</code> and
-<code>unison_marker.py</code>, with the same arguments, and
-<code>unison_config.py</code>, which takes only <code>--unison</code>.
-The packdir project has its own 92 controls, plus 45 that compare each
-file command with GNU coreutils on the same tree unpacked.</p>
-<p>These were rerun while this book was written, on 2026-10-31 at source
-commit <code>c2aa06cc</code>, from fresh dune builds with OxCaml
-<code>5.2.0+ox</code> and stock OCaml 5.2.0, on the Unison side only. On
-both compilers the results matched the commit’s record: detection 11,
-write 28, recovery 21, parallel 11, marker 8, config 16 and semdiff 37
-controls passed, and <code>-selftest</code> reported success. The
-packdir project’s own suites and the fork’s larger qualification
-matrices were not rerun for this book.</p>
+<h1 data-number="15" id="how-this-was-built"><span
+class="header-section-number">15</span> How this was built</h1>
+<h2 data-number="15.1" id="two-sessions-and-a-mailbox"><span
+class="header-section-number">15.1</span> Two sessions and a
+mailbox</h2>
+<p>Packdir was built in one day by one human and two LLM sessions, which
+could not talk to each other directly. The Photo session, which owned
+the Lightroom preview pipeline, knew the data and worked in another
+repository. The Unison session worked in this one. The user talked to
+both.</p>
+<p>They cooperated through two files in <code>docs/</code>, under rules
+the Photo session wrote at the top of the first message:</p>
+<ul>
+<li><strong>Two files, one writer each.</strong>
+<code>photo-to-unison.md</code> is written only by Photo, and
+<code>unison-to-photo.md</code> only by Unison.</li>
+<li><strong>Lock while writing.</strong> Create
+<code>&lt;file&gt;.lock</code> with an exclusive create, write, then
+delete it. Never delete a lock you did not create. Report a stale one to
+the user.</li>
+<li><strong>Append only.</strong> Messages are numbered <code>P-n</code>
+and <code>U-n</code>. Never rewrite one. To correct one, send a new
+message that says which it supersedes.</li>
+<li><strong>Status line.</strong> <code>open</code>,
+<code>answered</code>, <code>blocked-on-user</code> or
+<code>closed</code>. Decisions that belong to the user are marked
+<code>blocked-on-user</code>, and neither session acts on them until the
+user decides.</li>
+</ul>
+<p>Between 06:58Z and 20:32Z on 2026-10-31, UTC by the messages’ own
+headings, the mailbox carried seven messages from Photo and 21 from
+Unison. The two-file rule worked well for two writers, and the
+append-only rule kept every wrong number in place next to its
+correction. U-17 exists only to say that U-16 named a commit hash
+written before the commit did, and which hash was right. P-3 corrects
+the timestamp in P-2.</p>
+<p><code>blocked-on-user</code> mattered most. The list of things
+decided by the human includes: the mirror disk stays HFS+, the originals
+stay, a changed original is kept updated in the container, the benchmark
+folder, the barrier, deleting three stray copies, packed over plain, and
+when to start. No session started the mirror until the user said go. The
+Unison session had written in U-20: “I won’t change the profile or start
+the run until the user says go.”</p>
+<h2 data-number="15.2" id="milestones"><span
+class="header-section-number">15.2</span> Milestones</h2>
+<p>The integration had six milestones, each tested on synthetic data on
+stock OCaml and OxCaml, with the prototype as the reference.</p>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 17%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Milestone</th>
+<th style="text-align: left;">Commit</th>
+<th style="text-align: left;">What it added</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;"><code>ee379a85</code></td>
+<td style="text-align: left;">Preferences, refusals, the archive
+identity</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"><code>9fc389bf</code></td>
+<td style="text-align: left;">Update detection from containers, through
+the hooks</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"><code>c3b553be</code></td>
+<td style="text-align: left;">Propagation through the writer</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;"><code>8590b216</code></td>
+<td style="text-align: left;">Barriers and recovery</td>
+</tr>
+<tr>
+<td style="text-align: left;">5, 6</td>
+<td style="text-align: left;"><code>e401f408</code></td>
+<td style="text-align: left;">Parallel writer, the packed marker,
+<code>unison-packdir</code> beside <code>unison</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>5c95d940</code></td>
+<td style="text-align: left;">One transaction per container for
+file-by-file items</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>c2aa06cc</code></td>
+<td style="text-align: left;">The format and commands moved to the
+separate packdir project</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>e46abd19</code></td>
+<td style="text-align: left;">Packing workers leave the inherited heap
+alone</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>4c107313</code></td>
+<td style="text-align: left;">A restart verifies only containers no
+barrier covers</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>24dc7298</code></td>
+<td style="text-align: left;">The DNG walker comes from tiffgraph</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>e451e6b6</code></td>
+<td style="text-align: left;">APFS clones preserved, file to file and
+into packed roots</td>
+</tr>
+</tbody>
+</table>
+<p>Controls at the last of these: detection 11, write 28, recovery 21,
+parallel 11, marker 8, config 16, semdiff 37, and Unison’s
+<code>-selftest</code>.</p>
+<h2 data-number="15.3" id="what-the-tests-found"><span
+class="header-section-number">15.3</span> What the tests found</h2>
+<p>The essay says, “A test can pass because its fixture missed the
+dangerous case.” The packdir work has examples of that and of its
+opposite. These are the ones recorded in the mailbox, the commits and
+the session’s notes.</p>
+<p><strong>Tests that passed by accident.</strong> In milestone 2, the
+first detection tests passed, and they should not have. Unison was
+failing to fingerprint every member and silently skipping them without
+comparing anything, because something called
+<code>Fingerprint.file</code> directly and bypassed the path the hook
+was on. The session noticed, put the hook in
+<code>Fingerprint.file</code>, and tightened the test to refuse digest
+errors. A later assertion in <code>tests/packdir/unison_detect.py</code>
+shows the tightening: exactly the two changes must be detected, with no
+error in the output. A silent skip looks exactly like nothing to do,
+which is why this class of bug is dangerous in a synchronizer.</p>
+<p><strong>A check that never ran.</strong> <code>-packdepth -1</code>
+was accepted, because setup only ran for a positive depth, so the
+negative-depth check inside it was unreachable, and Unison synchronized
+normally. Setup now runs for any nonzero depth, and a control covers it.
+The root check in the same milestone crashed because it ran before
+Unison had set up its roots.</p>
+<p><strong>A retained deletion that updated one archive.</strong> A
+retained deletion first updated only the packed root’s archive, so
+Unison found the two archives different and refused to save either. Both
+are updated now, as <code>Files.delete</code> does. Milestone 3’s
+controls caught this, and U-19 reports it.</p>
+<p><strong>The marker check ran too late.</strong> Setup writes the
+run’s marker, and the check came after it, so a run with the wrong depth
+could rewrite the mirror’s marker and carry on. The check now comes
+first, with a comment saying why, and an existing marker is never
+rewritten with another depth.</p>
+<p><strong>A crashed worker’s container dropped from the recheck
+list.</strong> After a commit, the pending list was cleared. A container
+whose job had died was in it, so it would have been trusted next time.
+Now only containers whose job failed stay pending, tracked in
+<code>failed_this_run</code>. The worker-crash control in
+<code>tests/packdir/unison_parallel.py</code> kills a worker partway
+through and requires the next run to converge.</p>
+<p><strong>A harness that deleted.</strong> The benchmark’s plain-Unison
+method deleted on the target until a dry run on the internal disk showed
+it. The dry run was there to test the harness, and it did.</p>
+<h2 data-number="15.4" id="what-went-wrong-without-a-test"><span
+class="header-section-number">15.4</span> What went wrong without a
+test</h2>
+<p>Not every mistake was caught by a control:</p>
+<ul>
+<li>A shell-quoting mistake packed three extra full copies, 51 GiB each,
+into folders with spaces in their names on the mirror disk. The harness
+had promised to delete nothing, so the session asked the user before
+removing them.</li>
+<li><code>diskutil unmount</code> hung for 16 and then 12 minutes,
+unattended, because it had no timeout. The session called that its own
+mistake.</li>
+<li>Nobody tested a target with plain directories at scale, and the
+result was the slow mirror of the benchmark chapter.</li>
+</ul>
+<p>These are recorded in the mailbox because the rule of that channel,
+and of the fork, is that a correction goes beside the original.</p>
+<h2 data-number="15.5" id="what-this-book-is"><span
+class="header-section-number">15.5</span> What this book is</h2>
+<p>This book was written in one session, after all of the above, from
+those records. The session read the essay, the design documents, the
+mailbox and the source, and ran the commands in the worked examples on
+synthetic data. It did not read from or write to the real disks. The
+diagrams were written by hand as SVG. When the source and a document
+disagreed, the book follows the source and says so, as with the
+<code>-preserve</code> help text.</p>
 </body>
 </html>

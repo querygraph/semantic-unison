@@ -5,9 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-09" />
+  <meta name="dcterms.date" content="2026-11-10" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
-  <title>The benchmark story</title>
+  <title>Skeleton versions</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -32,6 +32,71 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="book.css" />
 </head>
@@ -47,495 +112,156 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="chapter-013.html" accesskey="n" rel="next">Command reference</a>
+<span class="navlink-label">Next:</span> <a href="chapter-013.html" accesskey="n" rel="next">The benchmark story</a>
 </span>
 <span class="navlink">
 <span class="navlink-label">Previous:</span> <a href="chapter-011.html" accesskey="p" rel="previous">APFS clones</a>
 </span>
 </div>
 </nav>
-<h1 data-number="11" id="the-benchmark-story"><span
-class="header-section-number">11</span> The benchmark story</h1>
-<p>This chapter is the record of a day: 2026-10-31, from the first
-mailbox message at 06:58Z. All measurements are from the mailbox and
-<code>docs/packdir-design.md</code>. All of them used one Mac with 128
-GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the
-target. None were repeated by the session writing this book.</p>
-<h2 data-number="11.1" id="what-was-estimated-first"><span
-class="header-section-number">11.1</span> What was estimated first</h2>
-<p>The proposal and the first replies contained several figures, and one
-design choice, that later proved wrong. Two sessions wrote them in good
-faith, and the figures were marked as estimates or samples at the
-time.</p>
-<table>
-<colgroup>
-<col style="width: 34%" />
-<col style="width: 33%" />
-<col style="width: 32%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Early figure</th>
-<th style="text-align: left;">What was found</th>
-<th style="text-align: left;">Why it was wrong</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Cache of about 9.6 million files, about
-0.6 MiB each</td>
-<td style="text-align: left;">3,616,982 files, 4.43 TiB, mean 1.28
-MiB</td>
-<td style="text-align: left;">9.6 million was the inode count of the
-whole volume, including pipeline staging</td>
-</tr>
-<tr>
-<td style="text-align: left;">78 to 150 files per leaf</td>
-<td style="text-align: left;">About 55 mean, 16 to 108 over 400 sampled
-leaves</td>
-<td style="text-align: left;">Three hand-picked leaves</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison first run: 20 to 40 h,
-limited by about 200 to 270 IOPS</td>
-<td style="text-align: left;">Linear from a measured 152 MiB/s: about
-8.5 h</td>
-<td style="text-align: left;">Writes of 1.28 MiB files on this disk were
-not seek-bound at this scale</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>F_FULLFSYNC</code> update: about 50
-to 150 ms per container on the mirror disk</td>
-<td style="text-align: left;">About 0.9 s per container</td>
-<td style="text-align: left;">The drive’s cache flush costs far more
-than guessed</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>journal_mode = TRUNCATE</code> is
-the right journal</td>
-<td style="text-align: left;">It leaves an empty <code>-journal</code>
-beside every container</td>
-<td style="text-align: left;">Found by the prototype’s tests, which then
-changed the design</td>
-</tr>
-</tbody>
-</table>
-<p>The Photo session corrected the first two itself in P-2. The last
-line was caught the same morning. The third was the benchmark’s first
-surprise.</p>
-<h2 data-number="11.2" id="the-test-set"><span
-class="header-section-number">11.2</span> The test set</h2>
-<p>The Photo session wrote a generator that took the real distribution
-from a stat-only sample of 400 leaves and produced
-<code>leafset-v1</code>: 50.0 GiB, 39,903 files, 694 leaves, with random
-bytes that are incompressible like JPEG, and random names. Nothing real
-was in it. It reproduced whole groups of levels with real sizes. Each
-method wrote to a new folder on the mirror disk.</p>
-<h2 data-number="11.3" id="first-copy-plain-files-are-fast"><span
-class="header-section-number">11.3</span> First copy: plain files are
-fast</h2>
-<p>Source read from memory for every method, so the comparison is the
-mirror disk’s cost alone. Each method ends with <code>sync</code>.</p>
-<table style="width:99%;">
-<colgroup>
-<col style="width: 54%" />
-<col style="width: 12%" />
-<col style="width: 18%" />
-<col style="width: 15%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Throughput</th>
-<th style="text-align: right;">Target ops/s</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>cp -R</code></td>
-<td style="text-align: right;">259 s</td>
-<td style="text-align: right;">198 MiB/s</td>
-<td style="text-align: right;">312</td>
-</tr>
-<tr>
-<td style="text-align: left;">Piped <code>tar</code> to
-<code>tar</code></td>
-<td style="text-align: right;">266 s</td>
-<td style="text-align: right;">192 MiB/s</td>
-<td style="text-align: right;">303</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison, one way,
-<code>clone = off</code></td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">152 MiB/s</td>
-<td style="text-align: right;">272</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code>, 1 worker</td>
-<td style="text-align: right;">1,178 s</td>
-<td style="text-align: right;">44 MiB/s</td>
-<td style="text-align: right;">130</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code>, 1 worker,
-<code>F_FULLFSYNC</code> per container</td>
-<td style="text-align: right;">1,321 s</td>
-<td style="text-align: right;">39 MiB/s</td>
-<td style="text-align: right;">120</td>
-</tr>
-<tr>
-<td style="text-align: left;">Sparse bundle</td>
-<td style="text-align: right;">failed</td>
-<td style="text-align: right;"></td>
-<td style="text-align: right;"></td>
-</tr>
-</tbody>
-</table>
-<p>This was not the result anyone wanted for a packing project. Plain
-Unison was not seek-bound. The prototype was four times slower than it,
-for two reasons, and both were understood the same hour: it was
-CPU-bound on one thread, and it flushed the drive’s cache once per
-container. The sparse-bundle method failed because
-<code>hdiutil attach</code> got “Permission denied” for a bundle on the
-mirror disk, and it was later dropped.</p>
-<p>Workers fixed the first problem. The second needed a design decision.
-Three-way comparison on the full 50 GiB with 4 workers:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Sync</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Throughput</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Barrier every 4 GiB</td>
-<td style="text-align: right;">340 s</td>
-<td style="text-align: right;">150 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;">No flush at all</td>
-<td style="text-align: right;">314 s</td>
-<td style="text-align: right;">163 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>F_FULLFSYNC</code> per
-container</td>
-<td style="text-align: right;">946 s</td>
-<td style="text-align: right;">54 MiB/s</td>
-</tr>
-<tr>
-<td style="text-align: left;">Plain Unison, for reference</td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">152 MiB/s</td>
-</tr>
-</tbody>
-</table>
-<p>The barrier kept the guarantee that matters for a mirror, at 8% over
-no flush, and matched plain Unison.</p>
-<h2 data-number="11.4" id="incremental-open-only-what-changed"><span
-class="header-section-number">11.4</span> Incremental: open only what
-changed</h2>
-<p>A 1% change set then replaced, added and deleted files in 12 of 694
-leaves, 197 MiB in all. Every method stored the same 157 files.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Time</th>
-<th style="text-align: right;">Target I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">378 MiB, 4,031 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
-<td style="text-align: right;">61.6 s</td>
-<td style="text-align: right;">1,360 MiB, 15,800 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code></td>
-<td style="text-align: right;">121.8 s</td>
-<td style="text-align: right;">2,759 MiB, 37,749 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code></td>
-<td style="text-align: right;">129.6 s</td>
-<td style="text-align: right;">2,855 MiB, 39,457 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4</code></td>
-<td style="text-align: right;">146.1 s</td>
-<td style="text-align: right;">2,603 MiB, 34,910 ops</td>
-</tr>
-</tbody>
-</table>
-<p>Packing lost by roughly ten to twenty times, and the cause was
-specific. The prototype opened every container on every run. Opening all
-694 and reading their member tables, with nothing to write, took 83 to
-141 s, about 0.12 to 0.2 s each on the disk. Linearly, 65,536 containers
-would have taken 2 to 3.5 hours per run, enough to sink the whole
-idea.</p>
-<p>The fix is the design point mentioned earlier: record each
-container’s inode, size and mtime, and open only containers whose file
-changed or that have something to store. A rerun with nothing new then
-took 1.3 s for 694 containers. A second change set, with the scan timed
-apart from the transfer:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Method</th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Scan</th>
-<th style="text-align: right;">Containers opened</th>
-<th style="text-align: right;">Target I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">2.4 s</td>
-<td style="text-align: right;">n/a</td>
-<td style="text-align: right;">404 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar</code></td>
-<td style="text-align: right;">8.8 s</td>
-<td style="text-align: right;">0.31 s</td>
-<td style="text-align: right;">12 of 694</td>
-<td style="text-align: right;">647 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-wal</code></td>
-<td style="text-align: right;">8.4 s</td>
-<td style="text-align: right;">0.31 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">670 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4</code></td>
-<td style="text-align: right;">7.1 s</td>
-<td style="text-align: right;">0.40 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">638 MiB</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>sqlar-w4-nosync</code></td>
-<td style="text-align: right;">5.0 s</td>
-<td style="text-align: right;">0.41 s</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">635 MiB</td>
-</tr>
-</tbody>
-</table>
-<p><code>.sqlar</code> wrote about 1.6 times the bytes of plain Unison
-for the same change, because of the rollback journal and the read-back
-verification. <code>sqlar-wal</code> left three files per container
-instead of one, which confirmed <code>DELETE</code>.</p>
-<h2 data-number="11.5" id="the-cold-scan-partly"><span
-class="header-section-number">11.5</span> The cold scan, partly</h2>
-<p>Every figure above came from a warm cache. The mirror disk’s catalog
-for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6
-million more files is a different thing, and after a reboot it would
-have to be read from the platter. The deciding measurement would have
-been a cold scan.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">No-change pass, after
-<code>sudo purge</code></th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Scan</th>
-<th style="text-align: right;">Target I/O</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Plain Unison</td>
-<td style="text-align: right;">16.1 s</td>
-<td style="text-align: right;">11.8 s</td>
-<td style="text-align: right;">56 MiB, 4,755 ops</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>.sqlar</code>, 4 workers,
-barrier</td>
-<td style="text-align: right;">1.0 s</td>
-<td style="text-align: right;">0.6 s</td>
-<td style="text-align: right;">16 MiB, 166 ops</td>
-</tr>
-</tbody>
-</table>
-<p>This was only partly cold. <code>purge</code> left the mirror disk’s
-catalog cached: a stat walk of the plain copy afterwards took 0.21 s.
-Plain Unison’s extra reads look like the per-file Finder-info and
-resource-fork lookups it does on macOS, from HFS+’s attributes tree,
-though that was an inference. A fully cold test needed the mirror disk
-unmounted between steps, and from that session
-<code>diskutil unmount</code> hung twice, unattended, for 16 and 12
-minutes. The Unison session called that its own mistake, since the
-command should have had a timeout. The user chose to stop there.</p>
-<h2 data-number="11.6" id="where-the-benchmark-left-things"><span
-class="header-section-number">11.6</span> Where the benchmark left
-things</h2>
+<h1 data-number="11" id="skeleton-versions"><span
+class="header-section-number">11</span> Skeleton versions</h1>
+<h2 data-number="11.1" id="what-a-backup-costs"><span
+class="header-section-number">11.1</span> What a backup costs</h2>
+<p>Unison can keep the version of a file it is about to replace: the
+<code>backup</code> preference stores a whole copy. For photographs that
+is the wrong unit. Setting a rating in a 25 MB DNG rewrites a few
+hundred bytes of XMP and perhaps moves the image data along by a few
+bytes, and the backup of that edit is another 25 MB. Ten edits to one
+photograph, kept as backups, cost ten photographs.</p>
+<p>A <strong>skeleton version</strong> keeps only what the edit
+destroyed. It is the same idea DNG Compare’s archive uses to rebuild a
+reference file after it has been edited, described in that book’s part
+on skeletons, applied here to the versions a synchronization
+replaces.</p>
+<h2 data-number="11.2" id="blocks-and-the-skeleton"><span
+class="header-section-number">11.2</span> Blocks and the skeleton</h2>
+<p>A file is cut along its own structure into two parts.</p>
+<ul>
+<li><strong>Blocks</strong> are the large runs a metadata edit carries
+over unchanged, often at another offset: a TIFF or DNG file’s strips and
+tiles, its embedded previews, maker notes and profiles, and a JPEG’s
+scan.</li>
+<li><strong>The skeleton</strong> is every byte outside the blocks, in
+file order: the header, the directories, small tag values and the XMP
+packet.</li>
+</ul>
+<p>The cuts follow the rules of the DNG Compare archive format, and a
+test holds this fork’s walkers to values that project’s implementation
+produces for the same bytes. Classic TIFF, which includes DNG, and JPEG
+have walkers. A file of any other format up to 1 MiB, such as an XMP
+sidecar, is its own skeleton, with no blocks.</p>
+<p>A kept version is its skeleton, a few kilobytes, and a map of where
+each block goes. The blocks themselves are not copied while a later
+version of the file still holds them.</p>
+<h2 data-number="11.3" id="turning-it-on"><span
+class="header-section-number">11.3</span> Turning it on</h2>
+<pre><code>skeleton     = Name *.dng
+skeleton     = Name *.jpg
+skeleton     = Name *.xmp
+maxskeletons = 3
+skeletondir  = /path/outside/the/replicas/skeletons</code></pre>
+<p><code>skeleton</code> selects paths as <code>backup</code> does,
+<code>skeletonnot</code> makes exceptions, and <code>maxskeletons</code>
+is the number of earlier versions kept per path. Its default is 0, which
+keeps nothing and does not touch the store. Each host keeps the versions
+of the files replaced on that host, in its own store; the preferences
+travel to the server as the backup preferences do. Skeleton versions are
+independent of backups, and a path that matches both gets both.</p>
+<h2 data-number="11.4" id="what-happens-when-a-file-is-replaced"><span
+class="header-section-number">11.4</span> What happens when a file is
+replaced</h2>
+<ol type="1">
+<li>Before the file is replaced, Unison takes it as a <em>pending</em>
+item of the store: an APFS clone where the filesystem makes one,
+otherwise a copy.</li>
+<li>The new file goes into place as usual.</li>
+<li>The pending file is settled. Its skeleton and blocks are computed,
+and every block is looked for in the new file, by length and a sampled
+fingerprint first and then by the SHA-256 of the whole block. A block
+the new file does not hold, such as an embedded preview the edit
+regenerated, is saved in the store.</li>
+<li>The version is rebuilt from what will remain, without the pending
+file, and its SHA-256 is compared with the replaced file’s. Only then is
+the pending file deleted.</li>
+</ol>
+<p>Whatever cannot be kept this way is kept as a whole file, and said to
+be: a file with no walker that is larger than 1 MiB, a deleted file,
+which leaves no later file to hold its blocks, or a version whose
+rebuild did not match. Nothing is dropped silently, and an interrupted
+run leaves its pending files to be settled at the next start.</p>
+<h2 data-number="11.5" id="versions-are-additive"><span
+class="header-section-number">11.5</span> Versions are additive</h2>
+<p>The skeletons of one file are stored as differences against one
+another. The newest is kept in full and each older one as a small delta
+against the next newer, so a second rating change, a caption, and an
+exposure adjustment each add a few hundred bytes, not another skeleton.
+Blocks are shared too: a kept block is stored once however many versions
+need it, and is removed when the last version that needs it ages
+out.</p>
+<p>Measured on six real files edited by Lightroom Classic and Photo
+Mechanic, three DNGs of 24 to 29 MB and three JPEGs of 2 to 3 MB,
+synchronized twice so that each had two earlier versions:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: left;"></th>
-<th style="text-align: right;">Plain Unison</th>
-<th style="text-align: right;"><code>.sqlar</code>, 4 workers,
-barrier</th>
+<th style="text-align: left;">Stored</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">First copy, 50 GiB</td>
-<td style="text-align: right;">337 s</td>
-<td style="text-align: right;">340 s</td>
+<td style="text-align: left;">The newest earlier version of each file,
+in full</td>
+<td style="text-align: left;">19 to 67 KB</td>
 </tr>
 <tr>
-<td style="text-align: left;">1% incremental</td>
-<td style="text-align: right;">6.6 s</td>
-<td style="text-align: right;">5 to 7 s</td>
+<td style="text-align: left;">The version before it, as a delta</td>
+<td style="text-align: left;">81 to 316 bytes</td>
 </tr>
 <tr>
-<td style="text-align: left;">No-change scan, warm</td>
-<td style="text-align: right;">about 2.4 s</td>
-<td style="text-align: right;">about 0.4 s</td>
+<td style="text-align: left;">Kept blocks</td>
+<td style="text-align: left;">none: every block was still in the current
+file</td>
 </tr>
 <tr>
-<td style="text-align: left;">No-change pass, partly cold</td>
-<td style="text-align: right;">16 s</td>
-<td style="text-align: right;">1 s</td>
+<td style="text-align: left;">All twelve versions together</td>
+<td style="text-align: left;">186 KB, for 83 MB of files</td>
 </tr>
 </tbody>
 </table>
-<p>Extrapolations to the full cache were linear and were labelled as
-such: 3.6 million files is about 90 times this set, and 65,536
-containers is about 94 times. They gave a first copy of about 8.5 h
-either way, a warm scan of about 3.5 min plain against about 30 s
-packed, and a cold scan of about 24 min plain against about 1.5 min
-packed, with the plain figure as a lower bound.</p>
-<p>The trade-off was the user’s to judge, and it was put plainly. Plain
-files are simpler, need no new code and stay browsable with any tool.
-Packed makes runs much cheaper to scan and leaves the mirror disk with
-65,536 files, at the cost of a new Unison feature, a SQLite tool to look
-inside, and about 1.6 times the bytes written per change.</p>
-<p>The Photo session recommended running a plain mirror first, timing a
-cold pass on the real files, and switching only if that was too slow. It
-was a reasonable recommendation. The user chose packed, and confirmed
-that after hearing it.</p>
-<h2 data-number="11.7" id="real-unison-and-a-new-estimate"><span
-class="header-section-number">11.7</span> Real Unison, and a new
-estimate</h2>
-<p>After the integration, real Unison packed the 50 GiB set onto the
-mirror disk:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Writer</th>
-<th style="text-align: right;">Total</th>
-<th style="text-align: right;">Propagation</th>
-<th style="text-align: right;">Throughput</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Asynchronous</td>
-<td style="text-align: right;">424 s</td>
-<td style="text-align: right;">334 s</td>
-<td style="text-align: right;">121 MiB/s overall</td>
-</tr>
-<tr>
-<td style="text-align: left;">First, blocking</td>
-<td style="text-align: right;">538 s</td>
-<td style="text-align: right;">448 s</td>
-<td style="text-align: right;">95 MiB/s</td>
-</tr>
-</tbody>
-</table>
-<p>The propagation figure matches the prototype’s 340 s. The extra 90 s
-is Unison’s first-run MD5 of every source file, which the prototype had
-been spared, and a quiet rerun took 3.2 s. So the honest comparison with
-plain Unison’s 337 s is 424 s, not 340 s. The extrapolation became about
-10.6 h for a first full mirror against about 8.4 h plain. That was still
-an estimate.</p>
-<h2 data-number="11.8" id="the-surprise-file-by-file"><span
-class="header-section-number">11.8</span> The surprise: file by
-file</h2>
-<p>The real mirror started, and it was much slower than 10.6 h would
-imply.</p>
-<p>The set <code>leafset-v1</code> had been written to an empty target.
-The mirror disk was not empty. It held the kept originals, and a check
-during the run found that 41,549 of the 65,536 leaves had a plain
-directory on the target. As described in the previous chapter, a leaf
-with a plain directory on the target reaches the writer file by file,
-not as one directory item. Each file then had its own process and its
-own SQLite transaction. The commit message records the result: about 25
-files/s on the mirror disk.</p>
-<p>No benchmark had exercised this. The design had thought through what
-kept originals meant for correctness, in detail. Nobody had asked what
-they meant for how Unison’s items are shaped, and the leaf set had no
-plain directories to reveal it.</p>
-<p>As a rough estimate, and assuming leaves of equal size: 41,549 leaves
-are about 63% of the cache, or about 2.3 million files, and at 25
-files/s that is about 25 hours for those leaves alone. This is
-arithmetic on one rate, not a measurement of the mirror. The session’s
-own note at the time said roughly 30 hours or more.</p>
-<p>The fix was commit <code>5c95d940</code>, per-container queues. On
-the internal disk the rate went from 67 to 187 files/s. Its rate on the
-mirror disk is not yet measured.</p>
-<p><strong>The mirror finished</strong> on 2026-11-01. Unison reported
-<code>1813638 items transferred, 62925 skipped, 0 failed</code>. The
-mirror disk held all 65,536 containers, 4,610 GiB, with none damaged and
-the pending list empty. The 62,925 skips were the expected ones: files
-only the mirror disk had, which <code>nodeletion</code> protected. That
-is also why the run exited 1, which in Unison means only that items were
-skipped. All 74,981 kept originals were present at the right size
-afterwards. A later member listing, taken from Unison’s own state file
-in seconds rather than by opening the containers for hours, found
-3,616,982 members.</p>
-<p><strong>The collector, not the disk.</strong> Part way through, the
-packing rate kept rising and falling, between about 100 and 150 MB/s.
-The obvious suspects were the source disk’s layout and the mirror disk
-itself, and the first guess named the wrong one. The rate followed the
-garbage collector instead. Each worker is a forked process that inherits
-Unison’s whole heap, about 6.5 GB on this root. It then spent most of
-its time marking that heap, which it would never use, while it allocated
-file contents. A worker lives for one job, so it now turns its collector
-nearly off. After a restart with that change, packing held about 148
-MB/s for 6.9 hours, against about 115 MB/s on average before it.</p>
-<p><strong>What is still unmeasured.</strong> The run’s total time is
-not a clean figure: it was stopped and restarted for the fixes above.
-Batching’s rate on the mirror disk, and a fully cold no-change scan at
-full scale, are still not measured on their own.</p>
-<p><strong>The scan that survived.</strong> When the file-by-file
-problem was found, the mirror had to be stopped and restarted, and the
-session said the 5-hour scan would be lost. That was wrong, and it was
-stated without checking. Unison keeps a fingerprint cache for
-interrupted scans, 308 MB for this cache, and the restarted run reloaded
-it: source-disk reads fell from 268 MB/s to about 1.3 MB/s.</p>
-<h2 data-number="11.9" id="what-the-day-showed"><span
-class="header-section-number">11.9</span> What the day showed</h2>
-<ul>
-<li>A small benchmark on the wrong shape of data can be precise and
-still miss the main cost. This one was careful about file sizes and
-missed the state of the target.</li>
-<li>Measuring early changed the design four times: the journal, the
-workers, the barrier and the stamp check. Each of those would have been
-far more expensive to find on the real run.</li>
-<li>Estimates written down as estimates did no harm, because everyone
-could see what to replace.</li>
-<li>Two of the largest numbers came from a sample of three, and from a
-figure that described something else. Both were caught by asking where
-the number came from.</li>
-</ul>
+<p>Whole-file backups of the same twelve versions would have taken 165
+MB.</p>
+<h2 data-number="11.6" id="reading-the-store"><span
+class="header-section-number">11.6</span> Reading the store</h2>
+<p><code>unison-skeleton</code> lists, checks and restores:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> list    ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> verify  ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> restore ROOT PATH <span class="er">(</span><span class="ex">--version</span> N <span class="kw">|</span> <span class="ex">--sha256</span> HEX<span class="kw">)</span> <span class="ex">--out</span> FILE</span></code></pre></div>
+<p><code>list</code> prints each kept version with its number, the time
+it was replaced, its size, its SHA-256 and how it is stored.
+<code>verify</code> rebuilds every kept version without writing it and
+compares SHA-256s. <code>restore</code> writes one version to a new file
+outside the replica, checked the same way, and refuses to overwrite. A
+version’s number does not change when older ones are pruned.</p>
+<h2 data-number="11.7"
+id="one-writer-and-edits-unison-did-not-make"><span
+class="header-section-number">11.7</span> One writer, and edits Unison
+did not make</h2>
+<p>Each change to the store is made under a lock on the root’s
+directory, so two synchronizations that share a root cannot interleave
+their changes to it.</p>
+<p>A version’s blocks live in the current file. If an application
+rewrites that file in place, outside a synchronization, and destroys a
+block, by regenerating an embedded preview for instance, the versions
+that need the block can no longer be rebuilt on that replica, and
+nothing can prevent it. Unison does not stay silent about it: the next
+time it replaces the file it checks every earlier version against what
+is left, logs a warning for each one that is now unrebuildable, and
+marks it <code>lost</code>, once. <code>list</code> shows the mark and
+<code>restore</code> refuses the version. The replica that
+<em>received</em> the edit through Unison saved the block as it arrived,
+so its store usually still has the version. An in-place edit of metadata
+alone does no harm.</p>
 </body>
 </html>

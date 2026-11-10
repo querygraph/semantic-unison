@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc 3.12.1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-09" />
+  <meta name="dcterms.date" content="2026-11-10" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
   <title>Semantic Unison</title>
   <style>
@@ -114,7 +114,7 @@ figcaption { font-size: .88em; font-style: italic; color: #3b5563; margin-top: .
 <h1 class="title">Semantic Unison</h1>
 <p class="subtitle">An LLM-friendly fork of a file synchronizer</p>
 <p class="author">Alexy Khrabrov, with Claude as co-author</p>
-<p class="date">2026-11-09</p>
+<p class="date">2026-11-10</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -212,54 +212,69 @@ recovery</a></li>
 <li><a href="#out-of-packdir" id="toc-out-of-packdir"><span class="toc-section-number">10.5</span> Out of packdir</a></li>
 <li><a href="#groups-across-two-trees" id="toc-groups-across-two-trees"><span class="toc-section-number">10.6</span> Groups across two trees</a></li>
 </ul></li>
-<li><a href="#the-benchmark-story" id="toc-the-benchmark-story"><span class="toc-section-number">11</span> The benchmark story</a>
+<li><a href="#skeleton-versions" id="toc-skeleton-versions"><span class="toc-section-number">11</span> Skeleton versions</a>
 <ul>
-<li><a href="#what-was-estimated-first" id="toc-what-was-estimated-first"><span class="toc-section-number">11.1</span> What was estimated first</a></li>
-<li><a href="#the-test-set" id="toc-the-test-set"><span class="toc-section-number">11.2</span> The test set</a></li>
-<li><a href="#first-copy-plain-files-are-fast" id="toc-first-copy-plain-files-are-fast"><span class="toc-section-number">11.3</span> First copy: plain files are
+<li><a href="#what-a-backup-costs" id="toc-what-a-backup-costs"><span class="toc-section-number">11.1</span> What a backup costs</a></li>
+<li><a href="#blocks-and-the-skeleton" id="toc-blocks-and-the-skeleton"><span class="toc-section-number">11.2</span> Blocks and the skeleton</a></li>
+<li><a href="#turning-it-on" id="toc-turning-it-on"><span class="toc-section-number">11.3</span> Turning it on</a></li>
+<li><a href="#what-happens-when-a-file-is-replaced" id="toc-what-happens-when-a-file-is-replaced"><span class="toc-section-number">11.4</span> What happens when a file is
+replaced</a></li>
+<li><a href="#versions-are-additive" id="toc-versions-are-additive"><span class="toc-section-number">11.5</span> Versions are additive</a></li>
+<li><a href="#reading-the-store" id="toc-reading-the-store"><span class="toc-section-number">11.6</span> Reading the store</a></li>
+<li><a href="#one-writer-and-edits-unison-did-not-make" id="toc-one-writer-and-edits-unison-did-not-make"><span class="toc-section-number">11.7</span> One writer, and edits Unison did
+not make</a></li>
+</ul></li>
+<li><a href="#the-benchmark-story" id="toc-the-benchmark-story"><span class="toc-section-number">12</span> The benchmark story</a>
+<ul>
+<li><a href="#what-was-estimated-first" id="toc-what-was-estimated-first"><span class="toc-section-number">12.1</span> What was estimated first</a></li>
+<li><a href="#the-test-set" id="toc-the-test-set"><span class="toc-section-number">12.2</span> The test set</a></li>
+<li><a href="#first-copy-plain-files-are-fast" id="toc-first-copy-plain-files-are-fast"><span class="toc-section-number">12.3</span> First copy: plain files are
 fast</a></li>
-<li><a href="#incremental-open-only-what-changed" id="toc-incremental-open-only-what-changed"><span class="toc-section-number">11.4</span> Incremental: open only what
+<li><a href="#incremental-open-only-what-changed" id="toc-incremental-open-only-what-changed"><span class="toc-section-number">12.4</span> Incremental: open only what
 changed</a></li>
-<li><a href="#the-cold-scan-partly" id="toc-the-cold-scan-partly"><span class="toc-section-number">11.5</span> The cold scan, partly</a></li>
-<li><a href="#where-the-benchmark-left-things" id="toc-where-the-benchmark-left-things"><span class="toc-section-number">11.6</span> Where the benchmark left
+<li><a href="#the-cold-scan-partly" id="toc-the-cold-scan-partly"><span class="toc-section-number">12.5</span> The cold scan, partly</a></li>
+<li><a href="#where-the-benchmark-left-things" id="toc-where-the-benchmark-left-things"><span class="toc-section-number">12.6</span> Where the benchmark left
 things</a></li>
-<li><a href="#real-unison-and-a-new-estimate" id="toc-real-unison-and-a-new-estimate"><span class="toc-section-number">11.7</span> Real Unison, and a new
+<li><a href="#real-unison-and-a-new-estimate" id="toc-real-unison-and-a-new-estimate"><span class="toc-section-number">12.7</span> Real Unison, and a new
 estimate</a></li>
-<li><a href="#the-surprise-file-by-file" id="toc-the-surprise-file-by-file"><span class="toc-section-number">11.8</span> The surprise: file by
+<li><a href="#the-surprise-file-by-file" id="toc-the-surprise-file-by-file"><span class="toc-section-number">12.8</span> The surprise: file by
 file</a></li>
-<li><a href="#what-the-day-showed" id="toc-what-the-day-showed"><span class="toc-section-number">11.9</span> What the day showed</a></li>
+<li><a href="#what-the-day-showed" id="toc-what-the-day-showed"><span class="toc-section-number">12.9</span> What the day showed</a></li>
 </ul></li>
-<li><a href="#command-reference" id="toc-command-reference"><span class="toc-section-number">12</span> Command reference</a>
+<li><a href="#command-reference" id="toc-command-reference"><span class="toc-section-number">13</span> Command reference</a>
 <ul>
-<li><a href="#unison-the--semdiff-family" id="toc-unison-the--semdiff-family"><span class="toc-section-number">12.1</span> unison: the -semdiff
+<li><a href="#unison-the--semdiff-family" id="toc-unison-the--semdiff-family"><span class="toc-section-number">13.1</span> unison: the -semdiff
 family</a></li>
-<li><a href="#unison-dngscan" id="toc-unison-dngscan"><span class="toc-section-number">12.2</span> unison-dngscan</a></li>
-<li><a href="#packed-root-preferences" id="toc-packed-root-preferences"><span class="toc-section-number">12.3</span> Packed-root preferences</a></li>
-<li><a href="#packdir-and-unison-packdir" id="toc-packdir-and-unison-packdir"><span class="toc-section-number">12.4</span> packdir and
+<li><a href="#unison-dngscan" id="toc-unison-dngscan"><span class="toc-section-number">13.2</span> unison-dngscan</a></li>
+<li><a href="#packed-root-preferences" id="toc-packed-root-preferences"><span class="toc-section-number">13.3</span> Packed-root preferences</a></li>
+<li><a href="#packdir-and-unison-packdir" id="toc-packdir-and-unison-packdir"><span class="toc-section-number">13.4</span> packdir and
 unison-packdir</a></li>
-<li><a href="#dngc-and-dng-archive" id="toc-dngc-and-dng-archive"><span class="toc-section-number">12.5</span> dngc and dng-archive</a></li>
-<li><a href="#semantic-preferences" id="toc-semantic-preferences"><span class="toc-section-number">12.6</span> Semantic preferences</a></li>
+<li><a href="#unison-skeleton-and-the-skeleton-preferences" id="toc-unison-skeleton-and-the-skeleton-preferences"><span class="toc-section-number">13.5</span> unison-skeleton and the skeleton
+preferences</a></li>
+<li><a href="#dngc-and-dng-archive" id="toc-dngc-and-dng-archive"><span class="toc-section-number">13.6</span> dngc and dng-archive</a></li>
+<li><a href="#semantic-preferences" id="toc-semantic-preferences"><span class="toc-section-number">13.7</span> Semantic preferences</a></li>
 </ul></li>
-<li><a href="#honest-limits" id="toc-honest-limits"><span class="toc-section-number">13</span> Honest limits</a>
+<li><a href="#honest-limits" id="toc-honest-limits"><span class="toc-section-number">14</span> Honest limits</a>
 <ul>
-<li><a href="#packed-roots" id="toc-packed-roots"><span class="toc-section-number">13.1</span> Packed roots</a></li>
-<li><a href="#clones" id="toc-clones"><span class="toc-section-number">13.2</span> Clones</a></li>
-<li><a href="#semantic-diff-1" id="toc-semantic-diff-1"><span class="toc-section-number">13.3</span> Semantic diff</a></li>
-<li><a href="#semantic-transfer-and-merging" id="toc-semantic-transfer-and-merging"><span class="toc-section-number">13.4</span> Semantic transfer and
+<li><a href="#packed-roots" id="toc-packed-roots"><span class="toc-section-number">14.1</span> Packed roots</a></li>
+<li><a href="#clones" id="toc-clones"><span class="toc-section-number">14.2</span> Clones</a></li>
+<li><a href="#semantic-diff-1" id="toc-semantic-diff-1"><span class="toc-section-number">14.3</span> Semantic diff</a></li>
+<li><a href="#semantic-transfer-and-merging" id="toc-semantic-transfer-and-merging"><span class="toc-section-number">14.4</span> Semantic transfer and
 merging</a></li>
-<li><a href="#building" id="toc-building"><span class="toc-section-number">13.5</span> Building</a></li>
+<li><a href="#skeleton-versions-1" id="toc-skeleton-versions-1"><span class="toc-section-number">14.5</span> Skeleton versions</a></li>
+<li><a href="#building" id="toc-building"><span class="toc-section-number">14.6</span> Building</a></li>
 </ul></li>
-<li><a href="#how-this-was-built" id="toc-how-this-was-built"><span class="toc-section-number">14</span> How this was built</a>
+<li><a href="#how-this-was-built" id="toc-how-this-was-built"><span class="toc-section-number">15</span> How this was built</a>
 <ul>
-<li><a href="#two-sessions-and-a-mailbox" id="toc-two-sessions-and-a-mailbox"><span class="toc-section-number">14.1</span> Two sessions and a
+<li><a href="#two-sessions-and-a-mailbox" id="toc-two-sessions-and-a-mailbox"><span class="toc-section-number">15.1</span> Two sessions and a
 mailbox</a></li>
-<li><a href="#milestones" id="toc-milestones"><span class="toc-section-number">14.2</span> Milestones</a></li>
-<li><a href="#what-the-tests-found" id="toc-what-the-tests-found"><span class="toc-section-number">14.3</span> What the tests found</a></li>
-<li><a href="#what-went-wrong-without-a-test" id="toc-what-went-wrong-without-a-test"><span class="toc-section-number">14.4</span> What went wrong without a
+<li><a href="#milestones" id="toc-milestones"><span class="toc-section-number">15.2</span> Milestones</a></li>
+<li><a href="#what-the-tests-found" id="toc-what-the-tests-found"><span class="toc-section-number">15.3</span> What the tests found</a></li>
+<li><a href="#what-went-wrong-without-a-test" id="toc-what-went-wrong-without-a-test"><span class="toc-section-number">15.4</span> What went wrong without a
 test</a></li>
-<li><a href="#what-this-book-is" id="toc-what-this-book-is"><span class="toc-section-number">14.5</span> What this book is</a></li>
+<li><a href="#what-this-book-is" id="toc-what-this-book-is"><span class="toc-section-number">15.5</span> What this book is</a></li>
 </ul></li>
-<li><a href="#building-and-testing" id="toc-building-and-testing"><span class="toc-section-number">15</span> Building and testing</a></li>
+<li><a href="#building-and-testing" id="toc-building-and-testing"><span class="toc-section-number">16</span> Building and testing</a></li>
 </ul>
 </nav>
 <figure>
@@ -276,20 +291,24 @@ in this book describes. Where the text says “the user”, it means Alexy.
 Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
 <p>The book describes the state of the fork’s <code>master</code> branch
-on 2026-11-08, at commit <code>2267da59</code>, together with the
+on 2026-11-10, at commit <code>d6a0005d</code>, together with the
 separate <a href="https://github.com/querygraph/packdir">packdir</a> and
 <a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects
 and dng-compare’s OCaml archive tool. The first edition, of 2026-10-31,
 was written before the real mirror finished; the second, of 2026-11-02,
 added its results, preservation of APFS clones, and the DNG walker’s
-move into tiffgraph. This one, 1.2, follows dng-compare’s unified
-archive layout and its versions across shuttle cycles, and records the
-contract the two projects agreed on. Every command option was checked
-against the source, and the worked examples in the chapters on semantic
-diff and packdir are real runs on small synthetic trees, made while
-writing. Numbers about the benchmark and the mirror come from the two
-sessions’ mailbox and the design documents. This session did not take
-those measurements and did not touch the disks involved.</p>
+move into tiffgraph. Edition 1.2 followed dng-compare’s unified archive
+layout and its versions across shuttle cycles, and recorded the contract
+the two projects agreed on. This one, 1.3, adds skeleton versions: the
+versions a synchronization replaces, kept as a few kilobytes each. That
+chapter and its code were written with Claude Fable 5.2, and its figures
+come from runs on six real files made while writing. Every command
+option was checked against the source, and the worked examples in the
+chapters on semantic diff and packdir are real runs on small synthetic
+trees, made while writing. Numbers about the benchmark and the mirror
+come from the two sessions’ mailbox and the design documents. This
+session did not take those measurements and did not touch the disks
+involved.</p>
 <p>Three kinds of statement appear below, and they are kept apart:</p>
 <ul>
 <li><strong>Measured</strong> figures are quoted from a record, with the
@@ -315,18 +334,22 @@ walks a TIFF or DNG file’s structure under a fixed grammar and finds its
 editable XMP packet.</li>
 <li><strong><a href="https://firstpair.org/books/phidentify/">phidentify</a></strong>
 computes a photo’s identities: SHA-256, DNG raw blocks, image data,
-Lightroom fingerprint, metadata record and preserved digest.</li>
+block marks, Lightroom fingerprint, metadata record and preserved
+digest, and the skeleton that rebuilds a file from an edited copy.</li>
 <li><strong><a href="https://firstpair.org/books/phindex/">phindex</a></strong> keeps
-those identities for every file of a volume, and aligns two volumes by
-content.</li>
+those identities and a skeleton for every file of a volume, aligns two
+volumes by content, and restores a file as it was before a metadata
+edit.</li>
 <li><strong><a href="https://firstpair.org/books/dng-compare/">DNG
 Compare</a></strong> compares pairs and preserves one side byte for byte
-as deltas against the other, with a searchable metadata section, through
+as deltas against the other, restorable even after the other side is
+edited, with a searchable metadata section, through
 <code>dngc</code>.</li>
 <li><strong><a href="https://firstpair.org/books/semantic-unison/">Semantic
 Unison</a></strong> synchronizes photo trees, sending metadata edits
-without resending image bytes, and preserves what a shuttle disk brings
-into the same archives.</li>
+without resending image bytes, keeps the versions it replaces as small
+skeletons, and preserves what a shuttle disk brings into the same
+archives.</li>
 <li><strong><a href="https://firstpair.org/books/packdir/">packdir</a></strong> keeps
 directories of small files as SQLite archives that still work like plain
 files.</li>
@@ -846,7 +869,7 @@ catch their absence.</p>
 with 177 cases per compiler in both ordinary and timed modes; and 21
 native clone-lease cases per compiler. Those numbers describe particular
 tests. They do not certify every camera, operating system, storage
-device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/4419ca9b06cf2b73c45681723aeed63802c94803/doc/sol-final-acceptance-map-20261019.md">acceptance
+device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/a003950bc3374c142ed138cef8f2499da6331eda/doc/sol-final-acceptance-map-20261019.md">acceptance
 map</a> links the scoped evidence.</p>
 <p>I have made mistakes, too. Harness assumptions have failed. Pins have
 gone stale. Observations have needed narrower interpretations.
@@ -907,7 +930,7 @@ into an OS thread cap, a sample into a peak-memory measurement, or one
 successful camera case into universal compatibility. I cannot claim that
 this goal is finished: final generated Adobe fixtures and receiving
 qualification, portions of the prescribed measurement matrix, and final
-acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/4419ca9b06cf2b73c45681723aeed63802c94803/OPUS-HANDOFF.md">handoff</a>
+acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/a003950bc3374c142ed138cef8f2499da6331eda/OPUS-HANDOFF.md">handoff</a>
 records the changing state.</p>
 <p>I can make the work easier to challenge. That means readable changes,
 explicit assumptions, reproducible commands, conservative fallbacks,
@@ -1879,13 +1902,148 @@ roots must stay side by side.</li>
 </ul>
 <p>Neither is built yet. Which one fits depends on the second tree’s
 layout and on what in it can be rebuilt rather than mirrored.</p>
-<h1 data-number="11" id="the-benchmark-story"><span class="header-section-number">11</span> The benchmark story</h1>
+<h1 data-number="11" id="skeleton-versions"><span class="header-section-number">11</span> Skeleton versions</h1>
+<h2 data-number="11.1" id="what-a-backup-costs"><span class="header-section-number">11.1</span> What a backup costs</h2>
+<p>Unison can keep the version of a file it is about to replace: the
+<code>backup</code> preference stores a whole copy. For photographs that
+is the wrong unit. Setting a rating in a 25 MB DNG rewrites a few
+hundred bytes of XMP and perhaps moves the image data along by a few
+bytes, and the backup of that edit is another 25 MB. Ten edits to one
+photograph, kept as backups, cost ten photographs.</p>
+<p>A <strong>skeleton version</strong> keeps only what the edit
+destroyed. It is the same idea DNG Compare’s archive uses to rebuild a
+reference file after it has been edited, described in that book’s part
+on skeletons, applied here to the versions a synchronization
+replaces.</p>
+<h2 data-number="11.2" id="blocks-and-the-skeleton"><span class="header-section-number">11.2</span> Blocks and the skeleton</h2>
+<p>A file is cut along its own structure into two parts.</p>
+<ul>
+<li><strong>Blocks</strong> are the large runs a metadata edit carries
+over unchanged, often at another offset: a TIFF or DNG file’s strips and
+tiles, its embedded previews, maker notes and profiles, and a JPEG’s
+scan.</li>
+<li><strong>The skeleton</strong> is every byte outside the blocks, in
+file order: the header, the directories, small tag values and the XMP
+packet.</li>
+</ul>
+<p>The cuts follow the rules of the DNG Compare archive format, and a
+test holds this fork’s walkers to values that project’s implementation
+produces for the same bytes. Classic TIFF, which includes DNG, and JPEG
+have walkers. A file of any other format up to 1 MiB, such as an XMP
+sidecar, is its own skeleton, with no blocks.</p>
+<p>A kept version is its skeleton, a few kilobytes, and a map of where
+each block goes. The blocks themselves are not copied while a later
+version of the file still holds them.</p>
+<h2 data-number="11.3" id="turning-it-on"><span class="header-section-number">11.3</span> Turning it on</h2>
+<pre><code>skeleton     = Name *.dng
+skeleton     = Name *.jpg
+skeleton     = Name *.xmp
+maxskeletons = 3
+skeletondir  = /path/outside/the/replicas/skeletons</code></pre>
+<p><code>skeleton</code> selects paths as <code>backup</code> does,
+<code>skeletonnot</code> makes exceptions, and <code>maxskeletons</code>
+is the number of earlier versions kept per path. Its default is 0, which
+keeps nothing and does not touch the store. Each host keeps the versions
+of the files replaced on that host, in its own store; the preferences
+travel to the server as the backup preferences do. Skeleton versions are
+independent of backups, and a path that matches both gets both.</p>
+<h2 data-number="11.4" id="what-happens-when-a-file-is-replaced"><span class="header-section-number">11.4</span> What happens when a file is
+replaced</h2>
+<ol type="1">
+<li>Before the file is replaced, Unison takes it as a <em>pending</em>
+item of the store: an APFS clone where the filesystem makes one,
+otherwise a copy.</li>
+<li>The new file goes into place as usual.</li>
+<li>The pending file is settled. Its skeleton and blocks are computed,
+and every block is looked for in the new file, by length and a sampled
+fingerprint first and then by the SHA-256 of the whole block. A block
+the new file does not hold, such as an embedded preview the edit
+regenerated, is saved in the store.</li>
+<li>The version is rebuilt from what will remain, without the pending
+file, and its SHA-256 is compared with the replaced file’s. Only then is
+the pending file deleted.</li>
+</ol>
+<p>Whatever cannot be kept this way is kept as a whole file, and said to
+be: a file with no walker that is larger than 1 MiB, a deleted file,
+which leaves no later file to hold its blocks, or a version whose
+rebuild did not match. Nothing is dropped silently, and an interrupted
+run leaves its pending files to be settled at the next start.</p>
+<h2 data-number="11.5" id="versions-are-additive"><span class="header-section-number">11.5</span> Versions are additive</h2>
+<p>The skeletons of one file are stored as differences against one
+another. The newest is kept in full and each older one as a small delta
+against the next newer, so a second rating change, a caption, and an
+exposure adjustment each add a few hundred bytes, not another skeleton.
+Blocks are shared too: a kept block is stored once however many versions
+need it, and is removed when the last version that needs it ages
+out.</p>
+<p>Measured on six real files edited by Lightroom Classic and Photo
+Mechanic, three DNGs of 24 to 29 MB and three JPEGs of 2 to 3 MB,
+synchronized twice so that each had two earlier versions:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Stored</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">The newest earlier version of each file,
+in full</td>
+<td style="text-align: left;">19 to 67 KB</td>
+</tr>
+<tr>
+<td style="text-align: left;">The version before it, as a delta</td>
+<td style="text-align: left;">81 to 316 bytes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Kept blocks</td>
+<td style="text-align: left;">none: every block was still in the current
+file</td>
+</tr>
+<tr>
+<td style="text-align: left;">All twelve versions together</td>
+<td style="text-align: left;">186 KB, for 83 MB of files</td>
+</tr>
+</tbody>
+</table>
+<p>Whole-file backups of the same twelve versions would have taken 165
+MB.</p>
+<h2 data-number="11.6" id="reading-the-store"><span class="header-section-number">11.6</span> Reading the store</h2>
+<p><code>unison-skeleton</code> lists, checks and restores:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> list    ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> verify  ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> restore ROOT PATH <span class="er">(</span><span class="ex">--version</span> N <span class="kw">|</span> <span class="ex">--sha256</span> HEX<span class="kw">)</span> <span class="ex">--out</span> FILE</span></code></pre></div>
+<p><code>list</code> prints each kept version with its number, the time
+it was replaced, its size, its SHA-256 and how it is stored.
+<code>verify</code> rebuilds every kept version without writing it and
+compares SHA-256s. <code>restore</code> writes one version to a new file
+outside the replica, checked the same way, and refuses to overwrite. A
+version’s number does not change when older ones are pruned.</p>
+<h2 data-number="11.7" id="one-writer-and-edits-unison-did-not-make"><span class="header-section-number">11.7</span> One writer, and edits Unison
+did not make</h2>
+<p>Each change to the store is made under a lock on the root’s
+directory, so two synchronizations that share a root cannot interleave
+their changes to it.</p>
+<p>A version’s blocks live in the current file. If an application
+rewrites that file in place, outside a synchronization, and destroys a
+block, by regenerating an embedded preview for instance, the versions
+that need the block can no longer be rebuilt on that replica, and
+nothing can prevent it. Unison does not stay silent about it: the next
+time it replaces the file it checks every earlier version against what
+is left, logs a warning for each one that is now unrebuildable, and
+marks it <code>lost</code>, once. <code>list</code> shows the mark and
+<code>restore</code> refuses the version. The replica that
+<em>received</em> the edit through Unison saved the block as it arrived,
+so its store usually still has the version. An in-place edit of metadata
+alone does no harm.</p>
+<h1 data-number="12" id="the-benchmark-story"><span class="header-section-number">12</span> The benchmark story</h1>
 <p>This chapter is the record of a day: 2026-10-31, from the first
 mailbox message at 06:58Z. All measurements are from the mailbox and
 <code>docs/packdir-design.md</code>. All of them used one Mac with 128
 GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the
 target. None were repeated by the session writing this book.</p>
-<h2 data-number="11.1" id="what-was-estimated-first"><span class="header-section-number">11.1</span> What was estimated first</h2>
+<h2 data-number="12.1" id="what-was-estimated-first"><span class="header-section-number">12.1</span> What was estimated first</h2>
 <p>The proposal and the first replies contained several figures, and one
 design choice, that later proved wrong. Two sessions wrote them in good
 faith, and the figures were marked as estimates or samples at the
@@ -1946,14 +2104,14 @@ changed the design</td>
 <p>The Photo session corrected the first two itself in P-2. The last
 line was caught the same morning. The third was the benchmark’s first
 surprise.</p>
-<h2 data-number="11.2" id="the-test-set"><span class="header-section-number">11.2</span> The test set</h2>
+<h2 data-number="12.2" id="the-test-set"><span class="header-section-number">12.2</span> The test set</h2>
 <p>The Photo session wrote a generator that took the real distribution
 from a stat-only sample of 400 leaves and produced
 <code>leafset-v1</code>: 50.0 GiB, 39,903 files, 694 leaves, with random
 bytes that are incompressible like JPEG, and random names. Nothing real
 was in it. It reproduced whole groups of levels with real sizes. Each
 method wrote to a new folder on the mirror disk.</p>
-<h2 data-number="11.3" id="first-copy-plain-files-are-fast"><span class="header-section-number">11.3</span> First copy: plain files are
+<h2 data-number="12.3" id="first-copy-plain-files-are-fast"><span class="header-section-number">12.3</span> First copy: plain files are
 fast</h2>
 <p>Source read from memory for every method, so the comparison is the
 mirror disk’s cost alone. Each method ends with <code>sync</code>.</p>
@@ -2057,7 +2215,7 @@ container</td>
 </table>
 <p>The barrier kept the guarantee that matters for a mirror, at 8% over
 no flush, and matched plain Unison.</p>
-<h2 data-number="11.4" id="incremental-open-only-what-changed"><span class="header-section-number">11.4</span> Incremental: open only what
+<h2 data-number="12.4" id="incremental-open-only-what-changed"><span class="header-section-number">12.4</span> Incremental: open only what
 changed</h2>
 <p>A 1% change set then replaced, added and deleted files in 12 of 694
 leaves, 197 MiB in all. Every method stored the same 157 files.</p>
@@ -2160,7 +2318,7 @@ apart from the transfer:</p>
 for the same change, because of the rollback journal and the read-back
 verification. <code>sqlar-wal</code> left three files per container
 instead of one, which confirmed <code>DELETE</code>.</p>
-<h2 data-number="11.5" id="the-cold-scan-partly"><span class="header-section-number">11.5</span> The cold scan, partly</h2>
+<h2 data-number="12.5" id="the-cold-scan-partly"><span class="header-section-number">12.5</span> The cold scan, partly</h2>
 <p>Every figure above came from a warm cache. The mirror disk’s catalog
 for 40,000 files fits easily in 128 GiB of RAM. A catalog for 3.6
 million more files is a different thing, and after a reboot it would
@@ -2201,7 +2359,7 @@ unmounted between steps, and from that session
 <code>diskutil unmount</code> hung twice, unattended, for 16 and 12
 minutes. The Unison session called that its own mistake, since the
 command should have had a timeout. The user chose to stop there.</p>
-<h2 data-number="11.6" id="where-the-benchmark-left-things"><span class="header-section-number">11.6</span> Where the benchmark left
+<h2 data-number="12.6" id="where-the-benchmark-left-things"><span class="header-section-number">12.6</span> Where the benchmark left
 things</h2>
 <table>
 <thead>
@@ -2250,7 +2408,7 @@ inside, and about 1.6 times the bytes written per change.</p>
 cold pass on the real files, and switching only if that was too slow. It
 was a reasonable recommendation. The user chose packed, and confirmed
 that after hearing it.</p>
-<h2 data-number="11.7" id="real-unison-and-a-new-estimate"><span class="header-section-number">11.7</span> Real Unison, and a new
+<h2 data-number="12.7" id="real-unison-and-a-new-estimate"><span class="header-section-number">12.7</span> Real Unison, and a new
 estimate</h2>
 <p>After the integration, real Unison packed the 50 GiB set onto the
 mirror disk:</p>
@@ -2284,7 +2442,7 @@ been spared, and a quiet rerun took 3.2 s. So the honest comparison with
 plain Unison’s 337 s is 424 s, not 340 s. The extrapolation became about
 10.6 h for a first full mirror against about 8.4 h plain. That was still
 an estimate.</p>
-<h2 data-number="11.8" id="the-surprise-file-by-file"><span class="header-section-number">11.8</span> The surprise: file by
+<h2 data-number="12.8" id="the-surprise-file-by-file"><span class="header-section-number">12.8</span> The surprise: file by
 file</h2>
 <p>The real mirror started, and it was much slower than 10.6 h would
 imply.</p>
@@ -2338,7 +2496,7 @@ session said the 5-hour scan would be lost. That was wrong, and it was
 stated without checking. Unison keeps a fingerprint cache for
 interrupted scans, 308 MB for this cache, and the restarted run reloaded
 it: source-disk reads fell from 268 MB/s to about 1.3 MB/s.</p>
-<h2 data-number="11.9" id="what-the-day-showed"><span class="header-section-number">11.9</span> What the day showed</h2>
+<h2 data-number="12.9" id="what-the-day-showed"><span class="header-section-number">12.9</span> What the day showed</h2>
 <ul>
 <li>A small benchmark on the wrong shape of data can be precise and
 still miss the main cost. This one was careful about file sizes and
@@ -2352,13 +2510,13 @@ could see what to replace.</li>
 figure that described something else. Both were caught by asking where
 the number came from.</li>
 </ul>
-<h1 data-number="12" id="command-reference"><span class="header-section-number">12</span> Command reference</h1>
+<h1 data-number="13" id="command-reference"><span class="header-section-number">13</span> Command reference</h1>
 <p>Every option in this chapter was checked against the source at commit
 <code>c2aa06cc</code>: <code>src/uicommon.ml</code>,
 <code>src/packdirConfig.ml</code>, <code>src/dngscan.ml</code>, and in
 the other projects <code>lib/cli.ml</code>,
 <code>lib/fileutils.ml</code> and <code>bin/main.ml</code>.</p>
-<h2 data-number="12.1" id="unison-the--semdiff-family"><span class="header-section-number">12.1</span> unison: the -semdiff
+<h2 data-number="13.1" id="unison-the--semdiff-family"><span class="header-section-number">13.1</span> unison: the -semdiff
 family</h2>
 <p>These are ordinary Unison preferences, so each can also go in a
 profile. All are local.</p>
@@ -2481,7 +2639,7 @@ not complete; nothing was synchronized”.</p>
 <code>nodeletion</code> on the second,
 <code>ignorearchives = true</code>, and one <code>path</code> for each
 listed file.</p>
-<h2 data-number="12.2" id="unison-dngscan"><span class="header-section-number">12.2</span> unison-dngscan</h2>
+<h2 data-number="13.2" id="unison-dngscan"><span class="header-section-number">13.2</span> unison-dngscan</h2>
 <p>The command has three forms, as its usage line says:</p>
 <pre class="text"><code>unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
                [-o REPORT.jsonl [-resume]] PATH...
@@ -2696,7 +2854,7 @@ default <code>~/src/dng-compare</code>. <code>DNG_ARCHIVE</code> locates
 <code>dng-archive</code>, otherwise <code>PATH</code>, then the
 <code>5.2.0+ox</code> and <code>default</code> opam switches.
 <code>-preservefull</code> also needs <code>xdelta3</code>.</p>
-<h2 data-number="12.3" id="packed-root-preferences"><span class="header-section-number">12.3</span> Packed-root preferences</h2>
+<h2 data-number="13.3" id="packed-root-preferences"><span class="header-section-number">13.3</span> Packed-root preferences</h2>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -2767,7 +2925,7 @@ barriers.</p>
 and files above that depth stay plain. A subdirectory of a packed
 directory, a move, and a symbolic link are each refused with a
 message.</p>
-<h2 data-number="12.4" id="packdir-and-unison-packdir"><span class="header-section-number">12.4</span> packdir and
+<h2 data-number="13.4" id="packdir-and-unison-packdir"><span class="header-section-number">13.4</span> packdir and
 unison-packdir</h2>
 <p>These are one program under two names. Container commands:</p>
 <pre class="text"><code>packdir pack-tree ROOT OUT [--depth N] [--workers N] [--wal] [--batch-mib M]
@@ -2958,24 +3116,81 @@ tree.</strong> The source says so.</li>
 <code>du</code>’s directory sizes, and the order of <code>du</code> and
 <code>find</code> output, which is sorted here.</li>
 </ul>
-<h2 data-number="12.5" id="dngc-and-dng-archive"><span class="header-section-number">12.5</span> dngc and dng-archive</h2>
+<h2 data-number="13.5" id="unison-skeleton-and-the-skeleton-preferences"><span class="header-section-number">13.5</span> unison-skeleton and the
+skeleton preferences</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 10%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Preference</th>
+<th style="text-align: left;">Default</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>skeleton</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Path specification of the files whose
+replaced versions are kept as skeleton versions. Repeatable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>skeletonnot</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">Exceptions to <code>skeleton</code>.
+Repeatable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>maxskeletons</code></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">Earlier versions kept per path. 0 keeps
+none and leaves the store untouched</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>skeletondir</code></td>
+<td style="text-align: left;"><code>skeletons</code> in the Unison
+directory</td>
+<td style="text-align: left;">The store. The environment variable
+<code>UNISONSKELETONDIR</code> is checked first. It must not be inside a
+replica</td>
+</tr>
+</tbody>
+</table>
+<pre class="text"><code>unison-skeleton list    ROOT [PATH] [--skeletondir DIR]
+unison-skeleton verify  ROOT [PATH] [--skeletondir DIR]
+unison-skeleton restore ROOT PATH (--version N | --sha256 HEX) --out FILE [--skeletondir DIR]</code></pre>
+<p><code>ROOT</code> is a replica root as the profile names it and
+<code>PATH</code> a path inside it. <code>verify</code> exits non-zero
+when a version cannot be rebuilt.</p>
+<h2 data-number="13.6" id="dngc-and-dng-archive"><span class="header-section-number">13.6</span> dngc and dng-archive</h2>
 <p><code>dngc</code>, installed beside <code>dng-archive</code> in each
 opam switch, is the command to use on an archive by hand. Its verbs are
 <code>run</code>, <code>restore</code>, <code>index</code>,
 <code>query</code>, <code>verify</code>, <code>status</code>,
 <code>migrate</code> and <code>versions</code>; <a href="https://firstpair.org/books/dng-compare/">DNG Compare</a>
 documents them.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> status ARCHIVE                          <span class="co"># what the archive holds</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> versions ARCHIVE <span class="pp">[</span><span class="ss">RELATIVE_PATH</span><span class="pp">]</span>        <span class="co"># current and earlier contents of each path</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> verify ARCHIVE [--restore-sample N]     <span class="co"># records, files and index</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> migrate ARCHIVE [--dry-run <span class="kw">|</span> <span class="ex">--undo]</span>    <span class="co"># a legacy archive&#39;s byte section into bytes/</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> status ARCHIVE                          <span class="co"># what the archive holds</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> versions ARCHIVE <span class="pp">[</span><span class="ss">RELATIVE_PATH</span><span class="pp">]</span>        <span class="co"># current and earlier contents of each path</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> verify ARCHIVE [--restore-sample N]     <span class="co"># records, files and index</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> skeleton build ARCHIVE                  <span class="co"># skeletons of the reference files, so they may be edited</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> migrate ARCHIVE [--dry-run <span class="kw">|</span> <span class="ex">--undo]</span>    <span class="co"># a legacy archive&#39;s byte section into bytes/</span></span></code></pre></div>
 <p>Semantic Unison itself calls <code>dng-archive</code>, the program
 underneath:</p>
 <pre class="text"><code>dng-archive index ARCHIVE
 dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
                      [--workers N] [--rate-mib R]
-dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]</code></pre>
+dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]
+                    [--index FILE]... [--candidates N]</code></pre>
+<p><code>dngc restore</code>, <code>dngc verify --restore-sample</code>
+and <code>dngc keep</code> take <code>--reference-root</code>,
+<code>--index</code> and <code>--candidates</code> too: a reference tree
+that has moved is read below its new root, and a reference file that was
+moved or renamed is found through a phindex index.</p>
 <table>
 <colgroup>
 <col style="width: 13%" />
@@ -3052,7 +3267,7 @@ moved</td>
 errors and rerun before deleting source” if any file did not verify or a
 listed source is missing. It needs <code>xdelta3</code> on
 <code>PATH</code>, and SQLite and zlib from the system.</p>
-<h2 data-number="12.6" id="semantic-preferences"><span class="header-section-number">12.6</span> Semantic preferences</h2>
+<h2 data-number="13.7" id="semantic-preferences"><span class="header-section-number">13.7</span> Semantic preferences</h2>
 <p>These are the main preferences of the sync engine, with defaults from
 the source.</p>
 <table>
@@ -3179,10 +3394,11 @@ the driver</td>
 <p>The built-in merge is not a preference of its own. It is the rule
 <code>merge = Name *.dng -&gt; unison:dng-xmp-scalars/0</code>, with
 <code>backupcurrent = Name *.dng</code>.</p>
-<h1 data-number="13" id="honest-limits"><span class="header-section-number">13</span> Honest limits</h1>
+<h1 data-number="14" id="honest-limits"><span class="header-section-number">14</span> Honest limits</h1>
 <p>This chapter lists what the tools do not do, or do not yet do. All of
-it was true at commit <code>9b68266b</code>.</p>
-<h2 data-number="13.1" id="packed-roots"><span class="header-section-number">13.1</span> Packed roots</h2>
+it was true at commit <code>9b68266b</code>, and the section on skeleton
+versions at <code>d6a0005d</code>.</p>
+<h2 data-number="14.1" id="packed-roots"><span class="header-section-number">14.1</span> Packed roots</h2>
 <ul>
 <li><strong>One-way and local.</strong> A packed root must be local and
 must only receive. It can never be a source, so Unison reads members
@@ -3216,7 +3432,7 @@ deletions keep their bytes until
 tar and pack formats stayed benchmark comparisons. The backend interface
 is narrow so that one could be added later.</li>
 </ul>
-<h2 data-number="13.2" id="clones"><span class="header-section-number">13.2</span> Clones</h2>
+<h2 data-number="14.2" id="clones"><span class="header-section-number">14.2</span> Clones</h2>
 <ul>
 <li><strong>macOS and APFS only.</strong> Clone IDs come from
 <code>getattrlist</code>; elsewhere nothing is a clone and nothing
@@ -3230,7 +3446,7 @@ packed as full copies stay so; they are not regrouped.</li>
 earlier in-flight original is reviewed but not reached by any test, and
 nothing has run on a real catalog yet.</li>
 </ul>
-<h2 data-number="13.3" id="semantic-diff-1"><span class="header-section-number">13.3</span> Semantic diff</h2>
+<h2 data-number="14.3" id="semantic-diff-1"><span class="header-section-number">14.3</span> Semantic diff</h2>
 <ul>
 <li><strong>Same view is a rule.</strong> It is a list of tags, not a
 rendering comparison.</li>
@@ -3252,7 +3468,7 @@ Unison still says the default archive is
 <code>ROOT2/.dng-compare/NAME-OF-ROOT1</code>. The code uses
 <code>ROOT2/../dng-compare/SHUTTLE</code>, as this book describes.</li>
 </ul>
-<h2 data-number="13.4" id="semantic-transfer-and-merging"><span class="header-section-number">13.4</span> Semantic transfer and
+<h2 data-number="14.4" id="semantic-transfer-and-merging"><span class="header-section-number">14.4</span> Semantic transfer and
 merging</h2>
 <ul>
 <li><strong>Narrow by design.</strong> A grown or moved packet falls
@@ -3279,7 +3495,33 @@ protocol, and SDK sources are not in this repository.</li>
 recorded it as active and incomplete. The state moves, and
 <code>OPUS-HANDOFF.md</code> is where it is tracked.</li>
 </ul>
-<h2 data-number="13.5" id="building"><span class="header-section-number">13.5</span> Building</h2>
+<h2 data-number="14.5" id="skeleton-versions-1"><span class="header-section-number">14.5</span> Skeleton versions</h2>
+<ul>
+<li><strong>Classic TIFF and JPEG only.</strong> BigTIFF, HEIF, video
+and other containers are kept whole, or as their own skeleton up to 1
+MiB.</li>
+<li><strong>An edit outside Unison can lose a version.</strong> A block
+destroyed in place on a replica takes with it the versions there that
+need it. Unison reports and marks them at the next replacement, as the
+chapter says, and cannot bring them back.</li>
+<li><strong>Roots are named by path.</strong> Moving or renaming a root
+starts a new part of the store. The earlier versions stay under the old
+path and only those kept whole, or as their own skeleton, still restore.
+A store that follows a moved root is not built.</li>
+<li><strong>The same path replaced twice at once.</strong> Two
+synchronizations that share a root are kept apart by the store’s lock,
+but if both replace the same path at the same moment only one of the two
+outgoing contents becomes a version.</li>
+<li><strong>A temporary copy where there are no clones.</strong> On a
+filesystem without clones, or with the store on another volume, each
+replacement first makes a full temporary copy of the outgoing file.</li>
+<li><strong>Not yet run across a network.</strong> The receiving side
+has been run as a separate Unison server process over the remote
+protocol on one machine, through a stand-in for <code>ssh</code>. No run
+has crossed a real network connection, and none has yet been made on a
+real library.</li>
+</ul>
+<h2 data-number="14.6" id="building"><span class="header-section-number">14.6</span> Building</h2>
 <ul>
 <li><strong>The <code>make</code> build is broken at a module unrelated
 to this work.</strong> It stops at <code>directoryOwner.cmx</code>, with
@@ -3300,8 +3542,8 @@ finds it beside the standard library.</li>
 on Intel, with HFS+ and APFS volumes. <code>F_FULLFSYNC</code> is a
 macOS call. Nothing here claims behaviour on other systems.</li>
 </ul>
-<h1 data-number="14" id="how-this-was-built"><span class="header-section-number">14</span> How this was built</h1>
-<h2 data-number="14.1" id="two-sessions-and-a-mailbox"><span class="header-section-number">14.1</span> Two sessions and a
+<h1 data-number="15" id="how-this-was-built"><span class="header-section-number">15</span> How this was built</h1>
+<h2 data-number="15.1" id="two-sessions-and-a-mailbox"><span class="header-section-number">15.1</span> Two sessions and a
 mailbox</h2>
 <p>Packdir was built in one day by one human and two LLM sessions, which
 could not talk to each other directly. The Photo session, which owned
@@ -3341,7 +3583,7 @@ folder, the barrier, deleting three stray copies, packed over plain, and
 when to start. No session started the mirror until the user said go. The
 Unison session had written in U-20: “I won’t change the profile or start
 the run until the user says go.”</p>
-<h2 data-number="14.2" id="milestones"><span class="header-section-number">14.2</span> Milestones</h2>
+<h2 data-number="15.2" id="milestones"><span class="header-section-number">15.2</span> Milestones</h2>
 <p>The integration had six milestones, each tested on synthetic data on
 stock OCaml and OxCaml, with the prototype as the reference.</p>
 <table>
@@ -3426,7 +3668,7 @@ into packed roots</td>
 <p>Controls at the last of these: detection 11, write 28, recovery 21,
 parallel 11, marker 8, config 16, semdiff 37, and Unison’s
 <code>-selftest</code>.</p>
-<h2 data-number="14.3" id="what-the-tests-found"><span class="header-section-number">14.3</span> What the tests found</h2>
+<h2 data-number="15.3" id="what-the-tests-found"><span class="header-section-number">15.3</span> What the tests found</h2>
 <p>The essay says, “A test can pass because its fixture missed the
 dangerous case.” The packdir work has examples of that and of its
 opposite. These are the ones recorded in the mailbox, the commits and
@@ -3468,7 +3710,7 @@ through and requires the next run to converge.</p>
 <p><strong>A harness that deleted.</strong> The benchmark’s plain-Unison
 method deleted on the target until a dry run on the internal disk showed
 it. The dry run was there to test the harness, and it did.</p>
-<h2 data-number="14.4" id="what-went-wrong-without-a-test"><span class="header-section-number">14.4</span> What went wrong without a
+<h2 data-number="15.4" id="what-went-wrong-without-a-test"><span class="header-section-number">15.4</span> What went wrong without a
 test</h2>
 <p>Not every mistake was caught by a control:</p>
 <ul>
@@ -3484,7 +3726,7 @@ result was the slow mirror of the benchmark chapter.</li>
 </ul>
 <p>These are recorded in the mailbox because the rule of that channel,
 and of the fork, is that a correction goes beside the original.</p>
-<h2 data-number="14.5" id="what-this-book-is"><span class="header-section-number">14.5</span> What this book is</h2>
+<h2 data-number="15.5" id="what-this-book-is"><span class="header-section-number">15.5</span> What this book is</h2>
 <p>This book was written in one session, after all of the above, from
 those records. The session read the essay, the design documents, the
 mailbox and the source, and ran the commands in the worked examples on
@@ -3492,21 +3734,28 @@ synthetic data. It did not read from or write to the real disks. The
 diagrams were written by hand as SVG. When the source and a document
 disagreed, the book follows the source and says so, as with the
 <code>-preserve</code> help text.</p>
-<h1 data-number="15" id="building-and-testing"><span class="header-section-number">15</span> Building and testing</h1>
+<h1 data-number="16" id="building-and-testing"><span class="header-section-number">16</span> Building and testing</h1>
 <p>Semantic Unison builds with dune. Packed roots need the opam
 <code>packdir</code> package, and <code>-preserve</code> needs
 <code>dng-archive</code>. Each must be pinned in each opam switch you
 use, and stock OCaml and OxCaml stay separate.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
 <p>The binaries are <code>src/linktext.exe</code> (installed as
 <code>unison</code>), <code>src/dngscan.exe</code>
 (<code>unison-dngscan</code>) and <code>tools/packdir/main.exe</code>
 (<code>unison-packdir</code>), under dune’s build directory.</p>
 <p>The controls use synthetic data in private temporary directories:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
+<p>Skeleton versions have a dune test, which also runs a real
+synchronization of two roots and the <code>unison-skeleton</code>
+tool:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build @tests/skeleton/runtest</span></code></pre></div>
+<p>Its 116 checks pass with stock OCaml 5.2.0 and with OxCaml
+<code>5.2.0+ox</code> and <code>5.4.0+ox</code>, as does the built-in
+self-test’s “skeleton versions” case.</p>
 <p>The other packed-root suites are <code>unison_write.py</code>,
 <code>unison_recover.py</code>, <code>unison_parallel.py</code> and
 <code>unison_marker.py</code>, with the same arguments, and

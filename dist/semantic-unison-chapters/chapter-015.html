@@ -5,9 +5,9 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Alexy Khrabrov, with Claude as co-author" />
-  <meta name="dcterms.date" content="2026-11-09" />
+  <meta name="dcterms.date" content="2026-11-10" />
   <meta name="description" content="How a public, LLM-friendly fork of Unison compares and syncs DNG and JPEG files by meaning, proves a shuttle disk safe to wipe, and packs millions of small files into SQLite archives, with every option and every measured number." />
-  <title>How this was built</title>
+  <title>Honest limits</title>
   <style>
     div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
     span.navlink { flex: 1; }
@@ -47,210 +47,167 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="chapter-016.html" accesskey="n" rel="next">Building and testing</a>
+<span class="navlink-label">Next:</span> <a href="chapter-016.html" accesskey="n" rel="next">How this was built</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="chapter-014.html" accesskey="p" rel="previous">Honest limits</a>
+<span class="navlink-label">Previous:</span> <a href="chapter-014.html" accesskey="p" rel="previous">Command reference</a>
 </span>
 </div>
 </nav>
-<h1 data-number="14" id="how-this-was-built"><span
-class="header-section-number">14</span> How this was built</h1>
-<h2 data-number="14.1" id="two-sessions-and-a-mailbox"><span
-class="header-section-number">14.1</span> Two sessions and a
-mailbox</h2>
-<p>Packdir was built in one day by one human and two LLM sessions, which
-could not talk to each other directly. The Photo session, which owned
-the Lightroom preview pipeline, knew the data and worked in another
-repository. The Unison session worked in this one. The user talked to
-both.</p>
-<p>They cooperated through two files in <code>docs/</code>, under rules
-the Photo session wrote at the top of the first message:</p>
+<h1 data-number="14" id="honest-limits"><span
+class="header-section-number">14</span> Honest limits</h1>
+<p>This chapter lists what the tools do not do, or do not yet do. All of
+it was true at commit <code>9b68266b</code>, and the section on skeleton
+versions at <code>d6a0005d</code>.</p>
+<h2 data-number="14.1" id="packed-roots"><span
+class="header-section-number">14.1</span> Packed roots</h2>
 <ul>
-<li><strong>Two files, one writer each.</strong>
-<code>photo-to-unison.md</code> is written only by Photo, and
-<code>unison-to-photo.md</code> only by Unison.</li>
-<li><strong>Lock while writing.</strong> Create
-<code>&lt;file&gt;.lock</code> with an exclusive create, write, then
-delete it. Never delete a lock you did not create. Report a stale one to
-the user.</li>
-<li><strong>Append only.</strong> Messages are numbered <code>P-n</code>
-and <code>U-n</code>. Never rewrite one. To correct one, send a new
-message that says which it supersedes.</li>
-<li><strong>Status line.</strong> <code>open</code>,
-<code>answered</code>, <code>blocked-on-user</code> or
-<code>closed</code>. Decisions that belong to the user are marked
-<code>blocked-on-user</code>, and neither session acts on them until the
-user decides.</li>
+<li><strong>One-way and local.</strong> A packed root must be local and
+must only receive. It can never be a source, so Unison reads members
+back only to verify them. Two-way packed sync and packed replicas over
+ssh are later work.</li>
+<li><strong>No moves, symlinks or nested directories.</strong> A move, a
+symbolic link, or a directory below the packed depth fails its item with
+a message.</li>
+<li><strong><code>perms = 0</code>, no <code>xattrs</code>, no
+ACLs.</strong> Members keep a mode in the <code>sqlar</code> table, but
+a packed root compares no permissions and stores no extended attributes
+or ACLs. Do not use one for trees where those matter.</li>
+<li><strong>Silent bit rot needs a scrub.</strong> An unchanged
+container is not opened, so nothing notices flipped bits inside it. Only
+<code>unison-packdir verify</code>, run periodically, does.</li>
+<li><strong>Some full-scale figures are still missing.</strong> The real
+mirror finished (see the benchmark chapter), but its total time includes
+restarts, and batching’s rate and a cold full-scale scan are not
+measured on their own.</li>
+<li><strong>Write amplification.</strong> About 1.6 times plain Unison’s
+bytes for the same change, as measured.</li>
+<li><strong>Metadata-only changes rewrite the member.</strong> Inside a
+container there is no packet rebuild from a clone. For 1.28 MiB files
+this is a small cost, but the semantic transfer path does not
+apply.</li>
+<li><strong>Space is not reclaimed automatically.</strong>
+<code>incremental_vacuum</code> runs only on request, and retained
+deletions keep their bytes until
+<code>repack --drop-retained</code>.</li>
+<li><strong>One format.</strong> Only <code>sqlar</code> is built. ZIP,
+tar and pack formats stayed benchmark comparisons. The backend interface
+is narrow so that one could be added later.</li>
 </ul>
-<p>Between 06:58Z and 20:32Z on 2026-10-31, UTC by the messages’ own
-headings, the mailbox carried seven messages from Photo and 21 from
-Unison. The two-file rule worked well for two writers, and the
-append-only rule kept every wrong number in place next to its
-correction. U-17 exists only to say that U-16 named a commit hash
-written before the commit did, and which hash was right. P-3 corrects
-the timestamp in P-2.</p>
-<p><code>blocked-on-user</code> mattered most. The list of things
-decided by the human includes: the mirror disk stays HFS+, the originals
-stay, a changed original is kept updated in the container, the benchmark
-folder, the barrier, deleting three stray copies, packed over plain, and
-when to start. No session started the mirror until the user said go. The
-Unison session had written in U-20: “I won’t change the profile or start
-the run until the user says go.”</p>
-<h2 data-number="14.2" id="milestones"><span
-class="header-section-number">14.2</span> Milestones</h2>
-<p>The integration had six milestones, each tested on synthetic data on
-stock OCaml and OxCaml, with the prototype as the reference.</p>
-<table>
-<colgroup>
-<col style="width: 4%" />
-<col style="width: 17%" />
-<col style="width: 78%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Milestone</th>
-<th style="text-align: left;">Commit</th>
-<th style="text-align: left;">What it added</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;"><code>ee379a85</code></td>
-<td style="text-align: left;">Preferences, refusals, the archive
-identity</td>
-</tr>
-<tr>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;"><code>9fc389bf</code></td>
-<td style="text-align: left;">Update detection from containers, through
-the hooks</td>
-</tr>
-<tr>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;"><code>c3b553be</code></td>
-<td style="text-align: left;">Propagation through the writer</td>
-</tr>
-<tr>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;"><code>8590b216</code></td>
-<td style="text-align: left;">Barriers and recovery</td>
-</tr>
-<tr>
-<td style="text-align: left;">5, 6</td>
-<td style="text-align: left;"><code>e401f408</code></td>
-<td style="text-align: left;">Parallel writer, the packed marker,
-<code>unison-packdir</code> beside <code>unison</code></td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>5c95d940</code></td>
-<td style="text-align: left;">One transaction per container for
-file-by-file items</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>c2aa06cc</code></td>
-<td style="text-align: left;">The format and commands moved to the
-separate packdir project</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>e46abd19</code></td>
-<td style="text-align: left;">Packing workers leave the inherited heap
-alone</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>4c107313</code></td>
-<td style="text-align: left;">A restart verifies only containers no
-barrier covers</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>24dc7298</code></td>
-<td style="text-align: left;">The DNG walker comes from tiffgraph</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>e451e6b6</code></td>
-<td style="text-align: left;">APFS clones preserved, file to file and
-into packed roots</td>
-</tr>
-</tbody>
-</table>
-<p>Controls at the last of these: detection 11, write 28, recovery 21,
-parallel 11, marker 8, config 16, semdiff 37, and Unison’s
-<code>-selftest</code>.</p>
-<h2 data-number="14.3" id="what-the-tests-found"><span
-class="header-section-number">14.3</span> What the tests found</h2>
-<p>The essay says, “A test can pass because its fixture missed the
-dangerous case.” The packdir work has examples of that and of its
-opposite. These are the ones recorded in the mailbox, the commits and
-the session’s notes.</p>
-<p><strong>Tests that passed by accident.</strong> In milestone 2, the
-first detection tests passed, and they should not have. Unison was
-failing to fingerprint every member and silently skipping them without
-comparing anything, because something called
-<code>Fingerprint.file</code> directly and bypassed the path the hook
-was on. The session noticed, put the hook in
-<code>Fingerprint.file</code>, and tightened the test to refuse digest
-errors. A later assertion in <code>tests/packdir/unison_detect.py</code>
-shows the tightening: exactly the two changes must be detected, with no
-error in the output. A silent skip looks exactly like nothing to do,
-which is why this class of bug is dangerous in a synchronizer.</p>
-<p><strong>A check that never ran.</strong> <code>-packdepth -1</code>
-was accepted, because setup only ran for a positive depth, so the
-negative-depth check inside it was unreachable, and Unison synchronized
-normally. Setup now runs for any nonzero depth, and a control covers it.
-The root check in the same milestone crashed because it ran before
-Unison had set up its roots.</p>
-<p><strong>A retained deletion that updated one archive.</strong> A
-retained deletion first updated only the packed root’s archive, so
-Unison found the two archives different and refused to save either. Both
-are updated now, as <code>Files.delete</code> does. Milestone 3’s
-controls caught this, and U-19 reports it.</p>
-<p><strong>The marker check ran too late.</strong> Setup writes the
-run’s marker, and the check came after it, so a run with the wrong depth
-could rewrite the mirror’s marker and carry on. The check now comes
-first, with a comment saying why, and an existing marker is never
-rewritten with another depth.</p>
-<p><strong>A crashed worker’s container dropped from the recheck
-list.</strong> After a commit, the pending list was cleared. A container
-whose job had died was in it, so it would have been trusted next time.
-Now only containers whose job failed stay pending, tracked in
-<code>failed_this_run</code>. The worker-crash control in
-<code>tests/packdir/unison_parallel.py</code> kills a worker partway
-through and requires the next run to converge.</p>
-<p><strong>A harness that deleted.</strong> The benchmark’s plain-Unison
-method deleted on the target until a dry run on the internal disk showed
-it. The dry run was there to test the harness, and it did.</p>
-<h2 data-number="14.4" id="what-went-wrong-without-a-test"><span
-class="header-section-number">14.4</span> What went wrong without a
-test</h2>
-<p>Not every mistake was caught by a control:</p>
+<h2 data-number="14.2" id="clones"><span
+class="header-section-number">14.2</span> Clones</h2>
 <ul>
-<li>A shell-quoting mistake packed three extra full copies, 51 GiB each,
-into folders with spaces in their names on the mirror disk. The harness
-had promised to delete nothing, so the session asked the user before
-removing them.</li>
-<li><code>diskutil unmount</code> hung for 16 and then 12 minutes,
-unattended, because it had no timeout. The session called that its own
-mistake.</li>
-<li>Nobody tested a target with plain directories at scale, and the
-result was the slow mirror of the benchmark chapter.</li>
+<li><strong>macOS and APFS only.</strong> Clone IDs come from
+<code>getattrlist</code>; elsewhere nothing is a clone and nothing
+changes.</li>
+<li><strong>Within one sync and one volume.</strong> A clone group is
+kept only among files the same run sees, and clones can’t span volumes
+on the receiving side.</li>
+<li><strong>New and changed files only.</strong> Files already synced or
+packed as full copies stay so; they are not regrouped.</li>
+<li><strong>Some paths untested at scale.</strong> The wait for an
+earlier in-flight original is reviewed but not reached by any test, and
+nothing has run on a real catalog yet.</li>
 </ul>
-<p>These are recorded in the mailbox because the rule of that channel,
-and of the fork, is that a correction goes beside the original.</p>
-<h2 data-number="14.5" id="what-this-book-is"><span
-class="header-section-number">14.5</span> What this book is</h2>
-<p>This book was written in one session, after all of the above, from
-those records. The session read the essay, the design documents, the
-mailbox and the source, and ran the commands in the worked examples on
-synthetic data. It did not read from or write to the real disks. The
-diagrams were written by hand as SVG. When the source and a document
-disagreed, the book follows the source and says so, as with the
-<code>-preserve</code> help text.</p>
+<h2 data-number="14.3" id="semantic-diff-1"><span
+class="header-section-number">14.3</span> Semantic diff</h2>
+<ul>
+<li><strong>Same view is a rule.</strong> It is a list of tags, not a
+rendering comparison.</li>
+<li><strong>Identical raw image means identical stored bytes.</strong>
+Files that decode to the same samples from different encodings are
+reported as <code>image-differs</code>.</li>
+<li><strong>Unknown file types get <code>differs</code>.</strong> They
+have no image layer to compare.</li>
+<li><strong>Versions need a recent <code>dng-archive</code>.</strong>
+With one older than dng-compare <code>992eff7</code>, a second version
+at the same path stays “not safe” until handled by hand.</li>
+<li><strong>Local roots only.</strong> <code>-semdiff</code> and
+<code>-semcatchupfrom</code> need exactly two local roots.</li>
+<li><strong>Disk detection uses <code>diskutil</code>,</strong> so it is
+macOS behaviour. <code>-hdd</code> and <code>-ssd</code> override
+it.</li>
+<li><strong>Stale help text.</strong> The <code>-preserve</code> help in
+Unison still says the default archive is
+<code>ROOT2/.dng-compare/NAME-OF-ROOT1</code>. The code uses
+<code>ROOT2/../dng-compare/SHUTTLE</code>, as this book describes.</li>
+</ul>
+<h2 data-number="14.4" id="semantic-transfer-and-merging"><span
+class="header-section-number">14.4</span> Semantic transfer and
+merging</h2>
+<ul>
+<li><strong>Narrow by design.</strong> A grown or moved packet falls
+back to a normal copy. So does anything the profile does not
+recognize.</li>
+<li><strong>Ratings and labels only.</strong> The merge handles the
+supported Rating and Label forms. General RDF structures and relocated
+packets are separate work.</li>
+<li><strong>Declined files are conflicts.</strong> A file the merge
+cannot prove safe stays a normal conflict, and both replicas are
+preserved.</li>
+<li><strong>Second-receiver failure.</strong> There is no distributed
+atomic rename. A rejection at the second receiver can leave the first
+committed. Retry generates the same exact result, if the saved base is
+still available.</li>
+<li><strong>Fixtures are mostly synthetic.</strong> Generated containers
+qualify the sync contract, not Adobe decoding or rendering across real
+cameras. No claim covers every camera, operating system or storage
+device.</li>
+<li><strong>Adobe validation needs a qualified driver.</strong> The
+stock <code>dng_validate</code> command alone does not implement the
+protocol, and SDK sources are not in this repository.</li>
+<li><strong>The overall goal is open.</strong> The handoff of 2026-10-20
+recorded it as active and incomplete. The state moves, and
+<code>OPUS-HANDOFF.md</code> is where it is tracked.</li>
+</ul>
+<h2 data-number="14.5" id="skeleton-versions-1"><span
+class="header-section-number">14.5</span> Skeleton versions</h2>
+<ul>
+<li><strong>Classic TIFF and JPEG only.</strong> BigTIFF, HEIF, video
+and other containers are kept whole, or as their own skeleton up to 1
+MiB.</li>
+<li><strong>An edit outside Unison can lose a version.</strong> A block
+destroyed in place on a replica takes with it the versions there that
+need it. Unison reports and marks them at the next replacement, as the
+chapter says, and cannot bring them back.</li>
+<li><strong>Roots are named by path.</strong> Moving or renaming a root
+starts a new part of the store. The earlier versions stay under the old
+path and only those kept whole, or as their own skeleton, still restore.
+A store that follows a moved root is not built.</li>
+<li><strong>The same path replaced twice at once.</strong> Two
+synchronizations that share a root are kept apart by the store’s lock,
+but if both replace the same path at the same moment only one of the two
+outgoing contents becomes a version.</li>
+<li><strong>A temporary copy where there are no clones.</strong> On a
+filesystem without clones, or with the store on another volume, each
+replacement first makes a full temporary copy of the outgoing file.</li>
+<li><strong>Not yet run across a network.</strong> The receiving side
+has been run as a separate Unison server process over the remote
+protocol on one machine, through a stand-in for <code>ssh</code>. No run
+has crossed a real network connection, and none has yet been made on a
+real library.</li>
+</ul>
+<h2 data-number="14.6" id="building"><span
+class="header-section-number">14.6</span> Building</h2>
+<ul>
+<li><strong>The <code>make</code> build is broken at a module unrelated
+to this work.</strong> It stops at <code>directoryOwner.cmx</code>, with
+“Could not find the .cmi file for interface” for
+<code>directoryOwner.mli</code>. The Unison session found this during
+milestone 1, and confirmed it on a clean copy of the commit before its
+own changes. The binaries in use are built with dune, which is fine.
+<code>src/Makefile.OCaml</code> also takes the packdir stub, so a
+<code>make</code> build could not have packed roots even when
+fixed.</li>
+<li><strong>Packed roots need the opam <code>packdir</code>
+package.</strong> Without it, dune selects the stub and
+<code>packdepth</code> is refused.</li>
+<li><strong>DNG profiles need the opam <code>tiffgraph</code>
+package.</strong> Both builds link it; <code>src/Makefile.OCaml</code>
+finds it beside the standard library.</li>
+<li><strong>Platform.</strong> All evidence recorded here is from macOS
+on Intel, with HFS+ and APFS volumes. <code>F_FULLFSYNC</code> is a
+macOS call. Nothing here claims behaviour on other systems.</li>
+</ul>
 </body>
 </html>
