@@ -1165,12 +1165,12 @@ let run c =
     Printf.eprintf "semdiff: metadata rules unavailable (%s): metadata is not compared\n%!" e; None in
   let exiftool = if c.exiftool_path <> "" then c.exiftool_path else
     find_program "metadata-extract-exiftool-rs-oxcaml"
-      (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["default"; "5.2.0+ox"]) in
+      (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["default"; "5.4.0+ox"]) in
   (* dng-compare's OCaml archive tool: index, preserve, restore. *)
   let archiver = match Sys.getenv_opt "DNG_ARCHIVE" with
     | Some p when p <> "" -> p
     | _ -> find_program "dng-archive"
-             (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["5.2.0+ox"; "default"]) in
+             (List.map (fun sw -> Filename.concat (home ()) (".opam/" ^ sw ^ "/bin")) ["5.4.0+ox"; "default"]) in
   let from_reports = c.summarize || c.review in
   let records =
     if from_reports then

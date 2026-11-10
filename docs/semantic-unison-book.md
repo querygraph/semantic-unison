@@ -1184,7 +1184,7 @@ Verdicts are `mergeable`, `xmp-unsupported`, `declined` and `error`. The exit st
 
 `-j`, `-o`, `-resume` and `-cache` work here as in scan mode. The exit status is 0 when the shuttle is safe to wipe and 1 when it is not.
 
-`DNG_COMPARE_HOME` locates dng-compare for the rules, default `~/src/dng-compare`. `DNG_ARCHIVE` locates `dng-archive`, otherwise `PATH`, then the `5.2.0+ox` and `default` opam switches. `-preservefull` also needs `xdelta3`.
+`DNG_COMPARE_HOME` locates dng-compare for the rules, default `~/src/dng-compare`. `DNG_ARCHIVE` locates `dng-archive`, otherwise `PATH`, then the `5.4.0+ox` and `default` opam switches. `-preservefull` also needs `xdelta3`.
 
 ## Packed-root preferences
 
@@ -1469,8 +1469,8 @@ This book was written in one session, after all of the above, from those records
 Semantic Unison builds with dune. Packed roots need the opam `packdir` package, and `-preserve` needs `dng-archive`. Each must be pinned in each opam switch you use, and stock OCaml and OxCaml stay separate.
 
 ```sh
-opam pin add -y --switch 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT
-opam exec --switch 5.2.0+ox -- dune build \
+opam pin add -y --switch 5.4.0+ox packdir PATH-TO-PACKDIR-CHECKOUT
+opam exec --switch 5.4.0+ox -- dune build \
     ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe
 ```
 
@@ -1486,7 +1486,7 @@ python3 tests/packdir/unison_detect.py --unison PATH/unison --packdir PATH/uniso
 Skeleton versions have a dune test, which also runs a real synchronization of two roots and the `unison-skeleton` tool:
 
 ```sh
-opam exec --switch 5.2.0+ox -- dune build @tests/skeleton/runtest
+opam exec --switch 5.4.0+ox -- dune build @tests/skeleton/runtest
 ```
 
 Its 116 checks pass with stock OCaml 5.2.0 and with OxCaml `5.2.0+ox` and `5.4.0+ox`, as does the built-in self-test's "skeleton versions" case.

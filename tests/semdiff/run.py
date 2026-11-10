@@ -19,7 +19,7 @@ p.add_argument('--dngscan', required=True, help='unison-dngscan of the same buil
 a = p.parse_args()
 home = pathlib.Path(os.environ.get('DNG_COMPARE_HOME', pathlib.Path.home() / 'src/dng-compare'))
 archiver = next((c for c in [os.environ.get('DNG_ARCHIVE'), shutil.which('dng-archive')] +
-                 [str(pathlib.Path.home() / '.opam' / sw / 'bin/dng-archive') for sw in ('5.2.0+ox', 'default')]
+                 [str(pathlib.Path.home() / '.opam' / sw / 'bin/dng-archive') for sw in ('5.4.0+ox', 'default')]
                  if c and os.access(c, os.X_OK)), None)
 have_dng_compare = (home / 'metadata_rules.json').is_file() and archiver and shutil.which('xdelta3')
 

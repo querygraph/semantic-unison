@@ -387,9 +387,12 @@ xmpMerge.cmx: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
 
 # The make build has no packdir library (SQLite): it always takes the stub
 # that refuses packed roots. dune selects the SQLite one when it can.
-packdirSupport.cmo: packdirSupport.none.ml
+# .depend doesn't list the stub (it isn't named packdirSupport.ml), so its
+# imports are spelled out here; without them a parallel make can compile it
+# before fspath.cmi exists.
+packdirSupport.cmo: packdirSupport.none.ml fspath.cmi common.cmi path.cmi uutil.cmi ubase/util.cmi lwt/lwt.cmi
 	$(OCAMLC) $(CAMLFLAGS_X) -c -impl $(CWD)/packdirSupport.none.ml -o $(CWD)/packdirSupport.cmo
-packdirSupport.cmx: packdirSupport.none.ml
+packdirSupport.cmx: packdirSupport.none.ml fspath.cmx common.cmx path.cmx uutil.cmx ubase/util.cmx lwt/lwt.cmx
 	$(OCAMLOPT) $(CAMLFLAGS_X) -c -impl $(CWD)/packdirSupport.none.ml -o $(CWD)/packdirSupport.cmx
 
 .mli.cmi:

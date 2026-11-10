@@ -1,6 +1,7 @@
 # Building the CLI with pinned OxCaml
 
-The CLI can be built with the `5.2.0+ox` compiler while retaining a standard
+The CLI can be built with OxCaml `5.4.0+ox`, the standard OxCaml switch on this host since
+2026-11-10 (the earlier `5.2.0+ox` is kept only to reproduce older results), while retaining a standard
 OCaml 5 build. The compatibility changes eta-expand standard-library aliases;
 they do not change interfaces or archives. The semantic extension adds
 separately negotiated capabilities while retaining ordinary peer fallback.
@@ -30,7 +31,7 @@ retains its historical snapshot; it is not the current default switch version.
 On this shared host, prefer the owned entry point with an unused output path:
 
 ```sh
-SHARED_CPU_CREDITS=8 OX_PREFIX=/Users/alexy/.opam/5.2.0+ox/bin \
+SHARED_CPU_CREDITS=8 OX_PREFIX=/Users/alexy/.opam/5.4.0+ox/bin \
   OUTPUT_DIR=/private/tmp/unison-ox-check-UNUSED-NONCE \
   /Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14 \
   -B tests/manual.py ox-check
@@ -67,8 +68,8 @@ tree before building.
 ```sh
 unison_build=$(mktemp -d /private/tmp/unison-oxcaml.XXXXXX)
 git archive HEAD | tar -xf - -C "$unison_build"
-opam exec --switch=5.2.0+ox -- ocamlopt -version
-opam exec --switch=5.2.0+ox -- make -C "$unison_build/src" tui NATIVE=true -j2
+opam exec --switch=5.4.0+ox -- ocamlopt -version
+opam exec --switch=5.4.0+ox -- make -C "$unison_build/src" tui NATIVE=true -j2
 mkdir "$unison_build/test-state"
 UNISON="$unison_build/test-state" "$unison_build/src/unison" -ui text -selftest -semanticworkers 3
 ```
@@ -76,14 +77,14 @@ UNISON="$unison_build/test-state" "$unison_build/src/unison" -ui text -selftest 
 Use an available temporary directory in place of `/private/tmp` on other
 platforms. The commands require an already installed switch; they do not
 install or upgrade a compiler. Check that `ocamlopt -version` reports
-`5.2.0+ox` before comparing results. Do not infer the compiler from a binary's
+`5.4.0+ox` before comparing results. Do not infer the compiler from a binary's
 filename.
 
 If using an explicit compiler directory instead of `opam exec`, this is the
 tested native build form, run in a fresh source copy:
 
 ```sh
-make -C src tui NATIVE=true -j2 TOOL_PREFIX=/path/to/5.2.0+ox/bin/
+make -C src tui NATIVE=true -j2 TOOL_PREFIX=/path/to/5.4.0+ox/bin/
 ```
 
 Set `NATIVE=true` explicitly. The inspected make configuration selected

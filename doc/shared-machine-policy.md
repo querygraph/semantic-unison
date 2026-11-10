@@ -58,7 +58,7 @@ Invoke from the repository root, serially within the Unison lane:
 export PATH="$HOME/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin:$PATH"
 SHARED_CPU_CREDITS=8 JOBS=2 STOCK_PREFIX="$HOME/.opam/default/bin" \
   make -f tests/Makefile stock-check
-SHARED_CPU_CREDITS=8 JOBS=2 OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" \
+SHARED_CPU_CREDITS=8 JOBS=2 OX_PREFIX="$HOME/.opam/5.4.0+ox/bin" \
   make -f tests/Makefile ox-check
 SHARED_CPU_CREDITS=8 make -f tests/Makefile shared-sync-controls
 ```

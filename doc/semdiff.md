@@ -173,7 +173,7 @@ unison-dngscan -review -semdiff ROOT -o REPORT.jsonl [-tree NAME | -suffix[=SUF]
 The metadata rules come from dng-compare, found through `DNG_COMPARE_HOME`
 (default `~/src/dng-compare`). `-preserve` and `-preservefull` run dng-compare's
 OCaml `dng-archive` (opam package `dng-archive`, in `ocaml-archive/`), found
-through `DNG_ARCHIVE`, else `PATH`, else the `5.2.0+ox` and `default` opam
+through `DNG_ARCHIVE`, else `PATH`, else the `5.4.0+ox` and `default` opam
 switches; it writes the same archive files as dng-compare's Python tools. No
 Python runs. `-preservefull` also needs `xdelta3`.
 

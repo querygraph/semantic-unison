@@ -11,7 +11,7 @@ tool and Unison builds without packed roots, refusing `packdepth` with a message
 [`docs/packdir-design.md`](../../docs/packdir-design.md).
 
 ```sh
-opam pin add -y --switch 5.2.0+ox packdir ~/src/packdir
+opam pin add -y --switch 5.4.0+ox packdir ~/src/packdir
 opam pin add -y --switch default packdir ~/src/packdir
 ```
 

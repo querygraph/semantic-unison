@@ -7,7 +7,7 @@ jobs**. Both endpoints and owner overhead count when a test launches two replica
 Credits coordinate participating owners; they are not an OS CPU or RSS hard cap.
 
 Use the installed compiler-matched switches: stock OCaml under
-`$HOME/.opam/default/bin`, OxCaml under `$HOME/.opam/5.2.0+ox/bin`. Do not use the
+`$HOME/.opam/default/bin`, OxCaml under `$HOME/.opam/5.4.0+ox/bin`. Do not use the
 unrelated Homebrew compiler or change the selected opam switch. The qualified
 local test interpreter is:
 
@@ -22,7 +22,7 @@ ownership through child/group settlement. Each `OUTPUT_DIR` must be fresh; an
 existing directory is refused rather than overwritten or reused.
 
 ```sh
-SHARED_CPU_CREDITS=8 JOBS=2 OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" \
+SHARED_CPU_CREDITS=8 JOBS=2 OX_PREFIX="$HOME/.opam/5.4.0+ox/bin" \
   OUTPUT_DIR=/private/tmp/unison-local-ox-check-001 \
   "$UNISON_TEST_PYTHON" tests/manual.py ox-check
 

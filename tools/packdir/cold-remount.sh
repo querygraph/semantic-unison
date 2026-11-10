@@ -3,7 +3,7 @@
 # catalog, attributes and data caches; the Quasar set is re-read warm by the harness.
 set -e
 R=$HOME/src/semantic-unison; S=/Volumes/Quasar/packdir-bench/leafset-v1; B=/Volumes/Ten/packdir-bench
-A=(--unison "$R/build-semdiff/ox/unison" --packdir "$R/build-semdiff/.dune-5.2.0+ox/default/tools/packdir/main.exe")
+A=(--unison "$R/build-semdiff/ox/unison" --packdir "$R/build-semdiff/.dune-5.4.0+ox/default/tools/packdir/main.exe")
 cold() { cd /; diskutil unmount /Volumes/Ten >/dev/null && diskutil mount disk17s2 >/dev/null; test -d "$B"; }
 walk() { python3 -c '
 import os, sys, time
