@@ -77,7 +77,8 @@
  (public_name unison-dngscan)
  (package unison) ; Dummy: we don't use packages
  (modules scanCommon semdiff dngscan)
- (libraries unison_lib))
+ ; -semindex reads phindex indexes through tools/semindex.
+ (libraries unison_lib unison_semindex))
 
 ; Lists, checks and restores skeleton versions (docs/skeleton-versions.md).
 (executable

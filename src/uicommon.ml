@@ -245,6 +245,15 @@ let semdiffRoots =
   Prefs.createStringList "semdiffroot" ~category:(`Advanced `General) ~local:true
     "with -semdiff, also count a file as kept when it is on this root (repeatable)"
     "Further long-term roots that -semdiff compares against; only the second root is synchronized."
+let semdiffIndexes =
+  Prefs.createStringList "semindex" ~category:(`Advanced `General) ~local:true
+    "with -semdiff, a phindex index of one of the trees (repeatable)"
+    ("phindex indexes of the roots that -semdiff compares, one per tree. A pair whose \
+      two files still have the size and modification time of their index rows is \
+      settled from the rows without reading either file: identical when the rows \
+      have one SHA-256, the same image when they share DNG raw blocks or image data. \
+      A file not found by path or name is also looked for by its content. \
+      Passed to unison-dngscan -semdiff -semindex.")
 let semdiffScanner =
   Prefs.createString "semdiffscanner" "" ~category:(`Advanced `General) ~local:true
     "unison-dngscan binary for -semdiff"
@@ -286,6 +295,7 @@ let semdiffSetup () =
       let full = Prefs.read semdiffPreserveFull in
       let args = [scanner; "-semdiff"; r2]
         @ List.concat_map (fun r -> ["-semdiff"; r]) (Prefs.read semdiffRoots)
+        @ List.concat_map (fun f -> ["-semindex"; f]) (Prefs.read semdiffIndexes)
         @ (if Prefs.read semdiffSameview then ["-sameview"] else [])
         @ (if Prefs.read semdiffPreserve || db <> "" || full then ["-preserve"] else [])
         @ (if db <> "" then ["-preservedb"; db] else [])

@@ -556,6 +556,37 @@ A root on a disk that `diskutil` does not report as solid state, either a spinni
 
 A progress line every minute gives files and bytes compared, MiB/s, files/s, the time left and the counts so far. Time left is fitted over the last 15 minutes with a cost per file and a cost per byte, so it holds through stretches of small sidecars and large DNGs. `-v` adds listing progress, a line for each file that is not identical, and dng-compare's preservation output. `^C` is safe: rerun the same command and finished comparisons are reused.
 
+## With phindex indexes
+
+The comparison reads both files of every matched pair, which for two large libraries is most of both disks. When each tree has a [phindex](https://firstpair.org/books/phindex/) index, that work has been done already, once, and `-semindex` uses it:
+
+```sh
+phindex --db source.sqlite   --root /Volumes/Source/foto      # reads only what changed
+phindex --db longterm.sqlite --root /Volumes/Archive/foto
+unison /Volumes/Source/foto /Volumes/Archive/foto -semdiff \
+       -semindex source.sqlite -semindex longterm.sqlite
+```
+
+A row is used only while its file still has the row's size and modification time. For a pair whose two rows are both current:
+
+| The rows have | Status | Files read |
+|:--|:--|:--|
+| one SHA-256 | `identical` | none |
+| the same DNG raw blocks, or the same image data | `metadata-only` | none, unless `-sameview` or `-preserve` asks for the metadata |
+| nothing in common, or one row is missing or stale | decided as without an index | both |
+
+A file that the path and the name did not find is then looked for by content: first a file the long-term index lists with the same SHA-256, then one that shares its raw blocks or image data. That finds a file that was renamed, or renamed and edited, and settles a name that occurs twice. Such a match is reported as found `index`, with the path it was found at, and the file is not copied again.
+
+This is the way to keep a long-term library as it is while new photographs keep arriving somewhere else. The library is never rewritten: a file already there under any name counts as kept, a file whose metadata differs is reported and left alone, and only a file with no copy at all is added. A file that reached the library by another route, from a second shuttle for instance, is found in its index and not copied twice.
+
+Three things to know:
+
+- **The index is trusted.** A current row stands for the file's content; the file is not read to confirm it. A file changed without its size or modification time changing would be missed, as it would by phindex itself. Without `-semindex` every pair is read.
+- **Run phindex first.** A file added since the index was made has no row, and a changed one has a stale row; both are compared the slow way, by reading, and nothing wrong is concluded.
+- **"Safe to wipe" still needs proof.** A pair the indexes call metadata-only is not safe to wipe until it is preserved, exactly as without an index.
+
+On six real files edited by Lightroom Classic and Photo Mechanic, indexed by phindex itself: one renamed copy was found by SHA-256, one renamed and edited JPEG by its image data, three edited files at their own paths were settled as the same image, one of them with both copies made unreadable, and the one file with no copy was listed for the catch-up.
+
 ## Reruns and other roots
 
 - **Reports.** The report lives in the Unison directory as `semdiff-HASH.jsonl`, next to its `.walk` listing cache and `.catchup` list. A pair is compared again only if either file changed. Missing, ambiguous and unavailable files are always looked at again.
@@ -1080,6 +1111,7 @@ These are ordinary Unison preferences, so each can also go in a profile. All are
 |:--------------------|:------------|:------------------------------------------------|
 | `-semdiff` | bool, false | Run `unison-dngscan -semdiff ROOT2 ROOT1` first, then synchronize only files missing on the second root, creation only. Both roots must be local |
 | `-sameview` | bool, false | Also decide which metadata-only differences cannot affect rendering |
+| `-semindex FILE` | list | A [phindex](https://firstpair.org/books/phindex/) index of one of the trees. Repeatable, one per tree. Pairs whose rows are current are settled without reading the files, and a file is also found by its content |
 | `-preserve` | bool, false | Record metadata differences in a dng-compare archive, and keep conflict copies |
 | `-preservedb DIR` | string | Archive for `-preserve`. Implies `-preserve` |
 | `-preservefull` | bool, false | `-preserve`, and keep each metadata-only file as a verified VCDIFF delta |
@@ -1105,7 +1137,7 @@ The command has three forms, as its usage line says:
 ```text
 unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
                [-o REPORT.jsonl [-resume]] PATH...
-unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
+unison-dngscan -semdiff ROOT... [-semindex INDEX.sqlite]... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
                [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]...
                [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]
 unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]
@@ -1129,6 +1161,7 @@ Verdicts are `mergeable`, `xmp-unsupported`, `declined` and `error`. The exit st
 | Option | Default | Meaning |
 |:----------------------|:-------------|:-------------------------------------------|
 | `-semdiff ROOT` | required | Compare every file under LEFT with its match under ROOT. Repeatable |
+| `-semindex FILE` | none | A phindex index of a tree being compared. Repeatable. Needs the opam `sqlite3` package at build time; without it the option is refused |
 | `-sameview` | off | Decide whether a pair differs only in non-rendering tags |
 | `-summarize` | off | Summarize reports given as arguments instead of scanning |
 | `-catchup` | off | Then run Unison to copy what is missing, creation only |
@@ -1457,6 +1490,8 @@ opam exec --switch 5.2.0+ox -- dune build @tests/skeleton/runtest
 ```
 
 Its 116 checks pass with stock OCaml 5.2.0 and with OxCaml `5.2.0+ox` and `5.4.0+ox`, as does the built-in self-test's "skeleton versions" case.
+
+`tests/semdiff/semindex.py`, with the same two arguments as `run.py`, covers `-semindex` with hand-made indexes: 21 checks.
 
 The other packed-root suites are `unison_write.py`, `unison_recover.py`, `unison_parallel.py` and `unison_marker.py`, with the same arguments, and `unison_config.py`, which takes only `--unison`. The packdir project has its own 92 controls, plus 45 that compare each file command with GNU coreutils on the same tree unpacked.
 

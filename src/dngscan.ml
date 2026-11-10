@@ -17,7 +17,7 @@ type record = {
 }
 
 let usage = "usage: unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv] [-o REPORT.jsonl [-resume]] PATH...\n\
-\       unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR] [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]... [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]\n\
+\       unison-dngscan -semdiff ROOT... [-semindex INDEX.sqlite]... [-sameview] [-preserve | -preservefull] [-preservedb DIR] [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]... [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]\n\
 \       unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]"
 
 let is_dng name =
@@ -144,6 +144,7 @@ let () =
   let workers = ref 8 and report = ref "" and resume = ref false and cache = ref "" and roots = ref [] in
   let admit = ref [] and tags = ref "" in
   let semdiff = ref [] and sameview = ref false and summarize = ref false and catchup = ref false in
+  let indexes = ref [] in
   let catchup_to = ref "" and catchup_file = ref "" and db = ref false and db_archive = ref "" in
   let rules = ref "" and exiftool = ref "" and unison = ref "" and unison_args = ref [] in
   let preserve_full = ref false and review = ref false and verbose = ref false and kinds = ref [] and readers = ref None and placement = ref (Semdiff.Tree "review") in
@@ -157,6 +158,8 @@ let () =
       placement := Semdiff.Suffix s), "SUF  as -suffix=SUF";
     "-semdiff", Arg.String (fun r -> semdiff := !semdiff @ [r]),
       "ROOT  compare every file under LEFT with its match under ROOT (repeatable): same relative path, else same file name";
+    "-semindex", Arg.String (fun f -> indexes := !indexes @ [f]),
+      "FILE  a phindex index of a tree being compared (repeatable): pairs whose rows are current are settled from it without reading the files, and a file is also found by its content at another path";
     "-sameview", Arg.Set sameview, " also decide whether a pair differs only in tags that cannot affect rendering";
     "-summarize", Arg.Set summarize, " summarize -semdiff reports given as arguments instead of scanning";
     "-catchup", Arg.Set catchup, " then run unison to copy what is missing (creation only)";
@@ -199,6 +202,7 @@ let () =
     let home = Semdiff.dng_compare_default () in
     Semdiff.run {Semdiff.left_roots = (if !summarize then [] else List.rev !roots); review = !review;
       preserve_full = !preserve_full; placement = !placement; verbose = !verbose; disk_kinds = !kinds; readers = !readers;
+      indexes = !indexes;
       right_roots = !semdiff; workers = !workers; report = !report; resume = !resume; cache = !cache;
       sameview_flag = !sameview; summarize = !summarize; reports = (if !summarize then List.rev !roots else []);
       catchup = !catchup; catchup_to = !catchup_to; catchup_file = !catchup_file;

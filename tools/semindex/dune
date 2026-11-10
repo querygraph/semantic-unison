@@ -1,0 +1,10 @@
+; unison-dngscan -semindex: phindex indexes, read with the opam sqlite3
+; package. Without that package the option is refused at run time.
+(library
+ (name unison_semindex)
+ (wrapped false)
+ (modules semindex)
+ (libraries unix
+  (select semindex.ml from
+   (sqlite3 -> semindex.sqlite.ml)
+   (-> semindex.none.ml))))

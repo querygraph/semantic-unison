@@ -83,7 +83,7 @@ let layout rules tag = (starts "EXIF:" tag || starts "MakerNotes:" tag) && List.
 (* One right root's view of one left file. *)
 type diff = { tag : string; kind : string; left_value : json option; right_value : json option; cat : string }
 type target = {
-  root : string; matched : string; how : string; (* path | name | ambiguous | none | unavailable *)
+  root : string; matched : string; how : string; (* path | name | index | ambiguous | none | unavailable *)
   msize : int64; mmtime : float;
   status : string; (* identical | metadata-only | image-differs | differs | missing | ambiguous | unavailable | error *)
   image : string; previews : string; (* same | differs | unknown | "" *)
@@ -401,14 +401,37 @@ let reclassify rules t =
   let changes = rendering_changes rules (side (fun d -> d.left_value)) (side (fun d -> d.right_value)) in
   {t with sameview = Some (changes = []); reason = rendering_reason changes}
 
+(* -semindex: phindex indexes of the trees.  A row counts only while its file
+   still has the row's size and modification time (to the microsecond, which
+   is what a float time holds); then the row's SHA-256 and identities stand
+   for the file's content and the file is not read. *)
+let index_current (row : Semindex.row) (s : Unix.LargeFile.stats) =
+  row.Semindex.sha256 <> "" && row.Semindex.size = s.Unix.LargeFile.st_size
+  && Float.abs (s.Unix.LargeFile.st_mtime -. Int64.to_float row.Semindex.mtime_ns /. 1e9) < 2e-6
+
+let indexed indexes path stat =
+  List.find_map (fun i -> match Semindex.at i path with
+    | Some r when index_current r stat -> Some r | _ -> None) indexes
+
+let same_image (a : Semindex.row) (b : Semindex.row) =
+  (a.Semindex.dng_blocks <> "" && a.Semindex.dng_blocks = b.Semindex.dng_blocks)
+  || (a.Semindex.image_data <> "" && a.Semindex.image_data = b.Semindex.image_data)
+
+let index_note = "same image by the phindex indexes; metadata not compared"
+
 let compare_pair opts left matched t =
   let ext = String.lowercase_ascii (Filename.extension left) in
   let lsize = (Unix.LargeFile.stat left).st_size and msize = t.msize in
-  if lsize = msize && (let h, h' = both hash_file left matched in h = h') then
+  (* The indexes already said the two hold the same image and other bytes. *)
+  let settled = t.image = "same" in
+  if settled && not (opts.want_sameview || opts.keep_meta) then
+    {t with status = "metadata-only"; previews = "unknown"; reason = index_note}
+  else if not settled && lsize = msize && (let h, h' = both hash_file left matched in h = h') then
     {t with status = "identical"; image = "same"; previews = "same";
             sameview = if opts.want_sameview then Some true else None}
   else begin
     let image, previews, image_note =
+      if settled then "same", "unknown", "" else
       let units = match ext with
         | ".dng" -> Some image_units | ".jpg" | ".jpeg" -> Some jpeg_units | _ -> None in
       match units with
@@ -447,7 +470,8 @@ type job = { jpath : string; jrel : string; jsize : int64; jmtime : float; jino 
 
 let run_job opts j =
   let targets = List.map (fun t ->
-    if t.how <> "path" && t.how <> "name" then t else
+    (* A pair the indexes settled as identical has its status already. *)
+    if not (List.mem t.how ["path"; "name"; "index"]) || t.status <> "missing" then t else
     try compare_pair opts j.jpath t.matched t
     with Unix.Unix_error (e, _, p) -> {t with status = "error"; reason = p ^ ": " ^ Unix.error_message e}
        | SemanticFile.Invalid r | Failure r -> {t with status = "error"; reason = r}) j.jtargets in
@@ -907,6 +931,7 @@ type config = {
   catchup : bool; catchup_to : string; catchup_file : string; review : bool; placement : placement;
   db : bool; db_archive : string; preserve_full : bool; rules_path : string; exiftool_path : string;
   dng_compare_home : string; unison_path : string; unison_args : string list; verbose : bool;
+  indexes : string list; (* -semindex FILE: phindex indexes of the trees *)
   disk_kinds : (string * string) list; (* -hdd / -ssd PATH, recorded for later runs *)
   readers : int option; (* -readers N for the -hdd disks, recorded too *)
 }
@@ -968,6 +993,48 @@ let scan c ~left ~roots ~rules ~exiftool =
   let done_ = Hashtbl.create 1024 in
   List.iter (fun r -> Hashtbl.replace done_ r.path ()) reused_records;
   let prefix = left ^ "/" in
+  (* -semindex: settle pairs from phindex rows, and find by content what the
+     path and the name did not. *)
+  let sem = List.map Semindex.open_ c.indexes in
+  let by_index = Hashtbl.create 4 in
+  let note what = Hashtbl.replace by_index what (1 + try Hashtbl.find by_index what with Not_found -> 0) in
+  let settle p s t =
+    if sem = [] then t else
+    match indexed sem p s with
+    | None -> t
+    | Some l ->
+        let from_row t (r : Semindex.row) =
+          if r.Semindex.sha256 = l.Semindex.sha256 then begin
+            note "identical";
+            {t with status = "identical"; image = "same"; previews = "same";
+                    sameview = if c.sameview_flag then Some true else None; reason = ""}
+          end else if same_image l r then (note "same image"; {t with image = "same"})
+          else t in
+        match t.how with
+        | "path" | "name" ->
+            (match lstat_opt t.matched with
+             | Some ms -> (match indexed sem t.matched ms with Some r -> from_row t r | None -> t)
+             | None -> t)
+        | "none" | "ambiguous" ->
+            let live rows = List.find_map (fun (m, _) ->
+              if not (starts (t.root ^ "/") m) then None else
+              match lstat_opt m with
+              | Some ({Unix.LargeFile.st_kind = Unix.S_REG; _} as ms) ->
+                  Option.map (fun r -> m, ms, r) (indexed sem m ms)
+              | _ -> None) rows in
+            let found = match live (List.concat_map (fun i -> Semindex.holding i l.Semindex.sha256 64) sem) with
+              | Some f -> Some f
+              | None ->
+                  live (List.concat_map (fun i ->
+                    Semindex.sharing i "dng_blocks" l.Semindex.dng_blocks 64
+                    @ Semindex.sharing i "image_data" l.Semindex.image_data 64) sem) in
+            (match found with
+             | Some (m, ms, r) ->
+                 note "found by content";
+                 from_row {(blank_target t.root) with matched = m; how = "index"; msize = ms.Unix.LargeFile.st_size;
+                                                      mmtime = ms.Unix.LargeFile.st_mtime} r
+             | None -> t)
+        | _ -> t in
   let jobs = Array.of_list (List.filter_map (fun p ->
     if Hashtbl.mem done_ p then None else
     match lstat_opt p with
@@ -976,6 +1043,7 @@ let scan c ~left ~roots ~rules ~exiftool =
         let rel = String.sub p (String.length prefix) (String.length p - String.length prefix) in
         let targets = List.map (fun (root, index) ->
           let t = blank_target root in
+          settle p s @@
           match index with
           | None -> {t with how = "unavailable"; status = "unavailable"; reason = root ^ " is not mounted"}
           | Some index ->
@@ -994,6 +1062,11 @@ let scan c ~left ~roots ~rules ~exiftool =
     (Array.to_list files)) in
   Printf.eprintf "semdiff: %d results reused, comparing %d files with %d workers\n%!"
     (List.length reused_records) (Array.length jobs) c.workers;
+  if sem <> [] then begin
+    let n what = try Hashtbl.find by_index what with Not_found -> 0 in
+    Printf.eprintf "semdiff: from the phindex indexes, without reading the files: %d identical, %d with the same image; \
+                    %d found by content at another path\n%!" (n "identical") (n "same image") (n "found by content")
+  end;
   List.iter (fun (kind, path) ->
     record_kind ?readers:(if kind = "hdd" then c.readers else None) kind path) c.disk_kinds;
   List.iter (fun (kind, path) -> match note_disk ~kind ?readers:(if kind = "hdd" then c.readers else None) path with
@@ -1012,7 +1085,10 @@ let scan c ~left ~roots ~rules ~exiftool =
   (* Progress by bytes that are actually read: shuttle files with a match.
      Missing files cost nothing and are left out. The rate is the last ten
      minutes', so the estimate follows what the disks deliver now. *)
-  let compared j = List.exists (fun t -> t.how = "path" || t.how = "name") j.jtargets in
+  let compared j = List.exists (fun t ->
+    List.mem t.how ["path"; "name"; "index"] && t.status = "missing" && t.image <> "same") j.jtargets in
+  let read = Hashtbl.create 1024 in
+  Array.iter (fun j -> if compared j then Hashtbl.replace read j.jpath ()) jobs;
   let total = Array.fold_left (fun n j -> if compared j then Int64.add n j.jsize else n) 0L jobs in
   let total_files = Array.fold_left (fun n j -> if compared j then n + 1 else n) 0 jobs in
   let done_bytes = ref 0L and done_files = ref 0 and samples = Queue.create () in
@@ -1057,13 +1133,13 @@ let scan c ~left ~roots ~rules ~exiftool =
   let failed = run_pool ~interval:60. ~status ~label:"semdiff" ~workers:c.workers jobs
       (run_job opts) (fun (r : record) ->
     collected := r :: !collected;
-    if List.exists (fun t -> t.how = "path" || t.how = "name") r.targets then begin
+    if Hashtbl.mem read r.path then begin
       done_bytes := Int64.add !done_bytes r.size; incr done_files end;
     List.iter (fun t ->
       Hashtbl.replace counts t.status (1 + try Hashtbl.find counts t.status with Not_found -> 0);
       if c.verbose && t.status <> "identical" then
         Printf.eprintf "semdiff: %-13s %s%s%s\n%!" t.status r.rel
-          (if t.how = "name" then "  (found as " ^ t.matched ^ ")" else "")
+          (if t.how = "name" || t.how = "index" then "  (found as " ^ t.matched ^ ")" else "")
           (match t.sameview, t.reason with
            | Some true, _ -> "  same view"
            | _, "" -> "" | _, why -> "  " ^ why)) r.targets;
