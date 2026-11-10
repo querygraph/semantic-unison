@@ -65,3 +65,14 @@ for general release. (Upstream's own list is `src/TODO.txt`.)
    in a file of the store with a command to re-point it, or the archive
    name Unison already derives for the root pair. Until then: restore what
    matters before moving a root, or keep the old path reachable.
+4. **The skeleton version store as its own package** (not built; decide after
+   the first real run). `src/skeletonStore.ml` and `src/skeletontool.ml`
+   know nothing of Unison's preferences, so they could become an opam
+   package with the `unison-skeleton` tool, imported here like packdir and
+   tiffgraph. The reason would be one place to revert from: phindex keeps
+   earlier contents in its own index tables and restores them with
+   `phindex restore`, so a file replaced by a synchronization and one
+   replaced by another tool are restored by different commands. phindex is
+   Rust, so it would call the tool or need a second implementation; write
+   the store's on-disk format up as a specification first. `phindex conform`
+   only renames and needs no skeletons.
