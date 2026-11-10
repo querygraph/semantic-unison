@@ -482,6 +482,50 @@ let test() =
                               (".bak.1.x", File "foo"); (".bak.1.d", Dir [("a", File "barr")])])
     );
 
+  if bothRootsLocal then
+    runtest "skeleton versions (local)" ["skeleton = Name *"; "skeletonnot = Name n";
+                                         "maxskeletons = 2"] (fun() ->
+      let store = Stasher.skeletonDirectory () in
+      let root = match r2 with (_, fspath) -> Fspath.toString fspath in
+      let kept path =
+        match SkeletonStore.chain ~store ~root ~path with
+        | None -> []
+        | Some chain ->
+            Safelist.map (fun (v : SkeletonStore.version) ->
+              let b = Buffer.create 16 in
+              SkeletonStore.restore ~store ~root ~path
+                ~live:(let f = Filename.concat root path in
+                       if Sys.file_exists f then Some f else None)
+                ~seq:v.SkeletonStore.seq
+                ~write:(Buffer.add_substring b) ~reset:(fun () -> Buffer.clear b);
+              Buffer.contents b) chain.SkeletonStore.versions in
+      let versions name path want =
+        check_assert name (fun () ->
+          let got = kept path in
+          if got = want then None
+          else Some (Printf.sprintf "kept versions of %s: [%s], expected [%s]" path
+                       (String.concat "; " got) (String.concat "; " want))) in
+      put R1 (Dir []); put R2 (Dir []); sync();
+      put R1 (Dir ["x", File "one"; "n", File "one"; "d", Dir ["a", File "first"]]); sync();
+      versions "1" "x" [];
+      put R1 (Dir ["x", File "three"; "n", File "three"; "d", Dir ["a", File "second"]]); sync();
+      versions "2" "x" ["one"];
+      versions "3" "d/a" ["first"];
+      versions "4" "n" [];
+      put R1 (Dir ["x", File "fourfour"; "n", File "fourfour"; "d", Dir ["a", File "second"]]); sync();
+      put R1 (Dir ["x", File "fivefivefive"; "n", File "f"; "d", Dir ["a", File "second"]]); sync();
+      (* Two versions are kept; the oldest was pruned *)
+      versions "5" "x" ["three"; "fourfour"];
+      (* A deleted file, and the files of a deleted directory, are kept too *)
+      put R1 (Dir ["n", File "f"]); sync();
+      versions "6" "x" ["fourfour"; "fivefivefive"];
+      versions "7" "d/a" ["first"; "second"];
+      check "8" R2 (Dir ["n", File "f"]);
+      check_assert "9" (fun () ->
+        if SkeletonStore.pending_paths ~store ~root = [] then None
+        else Some "pending items were left in the skeleton store")
+    );
+
   runtest "backups 2" ["backup = Name *"; "backuplocation = local"] (fun() ->
     put R1 (Dir []); put R2 (Dir []); sync();
     (* Create a file and a directory *)

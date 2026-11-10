@@ -11,6 +11,19 @@ val backup:
   Fspath.t -> Path.local ->
   [`AndRemove | `ByCopying] -> Update.archive -> unit
 
+(* Skeleton versions (preferences skeleton, skeletonnot, maxskeletons,
+   skeletondir; docs/skeleton-versions.md).  [backup] takes a selected file
+   that is about to be replaced as a pending item of the skeleton store;
+   call [settleSkeletons] once the replacement is in place at the path.  It
+   never fails: an item it cannot settle stays in the store, whole. *)
+val settleSkeletons : Fspath.t -> Path.local -> unit
+
+(* Where skeleton versions are kept *)
+val skeletonDirectory : unit -> string
+
+(* Low-level skeletondir preference *)
+val skeletondir : string Prefs.t
+
 (* Stashes of current versions (so that we have archives when needed for merging) *)
 val stashCurrentVersion:
       Fspath.t                (* fspath to stash *)

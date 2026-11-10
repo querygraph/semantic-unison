@@ -176,6 +176,177 @@ let _ = Pred.alias backupcurrent "backupcurrent"
 let _ = Pred.alias backupcurrentnot "backupcurrentnot"
 
 (* ---------------------------------------------------------------------------*)
+(* Skeleton versions: replaced versions kept as skeletons instead of whole
+   copies.  The store is SkeletonStore; see docs/skeleton-versions.md.
+
+   The four preferences are optional for the other host (~local:true): a
+   server built without them ignores them, and keeps no skeleton versions. *)
+
+let skeleton =
+  Pred.create "skeleton" ~local:true
+    ~category:(`Advanced `Syncprocess)
+    ("Including the preference \\texttt{-skeleton \\ARG{pathspec}} "
+     ^ "causes Unison to keep the versions it replaces or deletes of each file "
+     ^ "that matches \\ARG{pathspec} as {\\em skeleton versions}: the small "
+     ^ "parts of the file that a metadata edit rewrites (headers, directories, "
+     ^ "XMP), with a map of its large blocks (image data, previews, profiles), "
+     ^ "which are not copied while a later version of the file still holds them. "
+     ^ "Successive versions of one file are stored as small differences. "
+     ^ "This applies to classic TIFF files (including DNG) and JPEG files; a "
+     ^ "file of another format is kept as its own skeleton when it is no larger "
+     ^ "than 1 MiB and as a whole file otherwise, as is a deleted file. "
+     ^ "Nothing is kept unless \\verb|maxskeletons| is positive. "
+     ^ "The versions are kept in the directory given by the \\verb|skeletondir| "
+     ^ "preference and are listed, checked and restored with the "
+     ^ "\\verb|unison-skeleton| program. "
+     ^ "This preference is independent of \\verb|backup|: a path matching both "
+     ^ "gets both."
+     ^ "\n\n The syntax of \\ARG{pathspec} is described in "
+     ^ "\\sectionref{pathspec}{Path Specification}.")
+
+let skeletonnot =
+  Pred.create "skeletonnot" ~local:true
+    ~category:(`Advanced `Syncprocess)
+    ("The values of this preference specify paths or individual files or"
+     ^ " regular expressions whose replaced versions should {\\em not} "
+     ^ "be kept as skeleton versions, even if the {\\tt skeleton} preference "
+     ^ "selects them---i.e., it selectively overrides {\\tt skeleton}.")
+
+let maxskeletons =
+  Prefs.createInt "maxskeletons" 0 ~local:true
+    ~category:(`Advanced `Syncprocess)
+    "number of skeleton versions of a file"
+    ("This preference specifies the number of earlier versions that will "
+     ^ "be kept by unison, as skeleton versions, for each path that matches "
+     ^ "the predicate \\verb|skeleton|.  When a newly replaced version makes "
+     ^ "more, the oldest is removed together with anything only it needs. "
+     ^ "The default is 0, which keeps none.")
+
+let skeletondir =
+  Prefs.createString "skeletondir" "" ~local:true
+    ~category:(`Advanced `Syncprocess)
+    "directory for storing skeleton versions"
+    ("If this preference is set, Unison will use it as the name of the "
+     ^ "directory used to store the skeleton versions specified by "
+     ^ "the {\\tt skeleton} preference.  It is checked {\\em after} the "
+     ^ "{\\tt UNISONSKELETONDIR} environment variable; when neither is set, "
+     ^ "the directory \\verb|skeletons| in the Unison directory is used. "
+     ^ "Each replica root has its own subdirectory, so one directory can serve "
+     ^ "several roots.  It must not be inside a replica.")
+
+let skeletonDirectory () =
+  Util.convertUnixErrorsToTransient "skeletonDirectory()" (fun () ->
+    Fspath.toString
+      (try Fspath.canonize (Some (System.getenv "UNISONSKELETONDIR"))
+       with Not_found ->
+         if Prefs.read skeletondir <> ""
+         then Fspath.canonize (Some (Prefs.read skeletondir))
+         else Fspath.canonize (Some (Util.fileInUnisonDir "skeletons"))))
+
+let shouldSkeleton p =
+  Prefs.read maxskeletons > 0 &&
+  (let s = Path.toString p in
+   Pred.test skeleton s && not (Pred.test skeletonnot s))
+
+(* An APFS (or similar) clone of a file, when the filesystem gives one. *)
+let skeletonClone src dst =
+  let size = (Unix.LargeFile.stat src).Unix.LargeFile.st_size in
+  let target =
+    Fspath.child (Fspath.canonize (Some (Filename.dirname dst)))
+      (Name.fromString (Filename.basename dst)) in
+  match Fs.clone_path_status ~expected_length:size (Fspath.canonize (Some src)) target with
+  | Fs.Declined_path (scope, _) ->
+      debug (fun () -> Util.msg "skeleton version: no clone (%s), copying\n"
+                         (WholeFileClone.scope_name scope));
+      false
+  | Fs.Created_path (_, output, parent) ->
+      let output = ref output and outputOwned = ref true
+      and parent = ref parent and parentOwned = ref true in
+      System.whole_clone_close_slot output outputOwned;
+      System.whole_clone_close_slot parent parentOwned;
+      debug (fun () -> Util.msg "skeleton version: cloned the replaced file\n");
+      true
+
+let skeletonFailure path f =
+  try f () with
+  | Failure m | Sys_error m ->
+      raise (Util.Transient (Printf.sprintf
+        "Keeping a skeleton version of %s: %s" (Path.toString path) m))
+
+(* The file now at a path of a root, as the store names files. *)
+let skeletonLive fspath path =
+  let (workingDir, realPath) = Fspath.findWorkingDir fspath path in
+  Fspath.toString (Fspath.concat workingDir realPath)
+
+(* Before [path] is replaced ([`ByCopying]) or deleted ([`AndRemove]): take
+   each selected file at or under it as a pending item of the store.  A
+   deleted file becomes a version at once; a replaced one is settled by
+   [settleSkeletons] when its replacement is in place.  [keepSource] leaves a
+   deleted file where it is, for the ordinary backup that follows. *)
+let stashSkeletons fspath path finalDisposition ~keepSource =
+  if Prefs.read maxskeletons > 0 then begin
+    let store = skeletonDirectory () and root = Fspath.toString fspath
+    and depth = Prefs.read maxskeletons in
+    let rec visit fromRoot path =
+      match Fileinfo.getType fromRoot fspath path with
+      | `FILE when shouldSkeleton path ->
+          skeletonFailure path (fun () ->
+            let file = skeletonLive fspath path and p = Path.toString path in
+            debug (fun () -> Util.msg "skeleton version: stashing %s\n" p);
+            match finalDisposition with
+            | `ByCopying ->
+                ignore (SkeletonStore.stash ~store ~root ~path:p ~file ~how:`Copy
+                          ~clone:skeletonClone ~depth ())
+            | `AndRemove ->
+                ignore (SkeletonStore.stash ~store ~root ~path:p ~file
+                          ~how:(if keepSource then `Copy else `Move)
+                          ~clone:skeletonClone ~depth ());
+                ignore (SkeletonStore.settle ~store ~root ~path:p ~live:file ~gone:true ~depth ()))
+      | `DIRECTORY ->
+          Safelist.iter (fun n -> visit false (Path.child path n)) (Os.childrenOf fspath path)
+      | _ -> () in
+    visit true path
+  end
+
+let skeletonOutcome path = function
+  | SkeletonStore.Kept_whole (seq, why) ->
+      debug (fun () -> Util.msg "skeleton version %d of %s kept whole: %s\n" seq path why)
+  | SkeletonStore.Kept_skeleton (seq, blocks) ->
+      debug (fun () -> Util.msg "skeleton version %d of %s kept (%d bytes of blocks)\n" seq path blocks)
+  | SkeletonStore.Nothing | SkeletonStore.Unchanged -> ()
+
+(* Settle the pending items of a root: all of them, or those at or under
+   [under].  Never fails: an item that cannot be settled stays pending, whole,
+   in the store, and is tried again at the next start. *)
+let settleSkeletonsOfRoot fspath under =
+  try
+    let store = skeletonDirectory () and root = Fspath.toString fspath in
+    if SkeletonStore.pending_paths ~store ~root <> [] then begin
+      let live p = skeletonLive fspath (Path.fromString p) in
+      let (settled, failed) =
+        SkeletonStore.settle_all ~store ~root ?under ~live ~depth:(Prefs.read maxskeletons) () in
+      Safelist.iter (fun (p, outcome) -> skeletonOutcome p outcome) settled;
+      Safelist.iter (fun (p, why) ->
+        Trace.log (Printf.sprintf
+          "Skeleton version of %s is not settled and stays pending: %s\n" p why)) failed
+    end
+  with
+  | Util.Transient m | Util.Fatal m | Failure m | Sys_error m ->
+      Trace.log (Printf.sprintf "Skeleton versions could not be settled: %s\n" m)
+  | Unix.Unix_error (e, f, _) ->
+      Trace.log (Printf.sprintf "Skeleton versions could not be settled: %s: %s\n"
+                   f (Unix.error_message e))
+  | (Out_of_memory | Stack_overflow | Sys.Break) as e -> raise e
+  | e ->
+      (* The replacement is already in place; what was taken stays pending. *)
+      Trace.log (Printf.sprintf "Skeleton versions could not be settled: %s\n"
+                   (Printexc.to_string e))
+
+let settleSkeletons fspath path =
+  if Prefs.read maxskeletons > 0 then
+    settleSkeletonsOfRoot fspath (Some (Path.toString path))
+
+(* ---------------------------------------------------------------------------*)
 
 (* NB: We use Str.regexp here because we need group matching to retrieve
    and increment version numbers from backup file names. We only use
@@ -408,6 +579,13 @@ let backup fspath path (finalDisposition : [`AndRemove | `ByCopying]) arch =
       debug (fun () -> Util.msg
         "File %s in %s does not exist, so no need to back up\n"
         (Path.toString path) (Fspath.toDebugString fspath))
+    else begin
+    (* Skeleton versions first; they are independent of ordinary backups. *)
+    stashSkeletons fspath path finalDisposition ~keepSource:(shouldBackup path);
+    if not (Os.exists workingDir realPath) then
+      debug (fun () -> Util.msg
+        "File %s in %s was moved into the skeleton store\n"
+        (Path.toString path) (Fspath.toDebugString fspath))
     else if shouldBackup path then begin
       match backupPath fspath path with
         None -> disposeIfNeeded()
@@ -434,7 +612,8 @@ let backup fspath path (finalDisposition : [`AndRemove | `ByCopying]) arch =
             (Fspath.toDebugString fspath)
             (Path.toString path));
         disposeIfNeeded()
-      end)
+      end
+    end)
 
 (*------------------------------------------------------------------------------------*)
 
@@ -539,7 +718,11 @@ let initBackupsRoot: Common.root -> unit -> unit Lwt.t =
   Remote.registerRootCmd
     "initBackups" Umarshal.unit Umarshal.unit
     (fun (fspath, ()) ->
-      Lwt.return (initBackupsLocal ()))
+      initBackupsLocal ();
+      (* Replaced files an interrupted run left pending in the skeleton store.
+         With maxskeletons = 0 the store is not touched at all. *)
+      if Prefs.read maxskeletons > 0 then settleSkeletonsOfRoot fspath None;
+      Lwt.return ())
 
 let initBackups () =
   Lwt_unix.run (

@@ -1605,6 +1605,43 @@ For backward compatibility, the \verb|backups| preference is also supported.
 It simply means \verb|backup = Name *| and \verb|backuplocation = local|.
 
 
+\SUBSECTION{Skeleton Versions}{skeletons}
+
+For files whose edits are mostly metadata (photographs with embedded XMP,
+and their sidecars), Unison can keep the versions it replaces as
+\emph{skeleton versions} instead of whole backup copies.  A skeleton version
+stores the small parts of the file that a metadata edit rewrites, and a map
+of its large blocks (image data, embedded previews, profiles), which are not
+copied while a later version of the file still holds them.  Successive
+versions of one file are stored as small differences.
+
+The preferences \verb|skeleton| and \verb|skeletonnot| select the paths, as
+\verb|backup| and \verb|backupnot| do.  The preference \verb|maxskeletons|
+(default 0, which keeps nothing) is the number of earlier versions kept for
+each path; the oldest is removed when a new one makes more.  The versions are
+kept in the directory named by the \verb|skeletondir| preference (checked
+after the \verb|UNISONSKELETONDIR| environment variable; by default the
+directory \verb|skeletons| in the Unison directory), with a subdirectory for
+each replica root.  This directory must not be inside a replica.
+
+Classic TIFF files (including DNG) and JPEG files are kept this way.  A file
+of another format is kept as its own skeleton when it is no larger than
+1~MiB, and as a whole file otherwise; a deleted file is kept whole.  Every
+version is rebuilt and its SHA-256 checked before the replaced file is
+discarded, and a version that cannot be kept as a skeleton is kept whole.
+
+The program \verb|unison-skeleton| lists the kept versions of a root
+(\verb|list|), rebuilds and checks them all (\verb|verify|), and rebuilds one
+into a new file outside the replica (\verb|restore|).
+
+Skeleton versions are independent of backups: a path that matches both
+\verb|skeleton| and \verb|backup| gets both.  A version takes its blocks from
+the current file; if that file is edited locally in a way that destroys a
+block before Unison next replaces it, the version can no longer be rebuilt on
+that replica, and \verb|unison-skeleton verify| reports it.  The design and
+its limits are described in \verb|docs/skeleton-versions.md|.
+
+
 \SUBSECTION{DNG Component Details and Optional Cache}{semanticcomponents}
 
 For explicit DNG details, enable \verb|semanticdng = true| and

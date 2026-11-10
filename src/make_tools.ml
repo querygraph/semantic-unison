@@ -240,6 +240,7 @@ let () =
     "CAMLOBJS" <-- "$(OCAMLOBJS:.cmo=.cmx)";
     "CAMLOBJS_TUI" <-- "$(OCAMLOBJS_TUI:.cmo=.cmx)";
     "CAMLOBJS_DNGSCAN" <-- "$(OCAMLOBJS_DNGSCAN:.cmo=.cmx)";
+    "CAMLOBJS_SKELETON" <-- "$(OCAMLOBJS_SKELETON:.cmo=.cmx)";
     "CAMLOBJS_GUI" <-- "$(OCAMLOBJS_GUI:.cmo=.cmx)";
     "CAMLOBJS_FSM" <-- "$(FSMOCAMLOBJS:.cmo=.cmx)";
     "CAMLOBJS_MAC" <-- "$(OCAMLOBJS_MAC:.cmo=.cmx)";
@@ -263,6 +264,7 @@ let () =
     "CAMLOBJS" <-- "$(OCAMLOBJS)";
     "CAMLOBJS_TUI" <-- "$(OCAMLOBJS_TUI)";
     "CAMLOBJS_DNGSCAN" <-- "$(OCAMLOBJS_DNGSCAN)";
+    "CAMLOBJS_SKELETON" <-- "$(OCAMLOBJS_SKELETON)";
     "CAMLOBJS_GUI" <-- "$(OCAMLOBJS_GUI)";
     "CAMLOBJS_MAC" <-- "$(OCAMLOBJS_MAC)";
     "CAMLOBJS_FSM" <-- "$(FSMOCAMLOBJS)";

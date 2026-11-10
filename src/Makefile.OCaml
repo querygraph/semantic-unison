@@ -80,7 +80,7 @@ OCAMLOBJS = \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
           validationStage.cmo validationStageWork.cmo validationDescriptor.cmo candidateValidation.cmo validationScanWork.cmo finalPublication.cmo targetBinding.cmo \
-          fpcache.cmo validationPaths.cmo packdirConfig.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
+          fpcache.cmo validationPaths.cmo packdirConfig.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo skeleton.cmo skeletonDelta.cmo skeletonStore.cmo stasher.cmo \
           files.cmo packdirSupport.cmo sortri.cmo recon.cmo transport.cmo \
           strings.cmo uicommon.cmo uitext.cmo test.cmo \
           main.cmo
@@ -107,6 +107,9 @@ OCAMLOBJS_TUI = linktext.cmo
 ## DNG survey command
 OCAMLOBJS_DNGSCAN = scanCommon.cmo semdiff.cmo dngscan.cmo
 
+## Skeleton versions command
+OCAMLOBJS_SKELETON = skeletontool.cmo
+
 ## Mac UI
 OCAMLOBJS_MAC = uimacbridge.cmo
 OCAMLLIBS_MAC = threads.cma
@@ -129,6 +132,9 @@ tui: buildexecutable $(NAME)$(EXEC_EXT)
 
 .PHONY: dngscan
 dngscan: buildexecutable $(NAME)-dngscan$(EXEC_EXT)
+
+.PHONY: skeleton
+skeleton: buildexecutable $(NAME)-skeleton$(EXEC_EXT)
 
 .PHONY: gui
 gui: buildexecutable $(NAME_GUI)$(EXEC_EXT)
@@ -411,6 +417,10 @@ $(NAME)$(EXEC_EXT): $(COMPAT_OBJS) $(CAMLOBJS) $(CAMLOBJS_TUI) $(COBJS)
 	$(CAMLC) -verbose $(CAMLFLAGS_X) $(CAMLLDFLAGS) -o $@ $(CAMLLIBS) $(ALL__SRC) $(CLIBS)
 
 $(NAME)-dngscan$(EXEC_EXT): $(COMPAT_OBJS) $(CAMLOBJS) $(CAMLOBJS_DNGSCAN) $(COBJS)
+	@echo Linking $@
+	$(CAMLC) -verbose $(CAMLFLAGS_X) $(CAMLLDFLAGS) -o $@ $(CAMLLIBS) $(ALL__SRC) $(CLIBS)
+
+$(NAME)-skeleton$(EXEC_EXT): $(COMPAT_OBJS) $(CAMLOBJS) $(CAMLOBJS_SKELETON) $(COBJS)
 	@echo Linking $@
 	$(CAMLC) -verbose $(CAMLFLAGS_X) $(CAMLLDFLAGS) -o $@ $(CAMLLIBS) $(ALL__SRC) $(CLIBS)
 

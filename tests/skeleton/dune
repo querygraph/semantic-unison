@@ -1,0 +1,11 @@
+; Skeleton versions (docs/skeleton-versions.md): walker cuts, the delta, the
+; store, and a synchronization that keeps and restores versions.  Synthetic
+; fixtures only, in a disposable directory.
+(test
+ (name test)
+ (modules test)
+ (libraries unison_lib)
+ (deps %{exe:../../src/linktext.exe} %{exe:../../src/skeletontool.exe})
+ (action
+  (run %{test} --unison %{exe:../../src/linktext.exe}
+       --tool %{exe:../../src/skeletontool.exe})))

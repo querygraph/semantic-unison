@@ -1397,7 +1397,9 @@ let initPrefs ~profileName ~promptForRoots ?(prepDebug = fun () -> ()) () =
           "logfile = " ^ tmpdir ^ "unison.log";
         ];
       if (Prefs.read Stasher.backupdir) = "" then
-        Prefs.loadStrings [ "backupdir = " ^ tmpdir ^ "backup" ]
+        Prefs.loadStrings [ "backupdir = " ^ tmpdir ^ "backup" ];
+      if (Prefs.read Stasher.skeletondir) = "" then
+        Prefs.loadStrings [ "skeletondir = " ^ tmpdir ^ "skeletons" ]
   end;
 
   (* Print the preference settings *)

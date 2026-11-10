@@ -371,7 +371,10 @@ let performRename fspathTo localPathTo (workingDirFrom, pathFrom)
               "Contents of %s after renaming = %s\n"
               (Fspath.toDebugString target)
 	      (Fingerprint.toString (Fingerprint.file target Path.empty)));
-      end)
+      end);
+  (* The replacement is in place: what Stasher.backup took of the replaced
+     file for the skeleton store can be settled against it. *)
+  Stasher.settleSkeletons fspathTo localPathTo
 
 (* FIX: maybe we should rename the destination before making any check ? *)
 (* JV (6/09): the window is small again...
@@ -558,7 +561,8 @@ let renameLocalWithBinding ?binding
        (* Native ownership changes before pending exception delivery. Any
           failure from this point leaves live output for the next scan; the
           binding's cleanup never deletes it or advances an archive. *)
-       checkPublication binding FinalPublication.check_published);
+       checkPublication binding FinalPublication.check_published;
+       Stasher.settleSkeletons fspathTo localPathTo);
   let checkPublished () = match publication with
     | None -> ()
     | Some binding -> checkPublication binding FinalPublication.check_published in
