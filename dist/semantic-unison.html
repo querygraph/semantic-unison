@@ -174,7 +174,8 @@ cycles</a></li>
 <li><a href="#dng-compare-archives" id="toc-dng-compare-archives"><span class="toc-section-number">7.5</span> dng-compare archives</a></li>
 <li><a href="#the-shared-contract" id="toc-the-shared-contract"><span class="toc-section-number">7.6</span> The shared contract</a></li>
 <li><a href="#disks-and-progress" id="toc-disks-and-progress"><span class="toc-section-number">7.7</span> Disks and progress</a></li>
-<li><a href="#reruns-and-other-roots" id="toc-reruns-and-other-roots"><span class="toc-section-number">7.8</span> Reruns and other roots</a></li>
+<li><a href="#with-phindex-indexes" id="toc-with-phindex-indexes"><span class="toc-section-number">7.8</span> With phindex indexes</a></li>
+<li><a href="#reruns-and-other-roots" id="toc-reruns-and-other-roots"><span class="toc-section-number">7.9</span> Reruns and other roots</a></li>
 </ul></li>
 <li><a href="#packdir" id="toc-packdir"><span class="toc-section-number">8</span> Packdir</a>
 <ul>
@@ -291,7 +292,7 @@ in this book describes. Where the text says “the user”, it means Alexy.
 Where it says “Unison session” or “Photo session”, it means two LLM
 sessions whose written records this book draws on.</p>
 <p>The book describes the state of the fork’s <code>master</code> branch
-on 2026-11-10, at commit <code>d6a0005d</code>, together with the
+on 2026-11-10, at commit <code>7270b598</code>, together with the
 separate <a href="https://github.com/querygraph/packdir">packdir</a> and
 <a href="https://github.com/firstpair/tiffgraph">tiffgraph</a> projects
 and dng-compare’s OCaml archive tool. The first edition, of 2026-10-31,
@@ -299,9 +300,11 @@ was written before the real mirror finished; the second, of 2026-11-02,
 added its results, preservation of APFS clones, and the DNG walker’s
 move into tiffgraph. Edition 1.2 followed dng-compare’s unified archive
 layout and its versions across shuttle cycles, and recorded the contract
-the two projects agreed on. This one, 1.3, adds skeleton versions: the
-versions a synchronization replaces, kept as a few kilobytes each. That
-chapter and its code were written with Claude Fable 5.2, and its figures
+the two projects agreed on. Edition 1.3 added skeleton versions: the
+versions a synchronization replaces, kept as a few kilobytes each. This
+one, 1.4, adds <code>-semindex</code>, which lets the shuttle comparison
+take its answers from phindex indexes of the two trees. Both additions
+and their code were written with Claude Fable 5.2, and their figures
 come from runs on six real files made while writing. Every command
 option was checked against the source, and the worked examples in the
 chapters on semantic diff and packdir are real runs on small synthetic
@@ -869,7 +872,7 @@ catch their absence.</p>
 with 177 cases per compiler in both ordinary and timed modes; and 21
 native clone-lease cases per compiler. Those numbers describe particular
 tests. They do not certify every camera, operating system, storage
-device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/a003950bc3374c142ed138cef8f2499da6331eda/doc/sol-final-acceptance-map-20261019.md">acceptance
+device, or possible failure. The <a href="https://github.com/querygraph/semantic-unison/blob/390010ff1f733e5ad6d2d19a5f6d4c430d3e46dc/doc/sol-final-acceptance-map-20261019.md">acceptance
 map</a> links the scoped evidence.</p>
 <p>I have made mistakes, too. Harness assumptions have failed. Pins have
 gone stale. Observations have needed narrower interpretations.
@@ -930,7 +933,7 @@ into an OS thread cap, a sample into a peak-memory measurement, or one
 successful camera case into universal compatibility. I cannot claim that
 this goal is finished: final generated Adobe fixtures and receiving
 qualification, portions of the prescribed measurement matrix, and final
-acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/a003950bc3374c142ed138cef8f2499da6331eda/OPUS-HANDOFF.md">handoff</a>
+acceptance work remain open at this writing. The current <a href="https://github.com/querygraph/semantic-unison/blob/390010ff1f733e5ad6d2d19a5f6d4c430d3e46dc/OPUS-HANDOFF.md">handoff</a>
 records the changing state.</p>
 <p>I can make the work easier to challenge. That means readable changes,
 explicit assumptions, reproducible commands, conservative fallbacks,
@@ -1370,7 +1373,84 @@ holds through stretches of small sidecars and large DNGs.
 <code>-v</code> adds listing progress, a line for each file that is not
 identical, and dng-compare’s preservation output. <code>^C</code> is
 safe: rerun the same command and finished comparisons are reused.</p>
-<h2 data-number="7.8" id="reruns-and-other-roots"><span class="header-section-number">7.8</span> Reruns and other roots</h2>
+<h2 data-number="7.8" id="with-phindex-indexes"><span class="header-section-number">7.8</span> With phindex indexes</h2>
+<p>The comparison reads both files of every matched pair, which for two
+large libraries is most of both disks. When each tree has a <a href="https://firstpair.org/books/phindex/">phindex</a> index, that work
+has been done already, once, and <code>-semindex</code> uses it:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">phindex</span> <span class="at">--db</span> source.sqlite   <span class="at">--root</span> /Volumes/Source/foto      <span class="co"># reads only what changed</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">phindex</span> <span class="at">--db</span> longterm.sqlite <span class="at">--root</span> /Volumes/Archive/foto</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Source/foto /Volumes/Archive/foto <span class="at">-semdiff</span> <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">-semindex</span> source.sqlite <span class="at">-semindex</span> longterm.sqlite</span></code></pre></div>
+<p>A row is used only while its file still has the row’s size and
+modification time. For a pair whose two rows are both current:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">The rows have</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Files read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">one SHA-256</td>
+<td style="text-align: left;"><code>identical</code></td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">the same DNG raw blocks, or the same image
+data</td>
+<td style="text-align: left;"><code>metadata-only</code></td>
+<td style="text-align: left;">none, unless <code>-sameview</code> or
+<code>-preserve</code> asks for the metadata</td>
+</tr>
+<tr>
+<td style="text-align: left;">nothing in common, or one row is missing
+or stale</td>
+<td style="text-align: left;">decided as without an index</td>
+<td style="text-align: left;">both</td>
+</tr>
+</tbody>
+</table>
+<p>A file that the path and the name did not find is then looked for by
+content: first a file the long-term index lists with the same SHA-256,
+then one that shares its raw blocks or image data. That finds a file
+that was renamed, or renamed and edited, and settles a name that occurs
+twice. Such a match is reported as found <code>index</code>, with the
+path it was found at, and the file is not copied again.</p>
+<p>This is the way to keep a long-term library as it is while new
+photographs keep arriving somewhere else. The library is never
+rewritten: a file already there under any name counts as kept, a file
+whose metadata differs is reported and left alone, and only a file with
+no copy at all is added. A file that reached the library by another
+route, from a second shuttle for instance, is found in its index and not
+copied twice.</p>
+<p>Three things to know:</p>
+<ul>
+<li><strong>The index is trusted.</strong> A current row stands for the
+file’s content; the file is not read to confirm it. A file changed
+without its size or modification time changing would be missed, as it
+would by phindex itself. Without <code>-semindex</code> every pair is
+read.</li>
+<li><strong>Run phindex first.</strong> A file added since the index was
+made has no row, and a changed one has a stale row; both are compared
+the slow way, by reading, and nothing wrong is concluded.</li>
+<li><strong>“Safe to wipe” still needs proof.</strong> A pair the
+indexes call metadata-only is not safe to wipe until it is preserved,
+exactly as without an index.</li>
+</ul>
+<p>On six real files edited by Lightroom Classic and Photo Mechanic,
+indexed by phindex itself: one renamed copy was found by SHA-256, one
+renamed and edited JPEG by its image data, three edited files at their
+own paths were settled as the same image, one of them with both copies
+made unreadable, and the one file with no copy was listed for the
+catch-up.</p>
+<h2 data-number="7.9" id="reruns-and-other-roots"><span class="header-section-number">7.9</span> Reruns and other roots</h2>
 <ul>
 <li><strong>Reports.</strong> The report lives in the Unison directory
 as <code>semdiff-HASH.jsonl</code>, next to its <code>.walk</code>
@@ -1420,7 +1500,7 @@ mattered: reading one member by B-tree lookup, updating one member in
 place, transactions for crash safety, and restoring with a stock tool.
 macOS’s own <code>sqlite3</code> can extract one with no packdir at
 all:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> D.sqlar <span class="at">-AxC</span> D</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sqlite3</span> D.sqlar <span class="at">-AxC</span> D</span></code></pre></div>
 <p>The unit is the directory, for reasons that are mostly about what it
 avoids. There is no grouping rule to configure and no member name with a
 directory prefix. A single directory restores on its own. A damaged
@@ -1609,11 +1689,11 @@ replacing the containers and marker with the plain tree. A control in
 <code>tests/packdir/unison_marker.py</code> does exactly that and checks
 that a plain run then has nothing to do.</p>
 <h2 data-number="8.9" id="the-format"><span class="header-section-number">8.9</span> The format</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> sqlar(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="kw">mode</span> <span class="dt">INT</span>, mtime <span class="dt">INT</span>, sz <span class="dt">INT</span>, <span class="kw">data</span> <span class="dt">BLOB</span>);</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_member(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">REFERENCES</span> sqlar(name),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  mtime_ns <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fp <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fpalg TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, sha256 <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  retained_deleted <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>);</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_container(<span class="kw">key</span> TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="fu">value</span> TEXT);  <span class="co">-- format, epoch</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> sqlar(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="kw">mode</span> <span class="dt">INT</span>, mtime <span class="dt">INT</span>, sz <span class="dt">INT</span>, <span class="kw">data</span> <span class="dt">BLOB</span>);</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_member(name TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span> <span class="kw">REFERENCES</span> sqlar(name),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  mtime_ns <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fp <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>, fpalg TEXT <span class="kw">NOT</span> <span class="kw">NULL</span>, sha256 <span class="dt">BLOB</span> <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  retained_deleted <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">DEFAULT</span> <span class="dv">0</span>);</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> unison_container(<span class="kw">key</span> TEXT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>, <span class="fu">value</span> TEXT);  <span class="co">-- format, epoch</span></span></code></pre></div>
 <p><code>sqlar</code> is SQLite’s standard table, so stock tools work.
 The other two are additions. packdir opens its containers through <a href="https://firstpair.org/books/tursolite/">Tursolite</a>, the SQLite
 and optional Turso layer it shares with DNG Compare. On the synthetic
@@ -2011,9 +2091,9 @@ file</td>
 MB.</p>
 <h2 data-number="11.6" id="reading-the-store"><span class="header-section-number">11.6</span> Reading the store</h2>
 <p><code>unison-skeleton</code> lists, checks and restores:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> list    ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> verify  ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> restore ROOT PATH <span class="er">(</span><span class="ex">--version</span> N <span class="kw">|</span> <span class="ex">--sha256</span> HEX<span class="kw">)</span> <span class="ex">--out</span> FILE</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> list    ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> verify  ROOT <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison-skeleton</span> restore ROOT PATH <span class="er">(</span><span class="ex">--version</span> N <span class="kw">|</span> <span class="ex">--sha256</span> HEX<span class="kw">)</span> <span class="ex">--out</span> FILE</span></code></pre></div>
 <p><code>list</code> prints each kept version with its number, the time
 it was replaced, its size, its SHA-256 and how it is stored.
 <code>verify</code> rebuilds every kept version without writing it and
@@ -2549,6 +2629,14 @@ local</td>
 differences cannot affect rendering</td>
 </tr>
 <tr>
+<td style="text-align: left;"><code>-semindex FILE</code></td>
+<td style="text-align: left;">list</td>
+<td style="text-align: left;">A <a href="https://firstpair.org/books/phindex/">phindex</a> index of one of
+the trees. Repeatable, one per tree. Pairs whose rows are current are
+settled without reading the files, and a file is also found by its
+content</td>
+</tr>
+<tr>
 <td style="text-align: left;"><code>-preserve</code></td>
 <td style="text-align: left;">bool, false</td>
 <td style="text-align: left;">Record metadata differences in a
@@ -2643,7 +2731,7 @@ listed file.</p>
 <p>The command has three forms, as its usage line says:</p>
 <pre class="text"><code>unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
                [-o REPORT.jsonl [-resume]] PATH...
-unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
+unison-dngscan -semdiff ROOT... [-semindex INDEX.sqlite]... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
                [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]...
                [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]
 unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]</code></pre>
@@ -2732,6 +2820,13 @@ exactly one left root.</p>
 <td style="text-align: left;">required</td>
 <td style="text-align: left;">Compare every file under LEFT with its
 match under ROOT. Repeatable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-semindex FILE</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">A phindex index of a tree being compared.
+Repeatable. Needs the opam <code>sqlite3</code> package at build time;
+without it the option is refused</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>-sameview</code></td>
@@ -3173,12 +3268,12 @@ opam switch, is the command to use on an archive by hand. Its verbs are
 <code>query</code>, <code>verify</code>, <code>status</code>,
 <code>migrate</code> and <code>versions</code>; <a href="https://firstpair.org/books/dng-compare/">DNG Compare</a>
 documents them.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> status ARCHIVE                          <span class="co"># what the archive holds</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> versions ARCHIVE <span class="pp">[</span><span class="ss">RELATIVE_PATH</span><span class="pp">]</span>        <span class="co"># current and earlier contents of each path</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> verify ARCHIVE [--restore-sample N]     <span class="co"># records, files and index</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> skeleton build ARCHIVE                  <span class="co"># skeletons of the reference files, so they may be edited</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> migrate ARCHIVE [--dry-run <span class="kw">|</span> <span class="ex">--undo]</span>    <span class="co"># a legacy archive&#39;s byte section into bytes/</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> status ARCHIVE                          <span class="co"># what the archive holds</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> versions ARCHIVE <span class="pp">[</span><span class="ss">RELATIVE_PATH</span><span class="pp">]</span>        <span class="co"># current and earlier contents of each path</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> verify ARCHIVE [--restore-sample N]     <span class="co"># records, files and index</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> skeleton build ARCHIVE                  <span class="co"># skeletons of the reference files, so they may be edited</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="ex">dngc</span> migrate ARCHIVE [--dry-run <span class="kw">|</span> <span class="ex">--undo]</span>    <span class="co"># a legacy archive&#39;s byte section into bytes/</span></span></code></pre></div>
 <p>Semantic Unison itself calls <code>dng-archive</code>, the program
 underneath:</p>
 <pre class="text"><code>dng-archive index ARCHIVE
@@ -3739,23 +3834,26 @@ disagreed, the book follows the source and says so, as with the
 <code>packdir</code> package, and <code>-preserve</code> needs
 <code>dng-archive</code>. Each must be pinned in each opam switch you
 use, and stock OCaml and OxCaml stay separate.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> pin add <span class="at">-y</span> <span class="at">--switch</span> 5.2.0+ox packdir PATH-TO-PACKDIR-CHECKOUT</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build <span class="dt">\</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    ./src/linktext.exe ./src/dngscan.exe ./tools/packdir/main.exe</span></code></pre></div>
 <p>The binaries are <code>src/linktext.exe</code> (installed as
 <code>unison</code>), <code>src/dngscan.exe</code>
 (<code>unison-dngscan</code>) and <code>tools/packdir/main.exe</code>
 (<code>unison-packdir</code>), under dune’s build directory.</p>
 <p>The controls use synthetic data in private temporary directories:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/semdiff/run.py <span class="at">--unison</span> PATH/unison <span class="at">--dngscan</span> PATH/unison-dngscan</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tests/packdir/unison_detect.py <span class="at">--unison</span> PATH/unison <span class="at">--packdir</span> PATH/unison-packdir</span></code></pre></div>
 <p>Skeleton versions have a dune test, which also runs a real
 synchronization of two roots and the <code>unison-skeleton</code>
 tool:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build @tests/skeleton/runtest</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opam</span> exec <span class="at">--switch</span> 5.2.0+ox <span class="at">--</span> dune build @tests/skeleton/runtest</span></code></pre></div>
 <p>Its 116 checks pass with stock OCaml 5.2.0 and with OxCaml
 <code>5.2.0+ox</code> and <code>5.4.0+ox</code>, as does the built-in
 self-test’s “skeleton versions” case.</p>
+<p><code>tests/semdiff/semindex.py</code>, with the same two arguments
+as <code>run.py</code>, covers <code>-semindex</code> with hand-made
+indexes: 21 checks.</p>
 <p>The other packed-root suites are <code>unison_write.py</code>,
 <code>unison_recover.py</code>, <code>unison_parallel.py</code> and
 <code>unison_marker.py</code>, with the same arguments, and

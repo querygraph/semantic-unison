@@ -397,8 +397,87 @@ holds through stretches of small sidecars and large DNGs.
 <code>-v</code> adds listing progress, a line for each file that is not
 identical, and dng-compare’s preservation output. <code>^C</code> is
 safe: rerun the same command and finished comparisons are reused.</p>
-<h2 data-number="7.8" id="reruns-and-other-roots"><span
-class="header-section-number">7.8</span> Reruns and other roots</h2>
+<h2 data-number="7.8" id="with-phindex-indexes"><span
+class="header-section-number">7.8</span> With phindex indexes</h2>
+<p>The comparison reads both files of every matched pair, which for two
+large libraries is most of both disks. When each tree has a <a
+href="https://firstpair.org/books/phindex/">phindex</a> index, that work
+has been done already, once, and <code>-semindex</code> uses it:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">phindex</span> <span class="at">--db</span> source.sqlite   <span class="at">--root</span> /Volumes/Source/foto      <span class="co"># reads only what changed</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">phindex</span> <span class="at">--db</span> longterm.sqlite <span class="at">--root</span> /Volumes/Archive/foto</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">unison</span> /Volumes/Source/foto /Volumes/Archive/foto <span class="at">-semdiff</span> <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">-semindex</span> source.sqlite <span class="at">-semindex</span> longterm.sqlite</span></code></pre></div>
+<p>A row is used only while its file still has the row’s size and
+modification time. For a pair whose two rows are both current:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">The rows have</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Files read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">one SHA-256</td>
+<td style="text-align: left;"><code>identical</code></td>
+<td style="text-align: left;">none</td>
+</tr>
+<tr>
+<td style="text-align: left;">the same DNG raw blocks, or the same image
+data</td>
+<td style="text-align: left;"><code>metadata-only</code></td>
+<td style="text-align: left;">none, unless <code>-sameview</code> or
+<code>-preserve</code> asks for the metadata</td>
+</tr>
+<tr>
+<td style="text-align: left;">nothing in common, or one row is missing
+or stale</td>
+<td style="text-align: left;">decided as without an index</td>
+<td style="text-align: left;">both</td>
+</tr>
+</tbody>
+</table>
+<p>A file that the path and the name did not find is then looked for by
+content: first a file the long-term index lists with the same SHA-256,
+then one that shares its raw blocks or image data. That finds a file
+that was renamed, or renamed and edited, and settles a name that occurs
+twice. Such a match is reported as found <code>index</code>, with the
+path it was found at, and the file is not copied again.</p>
+<p>This is the way to keep a long-term library as it is while new
+photographs keep arriving somewhere else. The library is never
+rewritten: a file already there under any name counts as kept, a file
+whose metadata differs is reported and left alone, and only a file with
+no copy at all is added. A file that reached the library by another
+route, from a second shuttle for instance, is found in its index and not
+copied twice.</p>
+<p>Three things to know:</p>
+<ul>
+<li><strong>The index is trusted.</strong> A current row stands for the
+file’s content; the file is not read to confirm it. A file changed
+without its size or modification time changing would be missed, as it
+would by phindex itself. Without <code>-semindex</code> every pair is
+read.</li>
+<li><strong>Run phindex first.</strong> A file added since the index was
+made has no row, and a changed one has a stale row; both are compared
+the slow way, by reading, and nothing wrong is concluded.</li>
+<li><strong>“Safe to wipe” still needs proof.</strong> A pair the
+indexes call metadata-only is not safe to wipe until it is preserved,
+exactly as without an index.</li>
+</ul>
+<p>On six real files edited by Lightroom Classic and Photo Mechanic,
+indexed by phindex itself: one renamed copy was found by SHA-256, one
+renamed and edited JPEG by its image data, three edited files at their
+own paths were settled as the same image, one of them with both copies
+made unreadable, and the one file with no copy was listed for the
+catch-up.</p>
+<h2 data-number="7.9" id="reruns-and-other-roots"><span
+class="header-section-number">7.9</span> Reruns and other roots</h2>
 <ul>
 <li><strong>Reports.</strong> The report lives in the Unison directory
 as <code>semdiff-HASH.jsonl</code>, next to its <code>.walk</code>

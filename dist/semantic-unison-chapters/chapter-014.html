@@ -160,6 +160,15 @@ local</td>
 differences cannot affect rendering</td>
 </tr>
 <tr>
+<td style="text-align: left;"><code>-semindex FILE</code></td>
+<td style="text-align: left;">list</td>
+<td style="text-align: left;">A <a
+href="https://firstpair.org/books/phindex/">phindex</a> index of one of
+the trees. Repeatable, one per tree. Pairs whose rows are current are
+settled without reading the files, and a file is also found by its
+content</td>
+</tr>
+<tr>
 <td style="text-align: left;"><code>-preserve</code></td>
 <td style="text-align: left;">bool, false</td>
 <td style="text-align: left;">Record metadata differences in a
@@ -255,7 +264,7 @@ class="header-section-number">13.2</span> unison-dngscan</h2>
 <p>The command has three forms, as its usage line says:</p>
 <pre class="text"><code>unison-dngscan [-j WORKERS] [-cache WALK] [-admit IFD:TAG:TYPE]... [-tags REVIEW.tsv]
                [-o REPORT.jsonl [-resume]] PATH...
-unison-dngscan -semdiff ROOT... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
+unison-dngscan -semdiff ROOT... [-semindex INDEX.sqlite]... [-sameview] [-preserve | -preservefull] [-preservedb DIR]
                [-tree NAME | -suffix[=SUF]] [-review] [-v] [-hdd PATH [-readers N] | -ssd PATH]...
                [-catchup [-catchupto ROOT]] [-o REPORT.jsonl [-resume]] LEFT [-- UNISON-ARGS]
 unison-dngscan -summarize [-catchup ...] [-preserve ...] REPORT.jsonl... [-- UNISON-ARGS]</code></pre>
@@ -344,6 +353,13 @@ exactly one left root.</p>
 <td style="text-align: left;">required</td>
 <td style="text-align: left;">Compare every file under LEFT with its
 match under ROOT. Repeatable</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-semindex FILE</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;">A phindex index of a tree being compared.
+Repeatable. Needs the opam <code>sqlite3</code> package at build time;
+without it the option is refused</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>-sameview</code></td>
