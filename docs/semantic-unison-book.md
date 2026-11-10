@@ -2,7 +2,7 @@
 
 This book is by Alexy Khrabrov, with Claude as co-author. The ideas are Alexy's: why the fork exists, what semantic sync and semantic diff should do, the shuttle-disk workflow, packing directories into SQLite archives, and the decisions recorded in these chapters. Claude Opus 5.5, an Anthropic model, wrote the text and the code with him, as the essay in this book describes. Where the text says "the user", it means Alexy. Where it says "Unison session" or "Photo session", it means two LLM sessions whose written records this book draws on.
 
-The book describes the state of the fork's `master` branch on 2026-11-08, at commit `2267da59`, together with the separate [packdir](https://github.com/querygraph/packdir) and [tiffgraph](https://github.com/firstpair/tiffgraph) projects and dng-compare's OCaml archive tool. The first edition, of 2026-10-31, was written before the real mirror finished; the second, of 2026-11-02, added its results, preservation of APFS clones, and the DNG walker's move into tiffgraph. This one, 1.2, follows dng-compare's unified archive layout and its versions across shuttle cycles, and records the contract the two projects agreed on. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
+The book describes the state of the fork's `master` branch on 2026-11-10, at commit `d6a0005d`, together with the separate [packdir](https://github.com/querygraph/packdir) and [tiffgraph](https://github.com/firstpair/tiffgraph) projects and dng-compare's OCaml archive tool. The first edition, of 2026-10-31, was written before the real mirror finished; the second, of 2026-11-02, added its results, preservation of APFS clones, and the DNG walker's move into tiffgraph. Edition 1.2 followed dng-compare's unified archive layout and its versions across shuttle cycles, and recorded the contract the two projects agreed on. This one, 1.3, adds skeleton versions: the versions a synchronization replaces, kept as a few kilobytes each. That chapter and its code were written with Claude Fable 5.2, and its figures come from runs on six real files made while writing. Every command option was checked against the source, and the worked examples in the chapters on semantic diff and packdir are real runs on small synthetic trees, made while writing. Numbers about the benchmark and the mirror come from the two sessions' mailbox and the design documents. This session did not take those measurements and did not touch the disks involved.
 
 Three kinds of statement appear below, and they are kept apart:
 
@@ -18,10 +18,10 @@ This book is one of nine on the FirstPair photo tools. Each owns one part, and
 [The FirstPair Photo Stack](https://firstpair.org/books/photostack/) shows how they fit together.
 
 - **[tiffgraph](https://firstpair.org/books/tiffgraph/)** walks a TIFF or DNG file's structure under a fixed grammar and finds its editable XMP packet.
-- **[phidentify](https://firstpair.org/books/phidentify/)** computes a photo's identities: SHA-256, DNG raw blocks, image data, Lightroom fingerprint, metadata record and preserved digest.
-- **[phindex](https://firstpair.org/books/phindex/)** keeps those identities for every file of a volume, and aligns two volumes by content.
-- **[DNG Compare](https://firstpair.org/books/dng-compare/)** compares pairs and preserves one side byte for byte as deltas against the other, with a searchable metadata section, through `dngc`.
-- **[Semantic Unison](https://firstpair.org/books/semantic-unison/)** synchronizes photo trees, sending metadata edits without resending image bytes, and preserves what a shuttle disk brings into the same archives.
+- **[phidentify](https://firstpair.org/books/phidentify/)** computes a photo's identities: SHA-256, DNG raw blocks, image data, block marks, Lightroom fingerprint, metadata record and preserved digest, and the skeleton that rebuilds a file from an edited copy.
+- **[phindex](https://firstpair.org/books/phindex/)** keeps those identities and a skeleton for every file of a volume, aligns two volumes by content, and restores a file as it was before a metadata edit.
+- **[DNG Compare](https://firstpair.org/books/dng-compare/)** compares pairs and preserves one side byte for byte as deltas against the other, restorable even after the other side is edited, with a searchable metadata section, through `dngc`.
+- **[Semantic Unison](https://firstpair.org/books/semantic-unison/)** synchronizes photo trees, sending metadata edits without resending image bytes, keeps the versions it replaces as small skeletons, and preserves what a shuttle disk brings into the same archives.
 - **[packdir](https://firstpair.org/books/packdir/)** keeps directories of small files as SQLite archives that still work like plain files.
 - **[Tursolite](https://firstpair.org/books/tursolite/)** is the SQLite and Turso layer under packdir, DNG Compare and Mechanic.
 - **[diskproxy](https://firstpair.org/books/diskproxy/)** serves a folder as a virtual disk, such as previews with camera metadata spliced in, and captures ratings into sidecars.
@@ -857,6 +857,79 @@ A clone group is kept only within one sync. When the clones and their originals 
 
 Neither is built yet. Which one fits depends on the second tree's layout and on what in it can be rebuilt rather than mirrored.
 
+# Skeleton versions
+
+## What a backup costs
+
+Unison can keep the version of a file it is about to replace: the `backup` preference stores a whole copy. For photographs that is the wrong unit. Setting a rating in a 25 MB DNG rewrites a few hundred bytes of XMP and perhaps moves the image data along by a few bytes, and the backup of that edit is another 25 MB. Ten edits to one photograph, kept as backups, cost ten photographs.
+
+A **skeleton version** keeps only what the edit destroyed. It is the same idea DNG Compare's archive uses to rebuild a reference file after it has been edited, described in that book's part on skeletons, applied here to the versions a synchronization replaces.
+
+## Blocks and the skeleton
+
+A file is cut along its own structure into two parts.
+
+- **Blocks** are the large runs a metadata edit carries over unchanged, often at another offset: a TIFF or DNG file's strips and tiles, its embedded previews, maker notes and profiles, and a JPEG's scan.
+- **The skeleton** is every byte outside the blocks, in file order: the header, the directories, small tag values and the XMP packet.
+
+The cuts follow the rules of the DNG Compare archive format, and a test holds this fork's walkers to values that project's implementation produces for the same bytes. Classic TIFF, which includes DNG, and JPEG have walkers. A file of any other format up to 1 MiB, such as an XMP sidecar, is its own skeleton, with no blocks.
+
+A kept version is its skeleton, a few kilobytes, and a map of where each block goes. The blocks themselves are not copied while a later version of the file still holds them.
+
+## Turning it on
+
+```
+skeleton     = Name *.dng
+skeleton     = Name *.jpg
+skeleton     = Name *.xmp
+maxskeletons = 3
+skeletondir  = /path/outside/the/replicas/skeletons
+```
+
+`skeleton` selects paths as `backup` does, `skeletonnot` makes exceptions, and `maxskeletons` is the number of earlier versions kept per path. Its default is 0, which keeps nothing and does not touch the store. Each host keeps the versions of the files replaced on that host, in its own store; the preferences travel to the server as the backup preferences do. Skeleton versions are independent of backups, and a path that matches both gets both.
+
+## What happens when a file is replaced
+
+1. Before the file is replaced, Unison takes it as a *pending* item of the store: an APFS clone where the filesystem makes one, otherwise a copy.
+2. The new file goes into place as usual.
+3. The pending file is settled. Its skeleton and blocks are computed, and every block is looked for in the new file, by length and a sampled fingerprint first and then by the SHA-256 of the whole block. A block the new file does not hold, such as an embedded preview the edit regenerated, is saved in the store.
+4. The version is rebuilt from what will remain, without the pending file, and its SHA-256 is compared with the replaced file's. Only then is the pending file deleted.
+
+Whatever cannot be kept this way is kept as a whole file, and said to be: a file with no walker that is larger than 1 MiB, a deleted file, which leaves no later file to hold its blocks, or a version whose rebuild did not match. Nothing is dropped silently, and an interrupted run leaves its pending files to be settled at the next start.
+
+## Versions are additive
+
+The skeletons of one file are stored as differences against one another. The newest is kept in full and each older one as a small delta against the next newer, so a second rating change, a caption, and an exposure adjustment each add a few hundred bytes, not another skeleton. Blocks are shared too: a kept block is stored once however many versions need it, and is removed when the last version that needs it ages out.
+
+Measured on six real files edited by Lightroom Classic and Photo Mechanic, three DNGs of 24 to 29 MB and three JPEGs of 2 to 3 MB, synchronized twice so that each had two earlier versions:
+
+| | Stored |
+|:--|:--|
+| The newest earlier version of each file, in full | 19 to 67 KB |
+| The version before it, as a delta | 81 to 316 bytes |
+| Kept blocks | none: every block was still in the current file |
+| All twelve versions together | 186 KB, for 83 MB of files |
+
+Whole-file backups of the same twelve versions would have taken 165 MB.
+
+## Reading the store
+
+`unison-skeleton` lists, checks and restores:
+
+```sh
+unison-skeleton list    ROOT [PATH]
+unison-skeleton verify  ROOT [PATH]
+unison-skeleton restore ROOT PATH (--version N | --sha256 HEX) --out FILE
+```
+
+`list` prints each kept version with its number, the time it was replaced, its size, its SHA-256 and how it is stored. `verify` rebuilds every kept version without writing it and compares SHA-256s. `restore` writes one version to a new file outside the replica, checked the same way, and refuses to overwrite. A version's number does not change when older ones are pruned.
+
+## One writer, and edits Unison did not make
+
+Each change to the store is made under a lock on the root's directory, so two synchronizations that share a root cannot interleave their changes to it.
+
+A version's blocks live in the current file. If an application rewrites that file in place, outside a synchronization, and destroys a block, by regenerating an embedded preview for instance, the versions that need the block can no longer be rebuilt on that replica, and nothing can prevent it. Unison does not stay silent about it: the next time it replaces the file it checks every earlier version against what is left, logs a warning for each one that is now unrebuildable, and marks it `lost`, once. `list` shows the mark and `restore` refuses the version. The replica that *received* the edit through Unison saved the block as it arrived, so its store usually still has the version. An in-place edit of metadata alone does no harm.
+
 # The benchmark story
 
 This chapter is the record of a day: 2026-10-31, from the first mailbox message at 06:58Z. All measurements are from the mailbox and `docs/packdir-design.md`. All of them used one Mac with 128 GiB of RAM, with the mirror disk, a SATA hard disk on HFS+, as the target. None were repeated by the session writing this book.
@@ -1151,6 +1224,23 @@ A `pack-tree` rerun stores only new and changed files, by size and nanosecond mt
 - **Never run the changing commands while Unison writes the same tree.** The source says so.
 - **A few outputs cannot match GNU:** `ls -l`'s `total` line and directory lines, `du`'s directory sizes, and the order of `du` and `find` output, which is sorted here.
 
+## unison-skeleton and the skeleton preferences
+
+| Preference | Default | Meaning |
+|:--------------|:-------|:---------------------------------------------------|
+| `skeleton` | none | Path specification of the files whose replaced versions are kept as skeleton versions. Repeatable |
+| `skeletonnot` | none | Exceptions to `skeleton`. Repeatable |
+| `maxskeletons` | 0 | Earlier versions kept per path. 0 keeps none and leaves the store untouched |
+| `skeletondir` | `skeletons` in the Unison directory | The store. The environment variable `UNISONSKELETONDIR` is checked first. It must not be inside a replica |
+
+```text
+unison-skeleton list    ROOT [PATH] [--skeletondir DIR]
+unison-skeleton verify  ROOT [PATH] [--skeletondir DIR]
+unison-skeleton restore ROOT PATH (--version N | --sha256 HEX) --out FILE [--skeletondir DIR]
+```
+
+`ROOT` is a replica root as the profile names it and `PATH` a path inside it. `verify` exits non-zero when a version cannot be rebuilt.
+
 ## dngc and dng-archive
 
 `dngc`, installed beside `dng-archive` in each opam switch, is the command to use on an archive by hand. Its verbs are `run`, `restore`, `index`, `query`, `verify`, `status`, `migrate` and `versions`; [DNG Compare](https://firstpair.org/books/dng-compare/) documents them.
@@ -1160,6 +1250,7 @@ dngc status ARCHIVE                          # what the archive holds
 dngc versions ARCHIVE [RELATIVE_PATH]        # current and earlier contents of each path
 dngc restore ARCHIVE RELATIVE_PATH OUTPUT [--version LABEL]
 dngc verify ARCHIVE [--restore-sample N]     # records, files and index
+dngc skeleton build ARCHIVE                  # skeletons of the reference files, so they may be edited
 dngc migrate ARCHIVE [--dry-run | --undo]    # a legacy archive's byte section into bytes/
 ```
 
@@ -1170,7 +1261,10 @@ dng-archive index ARCHIVE
 dng-archive preserve SOURCE REFERENCE ARCHIVE --pairs FILE [--delta] [--full-copy]
                      [--workers N] [--rate-mib R]
 dng-archive restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]
+                    [--index FILE]... [--candidates N]
 ```
+
+`dngc restore`, `dngc verify --restore-sample` and `dngc keep` take `--reference-root`, `--index` and `--candidates` too: a reference tree that has moved is read below its new root, and a reference file that was moved or renamed is found through a phindex index.
 
 | Command | Option | Default | Meaning |
 |:----------|:-------------------|:-------|:-----------------------------------------|
@@ -1213,7 +1307,7 @@ The built-in merge is not a preference of its own. It is the rule `merge = Name 
 
 # Honest limits
 
-This chapter lists what the tools do not do, or do not yet do. All of it was true at commit `9b68266b`.
+This chapter lists what the tools do not do, or do not yet do. All of it was true at commit `9b68266b`, and the section on skeleton versions at `d6a0005d`.
 
 ## Packed roots
 
@@ -1253,6 +1347,15 @@ This chapter lists what the tools do not do, or do not yet do. All of it was tru
 - **Fixtures are mostly synthetic.** Generated containers qualify the sync contract, not Adobe decoding or rendering across real cameras. No claim covers every camera, operating system or storage device.
 - **Adobe validation needs a qualified driver.** The stock `dng_validate` command alone does not implement the protocol, and SDK sources are not in this repository.
 - **The overall goal is open.** The handoff of 2026-10-20 recorded it as active and incomplete. The state moves, and `OPUS-HANDOFF.md` is where it is tracked.
+
+## Skeleton versions
+
+- **Classic TIFF and JPEG only.** BigTIFF, HEIF, video and other containers are kept whole, or as their own skeleton up to 1 MiB.
+- **An edit outside Unison can lose a version.** A block destroyed in place on a replica takes with it the versions there that need it. Unison reports and marks them at the next replacement, as the chapter says, and cannot bring them back.
+- **Roots are named by path.** Moving or renaming a root starts a new part of the store. The earlier versions stay under the old path and only those kept whole, or as their own skeleton, still restore. A store that follows a moved root is not built.
+- **The same path replaced twice at once.** Two synchronizations that share a root are kept apart by the store's lock, but if both replace the same path at the same moment only one of the two outgoing contents becomes a version.
+- **A temporary copy where there are no clones.** On a filesystem without clones, or with the store on another volume, each replacement first makes a full temporary copy of the outgoing file.
+- **Not yet run across a network.** The receiving side has been run as a separate Unison server process over the remote protocol on one machine, through a stand-in for `ssh`. No run has crossed a real network connection, and none has yet been made on a real library.
 
 ## Building
 
@@ -1346,6 +1449,14 @@ The controls use synthetic data in private temporary directories:
 python3 tests/semdiff/run.py --unison PATH/unison --dngscan PATH/unison-dngscan
 python3 tests/packdir/unison_detect.py --unison PATH/unison --packdir PATH/unison-packdir
 ```
+
+Skeleton versions have a dune test, which also runs a real synchronization of two roots and the `unison-skeleton` tool:
+
+```sh
+opam exec --switch 5.2.0+ox -- dune build @tests/skeleton/runtest
+```
+
+Its 116 checks pass with stock OCaml 5.2.0 and with OxCaml `5.2.0+ox` and `5.4.0+ox`, as does the built-in self-test's "skeleton versions" case.
 
 The other packed-root suites are `unison_write.py`, `unison_recover.py`, `unison_parallel.py` and `unison_marker.py`, with the same arguments, and `unison_config.py`, which takes only `--unison`. The packdir project has its own 92 controls, plus 45 that compare each file command with GNU coreutils on the same tree unpacked.
 
