@@ -2482,30 +2482,29 @@ let setArchivePropsForPath thisRoot path pathProps =
 
 let purgeArchivePropsOverriddenChildren thisRoot paths =
   let f propPaths =
-    let clearChildren propPaths path =
-      let rec isParent p c =
-        match Path.deconstruct p, Path.deconstruct c with
-        | None, Some _ -> true
-        | Some (p, px), Some (c, cx) -> Name.compare p c = 0 && isParent px cx
-        | _ -> false
-      in
-      let overrideChildren k v acc =
-        (* If a child path is not ignored within a parent path then the properties
-           specific to this child must be removed to avoid any conflicts between
-           child and parent properties. Otherwise, the files under the child path
-           could be synced with overlapping properties (once within the parent,
-           once within the child path), which makes detecting predicate changes
-           difficult. *)
-        if not (isParent path k) then
-          PathMap.add k v acc
-        else if Globals.shouldIgnore k then
-          PathMap.add k v acc
-        else
-          acc
-      in
-      PathMap.fold overrideChildren propPaths PathMap.empty
+    (* If a child path is not ignored within a parent path then the properties
+       specific to this child must be removed to avoid any conflicts between
+       child and parent properties. Otherwise, the files under the child path
+       could be synced with overlapping properties (once within the parent,
+       once within the child path), which makes detecting predicate changes
+       difficult. *)
+    (* Each recorded path is tested against the given paths by looking its
+       own ancestors up in a set, not by rebuilding the whole map once per
+       given path: a run given tens of thousands of paths (a -semdiff
+       catch-up) spent hours here before copying anything. *)
+    let given =
+      Safelist.fold_left (fun acc p -> PathMap.add p () acc) PathMap.empty paths in
+    let rec underGiven prefix = function
+      | [] -> false
+      | name :: rest ->
+          PathMap.mem prefix given || underGiven (Path.child prefix name) rest
     in
-    Safelist.fold_left clearChildren propPaths paths
+    let keep k v acc =
+      if underGiven Path.empty (Path.toNames k) && not (Globals.shouldIgnore k)
+      then acc
+      else PathMap.add k v acc
+    in
+    PathMap.fold keep propPaths PathMap.empty
   in
   mapPropPaths f (getArchiveProps thisRoot)
   |> setArchivePropsLocal thisRoot
