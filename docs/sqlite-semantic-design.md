@@ -266,10 +266,12 @@ each bounded like what exists:
 
 **`-semdiff`.** A pair of databases gets the layers: whole file; content; derived
 (indexes, statistics). Bytes equal is `identical`. Content digests equal with bytes
-different is a new status, `layout-only`, which counts as kept. It requires the schema
-digest and every table's `rows` digest to match, rowids included. The summary says what
-it means ("same rows, different page layout") and gives its count on its own line, so
-the safe-to-wipe figure never hides it (Photo's request in P-28; see "Decisions taken"). Otherwise `differs`,
+different is a new status, `layout-only`. It requires the schema digest and every
+table's `rows` digest to match, rowids included: every value of every row is equal, and
+only the placement on disk differs. The summary says what it means ("same rows,
+different page layout") and gives its count on its own line. It does **not** count as
+kept unless the profile sets `sqlitelayoutkept = true`; by default the safe-to-wipe
+figure leaves it out (see "Decisions taken"). Otherwise `differs`,
 with the tables that differ; "same records, different rowids" is `differs` with that
 finding attached, and goes to review. A shuttle database that isn't quiet is `error` and never counts as kept. A new
 status touches the shared contract with dng-compare, so it goes to the mailbox first.
@@ -292,6 +294,7 @@ anything. Who owns it, as dng-compare owns `metadata_rules.json`, is a mailbox q
 ```
 sqlitedb    = Name *.lrcat          # paths treated as SQLite databases; the content must agree
 sqlitequiet = require               # off | warn | require; default require for sqlitedb paths
+sqlitelayoutkept = false            # true: a layout-only pair counts as kept in -semdiff's summary
 semanticprofile = org.firstpair.sqlite-pages/0    # the page delta, when built
 skeleton    = Name *.lrcat          # existing preference; pages become the blocks
 ```
@@ -339,7 +342,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 | 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
 | 2 | Pages as skeleton blocks, so a replaced catalog is kept cheaply | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
-| 4 | Measure on a real catalog; build the page delta only if Unison's rsync proves too slow | The user's approval and Photo's help for the measurement | Negotiated, opt-in |
+| 4 | Measure on a real catalog; build the page delta only if Unison's rsync proves too slow | Photo's measurement (approved by the user, 2026-11-15) | Negotiated, opt-in |
 
 Step 2 is what makes a both-sides edit recoverable: the conflict stays a conflict, the
 user picks a side, and the other side's catalog is still in the store.
@@ -350,13 +353,23 @@ By the user on 2026-11-15, on the Unison session's recommendation:
 
 1. **The guard defaults to `require`** for `sqlitedb` paths, refuses in both directions,
    and guards nothing that isn't named. It gains the Lightroom marker and held paths.
-2. **`layout-only` counts as kept, strictly:** every table's rows and rowids match.
-   "Same records, different rowids" goes to review.
+2. **`layout-only` is strict and off by default.** The status requires every table's
+   rows and rowids to match; "same records, different rowids" goes to review. It is
+   reported on its own line and counts as kept only where a profile sets
+   `sqlitelayoutkept = true`. (First decided as "counts"; changed the same day after
+   Photo's request in P-28. The reason: a wipe can't be undone and the verdict rests on
+   a reader that is new. Turn it on once the walker has been checked against `dbhash`
+   and the engine on real catalogs.)
 3. **The walker starts in this repository** and moves out when a second tool wants it.
 4. **No live mode through `sqlite3_rsync`.** Lightroom has to be closed for a copy of its
    catalog to mean anything. `sqlite3_rsync` stays a test oracle.
 5. **Lightroom catalogs come first.** The page delta waits for a measurement of one real
    catalog before and after an editing session, read-only on a copy.
+6. **The measurement is approved.** Photo runs it on closed copies and reports numbers;
+   the Unison session reads no catalog. The two pairs that exist now (two consecutive
+   copies of 13 to 15 October; the last October copy against 13 November), about 104 GB
+   read, and one ordinary editing session on Capitola when the user next makes one. The
+   figures are listed in U-42.
 
 Settled with Photo (P-28): the catalog's layout and journal mode as tabled under
 "Lightroom catalogs"; all the folders beside a catalog are held; nothing of Photo's
@@ -365,10 +378,5 @@ and Photo supplies the Lightroom entries.
 
 Still open:
 
-- **`layout-only` and the wipe count.** Photo asks that it stay out of "safe to wipe"
-  unless the user decides otherwise, since the bytes differ. The user's decision 2 is
-  that it counts. Until the user confirms either way, the design counts it and shows it
-  separately.
-- **The measurement** needs the user's approval. Photo will run it on closed copies that
-  already exist and report numbers; the Unison session reads no catalog. The figures
-  asked for are in U-42.
+- **The measurement's results**, and with them whether the page delta is built.
+- **The rules file's format**, to be shown to Photo before any entry is used.
