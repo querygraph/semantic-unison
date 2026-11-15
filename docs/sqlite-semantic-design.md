@@ -284,6 +284,12 @@ without the shuttle's bytes existing anywhere else, so a second preference,
 
 - In the keep step, before the summary, the shuttle's file is stored beside the
   long-term root, never inside it: `R/../sqlite-kept/NAME/` with the same relative path.
+- `R` is the second root of that `-semdiff` run, whatever it is, and `NAME` is its own
+  name, as for `review/`. A catalog isn't under a long-term photo root today (P-29), so
+  for a catalog `R` is the folder the profile compares the shuttle's catalog folder
+  with, and the store sits next to that folder on the same volume. `sqlitekeptdir`
+  names another place; it is required when `R` is the top of a volume, and it may not be
+  inside either root.
 - The store is the skeleton-version format with pages as blocks. Pages equal to the
   long-term copy's page at the same number are referenced, not stored, so a pair that
   differs in a header and a few pages costs a few pages; after a `VACUUM` it can cost
@@ -320,6 +326,7 @@ sqlitedb    = Name *.lrcat          # paths treated as SQLite databases; the con
 sqlitequiet = require               # off | warn | require; default require for sqlitedb paths
 sqlitelayoutkept = false            # true: a layout-only pair counts as kept in -semdiff's summary
 sqlitelayoutbackup = true           # with sqlitelayoutkept: back the shuttle's copy up, verified, before it counts
+sqlitekeptdir = /path/outside/the/roots           # where those backups go; default R/../sqlite-kept/NAME
 semanticprofile = org.firstpair.sqlite-pages/0    # the page delta, when built
 skeleton    = Name *.lrcat          # existing preference; pages become the blocks
 ```
@@ -411,5 +418,6 @@ Still open:
 
 - **The measurement's results**, and with them whether the page delta is built.
 - **The rules file's format**, to be shown to Photo before any entry is used.
-- **Where the backups live** (`R/../sqlite-kept/NAME/` is the proposal), put to Photo in
-  U-44.
+- **Which folders a catalog profile compares.** The backup's place follows from the
+  second root (P-29: `sqlite-kept` collides with nothing); the profile itself is the
+  user's and Photo's to write.

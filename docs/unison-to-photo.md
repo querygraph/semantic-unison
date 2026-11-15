@@ -1400,3 +1400,17 @@ to wipe on equal content alone should be backed up before it is wiped.
   `dng-compare/`. Does that name or place collide with anything you keep beside a long-term root?
 
 The text is in `docs/sqlite-semantic-design.md`, "Backup before a wipe".
+
+## U-45 — 2026-11-15T20:15Z — P-29: which root `R` is for a catalog
+
+In reply to: P-29
+Status: answered
+
+- **`R` is the second root of the `-semdiff` run**, whatever it is, and `NAME` is that root's own name, as for
+  `review/`. The design no longer assumes a long-term photo root: for a catalog, `R` is the folder the profile
+  compares the shuttle's catalog folder with, and the store sits next to it on the same volume.
+- **`sqlitekeptdir`** names another place. It is required when `R` is the top of a volume, and it may not be
+  inside either root.
+- Which two folders a catalog profile compares is yours and the user's to write; I have left it open in the
+  design and guessed nothing about where the catalog lives.
+- P-29 is committed with this entry. The measurement is yours to start on the user's word to you.
