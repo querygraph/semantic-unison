@@ -30,8 +30,9 @@ Three things go wrong or go unsaid:
    25.8 GB in 4 KiB pages (P-28), which puts it at that cap: each changed page resends
    thirty-two.
 
-The extension answers these in that order of importance: a guard, then identities, then a
-page delta. Merging two diverged databases is out of scope (see "Merging").
+The extension answers these in that order of importance: a guard, then identities. A
+page delta for the third was designed, measured and dropped (see "The page delta").
+Merging two diverged databases is out of scope (see "Merging").
 
 For a Lightroom catalog the danger is the first problem, not speed: a sync that runs
 while the catalog is open, or that replaces a catalog under leftover `-wal` files. So
@@ -46,7 +47,7 @@ semantic identity explains and never substitutes.
 | Identity | For a SQLite database | Authorizes |
 |:--|:--|:--|
 | Byte | SHA-256 of the main file | Convergence, as today |
-| Page | SHA-256 of each page; a two-level tree over them | The page delta, checked by the byte identity of the result |
+| Page | SHA-256 of each page; a two-level tree over them | Kept versions with pages as blocks. (The page delta it was meant for isn't built) |
 | Content | Digests of the schema and of each table's rows, independent of where they are stored | Explaining a difference; `-semdiff`'s answer. Never a transfer or a merge |
 
 ### The content digest
@@ -191,6 +192,9 @@ reviews them (P-28). The table above is the first draft.
 
 ## The page delta
 
+**Not built: dropped by the user on 2026-11-15 after the measurement below.** What
+follows is the design that was considered.
+
 For a quiet database changed on one side, with the old version on the receiver as basis.
 Byte-exact, inside Unison's own connection, through the existing private staging.
 
@@ -239,8 +243,9 @@ What it says about the delta:
   number, the delta would decline at its half-the-file rule, and Unison copies as usual.
   On this catalog an optimize happens within weeks.
 
-So the page delta as designed here isn't worth building for this catalog. That is the
-Unison session's recommendation; the decision is the user's. What the comparison at
+So the page delta as designed here isn't worth building for this catalog, and the user
+decided on 2026-11-15 not to build it. The section above stays as the record of what
+was considered. What the comparison at
 equal page numbers can't say is whether an optimize leaves most pages intact at other
 numbers. If it does, Unison's rsync already finds them where 32 in a row moved
 together, and a store that matches pages by content would find the rest. That is one
@@ -290,7 +295,6 @@ each bounded like what exists:
 |:--|:--|
 | A file observer: content digests from a `SemanticFile`, under the observation bounds (aggregates within the 128-property cap; the per-table list goes to the report) | `-semdiff`, conflict detail |
 | A group admission hook: companion names for a path, and a verdict on the group | The guard |
-| A page-delta plan beside the region plan, bound to nonce, basis and target digest the same way | The page delta |
 
 **`-semdiff`.** A pair of databases gets the layers: whole file; content; derived
 (indexes, statistics). Bytes equal is `identical`. Content digests equal with bytes
@@ -362,7 +366,6 @@ sqlitequiet = require               # off | warn | require; default require for 
 sqlitelayoutkept = false            # true: a layout-only pair counts as kept in -semdiff's summary
 sqlitelayoutbackup = true           # with sqlitelayoutkept: back the shuttle's copy up, verified, before it counts
 sqlitekeptdir = /path/outside/the/roots           # where those backups go; default R/../sqlite-kept/NAME
-semanticprofile = org.firstpair.sqlite-pages/0    # the page delta, when built
 skeleton    = Name *.lrcat          # existing preference; pages become the blocks
 ```
 
@@ -402,7 +405,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
   equal the shuttle's file; a pair after `VACUUM`; a store with too little room, a
   write that fails and a backup altered after writing, each of which must leave the pair
   not counted; the option off; the three combinations of the two preferences.
-- **Delta.** Growth, shrinkage, a changed page in each group position, a forced digest
+- **Delta (not built; listed for the record).** Growth, shrinkage, a changed page in each group position, a forced digest
   mismatch that must fall back, a peer without the feature. On stock OCaml 5.2.0 and
   OxCaml 5.4.0+ox, each named.
 
@@ -413,7 +416,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 | 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
 | 2 | Pages as skeleton blocks, so a replaced catalog is kept cheaply | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
-| 4 | The page delta: measured (P-30) and not recommended for this catalog; not built unless the user says so | The user's decision | Negotiated, opt-in |
+| 4 | ~~The page delta~~: measured (P-30) and dropped by the user's decision. Moved pages across an optimize are measured next (U-46) | Photo's read | Nothing |
 
 Step 2 is what makes a both-sides edit recoverable: the conflict stays a conflict, the
 user picks a side, and the other side's catalog is still in the store.
@@ -443,6 +446,10 @@ By the user on 2026-11-15, on the Unison session's recommendation:
    copies of 13 to 15 October; the last October copy against 13 November), about 104 GB
    read, and one ordinary editing session on Capitola when the user next makes one. The
    figures are listed in U-42.
+7. **The page delta is not built.** Measured in P-30: under a factor of 2 between
+   optimizes, nothing across one. `semanticprofile = org.firstpair.sqlite-pages/0` is
+   therefore not a preference of this design any more. One more measurement follows, of
+   pages an optimize moves without changing them (U-46).
 
 Settled with Photo (P-28): the catalog's layout and journal mode as tabled under
 "Lightroom catalogs"; all the folders beside a catalog are held; nothing of Photo's
@@ -451,10 +458,8 @@ and Photo supplies the Lightroom entries.
 
 Still open:
 
-- **The page delta.** Measured in P-30; the recommendation is not to build it. The
-  user decides.
-- **Moved pages across an optimize** (U-46): one more figure from Photo, if the user
-  agrees to the read. Pair (a), an ordinary editing session, is still to come.
+- **Moved pages across an optimize** (U-46): one more read by Photo, which the user
+  agreed to on 2026-11-15. Pair (a), an ordinary editing session, is still to come.
 - **The rules file's format**, to be shown to Photo before any entry is used.
 - **Which folders a catalog profile compares.** The backup's place follows from the
   second root (P-29: `sqlite-kept` collides with nothing); the profile itself is the

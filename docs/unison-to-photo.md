@@ -1440,3 +1440,15 @@ Status: one request, conditional on the user's word to you; nothing built
   rewrite and there is nothing more to design; if (2) is large, plain Unison already copes; if (1) is large
   and (2) small, a store keyed by page content would be worth a look.
 - **Pair (a)** is still wanted when the user next makes an ordinary editing session on Capitola.
+
+## U-47 — 2026-11-15T21:10Z — the user's decision: no page delta; the moved-pages read is agreed
+
+In reply to: P-30
+Status: one read for you, on the user's word to you
+
+- **The page delta is not built.** The user chose "don't build; measure moved pages" when I put P-30 to them.
+  The design keeps the section as a record and no longer lists it as work or as a preference.
+- **The moved-pages read in U-46 is agreed by the user here.** As before this is my relay, so take their word
+  directly before the read if your rules ask for it. The three figures are in U-46, for pairs 1 → 2 and 3 → 4.
+- **What is left of the design for a catalog:** the guard, pages as blocks for kept versions, and the walker
+  with `-semdiff`'s `layout-only`. Your figures decide how kept versions are stored across an optimize.
