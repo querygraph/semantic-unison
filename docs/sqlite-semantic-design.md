@@ -218,6 +218,34 @@ delta's gain is the factor between a page and an rsync block (32 for the user's 
 the bytes sent and written, and nothing on the bytes read. A run on a real catalog
 before and after one editing session would say whether that matters.
 
+### Measured (P-30, 2026-11-15)
+
+Photo compared four closed copies of the user's catalog (25.8 GB, 4 KiB pages), page `i`
+against page `i`, giving three consecutive pairs:
+
+| Pair | Between the copies | Pages that differ | 32-page blocks with a difference | 256-page groups with a difference |
+|:--|:--|:--|:--|:--|
+| 1 → 2 | An optimize: the freelist went from 16,201 pages to 0 in three commits | 6,291,165 (99.72%) | 197,142 of 197,147 | all 24,644 |
+| 2 → 3 | A repair session, no optimize | 15,175 (0.24%) | 950 of 197,147 | 407 of 24,644 |
+| 3 → 4 | Four weeks; an optimize during a Lightroom backup is likely, not checked | 6,224,614 (98.67%) | 197,145 of 197,148 | all 24,644 |
+
+What it says about the delta:
+
+- **Without an optimize the gain is under 2, not 32.** The changes cluster: one run of
+  14,325 pages is 94% of pair 2 → 3. Unison's rsync would resend 950 blocks, about
+  119 MiB; the page delta would send about 59 MiB of pages and 4 MiB of digests. That
+  saves some 56 MiB on a file both sides read in full either way.
+- **Across an optimize there is no gain at all.** Nearly every page differs at its own
+  number, the delta would decline at its half-the-file rule, and Unison copies as usual.
+  On this catalog an optimize happens within weeks.
+
+So the page delta as designed here isn't worth building for this catalog. That is the
+Unison session's recommendation; the decision is the user's. What the comparison at
+equal page numbers can't say is whether an optimize leaves most pages intact at other
+numbers. If it does, Unison's rsync already finds them where 32 in a row moved
+together, and a store that matches pages by content would find the rest. That is one
+more figure to ask for (U-46) before anything is concluded about the optimize case.
+
 ## `sqlite3_rsync`, and why it isn't the transfer
 
 SQLite ships `sqlite3_rsync ORIGIN REPLICA`, which makes the replica a copy of a
@@ -308,10 +336,17 @@ exists.
 
 **Skeleton versions.** With pages as blocks, a replaced catalog's kept version costs the
 pages the edit changed instead of the whole file. The store's rebuild-and-verify step is
-unchanged. This is probably the largest practical saving of the whole design. Pages
-don't move, so a version is recorded as the old contents of the page runs that changed
-and the old size, not as a map with an entry for each of the catalog's 6.3 million
-pages. Settling a version reads the replaced file and its successor once each.
+unchanged. Between optimizes pages don't move, so a version is recorded as the old
+contents of the page runs that changed and the old size, not as a map with an entry for
+each of the catalog's 6.3 million pages. Settling a version reads the replaced file and
+its successor once each.
+
+Measured (P-30): for the pair without an optimize such a version is 59 MiB instead of
+25.8 GB. Across an optimize nearly every page differs at its number and the version is
+the whole file again, so with `maxskeletons = 3` the store has to be sized for three
+full catalogs, about 78 GB, and the free space is checked before a version is taken.
+Whether matching pages by content instead of by number would reduce that isn't known
+yet (U-46).
 
 **Application rules.** Which tables are caches or bookkeeping is the application's
 knowledge, not SQLite's. A rules file keyed by `application_id`, `user_version` or schema
@@ -378,7 +413,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 | 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
 | 2 | Pages as skeleton blocks, so a replaced catalog is kept cheaply | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
-| 4 | Measure on a real catalog; build the page delta only if Unison's rsync proves too slow | Photo's measurement (approved by the user, 2026-11-15) | Negotiated, opt-in |
+| 4 | The page delta: measured (P-30) and not recommended for this catalog; not built unless the user says so | The user's decision | Negotiated, opt-in |
 
 Step 2 is what makes a both-sides edit recoverable: the conflict stays a conflict, the
 user picks a side, and the other side's catalog is still in the store.
@@ -416,7 +451,10 @@ and Photo supplies the Lightroom entries.
 
 Still open:
 
-- **The measurement's results**, and with them whether the page delta is built.
+- **The page delta.** Measured in P-30; the recommendation is not to build it. The
+  user decides.
+- **Moved pages across an optimize** (U-46): one more figure from Photo, if the user
+  agrees to the read. Pair (a), an ordinary editing session, is still to come.
 - **The rules file's format**, to be shown to Photo before any entry is used.
 - **Which folders a catalog profile compares.** The backup's place follows from the
   second root (P-29: `sqlite-kept` collides with nothing); the profile itself is the

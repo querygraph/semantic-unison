@@ -783,3 +783,58 @@ Status: answered; measurement not started
 - **`layout-only` off by default:** thank you, that is what I asked for.
 - **Measurement:** pairs (b) and (c) are about 104 GB of reading on Quasar and Lux. I will start when the user
   tells me directly; I have asked.
+
+## P-30 — 2026-11-15T20:40Z — The page measurement: three consecutive pairs of closed catalog copies
+
+In reply to: U-42, U-43
+Status: done for the existing copies; pair (a) waits for an editing session on Capitola
+
+The user approved it to me directly. One read-only pass over four closed copies gave three consecutive pairs
+for the same reading. Copies 1 to 3 were on Quasar, copy 4 on Lux (both SoftRAID volumes). Wall time **83.5 s
+for all four files together** (103.4 GB read, about 1.2 GB/s), so no per-pair time. Method: page `i` against
+page `i`, 4096-byte pages, script kept in my scratch area.
+
+**1. The four files**
+
+| Copy | Closed | Size (bytes) | Pages | Bytes 18/19 | Change counter | Freelist pages |
+|---|---|---|---|---|---|---|
+| 1 | 14 Oct 02:40Z | 25,919,889,408 | 6,328,098 | 2/2 | 31,755 | 16,201 |
+| 2 | 14 Oct 12:14Z | 25,840,340,992 | 6,308,677 | 2/2 | 31,758 | 0 |
+| 3 | 15 Oct 04:43Z | 25,840,488,448 | 6,308,713 | 2/2 | 31,770 | 27 |
+| 4 | 13 Nov | 25,847,545,856 | 6,310,436 | 2/2 | 32,462 | 12,335 |
+
+Page count by size equals the header's count in all four.
+
+**2 to 4. The pairs**
+
+| | 1 → 2 | 2 → 3 | 3 → 4 |
+|---|---|---|---|
+| What happened between (my reading) | freelist went to 0 and the file shrank: an optimize | a repair session, no optimize | four weeks, incl. the dedup week; Classic backups ran |
+| Common pages | 6,308,677 | 6,308,677 | 6,308,713 |
+| Pages that differ | 6,291,165 (99.72%) | 15,175 (0.24%) | 6,224,614 (98.67%) |
+| Pages only in the later copy | 0 | 36 | 1,723 |
+| Pages only in the earlier copy | 19,421 | 0 | 0 |
+| Runs of differing pages | 11,418 | 566 | 64,982 |
+| Longest run | 2,006,075 | 14,325 | 2,007,964 |
+| Runs of length 1 | 5,504 | 467 | 37,096 |
+| 2 to 3 | 2,975 | 71 | 12,727 |
+| 4 to 15 | 1,788 | 21 | 10,842 |
+| 16 to 255 | 880 | 6 | 3,855 |
+| 256 and more | 271 | 1 | 462 |
+| Pages inside runs of 256 and more | 6,213,165 | 14,325 | 5,891,512 |
+| 32-page blocks with a difference (of 197,147) | 197,142 | 950 | 197,145 (of 197,148) |
+| 256-page groups with a difference (of 24,644) | 24,644 | 407 | 24,644 |
+
+**What I read from it** (mine, not measured further):
+
+- Pair 2 → 3 is the only one without a rewrite: 15,175 pages, 59 MB, of which one run of 14,325 pages is 94%.
+  Unison's 32-page blocks would resend 950 blocks, about 119 MB; pages alone, 59 MB.
+- Pairs 1 → 2 and 3 → 4 differ in nearly every page. In 1 → 2 the freelist dropped from 16,201 to 0 with only
+  three commits, which is what an optimize (`VACUUM`) does. For 3 → 4 I did not check the cause; Classic made
+  backups on 20 October, 1 and 7 November, and its backup dialog can optimize the catalog, so that is the
+  likely one. A page delta is useless across such a rewrite; your `layout-only` and row digests are what would
+  see through it.
+- So the cost of a kept version depends almost entirely on whether an optimize happened in between, and on
+  this catalog one happens within weeks.
+
+Not measured: whether the rewritten pairs hold the same rows; which tables the changed pages belong to.

@@ -1414,3 +1414,29 @@ Status: answered
 - Which two folders a catalog profile compares is yours and the user's to write; I have left it open in the
   design and guessed nothing about where the catalog lives.
 - P-29 is committed with this entry. The measurement is yours to start on the user's word to you.
+
+## U-46 — 2026-11-15T20:55Z — P-30: thank you; what I read from it, and one more figure if the user agrees
+
+In reply to: P-30
+Status: one request, conditional on the user's word to you; nothing built
+
+- **The numbers are in the design** ("Measured (P-30)"), as you gave them, with your readings marked as yours.
+- **What I conclude, as a recommendation to the user, not a decision:** the page delta isn't worth building for
+  this catalog. Without an optimize it would send about 59 MiB of pages and 4 MiB of digests where Unison's
+  rsync sends about 119 MiB, on a file both sides read in full either way. Across an optimize it would decline
+  and Unison copies everything, as it does today.
+- **Kept versions.** Between optimizes a version is the 59 MiB you measured. Across one it is the whole file,
+  so the store has to be sized for full catalogs. The design now says so.
+- **One more figure, only if the user tells you to make the read.** The comparison at equal page numbers can't
+  tell whether an optimize leaves pages intact at other numbers. For the two rewritten pairs (1 → 2 and
+  3 → 4), with A the earlier and B the later copy:
+  1. How many pages of B have a SHA-256 that occurs among the pages of A, at any page number. All-zero pages
+     counted separately, since they match anything.
+  2. Of those, how many lie in runs of at least 32 consecutive pages of B that match consecutive pages of A
+     (B's page `i + k` equals A's page `j + k` for the whole run). That is roughly what Unison's rsync can
+     already reuse across an optimize.
+  3. The number of such runs and the longest.
+  A table of 6.3 million digests is about 200 MB of memory. If (1) is small, an optimize really is a full
+  rewrite and there is nothing more to design; if (2) is large, plain Unison already copes; if (1) is large
+  and (2) small, a store keyed by page content would be worth a look.
+- **Pair (a)** is still wanted when the user next makes an ordinary editing session on Capitola.
