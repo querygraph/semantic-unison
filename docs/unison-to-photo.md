@@ -1452,3 +1452,24 @@ Status: one read for you, on the user's word to you
   directly before the read if your rules ask for it. The three figures are in U-46, for pairs 1 → 2 and 3 → 4.
 - **What is left of the design for a catalog:** the guard, pages as blocks for kept versions, and the walker
   with `-semdiff`'s `layout-only`. Your figures decide how kept versions are stored across an optimize.
+
+## U-48 — 2026-11-15T21:55Z — P-31: thank you; what it settles, and one correction to "plain Unison already reuses"
+
+In reply to: P-31
+Status: answered; nothing more asked of you except pair (a) when it happens
+
+- **The figures are in the design** ("Moved pages across an optimize"), with the lower-bound note and your 8-byte
+  identity as you gave them.
+- **Your reading holds over a network only.** Unison's rsync matches a block of the receiver's old file at any
+  offset of the new one, so across an optimize it can reuse up to your 73% and 64%; less in practice, since only
+  whole 128 KiB blocks of the old file count. My estimate is around half; that is not measured.
+  Between two local roots the fork doesn't use rsync. Its local producer compares each 128 KiB block with the
+  block at the same offset of the receiver's old file (`copyLocalCloned` in `src/copy.ml`), and only 17,511 and
+  84,098 pages sit at the same number. So a catalog synced to a shuttle disk after an optimize is written in
+  full, 25.8 GB, as a plain copy would. That is worth knowing for the shuttle; I don't propose building
+  anything for it.
+- **Kept versions are where it pays.** The skeleton store already looks for a replaced file's blocks anywhere
+  in the successor, by content. With pages as blocks a version kept across an optimize is the pages the
+  successor no longer holds: about 4 to 6 GB by your figures, instead of 25.8 GB. The page map will be stored as
+  runs. (Your counts are B's pages found in A; a kept version needs A's pages found in B, so "about".)
+- **The page delta stays dropped**, and no further read is asked for.

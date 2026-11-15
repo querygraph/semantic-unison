@@ -245,11 +245,39 @@ What it says about the delta:
 
 So the page delta as designed here isn't worth building for this catalog, and the user
 decided on 2026-11-15 not to build it. The section above stays as the record of what
-was considered. What the comparison at
-equal page numbers can't say is whether an optimize leaves most pages intact at other
-numbers. If it does, Unison's rsync already finds them where 32 in a row moved
-together, and a store that matches pages by content would find the rest. That is one
-more figure to ask for (U-46) before anything is concluded about the optimize case.
+was considered.
+
+### Moved pages across an optimize (P-31, 2026-11-15)
+
+The comparison at equal page numbers can't say whether an optimize rewrites pages or
+moves them. Photo read the same copies again and matched pages by content at any page
+number (A the earlier copy, B the later; the one all-zero page left out):
+
+| | 1 → 2 | 3 → 4 |
+|:--|:--|:--|
+| Pages of B whose content occurs somewhere in A | 5,362,012 (85.0%) | 4,884,868 (77.4%) |
+| of which at the same page number | 17,511 | 84,098 |
+| Pages of B in runs of 32 or more that match consecutive pages of A (a lower bound) | 4,600,511 (72.9%) | 4,044,522 (64.1%) |
+| Such runs; the longest | 28,476; 1,128 pages | 25,633; 1,128 pages |
+
+So an optimize on this catalog mostly moves pages: 15 to 23% of the pages are new
+content, the rest exist in the earlier copy at another number. What follows:
+
+- **Over a network, plain Unison already reuses much of the file across an optimize.**
+  Its rsync finds a block of the receiver's old file at any offset of the new one. The
+  reuse is at most the 73% and 64% above, and less in practice, since only whole
+  128 KiB blocks of the old file count; around half is this session's estimate, not a
+  measurement.
+- **Between two local roots, such as a shuttle disk, nothing is reused across an
+  optimize.** The fork's local producer compares each 128 KiB block with the block at
+  the same offset in the receiver's old file, so moved pages are written again: the
+  whole 25.8 GB. That is a full local copy, as before the fork, and no reason to build
+  a transfer for it.
+- **Kept versions gain the most.** The skeleton store already looks for each block of a
+  replaced file anywhere in its successor, by content. With pages as blocks, a version
+  kept across an optimize costs the pages the successor no longer holds, roughly the 15
+  to 23% above, or 4 to 6 GB, instead of 25.8 GB. (Roughly, because the figures count
+  B's pages found in A and a kept version needs A's pages found in B.)
 
 ## `sqlite3_rsync`, and why it isn't the transfer
 
@@ -340,17 +368,20 @@ exists.
 
 **Skeleton versions.** With pages as blocks, a replaced catalog's kept version costs the
 pages the edit changed instead of the whole file. The store's rebuild-and-verify step is
-unchanged. Between optimizes pages don't move, so a version is recorded as the old
-contents of the page runs that changed and the old size, not as a map with an entry for
-each of the catalog's 6.3 million pages. Settling a version reads the replaced file and
-its successor once each.
+unchanged, and so is its rule for finding a block: anywhere in the successor, by
+content. That matters because an optimize moves pages (P-31). The map of where each page
+goes is stored as runs (old page, new page, length), not as an entry for each of the
+catalog's 6.3 million pages: a version between optimizes is a handful of runs, and one
+across an optimize some tens of thousands of long runs and at most a few hundred
+thousand short ones, a few megabytes. Settling a version reads the replaced file and
+its successor once each, and holds one digest per page of the successor in memory
+(about 200 MB at 32 bytes each for this catalog; a shorter key with a full compare on a
+match would do with less).
 
-Measured (P-30): for the pair without an optimize such a version is 59 MiB instead of
-25.8 GB. Across an optimize nearly every page differs at its number and the version is
-the whole file again, so with `maxskeletons = 3` the store has to be sized for three
-full catalogs, about 78 GB, and the free space is checked before a version is taken.
-Whether matching pages by content instead of by number would reduce that isn't known
-yet (U-46).
+Measured: a version kept between optimizes is 59 MiB instead of 25.8 GB (P-30). One
+kept across an optimize is the pages its successor no longer holds, about 4 to 6 GB
+(P-31). The free space is checked before a version is taken, and a version that can't
+be kept this way is kept whole and said to be, as today.
 
 **Application rules.** Which tables are caches or bookkeeping is the application's
 knowledge, not SQLite's. A rules file keyed by `application_id`, `user_version` or schema
@@ -414,9 +445,9 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 | Step | What | Needs | Changes sync behaviour |
 |:--|:--|:--|:--|
 | 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
-| 2 | Pages as skeleton blocks, so a replaced catalog is kept cheaply | The page size from the header | Only with `skeleton` set |
+| 2 | Pages as skeleton blocks, found by content and mapped as runs, so a replaced catalog is kept cheaply, also across an optimize | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
-| 4 | ~~The page delta~~: measured (P-30) and dropped by the user's decision. Moved pages across an optimize are measured next (U-46) | Photo's read | Nothing |
+| 4 | ~~The page delta~~: measured (P-30, P-31) and dropped by the user's decision | | Nothing |
 
 Step 2 is what makes a both-sides edit recoverable: the conflict stays a conflict, the
 user picks a side, and the other side's catalog is still in the store.
@@ -448,8 +479,8 @@ By the user on 2026-11-15, on the Unison session's recommendation:
    figures are listed in U-42.
 7. **The page delta is not built.** Measured in P-30: under a factor of 2 between
    optimizes, nothing across one. `semanticprofile = org.firstpair.sqlite-pages/0` is
-   therefore not a preference of this design any more. One more measurement follows, of
-   pages an optimize moves without changing them (U-46).
+   therefore not a preference of this design any more. The measurement of moved pages
+   (P-31) changed nothing in that, and gave step 2 its shape.
 
 Settled with Photo (P-28): the catalog's layout and journal mode as tabled under
 "Lightroom catalogs"; all the folders beside a catalog are held; nothing of Photo's
@@ -458,8 +489,8 @@ and Photo supplies the Lightroom entries.
 
 Still open:
 
-- **Moved pages across an optimize** (U-46): one more read by Photo, which the user
-  agreed to on 2026-11-15. Pair (a), an ordinary editing session, is still to come.
+- **Pair (a)**, an ordinary editing session on Capitola, when the user next makes one.
+  P-30 and P-31 have answered the rest.
 - **The rules file's format**, to be shown to Photo before any entry is used.
 - **Which folders a catalog profile compares.** The backup's place follows from the
   second root (P-29: `sqlite-kept` collides with nothing); the profile itself is the

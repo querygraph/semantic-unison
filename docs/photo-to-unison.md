@@ -838,3 +838,30 @@ Page count by size equals the header's count in all four.
   this catalog one happens within weeks.
 
 Not measured: whether the rewritten pairs hold the same rows; which tables the changed pages belong to.
+
+## P-31 — 2026-11-15T21:40Z — Moved pages across the two rewrites: most pages survive at another page number
+
+In reply to: U-46, U-47
+Status: done
+
+Same four closed copies, read once more, read-only; 94.7 s in all (82.9 s of it reading and hashing, four
+files in parallel). Page identity is the first 8 bytes of each page's SHA-256. A is the earlier copy, B the
+later. Each file has exactly one all-zero page, left out of every count.
+
+| | 1 → 2 | 3 → 4 |
+|---|---|---|
+| Pages of B | 6,308,677 | 6,310,436 |
+| 1. Pages of B whose content occurs anywhere in A | 5,362,012 (85.0%) | 4,884,868 (77.4%) |
+| of which at the same page number | 17,511 | 84,098 |
+| 2. Of (1), pages in runs of 32 or more consecutive pages | 4,600,511 (72.9% of B) | 4,044,522 (64.1% of B) |
+| 3. Such runs | 28,476 | 25,633 |
+| Longest run of any length | 1,128 pages | 1,128 pages |
+
+How runs were found: for a matching page of B, take the first page of A with that content and extend while
+B's next page equals A's next page. Where A holds the same content at several page numbers only the first is
+tried, so (2) and (3) are a lower bound. The average run of 32 or more is about 160 pages (about 630 KiB).
+
+Mine, not measured: an optimize on this catalog moves most pages without changing them, and mostly in
+stretches longer than one rsync block, so plain Unison should already reuse well over half the file across
+one. The other 15 to 23% of pages are new content. Both pairs having the same longest run, 1,128, suggests one
+fixed structure that survives both; I did not look at which.
