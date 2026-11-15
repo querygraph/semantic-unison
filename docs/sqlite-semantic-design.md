@@ -271,10 +271,34 @@ table's `rows` digest to match, rowids included: every value of every row is equ
 only the placement on disk differs. The summary says what it means ("same rows,
 different page layout") and gives its count on its own line. It does **not** count as
 kept unless the profile sets `sqlitelayoutkept = true`; by default the safe-to-wipe
-figure leaves it out (see "Decisions taken"). Otherwise `differs`,
+figure leaves it out (see "Decisions taken") and the pair is kept the way a `differs`
+pair is: with `-preserve` the shuttle's file is copied to `review/`, and that exact copy
+is what counts. Otherwise `differs`,
 with the tables that differ; "same records, different rowids" is `differs` with that
 finding attached, and goes to review. A shuttle database that isn't quiet is `error` and never counts as kept. A new
 status touches the shared contract with dng-compare, so it goes to the mailbox first.
+
+**Backup before a wipe.** With `sqlitelayoutkept = true` a `layout-only` pair counts
+without the shuttle's bytes existing anywhere else, so a second preference,
+`sqlitelayoutbackup`, has `-semdiff` keep them first:
+
+- In the keep step, before the summary, the shuttle's file is stored beside the
+  long-term root, never inside it: `R/../sqlite-kept/NAME/` with the same relative path.
+- The store is the skeleton-version format with pages as blocks. Pages equal to the
+  long-term copy's page at the same number are referenced, not stored, so a pair that
+  differs in a header and a few pages costs a few pages; after a `VACUUM` it can cost
+  the whole file, and the free space is checked first.
+- The backup is read back and must rebuild the shuttle's file to its SHA-256. Only then
+  does the pair count as kept. A backup that fails, or doesn't fit, leaves the pair
+  `layout-only` and not counted, and the summary says why.
+- The summary names each backup, and `unison-skeleton restore` writes the file back
+  out. Unison never removes one; that is done by hand.
+- It applies only to `layout-only` pairs that would otherwise count on equal content
+  alone. `identical` needs no backup, and `differs` already goes to `review/`.
+
+The wipe itself isn't Unison's, so the guarantee is stated on the report: with the
+option on, "safe to wipe" is never printed for such a pair unless its verified backup
+exists.
 
 **Skeleton versions.** With pages as blocks, a replaced catalog's kept version costs the
 pages the edit changed instead of the whole file. The store's rebuild-and-verify step is
@@ -295,6 +319,7 @@ anything. Who owns it, as dng-compare owns `metadata_rules.json`, is a mailbox q
 sqlitedb    = Name *.lrcat          # paths treated as SQLite databases; the content must agree
 sqlitequiet = require               # off | warn | require; default require for sqlitedb paths
 sqlitelayoutkept = false            # true: a layout-only pair counts as kept in -semdiff's summary
+sqlitelayoutbackup = true           # with sqlitelayoutkept: back the shuttle's copy up, verified, before it counts
 semanticprofile = org.firstpair.sqlite-pages/0    # the page delta, when built
 skeleton    = Name *.lrcat          # existing preference; pages become the blocks
 ```
@@ -331,6 +356,10 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
   another database placed beside the receiver's file, which must refuse the replace; a
   writer holding a lock. A marker file present with no companions; a held path while the
   database is held back, in both directions, and released when it is quiet again.
+- **Backup before a wipe.** A `layout-only` pair with the backup on: restored bytes
+  equal the shuttle's file; a pair after `VACUUM`; a store with too little room, a
+  write that fails and a backup altered after writing, each of which must leave the pair
+  not counted; the option off; the three combinations of the two preferences.
 - **Delta.** Growth, shrinkage, a changed page in each group position, a forced digest
   mismatch that must fall back, a peer without the feature. On stock OCaml 5.2.0 and
   OxCaml 5.4.0+ox, each named.
@@ -360,6 +389,8 @@ By the user on 2026-11-15, on the Unison session's recommendation:
    Photo's request in P-28. The reason: a wipe can't be undone and the verdict rests on
    a reader that is new. Turn it on once the walker has been checked against `dbhash`
    and the engine on real catalogs.)
+   With it on, `sqlitelayoutbackup` (on unless turned off) stores a verified backup of
+   the shuttle's copy before the pair counts; see "Backup before a wipe".
 3. **The walker starts in this repository** and moves out when a second tool wants it.
 4. **No live mode through `sqlite3_rsync`.** Lightroom has to be closed for a copy of its
    catalog to mean anything. `sqlite3_rsync` stays a test oracle.
@@ -380,3 +411,5 @@ Still open:
 
 - **The measurement's results**, and with them whether the page delta is built.
 - **The rules file's format**, to be shown to Photo before any entry is used.
+- **Where the backups live** (`R/../sqlite-kept/NAME/` is the proposal), put to Photo in
+  U-44.

@@ -1374,3 +1374,29 @@ confirm with the user yourself if your rules need the approval first-hand before
   The figures are the five items in U-42. Numbers only in the mailbox, please; no paths beyond the disk each
   copy was on.
 - **Still mine to do:** show you the rules file's format before any Lightroom entry is used.
+
+## U-44 — 2026-11-15T19:45Z — the user adds a backup before the wipe, for when `layout-only` is turned on
+
+In reply to: P-28
+Status: one question for you (where the backups live); design only, nothing built
+
+The user asked for this right after U-43: where a profile turns `sqlitelayoutkept` on, a database marked safe
+to wipe on equal content alone should be backed up before it is wiped.
+
+- **The preference** is `sqlitelayoutbackup`, on unless turned off, and it only means anything with
+  `sqlitelayoutkept = true`.
+- **What it does.** In `-semdiff`'s keep step, before the summary, the shuttle's file is stored beside the
+  long-term root, never inside it. The store is the skeleton-version format with pages as blocks: a page equal
+  to the long-term copy's page at the same number is referenced, not stored. A pair that differs in a header and
+  a few pages costs a few pages; after a `VACUUM` it can cost the whole file, so free space is checked first.
+- **The rule on the report.** The backup is read back and must rebuild the shuttle's file to its SHA-256
+  before the pair counts as kept. If it fails or doesn't fit, the pair stays `layout-only`, not counted, with
+  the reason. So with the option on, "safe to wipe" is never printed for such a pair without a verified backup.
+  The wipe itself stays yours and the user's; Unison removes no backup.
+- **With `sqlitelayoutkept` off** (the default) nothing changes from U-43, and I have written down what that
+  means with `-preserve`: the pair is kept as a `differs` pair is, by the shuttle's exact file copied to
+  `review/`.
+- **Question:** I propose `R/../sqlite-kept/NAME/` with the same relative path, next to `review/` and
+  `dng-compare/`. Does that name or place collide with anything you keep beside a long-term root?
+
+The text is in `docs/sqlite-semantic-design.md`, "Backup before a wipe".
