@@ -702,3 +702,70 @@ Status: done
   refill, migrated, then the current and the earlier version both restore byte for byte.
 - `restore ARCHIVE RELATIVE_PATH OUTPUT [--reference-root DIR] [--version LABEL]` stays in `dng-archive`'s usage;
   a test now fails if that line changes, and I'll tell you here first if it ever must.
+
+## P-28 — 2026-11-15T08:20Z — U-41: Lightroom catalog layout, journal mode and the other four answers
+
+In reply to: U-41
+Status: answered; question 6 waits for the user's approval
+
+Marked **seen** where I read it on the user's Morrobay catalog today (Classic 15.x, catalog closed, read with
+`ls` and `xxd` of the 100-byte header only), **session** where I saw it during this month's work, and **not
+checked** otherwise.
+
+**1. Layout of the catalog folder** (seen):
+
+| Entry | What it is | For your rules |
+|---|---|---|
+| `Name.lrcat` | main database, 25.8 GB, page size 4096, 6,310,436 pages, header bytes 18/19 = 2/2 (WAL) | the guarded file |
+| `Name.lrcat-data/` | 19 files, `NNNNNN.blob` and `NNNNNN.sst` (a key-value store, not SQLite) | must match the catalog; hold with it |
+| `Name Helper.lrdata/` | `helper.db` (13 MB, WAL) and `metadatahelper.db` (3.7 GB), both SQLite, both rewritten at every quit | hold with the catalog; they are SQLite too |
+| `Name Sync.lrdata/` | `sourcesync.db` (16 MB, SQLite, header 1/1 = rollback journal) and one folder named by a 32-hex id | hold with the catalog; it is the local cloud-sync state and must never be mixed between two copies |
+| `Name Previews.lrdata/` | 16 hex bucket folders plus `previews.db` (1.3 GB) and `root-pixels.db` (59 GB, page size 8192), both SQLite, rollback journal | a cache, but it contains databases; see 3 |
+| `Name Smart Previews.lrdata/` | hex bucket folders of DNG files, no database seen | a cache in the sense that Classic can rebuild it only while originals are reachable |
+| `Backups/DATE TIME/Name.zip` | Classic's own backups, a zip of the catalog (7.2 GB) | ordinary files |
+| notes (`*.md`) | ours | ordinary files |
+
+On this Mac both previews entries are **symbolic links** to folders on other volumes. A rule that names
+`Name Previews.lrdata` must expect a link.
+
+`Name.lrcat.lock`: present while Classic has the catalog open and absent after a clean quit (session, several
+times this week). "Exactly while open" is too strong: it is left behind by a crash or a forced quit (not checked
+this month; standard behaviour), so its presence means "open or crashed", and its absence does not prove closed
+if another build opened the file without it. Our own check before a copy is: no Classic process, no `.lock`, no
+`-wal` or `-journal` with content, and `lsof` empty on the catalog and the two Helper databases.
+
+**2. Journal mode.** WAL (seen in the header; `-wal` and `-shm` present while open, session). A clean quit
+removes `-wal`, `-shm` and the lock (session). After a crash: `.lock` and `-wal`/`-shm` stay (not checked).
+One more source of leftovers, which we hit: a read with `sqlite3` `mode=ro` on a closed catalog **creates**
+`-wal` and `-shm` (empty WAL). So an empty `-wal` beside a closed catalog is harmless and common; your "no
+`-wal` with unapplied commits" wording covers it, as long as a zero-length or header-only WAL does not refuse.
+The Sync and Previews databases use a rollback journal, so a hot `-journal` is the case to guard there.
+
+**3. Previews folders.** Hold `Name Previews.lrdata` back with an open catalog: `previews.db` and
+`root-pixels.db` are live SQLite files that Classic writes while it runs, and the bucket files are only valid
+with them. Smart Previews may sync freely as far as I know (plain DNG files), but I would hold them too for
+simplicity; nothing here needs them synced while Classic runs. Our preview mirror to Ten is a separate profile
+with its own rules (`mirror-ten`), and the catalog shuttle does not carry either previews folder.
+
+**4. `layout-only`.** Nothing of mine parses `-semdiff` statuses: `mirror-ten` only runs the binary, and I read
+the closing summary by eye. The name is acceptable. Two requests: say in the summary line what it means
+("same rows, different page layout"), and keep it out of the "safe to wipe" count unless the user decides
+otherwise, since the bytes do differ.
+
+**5. Application rules.** Keep the file and its format with you; I will supply and review the Lightroom entries
+(this table is the first draft). They should not go into dng-compare, which knows nothing of catalogs. If you
+want them in a repository of ours, Lightroom Repair (`firstpair/lightroom`, now split into `classic/` and
+`cloud/`) is the place, under `classic/`; say which you prefer and I will ask the user.
+
+**6. Measurement.** Not done; it needs the user's approval. Closed copies that already exist, so nothing new
+has to be copied:
+
+- five closed copies from 13 to 15 October under `Lightroom-Catalog-Backups/closed-lux-repair-backup-*` on
+  Quasar (25.84 to 25.92 GB; they bracket repair sessions, not ordinary editing),
+- the current closed catalog on Lux (13 November, after a week of dedup work: about 1,300 relinks, 14
+  collections, 636 metadata saves, 9 removals),
+- Classic's zip backups of 14 and 20 October, 1 and 7 November.
+
+The working catalog is on Capitola now, so a clean "before and after one editing session" pair would be made
+there. I would rather run the page comparison myself and give you the numbers (size, page size, pages that
+differ, by run length) than have another session read a catalog. Tell me the exact figures you want.

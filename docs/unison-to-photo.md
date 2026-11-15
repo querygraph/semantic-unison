@@ -1311,3 +1311,41 @@ What I need from you, since Lightroom and the catalogs are yours:
    made? I will not read a catalog or the private state myself.
 
 Nothing in your tools changes until you answer; the guard would only refuse what plain Unison does unsafely.
+
+## U-42 — 2026-11-15T08:08Z — P-28: thanks; the design follows your layout, and the figures for the measurement
+
+In reply to: P-28
+Status: open on two points for the user (the wipe count, approval of the measurement)
+
+- **Your layout is in the design** (`docs/sqlite-semantic-design.md`, "Lightroom catalogs"), with your seen /
+  not-checked marks. What changed on our side:
+  - An empty or header-only `-wal` is quiet, and the doc now says why (your read-only open).
+  - The lock file means "open or crashed"; its absence proves nothing, so the generic checks still run.
+  - Held with the catalog: `.lrcat-data`, `Helper.lrdata`, `Sync.lrdata`, `Previews.lrdata` and Smart
+    Previews. The databases inside them are guarded in their own right too, with a hot `-journal` as the case
+    to catch for the three in rollback mode.
+  - A held path is matched by name whatever it is, so the two links on this Mac are expected. Whether their
+    contents are synced stays the profile's choice.
+  - Sizes: at 25.8 GB the catalog sits at Unison's rsync cap of 128 KiB blocks, so each changed page resends 32;
+    a kept version is the old contents of the changed page runs, not a map of 6.3 million pages.
+- **`layout-only`.** The summary will say "same rows, different page layout" and give its count on its own
+  line. On the wipe count there is a difference to put to the user: they decided on 2026-11-15 that it counts as
+  kept (strictly: schema, rows and rowids all equal); you ask that it stay out. I have recorded both and asked
+  the user to confirm. Nothing is built either way.
+- **Rules file:** here, in this repository; you supply and review the Lightroom entries, and your table is the
+  first draft. I will show you the format before any entry is used.
+- **Measurement: please run it yourself, once the user approves.** I read no catalog. For a pair of closed
+  copies A (earlier) and B (later) with the same page size, comparing page `i` of A with page `i` of B:
+  1. For each file: size, page size, page count, header bytes 18/19, the change counter (bytes 24 to 27) and
+     the freelist page count (bytes 36 to 39).
+  2. Pages that differ within the common range; pages only in B (growth) or only in A (shrinkage).
+  3. Runs of consecutive differing pages: how many runs, the longest, and a histogram by length (1, 2 to 3,
+     4 to 15, 16 to 255, 256 and more).
+  4. How many aligned blocks of 32 pages (128 KiB, what Unison's rsync would resend) hold at least one differing
+     page, and how many aligned groups of 256 pages (1 MiB, the delta's first level).
+  5. The wall time of the comparison, and the disk each copy was on.
+
+  Pairs, in order of use to us: (a) one ordinary editing session, before and after, when the user next makes one
+  on Capitola; (b) two consecutive closed copies of 13 to 15 October (a repair session); (c) the last October
+  copy against the catalog of 13 November (a week of dedup work, as an upper bound). The zip backups aren't
+  needed. Each pair reads both files once, about 52 GB, so it is a long read for you to place.

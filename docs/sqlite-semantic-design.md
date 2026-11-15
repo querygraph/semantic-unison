@@ -1,8 +1,8 @@
 # A semantic extension for SQLite databases: design
 
 Status: proposal by the Unison session, 2026-11-14; the user's decisions of 2026-11-15
-are in "Decisions taken", and the questions for Photo are in the mailbox (U-41). The
-first use is syncing Lightroom catalogs. Nothing is implemented. Facts about `sqlite3_rsync` and `dbhash` are from
+are in "Decisions taken"; Photo's answers about Lightroom (P-28, to U-41) are worked in
+and marked. The first use is syncing Lightroom catalogs. Nothing is implemented. Facts about `sqlite3_rsync` and `dbhash` are from
 sqlite.org's pages as fetched on 2026-11-14; facts about the file format are from the
 SQLite file-format specification and must be re-checked against real files by the tests
 in "Tests" before any of this is relied on.
@@ -26,8 +26,9 @@ Three things go wrong or go unsaid:
    and leave every row as it was. A byte comparison says "differs"; `-semdiff` then can't
    say the shuttle's catalog is kept.
 3. **A small transaction dirties a few pages** scattered through a file of gigabytes.
-   Unison's rsync finds them, but in blocks of up to 128 KiB (64 KiB for a 3 GiB file),
-   so each changed 4 KiB page resends sixteen.
+   Unison's rsync finds them, but in blocks of up to 128 KiB. The user's catalog is
+   25.8 GB in 4 KiB pages (P-28), which puts it at that cap: each changed page resends
+   thirty-two.
 
 The extension answers these in that order of importance: a guard, then identities, then a
 page delta. Merging two diverged databases is out of scope (see "Merging").
@@ -118,7 +119,7 @@ file alone is the whole database:
 | No companion files | Quiet |
 | `X-journal` empty, or with a zeroed header (`TRUNCATE` and `PERSIST` modes) | Quiet |
 | `X-journal` with a valid header | **Hot journal.** A transaction was interrupted or is running. Not quiet |
-| `X-wal` empty or with no valid frame | Quiet |
+| `X-wal` empty, header-only or with no valid frame | Quiet. Common and harmless: a read-only open of a closed WAL-mode database creates an empty `-wal` and a `-shm` (P-28) |
 | `X-wal` whose last committed version of every page equals the main file's page, and whose last commit's size equals the file's | Quiet for *sending*: the WAL adds nothing |
 | `X-wal` with committed frames the main file lacks | **Not quiet.** The main file is an old version |
 | `X-shm` present | A connection is or was open; decided by the WAL rows above |
@@ -136,8 +137,8 @@ Rules, on by a path preference (below), in both directions:
   propagated in either direction. They are recognised by their own headers and their
   sibling, not by name alone.
 - **Lock evidence, optional.** On a local volume, `fcntl(F_GETLK)` on SQLite's lock
-  bytes asks whether another process holds a lock, without taking one. A held write lock
-  means not quiet. It is evidence only: Apple's SQLite can use other locking styles on
+  bytes (on `X-shm` for a WAL-mode database) asks whether another process holds a lock,
+  without taking one. A held write lock means not quiet. It is evidence only: Apple's SQLite can use other locking styles on
   network volumes, and an idle open connection holds no lock at all.
 - **Application markers.** A rule may name a sibling whose presence means "open". With
   one, an application that is open and idle is seen too.
@@ -152,18 +153,41 @@ the old hazard of any file sync, and the guard narrows it without closing it.
 
 ### Lightroom catalogs
 
-The two rules above exist for Lightroom Classic. As the Unison session understands a
-catalog's layout, to be confirmed by Photo (U-41) before anything is built on it:
+The two rules above exist for Lightroom Classic. The layout below is Photo's, from
+P-28: read on the user's catalog (Classic 15.x, closed; directory listing and the
+100-byte header only) or seen during this month's work, except where marked.
 
-| Beside `Name.lrcat` | Rule |
-|:--|:--|
-| `Name.lrcat.lock` | Marker: the catalog is open. Not quiet, even with no `-wal` or `-journal` |
-| `Name.lrcat-wal`, `-shm`, `-journal` | The generic rows of the table above |
-| `Name.lrcat-data/` | Held path: held back whenever the catalog is |
-| `Name Previews.lrdata/`, `Name Smart Previews.lrdata/` and the like | Open question: caches that could sync freely, or held with the catalog |
+| Beside `Name.lrcat` | What it is | Rule |
+|:--|:--|:--|
+| `Name.lrcat` | The catalog: WAL mode, 4 KiB pages, 25.8 GB | The guarded database |
+| `Name.lrcat.lock` | Present while Classic has the catalog open, gone after a clean quit; left behind by a crash or forced quit (not checked this month) | Marker: open *or crashed*. Not quiet |
+| `Name.lrcat-wal`, `-shm` | Present while open; removed by a clean quit; left by a crash | The generic WAL rows |
+| `Name.lrcat-data/` | A key-value store (`.blob`, `.sst`), not SQLite; must match the catalog | Held path |
+| `Name Helper.lrdata/` | `helper.db` (WAL) and `metadatahelper.db` (3.7 GB), SQLite, rewritten at every quit | Held path; each database also guarded |
+| `Name Sync.lrdata/` | `sourcesync.db` (rollback journal) and the local cloud-sync state; never to be mixed between two copies | Held path; database also guarded |
+| `Name Previews.lrdata/` | Bucket folders plus `previews.db` and `root-pixels.db` (59 GB, 8 KiB pages), SQLite with a rollback journal, written while Classic runs | Held path; databases also guarded, where a hot `-journal` is the case to catch |
+| `Name Smart Previews.lrdata/` | Bucket folders of DNG files, no database seen | Held path, for simplicity |
+| `Backups/DATE TIME/Name.zip` | Classic's own backups | Ordinary files |
 
-A lock file left by a crash holds the catalog back until someone removes it. That is
-the safe direction, and the message names the file.
+What follows from it:
+
+- **The marker's absence proves nothing.** A catalog with no lock file can still be
+  open by something that doesn't write one. The generic rows and the lock evidence still
+  apply; the marker only adds a case.
+- **A crash holds the catalog back** until Classic has reopened and quit cleanly, or
+  someone removes the leftovers. That is the safe direction, and the message names the
+  files.
+- **Held paths may be symbolic links.** On the user's Mac both previews folders are
+  links to other volumes. A held path is matched by name whatever it is, and whether its
+  contents are synced at all stays the profile's choice (`follow`, `ignore`). The
+  catalog shuttle doesn't carry the previews folders today.
+- **The databases inside held folders are databases too.** When the catalog is quiet,
+  each of them must be quiet in its own right before it is sent or replaced.
+- **Rewritten helpers.** `metadatahelper.db` is rewritten at every quit, so it travels
+  in full each time whatever the transfer is.
+
+The Lightroom entries live in a rules file in this repository; Photo supplies and
+reviews them (P-28). The table above is the first draft.
 
 ## The page delta
 
@@ -173,7 +197,7 @@ Byte-exact, inside Unison's own connection, through the existing private staging
 1. Both sides read their file once, getting the SHA-256 of the whole file and of every
    page in the same pass. Page sizes must be equal, or the profile declines.
 2. The receiver sends its basis as a nonce, the whole-file digest and one digest per
-   group of 256 pages. For a 5 GiB catalog of 4 KiB pages that is 5,120 digests.
+   group of 256 pages. For the user's 25.8 GB catalog that is 24,651 digests, under 1 MiB.
 3. The sender asks for page digests of the groups that differ, then sends the pages that
    differ, the new page count and the target's SHA-256. Messages are bounded (at most
    1 MiB of pages each). If more than half the file would travel, the profile declines
@@ -190,7 +214,7 @@ are, so an unchanged basis isn't reread.
 
 **Whether to build it should wait for a measurement.** Unison's rsync into the fork's
 receiver-basis staging already avoids resending and rewriting the unchanged bulk. The
-delta's gain is the factor between a page and an rsync block (16 for a 3 GiB file) on
+delta's gain is the factor between a page and an rsync block (32 for the user's catalog) on
 the bytes sent and written, and nothing on the bytes read. A run on a real catalog
 before and after one editing session would say whether that matters.
 
@@ -243,14 +267,19 @@ each bounded like what exists:
 **`-semdiff`.** A pair of databases gets the layers: whole file; content; derived
 (indexes, statistics). Bytes equal is `identical`. Content digests equal with bytes
 different is a new status, `layout-only`, which counts as kept. It requires the schema
-digest and every table's `rows` digest to match, rowids included. Otherwise `differs`,
+digest and every table's `rows` digest to match, rowids included. The summary says what
+it means ("same rows, different page layout") and gives its count on its own line, so
+the safe-to-wipe figure never hides it (Photo's request in P-28; see "Decisions taken"). Otherwise `differs`,
 with the tables that differ; "same records, different rowids" is `differs` with that
 finding attached, and goes to review. A shuttle database that isn't quiet is `error` and never counts as kept. A new
 status touches the shared contract with dng-compare, so it goes to the mailbox first.
 
 **Skeleton versions.** With pages as blocks, a replaced catalog's kept version costs the
 pages the edit changed instead of the whole file. The store's rebuild-and-verify step is
-unchanged. This is probably the largest practical saving of the whole design.
+unchanged. This is probably the largest practical saving of the whole design. Pages
+don't move, so a version is recorded as the old contents of the page runs that changed
+and the old size, not as a map with an entry for each of the catalog's 6.3 million
+pages. Settling a version reads the replaced file and its successor once each.
 
 **Application rules.** Which tables are caches or bookkeeping is the application's
 knowledge, not SQLite's. A rules file keyed by `application_id`, `user_version` or schema
@@ -329,6 +358,17 @@ By the user on 2026-11-15, on the Unison session's recommendation:
 5. **Lightroom catalogs come first.** The page delta waits for a measurement of one real
    catalog before and after an editing session, read-only on a copy.
 
-Open with Photo (U-41): the catalog's layout as tabled above, the journal mode Lightroom
-uses, whether the previews folders are held, the `layout-only` status in the shared
-contract, who owns the application rules, and the measurement.
+Settled with Photo (P-28): the catalog's layout and journal mode as tabled under
+"Lightroom catalogs"; all the folders beside a catalog are held; nothing of Photo's
+parses `-semdiff` statuses and the name `layout-only` is fine; the rules file lives here
+and Photo supplies the Lightroom entries.
+
+Still open:
+
+- **`layout-only` and the wipe count.** Photo asks that it stay out of "safe to wipe"
+  unless the user decides otherwise, since the bytes differ. The user's decision 2 is
+  that it counts. Until the user confirms either way, the design counts it and shows it
+  separately.
+- **The measurement** needs the user's approval. Photo will run it on closed copies that
+  already exist and report numbers; the Unison session reads no catalog. The figures
+  asked for are in U-42.
