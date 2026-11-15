@@ -67,7 +67,7 @@ def main():
         environment.pop(key, None)
     save()
     for label, compiler in [('stock', '/Users/alexy/.opam/default/bin/ocamlopt'),
-                            ('ox', '/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt')]:
+                            ('ox', '/Users/alexy/.opam/5.4.0+ox/bin/ocamlopt')]:
         work = workspace/label; work.mkdir(mode=0o700)
         for source in SOURCES: shutil.copyfile(source, work/source.name)
         binary = work/'private-framing-diagnostic'

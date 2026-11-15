@@ -219,7 +219,8 @@ def main():
                         if path.is_file() and path.suffix in (".ml", ".mli", ".c")}
     compiler_version = subprocess.check_output([compiler, "-version"], text=True, env=environment).strip()
     with (work / "build.log").open("w") as log:
-        command = [compiler, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c",
+        command = [compiler, "-I", "+unix", "-I", "+../tiffgraph", "unix.cmxa", "tiffgraph.cmxa",
+                   "semanticHash_stubs.c",
                    "semanticFile_stubs.c"]
         if args.sanitize:
             flag = "-fsanitize=" + args.sanitize

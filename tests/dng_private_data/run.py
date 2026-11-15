@@ -18,7 +18,7 @@ def main():
     workspace.chmod(0o700)
     runs = []
     for label, compiler in [('stock', '/Users/alexy/.opam/default/bin/ocamlopt'),
-                            ('ox', '/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt')]:
+                            ('ox', '/Users/alexy/.opam/5.4.0+ox/bin/ocamlopt')]:
         path = workspace / label
         path.mkdir(mode=0o700)
         for source in SOURCES:

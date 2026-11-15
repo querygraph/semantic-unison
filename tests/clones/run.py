@@ -55,7 +55,7 @@ if platform.system() != 'Darwin':
     sys.exit('clone preservation tests need macOS and APFS')
 binaries = {}
 for item in a.binary or ['default=build-semdiff/.dune-default/default/src/linktext.exe',
-                         'ox=build-semdiff/.dune-5.2.0+ox/default/src/linktext.exe']:
+                         'ox=build-semdiff/.dune-5.4.0+ox/default/src/linktext.exe']:
     label, _, path = item.partition('=')
     binaries[label] = (ROOT/path).resolve() if not os.path.isabs(path) else Path(path)
 

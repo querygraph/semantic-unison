@@ -2,7 +2,7 @@
 # Real Unison packing onto Ten: the 50 GiB leaf set into a new folder under
 # /Volumes/Ten/packdir-bench, first run then a quiet rerun, each with a time limit.
 set -e
-U=$HOME/src/semantic-unison/build-semdiff/.dune-5.2.0+ox/default/src/linktext.exe
+U=$HOME/src/semantic-unison/build-semdiff/.dune-5.4.0+ox/default/src/linktext.exe
 S=/Volumes/Quasar/packdir-bench/leafset-v1; O=${OUT:-/Volumes/Ten/packdir-bench/run4-unison}
 W=$(mktemp -d /tmp/unison-bench-home.XXXX)
 mkdir "$O"

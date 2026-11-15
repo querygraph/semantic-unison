@@ -49,7 +49,7 @@ def main():
     rows = []
     for label, compiler, variant in [(label, compiler, variant)
             for label, compiler in [('stock', '/Users/alexy/.opam/default/bin/ocamlopt'),
-                            ('ox', '/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt')]
+                            ('ox', '/Users/alexy/.opam/5.4.0+ox/bin/ocamlopt')]
             for variant in ('current', 'previous-profile-domain', 'previous-target-proof', 'previous-profile-inspection')]:
         report = work/(label+'-'+variant+'.json')
         command = [sys.executable, str(ROOT/'tests/semantic/conformance/run.py'),
