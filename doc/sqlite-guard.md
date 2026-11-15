@@ -98,7 +98,9 @@ sqlitedb = Name * Helper.lrdata/helper.db
 `.lrcat.lock` marker, the five folders beside a catalog, and the five
 databases inside them. Two more databases in the Sync folder are left unnamed
 on purpose, because Classic leaves a log beside each after a clean quit and
-that log has to travel with them; the file says so.
+that log has to travel with them; the file says so. The entries were seen on
+one catalog on one Mac (Classic 15.x), so their first real use on another Mac
+is their first check there.
 
 ## A closed database that keeps its log
 

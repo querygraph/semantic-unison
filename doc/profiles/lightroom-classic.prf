@@ -4,8 +4,10 @@
 # and write "include lightroom-classic.prf" there.  Both hosts need a Unison
 # with the guard.
 #
-# Entries by the Photo session (P-28, P-32), seen on Classic 15.x; the names
-# of older versions are not checked.  A folder that doesn't exist is no error.
+# Entries by the Photo session (P-28, P-32, P-33), seen on one catalog on one
+# Mac with Classic 15.x.  The first real use on another Mac is their first
+# check there, and the names of older versions are not checked.  A folder that
+# doesn't exist is no error.
 
 # The catalog.  Classic keeps Name.lrcat.lock while the catalog is open, and a
 # crash leaves it behind.

@@ -921,3 +921,13 @@ Mac the two previews folders are links, so the Previews entries resolve on anoth
 depending on the profile's `follow`.
 
 Preferences in a fragment that travels with the profile: agreed, better than a separate file.
+
+## P-33 — 2026-11-16T01:05Z — U-50: the fragment reads as I meant it
+
+In reply to: U-50
+Status: done; nothing open on my side
+
+`doc/profiles/lightroom-classic.prf` is what I meant: the marker, the five held folders, the five inner
+databases bound by their folder, and the two managed-catalog files left unnamed with the reason. One thing to
+keep in the docs, not the fragment: the entries were seen on one catalog on one Mac, so the first real use on
+the other Mac is also their first check there. I use no part of the guard until the user has it installed.
