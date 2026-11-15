@@ -1,7 +1,8 @@
 # A semantic extension for SQLite databases: design
 
-Status: proposal by the Unison session, 2026-11-14, for the user's review and then the
-mailbox. Nothing is implemented. Facts about `sqlite3_rsync` and `dbhash` are from
+Status: proposal by the Unison session, 2026-11-14; the user's decisions of 2026-11-15
+are in "Decisions taken", and the questions for Photo are in the mailbox (U-41). The
+first use is syncing Lightroom catalogs. Nothing is implemented. Facts about `sqlite3_rsync` and `dbhash` are from
 sqlite.org's pages as fetched on 2026-11-14; facts about the file format are from the
 SQLite file-format specification and must be re-checked against real files by the tests
 in "Tests" before any of this is relied on.
@@ -30,6 +31,11 @@ Three things go wrong or go unsaid:
 
 The extension answers these in that order of importance: a guard, then identities, then a
 page delta. Merging two diverged databases is out of scope (see "Merging").
+
+For a Lightroom catalog the danger is the first problem, not speed: a sync that runs
+while the catalog is open, or that replaces a catalog under leftover `-wal` files. So
+the guard is built first, and cheap versions of a replaced catalog second ("Order of
+work"). Both need only file headers, not the walker.
 
 ## The three identities, for SQLite
 
@@ -133,12 +139,31 @@ Rules, on by a path preference (below), in both directions:
   bytes asks whether another process holds a lock, without taking one. A held write lock
   means not quiet. It is evidence only: Apple's SQLite can use other locking styles on
   network volumes, and an idle open connection holds no lock at all.
-- **Application markers.** A rules file may name a sibling that means "open", such as
-  Lightroom Classic's `.lrcat.lock` (to be confirmed with Photo).
+- **Application markers.** A rule may name a sibling whose presence means "open". With
+  one, an application that is open and idle is seen too.
+- **Held paths.** A rule may name siblings that belong to the database. Whenever the
+  database is held back, so are they, in both directions, so the other replica never
+  gets companion data that doesn't match its database. Unison has no commit across
+  several files, so this narrows the window; it doesn't make the group atomic.
 
-The limit to state plainly: an application that has a database open and idle, in
-rollback mode, is invisible to all of this. Replacing the file under it is the old
-hazard of any file sync, and the guard narrows it without closing it.
+The limit to state plainly: without a marker, an application that has a database open
+and idle, in rollback mode, is invisible to all of this. Replacing the file under it is
+the old hazard of any file sync, and the guard narrows it without closing it.
+
+### Lightroom catalogs
+
+The two rules above exist for Lightroom Classic. As the Unison session understands a
+catalog's layout, to be confirmed by Photo (U-41) before anything is built on it:
+
+| Beside `Name.lrcat` | Rule |
+|:--|:--|
+| `Name.lrcat.lock` | Marker: the catalog is open. Not quiet, even with no `-wal` or `-journal` |
+| `Name.lrcat-wal`, `-shm`, `-journal` | The generic rows of the table above |
+| `Name.lrcat-data/` | Held path: held back whenever the catalog is |
+| `Name Previews.lrdata/`, `Name Smart Previews.lrdata/` and the like | Open question: caches that could sync freely, or held with the catalog |
+
+A lock file left by a crash holds the catalog back until someone removes it. That is
+the safe direction, and the message names the file.
 
 ## The page delta
 
@@ -198,11 +223,10 @@ What it is used for here:
 - **An oracle.** After `sqlite3_rsync A B`, this extension must find equal content
   digests and bytes that differ only in the header. That tests the walker, the digest
   and the classification with a tool this project didn't write.
-- **A possible later mode,** separate from two-way sync: a one-way, never-quiet database
-  (`sqlitelive`), replicated by `sqlite3_rsync` into the replica and judged by content
-  digest instead of bytes, in the way packed roots are one-way in v1. It changes what
-  "in sync" means for those paths, so it is the user's decision and not part of this
-  design.
+- **Not a live mode.** A one-way mode for a database that is never closed, replicated
+  by `sqlite3_rsync` and judged by content digest instead of bytes, was considered. The
+  user declined it: it changes what "in sync" means for those paths, and Lightroom has
+  to be closed for a catalog copy to mean anything.
 
 ## Where it plugs in
 
@@ -218,9 +242,10 @@ each bounded like what exists:
 
 **`-semdiff`.** A pair of databases gets the layers: whole file; content; derived
 (indexes, statistics). Bytes equal is `identical`. Content digests equal with bytes
-different is a new status, `layout-only`, which counts as kept. Otherwise `differs`,
-with the tables that differ and the "same records, different rowids" finding where it
-applies. A shuttle database that isn't quiet is `error` and never counts as kept. A new
+different is a new status, `layout-only`, which counts as kept. It requires the schema
+digest and every table's `rows` digest to match, rowids included. Otherwise `differs`,
+with the tables that differ; "same records, different rowids" is `differs` with that
+finding attached, and goes to review. A shuttle database that isn't quiet is `error` and never counts as kept. A new
 status touches the shared contract with dng-compare, so it goes to the mailbox first.
 
 **Skeleton versions.** With pages as blocks, a replaced catalog's kept version costs the
@@ -272,27 +297,38 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
   wrong page count, garbage in free pages that looks like rows.
 - **Guard.** A hot journal; a WAL with unapplied commits; a redundant WAL; a WAL from
   another database placed beside the receiver's file, which must refuse the replace; a
-  writer holding a lock.
+  writer holding a lock. A marker file present with no companions; a held path while the
+  database is held back, in both directions, and released when it is quiet again.
 - **Delta.** Growth, shrinkage, a changed page in each group position, a forced digest
   mismatch that must fall back, a peer without the feature. On stock OCaml 5.2.0 and
   OxCaml 5.4.0+ox, each named.
 
 ## Order of work
 
-| Step | What | Changes sync behaviour |
-|:--|:--|:--|
-| 1 | Walker, content digests, `-semdiff` layers and report | No |
-| 2 | The guard | Yes: refuses what was unsafe |
-| 3 | Pages as skeleton blocks | Only with `skeleton` set |
-| 4 | Measure rsync on a real catalog; build the page delta if it pays | Negotiated, opt-in |
+| Step | What | Needs | Changes sync behaviour |
+|:--|:--|:--|:--|
+| 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
+| 2 | Pages as skeleton blocks, so a replaced catalog is kept cheaply | The page size from the header | Only with `skeleton` set |
+| 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
+| 4 | Measure on a real catalog; build the page delta only if Unison's rsync proves too slow | The user's approval and Photo's help for the measurement | Negotiated, opt-in |
 
-## Decisions for the user
+Step 2 is what makes a both-sides edit recoverable: the conflict stays a conflict, the
+user picks a side, and the other side's catalog is still in the store.
 
-1. Is the guard's default right: `require` for `sqlitedb` paths, refusing in both
-   directions, with nothing guarded unless named?
-2. `layout-only` as a `-semdiff` status that counts as kept: accept the digest's stated
-   limits for that purpose, or keep such pairs for review?
-3. The walker in this repository first, or its own repository from the start?
-4. Is the one-way live mode through `sqlite3_rsync` wanted at all?
-5. Which real databases matter first (Lightroom catalogs, phindex indexes, others), so
-   the fixtures and the measurement in step 4 use the right ones?
+## Decisions taken
+
+By the user on 2026-11-15, on the Unison session's recommendation:
+
+1. **The guard defaults to `require`** for `sqlitedb` paths, refuses in both directions,
+   and guards nothing that isn't named. It gains the Lightroom marker and held paths.
+2. **`layout-only` counts as kept, strictly:** every table's rows and rowids match.
+   "Same records, different rowids" goes to review.
+3. **The walker starts in this repository** and moves out when a second tool wants it.
+4. **No live mode through `sqlite3_rsync`.** Lightroom has to be closed for a copy of its
+   catalog to mean anything. `sqlite3_rsync` stays a test oracle.
+5. **Lightroom catalogs come first.** The page delta waits for a measurement of one real
+   catalog before and after an editing session, read-only on a copy.
+
+Open with Photo (U-41): the catalog's layout as tabled above, the journal mode Lightroom
+uses, whether the previews folders are held, the `layout-only` status in the shared
+contract, who owns the application rules, and the measurement.

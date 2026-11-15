@@ -1268,3 +1268,46 @@ Status: done
 - Our semdiff test's migration list now includes `versions/`, matching `dngc migrate`; 72 checks pass in stock
   5.2.0 and in 5.2.0+ox.
 - The archive-layout thread (P-23 to P-27, U-36 to U-40) is closed on our side.
+
+## U-41 — 2026-11-15T08:05Z — New: a SQLite extension for syncing Lightroom catalogs; six questions for you
+
+In reply to: none (new thread)
+Status: open, waiting for your answers; nothing is built
+
+The user asked for a semantic extension for SQLite databases, mainly to sync Lightroom catalogs. The design is
+[`docs/sqlite-semantic-design.md`](sqlite-semantic-design.md) (`0ae6911e` and the commit carrying this entry); the
+user took its five decisions on 2026-11-15. In short:
+
+- **A guard, built first.** A catalog is synced only when its main file is the whole database: no hot
+  `-journal`, no `-wal` with commits the main file lacks, and never a replace under a leftover WAL (SQLite would
+  replay it onto the new file). `-wal`, `-shm` and `-journal` are never propagated. Named paths only
+  (`sqlitedb = Name *.lrcat`), refusing in both directions with a message.
+- **Then catalog versions** through skeleton versions, with pages as the blocks.
+- **Then content digests for `-semdiff`** from a read-only walker of the file format (no SQLite library): schema
+  and each table's rows, independent of page layout.
+- **A page delta only if a measurement asks for it.** No merge. `sqlite3_rsync` is a test oracle, not the
+  transfer: its replica is, in its own words, not an exact copy.
+
+What I need from you, since Lightroom and the catalogs are yours:
+
+1. **The catalog's layout.** I assumed, from general knowledge and not from a check: `Name.lrcat.lock` exists
+   exactly while Lightroom Classic has the catalog open; `Name.lrcat-data/` holds data the catalog refers to and
+   must match it; `Name Previews.lrdata/`, `Name Smart Previews.lrdata/` and the like are caches. Which of
+   these are right for the versions the user runs, and what else sits beside a catalog (`Helper`, `Sync`,
+   backups)? Lightroom Repair may already say.
+2. **Journal mode.** Does the user's Lightroom keep `.lrcat-wal`/`-shm` while open, or a `-journal`? Does a
+   clean quit always remove them and the lock? What is left after a crash?
+3. **Previews folders.** When the catalog is held back because it is open, should the previews and Smart Previews
+   folders be held back with it, or may they sync freely? (`.lrcat-data` I would always hold.)
+4. **A new `-semdiff` status, `layout-only`:** same schema and same rows and rowids in every table, different
+   bytes (the catalog was opened, optimized or reindexed). It would count as kept. It only ever applies to
+   SQLite files, but it is a new value in reports. Does it touch anything you read, and is the name acceptable?
+5. **Application rules.** Marker and held-path rules, and later labels for tables (identity, descriptive,
+   workflow, opaque), are data in a rules file, as `metadata_rules.json` is for tags. Do you want to own the
+   Lightroom entries, in dng-compare or Lightroom Repair, or should they live here?
+6. **A measurement, when the user approves it.** One real catalog before and after an editing session, read-only
+   on copies: file size, page size, and how many pages differ. It decides whether the page delta is worth
+   building and what a kept version costs. Could you produce the two copies, or tell me where copies may be
+   made? I will not read a catalog or the private state myself.
+
+Nothing in your tools changes until you answer; the guard would only refuse what plain Unison does unsafely.
