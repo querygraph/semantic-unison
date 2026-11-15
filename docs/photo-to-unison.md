@@ -865,3 +865,59 @@ Mine, not measured: an optimize on this catalog moves most pages without changin
 stretches longer than one rsync block, so plain Unison should already reuse well over half the file across
 one. The other 15 to 23% of pages are new content. Both pairs having the same longest run, 1,128, suggests one
 fixed structure that survives both; I did not look at which.
+
+## P-32 — 2026-11-16T00:10Z — U-49: review of the Lightroom fragment; two more databases, which keep a full log after a clean quit
+
+In reply to: U-49
+Status: answered; one finding that changes a rule (the Sync folder)
+
+Checked today on the closed Morrobay catalog (listing and file headers only).
+
+**The finding first.** `{stem} Sync.lrdata/<32 hex>/` holds two more SQLite databases, both WAL (header 2/2):
+
+| File | Size | Page size | `-wal` after a clean quit | `-shm` |
+|---|---|---|---|---|
+| `Managed Catalog.mcat` | 22.1 GB | 8192 | 16.8 MB, written two minutes after the main file | 32 KB |
+| `Managed Catalog.wfindex` | 6.7 GB | 4096 | 798 MB, written one minute after the main file | 164 KB |
+
+Classic was quit through its menu on 13 November and the catalog itself has no log, but these two keep theirs.
+Both logs start with a valid WAL magic (`377f0682`). I did not parse frames, so "holds commits the main file
+lacks" is likely, not shown. Consequences for the rules:
+
+- These two must **not** fall under "the three files beside a database never propagate". A Sync folder copied
+  without them would probably lose the last cloud-sync state. Our shuttle copy carries all of it, byte for byte,
+  and that is what works today.
+- So either leave them unnamed (then the folder is ordinary files when the catalog is quiet, and held when it
+  is not, which is correct), or give the guard a third state for them: closed with a log, propagated as one
+  unit of main file plus `-wal` (and `-shm`). I would leave them unnamed and write the reason in the fragment.
+- Please do not add a broad `sqlitedb = Name *.mcat` or `*.wfindex` later for the same reason.
+
+**1. The five folder names.** Right as patterns of the stem for what I have seen (Classic 15.x here, and the
+same names on the catalog as received from the other Mac). `{name}.lock` is right: `Catalog.lrcat.lock`.
+Older Classic versions lack `.lrcat-data` and, earlier still, `Helper.lrdata` and `Sync.lrdata`; a held path
+that does not exist should be no error. Not checked on any older version. `Backups/` is not held and should
+not be.
+
+**2. The inner database names.** The five you list are all the top-level ones and are SQLite: `helper.db`,
+`metadatahelper.db` (in Helper), `sourcesync.db` (in Sync), `previews.db`, `root-pixels.db` (in Previews).
+Not complete: add the two above to the picture, as files to carry with their logs, not as guarded names.
+Smart Previews has no database. `.lrcat-data` has none (blob and sst files).
+
+**3. `Name` patterns for them.** Too broad for my taste: `helper.db` and `previews.db` are generic names, and
+every closed backup of a catalog folder in my trees contains the same five names (fine there, they are real
+SQLite files). I started a search for other files with these names and stopped it as too slow, so I cannot
+say none exists. I would bind them to the catalog, in the same form as the held paths:
+
+```
+sqlitedb = Name *.lrcat -> {stem} Helper.lrdata/helper.db
+sqlitedb = Name *.lrcat -> {stem} Helper.lrdata/metadatahelper.db
+sqlitedb = Name *.lrcat -> {stem} Sync.lrdata/sourcesync.db
+sqlitedb = Name *.lrcat -> {stem} Previews.lrdata/previews.db
+sqlitedb = Name *.lrcat -> {stem} Previews.lrdata/root-pixels.db
+```
+
+If that form is not available for `sqlitedb`, a `Regex` on the folder suffix does as well. Note that on this
+Mac the two previews folders are links, so the Previews entries resolve on another volume or not at all,
+depending on the profile's `follow`.
+
+Preferences in a fragment that travels with the profile: agreed, better than a separate file.

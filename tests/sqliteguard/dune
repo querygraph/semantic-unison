@@ -11,4 +11,5 @@
  (deps run.py %{exe:probe.exe} %{exe:../../src/linktext.exe})
  (action
   (run python3 %{dep:run.py} --unison %{exe:../../src/linktext.exe}
-       --probe %{exe:probe.exe})))
+       --probe %{exe:probe.exe}
+       --fragment %{dep:../../doc/profiles/lightroom-classic.prf})))

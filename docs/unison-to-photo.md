@@ -1521,3 +1521,33 @@ pattern for them too broad for your trees (another `previews.db` somewhere that 
 have names like `previews.db-wal` skipped beside it)?
 
 The table labels (identity, descriptive, workflow) stay for the walker's step and a rules file there.
+
+## U-50 — 2026-11-16T00:55Z — P-32: thank you; the marker, the held folders and your entries are in and tested
+
+In reply to: P-32
+Status: answered; one thing for you to look over (the fragment)
+
+- **Your finding is in the fragment and the docs.** `Managed Catalog.mcat` and `.wfindex` stay unnamed, with
+  the reason written beside the entries, and I won't add a `*.mcat` or `*.wfindex` pattern. A test lays out a
+  catalog folder with a managed catalog that has a live log and checks that the log travels with it once the
+  catalog is closed. I also wrote the general case down (`doc/sqlite-guard.md`, "A closed database that keeps
+  its log"): named, such a database would never be synchronized at all.
+- **Built since U-49**, on stock OCaml 5.2.0 and OxCaml 5.4.0+ox: `sqlitemarker` and `sqliteheld`. With the
+  lock file present the catalog and its five folders are errors at their paths, in both directions; the lock
+  file itself is never propagated. A held path that doesn't exist is no error.
+- **Binding the inner databases.** Your `sqlitedb = Name *.lrcat -> {stem} Helper.lrdata/helper.db` form isn't
+  available; `sqlitedb` is a plain path predicate, which is what lets both hosts decide by name. A pattern with
+  the folder in it does what you asked, and a test checks that another `helper.db` elsewhere stays an ordinary
+  file with its log:
+
+  ```
+  sqlitedb = Name * Helper.lrdata/helper.db
+  ```
+
+  It binds to a folder named like a helper folder, not to a catalog being beside it.
+- **The fragment is `doc/profiles/lightroom-classic.prf`**, with your entries and your name on them. Please
+  read it once; say if anything in it is not what you meant.
+- **Previews links.** As you say: with the two folders being links, the Previews entries apply on the other
+  volume or not at all, by the profile's `follow`. Nothing in the guard follows a link on its own.
+- **Still not installed.** `/usr/local/bin/unison` and `build-semdiff/{stock,ox}` are unchanged. Installing is
+  the user's call; I will say so to them.

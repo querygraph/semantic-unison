@@ -127,9 +127,10 @@ file alone is the whole database:
 | `X-shm` present | A connection is or was open; decided by the WAL rows above |
 
 **Built** (2026-11-15, `src/sqliteGuard.ml`, `doc/sqlite-guard.md`): the table above, the
-sending, receiving and companion rules below, the preferences, and the negotiated feature
-`sqlite-guard-v0`. **Not built yet:** lock evidence, application markers, held paths.
-How it is built differs from the first draft in two places, both noted below.
+sending, receiving and companion rules below, application markers and held paths
+(`sqlitemarker`, `sqliteheld`), and the negotiated feature `sqlite-guard-v0`.
+**Not built yet:** lock evidence. How it is built differs from the first draft in three
+places, noted below.
 
 Rules, on by a path preference (below), in both directions:
 
@@ -156,7 +157,11 @@ Rules, on by a path preference (below), in both directions:
   without taking one. A held write lock means not quiet. It is evidence only: Apple's SQLite can use other locking styles on
   network volumes, and an idle open connection holds no lock at all.
 - **Application markers.** A rule may name a sibling whose presence means "open". With
-  one, an application that is open and idle is seen too.
+  one, an application that is open and idle is seen too. *As built:* the rules are
+  preferences, `sqlitemarker = PATHSPEC -> {name}.lock` and
+  `sqliteheld = PATHSPEC -> {stem} Helper.lrdata`, not a separate file, so that they
+  reach the other host with the profile (agreed with Photo, P-32). The marker file is
+  never propagated.
 - **Held paths.** A rule may name siblings that belong to the database. Whenever the
   database is held back, so are they, in both directions, so the other replica never
   gets companion data that doesn't match its database. Unison has no commit across
@@ -180,6 +185,7 @@ P-28: read on the user's catalog (Classic 15.x, closed; directory listing and th
 | `Name.lrcat-data/` | A key-value store (`.blob`, `.sst`), not SQLite; must match the catalog | Held path |
 | `Name Helper.lrdata/` | `helper.db` (WAL) and `metadatahelper.db` (3.7 GB), SQLite, rewritten at every quit | Held path; each database also guarded |
 | `Name Sync.lrdata/` | `sourcesync.db` (rollback journal) and the local cloud-sync state; never to be mixed between two copies | Held path; database also guarded |
+| `Name Sync.lrdata/<id>/Managed Catalog.mcat`, `.wfindex` | Two more WAL databases, 22.1 GB and 6.7 GB, which keep a log of 16.8 MB and 798 MB after a clean quit (P-32) | Held with the folder, and **not named**: their logs must travel with them |
 | `Name Previews.lrdata/` | Bucket folders plus `previews.db` and `root-pixels.db` (59 GB, 8 KiB pages), SQLite with a rollback journal, written while Classic runs | Held path; databases also guarded, where a hot `-journal` is the case to catch |
 | `Name Smart Previews.lrdata/` | Bucket folders of DNG files, no database seen | Held path, for simplicity |
 | `Backups/DATE TIME/Name.zip` | Classic's own backups | Ordinary files |
@@ -201,8 +207,14 @@ What follows from it:
 - **Rewritten helpers.** `metadatahelper.db` is rewritten at every quit, so it travels
   in full each time whatever the transfer is.
 
-The Lightroom entries live in a rules file in this repository; Photo supplies and
-reviews them (P-28). The table above is the first draft.
+- **A closed database can keep a log** (P-32). The two managed-catalog databases do,
+  after a clean quit. Named, they would never be quiet and their logs never travel, so
+  they stay unnamed and are ordinary files inside a held folder. Moving a database
+  and its log as one unit is not designed.
+
+The Lightroom entries are `doc/profiles/lightroom-classic.prf`, reviewed by Photo
+(P-28, P-32). The inner databases are named with their folder
+(`Name * Helper.lrdata/helper.db`), not by a bare name.
 
 ## The page delta
 
@@ -458,7 +470,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 
 | Step | What | Needs | Changes sync behaviour |
 |:--|:--|:--|:--|
-| 1 | The guard. **Built:** quiet check, companions, preferences, feature. **To do:** the Lightroom marker and held paths (the rules file), lock evidence | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
+| 1 | The guard. **Built:** quiet check, companions, markers, held paths, the Lightroom profile fragment, feature. **To do:** lock evidence | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
 | 2 | Pages as skeleton blocks, found by content and mapped as runs, so a replaced catalog is kept cheaply, also across an optimize | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
 | 4 | ~~The page delta~~: measured (P-30, P-31) and dropped by the user's decision | | Nothing |
@@ -505,7 +517,8 @@ Still open:
 
 - **Pair (a)**, an ordinary editing session on Capitola, when the user next makes one.
   P-30 and P-31 have answered the rest.
-- **The rules file's format**, to be shown to Photo before any entry is used.
+- **The table labels** for the walker's step (identity, descriptive, workflow), and
+  where they are kept. The marker and held paths are settled as preferences.
 - **Which folders a catalog profile compares.** The backup's place follows from the
   second root (P-29: `sqlite-kept` collides with nothing); the profile itself is the
   user's and Photo's to write.

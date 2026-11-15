@@ -27,8 +27,9 @@ val inspect : Fspath.t -> Path.local -> state
 val guarded : 'a Path.path -> bool
 
 (* [companion path] is true when [path] is X-journal, X-wal or X-shm for an X
-   that matches [sqlitedb], and both hosts offer the guard.  Such paths are
-   never propagated: [Globals.shouldIgnore] returns true for them. *)
+   that matches [sqlitedb], or the marker file [sqlitemarker] names for such
+   an X, and both hosts offer the guard.  Such paths are never propagated:
+   [Globals.shouldIgnore] returns true for them. *)
 val companion : string -> bool
 
 (* The file at [root]/[path] is about to be read as the version to propagate,
@@ -39,9 +40,16 @@ val check_sending : Fspath.t -> Path.local -> unit
 
 (* The file or directory at [root]/[path] is about to be replaced or deleted.
    Refuses, as [check_sending] does, a database with a hot journal or a
-   write-ahead log holding any valid frame, anywhere under [path]. *)
+   write-ahead log holding any valid frame, anywhere under [path], and a path
+   that [check_held] refuses. *)
 val check_receiving : Fspath.t -> Path.local -> unit
+
+(* [path], existing or not, is named by [sqliteheld] for a database beside it
+   that is not quiet: refused as [check_sending] refuses the database. *)
+val check_held : Fspath.t -> Path.local -> unit
 
 (* The preferences, for documentation and tests. *)
 val sqlitedb : Pred.t
 val sqlitequiet : string Prefs.t
+val sqlitemarker : Pred.t
+val sqliteheld : Pred.t

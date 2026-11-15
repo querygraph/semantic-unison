@@ -14,7 +14,8 @@ sqlitequiet = require           # off | warn | require; require is the default
 ```
 
 The design, with its reasons, is `docs/sqlite-semantic-design.md`. This page
-says what is built (step 1 of that design, without application rules).
+says what is built: step 1 of that design, except lock evidence from the
+operating system.
 
 ## What it does
 
@@ -63,6 +64,50 @@ journal whose header is in place but not yet stamped with its magic number.
 The guard reads headers and frames. It never opens a database through SQLite,
 never locks, never writes, and never removes or checkpoints a log.
 
+## Markers and paths that belong to a database
+
+An application that has a database open and idle leaves nothing in a journal
+or a log. Two more preferences cover what an application keeps beside its
+database:
+
+```
+sqlitemarker = Name *.lrcat -> {name}.lock
+sqliteheld   = Name *.lrcat -> {stem} Helper.lrdata
+```
+
+- **`sqlitemarker`** names a file whose presence means the application has the
+  database open, or crashed with it open. While it exists the database is not
+  quiet. `{name}` is the database's file name and must occur once. The marker
+  file itself is never propagated.
+- **`sqliteheld`** names a file or directory beside the database that belongs
+  to it. While the database is not quiet, that path is an error too, in both
+  directions: it is not sent, written to or deleted. `{name}` is the
+  database's file name, `{stem}` that name without its extension. A path that
+  doesn't exist is no error.
+
+A database inside a held folder is named with its folder, so that the same
+name elsewhere stays an ordinary file:
+
+```
+sqlitedb = Name * Helper.lrdata/helper.db
+```
+
+### Lightroom Classic
+
+`doc/profiles/lightroom-classic.prf` has the entries for a catalog: the
+`.lrcat.lock` marker, the five folders beside a catalog, and the five
+databases inside them. Two more databases in the Sync folder are left unnamed
+on purpose, because Classic leaves a log beside each after a clean quit and
+that log has to travel with them; the file says so.
+
+## A closed database that keeps its log
+
+Some applications leave a write-ahead log holding commits beside a database
+they have closed. Named by `sqlitedb`, such a database is never quiet, and its
+log is never propagated, so it would not be synchronized at all. Leave it
+unnamed: it is then three ordinary files, copied as before. The guard has no
+way yet to move a database and its log as one unit.
+
 ## `sqlitequiet`
 
 | Value | A database that isn't quiet |
@@ -86,9 +131,8 @@ build of this fork):
 ## Limits
 
 - An application that has a database open and idle, with nothing in a journal
-  or log, can't be seen from the files. Markers such as Lightroom's
-  `.lrcat.lock`, the folders that belong to a catalog, and lock evidence from
-  the operating system are the next part of the design and are not built.
+  or log and no marker file, can't be seen from the files. Lock evidence from
+  the operating system is in the design and not built.
 - Unison has no commit across several files and there is a window between a
   check and the rename that follows it. The guard narrows the window; it
   doesn't close it.
@@ -102,10 +146,12 @@ build of this fork):
 
 ```sh
 dune build @tests/sqliteguard/runtest
-python3 tests/sqliteguard/run.py --unison UNISON --probe PROBE --upstream /usr/local/bin/unison-2.53.5-upstream
+python3 tests/sqliteguard/run.py --unison UNISON --probe PROBE \
+    --fragment doc/profiles/lightroom-classic.prf --upstream /usr/local/bin/unison-2.53.5-upstream
 ```
 
 Real databases are made with Python's `sqlite3` and copied while a connection
 is open; synthetic logs and journals cover both checksum byte orders and
 damage. The same scenarios run between two local roots and over a connection.
-`--upstream` adds the checks against a Unison without the guard.
+`--fragment` runs the Lightroom entries on a folder laid out as a catalog's,
+and `--upstream` adds the checks against a Unison without the guard.

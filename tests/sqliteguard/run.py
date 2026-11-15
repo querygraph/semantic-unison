@@ -2,7 +2,8 @@
 """The SQLite guard: verdicts on real and synthetic database groups, and what
 a synchronization does with them.
 
-    run.py --unison UNISON --probe PROBE [--upstream OLD-UNISON] [--keep]
+    run.py --unison UNISON --probe PROBE [--fragment LIGHTROOM.PRF]
+           [--upstream OLD-UNISON] [--keep]
 
 Real fixtures come from Python's sqlite3, copied while a connection is open.
 Synthetic write-ahead logs are written here, by code that shares nothing with
@@ -327,6 +328,10 @@ def put(fixtures, name, root, as_name=None):
 def listing(root):
     return sorted(str(p.relative_to(root)) for p in root.rglob("*") if p.is_file())
 
+def content(root):
+    """The listing without what SQLite or an application keeps beside a database."""
+    return [f for f in listing(root) if not f.endswith(("-journal", "-wal", "-shm", ".lock"))]
+
 def scenarios(unison, fixtures, top, label, remote=None):
     section("synchronization, " + label)
     new = lambda name, extra=(): Sync(unison, top, label.replace(" ", "-") + "-" + name, remote, extra)
@@ -419,10 +424,120 @@ def scenarios(unison, fixtures, top, label, remote=None):
     check("a file that is no database is copied; a name like a log beside a named database is not",
           code == 0 and listing(s.b) == ["notes.txt", "notes.txt-wal", "text.db"], out)
 
+    # An application's marker file and the folders that belong to a database.
+    rules = ["-sqlitemarker", "Name *.db -> {name}.lock",
+             "-sqliteheld", "Name *.db -> {stem} Helper.data",
+             "-sqliteheld", "Name *.db -> {name}-data"]
+    s = new("marker", rules)
+    put(fixtures, "closed-delete.db", s.a, "cat.db")
+    put(fixtures, "closed-delete.db", s.a, "dog.db")
+    (s.a / "cat.db.lock").write_text("")
+    for folder in ("cat Helper.data", "cat.db-data", "dog Helper.data", "other"):
+        (s.a / folder).mkdir()
+        (s.a / folder / "x.bin").write_bytes(b"1")
+    code, out = s.run()
+    check("a database with its marker present is not sent, nor what belongs to it; the rest is",
+          code != 0 and listing(s.b) == ["dog Helper.data/x.bin", "dog.db", "other/x.bin"]
+          and "cat.db.lock is present" in out and "belongs to the SQLite database cat.db" in out, out)
+    (s.a / "cat.db.lock").unlink()
+    code, out = s.run()
+    check("with the marker gone everything is sent",
+          code == 0 and content(s.b) == content(s.a) and "cat.db" in listing(s.b)
+          and "cat Helper.data/x.bin" in listing(s.b), out)
+    # Now the other side is open, and this side has changes for it.
+    (s.b / "cat.db.lock").write_text("")
+    put(fixtures, "wal-closed.db", s.a, "cat.db")
+    (s.a / "cat Helper.data" / "x.bin").write_bytes(b"22")
+    (s.a / "cat.db-data" / "y.bin").write_bytes(b"new")
+    shutil.rmtree(s.a / "other")
+    before = (s.b / "cat.db").read_bytes()
+    code, out = s.run()
+    check("an open database and what belongs to it are not written to; the marker is never copied",
+          code != 0 and (s.b / "cat.db").read_bytes() == before
+          and (s.b / "cat Helper.data" / "x.bin").read_bytes() == b"1"
+          and not (s.b / "cat.db-data" / "y.bin").exists()
+          and not (s.b / "other").exists()
+          and "cat.db.lock" not in listing(s.a), out)
+    (s.b / "cat.db.lock").unlink()
+    code, out = s.run()
+    check("and are once it is closed", code == 0 and content(s.b) == content(s.a)
+          and (s.b / "cat Helper.data" / "x.bin").read_bytes() == b"22", out)
+    # A held folder deleted on one side while the database is open on the other.
+    (s.b / "cat.db.lock").write_text("")
+    shutil.rmtree(s.a / "cat Helper.data")
+    code, out = s.run()
+    check("a folder that belongs to an open database is not deleted",
+          code != 0 and (s.b / "cat Helper.data" / "x.bin").exists(), out)
+    # Held by a log, without any marker.
+    s = new("held-by-log", rules)
+    put(fixtures, "wal-live.db", s.a, "cat.db")
+    (s.a / "cat Helper.data").mkdir(); (s.a / "cat Helper.data" / "x.bin").write_bytes(b"1")
+    code, out = s.run()
+    check("what belongs to a database with a live log is held too",
+          code != 0 and listing(s.b) == [] and "belongs to the SQLite database cat.db" in out, out)
+
+    # A database named by the folder it lives in, and one of the same name
+    # elsewhere that is not named: its log travels with it.
+    s = Sync(unison, top, label.replace(" ", "-") + "-bound", remote)
+    s.args[s.args.index("-sqlitedb") + 1] = "Name * Helper.data/inner.sq"
+    for folder in ("cat Helper.data", "elsewhere"):
+        (s.a / folder).mkdir()
+        put(fixtures, "wal-live.db", s.a / folder, "inner.sq")
+    code, out = s.run()
+    check("a database named with its folder is guarded; the same name elsewhere is an ordinary file with its log",
+          code != 0 and listing(s.b) == ["elsewhere/inner.sq", "elsewhere/inner.sq-shm", "elsewhere/inner.sq-wal"]
+          and "cat Helper.data/inner.sq is not quiet" in out, out)
+
+    s = new("bad-marker", ["-sqlitemarker", "Name *.db -> {stem}.lock"])
+    put(fixtures, "closed-delete.db", s.a, "cat.db")
+    code, out = s.run()
+    check("a marker name without {name} stops the run", code != 0 and "must contain {name} once" in out and listing(s.b) == [], out)
+
     s = new("bad-value", ["-sqlitequiet", "sometimes"])
     put(fixtures, "closed-delete.db", s.a, "cat.db")
     code, out = s.run()
     check("an unknown sqlitequiet value stops the run", code != 0 and "off, warn or require" in out and listing(s.b) == [], out)
+
+def lightroom(unison, fragment, fixtures, top, label, remote=None):
+    """The entries of doc/profiles/lightroom-classic.prf on a folder laid out as a catalog's."""
+    section("the Lightroom Classic entries, " + label)
+    prefs = []
+    for line in Path(fragment).read_text().splitlines():
+        if line.strip() and not line.startswith("#"):
+            key, value = line.split("=", 1)
+            prefs += ["-" + key.strip(), value.strip()]
+    s = Sync(unison, top, label.replace(" ", "-") + "-lightroom", remote, prefs)
+    at = s.args.index("-sqlitedb"); del s.args[at:at + 2]      # the test's own *.db
+    a = s.a / "Lightroom"; a.mkdir()
+    put(fixtures, "wal-closed.db", a, "Cat.lrcat")
+    for suffix in ("-wal", "-shm"):
+        Path(str(a / "Cat.lrcat") + suffix).unlink(missing_ok=True)
+    for folder in ("Cat.lrcat-data", "Cat Helper.lrdata", "Cat Sync.lrdata/0123abcd", "Cat Previews.lrdata",
+                   "Cat Smart Previews.lrdata", "Backups", "Other Helper.lrdata", "misc"):
+        (a / folder).mkdir(parents=True)
+        (a / folder / "x.bin").write_bytes(b"1")
+    put(fixtures, "closed-delete.db", a / "Cat Helper.lrdata", "helper.db")
+    put(fixtures, "wal-live.db", a / "Cat Sync.lrdata" / "0123abcd", "Managed Catalog.mcat")
+    put(fixtures, "wal-live.db", a / "misc", "helper.db")
+    (a / "Cat.lrcat.lock").write_text("")
+    code, out = s.run()
+    check("with the lock file present only what is not the catalog's is sent",
+          code != 0 and sorted({f.split("/")[1] for f in listing(s.b)}) == ["Backups", "Other Helper.lrdata", "misc"]
+          and "Cat.lrcat.lock is present" in out, out)
+    (a / "Cat.lrcat.lock").unlink()
+    code, out = s.run()
+    got = listing(s.b)
+    check("after a clean quit the catalog and all its folders are sent",
+          code == 0 and got == listing(s.a), out + "\n" + "\n".join(got))
+    check("the managed catalog travels with its log; an unnamed helper.db elsewhere does too",
+          "Lightroom/Cat Sync.lrdata/0123abcd/Managed Catalog.mcat-wal" in got
+          and "Lightroom/misc/helper.db-wal" in got)
+    # The helper database is written while the catalog is closed.
+    put(fixtures, "wal-live.db", a / "Cat Helper.lrdata", "helper.db")
+    code, out = s.run()
+    check("a database inside a catalog's folder is guarded in its own right",
+          code != 0 and "Cat Helper.lrdata/helper.db is not quiet" in out
+          and "Lightroom/Cat Helper.lrdata/helper.db-wal" not in listing(s.b), out)
 
 def old_peer(unison, upstream, fixtures, top):
     section("a peer without the guard (%s)" % Path(upstream).name)
@@ -443,6 +558,7 @@ def main():
     ap.add_argument("--unison", required=True)
     ap.add_argument("--probe", required=True)
     ap.add_argument("--upstream", help="a Unison without the guard, for the old-peer checks")
+    ap.add_argument("--fragment", help="doc/profiles/lightroom-classic.prf, to check its entries")
     ap.add_argument("--keep", action="store_true")
     args = ap.parse_args()
     unison, probe = str(Path(args.unison).resolve()), str(Path(args.probe).resolve())
@@ -455,6 +571,9 @@ def main():
         test_verdicts(probe, fixtures)
         scenarios(unison, fixtures, top, "two local roots")
         scenarios(unison, fixtures, top, "over a connection", remote=unison)
+        if args.fragment:
+            lightroom(unison, args.fragment, fixtures, top, "two local roots")
+            lightroom(unison, args.fragment, fixtures, top, "over a connection", remote=unison)
         if args.upstream:
             old_peer(unison, str(Path(args.upstream).resolve()), fixtures, top)
     finally:

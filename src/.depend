@@ -1935,6 +1935,7 @@ sqliteGuard.cmo : \
     pred.cmi \
     path.cmi \
     os.cmi \
+    name.cmi \
     fspath.cmi \
     fs.cmi \
     features.cmi \
@@ -1946,6 +1947,7 @@ sqliteGuard.cmx : \
     pred.cmx \
     path.cmx \
     os.cmx \
+    name.cmx \
     fspath.cmx \
     fs.cmx \
     features.cmx \

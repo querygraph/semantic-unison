@@ -42,6 +42,25 @@ let sqlitequiet =
      ^ "synchronized anyway.  With \\verb|off| nothing is checked.  The "
      ^ "files beside a database are not propagated in any of the three.")
 
+let sqlitemarker =
+  Pred.create "sqlitemarker" ~category:(`Advanced `Sync) ~send
+    ("A preference of the form \\texttt{-sqlitemarker \\ARG{pathspec} -> "
+     ^ "\\ARG{name}} names a file an application keeps beside a database "
+     ^ "named by \\verb|sqlitedb| while it has that database open, such as "
+     ^ "a lock file.  While that file exists the database is not quiet.  "
+     ^ "In \\ARG{name}, \\verb|{name}| stands for the database's file "
+     ^ "name; it must occur once.  The marker file itself is never "
+     ^ "propagated.")
+
+let sqliteheld =
+  Pred.create "sqliteheld" ~category:(`Advanced `Sync) ~send
+    ("A preference of the form \\texttt{-sqliteheld \\ARG{pathspec} -> "
+     ^ "\\ARG{name}} names a file or directory beside a database named by "
+     ^ "\\verb|sqlitedb| that belongs to it.  Whenever the database is not "
+     ^ "quiet, that path is not synchronized either, in both directions.  "
+     ^ "In \\ARG{name}, \\verb|{name}| stands for the database's file name "
+     ^ "and \\verb|{stem}| for that name without its extension.")
+
 type policy = Off | Warn | Require
 
 let policy () =
@@ -82,11 +101,78 @@ let stem s =
     then Some (String.sub s 0 (String.length s - String.length suffix))
     else None) suffixes
 
+(* ---- Names beside a database ---- *)
+
+let replace_all ~sub ~by s =
+  let n = String.length sub in
+  let b = Buffer.create (String.length s + 16) in
+  let rec go i =
+    if i > String.length s - n then
+      Buffer.add_substring b s i (String.length s - i)
+    else if String.sub s i n = sub then (Buffer.add_string b by; go (i + n))
+    else (Buffer.add_char b s.[i]; go (i + 1)) in
+  go 0;
+  Buffer.contents b
+
+let occurrences ~sub s =
+  let n = String.length sub in
+  let rec go i count =
+    if i > String.length s - n then count
+    else if String.sub s i n = sub then go (i + n) (count + 1)
+    else go (i + 1) count in
+  go 0 0
+
+let bad_template preference template why =
+  raise (Util.Fatal (Printf.sprintf
+    "The name '%s' in the preference %s %s" template preference why))
+
+let check_template preference template =
+  if template = "" || String.contains template '/' then
+    bad_template preference template
+      "must be a single file name beside the database"
+
+(* The sibling a template names for the database called [name]. *)
+let expand preference template name =
+  check_template preference template;
+  replace_all ~sub:"{name}" ~by:name
+    (replace_all ~sub:"{stem}" ~by:(Filename.remove_extension name) template)
+
+(* A marker's name must give back the database's name, so that both hosts
+   can tell a marker from its own name alone. *)
+let marker_parts template =
+  check_template "sqlitemarker" template;
+  if occurrences ~sub:"{name}" template <> 1
+     || occurrences ~sub:"{stem}" template <> 0 then
+    bad_template "sqlitemarker" template "must contain {name} once, and not {stem}";
+  let i =
+    let rec find i = if String.sub template i 6 = "{name}" then i else find (i + 1) in
+    find 0 in
+  (String.sub template 0 i,
+   String.sub template (i + 6) (String.length template - i - 6))
+
+let is_marker s =
+  let dir, name =
+    match String.rindex_opt s '/' with
+    | None -> "", s
+    | Some i -> String.sub s 0 (i + 1), String.sub s (i + 1) (String.length s - i - 1) in
+  List.exists (fun template ->
+    let before, after = marker_parts template in
+    let middle = String.length name - String.length before - String.length after in
+    middle > 0 && String.starts_with ~prefix:before name
+    && String.ends_with ~suffix:after name
+    && begin
+      let database = dir ^ String.sub name (String.length before) middle in
+      Pred.test sqlitedb database
+      && List.mem template (Pred.assoc_all sqlitemarker database)
+    end)
+    (Pred.extern_associated_strings sqlitemarker)
+
 let companion s =
   Features.enabled feature &&
-  (match stem s with
-   | None -> false
-   | Some database -> Pred.test sqlitedb database)
+  ((match stem s with
+    | None -> false
+    | Some database -> Pred.test sqlitedb database)
+   || is_marker s)
 
 let guarded path =
   Features.enabled feature && Pred.test sqlitedb (Path.toString path) &&
@@ -305,33 +391,109 @@ let inspect root path =
 
 let advice = "; close the application that has it open, or checkpoint it"
 
-let report path reason =
-  let message =
-    Printf.sprintf "The SQLite database %s is not quiet: %s%s"
-      (Path.toString path) reason advice in
+let exists root path =
+  match Fs.lstat (Fspath.concat root path) with
+  | _ -> true
+  | exception Unix.Unix_error _ -> false
+
+(* A marker file present beside the database, if any. *)
+let marker root path =
+  match Path.deconstructRev path with
+  | None -> None
+  | Some (name, dir) ->
+      List.find_map (fun template ->
+        ignore (marker_parts template);
+        let sibling = expand "sqlitemarker" template (Name.toString name) in
+        if exists root (Path.child dir (Name.fromString sibling))
+        then Some sibling else None)
+        (Pred.assoc_all sqlitemarker (Path.toString path))
+
+(* Why the database at [path] must be held back, with the advice to give;
+   None when it may be sent ([receiving] false) or replaced (true). *)
+let unquiet ~receiving root path =
+  match inspect root path with
+  | Not_database -> None
+  | state ->
+      match marker root path with
+      | Some sibling ->
+          Some (sibling ^ " is present: an application has the database open, \
+                           or left it after a crash",
+                "; quit the application, or remove the file if it is not \
+                 running")
+      | None ->
+          match state with
+          | Not_database | Quiet -> None
+          | Redundant_wal frames ->
+              if receiving then
+                Some (Printf.sprintf
+                        "%s-wal holds %s, and replacing or deleting the \
+                         database under it would corrupt the next open"
+                        (Filename.basename (Path.toString path))
+                        (plural frames "valid frame"), advice)
+              else None
+          | Busy reason -> Some (reason, advice)
+
+let refuse message =
   match policy () with
   | Require -> raise (Util.Transient message)
   | Warn -> Util.warn message
   | Off -> ()
 
-let check_sending root path =
+let check ~receiving root path =
   if guarded path then
-    match inspect root path with
-    | Not_database | Quiet | Redundant_wal _ -> ()
-    | Busy reason -> report path reason
+    match unquiet ~receiving root path with
+    | None -> ()
+    | Some (reason, advice) ->
+        refuse (Printf.sprintf "The SQLite database %s is not quiet: %s%s"
+                  (Path.toString path) reason advice)
 
-let check_receiving_file root path =
-  if guarded path then
-    match inspect root path with
-    | Not_database | Quiet -> ()
-    | Redundant_wal frames ->
-        report path
-          (Printf.sprintf
-             "%s-wal holds %s, and replacing or deleting the database under \
-              it would corrupt the next open"
-             (Filename.basename (Path.toString path))
-             (plural frames "valid frame"))
-    | Busy reason -> report path reason
+let check_sending root path = check ~receiving:false root path
+let check_receiving_file root path = check ~receiving:true root path
+
+(* ---- Paths that belong to a database ---- *)
+
+(* For a directory, the names held by the databases in it.  Looked up for
+   every path scanned, so kept for a moment; never long, because a run can
+   last for days. *)
+let held_names : (string, float * (string * Name.t) list) Hashtbl.t =
+  Hashtbl.create 16
+
+let held_in root dir =
+  let key = Fspath.toString (Fspath.concat root dir) in
+  let now = Unix.gettimeofday () in
+  match Hashtbl.find_opt held_names key with
+  | Some (at, table) when now -. at < 2.0 && now >= at -> table
+  | _ ->
+      let children =
+        try Os.childrenOf root dir with Util.Transient _ | Unix.Unix_error _ -> [] in
+      let table =
+        List.concat_map (fun child ->
+          let database = Path.toString (Path.child dir child) in
+          if Pred.test sqlitedb database then
+            List.map (fun template ->
+              (expand "sqliteheld" template (Name.toString child), child))
+              (Pred.assoc_all sqliteheld database)
+          else []) children in
+      if Hashtbl.length held_names > 256 then Hashtbl.reset held_names;
+      Hashtbl.replace held_names key (now, table);
+      table
+
+let check_held root path =
+  if Features.enabled feature && Pred.extern sqliteheld <> [] && policy () <> Off
+  then
+    match Path.deconstructRev path with
+    | None -> ()
+    | Some (name, dir) ->
+        List.iter (fun (held, database) ->
+          if held = Name.toString name then
+            match unquiet ~receiving:false root (Path.child dir database) with
+            | None -> ()
+            | Some (reason, advice) ->
+                refuse (Printf.sprintf
+                  "%s belongs to the SQLite database %s, which is not quiet: \
+                   %s%s" (Path.toString path) (Name.toString database)
+                  reason advice))
+          (held_in root dir)
 
 (* A directory about to be replaced or deleted takes its databases with it. *)
 let rec check_receiving_tree root path =
@@ -344,6 +506,7 @@ let rec check_receiving_tree root path =
   | _ -> ()
 
 let check_receiving root path =
+  check_held root path;
   if Features.enabled feature && Pred.extern sqlitedb <> [] && policy () <> Off
   then begin
     debug (fun () ->

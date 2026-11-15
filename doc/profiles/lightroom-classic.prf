@@ -1,0 +1,36 @@
+# The SQLite guard for Lightroom Classic catalogs (doc/sqlite-guard.md).
+#
+# Copy these lines into a profile, or copy this file into the Unison directory
+# and write "include lightroom-classic.prf" there.  Both hosts need a Unison
+# with the guard.
+#
+# Entries by the Photo session (P-28, P-32), seen on Classic 15.x; the names
+# of older versions are not checked.  A folder that doesn't exist is no error.
+
+# The catalog.  Classic keeps Name.lrcat.lock while the catalog is open, and a
+# crash leaves it behind.
+sqlitedb     = Name *.lrcat
+sqlitemarker = Name *.lrcat -> {name}.lock
+
+# What belongs to a catalog and must match it.  While the catalog is not
+# quiet, none of this is synchronized, in either direction.
+sqliteheld   = Name *.lrcat -> {stem}.lrcat-data
+sqliteheld   = Name *.lrcat -> {stem} Helper.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Sync.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Previews.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Smart Previews.lrdata
+
+# The databases inside those folders, named with their folder so that another
+# helper.db or previews.db elsewhere stays an ordinary file.
+sqlitedb     = Name * Helper.lrdata/helper.db
+sqlitedb     = Name * Helper.lrdata/metadatahelper.db
+sqlitedb     = Name * Sync.lrdata/sourcesync.db
+sqlitedb     = Name * Previews.lrdata/previews.db
+sqlitedb     = Name * Previews.lrdata/root-pixels.db
+
+# Deliberately not named: "Managed Catalog.mcat" and "Managed Catalog.wfindex"
+# in "Name Sync.lrdata/<id>/".  Classic leaves a write-ahead log beside each
+# after a clean quit, and that log is part of the database.  Unnamed, they are
+# ordinary files and travel with their logs when the catalog is quiet; the
+# sqliteheld line above holds the whole folder when it is not.  Do not add
+# "sqlitedb = Name *.mcat" or "*.wfindex".

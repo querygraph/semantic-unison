@@ -2069,6 +2069,8 @@ and buildUpdateRec archive currfspath path scanInfo =
     (* A SQLite database that isn't quiet is an error at this path, changed
        or not, so that it is neither sent nor replaced. *)
     if info.Fileinfo.typ = `FILE then SqliteGuard.check_sending currfspath path;
+    (* So is a path that belongs to such a database, present or not. *)
+    SqliteGuard.check_held currfspath path;
     (match info.Fileinfo.typ,scanInfo.validationPaths with
      | `FILE,Some paths -> ValidationPaths.add paths path
      | _ -> ());
