@@ -145,6 +145,7 @@ let deleteLocal (fspathTo, (pathTo, ui, notDefault)) =
   (* (There is an unavoidable race condition here.) *)
   let prevArch = Update.checkNoUpdates fspathTo localPathTo ui in
   ignore (finishCopy copyInfo);
+  SqliteGuard.check_receiving fspathTo localPathTo;
   Stasher.backup fspathTo localPathTo `AndRemove prevArch;
   (* Archive update must be done last *)
   Update.replaceArchiveLocal fspathTo localPathTo Update.NoArchive;
@@ -339,6 +340,7 @@ let performRename fspathTo localPathTo (workingDirFrom, pathFrom)
 
         debug (fun() ->
           Util.msg "moving %s to %s\n" (Fspath.toDebugString target) temp');
+        SqliteGuard.check_receiving fspathTo localPathTo;
         Stasher.backup fspathTo localPathTo `ByCopying prevArch;
         writeCommitLog source target temp';
         Util.finalize (fun() ->
@@ -363,6 +365,7 @@ let performRename fspathTo localPathTo (workingDirFrom, pathFrom)
         Os.delete temp Path.empty
       end else begin
         debug (fun() -> Util.msg "rename: moveFirst=false\n");
+        SqliteGuard.check_receiving fspathTo localPathTo;
         Stasher.backup fspathTo localPathTo `ByCopying prevArch;
         Os.rename "renameLocal(3)" ?exdev source Path.empty target Path.empty;
         debug (fun() ->
@@ -538,6 +541,7 @@ let renameLocalWithBinding ?binding
        performRename fspathTo localPathTo (workingDir, pathFrom) (workingDir, pathTo) prevArch
    | Some binding ->
        checkPublication binding FinalPublication.check;
+       SqliteGuard.check_receiving fspathTo localPathTo;
        Stasher.backup fspathTo localPathTo `ByCopying prevArch;
        checkPublication binding FinalPublication.check;
        Abort.checkAll ();
@@ -663,6 +667,8 @@ let rename ?token root localPath workingDir pathOld pathNew ui archOpt notDefaul
 
 let setupTargetPathsLocal (fspath, path) =
   let localPath = Update.translatePathLocal fspath path in
+  (* Refuse before the transfer what would be refused after it. *)
+  SqliteGuard.check_receiving fspath localPath;
   let (workingDir,realPath) = Fspath.findWorkingDir fspath localPath in
   let tempPath = Os.tempPath ~fresh:false workingDir realPath in
   Lwt.return (workingDir, realPath, tempPath, localPath)
@@ -695,6 +701,7 @@ let setupTargetPathsAndCreateParentDirectoryLocal (fspath, (path, props)) =
   Util.convertUnixErrorsToTransient
     "creating parent directories"
     (fun () -> createDirectories fspath localPath props);
+  SqliteGuard.check_receiving fspath localPath;
   let (workingDir,realPath) = Fspath.findWorkingDir fspath localPath in
   let tempPath = Os.tempPath ~fresh:false workingDir realPath in
   Lwt.return (workingDir, realPath, tempPath, localPath)

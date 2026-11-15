@@ -1,0 +1,14 @@
+; The SQLite guard (docs/sqlite-semantic-design.md, "The guard"): what it
+; finds beside real databases made by Python's sqlite3 and beside synthetic
+; logs, and what a synchronization then does.  Disposable directories only.
+(executable
+ (name probe)
+ (modules probe)
+ (libraries unison_lib))
+
+(rule
+ (alias runtest)
+ (deps run.py %{exe:probe.exe} %{exe:../../src/linktext.exe})
+ (action
+  (run python3 %{dep:run.py} --unison %{exe:../../src/linktext.exe}
+       --probe %{exe:probe.exe})))

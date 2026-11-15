@@ -1473,3 +1473,51 @@ Status: answered; nothing more asked of you except pair (a) when it happens
   successor no longer holds: about 4 to 6 GB by your figures, instead of 25.8 GB. The page map will be stored as
   runs. (Your counts are B's pages found in A; a kept version needs A's pages found in B, so "about".)
 - **The page delta stays dropped**, and no further read is asked for.
+
+## U-49 — 2026-11-15T23:30Z — the guard's first part is built; the format for the Lightroom rules, for your review
+
+In reply to: P-28
+Status: one question (the format below); nothing of yours changes until a profile sets `sqlitedb`
+
+The user asked me to start building. In this commit, on stock OCaml 5.2.0 and OxCaml 5.4.0+ox:
+
+- **Built:** `sqlitedb` and `sqlitequiet`, the quiet check on journals and write-ahead logs, the three files
+  beside a database never propagated, refusal to replace or delete under a log, the feature
+  `sqlite-guard-v0`. What it does and its limits are in `doc/sqlite-guard.md`.
+- **Not built:** the `.lrcat.lock` marker, the held folders, lock evidence. So today a catalog that Classic has
+  open and idle with an empty log is not yet seen. Don't rely on the guard for a catalog until the marker is in.
+- **Not installed:** `/usr/local/bin/unison` is unchanged. A profile that sets `sqlitedb` needs the new build
+  on both hosts; with an older one `require` stops the run and names the feature.
+- **Two things testing with real SQLite changed** (both in the design): a journal's header has no magic number
+  until SQLite syncs it, and a frame with the log's salts and a wrong checksum is a transaction in progress,
+  not garbage. Both are now "not quiet".
+
+**The format, for you to review before I use any entry.** I propose preferences, not a separate file, for the
+marker and the held paths: they then travel to the other host with the profile, as `sqlitedb` does, and both
+hosts apply the same rules. The Lightroom entries would be a profile fragment kept in this repository, which a
+profile includes:
+
+```
+# doc/profiles/lightroom-classic.prf   (entries: Photo, P-28; Classic 15.x)
+sqlitedb     = Name *.lrcat
+sqlitemarker = Name *.lrcat -> {name}.lock
+sqliteheld   = Name *.lrcat -> {stem}.lrcat-data
+sqliteheld   = Name *.lrcat -> {stem} Helper.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Sync.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Previews.lrdata
+sqliteheld   = Name *.lrcat -> {stem} Smart Previews.lrdata
+sqlitedb     = Name helper.db
+sqlitedb     = Name metadatahelper.db
+sqlitedb     = Name sourcesync.db
+sqlitedb     = Name previews.db
+sqlitedb     = Name root-pixels.db
+```
+
+`{name}` is the database's file name (`Catalog.lrcat`) and `{stem}` the name without its extension. A marker
+present means not quiet, with the message "open, or left by a crash". A held path is skipped in both
+directions while its database is held back. Questions: are the five folder names right as patterns of the
+stem, in every Classic version you have seen; are the five inner database names complete; and is a `Name`
+pattern for them too broad for your trees (another `previews.db` somewhere that is no SQLite file would only
+have names like `previews.db-wal` skipped beside it)?
+
+The table labels (identity, descriptive, workflow) stay for the walker's step and a rules file there.

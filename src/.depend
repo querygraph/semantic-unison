@@ -248,6 +248,7 @@ copy.cmo : \
     system.cmi \
     supervisedExternal.cmi \
     stagePublication.cmi \
+    sqliteGuard.cmi \
     semanticSync.cmi \
     semanticRemote.cmi \
     ubase/safelist.cmi \
@@ -288,6 +289,7 @@ copy.cmx : \
     system.cmx \
     supervisedExternal.cmx \
     stagePublication.cmx \
+    sqliteGuard.cmx \
     semanticSync.cmx \
     semanticRemote.cmx \
     ubase/safelist.cmx \
@@ -543,6 +545,7 @@ files.cmo : \
     system.cmi \
     supervisedExternal.cmi \
     stasher.cmi \
+    sqliteGuard.cmi \
     semanticSync.cmi \
     semanticMergeCache.cmi \
     semanticDelta.cmi \
@@ -581,6 +584,7 @@ files.cmx : \
     system.cmx \
     supervisedExternal.cmx \
     stasher.cmx \
+    sqliteGuard.cmx \
     semanticSync.cmx \
     semanticMergeCache.cmx \
     semanticDelta.cmx \
@@ -859,6 +863,7 @@ globals.cmo : \
     ubase/util.cmi \
     ubase/umarshal.cmi \
     ubase/trace.cmi \
+    sqliteGuard.cmi \
     ubase/safelist.cmi \
     remote.cmi \
     ubase/prefs.cmi \
@@ -877,6 +882,7 @@ globals.cmx : \
     ubase/util.cmx \
     ubase/umarshal.cmx \
     ubase/trace.cmx \
+    sqliteGuard.cmx \
     ubase/safelist.cmx \
     remote.cmx \
     ubase/prefs.cmx \
@@ -1922,6 +1928,33 @@ sortri.cmx : \
     sortri.cmi
 sortri.cmi : \
     common.cmi
+sqliteGuard.cmo : \
+    ubase/util.cmi \
+    ubase/trace.cmi \
+    ubase/prefs.cmi \
+    pred.cmi \
+    path.cmi \
+    os.cmi \
+    fspath.cmi \
+    fs.cmi \
+    features.cmi \
+    sqliteGuard.cmi
+sqliteGuard.cmx : \
+    ubase/util.cmx \
+    ubase/trace.cmx \
+    ubase/prefs.cmx \
+    pred.cmx \
+    path.cmx \
+    os.cmx \
+    fspath.cmx \
+    fs.cmx \
+    features.cmx \
+    sqliteGuard.cmi
+sqliteGuard.cmi : \
+    ubase/prefs.cmi \
+    pred.cmi \
+    path.cmi \
+    fspath.cmi
 stagePublication.cmo : \
     stagePublication.cmi
 stagePublication.cmx : \
@@ -2610,6 +2643,7 @@ update.cmo : \
     tree.cmi \
     ubase/trace.cmi \
     system.cmi \
+    sqliteGuard.cmi \
     semanticWorkers.cmi \
     semanticHash.cmi \
     ubase/safelist.cmi \
@@ -2653,6 +2687,7 @@ update.cmx : \
     tree.cmx \
     ubase/trace.cmx \
     system.cmx \
+    sqliteGuard.cmx \
     semanticWorkers.cmx \
     semanticHash.cmx \
     ubase/safelist.cmx \

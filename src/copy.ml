@@ -55,6 +55,8 @@ let lwt_protect f g =
    modified during synchronization. *)
 let checkForChangesToSourceLocal
       fspathFrom pathFrom archDesc archFp archStamp archRess newFpOpt paranoid =
+  (* A SQLite database must still be quiet now that it has been read. *)
+  SqliteGuard.check_sending fspathFrom pathFrom;
   (* Retrieve attributes of current source file *)
   let sourceInfo = Fileinfo.getBasicWithRess true fspathFrom pathFrom in
   let sourceType = sourceInfo.Fileinfo.typ in

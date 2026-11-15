@@ -284,7 +284,10 @@ let atomic = Pred.create "atomic"
 
 let shouldIgnore p =
   let p = Path.toString p in
-  (Pred.test ignorePred p) && not (Pred.test ignorenotPred p)
+  ((Pred.test ignorePred p) && not (Pred.test ignorenotPred p))
+  (* The files SQLite keeps beside a database named by sqlitedb are never
+     propagated, whatever ignorenot says. *)
+  || SqliteGuard.companion p
 
 let addRegexpToIgnore re =
   let oldRE = Pred.extern ignorePred in

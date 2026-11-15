@@ -119,11 +119,17 @@ file alone is the whole database:
 |:--|:--|
 | No companion files | Quiet |
 | `X-journal` empty, or with a zeroed header (`TRUNCATE` and `PERSIST` modes) | Quiet |
-| `X-journal` with a valid header | **Hot journal.** A transaction was interrupted or is running. Not quiet |
-| `X-wal` empty, header-only or with no valid frame | Quiet. Common and harmless: a read-only open of a closed WAL-mode database creates an empty `-wal` and a `-shm` (P-28) |
+| `X-journal` with a header: its magic number, or (before SQLite has synced the journal) a zeroed magic number with the rest of the header in place | **Hot journal.** A transaction was interrupted or is running. Not quiet |
+| `X-wal` empty, header-only or with only frames of an earlier log (other salts) | Quiet. Common and harmless: a read-only open of a closed WAL-mode database creates an empty `-wal` and a `-shm` (P-28) |
+| `X-wal` with frames of a transaction that hasn't committed, among them a frame that carries the log's salts but fails its checksum or is cut short | **Not quiet.** SQLite rewrites spilled frames and corrects their checksums only at commit, so this is how a running transaction looks (found in testing, 2026-11-15) |
 | `X-wal` whose last committed version of every page equals the main file's page, and whose last commit's size equals the file's | Quiet for *sending*: the WAL adds nothing |
 | `X-wal` with committed frames the main file lacks | **Not quiet.** The main file is an old version |
 | `X-shm` present | A connection is or was open; decided by the WAL rows above |
+
+**Built** (2026-11-15, `src/sqliteGuard.ml`, `doc/sqlite-guard.md`): the table above, the
+sending, receiving and companion rules below, the preferences, and the negotiated feature
+`sqlite-guard-v0`. **Not built yet:** lock evidence, application markers, held paths.
+How it is built differs from the first draft in two places, both noted below.
 
 Rules, on by a path preference (below), in both directions:
 
@@ -131,12 +137,20 @@ Rules, on by a path preference (below), in both directions:
   transient error that says why ("`Catalog.lrcat-wal` holds 37 committed frames; close
   the application or checkpoint"), and the next sync tries again. The group is rechecked
   after the transfer, on top of Unison's own check that the source didn't change.
+  *As built:* the check runs while Unison looks for changes, on each host, for every
+  matching file whether it changed or not. A database that isn't quiet becomes an error
+  at its path, so nothing is sent from it or written over it, and no new message
+  between the hosts is needed.
 - **Receiving.** A database is never replaced or deleted while a hot journal or a WAL
   with *any* valid frame sits beside it. This is the corruption case of problem 1.
   Unison doesn't delete or checkpoint the user's WAL; it refuses and says so.
-- **Companions.** `-journal`, `-wal` and `-shm` beside a recognised database are never
-  propagated in either direction. They are recognised by their own headers and their
-  sibling, not by name alone.
+- **Companions.** `-journal`, `-wal` and `-shm` beside a database are never propagated
+  in either direction. *As built:* they are recognised by name alone, `X-wal` for any
+  `X` that matches `sqlitedb`, not by their headers. The two hosts must agree on what
+  is skipped, and a rule that read the files could disagree with itself across hosts
+  and then offer one host's log to the other. The preference names `X` explicitly, so
+  this isn't guesswork. For the same reason the guard is a negotiated feature: with a
+  peer that lacks it, `require` stops the run and `warn` runs without the guard.
 - **Lock evidence, optional.** On a local volume, `fcntl(F_GETLK)` on SQLite's lock
   bytes (on `X-shm` for a WAL-mode database) asks whether another process holds a lock,
   without taking one. A held write lock means not quiet. It is evidence only: Apple's SQLite can use other locking styles on
@@ -444,7 +458,7 @@ Fixtures are built at test time by the `sqlite3` shell (system 3.43.2 and Homebr
 
 | Step | What | Needs | Changes sync behaviour |
 |:--|:--|:--|:--|
-| 1 | The guard, with the Lightroom marker and held paths | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
+| 1 | The guard. **Built:** quiet check, companions, preferences, feature. **To do:** the Lightroom marker and held paths (the rules file), lock evidence | Journal and WAL headers, page compare | Yes: refuses what was unsafe |
 | 2 | Pages as skeleton blocks, found by content and mapped as runs, so a replaced catalog is kept cheaply, also across an optimize | The page size from the header | Only with `skeleton` set |
 | 3 | Walker, content digests, `-semdiff` layers and report | The walker | No |
 | 4 | ~~The page delta~~: measured (P-30, P-31) and dropped by the user's decision | | Nothing |
